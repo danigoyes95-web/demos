@@ -1,5 +1,6 @@
 /* Carta de Casa Jao Fua (generado desde clientes/casa-jao-fua/cliente.json). Precios en centavos. desc = null → ingredientes sin confirmar. */
 window.MENU = {
+  "vista": "pestanas",
   "categorias": [
     {
       "id": "entradas",

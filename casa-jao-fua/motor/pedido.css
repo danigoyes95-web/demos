@@ -20,6 +20,22 @@
 .pd-acc { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 10px; flex-shrink: 0; }
 .pd-precio { font: 900 1.45rem/1 var(--fx-font-disp); }
 
+/* Carta por pestañas (menu.vista = "pestanas"): barra fija con buscador y categorías; bajo la cabecera fija (70 px) */
+.pd-barra-carta { position: sticky; top: 70px; z-index: 20; background: var(--fx-bg); margin: 0 0 18px; padding: 10px 0 8px; border-bottom: 1px solid color-mix(in srgb, var(--fx-deep) 18%, transparent); }
+.pd-buscar input { width: 100%; min-height: 46px; padding: 0 14px; font: 400 1rem/1 var(--fx-font-txt); color: var(--fx-ink); background: var(--fx-paper); border: 1px solid color-mix(in srgb, var(--fx-deep) 35%, transparent); border-radius: 8px; }
+.pd-buscar input:focus-visible { outline: 3px solid var(--fx-pop); outline-offset: 1px; }
+.pd-solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.pd-tabs { display: flex; gap: 8px; width: 0; min-width: 100%; overflow-x: auto; margin-top: 10px; padding-bottom: 4px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.pd-tabs::-webkit-scrollbar { display: none; }
+.pd-tab { flex: none; min-height: 40px; padding: 0 16px; font: 700 .95rem/1 var(--fx-font-disp); text-transform: uppercase; letter-spacing: .06em; color: var(--fx-deep); background: transparent; border: 1px solid color-mix(in srgb, var(--fx-deep) 40%, transparent); border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.pd-tab.on { background: var(--fx-deep); color: var(--fx-bg); border-color: var(--fx-deep); }
+.pd-tab:focus-visible { outline: 3px solid var(--fx-pop); outline-offset: 2px; }
+.pd-res { margin: 0 0 12px; text-transform: uppercase; font: 900 1.6rem/1 var(--fx-font-disp); }
+.pd-vacio { margin: 8px 0 0; font: 400 1.05rem/1.4 var(--fx-font-txt); }
+.pd-in { animation: pd-in .28s var(--fx-ease) both; }
+@keyframes pd-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .pd-in { animation: none; } }
+
 /* Botones: se hunden al tocar (perfil energía) */
 .pd-btn { font: 800 1.05rem/1 var(--fx-font-disp); text-transform: uppercase; letter-spacing: .03em; min-height: 44px; padding: 0 18px; border: 2px solid var(--fx-deep); border-radius: 10px; background: var(--fx-accent); color: var(--fx-deep); cursor: pointer; box-shadow: 3px 3px 0 var(--fx-deep); transition: transform var(--fx-fast) var(--fx-ease), box-shadow var(--fx-fast); }
 .pd-btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--fx-deep); }

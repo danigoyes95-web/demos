@@ -26,21 +26,7 @@
   const unidades = () => carrito.reduce((s, l) => s + l.cant, 0);
 
   /* ---------- Carta ---------- */
-  function pintarCarta(sel) {
-    const raiz = $(sel);
-    const t = M.temporada;
-    raiz.innerHTML = `
-      ${t ? `<div class="pd-temporada${t.foto ? ' con-foto' : ''}" data-reveal>
-        ${t.foto ? `<img src="${esc(t.foto)}" alt="${esc(t.alt || t.nombre)}" width="${esc(t.fotoW)}" height="${esc(t.fotoH)}" loading="lazy">` : ''}
-        <div><span class="pd-sello">${esc(t.nota)}</span>
-        <h3>${esc(t.nombre)}</h3>
-        <p>${marca(t.confirmar)}</p></div>
-      </div>` : ''}
-      ${M.categorias.map(c => `
-        <section class="pd-cat" aria-labelledby="cat-${c.id}">
-          <h2 id="cat-${c.id}"><span class="fino">${esc(c.antes || 'Carta')}</span> <span class="grueso">${esc(c.nombre)}</span></h2>
-          <ul class="pd-lista" data-stagger>
-            ${c.items.map(i => `
+  const itemHtml = (i, c) => `
               <li class="pd-item">
                 <div class="pd-info">
                   <h3>${esc(i.nombre)}</h3>
@@ -51,7 +37,24 @@
                   <span class="pd-precio">${plata(i.precio)}</span>
                   <button type="button" class="pd-btn pd-btn-add" data-add="${i.id}" aria-label="Agregar ${esc(i.nombre)}">Agregar</button>
                 </div>
-              </li>`).join('')}
+              </li>`;
+  const temporadaHtml = t => t ? `<div class="pd-temporada${t.foto ? ' con-foto' : ''}" data-reveal>
+        ${t.foto ? `<img src="${esc(t.foto)}" alt="${esc(t.alt || t.nombre)}" width="${esc(t.fotoW)}" height="${esc(t.fotoH)}" loading="lazy">` : ''}
+        <div><span class="pd-sello">${esc(t.nota)}</span>
+        <h3>${esc(t.nombre)}</h3>
+        <p>${marca(t.confirmar)}</p></div>
+      </div>` : '';
+  const titulo = c => `<h2 id="cat-${c.id}"><span class="fino">${esc(c.antes || 'Carta')}</span> <span class="grueso">${esc(c.nombre)}</span></h2>`;
+
+  function pintarCarta(sel) {
+    const raiz = $(sel);
+    if (M.vista === 'pestanas') pintarPestanas(raiz);
+    else raiz.innerHTML = `
+      ${temporadaHtml(M.temporada)}
+      ${M.categorias.map(c => `
+        <section class="pd-cat" aria-labelledby="cat-${c.id}">
+          ${titulo(c)}
+          <ul class="pd-lista" data-stagger>${c.items.map(i => itemHtml(i, c)).join('')}
           </ul>
         </section>`).join('')}`;
     raiz.addEventListener('click', e => {
@@ -60,6 +63,38 @@
       it.conExtras ? abrirExtras(it) : agregar(it.id, []);
     });
     montarBarra();
+  }
+
+  /* Carta larga: menu.vista = "pestanas" → una categoría a la vez, pestaña inicial con los platos marcados destacado:true y buscador */
+  function pintarPestanas(raiz) {
+    const plano = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const dest = M.categorias.flatMap(c => c.items.filter(i => i.destacado).map(i => ({ i, c })));
+    const tabs = [...(dest.length ? [{ id: 'destacados', nombre: M.destacados || 'Especialidades', antes: 'La casa recomienda', lista: dest, estrella: true }] : []),
+      ...M.categorias.map(c => ({ ...c, lista: c.items.map(i => ({ i, c })) }))];
+    let activa = tabs[0].id, q = '';
+    raiz.innerHTML = `${temporadaHtml(M.temporada)}
+      <div class="pd-barra-carta">
+        <label class="pd-buscar"><span class="pd-solo-lector">Buscar un plato</span><input type="search" id="pd-buscar" placeholder="Buscar un plato (ej. camarón, sopa, arroz)" autocomplete="off"></label>
+        <div class="pd-tabs" role="tablist" aria-label="Categorías de la carta">${tabs.map(t => `<button type="button" role="tab" class="pd-tab" data-tab="${t.id}">${t.estrella ? '★ ' : ''}${esc(t.nombre)}</button>`).join('')}</div>
+      </div>
+      <section class="pd-cat" id="pd-panel" aria-live="polite"></section>`;
+    const panel = $('#pd-panel', raiz), tabsEl = $('.pd-tabs', raiz);
+    const pintar = (subir) => {
+      const hay = q.trim();
+      tabsEl.querySelectorAll('.pd-tab').forEach(b => { const on = !hay && b.dataset.tab === activa; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); if (on) tabsEl.scrollTo({ left: b.offsetLeft - 16, behavior: 'smooth' }); });
+      if (hay) {
+        const k = plano(hay), r = M.categorias.flatMap(c => c.items.filter(i => plano(i.nombre + ' ' + (i.desc || '')).includes(k)).map(i => ({ i, c })));
+        panel.innerHTML = `<h2 class="pd-res"><span class="grueso">${r.length ? r.length + (r.length === 1 ? ' plato' : ' platos') : 'Sin resultados'}</span></h2>` +
+          (r.length ? `<ul class="pd-lista pd-in">${r.map(x => itemHtml(x.i, x.c)).join('')}</ul>` : `<p class="pd-vacio">No encontramos ese plato. Prueba con otra palabra o elige una categoría.</p>`);
+      } else {
+        const t = tabs.find(x => x.id === activa);
+        panel.innerHTML = `${titulo(t)}<ul class="pd-lista pd-in">${t.lista.map(x => itemHtml(x.i, x.c)).join('')}</ul>`;
+      }
+      if (subir) { const top = raiz.getBoundingClientRect().top; if (top < 0) raiz.scrollIntoView({ block: 'start' }); }
+    };
+    tabsEl.addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; activa = b.dataset.tab; q = ''; $('#pd-buscar', raiz).value = ''; pintar(true); });
+    $('#pd-buscar', raiz).addEventListener('input', e => { q = e.target.value; pintar(false); });
+    pintar(false);
   }
 
   function abrirProducto(id) {
