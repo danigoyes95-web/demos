@@ -1,0 +1,64 @@
+/* efectos/oriente.css · complemento OPCIONAL para cocina oriental (se elige con efectos.usar = ["oriente"]). Se carga después de energia.css.
+   Afina el perfil energía hacia algo más sobrio y de restaurante: movimiento suave sin rebote, sombras suaves en vez de bloques duros,
+   filetes finos, cinta con la estrella de "especialidad de la casa", sello cuadrado y rayos de sol (motivo del logo).
+   Solo transform y opacity en lo que se mueve; los rayos y el bambú son estáticos. El bambú es assets/bambu.webp del cliente (WebP con transparencia; la ruta se fija aquí porque una url() dentro de una variable se resuelve distinto según el navegador). No añade animaciones infinitas: la cinta de energia.css sigue siendo la única, más lenta. */
+:root {
+  --fx-ease: cubic-bezier(.22, .61, .36, 1); --fx-dur: .6s; --fx-dist: 18px; --fx-fast: .25s;
+  --fx-rv-dur: 560; --fx-rv-step: 90; --fx-rv-ease: cubic-bezier(.22, .61, .36, 1); --fx-rv-dist: 16px; --fx-rv-scale: 1;
+}
+
+/* Botones: sin textura ni bloque duro; sombra suave y filete dorado sobre fondo oscuro */
+.btn { background-image: none; letter-spacing: .09em; box-shadow: 0 10px 20px -10px rgba(0, 0, 0, .55); }
+.btn:active { transform: translateY(1px); box-shadow: none; }
+.oscuro .btn { border-color: var(--fx-pop); box-shadow: 0 10px 20px -10px rgba(0, 0, 0, .6); }
+.oscuro .btn:active { box-shadow: none; }
+
+/* Titulares: filete corto encima y letra más abierta en la línea fina */
+.doble::before { content: ""; display: block; width: 44px; height: 2px; margin-bottom: 14px; background: var(--fx-deep); }
+.oscuro .doble::before { background: var(--fx-pop); }
+.doble span { letter-spacing: .05em; }
+
+/* Hero: rayos de sol detrás de la foto, bambú al fondo, foto con marco fino y sombra profunda */
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: repeating-conic-gradient(from 0deg at 74% 50%, color-mix(in srgb, var(--fx-pop) 11%, transparent) 0 4deg, transparent 4deg 12deg);
+  -webkit-mask-image: radial-gradient(closest-side at 74% 50%, #000 25%, transparent 100%); mask-image: radial-gradient(closest-side at 74% 50%, #000 25%, transparent 100%); }
+.hero::after { content: ""; position: absolute; left: -30px; bottom: -40px; width: 240px; height: 348px; z-index: 0; pointer-events: none;
+  background: url("../assets/bambu.webp") no-repeat left bottom / contain; opacity: .2; }
+.hero .wrap { position: relative; z-index: 1; }
+.hero-foto { border-radius: 6px; box-shadow: 0 34px 60px -24px rgba(0, 0, 0, .65); outline: 1px solid color-mix(in srgb, var(--fx-pop) 75%, transparent); outline-offset: 9px; }
+@media (max-width: 860px) { .hero::before { -webkit-mask-image: radial-gradient(closest-side at 50% 18%, #000 25%, transparent 100%); mask-image: radial-gradient(closest-side at 50% 18%, #000 25%, transparent 100%);
+  background: repeating-conic-gradient(from 0deg at 50% 18%, color-mix(in srgb, var(--fx-pop) 11%, transparent) 0 4deg, transparent 4deg 12deg); }
+  .hero::after { width: 150px; height: 218px; } }
+
+/* Sello: cuadrado con doble filete, como sello de tinta */
+.hero .sello { border: 0; border-radius: 8px; transform: rotate(-5deg); letter-spacing: .08em;
+  box-shadow: inset 0 0 0 3px var(--fx-pop), inset 0 0 0 4.5px var(--fx-deep), 0 14px 26px -10px rgba(0, 0, 0, .6); }
+
+/* Cinta: texto dorado espaciado con la estrella de la carta impresa, más lenta */
+.cinta { background: var(--fx-deep-2); border-block: 1px solid color-mix(in srgb, var(--fx-pop) 55%, transparent); padding-block: 16px; }
+.cinta-pista { animation-duration: 75s; }
+.cinta ul { gap: 0; padding: 0; }
+.cinta li, .cinta li:nth-child(3n) { display: flex; align-items: center; gap: 44px; padding: 0 22px; border: 0; border-radius: 0; background: none; color: var(--fx-pop); font: 500 1rem/1 var(--fx-font-disp); letter-spacing: .24em; }
+.cinta li::after { content: "★"; font-size: .8em; opacity: .85; }
+
+/* (los selectores de la carta llevan prefijo para ganarle a motor/pedido.css, que se carga después)
+   Carta: tarjetas de filete fino con sombra suave, encabezados con línea, lema con la estrella */
+.pd-cat h2 { padding-bottom: 10px; margin-bottom: 16px; border-bottom: 1px solid color-mix(in srgb, var(--fx-deep) 30%, transparent); }
+.pd-lista .pd-item { border: 1px solid color-mix(in srgb, var(--fx-deep) 28%, transparent); border-radius: 8px;
+  box-shadow: 0 12px 22px -18px color-mix(in srgb, var(--fx-ink) 55%, transparent); transition: transform .3s var(--fx-ease), box-shadow .3s; }
+@media (hover: hover) { .pd-lista .pd-item:hover { transform: translateY(-2px); box-shadow: 0 16px 24px -16px color-mix(in srgb, var(--fx-ink) 60%, transparent); } }
+.pd-info .pd-lema { color: var(--fx-deep); font: 600 .74rem/1.2 var(--fx-font-txt); letter-spacing: .08em; text-transform: uppercase; }
+.pd-info .pd-lema::before { content: "★ "; }
+
+body .pd-btn { border-radius: 6px; letter-spacing: .07em; box-shadow: 0 8px 16px -8px rgba(0, 0, 0, .5); }
+body .pd-btn:active { transform: translateY(1px); box-shadow: none; }
+body .pd-btn-sec { box-shadow: none; }
+
+/* Cierre: bambú a la derecha */
+.cierre { position: relative; overflow: hidden; }
+.cierre .wrap { position: relative; z-index: 1; }
+.cierre::before { content: ""; position: absolute; right: -24px; bottom: 0; width: 260px; height: 377px; z-index: 0; pointer-events: none;
+  background: url("../assets/bambu.webp") no-repeat right bottom / contain; opacity: .22; }
+@media (max-width: 860px) { .cierre::before { width: 170px; height: 247px; opacity: .16; } }
+
+@media (prefers-reduced-motion: reduce) { .pd-lista .pd-item { transition: none; } .pd-lista .pd-item:hover { transform: none; } }
