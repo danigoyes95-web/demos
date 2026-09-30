@@ -73,3 +73,43 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #8E8F
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .fx-trazo{stroke-dashoffset:0}
 }
+
+/* ===== Efectos v2 (adaptados de la librería Dermabelle / Core Studio al negro y plata) =====
+   Solo transform, opacity y background-position. Máx. 3 infinitos visibles a la vez. */
+@keyframes fx-brillo{0%{transform:translateX(-120%) skewX(-18deg)}55%,100%{transform:translateX(260%) skewX(-18deg)}}
+@keyframes fx-plata{to{background-position:200% 0}}
+@keyframes fx-pulso{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+@keyframes fx-entra{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes fx-entra-blur{from{opacity:0;transform:translateY(26px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+
+/* 1. Barrido de brillo dentro de los botones principales (Dermabelle 2) */
+.btn-metal,.btn-tinta{position:relative;overflow:hidden;isolation:isolate}
+.btn-metal::after,.btn-tinta::after{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;pointer-events:none;z-index:-1;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:fx-brillo 6.5s ease-in-out infinite}
+.btn-tinta::after{background:linear-gradient(90deg,transparent,rgba(201,201,205,.22),transparent)}
+.btn-metal{z-index:0}
+
+/* 2. Plata en movimiento, versión del texto dorado (Dermabelle 1) */
+.fx-plata{background:linear-gradient(100deg,#8E8F94 0%,#D9D9DC 25%,#F4F4F5 50%,#D9D9DC 75%,#8E8F94 100%);background-size:200% 100%;animation:fx-plata 10s linear infinite}
+.fx-plata-texto{background:linear-gradient(100deg,#9A9BA0 0%,#E6E6E9 25%,#FFFFFF 50%,#E6E6E9 75%,#9A9BA0 100%);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:fx-plata 8s linear infinite}
+
+/* 3. Pulso detrás del WhatsApp (Dermabelle 9) */
+.wa-flot::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;animation:fx-pulso 2.8s ease-out infinite;pointer-events:none}
+
+/* 4. Entrada del hero, línea por línea (Core Studio 2) */
+.fx-e1{animation:fx-entra .9s cubic-bezier(.2,.7,.2,1) .10s both}
+.fx-e2{animation:fx-entra-blur 1.2s cubic-bezier(.2,.7,.2,1) .25s both}
+.fx-e3{animation:fx-entra .9s cubic-bezier(.2,.7,.2,1) .45s both}
+.fx-e4{animation:fx-entra .9s cubic-bezier(.2,.7,.2,1) .60s both}
+.fx-e5{animation:fx-entra 1s cubic-bezier(.2,.7,.2,1) .55s both}
+
+/* 5. Zoom lento de fotos, solo con mouse (Core Studio 4) */
+[data-zoom]{overflow:hidden}
+[data-zoom] img{transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){[data-zoom]:hover img{transform:scale(1.06)}}
+
+@media (prefers-reduced-motion:reduce){
+  .btn-metal::after,.btn-tinta::after,.wa-flot::before{display:none}
+  .fx-plata,.fx-plata-texto{animation:none}
+}
