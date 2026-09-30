@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Gorila Burgers · Versión Premium</title>
+<meta name="description" content="Pantalla Premium de la demo de Gorila Burgers Ambato: envío por sector, pedidos programados y reporte.">
+<meta name="theme-color" content="#092E2F">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;700;800;900&family=Big+Shoulders+Text:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="pedido.css">
+<style>
+.volver { display: inline-flex; align-items: center; min-height: 44px; color: var(--crema); text-decoration: none; font: 700 1.05rem var(--f-disp); text-transform: uppercase; letter-spacing: .05em; }
+.cab-pag { padding-block: clamp(36px, 6vw, 70px) clamp(30px, 5vw, 56px); }
+.chip-ej { display: inline-block; font: 700 .8rem/1.3 var(--f-txt); background: var(--arena); color: var(--petroleo); padding: 2px 8px; border-radius: 99px; vertical-align: middle; }
+.kpis { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+.kpi { background: var(--papel); border: 3px solid var(--petroleo); border-radius: 16px; padding: 18px; box-shadow: 5px 5px 0 var(--petroleo); }
+.kpi small { font: 700 1rem var(--f-txt); }
+.kpi b { display: block; font: 900 clamp(2.4rem, 6vw, 3.2rem)/1 var(--f-disp); margin-top: 6px; }
+.kpi span { font-size: .95rem; }
+.bloque { background: var(--papel); border: 3px solid var(--petroleo); border-radius: 18px; padding: clamp(18px, 3vw, 26px); }
+.bloque h3 { font: 900 1.7rem/1 var(--f-disp); text-transform: uppercase; margin-bottom: 14px; }
+.barras { display: grid; gap: 10px; }
+.barra-f { display: grid; grid-template-columns: minmax(0, 150px) 1fr auto; gap: 10px; align-items: center; font: 600 1rem var(--f-txt); }
+.barra-f .p { height: 16px; border-radius: 99px; background: rgba(9,46,47,.12); overflow: hidden; }
+.barra-f .p div { height: 100%; background: var(--terracota); border-radius: 99px; transform-origin: left; animation: crece .5s var(--rebote) both; }
+@keyframes crece { from { transform: scaleX(0); } }
+
+.lienzo { display: grid; gap: 26px; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 960px) { .lienzo { grid-template-columns: 1fr; } }
+.lado { position: sticky; top: 90px; display: grid; gap: 18px; }
+@media (max-width: 960px) { .lado { position: static; } }
+.mejoras { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); margin-top: 30px; }
+.mejora { display: flex; gap: 14px; align-items: flex-start; }
+.mejora .ico { color: var(--arena); }
+.mejora h3 { font: 800 1.4rem/1 var(--f-disp); text-transform: uppercase; margin-bottom: 4px; }
+.mejora p { color: #dfe3cf; font-size: 1rem; }
+.dona { display: flex; gap: 18px; align-items: center; }
+.dona .c { width: 110px; height: 110px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; }
+.dona .c::after { content: ""; width: 62px; height: 62px; border-radius: 50%; background: var(--papel); }
+.leyenda { display: grid; gap: 6px; font: 600 1rem var(--f-txt); }
+.leyenda i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; }
+
+/* Juego (módulo adicional) */
+.etiqueta-mod { display: inline-block; font: 800 1rem/1 var(--f-disp); text-transform: uppercase; letter-spacing: .05em; background: #fff3c4; color: #5a3b00; padding: 8px 12px; border-radius: 6px; margin-bottom: 16px; }
+.juego-grid { display: grid; gap: 22px; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); margin-top: 30px; align-items: start; }
+@media (max-width: 900px) { .juego-grid { grid-template-columns: 1fr; } }
+.tablero { position: relative; height: 420px; border-radius: 20px; overflow: hidden; background: radial-gradient(120% 80% at 50% 0%, #1b5354 0%, #092E2F 70%); border: 3px solid var(--crema); touch-action: none; user-select: none; }
+.tablero:focus-visible { outline: 3px solid var(--arena); outline-offset: 3px; }
+.hud { position: absolute; inset: 12px 14px auto; display: flex; justify-content: space-between; font: 800 1.2rem/1 var(--f-disp); text-transform: uppercase; z-index: 3; }
+.hud b { font-size: 1.6rem; color: var(--arena); margin-left: 6px; }
+.ing { position: absolute; left: 0; top: 0; width: 64px; height: 22px; border-radius: 10px; display: grid; place-items: center; font: 800 .72rem/1 var(--f-disp); text-transform: uppercase; color: #fff; will-change: transform; box-shadow: 0 3px 0 rgba(0,0,0,.25); }
+.ing.carne { background: #6b3a1f; } .ing.queso { background: #f0b429; color: #3a2a00; } .ing.tocino { background: repeating-linear-gradient(90deg, #c2553b 0 8px, #e8927c 8px 12px); }
+.ing.lechuga { background: #5f9e45; } .ing.kong { background: #e07b39; } .ing.malo { background: #f5d547; color: #5a4300; border-radius: 30px 30px 6px 6px; width: 56px; }
+.pan { position: absolute; left: 0; bottom: 14px; width: 96px; will-change: transform; z-index: 2; }
+.pan-base { height: 22px; border-radius: 6px 6px 16px 16px; background: #e0a458; box-shadow: inset 0 -4px 0 #b97a35; }
+.pila { display: flex; flex-direction: column-reverse; align-items: center; }
+.capa { width: 88%; height: 10px; border-radius: 5px; margin-top: -1px; }
+.pan.golpe { animation: golpe-pan .3s; }
+@keyframes golpe-pan { 25% { translate: -6px 0; } 75% { translate: 6px 0; } }
+.flotante { position: absolute; z-index: 4; font: 900 1.4rem var(--f-disp); color: var(--arena); animation: sube-pts .7s ease-out forwards; pointer-events: none; }
+@keyframes sube-pts { to { transform: translateY(-40px); opacity: 0; } }
+.pantalla { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; text-align: center; padding: 22px; background: rgba(9,46,47,.88); }
+.pantalla[hidden] { display: none; }
+.pantalla h3 { font: 900 2.6rem/.9 var(--f-disp); text-transform: uppercase; }
+.pantalla p { margin: 10px 0 18px; color: #dfe3cf; }
+.pantalla input { min-height: 46px; border-radius: 10px; border: 2px solid var(--crema); padding: 0 12px; font: 400 1.05rem var(--f-txt); width: min(260px, 100%); margin-bottom: 12px; }
+.controles { display: flex; gap: 12px; margin-top: 12px; }
+.controles button { flex: 1; min-height: 56px; font: 900 1.6rem/1 var(--f-disp); border-radius: 12px; border: 2px solid var(--crema); background: transparent; color: var(--crema); cursor: pointer; }
+.controles button:active { background: var(--crema); color: var(--petroleo); }
+.ranking { background: var(--papel); color: var(--tinta); border-radius: 18px; padding: 20px; border: 3px solid var(--crema); }
+.ranking h3 { font: 900 1.7rem/1 var(--f-disp); text-transform: uppercase; }
+.ranking ol { margin: 12px 0; padding: 0; list-style: none; counter-reset: r; }
+.ranking li { counter-increment: r; display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 2px dashed rgba(9,46,47,.2); font: 600 1.05rem var(--f-txt); }
+.ranking li::before { content: counter(r); font: 900 1.5rem/1 var(--f-disp); }
+.ranking li:first-child { color: #7a4a1f; }
+.ranking li b { font: 900 1.3rem var(--f-disp); }
+.ranking .reglas { font-size: .95rem; }
+</style>
+</head>
+<body data-pagina="Pantalla Premium" data-secciones='["Encabezado","Pedido con envío por sector","Reporte de Gorila","Módulo: Arma tu Gorila"]'>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5 0 0 1 16 0z"/><path d="M3.5 13.5h17M4 17h16a0 0 0 0 1 0 0 3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M9 7h.01M13 6.5h.01M15.5 8h.01"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h5l2-6h-4M16 11l2 6M12 11 10 7H7"/></symbol>
+  <symbol id="i-envio" viewBox="0 0 24 24"><path d="M21 4 3 11l7 3 3 7z"/><path d="m10 14 4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+</defs></svg>
+
+<header class="cabecera"><div class="wrap">
+  <a class="marca" href="index.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Gorila</b><small>Versión Premium</small></span></a>
+  <a class="volver" href="index.html">Volver a la página</a>
+</div></header>
+<main>
+<section class="oscuro cab-pag"><div class="wrap">
+  <h1 class="doble fx-l fx-l1"><span>Premium</span>Domicilio sin idas y vueltas</h1>
+  <p class="intro fx-l fx-l2" style="color:#dfe3cf">Tu cliente elige su sector y ve el envío al instante, puede programar su pedido para más tarde y tú recibes cada mes el reporte de lo que vendes.</p>
+  <div class="mejoras" data-stagger>
+    <div class="mejora"><span class="ico"><svg><use href="#i-moto"/></svg></span><div><h3>Envío por sector</h3><p>El total ya incluye el envío. Menos preguntas por chat.</p></div></div>
+    <div class="mejora"><span class="ico"><svg><use href="#i-reloj"/></svg></span><div><h3>Pedido programado</h3><p>“Para las 19:30”: llega listo a la hora que pidió.</p></div></div>
+    <div class="mejora"><span class="ico"><svg><use href="#i-burger"/></svg></span><div><h3>Reporte mensual</h3><p>Qué burger se vende más, qué sectores piden y cómo te piden.</p></div></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:44px"><div class="wrap lienzo">
+  <div>
+    <p style="margin-bottom:16px"><span class="chip-ej">Sectores y costos de ejemplo</span> Gorila define sus sectores y precios de envío. <span class="pend">[CONFIRMAR]</span></p>
+    <div id="carta-premium"></div>
+  </div>
+  <aside class="lado">
+    <div class="bloque" data-reveal><h3>Reporte de Gorila</h3><p id="rep-aviso" style="margin-bottom:12px"></p>
+      <div class="dona"><div class="c" id="dona"></div><div class="leyenda" id="leyenda"></div></div></div>
+    <div class="bloque" data-reveal><h3>Pedidos por sector</h3><div class="barras" id="sectores"></div></div>
+  </aside>
+</div></section>
+
+<section class="sec oscuro" id="juego"><div class="wrap">
+  <span class="etiqueta-mod">Módulo adicional · no incluido en Premium</span>
+  <h2 class="doble" data-reveal><span>Arma tu</span>Gorila</h2>
+  <p class="intro" style="color:#dfe3cf" data-reveal>Atrapa los ingredientes en el pan durante 30 segundos y evita las cáscaras de banano. El 1.º del ranking semanal gana su burger, canjeable en el local.</p>
+  <div class="juego-grid">
+    <div>
+      <div class="tablero" id="tablero" tabindex="0" role="application" aria-label="Juego Arma tu Gorila. Mueve el pan con las flechas izquierda y derecha o arrastrando el dedo.">
+        <div class="hud"><span>Puntos<b id="pts">0</b></span><span>Tiempo<b id="seg">30</b></span></div>
+        <div class="pan" id="pan"><div class="pila" id="pila"></div><div class="pan-base"></div></div>
+        <div class="pantalla" id="pantalla"></div>
+      </div>
+      <div class="controles"><button type="button" id="izq" aria-label="Mover a la izquierda">◀</button><button type="button" id="der" aria-label="Mover a la derecha">▶</button></div>
+    </div>
+    <aside class="ranking">
+      <h3>Ranking de la semana</h3>
+      <ol id="rank"></ol>
+      <p class="reglas">Cierra el domingo a las 23:59. En el módulo real: una partida válida por teléfono y día, puntaje revisado en el servidor y premio canjeado por el personal a quien ya tiene una compra registrada.</p>
+    </aside>
+  </div>
+</div></section>
+</main>
+
+<script src="config.js"></script>
+<script>DEMO.sectores = DEMO.sectoresEjemplo; DEMO.programar = true;</script>
+<script src="menu.js"></script>
+<script src="pedido.js"></script>
+<script>
+GorilaPedido.pintarCarta('#carta-premium');
+const esc = GorilaPedido.esc, plata = GorilaPedido.plata;
+
+/* Reporte: pedidos de prueba del navegador o datos de EJEMPLO */
+const EJ = { llevar: 46, domicilio: 58, sectores: { FICOA: 21, Atocha: 12, Miraflores: 10, Centro: 8, Huachi: 5, Izamba: 2 } };
+function reporte() {
+  let peds = []; try { peds = JSON.parse(localStorage.getItem(DEMO.claveDemo) || '[]'); } catch (e) {}
+  const ej = !peds.length;
+  const llevar = ej ? EJ.llevar : peds.filter(p => p.tipo === 'llevar').length, dom = ej ? EJ.domicilio : peds.length - llevar;
+  const sec = ej ? EJ.sectores : peds.reduce((a, p) => (p.sector && (a[p.sector] = (a[p.sector] || 0) + 1), a), {});
+  document.getElementById('rep-aviso').innerHTML = ej ? '<span class="chip-ej">Datos de ejemplo</span> Haz un pedido de prueba y el reporte se actualiza.' : '<span class="chip-ej">Tus pedidos de prueba</span>';
+  const tot = llevar + dom || 1, pct = Math.round(dom / tot * 100);
+  document.getElementById('dona').style.background = `conic-gradient(var(--petroleo) 0 ${pct}%, var(--terracota) ${pct}% 100%)`;
+  document.getElementById('leyenda').innerHTML = `<span><i style="background:var(--petroleo)"></i>A domicilio · ${pct} %</span><span><i style="background:var(--terracota)"></i>Para llevar · ${100 - pct} %</span><span>${llevar + dom} pedidos</span>`;
+  const filas = Object.entries(sec).sort((a, b) => b[1] - a[1]), max = filas.length ? filas[0][1] : 1;
+  document.getElementById('sectores').innerHTML = filas.length ? filas.map(([n, c]) => `<div class="barra-f"><span>${esc(n)}</span><div class="p"><div style="width:${c / max * 100}%"></div></div><b>${c}</b></div>`).join('') : '<p>Aún no hay pedidos a domicilio de prueba.</p>';
+}
+reporte();
+window.addEventListener('storage', reporte);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) reporte(); });
+
+/* ---------- Arma tu Gorila (demo del módulo: ranking solo en este navegador) ---------- */
+(() => {
+  const T = document.getElementById('tablero'), pan = document.getElementById('pan'), pila = document.getElementById('pila');
+  const pant = document.getElementById('pantalla'), ptsEl = document.getElementById('pts'), segEl = document.getElementById('seg');
+  const TIPOS = [['carne', 'Carne', '#6b3a1f'], ['queso', 'Queso', '#f0b429'], ['tocino', 'Tocino', '#c2553b'], ['lechuga', 'Lechuga', '#5f9e45'], ['kong', 'Salsa Kong', '#e07b39']];
+  const CLAVE = 'gorila_demo_ranking', EJ = [['Jugador ejemplo 1', 420], ['Jugador ejemplo 2', 310], ['Jugador ejemplo 3', 190]];
+  let W, H, px, vx = 0, objetivo = null, items = [], pts = 0, t0, ult, spawn, jugando = false, racha = 0;
+  const medir = () => { W = T.clientWidth; H = T.clientHeight; };
+  const rank = () => { let r = []; try { r = JSON.parse(localStorage.getItem(CLAVE) || '[]'); } catch (e) {}
+    const todos = [...r.map(x => [x.n, x.p, true]), ...EJ.map(x => [...x, false])].sort((a, b) => b[1] - a[1]).slice(0, 5);
+    document.getElementById('rank').innerHTML = todos.map(([n, p, real]) => `<li><span>${esc(n)}${real ? '' : ' <span class="chip-ej">ejemplo</span>'}</span><b>${p}</b></li>`).join(''); };
+  function inicio() {
+    pant.innerHTML = `<div><h3>¿Listo para armar tu Gorila?</h3><p>Mueve el pan con el dedo, las flechas o los botones.</p><button type="button" class="btn" id="jugar">Jugar 30 segundos</button></div>`;
+    document.getElementById('jugar').onclick = jugar;
+  }
+  function jugar() {
+    medir(); items.forEach(i => i.el.remove()); items = []; pila.innerHTML = ''; pts = 0; racha = 0; ptsEl.textContent = 0;
+    px = (W - 96) / 2; pant.hidden = true; jugando = true; t0 = ult = performance.now(); spawn = 0; T.focus(); requestAnimationFrame(bucle);
+  }
+  function flotar(txt, x) { const f = document.createElement('div'); f.className = 'flotante'; f.textContent = txt; f.style.left = x + 'px'; f.style.bottom = '90px'; T.append(f); setTimeout(() => f.remove(), 700); }
+  function crear(prog) {
+    const malo = Math.random() < .22, ti = TIPOS[Math.floor(Math.random() * TIPOS.length)];
+    const el = document.createElement('div'); el.className = 'ing ' + (malo ? 'malo' : ti[0]); el.textContent = malo ? 'Cáscara' : ti[1];
+    const w = malo ? 56 : 64; T.append(el);
+    items.push({ el, x: Math.random() * (W - w), y: -30, w, v: 170 + prog * 190 + Math.random() * 40, malo, color: ti[2] });
+  }
+  function bucle(now) {
+    if (!jugando) return;
+    const dt = Math.min(.05, (now - ult) / 1000), trans = (now - t0) / 1000, prog = trans / 30; ult = now;
+    const rest = Math.max(0, 30 - trans); segEl.textContent = Math.ceil(rest);
+    spawn -= dt; if (spawn <= 0) { crear(prog); spawn = .65 - prog * .28; }
+    if (objetivo != null) px += (objetivo - 48 - px) * Math.min(1, dt * 14);
+    px += vx * dt * 520; px = Math.max(0, Math.min(W - 96, px));
+    pan.style.transform = `translateX(${px}px)`;
+    const topPan = H - 14 - 22 - pila.childElementCount * 9;
+    items = items.filter(it => {
+      it.y += it.v * dt;
+      if (it.y + 22 >= topPan && it.y < topPan + 20 && it.x + it.w > px + 6 && it.x < px + 90) {
+        it.el.remove();
+        if (it.malo) { pts = Math.max(0, pts - 15); racha = 0; pila.innerHTML = ''; pan.classList.remove('golpe'); void pan.offsetWidth; pan.classList.add('golpe'); flotar('−15', px + 30); }
+        else { pts += 10; racha++; const c = document.createElement('div'); c.className = 'capa'; c.style.background = it.color; pila.append(c); flotar('+10', px + 30);
+          if (racha % 6 === 0) { pts += 30; flotar('¡Gorila completa! +30', Math.max(0, px - 40)); setTimeout(() => pila.innerHTML = '', 250); } }
+        ptsEl.textContent = pts; return false;
+      }
+      if (it.y > H) { it.el.remove(); return false; }
+      it.el.style.transform = `translate(${it.x}px, ${it.y}px)`; return true;
+    });
+    if (rest <= 0) return fin();
+    requestAnimationFrame(bucle);
+  }
+  function fin() {
+    jugando = false; vx = 0; objetivo = null; pant.hidden = false;
+    pant.innerHTML = `<div><h3>${pts} puntos</h3><p>Guarda tu puntaje en el ranking de la semana.</p>
+      <input id="nom" maxlength="20" placeholder="Tu nombre" aria-label="Tu nombre para el ranking"><br>
+      <button type="button" class="btn" id="guardar">Guardar puntaje</button> <button type="button" class="btn btn-linea" id="otra">Jugar otra vez</button></div>`;
+    document.getElementById('otra').onclick = jugar;
+    document.getElementById('guardar').onclick = () => {
+      const n = document.getElementById('nom').value.trim(); if (!n) { document.getElementById('nom').focus(); return; }
+      try { const r = JSON.parse(localStorage.getItem(CLAVE) || '[]'); r.push({ n, p: pts }); localStorage.setItem(CLAVE, JSON.stringify(r.slice(-20))); } catch (e) {}
+      rank(); inicio();
+    };
+  }
+  T.addEventListener('pointerdown', e => { if (!jugando) return; const r = T.getBoundingClientRect(); objetivo = e.clientX - r.left; T.setPointerCapture(e.pointerId); });
+  T.addEventListener('pointermove', e => { if (objetivo == null) return; const r = T.getBoundingClientRect(); objetivo = e.clientX - r.left; });
+  ['pointerup', 'pointercancel'].forEach(ev => T.addEventListener(ev, () => objetivo = null));
+  T.addEventListener('keydown', e => { if (!jugando) return; if (e.key === 'ArrowLeft') { vx = -1; e.preventDefault(); } if (e.key === 'ArrowRight') { vx = 1; e.preventDefault(); } });
+  T.addEventListener('keyup', e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') vx = 0; });
+  [['izq', -1], ['der', 1]].forEach(([id, d]) => { const b = document.getElementById(id);
+    b.addEventListener('pointerdown', () => vx = d); ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => b.addEventListener(ev, () => vx = 0)); });
+  window.addEventListener('resize', medir);
+  medir(); rank(); inicio();
+})();
+</script>
+<script src="fx.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>
