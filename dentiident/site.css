@@ -1,0 +1,75 @@
+/* Dentiident · demo · perfil de efectos: calma */
+:root{
+  --blanco:#FFFFFF; --niebla:#F3F3F4; --tinta:#0E0F0F; --grafito:#232425; --texto:#555659; --suave:#6C6D71;
+  --plata:#C9C9CD; --linea:#E4E4E6; --linea-osc:#303133;
+  --metal:linear-gradient(135deg,#F4F4F5 0%,#C9C9CD 38%,#8E8F94 52%,#D9D9DC 70%,#9A9BA0 100%);
+  --negro-logo:radial-gradient(120% 90% at 70% 40%,#2E2E2E 0%,#141515 55%,#0E0F0F 100%);
+  --f:"Outfit",system-ui,-apple-system,"Segoe UI",sans-serif;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px);scroll-behavior:smooth}
+body{margin:0;background:var(--blanco);color:var(--tinta);font:400 17px/1.65 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #8E8F94;outline-offset:3px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.sec{padding-block:clamp(64px,9vw,112px)}
+.oscuro{background:var(--negro-logo);color:#fff}
+.niebla{background:var(--niebla)}
+
+/* Titulares de dos pesos */
+.doble{font-weight:700;line-height:1.02;letter-spacing:-.015em;font-size:clamp(36px,4.6vw,60px)}
+.doble span{display:block;font-weight:200;letter-spacing:-.01em;font-size:.62em;line-height:1.15;color:var(--grafito)}
+.oscuro .doble span{color:#B9B9BE}
+.intro{margin-top:18px;color:var(--texto);max-width:58ch;font-size:18px}
+.oscuro .intro{color:#B9B9BE}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;font:600 16px var(--f);text-decoration:none;border:1.5px solid transparent;cursor:pointer;background:none}
+.btn-metal{background:var(--metal);color:var(--tinta);border-color:#D4D4D8}
+.btn-linea{color:#fff;border-color:#fff}
+.btn-tinta{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.btn-linea-osc{color:var(--tinta);border-color:var(--tinta)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* Barra superior */
+.barra{background:#000;color:#C9C9CD;font-size:14px}
+.barra .wrap{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:center;justify-content:space-between;min-height:44px;padding-block:6px}
+.barra .datos{display:flex;flex-wrap:wrap;gap:4px 22px}
+.barra span{display:inline-flex;align-items:center;gap:7px}
+.barra svg{width:16px;height:16px;stroke:var(--plata)}
+.barra a{color:#fff;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;min-height:36px;padding:0 14px;background:var(--metal);color:var(--tinta)}
+
+/* Cabecera */
+.cabecera{position:sticky;top:0;z-index:30;background:var(--tinta);border-bottom:1px solid var(--linea-osc)}
+.cabecera .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px}
+.marca{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:600;letter-spacing:.06em}
+.marca img{width:56px;height:56px;border-radius:50%;box-shadow:0 0 0 1px #4A4B4F}
+.marca small{display:block;font-weight:300;letter-spacing:.02em;color:#A5A6AB;font-size:12px}
+.cabecera nav{display:flex;gap:28px;font-size:15px}
+.cabecera nav a{color:#DADADD;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+@media (max-width:860px){.cabecera nav{display:none}}
+
+/* Íconos en círculo */
+.ico{width:76px;height:76px;border-radius:50%;border:1px solid #BDBDC2;display:grid;place-items:center;flex-shrink:0}
+.ico svg{width:34px;height:34px;stroke:var(--tinta)}
+.oscuro .ico,.banda .ico{border-color:#5A5B5F}
+.oscuro .ico svg,.banda .ico svg{stroke:#fff}
+
+/* WhatsApp flotante (del cliente) */
+.wa-flot{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.wa-flot svg{width:30px;height:30px;fill:#fff}
+
+/* Efectos del perfil calma (equivalentes a efectos/calma.css: un solo momento protagonista, el diagnóstico) */
+.fx-paso{animation:fx-paso .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes fx-paso{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.fx-barra{transition:width .8s cubic-bezier(.2,.7,.2,1)}
+.fx-trazo{stroke-dasharray:30;stroke-dashoffset:30;animation:fx-trazo .8s .25s ease forwards}
+@keyframes fx-trazo{to{stroke-dashoffset:0}}
+.fx-nuevo{animation:fx-paso .8s cubic-bezier(.2,.7,.2,1) both}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .fx-trazo{stroke-dashoffset:0}
+}

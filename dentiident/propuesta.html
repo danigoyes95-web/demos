@@ -41,7 +41,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--rosa-claro);outline
 .barra .datos{display:flex;flex-wrap:wrap;gap:4px 22px}
 .barra .datos span{display:inline-flex;align-items:center;gap:7px}
 .barra svg{width:16px;height:16px;stroke:var(--rosa-claro)}
-.barra a{color:#fff;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border:1px solid #fff}
+.barra-nota{color:#A5A6AB;font-weight:300}
 
 /* Cabecera */
 .cabecera{position:sticky;top:0;z-index:30;background:var(--tinta);border-bottom:1px solid var(--linea-osc)}
@@ -198,14 +198,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--rosa-claro);outline
 .cierre .intro{margin-inline:auto}
 .cierre .acciones{justify-content:center}
 
+.plan-elegido{margin-top:-8px;margin-bottom:18px;color:#C9C9CD;font-size:15px}
+.contacto{margin-top:18px;color:#8E8F94;font-size:14px}
 footer{background:#000;color:#8E8F94;font-size:14px;padding-block:22px}
 
-/* WhatsApp flotante */
-.wa-flot{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}
-.wa-flot svg{width:30px;height:30px;fill:#fff}
 
 @media print{
-  .demo-barra,.sugerir,.wa-flot,.cabecera{display:none!important}
+  .demo-barra,.sugerir,.cabecera{display:none!important}
   .plan,.hecho,.chat,.tres article{break-inside:avoid}
   .hero::before,.cierre::before{display:none}
 }
@@ -239,7 +238,7 @@ footer{background:#000;color:#8E8F94;font-size:14px;padding-block:22px}
     <span><svg><use href="#i-pin"/></svg>Propuesta para Dentiident, Ambato</span>
     <span><svg><use href="#i-reloj"/></svg>Válida hasta el 14 de octubre de 2026</span>
   </div>
-  <a data-wa-agencia="Hola, tengo una pregunta sobre la propuesta para Dentiident.">Escribir a la agencia</a>
+  <span class="barra-nota">Tu marca, tus pacientes, tu agenda</span>
 </div></div>
 
 <header class="cabecera"><div class="wrap">
@@ -254,7 +253,7 @@ footer{background:#000;color:#8E8F94;font-size:14px;padding-block:22px}
     <p class="lead">Una página con tu marca donde cada paciente cuenta qué necesita antes de escribirte. Tú respondes con la información completa, no con un "¿precio?".</p>
     <div class="acciones">
       <a class="btn btn-rosa" href="#planes">Ver los planes</a>
-      <a class="btn btn-linea" data-wa-agencia="Hola, revisé la propuesta para Dentiident y quiero ver la demo funcionando.">Quiero ver la demo</a>
+      <a class="btn btn-linea" href="index.html">Probar la demo</a>
     </div>
     <div class="semana" aria-label="Días de atención: lunes a domingo">
       <b>L</b><b>M</b><b>M</b><b>J</b><b>V</b><b>S</b><b class="dom">D</b><em>Atiendes los 7 días. Tu página también.</em>
@@ -330,7 +329,7 @@ footer{background:#000;color:#8E8F94;font-size:14px;padding-block:22px}
         <li><svg><use href="#i-ok"/></svg>Reporte mensual: qué tratamientos piden más, cuántos agendan y cuántos llegan</li>
       </ul>
       <p class="entrega">3 rondas de cambios. Entrega en 7 a 10 días hábiles.</p>
-      <a class="btn btn-linea-osc" data-wa-agencia="Hola, quiero el plan Premium para Dentiident.">Quiero el Premium</a>
+      <a class="btn btn-linea-osc" href="#siguiente" data-plan="Premium">Elegir Premium</a>
     </article>
     <article class="plan reco">
       <span class="sello">Recomendado</span>
@@ -344,7 +343,7 @@ footer{background:#000;color:#8E8F94;font-size:14px;padding-block:22px}
         <li><svg><use href="#i-ok"/></svg>Los pacientes con convenio de la Policía Nacional se identifican desde el primer mensaje</li>
       </ul>
       <p class="entrega">2 rondas de cambios. Entrega en 5 días hábiles.</p>
-      <a class="btn" data-wa-agencia="Hola, quiero el plan Pro para Dentiident.">Quiero el Pro</a>
+      <a class="btn" href="#siguiente" data-plan="Pro">Elegir Pro</a>
     </article>
     <article class="plan">
       <div class="nombre">Esencial</div>
@@ -355,11 +354,11 @@ footer{background:#000;color:#8E8F94;font-size:14px;padding-block:22px}
         <li><svg><use href="#i-ok"/></svg>Optimizada para aparecer en Google y para compartir por WhatsApp</li>
       </ul>
       <p class="entrega">1 ronda de cambios. Entrega en 3 días hábiles.</p>
-      <a class="btn btn-linea-osc" data-wa-agencia="Hola, quiero el plan Esencial para Dentiident.">Quiero el Esencial</a>
+      <a class="btn btn-linea-osc" href="#siguiente" data-plan="Esencial">Elegir Esencial</a>
     </article>
   </div>
   <!-- Cuando existan index.html y premium.html, reemplazar este párrafo por los enlaces a la demo Pro y a la demo de agenda Premium. -->
-  <p class="demo-nota">Te mostramos el diagnóstico y la agenda funcionando, con tu marca, para que los pruebes desde tu celular. <a data-wa-agencia="Hola, quiero ver la demo de Dentiident funcionando.">Pedir la demo</a></p>
+  <p class="demo-nota">Pruébalo desde tu celular: el plan Pro en la <a href="index.html">demo de tu página</a> y el Premium en la <a href="premium.html">demo de agenda</a>.</p>
 </div></section>
 
 <section class="sec oscuro"><div class="wrap split">
@@ -414,24 +413,34 @@ footer{background:#000;color:#8E8F94;font-size:14px;padding-block:22px}
   </ul>
 </div></section>
 
-<section class="sec oscuro cierre"><div class="wrap">
+<section class="sec oscuro cierre" id="siguiente"><div class="wrap">
   <h2 class="doble"><span>Siguiente</span>paso</h2>
   <p class="intro">Elige tu plan, envíanos el material y en pocos días tu página empieza a recibir pacientes que ya te dicen qué necesitan.</p>
-  <div class="acciones"><a class="btn btn-rosa" data-wa-agencia="Hola, revisé la propuesta para Dentiident y quiero empezar.">Quiero empezar</a></div>
+  <p class="plan-elegido" id="plan-elegido" aria-live="polite">Plan recomendado: Pro</p>
+  <div class="acciones"><a class="btn btn-rosa" id="cta-final" data-wa-agencia="Hola, revisé la propuesta para Dentiident y quiero empezar con el plan Pro.">Quiero empezar con el plan Pro</a></div>
+  <p class="contacto">WhatsApp de la agencia: <span id="num-agencia"></span></p>
 </div></section>
 </main>
 
 <footer><div class="wrap">Preparada por [NOMBRE DE TU AGENCIA] para Dentiident Servicios Odontológicos, Ambato. 29 de septiembre de 2026.</div></footer>
 
-<a class="wa-flot" data-wa-agencia="Hola, tengo una pregunta sobre la propuesta para Dentiident." aria-label="Escribir a la agencia por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
 
 <script src="config.js"></script>
 <script>
 window.DEMO = window.DEMO || { cliente: 'Dentiident', waAgencia: '[WHATSAPP AGENCIA]' };
 window.wa = window.wa || ((n, t) => `https://wa.me/${String(n).replace(/\D/g, '')}?text=${encodeURIComponent(t)}`);
-document.querySelectorAll('[data-wa-agencia]').forEach(a => {
-  a.href = wa(DEMO.waAgencia, a.dataset.waAgencia); a.target = '_blank'; a.rel = 'noopener';
-});
+const cta = document.getElementById('cta-final');
+const enlazar = () => { cta.href = wa(DEMO.waAgencia, cta.dataset.waAgencia); cta.target = '_blank'; cta.rel = 'noopener'; };
+enlazar();
+const n = String(DEMO.waAgencia).replace(/\D/g, '');
+document.getElementById('num-agencia').textContent = /^593\d{9}$/.test(n) ? '0' + n.slice(3, 5) + ' ' + n.slice(5, 8) + ' ' + n.slice(8) : DEMO.waAgencia;
+document.querySelectorAll('[data-plan]').forEach(b => b.addEventListener('click', () => {
+  const p = b.dataset.plan;
+  document.getElementById('plan-elegido').textContent = 'Plan elegido: ' + p;
+  cta.textContent = 'Quiero empezar con el plan ' + p;
+  cta.dataset.waAgencia = 'Hola, revisé la propuesta para Dentiident y quiero empezar con el plan ' + p + '.';
+  enlazar();
+}));
 </script>
 <script src="demo.js"></script>
 </body>
