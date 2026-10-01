@@ -63,6 +63,9 @@ body { padding-bottom: 0; }
 .cifra b { font: 900 clamp(2.3rem, 5vw, 3rem)/1 var(--fx-font-disp); color: var(--fx-deep); text-transform: uppercase; }
 .cifra p { margin: 0; font-size: 1.05rem; line-height: 1.35; }
 .cifra small { margin-top: auto; padding-top: 8px; font: 600 .82rem/1.3 var(--fx-font-txt); opacity: .75; }
+.vimos-cta { margin-top: clamp(40px, 6vw, 64px); padding-top: 28px; border-top: 1px solid color-mix(in srgb, var(--fx-deep) 30%, transparent); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; }
+.vimos-cta p { margin: 0; font: 700 clamp(1.4rem, 3.4vw, 1.9rem)/1.1 var(--fx-font-disp); text-transform: uppercase; }
+.vimos-cta .acciones { margin-top: 0; }
 .cifras-nota { margin-top: 16px; font-size: .9rem; opacity: .75; max-width: 70ch; }
 .hecho { display: flex; gap: 18px; align-items: flex-start; }
 .hecho h3 { font: 800 1.6rem/1 var(--fx-font-disp); text-transform: uppercase; margin-bottom: 6px; }
@@ -176,10 +179,6 @@ body { padding-bottom: 0; }
   <div>
     <h1><span class="fino fx-entra fx-d1">Propuesta para Casa Jao Fua</span><span class="grueso fx-golpe">Pedidos completos, listos para la cocina</span></h1>
     <p class="lead fx-entra fx-d3">Una página con tu marca donde el cliente descubre qué pedir, arma su pedido con tu carta y te lo envía por WhatsApp con total, tipo de entrega y dirección.</p>
-    <div class="acciones fx-entra fx-d4">
-      <a class="btn" href="#planes">Ver los planes</a>
-      <a class="btn btn-linea" href="index.html">Probar la demo</a>
-    </div>
     <p class="fecha fx-entra fx-d4">30 de septiembre de 2026 · Preparada por Cup 33</p>
   </div>
   <div class="escena fx-entra fx-d2" aria-hidden="true">
@@ -227,6 +226,13 @@ body { padding-bottom: 0; }
     
   </div>
   <p class="cifras-nota">Cifras públicas consultadas el 30 de septiembre de 2026; pueden cambiar. La dirección, el teléfono y el horario que publican terceros están por confirmar con el cliente.</p>
+</div>
+<div class="wrap vimos-cta" data-reveal>
+  <p>Con esto a la vista, así lo resolvemos.</p>
+  <div class="acciones">
+    <a class="btn" href="#planes">Ver los planes</a>
+    <a class="btn btn-linea" href="index.html">Probar la demo</a>
+  </div>
 </div>
 </section>
 
