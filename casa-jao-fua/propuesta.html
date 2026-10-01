@@ -56,6 +56,14 @@ body { padding-bottom: 0; }
 .foto-marca img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 20px; border: 3px solid var(--fx-deep); box-shadow: 8px 8px 0 var(--fx-deep); }
 .foto-marca figcaption { position: absolute; left: 14px; bottom: 14px; background: var(--fx-deep); color: var(--fx-bg); font: 700 1rem var(--fx-font-txt); padding: 8px 12px; border-radius: 8px; }
 .hechos { display: grid; gap: 26px; margin-top: 30px; }
+.cifras-wrap { margin-top: clamp(48px, 7vw, 84px); }
+.cifras-tit { font: 300 clamp(1.6rem, 4vw, 2.2rem)/1 var(--fx-font-disp); text-transform: uppercase; margin-bottom: 20px; }
+.cifras { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+.cifra { background: var(--fx-paper); border: 3px solid var(--fx-deep); border-radius: 16px; box-shadow: 5px 5px 0 var(--fx-deep); padding: 20px 18px; display: flex; flex-direction: column; gap: 8px; }
+.cifra b { font: 900 clamp(2.3rem, 5vw, 3rem)/1 var(--fx-font-disp); color: var(--fx-deep); text-transform: uppercase; }
+.cifra p { margin: 0; font-size: 1.05rem; line-height: 1.35; }
+.cifra small { margin-top: auto; padding-top: 8px; font: 600 .82rem/1.3 var(--fx-font-txt); opacity: .75; }
+.cifras-nota { margin-top: 16px; font-size: .9rem; opacity: .75; max-width: 70ch; }
 .hecho { display: flex; gap: 18px; align-items: flex-start; }
 .hecho h3 { font: 800 1.6rem/1 var(--fx-font-disp); text-transform: uppercase; margin-bottom: 6px; }
 /* Qué cambia */
@@ -203,10 +211,24 @@ body { padding-bottom: 0; }
       <div class="hecho"><span class="ico"><svg><use href="#i-burger"/></svg></span><div><h3>Una carta grande y con identidad</h3><p>Más de 100 opciones en 16 secciones, con las especialidades de la casa marcadas y un menú impreso con ilustraciones propias.</p></div></div>
       <div class="hecho"><span class="ico"><svg><use href="#i-chat"/></svg></span><div><h3>Todo termina en WhatsApp</h3><p>Su enlace de Instagram reúne el menú, el menú a domicilio y un WhatsApp. Con la página, el pedido llega ya armado a ese mismo WhatsApp.</p></div></div>
       <div class="hecho"><span class="ico"><svg><use href="#i-web"/></svg></span><div><h3>Instagram con mucho contenido</h3><p>@casajaofua publica platos, al equipo en el local, sorteos y festividades como el Festival del Bote del Dragón y el Mid-Autumn. Falta una página propia que convierta esa atención en pedidos.</p></div></div>
+      <div class="hecho"><span class="ico"><svg><use href="#i-lista"/></svg></span><div><h3>Un menú que cuesta abrir</h3><p>El menú 2026 que nos pasaron es un PDF de 8,7 MB hecho solo de imágenes: en el celular puede tardar en abrir y no se puede buscar un plato ni copiar un precio. En la página, la carta carga rápido, se busca por categoría y se pide con un toque.</p></div></div>
+      <div class="hecho"><span class="ico"><svg><use href="#i-pin"/></svg></span><div><h3>Sus datos viven en listados de terceros</h3><p>La dirección, el teléfono y el horario de Casa Jao Fua aparecen en Tripadvisor y en mapas que el cliente no arma. Con su página, los datos oficiales, la carta y el botón de pedir están en un solo lugar.</p></div></div>
       
     </div>
   </div>
-</div></section>
+</div>
+<div class="wrap cifras-wrap">
+  <h3 class="cifras-tit" data-reveal>Por qué hoy importa</h3>
+  <div class="cifras" data-stagger>
+    <div class="cifra"><b>83,9 %</b><p>de la población de Ecuador usa internet: 15,4 millones de personas.</p><small>DataReportal, Digital 2026: Ecuador (datos de octubre de 2025)</small></div>
+    <div class="cifra"><b>4,5 / 5</b><p>es la nota de Casa Jao Fua en Tripadvisor: 3 de sus 4 reseñas son “Excelente”, pero ocupa el puesto 31 de 98 restaurantes de Ambato.</p><small>Tripadvisor, consultado el 30 de septiembre de 2026</small></div>
+    <div class="cifra"><b>Comida china</b><p>está entre lo más pedido a domicilio en Ecuador en 2025, junto al pollo frito, las hamburguesas, la comida típica y la pizza.</p><small>PedidosYa Ecuador, balance 2025 (publicado por OnData)</small></div>
+    <div class="cifra"><b>8,7 MB</b><p>pesa el PDF del menú 2026, hecho solo de imágenes: no se puede buscar ni copiar.</p><small>Archivo MENU_2026.pdf entregado por el cliente</small></div>
+    
+  </div>
+  <p class="cifras-nota">Cifras públicas consultadas el 30 de septiembre de 2026; pueden cambiar. La dirección, el teléfono y el horario que publican terceros están por confirmar con el cliente.</p>
+</div>
+</section>
 
 <section class="sec papel" id="cambia"><div class="wrap">
   <h2 class="doble" data-reveal><span>Qué cambia en</span>tu WhatsApp</h2>
