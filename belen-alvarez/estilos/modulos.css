@@ -29,3 +29,5 @@
 @media print { .mod { break-inside: avoid; } }
 .mod .por-que { font-size: .98rem; line-height: 1.4; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--fx-deep) 8%, transparent); }
 .otros-mod { margin-top: 22px; font: 600 1rem/1.4 var(--fx-font-txt); opacity: .85; }
+.mv-pts i.est { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--fx-pop); color: var(--fx-deep); font-style: normal; font-size: .8rem; line-height: 1; border: 2px solid var(--fx-deep); }
+.mod .mod-etiqueta + .mod-etiqueta { margin-top: -6px; }
