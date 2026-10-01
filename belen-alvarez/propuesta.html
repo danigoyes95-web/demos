@@ -118,6 +118,8 @@ body { padding-bottom: 0; }
 .scroll { overflow-x: auto; margin-top: 32px; }
 .tabla { width: 100%; min-width: 560px; border-collapse: separate; border-spacing: 0; background: var(--fx-paper); border: 3px solid var(--fx-deep); border-radius: 18px; overflow: hidden; }
 .tabla th { text-align: left; font: 800 1.2rem var(--fx-font-disp); text-transform: uppercase; background: var(--fx-deep); color: var(--fx-bg); padding: 14px 18px; }
+.tabla.comp td:not(:first-child), .tabla.comp th:not(:first-child) { text-align: center; width: 17%; }
+.tabla.comp td:first-child { width: 49%; }
 .tabla td { padding: 14px 18px; border-top: 2px dashed color-mix(in srgb, var(--fx-deep) 20%, transparent); vertical-align: top; font-size: 1.05rem; width: 50%; }
 .tabla a { font-weight: 700; }
 /* Pago y material */
@@ -145,7 +147,7 @@ body { padding-bottom: 0; }
 .plan.reco .demo { color: var(--fx-pop); }
 </style>
 </head>
-<body data-pagina="Propuesta" data-secciones='["Portada", "Lo que vimos", "Qué cambia", "Planes", "Módulos", "Premium", "Incluido", "Tiempos y pago", "Qué necesitamos", "Siguiente paso"]'>
+<body data-pagina="Propuesta" data-secciones='["Portada", "Lo que vimos", "Qué cambia", "Planes", "Qué incluye cada plan", "Módulos recomendados", "Premium", "Incluido", "Tiempos y pago", "Qué necesitamos", "Siguiente paso"]'>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
@@ -183,7 +185,7 @@ body { padding-bottom: 0; }
 
 <header class="cabecera"><div class="wrap">
   <a class="marca" href="#inicio"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Belén Alvarez</b><small>Propuesta de página web</small></span></a>
-  <nav aria-label="Secciones"><a href="#vimos">Lo que vimos</a><a href="#cambia">Qué cambia</a><a href="#planes">Planes</a><a href="#modulos">Módulos</a><a href="#pago">Pago</a></nav>
+  <nav aria-label="Secciones"><a href="#vimos">Lo que vimos</a><a href="#cambia">Qué cambia</a><a href="#planes">Planes</a><a href="#comparativa">Qué incluye</a><a href="#modulos">Módulos</a><a href="#pago">Pago</a></nav>
 </div></header>
 
 <main>
@@ -318,18 +320,33 @@ Horario preferido: Tarde<time>10:14</time></div>
   </div>
 </div></section>
 
+<section class="sec papel" id="comparativa"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Qué incluye</span>cada plan</h2>
+  <div class="scroll" data-reveal><table class="tabla comp">
+    <thead><tr><th>Qué recibes</th><th>Esencial</th><th>Pro</th><th>Premium</th></tr></thead>
+    <tbody><tr><td>Página con tus servicios, ubicación y horario</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Reserva que termina en WhatsApp con el mensaje listo</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>“Tu tratamiento ideal”</td><td>—</td><td>Plantilla</td><td>A tu medida</td></tr>
+    <tr><td>Sistema de citas (cada reserva queda guardada)</td><td>—</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Panel de control: citas y servicios más pedidos</td><td>—</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Panel modular donde se suman módulos</td><td>—</td><td>—</td><td>✓</td></tr>
+    <tr><td>Reporte mensual de citas</td><td>—</td><td>—</td><td>✓</td></tr>
+    <tr><td>Integraciones de una lista cerrada</td><td>—</td><td>—</td><td>Hasta 2</td></tr>
+    <tr><td>Rondas de cambios</td><td>1</td><td>2</td><td>3</td></tr>
+    <tr><td>Entrega (días hábiles)</td><td>3</td><td>5</td><td>7 a 10</td></tr>
+    </tbody></table></div>
+</div></section>
+
 <section class="sec" id="modulos"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Y cuando quieras</span>crecer</h2>
-  <p class="intro" data-reveal>Módulos que ya usamos en otros negocios. Se suman a tu panel cuando los necesites y se cotizan aparte: nunca vienen dentro de un plan.</p>
+  <h2 class="doble" data-reveal><span>Recomendados</span>para tu centro</h2>
+  <p class="intro" data-reveal>Los planes ya incluyen lo básico. Estos son los módulos que mejor le sentarían a un centro estético como el tuyo: se suman al panel cuando quieras y se cotizan aparte, nunca vienen dentro de un plan.</p>
   <div class="mods" data-stagger>
-    <article class="mod"><span class="ico"><svg><use href="#i-estrella"/></svg></span><h3>Fidelización por puntos y niveles</h3><p>Cada visita suma puntos y tus clientas suben de nivel. Premios claros, sin papelitos.</p><div class="mv"><div class="mv-niv"><span>Bronce</span><span class="on">Plata</span><span>Oro</span></div><div class="mv-barra"><i style="width:62%"></i></div><small>Ejemplo: 124 de 200 puntos para el siguiente nivel</small></div><p class="origen">Origen: Beer Club</p></article>
-    <article class="mod"><span class="ico"><svg><use href="#i-qr"/></svg></span><h3>QR de cada clienta</h3><p>Su QR identifica a la clienta en recepción: el personal lo escanea para sumar o canjear.</p><div class="mv mv-qr"><svg viewBox="0 0 9 9" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="8" y="0" width="1" height="1"/><rect x="8" y="1" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="0" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/><rect x="0" y="8" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="1" y="8" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="6" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/></svg><span>Tu clienta muestra su QR y el personal suma<small>Dibujo de ejemplo</small></span></div><p class="origen">Parte del módulo de fidelización</p></article>
-    <article class="mod"><span class="ico"><svg><use href="#i-tarjeta"/></svg></span><h3>Paquetes y tarjeta prepago</h3><p>Vende paquetes de sesiones o saldo prepago y lleva la cuenta de lo que le queda a cada clienta.</p><div class="mv"><span>Paquete de 5 sesiones</span><div class="mv-pts"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div><small>Ejemplo: 3 sesiones usadas, 2 disponibles</small></div><p class="origen">Origen: Mocka</p></article>
-    <article class="mod"><span class="ico"><svg><use href="#i-caja"/></svg></span><h3>Pedidos que llegan a caja</h3><p>Para tu línea de cosmética: la clienta pide en la web y el pedido aparece listo para cobrar.</p><div class="mv mv-tk"><div><span>Pedido de productos</span><em>Llega a caja</em></div><div><small>2 × producto de ejemplo</small><small>Por cobrar</small></div></div><p class="origen">Origen: MockaBox</p></article>
-    <article class="mod"><span class="ico"><svg><use href="#i-equipo"/></svg></span><h3>Panel de personal</h3><p>Sumar, canjear, cobrar, ventas del día y ficha completa de cada clienta (cliente 360).</p><div class="mv"><div class="mv-bt"><span>Sumar</span><span>Canjear</span><span>Cobrar</span></div><small>Ventas del día y ficha de cada clienta (cliente 360)</small></div><p class="origen">Se activa junto a fidelización o prepago</p></article>
-    <article class="mod"><span class="ico"><svg><use href="#i-juego"/></svg></span><h3>Mini juego con ranking</h3><p>Un juego en tu página con ranking. Si hay premio, se valida con reglas anti-abuso y el personal confirma el canje.</p><div class="mv"><div class="mv-pod"><span style="height:46px">2</span><span style="height:68px">1</span><span style="height:34px">3</span></div><small>Ranking con premio validado por el personal</small></div><p class="origen">Se muestra en la demo y se cotiza aparte</p></article>
+    <article class="mod"><span class="ico"><svg><use href="#i-tarjeta"/></svg></span><h3>Paquetes y tarjeta prepago</h3><p>Vende paquetes de sesiones o saldo prepago con bono y lleva la cuenta de lo que le queda a cada cliente.</p><div class="mv"><span>Paquete de 5 sesiones</span><div class="mv-pts"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div><small>Ejemplo: 3 sesiones usadas, 2 disponibles</small></div><p class="por-que"><b>Para tu negocio:</b> Tus clientas suelen comprar series de sesiones: el paquete cobra por adelantado y asegura que vuelvan.</p><p class="origen">Origen: Mocka</p></article>
+    <article class="mod"><span class="ico"><svg><use href="#i-estrella"/></svg></span><h3>Fidelización por puntos y niveles</h3><p>Cada visita o compra suma puntos y tus clientes suben de nivel. Premios claros, sin papelitos.</p><div class="mv"><div class="mv-niv"><span>Bronce</span><span class="on">Plata</span><span>Oro</span></div><div class="mv-barra"><i style="width:62%"></i></div><small>Ejemplo: 124 de 200 puntos para el siguiente nivel</small></div><p class="por-que"><b>Para tu negocio:</b> Premia la constancia: cada visita suma y la clienta ve cuánto le falta para su siguiente beneficio.</p><p class="origen">Origen: Beer Club</p></article>
+    <article class="mod"><span class="ico"><svg><use href="#i-equipo"/></svg></span><h3>Panel de personal</h3><p>Sumar, canjear, cobrar, ventas del día y ficha completa de cada cliente (cliente 360).</p><div class="mv"><div class="mv-bt"><span>Sumar</span><span>Canjear</span><span>Cobrar</span></div><small>Ventas del día y ficha de cada clienta (cliente 360)</small></div><p class="por-que"><b>Para tu negocio:</b> Tu equipo busca a la clienta por su QR, suma, cobra y ve su ficha completa en segundos.</p><p class="origen">Se activa junto a fidelización o prepago</p></article>
     
   </div>
+  <p class="otros-mod">Otros módulos disponibles: Tarjeta con QR, Pedidos que llegan a caja, Mini juego con ranking.</p>
   <p class="cifras-nota">Los dibujos son ejemplos de cómo se ve cada módulo. Precio y tiempos se confirman al cotizar.</p>
 </div></section>
 

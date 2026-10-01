@@ -27,3 +27,5 @@
 .mod.activo { box-shadow: inset 0 0 0 2px var(--fx-deep); }
 @media (prefers-reduced-motion: reduce) { .sw::after { transition: none; } }
 @media print { .mod { break-inside: avoid; } }
+.mod .por-que { font-size: .98rem; line-height: 1.4; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--fx-deep) 8%, transparent); }
+.otros-mod { margin-top: 22px; font: 600 1rem/1.4 var(--fx-font-txt); opacity: .85; }
