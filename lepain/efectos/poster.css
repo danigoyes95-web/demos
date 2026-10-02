@@ -1,0 +1,30 @@
+/* efectos/poster.css · complemento OPCIONAL de estilo "cartel" (se elige con efectos.usar = ["poster"]). Se carga después del perfil.
+   Referencia: DESIGN.md de Daniel (Roberta's Pizza): titulares condensados en mayúsculas, botones planos de 7,2 px, sombra dura de 4 px solo al
+   tocar, cinta de cuadros como marco y tarjetas sin degradados ni desenfoques. NO copia su logo, textos, fotos ni su rojo: los colores son
+   los de la marca del cliente (--fx-*). Fuentes sugeridas (marca.fuentes_href): Anton + Space Grotesk. Todo estático: sin animaciones nuevas. */
+:root { --fx-cuadro: 20px; --fx-sombra-dura: 4px 4px 0 var(--fx-deep); }
+body { letter-spacing: .02em; }
+
+/* Titulares condensados que se apilan como cartel */
+.doble, body .hero h1 .grueso { font-family: var(--fx-font-disp); font-weight: 400; text-transform: uppercase; letter-spacing: -.01em; line-height: .92; }
+.doble span, body .hero h1 .fino { font-family: var(--fx-font-txt); font-weight: 400; letter-spacing: .08em; }
+.marca b, .barra a, .cabecera nav a, .btn { font-family: var(--fx-font-txt); font-weight: 500; letter-spacing: .06em; }
+
+/* Botones planos de 7,2 px; la sombra dura solo aparece al tocar (nada depende de :hover) */
+.btn { border-radius: 7.2px; border-width: 1px; box-shadow: none; background-image: none; text-transform: uppercase; font-size: .95rem; }
+.btn:active { transform: translate(-2px, -2px); box-shadow: var(--fx-sombra-dura); }
+.oscuro .btn:active { box-shadow: 4px 4px 0 var(--fx-bg); }
+body .pd-btn { border-radius: 7.2px; box-shadow: none; }
+body .pd-btn:active { transform: translate(-2px, -2px); box-shadow: var(--fx-sombra-dura); }
+
+/* Tarjetas planas con filete */
+.caja, .chat, .op, .hero-foto, .galeria figure { border-radius: 7.2px; box-shadow: none; }
+.caja, .chat { border: 1px solid var(--fx-deep); }
+
+/* Cinta de cuadros (color de la marca) como marco de la cabecera y del pie */
+.cabecera, footer { position: relative; }
+.cabecera::after, footer::before { content: ""; position: absolute; left: 0; right: 0; height: 12px; pointer-events: none;
+  background: repeating-conic-gradient(var(--fx-deep) 0 25%, var(--fx-bg) 0 50%) 0 0 / 24px 24px; }
+.cabecera::after { bottom: -12px; }
+footer::before { top: 0; }
+footer { padding-top: 46px; }
