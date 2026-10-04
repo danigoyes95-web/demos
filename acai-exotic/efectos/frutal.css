@@ -1,13 +1,15 @@
 /* efectos/frutal.css · complemento OPCIONAL de estilo "frutal" (se elige con efectos.usar = ["frutal"]). Se carga después del perfil.
    Referencia: captura de Daniel (landing "brunch" saludable): fondo crema, manchas planas de color, titular contorneado con relleno desplazado,
    subtítulo manuscrito, botones píldora y foto con un borde muy curvo. NO copia su logo, textos, fotos ni su coral: los colores son los de la marca
-   del cliente (--fx-*). Colores propios de este complemento, con valor por defecto: --fx-blob-1/2/3 (manchas), --fx-magenta (botón y subtítulo).
+   del cliente (--fx-*). Colores propios de este complemento, con valor por defecto: --fx-blob-1/2/3 (manchas), --fx-magenta (violeta vivo de botones y subtítulo), --fx-claro (texto claro sobre morado), --fx-morado-1/2/3 (escala de fondos oscuros).
    Fuentes sugeridas (marca.fuentes_href): Fredoka (titulares), Nunito (texto) y Pacifico (subtítulo manuscrito).
    Todo es estático: las manchas y las hojas no se animan (excepción de texturas del CLAUDE.md §6). Sin animaciones infinitas nuevas. */
 :root {
-  --fx-blob-1: #e3d0f0; --fx-blob-2: #f7d9bd; --fx-blob-3: #d7e6c8; --fx-magenta: #c82070; --fx-hoja: #407038;
+  --fx-blob-1: #d9c0ea; --fx-blob-2: #b98fd6; --fx-blob-3: #cfe3bf; --fx-claro: #eadbf7; --fx-magenta: #8a3fb8; --fx-hoja: #407038;
+  --fx-morado-1: #6a3a8c; --fx-morado-2: #502a6a; --fx-morado-3: #3b1c50; /* escala de morados para fondos oscuros */
   --fx-font-script: "Pacifico", "Brush Script MT", cursive;
   --fx-taupe: color-mix(in srgb, var(--fx-deep) 16%, var(--fx-bg));
+  --hoja-a: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M8 92C6 46 40 10 92 8C94 58 58 94 8 92Z' fill='%23d7e6c8' stroke='%23407038' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M8 92L66 34M30 70l18 2M44 54l20 2M26 58l2-18' fill='none' stroke='%23407038' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"); --hoja-b: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M92 92C94 46 60 10 8 8C6 58 42 94 92 92Z' fill='%235f9a52'/%3E%3Cpath d='M92 92L34 34M70 70l-18 2M56 54l-20 2M74 58l-2-18' fill='none' stroke='%23d7e6c8' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"); --hoja-c: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 96C20 80 4 50 14 8C58 16 90 50 50 96Z' fill='%232f6a35'/%3E%3Cpath d='M50 96L22 18M44 70l-16-8M40 50l-12-8M52 76l16-12M58 56l14-12' fill='none' stroke='%23a8d08d' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 body { letter-spacing: 0; }
 
@@ -15,7 +17,7 @@ body { letter-spacing: 0; }
 .doble, .marca b, .btn, .cabecera nav a, .barra a { font-family: var(--fx-font-disp); }
 .doble { text-transform: none; font-weight: 700; line-height: 1; font-size: clamp(2.2rem, 6vw, 3.8rem); letter-spacing: 0; }
 .doble span { display: block; font-family: var(--fx-font-script); font-weight: 400; font-size: .62em; line-height: 1.15; color: var(--fx-magenta); margin-bottom: .1em; transform: rotate(-2deg); transform-origin: left center; }
-.oscuro .doble span, .cierre .doble span { color: var(--fx-blob-2); }
+.oscuro .doble span, .cierre .doble span { color: var(--fx-claro); }
 .cierre .doble span { transform-origin: center; }
 .marca b { font-weight: 700; text-transform: none; letter-spacing: 0; }
 .barra a, .cabecera nav a { text-transform: none; letter-spacing: 0; font-weight: 600; }
@@ -27,8 +29,18 @@ body { letter-spacing: 0; }
     radial-gradient(ellipse 30% 46% at 6% 100%, var(--fx-blob-2) 0 99%, transparent 100%),
     radial-gradient(ellipse 26% 34% at 58% 8%, var(--fx-blob-1) 0 99%, transparent 100%),
     radial-gradient(ellipse 18% 24% at 46% 96%, var(--fx-blob-3) 0 99%, transparent 100%); }
-.hero.oscuro::after { content: ""; position: absolute; z-index: -1; pointer-events: none; left: 2%; bottom: 5%; width: 110px; height: 110px; opacity: .95;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M8 92C6 46 40 10 92 8C94 58 58 94 8 92Z' fill='%23d7e6c8' stroke='%23407038' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M8 92L66 34M30 70l18 2M44 54l20 2M26 58l2-18' fill='none' stroke='%23407038' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat; }
+/* Hojas tropicales (SVG estático, tres variantes: contorno claro, verde sólido y verde oscuro) repartidas por hero y secciones */
+.hero.oscuro::after, .sec.oscuro:not(.cierre)::after, .cierre.oscuro::after, .sec.papel::after, .sec.arena::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-repeat: no-repeat; }
+.hero.oscuro::after {
+  background-image: var(--hoja-a), var(--hoja-b), var(--hoja-c), var(--hoja-a), var(--hoja-b), var(--hoja-c), var(--hoja-b);
+  background-size: 120px, 90px, 90px, 70px, 110px, 80px, 60px;
+  background-position: 1% 94%, 15% 98%, 50% 0, 53% 93%, 97% 4%, 1% 2%, 40% 100%; }
+.sec.oscuro:not(.cierre)::after, .cierre.oscuro::after {
+  background-image: var(--hoja-b), var(--hoja-c), var(--hoja-a), var(--hoja-b);
+  background-size: 130px, 100px, 90px, 70px; background-position: 2% 100%, 97% 96%, 99% 4%, 52% 102%; opacity: .75; }
+.sec.papel::after { background-image: var(--hoja-a), var(--hoja-b), var(--hoja-c); background-size: 90px, 70px, 100px; background-position: 100% 0, 99% 100%, 0 102%; opacity: .55; }
+.sec.arena::after { background-image: var(--hoja-b), var(--hoja-a), var(--hoja-c); background-size: 110px, 80px, 70px; background-position: 0 0, 98% 100%, 60% 104%; opacity: .6; }
+.sec.papel, .sec.arena { position: relative; isolation: isolate; overflow: hidden; }
 body .hero h1 { text-transform: none; line-height: 1; }
 body .hero h1 .fino { font: 400 clamp(1.9rem, 5vw, 3.2rem)/1.1 var(--fx-font-script); color: var(--fx-magenta); transform: rotate(-3deg); transform-origin: left center; margin-bottom: 6px; }
 body .hero h1 .grueso { font: 700 clamp(3.8rem, 14vw, 9.5rem)/.95 var(--fx-font-disp); text-transform: uppercase; color: transparent; -webkit-text-stroke: 2.5px var(--fx-deep); paint-order: stroke fill;
@@ -36,7 +48,9 @@ body .hero h1 .grueso { font: 700 clamp(3.8rem, 14vw, 9.5rem)/.95 var(--fx-font-
 body .hero .lead { color: color-mix(in srgb, var(--fx-ink) 88%, transparent); font-weight: 500; }
 body .hero-foto { border-radius: 220px 28px 28px 220px; box-shadow: none; outline: 3px solid var(--fx-deep); outline-offset: 8px; }
 .hero .sello { background: var(--fx-blob-3); color: var(--fx-deep); border: 3px dashed var(--fx-deep); box-shadow: none; font-family: var(--fx-font-disp); text-transform: none; }
-@media (max-width: 860px) { body .hero-foto { border-radius: 28px 28px 120px 120px; } .hero.oscuro::after { display: none; } .cierre .contorno { display: none; } }
+@media (max-width: 860px) { body .hero-foto { border-radius: 28px 28px 120px 120px; }   .hero.oscuro::after { background-image: var(--hoja-a), var(--hoja-b), var(--hoja-c); background-size: 70px, 60px, 80px; background-position: 100% 2%, 0 100%, 100% 100%; opacity: .9; } .cierre .contorno { display: none; }
+  .sec.oscuro:not(.cierre)::after, .cierre.oscuro::after { background-image: var(--hoja-b), var(--hoja-a); background-size: 64px, 56px; background-position: 0 102%, 100% 0; opacity: .6; }
+  .sec.papel::after, .sec.arena::after { background-size: 56px, 48px, 0; opacity: .5; } }
 
 /* Botones píldora: magenta con texto blanco sobre crema; lila con texto morado sobre fondo oscuro */
 .btn { border: 0; border-radius: 999px; min-height: 52px; padding: 0 28px; background: var(--fx-magenta); background-image: none; color: #fff; box-shadow: none; text-transform: none; letter-spacing: 0; font-size: 1.05rem; font-weight: 600; }
@@ -80,10 +94,12 @@ body .chat { border: 1px solid var(--fx-taupe); border-radius: 28px; background:
 body .chat.despues { background: var(--fx-deep); border-color: var(--fx-deep); }
 body .burbuja { border-radius: 18px; }
 body .paso h3 { font-size: 1.5rem; }
-body .paso b { color: var(--fx-blob-2); font-family: var(--fx-font-script); font-size: 1.5rem; font-weight: 400; }
+body .paso b { color: var(--fx-claro); font-family: var(--fx-font-script); font-size: 1.5rem; font-weight: 400; }
 body .galeria figure { border: 0; border-radius: 28px; transform: none; }
 body .galeria figure:nth-child(2) { border-radius: 999px 999px 28px 28px; }
 .sec.arena { background: var(--fx-blob-1); }
+.sec.oscuro, .cierre.oscuro { background: linear-gradient(165deg, var(--fx-morado-1) 0%, var(--fx-morado-2) 52%, var(--fx-morado-3) 100%); }
+.sec.oscuro + .sec.oscuro { background: linear-gradient(165deg, var(--fx-morado-2) 0%, var(--fx-morado-3) 100%); }
 .donde > .oscuro { border: 0 !important; border-radius: 28px !important; box-shadow: none !important; }
 body .donde > .oscuro h3 { text-transform: none !important; font: 700 1.7rem/1.1 var(--fx-font-disp) !important; }
 body .donde > .oscuro > p { font: 700 clamp(2rem, 6vw, 2.8rem)/1.1 var(--fx-font-disp) !important; }
@@ -113,7 +129,7 @@ body .telefono { border-radius: 44px; box-shadow: 12px 32px 80px 0 color-mix(in 
 body .p-op { border: 1px solid var(--fx-taupe); border-radius: 18px; box-shadow: none; }
 body .p-barra { border: 0; border-radius: 99px; text-transform: none; font-family: var(--fx-font-txt); }
 body .portada h1 .fino, body .portada h1 .grueso { text-transform: none; }
-body .portada h1 .fino { font: 400 clamp(1.8rem, 4.6vw, 3rem)/1.1 var(--fx-font-script); color: var(--fx-blob-2); }
+body .portada h1 .fino { font: 400 clamp(1.8rem, 4.6vw, 3rem)/1.1 var(--fx-font-script); color: var(--fx-claro); }
 body .portada h1 .grueso { font: 700 clamp(2.8rem, 8vw, 5.2rem)/1 var(--fx-font-disp); }
 body .volver { text-transform: none; letter-spacing: 0; font-family: var(--fx-font-txt); font-weight: 700; }
 body .mod { background: var(--fx-paper); }
