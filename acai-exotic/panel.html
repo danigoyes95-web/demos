@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#502a6a">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&amp;family=Nunito:wght@400;600;700&amp;family=Pacifico&amp;display=swap">
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/energia.css">
+<link rel="stylesheet" href="efectos/frutal.css">
+<link rel="stylesheet" href="motor/pedido.css">
+<style>:root { --fx-bg: #fff5e9; --fx-paper: #fcebd8; --fx-accent: #c82070; --fx-ink: #2d1640; --fx-deep: #502a6a; --fx-pop: #e3d0f0; --fx-font: "Nunito", Arial, sans-serif; --fx-font-disp: "Fredoka", "Nunito", Arial, sans-serif; --fx-font-txt: "Nunito", Arial, sans-serif; --fx-deep-2: #3b1c50; --fx-line-deep: #6a4584; --fx-soft: #e8dcf1; --fx-soft-2: #c8b3da; --fx-warm: #8a1650; --fx-chat: #f6e3cf; --fx-blob-1: #e3d0f0; --fx-blob-2: #f7d9bd; --fx-blob-3: #d7e6c8; --fx-magenta: #c82070; --fx-hoja: #407038; --fx-font-script: "Pacifico", cursive; }</style>
+
+<title>Lo que recibe Exotic Açaí · Panel de pedidos (Pro)</title>
+<meta name="description" content="Panel de pedidos de la demo de Exotic Açaí Ambato.">
+<link rel="stylesheet" href="estilos/paneles.css">
+<style>
+.grid-panel { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); margin-top: 24px; align-items: start; }
+@media (max-width: 900px) { .grid-panel { grid-template-columns: 1fr; } }
+.ped { border-bottom: 2px dashed color-mix(in srgb, var(--fx-deep) 25%, transparent); padding: 14px 0; display: grid; gap: 4px; }
+.ped:last-child { border-bottom: 0; }
+.ped-cab { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; }
+.ped-cab b { font: 800 1.3rem/1 var(--fx-font-disp); text-transform: uppercase; }
+.tipo { font: 800 .85rem/1 var(--fx-font-disp); text-transform: uppercase; letter-spacing: .05em; padding: 5px 9px; border-radius: 6px; background: var(--fx-deep); color: var(--fx-bg); }
+.tipo.llevar { background: var(--fx-pop); color: var(--fx-deep); }
+.ped p { font-size: 1rem; }
+.nota-pro { margin-top: 24px; display: flex; gap: 14px; align-items: flex-start; }
+</style>
+</head>
+<body data-pagina="Panel de pedidos (Pro)" data-secciones='["Resumen del día", "Platos más pedidos", "Pedidos recientes"]'>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5 0 0 1 16 0z"/><path d="M3.5 13.5h17M4 17h16a0 0 0 0 1 0 0 3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M9 7h.01M13 6.5h.01M15.5 8h.01"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h5l2-6h-4M16 11l2 6M12 11 10 7H7"/></symbol>
+  <symbol id="i-envio" viewBox="0 0 24 24"><path d="M21 4 3 11l7 3 3 7z"/><path d="m10 14 4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9h17M7 6.8h.01M9.5 6.8h.01"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pago" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 10h18M7 14h3"/></symbol>
+  <symbol id="i-llave" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-copa" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2v2h-2zM18.5 14.5h2M14.5 18.5h2M18.5 18.5v2"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-tarjeta" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-caja" viewBox="0 0 24 24"><path d="M6 3.5h12v5H6zM4 8.5h16l-1.5 11h-13z"/><path d="M9 13h6"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.5-3.5 2.7-5.5 5.5-5.5s5 2 5.5 5.5M15 14.2c2.6-.4 4.7 1 5.5 4.3"/></symbol>
+  <symbol id="i-juego" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M13 14h3M8 17h2"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+</defs></svg>
+
+
+<header class="cabecera"><div class="wrap">
+  <a class="marca" href="index.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Exotic Açaí</b><small>Panel de pedidos</small></span></a>
+  <a class="volver" href="index.html">Volver a la página</a>
+</div></header>
+<main>
+<section class="oscuro cab-pag"><div class="wrap">
+  <h1 class="doble fx-entra fx-d1"><span>Lo que recibe Exotic Açaí</span>Tus pedidos, claros</h1>
+  <p class="intro fx-entra fx-d2" style="color:var(--fx-soft)">Cada pedido de la web queda guardado: quién pidió, qué, si es para llevar o a domicilio y cuánto. Haz un pedido de prueba en la página y aparece aquí.</p>
+  <div class="acciones fx-entra fx-d3"><a class="btn" id="btn-prueba" href="index.html#carta">Hacer un pedido de prueba</a><button type="button" class="btn btn-linea" id="borrar">Borrar pedidos de prueba</button></div>
+</div></section>
+<section class="sec" style="padding-top:40px"><div class="wrap">
+  <p id="aviso-ej" style="margin-bottom:14px"></p>
+  <div class="kpis" id="kpis" data-stagger></div>
+  <div class="grid-panel">
+    <div class="bloque" data-reveal><h3>Platos más pedidos</h3><div class="barras" id="top"></div></div>
+    <div class="bloque" data-reveal><h3 id="tit-lista">Pedidos recientes</h3><div id="lista"></div></div>
+  </div>
+  <div class="nota-pro" data-reveal><span class="ico"><svg><use href="#i-chat"/></svg></span>
+    <p>Plan Pro: los pedidos se guardan en tu base de datos y los ves desde tu celular. En esta demo se guardan solo en este navegador. <a href="premium.html">Ver qué suma el plan Premium</a>.</p></div>
+</div></section>
+</main>
+<script src="config.js"></script>
+<script src="menu.js"></script>
+<script>
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const plata = c => '$' + (c / 100).toFixed(2);
+const ahora = Date.now(), hace = m => new Date(ahora - m * 60000).toISOString();
+/* Pedidos de EJEMPLO con productos reales de la carta: se muestran solo si aún no hay pedidos de prueba. */
+const EJEMPLO = [{"min": 12, "tipo": "domicilio", "total": 840, "nombre": "Cliente de ejemplo 1", "lineas": [{"nombre": "Passion Bowl 16 oz", "cant": 1}, {"nombre": "Wrap de proteína", "cant": 1}]}, {"min": 35, "tipo": "llevar", "total": 650, "nombre": "Cliente de ejemplo 2", "lineas": [{"nombre": "Passion Bowl 24 oz", "cant": 1}]}, {"min": 58, "tipo": "llevar", "total": 830, "nombre": "Cliente de ejemplo 3", "lineas": [{"nombre": "Passion Bowl 12 oz", "cant": 1}, {"nombre": "Papas preparadas", "cant": 1}, {"nombre": "Mega tostada", "cant": 1}]}, {"min": 90, "tipo": "domicilio", "total": 750, "nombre": "Cliente de ejemplo 4", "lineas": [{"nombre": "Volquetero", "cant": 2}]}].map(e => ({ ...e, fecha: hace(e.min) }));
+function leer() { try { return JSON.parse(localStorage.getItem(DEMO.claveDemo) || '[]'); } catch (e) { return []; } }
+const RES = DEMO.modo === 'reserva';
+if (RES) {
+  document.getElementById('btn-prueba').textContent = 'Hacer una reserva de prueba';
+  document.getElementById('borrar').textContent = 'Borrar reservas de prueba';
+  document.getElementById('tit-lista').textContent = 'Citas recientes';
+}
+function pintarReservas() {
+  const reales = leer(), ej = !reales.length, cs = (ej ? EJEMPLO : reales).slice().sort((a, b) => b.fecha.localeCompare(a.fecha));
+  document.getElementById('aviso-ej').innerHTML = ej ? '<span class="chip-ej">Datos de ejemplo</span> Aún no hay reservas de prueba en este navegador.' : `<span class="chip-ej">Tus reservas de prueba</span> ${reales.length} guardada(s) en este navegador.`;
+  const fr = {}; cs.forEach(c => fr[c.franja || 'Sin horario'] = (fr[c.franja || 'Sin horario'] || 0) + 1);
+  const franja = Object.entries(fr).sort((a, b) => b[1] - a[1])[0][0], nserv = cs.reduce((s, c) => s + c.lineas.reduce((t, l) => t + l.cant, 0), 0);
+  document.getElementById('kpis').innerHTML = [['Citas', cs.length, 'desde la web'], ['Por confirmar', cs.length, 'esperan tu respuesta'],
+    ['Horario más pedido', franja, 'franja preferida'], ['Servicios', nserv, 'solicitados']].map(([a, b, c]) => `<div class="kpi"><small>${a}</small><b>${esc(b)}</b><span>${c}</span></div>`).join('');
+  const cuenta = {}; cs.forEach(c => c.lineas.forEach(l => cuenta[l.nombre] = (cuenta[l.nombre] || 0) + l.cant));
+  const top = Object.entries(cuenta).sort((a, b) => b[1] - a[1]).slice(0, 5), max = top.length ? top[0][1] : 1;
+  document.getElementById('top').innerHTML = top.map(([n, c]) => `<div class="barra-f"><span>${esc(n)}</span><div class="p"><div style="width:${c / max * 100}%"></div></div><b>${c}</b></div>`).join('');
+  document.getElementById('lista').innerHTML = cs.slice(0, 8).map(c => `<div class="ped"><div class="ped-cab"><b>${esc(c.nombre || 'Clienta')}</b><span class="tipo">Por confirmar</span></div>
+    <p>${c.lineas.map(l => `${l.cant} × ${esc(l.nombre)}`).join(' · ')}</p>
+    <p><strong>${c.dia ? esc(c.dia) : 'Día por acordar'}</strong> · ${esc(c.franja || '')} · pidió a las ${new Date(c.fecha).toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Guayaquil' })}</p>${c.nota ? `<p>Nota: ${esc(c.nota)}</p>` : ''}</div>`).join('');
+}
+function pintar() {
+  if (RES) return pintarReservas();
+  const reales = leer(), ej = !reales.length, peds = (ej ? EJEMPLO : reales).slice().sort((a, b) => b.fecha.localeCompare(a.fecha));
+  document.getElementById('aviso-ej').innerHTML = ej ? '<span class="chip-ej">Datos de ejemplo</span> Aún no hay pedidos de prueba en este navegador.' : `<span class="chip-ej">Tus pedidos de prueba</span> ${reales.length} guardado(s) en este navegador.`;
+  const total = peds.reduce((s, p) => s + p.total, 0), dom = peds.filter(p => p.tipo === 'domicilio').length;
+  document.getElementById('kpis').innerHTML = [
+    ['Pedidos', peds.length, 'desde la web'], ['Ventas', plata(total), 'sin contar envíos'],
+    ['Para llevar / domicilio', `${peds.length - dom} / ${dom}`, 'cómo te piden'], ['Ticket promedio', plata(Math.round(total / peds.length)), 'por pedido']
+  ].map(([a, b, c]) => `<div class="kpi"><small>${a}</small><b>${b}</b><span>${c}</span></div>`).join('');
+  const cuenta = {}; peds.forEach(p => p.lineas.forEach(l => cuenta[l.nombre] = (cuenta[l.nombre] || 0) + l.cant));
+  const top = Object.entries(cuenta).sort((a, b) => b[1] - a[1]).slice(0, 5), max = top.length ? top[0][1] : 1;
+  document.getElementById('top').innerHTML = top.map(([n, c]) => `<div class="barra-f"><span>${esc(n)}</span><div class="p"><div style="width:${c / max * 100}%"></div></div><b>${c}</b></div>`).join('');
+  document.getElementById('lista').innerHTML = peds.slice(0, 8).map(p => `<div class="ped"><div class="ped-cab"><b>${esc(p.nombre || 'Cliente')}</b>
+    <span class="tipo ${p.tipo === 'llevar' ? 'llevar' : ''}">${p.tipo === 'llevar' ? 'Para llevar' : 'Domicilio'}${p.sector ? ' · ' + esc(p.sector) : ''}</span></div>
+    <p>${p.lineas.map(l => `${l.cant} × ${esc(l.nombre)}`).join(' · ')}</p>
+    <p><strong>${plata(p.total)}</strong> · ${new Date(p.fecha).toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Guayaquil' })}${p.programado ? ' · programado ' + esc(p.programado) : ''}</p></div>`).join('');
+}
+document.getElementById('borrar').onclick = () => { try { localStorage.removeItem(DEMO.claveDemo); } catch (e) {} pintar(); };
+pintar();
+</script>
+<script src="fx.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>
