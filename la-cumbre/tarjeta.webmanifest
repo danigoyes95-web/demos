@@ -1,0 +1,28 @@
+{
+  "name": "La Cumbre · Tarjeta",
+  "short_name": "La Cumbre Tarjet",
+  "description": "Tu tarjeta de La Cumbre: estrellas, nivel, clases, rutina y beneficios.",
+  "start_url": "tarjeta.html",
+  "display": "standalone",
+  "background_color": "#2B1D33",
+  "theme_color": "#2B1D33",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

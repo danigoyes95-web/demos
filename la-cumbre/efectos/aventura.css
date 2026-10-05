@@ -1,0 +1,101 @@
+/* efectos/aventura.css · complemento OPCIONAL de estilo «aventura / expedición» (se elige con efectos.usar = ["aventura"]). Se carga después del perfil.
+   Referencia: plantilla de landing «Trekking» de Daniel (capturas): titular gigante translúcido sobre un paisaje, discos con halo, rejillas de puntos,
+   botones píldora con punto. NO copia su naranja, textos ni foto: los colores son los de la marca del cliente (--fx-*).
+   Hero (solo gimnasios): cielo en degradado, tres cordilleras (SVG con colores de la marca), sol con halo y puntos; todo estático. Cuando el cliente
+   entregue su foto, se pone en --av-foto (ej. `--av-foto: url(../assets/hero.webp)` en el :root o en .hero) y queda bajo el tinte de la marca.
+   Resto de la página: botones píldora, tarjetas redondeadas de borde fino (sin sombras duras), curvas de nivel topográficas de fondo y cinta con ▲.
+   Solo CSS estático (texturas, sin animaciones nuevas): las dos animaciones infinitas del perfil (cinta y pulso de WhatsApp) siguen siendo las únicas.
+   Fuentes: las del perfil (Barlow Condensed + Inter). Los selectores llevan `body` delante para ganarle a las hojas del módulo y de la plantilla. */
+:root {
+  --av-radio: 22px;
+  --av-topo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='360' viewBox='0 0 520 360' fill='none' stroke='%23808080' stroke-opacity='.22' stroke-width='1.2'%3E%3Cpath d='M-10 70C70 20 150 120 240 80S400 20 530 90'/%3E%3Cpath d='M-10 100C70 52 150 148 240 110S400 52 530 118'/%3E%3Cpath d='M-10 130C70 84 150 176 240 140S400 84 530 146'/%3E%3Cpath d='M-10 230C90 170 170 290 270 240S420 190 530 250'/%3E%3Cpath d='M-10 260C90 202 170 318 270 270S420 222 530 278'/%3E%3Cpath d='M-10 290C90 234 170 346 270 300S420 254 530 306'/%3E%3C/svg%3E");
+}
+
+/* ---------- Hero: expedición ---------- */
+body .hero { min-height: min(92vh, 780px); display: grid; align-items: center; isolation: isolate; text-align: center; background: linear-gradient(180deg, var(--fx-deep) 0%, color-mix(in srgb, var(--fx-deep) 62%, var(--fx-accent)) 48%, color-mix(in srgb, var(--fx-accent) 62%, var(--fx-pop)) 100%); }
+body .av-fondo { display: block; position: absolute; inset: 0; z-index: -1; overflow: hidden; background: var(--av-foto, none) center / cover no-repeat; }
+body .av-fondo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--fx-deep) 66%, transparent), color-mix(in srgb, var(--fx-deep) 14%, transparent) 60%, transparent); }
+.av-monte { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 72%; }
+.av-monte .m3 { fill: color-mix(in srgb, var(--fx-accent) 52%, var(--fx-deep)); opacity: .75; }
+.av-monte .m2 { fill: color-mix(in srgb, var(--fx-pop) 38%, var(--fx-deep)); }
+.av-monte .m1 { fill: var(--fx-deep); }
+.av-sol { position: absolute; border-radius: 50%; background: var(--fx-accent); box-shadow: 0 0 0 clamp(10px, 2vw, 18px) color-mix(in srgb, var(--fx-accent) 26%, transparent), 0 0 0 clamp(22px, 4.4vw, 40px) color-mix(in srgb, var(--fx-accent) 12%, transparent); }
+.av-sol { width: clamp(38px, 6vw, 64px); aspect-ratio: 1; left: 9%; top: 24%; }
+.av-sol-2 { width: clamp(46px, 7vw, 76px); left: auto; right: 9%; top: auto; bottom: 20%; background: var(--fx-pop); box-shadow: 0 0 0 clamp(10px, 2vw, 18px) color-mix(in srgb, var(--fx-pop) 28%, transparent), 0 0 0 clamp(22px, 4.4vw, 40px) color-mix(in srgb, var(--fx-pop) 12%, transparent); }
+.av-puntos { position: absolute; width: clamp(54px, 8vw, 86px); color: color-mix(in srgb, var(--fx-bg) 80%, transparent); }
+.av-p1 { right: 12%; top: 22%; } .av-p2 { left: 12%; bottom: 16%; }
+body .av-redes { display: grid; place-items: center; position: absolute; left: clamp(12px, 3vw, 40px); bottom: clamp(18px, 4vw, 44px); z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--fx-bg) 70%, transparent); color: var(--fx-bg); background: color-mix(in srgb, var(--fx-deep) 35%, transparent); }
+.av-redes svg { width: 22px; height: 22px; }
+
+body .hero .wrap { grid-template-columns: minmax(0, 1fr); justify-items: center; padding-block: clamp(46px, 8vw, 96px) clamp(48px, 7vw, 84px); }
+body .hero h1 { text-align: center; }
+body .hero h1 .fino { font: 600 clamp(.95rem, 2.2vw, 1.3rem)/1 var(--fx-font-txt); letter-spacing: .5em; margin-right: -.5em; color: var(--fx-bg); opacity: .92; }
+body .hero h1 .grueso { margin-top: .12em; font: 900 clamp(4.2rem, 19vw, 13rem)/.86 var(--fx-font-disp); letter-spacing: .01em;
+  color: transparent; background: linear-gradient(180deg, color-mix(in srgb, var(--fx-bg) 96%, transparent) 8%, color-mix(in srgb, var(--fx-bg) 28%, transparent) 92%); -webkit-background-clip: text; background-clip: text;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fx-bg) 40%, transparent); }
+body .hero .lead { max-width: 52ch; margin-inline: auto; color: color-mix(in srgb, var(--fx-bg) 88%, transparent); font-size: 1.1rem; }
+body .hero .acciones { justify-content: center; }
+body .hero .cifras { justify-content: center; gap: 8px 38px; }
+body .hero .cifras b { color: var(--fx-bg); }
+body .hero .cifras span { color: color-mix(in srgb, var(--fx-bg) 75%, transparent); }
+/* la tarjeta de ejemplo del teléfono vive en la página de la socia; en la expedición el protagonista es el titular */
+body .hero-media { display: none; }
+
+/* ---------- Titulares: etiqueta con espaciado amplio sobre palabra grande ---------- */
+body .doble span { letter-spacing: .32em; font-weight: 600; font-size: .4em; margin-bottom: .35em; }
+body .marca b, body .cabecera nav a { letter-spacing: .08em; }
+
+/* ---------- Botones píldora con punto ---------- */
+body .btn { border-radius: 999px; border-width: 0; box-shadow: none; padding-inline: 28px; letter-spacing: .08em; }
+body .btn::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: .55; flex: none; }
+body .btn:active { transform: scale(.97); box-shadow: none; }
+body .btn-linea, body .oscuro .btn-linea { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
+body .btn-linea::after { display: none; }
+body .barra a, body .g-btn { border-radius: 999px; }
+body .oscuro .btn:not(.btn-linea) { border-color: transparent; box-shadow: none; }
+
+/* ---------- Tarjetas: borde fino, esquinas amplias, sin sombra dura ---------- */
+body .caja, body .plan-card, body .nivel-card, body .chat, body .hub-card, body .fx-tarjeta { border: 1.5px solid color-mix(in srgb, var(--fx-deep) 28%, transparent); border-radius: var(--av-radio); box-shadow: none; }
+body .caja { background: var(--fx-bg); }
+body .plan-card { box-shadow: 0 0 0 1.5px var(--fx-accent) inset; }
+body .plan-card.dest { border-color: transparent; background: var(--fx-accent); box-shadow: none; }
+body .nivel-card { background: var(--fx-bg); }
+body .chat.despues { border-color: transparent; }
+body .hub-card:active { transform: scale(.985); box-shadow: none; }
+body .hub-card.principal { border-color: transparent; }
+body .hub-card small { border-radius: 999px; }
+body .op { border-width: 1.5px; border-radius: 16px; }
+body .reco { border-radius: 18px; }
+body .durs button { border-radius: 999px; border-width: 1.5px; }
+body .g-chip { border-radius: 999px; }
+
+/* módulo de gimnasio (gym.css): mismas esquinas amplias y sin sombra dura */
+body .g-btn { border-width: 0; box-shadow: none; padding-inline: 20px; }
+body .g-btn.sec { box-shadow: inset 0 0 0 1.5px currentColor; }
+body .g-btn:active:not(:disabled) { transform: scale(.97); box-shadow: none; }
+body .oscuro .g-btn { box-shadow: none; }
+body .oscuro .g-btn.sec { box-shadow: inset 0 0 0 1.5px currentColor; }
+body .g-card, body .g-card.oscura, body .g-kpi, body .gym-aviso, body .g-clase, body .g-clase.mia, body dialog.g-dlg { border-width: 1.5px; border-radius: var(--av-radio); box-shadow: none; }
+body .g-card { border-color: color-mix(in srgb, var(--fx-deep) 28%, transparent); }
+body .g-clase { border-color: color-mix(in srgb, var(--fx-deep) 28%, transparent); }
+body .g-clase.mia { border-color: var(--fx-accent); }
+body .g-sedes button, body .g-dias button { border-radius: 16px; border-width: 1.5px; box-shadow: none; }
+body .g-sedes button { border-radius: 999px; }
+body .g-sedes button[aria-pressed="true"], body .g-dias button[aria-pressed="true"] { box-shadow: none; }
+
+/* ---------- Curvas de nivel de fondo en las secciones claras ---------- */
+body .sec.papel, body .sec.arena { background-image: var(--av-topo); background-size: 520px 360px; }
+
+/* ---------- Cinta de logros: montañas en vez de estrellas ---------- */
+body .cinta { border-block: 0; }
+body .cinta li::after { content: "▲"; font-size: .7em; vertical-align: .12em; }
+body .cierre .contorno { -webkit-text-stroke-width: 1.5px; }
+body .cierre { background-image: linear-gradient(180deg, var(--fx-deep), color-mix(in srgb, var(--fx-deep) 70%, var(--fx-accent))); }
+
+@media (max-width: 860px) {
+  .av-p1 { top: 14%; right: 6%; } .av-p2 { bottom: 10%; left: 6%; }
+  .av-sol { left: 6%; top: 15%; } .av-sol-2 { right: 6%; bottom: 14%; }
+  body .av-redes { display: none; }   /* a 375 px la barra lateral tapa el contenido: el Instagram sigue en el pie y en «Dónde» */
+  body .hero h1 .fino { letter-spacing: .38em; margin-right: -.38em; }
+}
+@media (prefers-reduced-motion: reduce) { body .btn { transition: none; } }
