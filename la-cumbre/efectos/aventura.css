@@ -55,7 +55,7 @@ body .barra a, body .g-btn { border-radius: 999px; }
 body .oscuro .btn:not(.btn-linea) { border-color: transparent; box-shadow: none; }
 
 /* ---------- Tarjetas: borde fino, esquinas amplias, sin sombra dura ---------- */
-body .caja, body .plan-card, body .nivel-card, body .chat, body .hub-card, body .fx-tarjeta { border: 1.5px solid color-mix(in srgb, var(--fx-deep) 28%, transparent); border-radius: var(--av-radio); box-shadow: none; }
+body .act, body .caja, body .plan-card, body .nivel-card, body .chat, body .hub-card, body .fx-tarjeta { border: 1.5px solid color-mix(in srgb, var(--fx-deep) 28%, transparent); border-radius: var(--av-radio); box-shadow: none; }
 body .caja { background: var(--fx-bg); }
 body .plan-card { box-shadow: 0 0 0 1.5px var(--fx-accent) inset; }
 body .plan-card.dest { border-color: transparent; background: var(--fx-accent); box-shadow: none; }

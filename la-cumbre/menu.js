@@ -44,7 +44,7 @@ window.MENU = {
         },
         {
           "id": "calistenia",
-          "nombre": "Calistenia",
+          "nombre": "Funcional · Calistenia",
           "precio": 0,
           "lema": null,
           "desc": "Fuerza con tu propio peso: barras, paralelas y movimiento."
