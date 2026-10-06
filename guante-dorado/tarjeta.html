@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap">
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/movimiento.css">
+<link rel="stylesheet" href="efectos/toque.css">
+<style>:root { --fx-bg: #F6F1E6; --fx-paper: #EBE3D0; --fx-accent: #D89818; --fx-ink: #0A0A0A; --fx-deep: #0A0A0A; --fx-pop: #F2B93B; --fx-font: "Inter", sans-serif; --fx-font-disp: "Barlow Condensed", sans-serif; --fx-font-txt: "Inter", sans-serif; }</style>
+
+<title>Guante Dorado · Mi tarjeta</title>
+<meta name="description" content="Tu tarjeta de Guante Dorado: estrellas, nivel, clases, rutina y beneficios.">
+<link rel="manifest" href="tarjeta.webmanifest">
+<link rel="stylesheet" href="modulos/gimnasio/gym.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>
+<style>
+.cab-tarjeta { padding-block: 26px 22px; }
+.cab-tarjeta .wrap { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px 20px; }
+.cab-tarjeta h1 { font: 900 clamp(2.4rem, 8vw, 4rem)/.88 var(--fx-font-disp); text-transform: uppercase; }
+.cab-tarjeta h1 span { display: block; font-weight: 500; font-size: .5em; letter-spacing: .08em; color: var(--fx-accent); }
+.cab-tarjeta .g-enlace { color: var(--fx-bg); }
+.volver { display: inline-flex; align-items: center; min-height: 44px; color: var(--fx-bg); text-decoration: none; font: 800 1rem var(--fx-font-disp); text-transform: uppercase; letter-spacing: .05em; }
+</style>
+</head>
+<body data-pagina="Tarjeta de la socia (Pro)" data-secciones='["Entrada", "Tarjeta", "Clases", "Rutina", "Progreso", "Beneficios", "Retos"]'>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5 0 0 1 16 0z"/><path d="M3.5 13.5h17M4 17h16a0 0 0 0 1 0 0 3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M9 7h.01M13 6.5h.01M15.5 8h.01"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h5l2-6h-4M16 11l2 6M12 11 10 7H7"/></symbol>
+  <symbol id="i-envio" viewBox="0 0 24 24"><path d="M21 4 3 11l7 3 3 7z"/><path d="m10 14 4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9h17M7 6.8h.01M9.5 6.8h.01"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pago" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 10h18M7 14h3"/></symbol>
+  <symbol id="i-llave" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-copa" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2v2h-2zM18.5 14.5h2M14.5 18.5h2M18.5 18.5v2"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-tarjeta" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-caja" viewBox="0 0 24 24"><path d="M6 3.5h12v5H6zM4 8.5h16l-1.5 11h-13z"/><path d="M9 13h6"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.5-3.5 2.7-5.5 5.5-5.5s5 2 5.5 5.5M15 14.2c2.6-.4 4.7 1 5.5 4.3"/></symbol>
+  <symbol id="i-juego" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M13 14h3M8 17h2"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+</defs></svg>
+
+
+<div class="g-plan"><span id="plan-nota" aria-live="polite"></span><span class="sw" role="group" aria-label="Plan que estás viendo"><button type="button" data-plan="esencial" aria-pressed="false">Esencial</button><button type="button" data-plan="pro" aria-pressed="true">Pro</button></span></div>
+
+<header class="cabecera"><div class="wrap">
+  <a class="marca" href="inicio.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Guante Dorado</b><small>Mi tarjeta</small></span></a>
+  <a class="volver" href="inicio.html">← Inicio</a>
+</div></header>
+
+<main>
+<section class="oscuro cab-tarjeta"><div class="wrap">
+  <h1 class="fx-entra fx-d1"><span>Tu tarjeta</span><span id="nombre-s" style="display:inline;color:inherit;font-size:1em;letter-spacing:0">Guante Dorado</span></h1>
+  <button class="g-enlace g-oculto" id="b-salir" type="button">Salir de mi tarjeta</button>
+</div></section>
+
+<section class="g-oculto" id="sin-pro"><div class="g-app g-panel">
+  <div class="g-solo-pro"><b>La tarjeta de la socio es del plan Pro</b><p>Con el plan Esencial la reserva se hace por WhatsApp. Con Pro, cada socio tiene su tarjeta con QR, ve sus estrellas, reserva con cupos reales y cancela sola.</p><button class="g-btn" id="ver-pro" type="button" style="margin-top:14px">Ver la demo del plan Pro</button></div>
+</div></section>
+
+<section id="entrada" class="g-oculto"><form class="g-entrada" id="acc-form" novalidate>
+  <div class="g-card"><h3>Abre tu tarjeta</h3><p style="margin-bottom:14px">Escribe el código que te enviamos por WhatsApp y los últimos 4 números de tu celular.</p>
+    <div class="g-pista" id="acc-ej" style="margin-bottom:14px"></div>
+    <label class="g-campo">Código<input id="acc-cod" autocomplete="off" autocapitalize="characters" placeholder="Código de tu tarjeta" required></label>
+    <label class="g-campo">Últimos 4 de tu WhatsApp<input id="acc-4" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="0000" required></label>
+    <p class="g-err" id="acc-err" role="alert"></p>
+    <button class="g-btn" id="acc-ok" type="submit" style="width:100%">Abrir mi tarjeta</button></div>
+  <p style="text-align:center">¿Aún no tienes tarjeta? Pídela en tu próxima clase. <a href="inicio.html#planes" style="font-weight:700">Ver planes</a></p>
+</form></section>
+
+<section id="app" class="g-oculto">
+  <div class="g-pestanas" id="tabs" role="tablist" aria-label="Secciones de tu tarjeta"></div>
+  <div class="g-app">
+    <div class="g-panel" data-panel="tarjeta" id="p-tarjeta" role="tabpanel"></div>
+    <div class="g-panel" data-panel="clases" id="p-clases" role="tabpanel" hidden></div>
+    <div class="g-panel" data-panel="rutina" id="p-rutina" role="tabpanel" hidden></div>
+    <div class="g-panel" data-panel="progreso" id="p-progreso" role="tabpanel" hidden></div>
+    <div class="g-panel" data-panel="beneficios" id="p-beneficios" role="tabpanel" hidden></div>
+    <div class="g-panel" data-panel="retos" id="p-retos" role="tabpanel" hidden></div>
+  </div>
+</section>
+</main>
+
+<script src="config.js"></script>
+<script>window.GYMDATA = {"api": {"modo": "demo"}, "iconos": {"lista": [{"src": "assets/icon-192.png", "sizes": "192x192"}, {"src": "assets/icon-512.png", "sizes": "512x512"}, {"src": "assets/icon-maskable-512.png", "sizes": "512x512", "purpose": "maskable"}]}, "textos": {"plan_pro": "Estás viendo el plan Pro: reservas con cupos en vivo, tarjeta con QR y panel del personal.", "plan_esencial": "Estás viendo el plan Esencial: la clase se reserva por WhatsApp. Sin cupos en vivo, sin tarjeta y sin panel.", "entrar_titulo": "Entra para reservar", "entrar_txt": "Con tu código y los últimos 4 dígitos de tu WhatsApp.", "sin_clases": "No hay clases ese día en esta sede.", "sin_retos": "Aún no hay fotos aprobadas. ¡Sé la primera!"}, "hero": {"saludo": "Hola, Valentina", "nivel": "Guante de plata", "estrellas": "62", "avance": ".42", "falta": "38 ★ para Guante dorado", "clase_hora": "18:00", "clase_nombre": "Boxeo adultos · Ficoa"}, "clases": {"fino": "Reserva tu", "grueso": "clase", "intro": "Elige tu sede (Ficoa o Huachi Chico) y el día. Los horarios de la demo son de ejemplo.", "nota_pro": "Puedes cancelar hasta 6 horas antes sin perder tu clase. Si está llena, entras a la lista de espera y subes solo cuando se libera un cupo.", "nota_esencial": "En el plan Esencial te llega la reserva por WhatsApp y el cupo se confirma por el mismo chat."}, "planes": {"fino": "Elige tu", "grueso": "plan", "intro": "Aceptamos transferencia; el cobro se cierra por WhatsApp.", "nota": "Único precio confirmado: la promo de fin de año ($100 por 3 meses, de su publicación). La mensualidad regular y los demás planes están por confirmar.", "duracion_inicial": "3", "base": "3", "etiqueta_destacado": "Promo fin de año", "duraciones": [{"id": "3", "label": "3 meses"}], "lista": [{"id": "promo", "nombre": "Los últimos 3 meses del año", "desc": "Promo de fin de año: más guantes por solo $100", "destacado": true, "unidad": "por 3 meses", "precios": {"3": 100}, "incluye": ["Boxeo para niños, jóvenes y adultos, todos los niveles", "Gimnasio: fuerza y acondicionamiento", "Entrenadores calificados, ambiente seguro y profesional"]}, {"id": "mensual", "nombre": "Mensualidad", "desc": "[MARCADOR: planes y precios regulares]", "destacado": false, "precios": {}, "incluye": ["Precio por confirmar con el club"]}]}, "estrellas": {"fino": "Estrellas y", "grueso": "niveles", "intro": "Tu constancia tiene premio. Cada clase, evento y amigo que traes suma estrellas. Tus estrellas nunca vencen: mientras más acumulas, más alto tu nivel y mejores tus descuentos.", "pasos": [{"titulo": "Recibe tu tarjeta", "texto": "Te la enviamos por WhatsApp desde tu primera clase, con tu QR personal."}, {"titulo": "Muéstralo en recepción", "texto": "Escaneamos tu QR al llegar y tus estrellas se suman al instante."}, {"titulo": "Sube de nivel", "texto": "Tu nivel te da descuentos fijos en eventos y merch, y prioridad en lanzamientos."}], "como_titulo": "Cómo sumar", "niveles_titulo": "Tus niveles", "cta": "Ver mi tarjeta"}, "retos": {"fino": "Retos y", "grueso": "comunidad", "intro": "Sube la foto de tu reto desde tu tarjeta. El equipo la revisa antes de publicarla: solo se ve lo aprobado y solo suma estrellas lo aprobado."}, "tarjeta": {"titulo": "Guante Dorado · Mi tarjeta", "descripcion": "Tu tarjeta de Guante Dorado: estrellas, nivel, clases, rutina y beneficios.", "marca_sub": "Mi tarjeta", "h1_fino": "Tu tarjeta", "h1_grueso": "Guante Dorado", "secciones": ["Entrada", "Tarjeta", "Clases", "Rutina", "Progreso", "Beneficios", "Retos"], "sin_pro_titulo": "La tarjeta de la socio es del plan Pro", "sin_pro_txt": "Con el plan Esencial la reserva se hace por WhatsApp. Con Pro, cada socio tiene su tarjeta con QR, ve sus estrellas, reserva con cupos reales y cancela sola.", "entrar_titulo": "Abre tu tarjeta", "entrar_txt": "Escribe el código que te enviamos por WhatsApp y los últimos 4 números de tu celular.", "sin_tarjeta": "¿Aún no tienes tarjeta? Pídela en tu próxima clase.", "sin_tarjeta_cta": "Ver planes", "objetivos": ["Competir", "Ponerme en forma", "Bajar de peso", "Ganar fuerza", "Disciplina y técnica", "Rendimiento"], "renovar_txt": "Renueva con un mensaje y no pierdes tu ritmo.", "qr_txt": "Así sumamos tus estrellas en cada clase, evento o compra.", "reglas_clases": "Puedes cancelar hasta 6 horas antes sin perder tu clase. Si está llena, entras a la lista de espera y subes solo.", "rutina_txt": "Haz tu rutina en los días sin clase. Cuando tu coach la confirma, suma +2 ★.", "sin_rutina": "Tu coach aún no te asigna una rutina esta semana.", "merch_txt": "Pagas y retiras en recepción. Cada compra de merch también suma 1 ★ por cada $5.", "reto_txt": "Tu foto queda pendiente hasta que el equipo la apruebe. Solo se publica lo aprobado."}, "personal": {"titulo": "Guante Dorado · Panel del personal", "descripcion": "Panel del equipo de Guante Dorado: asistencia con QR, estrellas, clases, socios, rutinas y retos.", "marca_sub": "Panel del personal", "h1_fino": "Tu equipo,", "h1_grueso": "al día", "secciones": ["Entrada", "Hoy", "Clases", "Socios", "Rutinas", "Retos", "Resumen", "Ficha"], "sin_pro_titulo": "El panel del personal es del plan Pro", "sin_pro_txt": "Con el plan Esencial las reservas llegan por WhatsApp. Con Pro, tu equipo marca asistencia con el QR, ve a cada socio en segundos y cada reserva queda guardada.", "entrar_titulo": "Entra al panel", "entrar_demo": "Elige un rol para probar. Cada rol ve y puede hacer cosas distintas, igual que en producción.", "rutinas_txt": "Arma plantillas con bloques (Rutina A, B, C) y asígnalas a varias socios a la vez. Para ajustar la rutina de una sola socio, hazlo desde su ficha.", "retos_txt": "Las fotos de los retos nacen pendientes. Al aprobarlas, la socio suma sus estrellas y, si quieres, la foto sale en la galería.", "resumen_txt": "Los mismos datos alimentan el reporte mensual de Premium."}, "mock": {"prefijo": "GD", "dominio": "ejemplo.ec", "sedes": ["Ficoa", "Huachi Chico"], "tipos": [{"clave": "ninos", "nombre": "Boxeo niños", "descripcion": "Boxeo para los más pequeños, todos los niveles."}, {"clave": "jovenes", "nombre": "Boxeo jóvenes", "descripcion": "Formación en boxeo para jóvenes, todos los niveles."}, {"clave": "adultos", "nombre": "Boxeo adultos", "descripcion": "Boxeo recreativo para adultos, todos los niveles."}, {"clave": "competencia", "nombre": "Competencia", "descripcion": "Formación amateur y profesional para quien quiere competir."}, {"clave": "gimnasio", "nombre": "Gimnasio", "descripcion": "Fuerza y acondicionamiento físico."}], "coaches": ["Entrenador 1", "Entrenador 2", "Entrenador 3", "Entrenador 4"], "niveles": [{"nombre": "Aprendiz", "desde": 0, "desc_eventos": 0, "desc_merch": 0, "prioridad_merch": false, "beneficios": "Sumas estrellas desde tu primera clase."}, {"nombre": "Guante de plata", "desde": 30, "desc_eventos": 10, "desc_merch": 10, "prioridad_merch": false, "beneficios": "10% en eventos pagos y 10% en merch."}, {"nombre": "Guante dorado", "desde": 100, "desc_eventos": 20, "desc_merch": 15, "prioridad_merch": true, "beneficios": "20% en eventos pagos, 15% en merch y prioridad en lanzamientos de merch."}], "merch": [{"nombre": "Camiseta del club", "descripcion": "Ejemplo de merch: confirmar si el club la vende.", "precio": 15, "tallas": "S · M · L · XL"}, {"nombre": "Vendas de boxeo", "descripcion": "Ejemplo de merch: confirmar si el club las vende.", "precio": 6}, {"nombre": "Botella del club", "descripcion": "Ejemplo de merch: confirmar si el club la vende.", "precio": 10}, {"nombre": "Guantes de entrenamiento", "descripcion": "Ejemplo de merch: confirmar si el club los vende.", "precio": 35, "solo_nivel": "Guante dorado"}]}};</script>
+<script src="modulos/gimnasio/gym-mock.js"></script>
+<script src="modulos/gimnasio/gym-api.js"></script>
+<script src="modulos/gimnasio/gym-ui.js"></script>
+<script src="modulos/gimnasio/gym-tarjeta.js"></script>
+<script src="fx.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>

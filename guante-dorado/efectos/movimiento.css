@@ -1,0 +1,61 @@
+/* efectos/movimiento.css · perfil MOVIMIENTO Y LOGRO (gimnasios, academias, deportes).
+   Ritmo rápido y firme (0.2–0.35 s), curva con arranque seco y sin rebote. Se carga después de base.css. Solo transform y opacity.
+   Colores solo por variables --fx-* (definidas en el :root de la página). Máx. 3 animaciones infinitas visibles a la vez:
+   aquí solo hay una (la cinta). Efectos: barras de progreso que se llenan, contadores de cifras reales (fx.js), transiciones laterales
+   entre pasos, botón que se hunde al tocar y titulares inclinados. Con movimiento reducido todo queda completo y quieto. */
+:root {
+  --fx-dur: .32s; --fx-ease: cubic-bezier(.22, .9, .3, 1); --fx-dist: 22px; --fx-fast: .16s;
+  /* aparición al hacer scroll (fx.js) */
+  --fx-rv-dur: 320; --fx-rv-step: 60; --fx-rv-ease: cubic-bezier(.22, .9, .3, 1); --fx-rv-dist: 20px; --fx-rv-scale: 1;
+}
+
+/* Titulares de dos pesos, en mayúsculas y compactos */
+.doble { text-transform: uppercase; font: 900 clamp(2.8rem, 8vw, 5.2rem)/.88 var(--fx-font-disp); letter-spacing: .005em; }
+.doble span { font-weight: 500; font-size: .5em; line-height: 1; margin-bottom: .1em; letter-spacing: .06em; }
+.marca b, .barra a, .cabecera nav a { text-transform: uppercase; letter-spacing: .04em; }
+
+/* Botón firme: borde sólido y sombra dura que se hunde al tocar */
+.btn { text-transform: uppercase; letter-spacing: .05em; border-radius: 4px; box-shadow: 4px 4px 0 var(--fx-deep); transition: transform var(--fx-fast) var(--fx-ease), box-shadow var(--fx-fast); }
+.btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--fx-deep); }
+.oscuro .btn { border-color: var(--fx-bg); box-shadow: 4px 4px 0 var(--fx-bg); }
+.oscuro .btn:active { box-shadow: 0 0 0 var(--fx-bg); }
+.btn-linea { box-shadow: none; }
+.btn-linea:active { transform: scale(.97); box-shadow: none; }
+
+/* Barra de progreso que se llena (nivel, cupos, cumplimiento). La anchura final va en --w y se anima solo con transform. */
+.fx-barra { position: relative; height: 12px; border-radius: 2px; background: color-mix(in srgb, currentColor 16%, transparent); overflow: hidden; }
+.fx-barra > i { position: absolute; inset: 0; background: var(--fx-accent); transform-origin: left; transform: scaleX(var(--w, 0)); animation: fx-llena .7s var(--fx-ease) both; }
+.oscuro .fx-barra > i, .fx-barra.sobre-claro > i { background: var(--fx-pop); }
+@keyframes fx-llena { from { transform: scaleX(0); } }
+
+/* Corte diagonal en los titulares de sección y sellos de estado */
+.fx-corte { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), 0 100%); padding-bottom: 22px; }
+.fx-inclina { display: inline-block; transform: skewX(-8deg); }
+
+/* Cinta de logros en movimiento (1 animación infinita) */
+.cinta { overflow: hidden; background: var(--fx-pop); color: var(--fx-deep); border-block: 3px solid var(--fx-deep); padding-block: 10px; }
+.cinta-pista { display: flex; width: max-content; animation: fx-cinta 28s linear infinite; }
+.cinta ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0 14px; }
+.cinta li { font: 900 1.35rem/1 var(--fx-font-disp); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+.cinta li::after { content: "★"; margin-left: 28px; }
+@keyframes fx-cinta { to { transform: translateX(-50%); } }
+
+/* Tarjeta con sombra sólida */
+.fx-tarjeta { background: var(--fx-paper); border: 3px solid var(--fx-deep); border-radius: 6px; box-shadow: 5px 5px 0 var(--fx-deep); }
+
+/* Entrada del hero: el titular grueso entra desde un lado */
+.fx-golpe { animation: fx-golpe .4s var(--fx-ease) .12s both; }
+@keyframes fx-golpe { from { opacity: 0; transform: translateX(-34px) skewX(-8deg); } }
+
+/* Transición lateral entre pasos (diagnóstico, pestañas de la app) */
+.fx-paso { animation: fx-paso .26s var(--fx-ease) both; }
+@keyframes fx-paso { from { opacity: 0; transform: translateX(22px); } }
+
+/* Pulso del WhatsApp flotante (1 animación infinita) */
+.wa-flot::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #25D366; animation: fx-pulso-m 3s ease-out infinite; }
+@keyframes fx-pulso-m { from { transform: scale(1); opacity: .7; } to { transform: scale(1.5); opacity: 0; } }
+
+/* Zoom de fotos (solo con mouse) */
+.fx-zoom { overflow: hidden; }
+.fx-zoom img { transition: transform 1s var(--fx-ease); }
+@media (hover: hover) { .fx-zoom:hover img { transform: scale(1.05); } }

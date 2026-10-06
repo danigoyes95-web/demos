@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap">
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/movimiento.css">
+<link rel="stylesheet" href="efectos/toque.css">
+<style>:root { --fx-bg: #F6F1E6; --fx-paper: #EBE3D0; --fx-accent: #D89818; --fx-ink: #0A0A0A; --fx-deep: #0A0A0A; --fx-pop: #F2B93B; --fx-font: "Inter", sans-serif; --fx-font-disp: "Barlow Condensed", sans-serif; --fx-font-txt: "Inter", sans-serif; }</style>
+
+<title>Guante Dorado Boxing Club · Boxeo en Ambato (Ficoa y Huachi Chico)</title>
+<meta name="description" content="Boxeo para niños, jóvenes y adultos en Ficoa y Huachi Chico, Ambato. Reserva tu clase, suma estrellas por constancia y cumple tus metas.">
+<meta property="og:title" content="Guante Dorado Boxing Club · Boxeo para todos">
+<meta property="og:description" content="Reserva tu clase de boxeo en Ficoa o Huachi Chico, Ambato.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "ExerciseGym", "name": "Guante Dorado Boxing Club Ambato", "telephone": "+593968438043", "address": {"@type": "PostalAddress", "streetAddress": "Ficoa: Av. Guaytambos y Chirimoyas · Huachi Chico: Av. Julio Jaramillo, a 150 m del Redondel de Huachi Chico (vía a Baños)", "addressLocality": "Ambato", "addressRegion": "Tungurahua", "addressCountry": "EC"}, "sameAs": ["https://www.instagram.com/guante.dorado_advance/", "[MARCADOR: facebook]"]}
+</script>
+<link rel="stylesheet" href="modulos/gimnasio/gym.css">
+<style>
+/* Hero */
+.hero { position: relative; overflow: hidden; }
+.hero .wrap { display: grid; gap: 28px; align-items: center; padding-block: clamp(28px, 5vw, 64px) clamp(40px, 6vw, 76px); grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
+.hero h1 { text-transform: uppercase; line-height: .84; }
+.hero h1 .fino { display: block; font: 500 clamp(2.2rem, 6vw, 4.2rem)/.9 var(--fx-font-disp); letter-spacing: .06em; }
+.hero h1 .grueso { display: block; font: 900 clamp(4.4rem, 15vw, 10.4rem)/.8 var(--fx-font-disp); color: var(--fx-accent); letter-spacing: .005em; }
+.hero .lead { margin-top: 20px; max-width: 42ch; font-size: 1.2rem; color: var(--fx-soft); }
+.cifras { display: flex; flex-wrap: wrap; gap: 8px 30px; margin-top: 30px; }
+.cifras div { display: grid; }
+.cifras b { font: 900 clamp(2.2rem, 6vw, 3.2rem)/1 var(--fx-font-disp); color: var(--fx-accent); }
+.cifras span { font: 600 .95rem var(--fx-font-txt); text-transform: uppercase; letter-spacing: .06em; color: var(--fx-soft); }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } .hero-media { order: -1; } }
+/* Teléfono del hero: la tarjeta de la socia (ejemplo) */
+.hero-media { display: grid; place-items: center; position: relative; min-height: 420px; }
+.hero-media::before { content: ""; position: absolute; width: min(78%, 360px); aspect-ratio: 1; background: var(--fx-accent); transform: rotate(8deg); border-radius: 4px; }
+.tel { position: relative; width: min(100%, 290px); border: 8px solid var(--fx-bg); border-radius: 34px; background: var(--fx-deep); color: var(--fx-bg); padding: 22px 16px 18px; box-shadow: 10px 10px 0 rgba(0,0,0,.45); transform: rotate(-3deg); }
+.tel::before { content: ""; position: absolute; top: 8px; left: 50%; width: 74px; height: 6px; border-radius: 4px; background: color-mix(in srgb, var(--fx-bg) 30%, transparent); transform: translateX(-50%); }
+.tel small { color: var(--fx-soft-2); font: 600 .78rem var(--fx-font-txt); text-transform: uppercase; letter-spacing: .08em; }
+.tel-nivel { display: flex; align-items: flex-end; justify-content: space-between; margin: 8px 0 10px; }
+.tel-nivel b { font: 900 2.2rem/.9 var(--fx-font-disp); text-transform: uppercase; }
+.tel-nivel span { font: 900 1.9rem/.9 var(--fx-font-disp); color: var(--fx-accent); }
+.tel .fx-barra { color: var(--fx-bg); }
+.tel-clase { margin-top: 16px; background: var(--fx-accent); color: var(--fx-deep); border-radius: 6px; padding: 10px 12px; display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; }
+.tel-clase b { font: 900 1.5rem/1 var(--fx-font-disp); }
+.tel-clase span { font: 800 1rem/1.1 var(--fx-font-disp); text-transform: uppercase; }
+.tel-clase em { font: 800 .72rem/1 var(--fx-font-txt); text-transform: uppercase; font-style: normal; background: var(--fx-deep); color: var(--fx-accent); padding: 4px 6px; border-radius: 3px; }
+.tel-qr { margin-top: 12px; display: grid; place-items: center; background: #fff; border-radius: 6px; padding: 10px; color: #000; }
+.tel-qr svg { width: 88px; height: 88px; }
+.ej-etiqueta { position: absolute; right: 0; bottom: 4px; z-index: 2; }
+
+/* Diagnóstico */
+.diag .wrap { display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; }
+@media (max-width: 860px) { .diag .wrap { grid-template-columns: 1fr; } }
+.caja { background: var(--fx-bg); border: 3px solid var(--fx-deep); border-radius: 6px; box-shadow: 8px 8px 0 var(--fx-deep); padding: clamp(18px, 3vw, 28px); min-height: 400px; display: flex; flex-direction: column; gap: 16px; }
+.caja-cab { padding-bottom: 12px; border-bottom: 2px dashed color-mix(in srgb, var(--fx-deep) 30%, transparent); }
+.caja-cab b { display: block; font: 900 1.4rem/1 var(--fx-font-disp); text-transform: uppercase; }
+.caja-cab small { font-size: .95rem; }
+.prog { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px; font: 700 .95rem var(--fx-font-txt); }
+.caja h3 { font: 900 clamp(1.7rem, 4vw, 2.2rem)/.95 var(--fx-font-disp); text-transform: uppercase; }
+.ops { display: grid; gap: 10px; }
+.op { display: flex; align-items: center; min-height: 58px; padding: 10px 16px; text-align: left; background: #fff; border: 2px solid var(--fx-deep); border-radius: 6px; font: 700 1.1rem/1.2 var(--fx-font-txt); color: var(--fx-ink); cursor: pointer; }
+.op:active { transform: translate(3px, 3px); }
+.op small { display: block; font-weight: 400; font-size: .95rem; }
+.reco { background: var(--fx-deep); color: var(--fx-bg); border-radius: 6px; padding: 18px; }
+.reco small { color: var(--fx-pop); font: 700 .95rem var(--fx-font-txt); }
+.reco b { display: block; font: 900 clamp(2.2rem, 6vw, 3rem)/.9 var(--fx-font-disp); text-transform: uppercase; margin: 6px 0; color: var(--fx-accent); }
+.reco p { color: var(--fx-soft); }
+
+/* Clases */
+.clases-cab { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: flex-end; justify-content: space-between; }
+.nombre-wa { max-width: 320px; }
+.clases-nota { margin-top: 14px; font: 600 1rem/1.4 var(--fx-font-txt); }
+#usuario { margin-top: 22px; }
+#clases { margin-top: 10px; }
+
+/* Planes */
+.durs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.durs button { min-height: 48px; padding: 0 18px; border: 2px solid var(--fx-bg); border-radius: 4px; background: transparent; color: var(--fx-bg); font: 800 1.05rem var(--fx-font-disp); text-transform: uppercase; letter-spacing: .05em; cursor: pointer; }
+.durs button[aria-pressed="true"] { background: var(--fx-accent); color: var(--fx-deep); border-color: var(--fx-accent); }
+.planes-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); margin-top: 24px; align-items: stretch; }
+.plan-card { display: flex; flex-direction: column; gap: 8px; background: var(--fx-bg); color: var(--fx-ink); border: 3px solid var(--fx-deep); border-radius: 6px; padding: 22px; box-shadow: 6px 6px 0 var(--fx-accent); }
+.plan-card.dest { background: var(--fx-accent); box-shadow: 6px 6px 0 var(--fx-bg); }
+.plan-card h3 { font: 900 2.2rem/.9 var(--fx-font-disp); text-transform: uppercase; }
+.plan-precio { display: flex; align-items: baseline; gap: 6px; }
+.plan-precio b { font: 900 3.4rem/1 var(--fx-font-disp); }
+.plan-ahorro { font: 700 .9rem var(--fx-font-txt); }
+.plan-card ul { list-style: none; padding: 0; margin: 6px 0 14px; display: grid; gap: 6px; flex: 1; }
+.plan-card li { padding-left: 24px; position: relative; font-size: 1.02rem; }
+.plan-card li::before { content: "✓"; position: absolute; left: 0; font-weight: 900; }
+.plan-nota { margin-top: 18px; font-size: 1rem; color: var(--fx-soft); }
+
+/* Estrellas y niveles */
+.estrellas-grid { display: grid; gap: 28px; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); margin-top: 30px; align-items: start; }
+@media (max-width: 860px) { .estrellas-grid { grid-template-columns: 1fr; } }
+.suma { list-style: none; padding: 0; margin: 0; }
+.suma li { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 2px dashed color-mix(in srgb, var(--fx-deep) 30%, transparent); font: 600 1.05rem var(--fx-font-txt); }
+.suma li b { font: 900 1.3rem/1 var(--fx-font-disp); white-space: nowrap; }
+.niveles { display: grid; gap: 14px; }
+.nivel-card { background: var(--fx-bg); color: var(--fx-ink); border: 3px solid var(--fx-deep); border-radius: 6px; padding: 16px 18px; box-shadow: 5px 5px 0 var(--fx-deep); }
+.nivel-card small { font: 700 .85rem var(--fx-font-txt); text-transform: uppercase; letter-spacing: .06em; }
+.nivel-card h3 { font: 900 2rem/1 var(--fx-font-disp); text-transform: uppercase; margin: 2px 0 8px; }
+.nivel-card .fx-barra { margin-bottom: 8px; }
+.pasos-e { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); margin-top: 30px; }
+.paso { display: flex; gap: 14px; align-items: flex-start; }
+.paso b { font: 900 2.4rem/1 var(--fx-font-disp); color: var(--fx-accent); }
+.paso h3 { font: 900 1.4rem/1 var(--fx-font-disp); text-transform: uppercase; margin-bottom: 4px; }
+
+/* Retos */
+#galeria-g { margin-top: 18px; }
+
+/* Qué cambia */
+.cambia { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); margin-top: 40px; }
+.chat { border-radius: 6px; padding: 18px; background: var(--fx-chat); border: 3px solid var(--fx-deep); }
+.chat h3 { font: 900 1.4rem/1 var(--fx-font-disp); text-transform: uppercase; margin-bottom: 12px; display: flex; gap: 10px; align-items: center; }
+.burbuja { max-width: 88%; padding: 9px 12px; border-radius: 10px; margin: 8px 0; font: 400 1.02rem/1.35 var(--fx-font-txt); background: #fff; white-space: pre-line; }
+.burbuja.yo { margin-left: auto; background: #d9fdd3; }
+.chat.despues { background: var(--fx-deep); }
+.chat.despues h3 { color: var(--fx-bg); }
+
+/* Dónde */
+.donde { display: grid; gap: 30px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+@media (max-width: 860px) { .donde { grid-template-columns: 1fr; } }
+.dato { display: flex; gap: 14px; align-items: center; margin-top: 16px; font-size: 1.15rem; }
+.dato .ico { width: 50px; height: 50px; }
+
+/* Cierre */
+.cierre { overflow: hidden; text-align: center; }
+.cierre .contorno { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); white-space: nowrap; font: 900 clamp(5rem, 22vw, 17rem)/.8 var(--fx-font-disp); text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px color-mix(in srgb, var(--fx-pop) 28%, transparent); pointer-events: none; }
+.cierre .wrap { position: relative; }
+.cierre .acciones { justify-content: center; }
+.demo-links { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; margin-top: 22px; font-size: 1.02rem; }
+.cab-acc { display: inline-flex; align-items: center; gap: 8px; }
+.cab-acc .g-btn { min-height: 44px; box-shadow: none; }
+</style>
+</head>
+<body data-pagina="Landing con reservas (Esencial y Pro)" data-secciones='["Inicio", "Tu clase ideal", "Reserva tu clase", "Planes", "Estrellas y niveles", "Retos", "Qué cambia", "Dónde estamos", "Cierre"]'>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5 0 0 1 16 0z"/><path d="M3.5 13.5h17M4 17h16a0 0 0 0 1 0 0 3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M9 7h.01M13 6.5h.01M15.5 8h.01"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h5l2-6h-4M16 11l2 6M12 11 10 7H7"/></symbol>
+  <symbol id="i-envio" viewBox="0 0 24 24"><path d="M21 4 3 11l7 3 3 7z"/><path d="m10 14 4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9h17M7 6.8h.01M9.5 6.8h.01"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pago" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 10h18M7 14h3"/></symbol>
+  <symbol id="i-llave" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-copa" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2v2h-2zM18.5 14.5h2M14.5 18.5h2M18.5 18.5v2"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-tarjeta" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-caja" viewBox="0 0 24 24"><path d="M6 3.5h12v5H6zM4 8.5h16l-1.5 11h-13z"/><path d="M9 13h6"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.5-3.5 2.7-5.5 5.5-5.5s5 2 5.5 5.5M15 14.2c2.6-.4 4.7 1 5.5 4.3"/></symbol>
+  <symbol id="i-juego" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M13 14h3M8 17h2"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+</defs></svg>
+
+
+<div class="g-plan"><span id="plan-nota" aria-live="polite"></span><span class="sw" role="group" aria-label="Plan que estás viendo"><button type="button" data-plan="esencial" aria-pressed="false">Esencial</button><button type="button" data-plan="pro" aria-pressed="true">Pro</button></span></div>
+
+<div class="barra"><div class="wrap">
+  <div class="datos">
+    <span class="ocultable"><svg><use href="#i-reloj"/></svg> <span class="pend">[MARCADOR: horario de cada sede]</span></span>
+    <span><svg><use href="#i-pin"/></svg>Ambato · Ficoa y Huachi Chico</span>
+    <span class="ocultable"><svg><use href="#i-tel"/></svg>096 843 8043</span>
+  </div>
+  <a href="#clases-sec">Reservar clase</a>
+</div></div>
+
+<header class="cabecera"><div class="wrap">
+  <a class="marca" href="#inicio"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Guante Dorado</b><small>Boxing Club</small></span></a>
+  <nav aria-label="Principal"><a href="#diagnostico">Tu clase</a><a href="#clases-sec">Clases</a><a href="#planes">Planes</a><a href="#estrellas">Estrellas</a><a href="#donde">Dónde</a></nav>
+  <span class="cab-acc"><a class="g-btn peq nav-tarjeta" href="tarjeta.html">Mi tarjeta</a></span>
+</div></header>
+
+<main>
+<section class="hero oscuro" id="inicio"><div class="wrap">
+  <div>
+    <h1><span class="fino fx-entra fx-d1">Boxeo</span><span class="grueso fx-golpe">para todos</span></h1>
+    <p class="lead fx-entra fx-d3">Niños, jóvenes y adultos, todos los niveles. Entrena en Ficoa o Huachi Chico con entrenadores calificados: disciplina, técnica y rendimiento.</p>
+    <div class="acciones fx-entra fx-d4">
+      <a class="btn" href="#clases-sec">Reservar clase</a>
+      <a class="btn btn-linea" href="#planes">Ver planes</a>
+    </div>
+    <div class="cifras" aria-label="Lo que ofrecemos">
+      <div><b class="fx-contador" id="c-tipos" data-contador="0">0</b><span>Tipos de clase</span></div>
+      <div><b class="fx-contador" id="c-sedes" data-contador="0">0</b><span>Sedes</span></div>
+      <div><b class="fx-contador" id="c-sem" data-contador="0">0</b><span>Clases esta semana</span></div>
+    </div>
+  </div>
+  <div class="hero-media fx-entra fx-d2">
+    <div class="tel" aria-hidden="true">
+      <small>Hola, Valentina</small>
+      <div class="tel-nivel"><b>Guante de plata</b><span>62 ★</span></div>
+      <div class="fx-barra"><i style="--w:.42"></i></div>
+      <small style="display:block;margin-top:6px">38 ★ para Guante dorado</small>
+      <div class="tel-clase"><b>18:00</b><span>Boxeo adultos · Ficoa</span><em>Reservada</em></div>
+      <div class="tel-qr"><svg viewBox="0 0 9 9" fill="currentColor"><path d="M0 0h3v3H0zM6 0h3v3H6zM0 6h3v3H0zM4 0h1v1H4zM4 2h1v1H4zM3 3h1v1H3zM5 3h1v1H5zM4 4h1v1H4zM3 5h1v1H3zM5 5h1v1H5zM6 6h1v1H6zM8 6h1v1H8zM7 7h1v1H7zM6 8h1v1H6zM8 8h1v1H8zM4 7h1v1H4zM3 8h1v1H3z"/></svg></div>
+    </div>
+    <span class="g-chip lima ej-etiqueta">Ejemplo de tarjeta</span>
+  </div>
+</div></section>
+
+<div class="cinta" aria-label="Disciplina · Técnica · Rendimiento"><div class="cinta-pista">
+  <ul><li>Boxeo niños</li><li>Boxeo jóvenes</li><li>Boxeo adultos</li><li>Competencia</li><li>Gimnasio</li></ul>
+  <ul aria-hidden="true"><li>Boxeo niños</li><li>Boxeo jóvenes</li><li>Boxeo adultos</li><li>Competencia</li><li>Gimnasio</li></ul>
+</div></div>
+
+<section class="sec papel diag" id="diagnostico"><div class="wrap">
+  <div data-reveal>
+    <h2 class="doble"><span>Descubre:</span>Tu clase ideal</h2>
+    <p class="intro">Cuéntanos para quién es y qué buscas, y te sugerimos por dónde empezar. En tu primera clase lo ajustamos contigo.</p>
+  </div>
+  <div class="caja" id="caja-diag" aria-live="polite"></div>
+</div></section>
+
+<section class="sec" id="clases-sec"><div class="wrap">
+  <div class="clases-cab">
+    <div><h2 class="doble" data-reveal><span>Reserva tu</span>clase</h2>
+    <p class="intro" data-reveal>Elige tu sede (Ficoa o Huachi Chico) y el día. Los horarios de la demo son de ejemplo.</p></div>
+    <label class="g-campo nombre-wa g-oculto" data-solo-esencial>Tu nombre (va en el mensaje)<input id="nombre-wa" autocomplete="given-name" placeholder="Ej.: Camila"></label>
+  </div>
+  <div id="usuario" data-solo-pro></div>
+  <div style="margin-top:22px"><div class="g-sedes" id="sedes" role="group" aria-label="Sede"></div><div class="g-dias" id="dias" role="group" aria-label="Día"></div><div id="filtro"></div></div>
+  <div class="g-clases" id="clases" aria-live="polite"></div>
+  <p class="clases-nota" data-solo-pro>Puedes cancelar hasta 6 horas antes sin perder tu clase. Si está llena, entras a la lista de espera y subes solo cuando se libera un cupo.</p>
+  <p class="clases-nota g-oculto" data-solo-esencial>En el plan Esencial te llega la reserva por WhatsApp y el cupo se confirma por el mismo chat.</p>
+</div></section>
+
+<section class="sec oscuro" id="planes"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Elige tu</span>plan</h2>
+  <p class="intro" data-reveal style="color:var(--fx-soft)">Aceptamos transferencia; el cobro se cierra por WhatsApp.</p>
+  <div class="durs" id="durs" role="group" aria-label="Duración"></div>
+  <div class="planes-grid" id="planes-lista" data-stagger></div>
+  <p class="plan-nota">Único precio confirmado: la promo de fin de año ($100 por 3 meses, de su publicación). La mensualidad regular y los demás planes están por confirmar.</p>
+</div></section>
+
+<section class="sec arena" id="estrellas"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Estrellas y</span>niveles</h2>
+  <p class="intro" data-reveal>Tu constancia tiene premio. Cada clase, evento y amigo que traes suma estrellas. Tus estrellas nunca vencen: mientras más acumulas, más alto tu nivel y mejores tus descuentos.</p>
+  <div class="pasos-e" data-stagger>
+    <div class="paso"><b>1</b><div><h3>Recibe tu tarjeta</h3><p>Te la enviamos por WhatsApp desde tu primera clase, con tu QR personal.</p></div></div>
+    <div class="paso"><b>2</b><div><h3>Muéstralo en recepción</h3><p>Escaneamos tu QR al llegar y tus estrellas se suman al instante.</p></div></div>
+    <div class="paso"><b>3</b><div><h3>Sube de nivel</h3><p>Tu nivel te da descuentos fijos en eventos y merch, y prioridad en lanzamientos.</p></div></div>
+    
+  </div>
+  <div class="estrellas-grid">
+    <div><h3 style="font:900 1.6rem/1 var(--fx-font-disp);text-transform:uppercase">Cómo sumar</h3><ul class="suma" id="como-suma"></ul></div>
+    <div><h3 style="font:900 1.6rem/1 var(--fx-font-disp);text-transform:uppercase;margin-bottom:14px">Tus niveles</h3><div class="niveles" id="niveles" data-stagger></div></div>
+  </div>
+  <div class="acciones"><a class="btn nav-tarjeta" href="tarjeta.html">Ver mi tarjeta</a></div>
+</div></section>
+
+<section class="sec" id="retos"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Retos y</span>comunidad</h2>
+  <p class="intro" data-reveal>Sube la foto de tu reto desde tu tarjeta. El equipo la revisa antes de publicarla: solo se ve lo aprobado y solo suma estrellas lo aprobado.</p>
+  <div id="reto-activo" style="margin-top:18px" data-solo-pro></div>
+  <div class="g-fotos" id="galeria-g"></div>
+</div></section>
+
+<section class="sec papel" id="cambia"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Menos mensajes,</span>más alumnos</h2>
+  <p class="intro" data-reveal>Ejemplo de cómo cambia el primer contacto con quien quiere entrenar.</p>
+  <div class="cambia" data-stagger>
+    <div class="chat"><h3>Hoy (ejemplo)</h3>
+      <div class="burbuja yo">Hola, ¿a qué hora entrenan los niños?</div><div class="burbuja yo">¿Y queda cupo?</div><div class="burbuja">Déjame revisar y te aviso</div><div class="burbuja yo">¿Cuánto cuesta el plan?</div><div class="burbuja yo">Gracias, lo pienso</div>
+    </div>
+    <div class="chat despues"><h3>Con tu página (ejemplo)</h3>
+      <div class="burbuja yo">Hola Guante Dorado, quiero reservar la clase de Boxeo niños el martes a las 18:00 en Ficoa.
+Mi nombre: Camila</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec arena" id="donde"><div class="wrap donde">
+  <div data-reveal>
+    <h2 class="doble"><span>Entrena en</span>Ambato</h2>
+    <div class="dato"><span class="ico"><svg><use href="#i-pin"/></svg></span><span>Ficoa: Av. Guaytambos y Chirimoyas · Huachi Chico: Av. Julio Jaramillo, a 150 m del Redondel de Huachi Chico (vía a Baños), Ambato</span></div>
+    <div class="dato"><span class="ico"><svg><use href="#i-reloj"/></svg></span><span> <span class="pend">[MARCADOR: horario de cada sede]</span></span></div>
+    <div class="acciones">
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Guante Dorado Boxing Club Ficoa Ambato" target="_blank" rel="noopener">Cómo llegar</a>
+      <a class="btn btn-linea" id="ig" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <div class="oscuro" style="border-radius:6px;padding:clamp(22px,3vw,32px);box-shadow:8px 8px 0 var(--fx-deep);border:3px solid var(--fx-deep)" data-reveal>
+    <h3 style="font:900 2rem/.95 var(--fx-font-disp);text-transform:uppercase">Escríbenos por WhatsApp</h3>
+    <p style="font:900 clamp(2.4rem,7vw,3.4rem)/1 var(--fx-font-disp);color:var(--fx-accent);margin:10px 0 6px">096 843 8043</p>
+    <div class="dato"><span class="ico" style="color:var(--fx-accent)"><svg><use href="#i-agenda"/></svg></span><span>Tu reserva llega lista: clase, día y sede</span></div>
+    <div class="dato"><span class="ico" style="color:var(--fx-accent)"><svg><use href="#i-chat"/></svg></span><span>Confirmamos por el mismo chat</span></div>
+    <div class="acciones"><a class="btn" data-wa="Hola Guante Dorado, quiero información sobre los planes">Escribir por WhatsApp</a></div>
+  </div>
+</div></section>
+
+<section class="sec oscuro cierre"><div class="contorno" aria-hidden="true">GUANTE</div><div class="wrap">
+  <h2 class="doble" data-reveal><span>Tu meta</span>es posible</h2>
+  <div class="acciones"><a class="btn" href="#clases-sec">Reservar mi clase</a><a class="btn btn-linea" data-wa="Hola Guante Dorado, quiero información sobre los planes">Escribir por WhatsApp</a></div>
+  <div class="demo-links"><a href="tarjeta.html">Ver la tarjeta del socio (Pro)</a><a href="personal.html">Ver el panel del personal (Pro)</a><a href="premium.html">Ver la versión Premium</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <img src="assets/logo.webp" alt="Guante Dorado Boxing Club" width="64" height="64" loading="lazy">
+  <div>Guante Dorado Boxing Club Ambato · Ficoa y Huachi Chico · 096 843 8043<br>
+  <a id="ig2" target="_blank" rel="noopener">Instagram</a> · <a id="fb" target="_blank" rel="noopener">Facebook</a></div>
+</div></footer>
+
+<a class="wa-flot" data-wa="Hola Guante Dorado, quiero reservar una clase" aria-label="Escribir a Guante Dorado Boxing Club por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+
+
+<dialog class="g-dlg" id="dlg-acc"><form id="acc-form" method="dialog" novalidate>
+  <h2>Entra a tu tarjeta</h2>
+  <p style="margin-bottom:14px">Escribe el código que te dio recepción y los últimos 4 números de tu WhatsApp.</p>
+  <div class="g-pista" id="acc-ej" style="margin-bottom:14px"></div>
+  <label class="g-campo">Código<input id="acc-cod" autocomplete="off" autocapitalize="characters" placeholder="Código de tu tarjeta" required></label>
+  <label class="g-campo">Últimos 4 de tu WhatsApp<input id="acc-4" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="0000" required></label>
+  <p class="g-err" id="acc-err" role="alert"></p>
+  <div class="g-dlg-acc"><button type="button" class="g-btn sec" id="acc-cancel">Cancelar</button><button class="g-btn" id="acc-ok" type="submit">Entrar</button></div>
+</form></dialog>
+
+<script src="config.js"></script>
+<script>window.GYMDATA = {"api": {"modo": "demo"}, "iconos": {"lista": [{"src": "assets/icon-192.png", "sizes": "192x192"}, {"src": "assets/icon-512.png", "sizes": "512x512"}, {"src": "assets/icon-maskable-512.png", "sizes": "512x512", "purpose": "maskable"}]}, "textos": {"plan_pro": "Estás viendo el plan Pro: reservas con cupos en vivo, tarjeta con QR y panel del personal.", "plan_esencial": "Estás viendo el plan Esencial: la clase se reserva por WhatsApp. Sin cupos en vivo, sin tarjeta y sin panel.", "entrar_titulo": "Entra para reservar", "entrar_txt": "Con tu código y los últimos 4 dígitos de tu WhatsApp.", "sin_clases": "No hay clases ese día en esta sede.", "sin_retos": "Aún no hay fotos aprobadas. ¡Sé la primera!"}, "hero": {"saludo": "Hola, Valentina", "nivel": "Guante de plata", "estrellas": "62", "avance": ".42", "falta": "38 ★ para Guante dorado", "clase_hora": "18:00", "clase_nombre": "Boxeo adultos · Ficoa"}, "clases": {"fino": "Reserva tu", "grueso": "clase", "intro": "Elige tu sede (Ficoa o Huachi Chico) y el día. Los horarios de la demo son de ejemplo.", "nota_pro": "Puedes cancelar hasta 6 horas antes sin perder tu clase. Si está llena, entras a la lista de espera y subes solo cuando se libera un cupo.", "nota_esencial": "En el plan Esencial te llega la reserva por WhatsApp y el cupo se confirma por el mismo chat."}, "planes": {"fino": "Elige tu", "grueso": "plan", "intro": "Aceptamos transferencia; el cobro se cierra por WhatsApp.", "nota": "Único precio confirmado: la promo de fin de año ($100 por 3 meses, de su publicación). La mensualidad regular y los demás planes están por confirmar.", "duracion_inicial": "3", "base": "3", "etiqueta_destacado": "Promo fin de año", "duraciones": [{"id": "3", "label": "3 meses"}], "lista": [{"id": "promo", "nombre": "Los últimos 3 meses del año", "desc": "Promo de fin de año: más guantes por solo $100", "destacado": true, "unidad": "por 3 meses", "precios": {"3": 100}, "incluye": ["Boxeo para niños, jóvenes y adultos, todos los niveles", "Gimnasio: fuerza y acondicionamiento", "Entrenadores calificados, ambiente seguro y profesional"]}, {"id": "mensual", "nombre": "Mensualidad", "desc": "[MARCADOR: planes y precios regulares]", "destacado": false, "precios": {}, "incluye": ["Precio por confirmar con el club"]}]}, "estrellas": {"fino": "Estrellas y", "grueso": "niveles", "intro": "Tu constancia tiene premio. Cada clase, evento y amigo que traes suma estrellas. Tus estrellas nunca vencen: mientras más acumulas, más alto tu nivel y mejores tus descuentos.", "pasos": [{"titulo": "Recibe tu tarjeta", "texto": "Te la enviamos por WhatsApp desde tu primera clase, con tu QR personal."}, {"titulo": "Muéstralo en recepción", "texto": "Escaneamos tu QR al llegar y tus estrellas se suman al instante."}, {"titulo": "Sube de nivel", "texto": "Tu nivel te da descuentos fijos en eventos y merch, y prioridad en lanzamientos."}], "como_titulo": "Cómo sumar", "niveles_titulo": "Tus niveles", "cta": "Ver mi tarjeta"}, "retos": {"fino": "Retos y", "grueso": "comunidad", "intro": "Sube la foto de tu reto desde tu tarjeta. El equipo la revisa antes de publicarla: solo se ve lo aprobado y solo suma estrellas lo aprobado."}, "tarjeta": {"titulo": "Guante Dorado · Mi tarjeta", "descripcion": "Tu tarjeta de Guante Dorado: estrellas, nivel, clases, rutina y beneficios.", "marca_sub": "Mi tarjeta", "h1_fino": "Tu tarjeta", "h1_grueso": "Guante Dorado", "secciones": ["Entrada", "Tarjeta", "Clases", "Rutina", "Progreso", "Beneficios", "Retos"], "sin_pro_titulo": "La tarjeta de la socio es del plan Pro", "sin_pro_txt": "Con el plan Esencial la reserva se hace por WhatsApp. Con Pro, cada socio tiene su tarjeta con QR, ve sus estrellas, reserva con cupos reales y cancela sola.", "entrar_titulo": "Abre tu tarjeta", "entrar_txt": "Escribe el código que te enviamos por WhatsApp y los últimos 4 números de tu celular.", "sin_tarjeta": "¿Aún no tienes tarjeta? Pídela en tu próxima clase.", "sin_tarjeta_cta": "Ver planes", "objetivos": ["Competir", "Ponerme en forma", "Bajar de peso", "Ganar fuerza", "Disciplina y técnica", "Rendimiento"], "renovar_txt": "Renueva con un mensaje y no pierdes tu ritmo.", "qr_txt": "Así sumamos tus estrellas en cada clase, evento o compra.", "reglas_clases": "Puedes cancelar hasta 6 horas antes sin perder tu clase. Si está llena, entras a la lista de espera y subes solo.", "rutina_txt": "Haz tu rutina en los días sin clase. Cuando tu coach la confirma, suma +2 ★.", "sin_rutina": "Tu coach aún no te asigna una rutina esta semana.", "merch_txt": "Pagas y retiras en recepción. Cada compra de merch también suma 1 ★ por cada $5.", "reto_txt": "Tu foto queda pendiente hasta que el equipo la apruebe. Solo se publica lo aprobado."}, "personal": {"titulo": "Guante Dorado · Panel del personal", "descripcion": "Panel del equipo de Guante Dorado: asistencia con QR, estrellas, clases, socios, rutinas y retos.", "marca_sub": "Panel del personal", "h1_fino": "Tu equipo,", "h1_grueso": "al día", "secciones": ["Entrada", "Hoy", "Clases", "Socios", "Rutinas", "Retos", "Resumen", "Ficha"], "sin_pro_titulo": "El panel del personal es del plan Pro", "sin_pro_txt": "Con el plan Esencial las reservas llegan por WhatsApp. Con Pro, tu equipo marca asistencia con el QR, ve a cada socio en segundos y cada reserva queda guardada.", "entrar_titulo": "Entra al panel", "entrar_demo": "Elige un rol para probar. Cada rol ve y puede hacer cosas distintas, igual que en producción.", "rutinas_txt": "Arma plantillas con bloques (Rutina A, B, C) y asígnalas a varias socios a la vez. Para ajustar la rutina de una sola socio, hazlo desde su ficha.", "retos_txt": "Las fotos de los retos nacen pendientes. Al aprobarlas, la socio suma sus estrellas y, si quieres, la foto sale en la galería.", "resumen_txt": "Los mismos datos alimentan el reporte mensual de Premium."}, "mock": {"prefijo": "GD", "dominio": "ejemplo.ec", "sedes": ["Ficoa", "Huachi Chico"], "tipos": [{"clave": "ninos", "nombre": "Boxeo niños", "descripcion": "Boxeo para los más pequeños, todos los niveles."}, {"clave": "jovenes", "nombre": "Boxeo jóvenes", "descripcion": "Formación en boxeo para jóvenes, todos los niveles."}, {"clave": "adultos", "nombre": "Boxeo adultos", "descripcion": "Boxeo recreativo para adultos, todos los niveles."}, {"clave": "competencia", "nombre": "Competencia", "descripcion": "Formación amateur y profesional para quien quiere competir."}, {"clave": "gimnasio", "nombre": "Gimnasio", "descripcion": "Fuerza y acondicionamiento físico."}], "coaches": ["Entrenador 1", "Entrenador 2", "Entrenador 3", "Entrenador 4"], "niveles": [{"nombre": "Aprendiz", "desde": 0, "desc_eventos": 0, "desc_merch": 0, "prioridad_merch": false, "beneficios": "Sumas estrellas desde tu primera clase."}, {"nombre": "Guante de plata", "desde": 30, "desc_eventos": 10, "desc_merch": 10, "prioridad_merch": false, "beneficios": "10% en eventos pagos y 10% en merch."}, {"nombre": "Guante dorado", "desde": 100, "desc_eventos": 20, "desc_merch": 15, "prioridad_merch": true, "beneficios": "20% en eventos pagos, 15% en merch y prioridad en lanzamientos de merch."}], "merch": [{"nombre": "Camiseta del club", "descripcion": "Ejemplo de merch: confirmar si el club la vende.", "precio": 15, "tallas": "S · M · L · XL"}, {"nombre": "Vendas de boxeo", "descripcion": "Ejemplo de merch: confirmar si el club las vende.", "precio": 6}, {"nombre": "Botella del club", "descripcion": "Ejemplo de merch: confirmar si el club la vende.", "precio": 10}, {"nombre": "Guantes de entrenamiento", "descripcion": "Ejemplo de merch: confirmar si el club los vende.", "precio": 35, "solo_nivel": "Guante dorado"}]}}; window.DIAG = {"titulo": "Tu clase ideal", "sub": "Tres preguntas, una sugerencia", "fino": "Descubre:", "intro": "Cuéntanos para quién es y qué buscas, y te sugerimos por dónde empezar. En tu primera clase lo ajustamos contigo.", "hoy": "Te sugerimos empezar por", "preguntas": [{"clave": "edad", "texto": "¿Quién va a entrenar?", "opciones": [{"valor": "nino", "texto": "Un niño o una niña"}, {"valor": "joven", "texto": "Un joven"}, {"valor": "adulto", "texto": "Un adulto"}]}, {"clave": "meta", "texto": "¿Qué buscas?", "opciones": [{"valor": "competir", "texto": "Competir", "detalle": "Amateur o profesional"}, {"valor": "forma", "texto": "Ponerme en forma", "detalle": "Disciplina y técnica"}, {"valor": "fuerza", "texto": "Fuerza y acondicionamiento", "detalle": "Gimnasio"}]}, {"clave": "exp", "texto": "¿Has boxeado antes?", "opciones": [{"valor": "si", "texto": "Sí"}, {"valor": "no", "texto": "No, es mi primera vez"}]}], "reglas": [{"si": {"meta": "competir"}, "id": "competencia"}, {"si": {"meta": "fuerza"}, "id": "gimnasio"}, {"si": {"edad": "nino"}, "id": "ninos"}, {"si": {"edad": "joven"}, "id": "jovenes"}], "defecto": "adultos", "compartir": {"clave": "exp", "valor": "no", "id": "gimnasio", "texto": "Para ir entrando en forma, pregunta también por"}};</script>
+<script src="modulos/gimnasio/gym-mock.js"></script>
+<script src="modulos/gimnasio/gym-api.js"></script>
+<script src="modulos/gimnasio/gym-ui.js"></script>
+<script src="modulos/gimnasio/gym-landing.js"></script>
+<script src="fx.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>
