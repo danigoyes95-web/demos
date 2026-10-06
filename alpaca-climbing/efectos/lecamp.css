@@ -1,0 +1,126 @@
+/* efectos/lecamp.css · complemento OPCIONAL de estilo "campamento base" (se elige con efectos.usar = ["lecamp"]). Se carga después del perfil.
+   Referencia: DESIGN.md de Daniel (LE CAMP): lienzo casi monocromo con UN solo acento, botones píldora de 35 px, etiquetas en mono mayúsculas
+   como señalización, tarjetas crema de 20 px sin sombra, filetes de 1 px, parches en forma de escudo y secciones que alternan blanco,
+   gris glaciar y crema. NO copia su logo, textos ni fotos, ni su rojo: el acento es el de la marca del cliente (--fx-accent).
+   Sin degradados ni sombras en superficies neutras; la única elevación es la del botón principal. Todo estático: no añade animaciones
+   (el perfil sigue aportando la cinta y el pulso del WhatsApp, máx. 3 infinitas). Con movimiento reducido no cambia nada.
+   Fuentes sugeridas (marca.fuentes_href): Bricolage Grotesque (sustituto de Agrandir) + DM Sans + DM Mono.
+   Pide en assets/ del cliente (con los colores de su marca; si faltan, da 404 y no se dibujan): topo.svg (curvas de nivel del hero), parche-pico.svg y parche-roca.svg.
+   Variables propias: --fx-mono, --fx-crema (superficie de tarjeta crema; por defecto --fx-pop). */
+:root {
+  --fx-mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --fx-crema: var(--fx-pop);
+  --fx-r-boton: 35px; --fx-r-tarjeta: 20px; --fx-r-chico: 10px;
+  --fx-glow: 0 2px 12px color-mix(in srgb, var(--fx-accent) 28%, transparent);
+}
+body { letter-spacing: 0; }
+
+/* Titulares: un solo gesto de cartel (peso 800, interlínea 1.0) y la línea fina en 350. Sin mayúsculas forzadas */
+.doble { text-transform: none; font-weight: 800; line-height: 1; letter-spacing: -.015em; font-size: clamp(2.5rem, 7.4vw, 5.6rem); }
+.doble span { font-weight: 350; font-size: .46em; letter-spacing: 0; margin-bottom: .22em; }
+body .hero h1 .grueso { text-transform: none; letter-spacing: -.02em; line-height: .98; font-size: clamp(3rem, 7.2vw, 5.8rem); }
+body .hero h1 .fino { font-weight: 350; text-transform: none; letter-spacing: 0; font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.fx-inclina { transform: none; }
+
+/* Etiquetas de señalización: mono, mayúsculas, 0,04 em */
+.marca small, .barra .datos, .cifras span, .cinta li, .g-chip, .tel small, .g-pestanas button, .g-fila small, .paso b, .reco small, .prog span, .pend {
+  font-family: var(--fx-mono); text-transform: uppercase; letter-spacing: .04em; font-weight: 400; }
+.cifras span, .g-chip { font-size: .72rem; }
+.marca b, .cabecera nav a, .barra a { text-transform: none; letter-spacing: 0; font-family: var(--fx-font-txt); font-weight: 600; }
+.marca b { font-family: var(--fx-font-disp); font-weight: 800; letter-spacing: -.01em; }
+.cabecera nav a { font-weight: 400; font-size: .95rem; }
+
+/* Botón principal: píldora llena en el acento, solo una por sección; el secundario es un rectángulo redondeado con filete */
+.btn { text-transform: none; letter-spacing: 0; font: 500 .98rem/1 var(--fx-font-txt); border: 0; border-radius: var(--fx-r-boton); background: var(--fx-accent); color: var(--fx-deep); box-shadow: var(--fx-glow); min-height: 48px; padding: 0 26px; }
+.btn:active { transform: scale(.97); box-shadow: none; }
+.btn-linea { background: transparent; color: inherit; border: 1px solid currentColor; border-radius: var(--fx-r-chico); box-shadow: none; }
+.oscuro .btn { border: 0; box-shadow: var(--fx-glow); }
+.oscuro .btn-linea { border: 1px solid var(--fx-bg); box-shadow: none; }
+.barra a { border-radius: var(--fx-r-boton); background: var(--fx-accent); color: var(--fx-deep); }
+.g-btn { border-radius: var(--fx-r-boton); box-shadow: none; text-transform: none; letter-spacing: 0; font-family: var(--fx-font-txt); font-weight: 500; }
+.g-btn.sec, .g-btn.peq.sec { border-radius: var(--fx-r-chico); }
+body .pd-btn { border-radius: var(--fx-r-boton); box-shadow: none; }
+
+/* Cabecera: filete de 1 px; barra superior sobria */
+.cabecera { border-bottom: 1px solid var(--fx-bg); }
+.barra { background: var(--fx-deep); border-bottom: 1px solid color-mix(in srgb, var(--fx-bg) 18%, transparent); }
+.barra svg { stroke: var(--fx-accent); }
+
+/* Superficies planas: ninguna sombra en tarjetas, 20 px de radio, la tarjeta crema es la separación cálida */
+.caja, .chat, .op, .hero-media, .galeria figure, .g-card, .fx-tarjeta, .plan, .nivel-card, .reco, .paso { border-radius: var(--fx-r-tarjeta); box-shadow: none; }
+.fx-tarjeta, .g-card { border: 1px solid var(--fx-ink); background: var(--fx-bg); }
+.g-card.oscura, .oscuro .g-card { border-color: color-mix(in srgb, var(--fx-bg) 40%, transparent); background: color-mix(in srgb, var(--fx-bg) 6%, var(--fx-deep)); }
+.arena .g-card, .arena .fx-tarjeta, .arena .caja { background: var(--fx-crema); border: 0; }
+.papel .g-card, .papel .fx-tarjeta { background: var(--fx-bg); }
+.arena { background: var(--fx-bg); }                                  /* la crema es de tarjeta, nunca de página entera */
+.arena .wrap { background: var(--fx-crema); border-radius: var(--fx-r-tarjeta); padding: clamp(26px, 5vw, 40px); width: min(1180px, 100% - 36px); }
+.papel { background: color-mix(in srgb, var(--fx-bg) 95%, var(--fx-deep)); }  /* gris glaciar */
+.g-chip, .g-chip.lima { border-radius: 999px; box-shadow: none; }
+
+/* Hero: lienzo oscuro con curvas de nivel (SVG estático) y dos parches de montaña flotando */
+body .hero { background-color: var(--fx-deep); background-image: url("../assets/topo.svg"); background-size: 760px auto; background-position: center top; }
+.hero-media { position: relative; overflow: visible; background: none; }
+.tel { box-shadow: none; border-color: color-mix(in srgb, var(--fx-bg) 90%, var(--fx-deep)); border-radius: 34px; }
+body .hero-media::before, body .hero-media::after { content: ""; position: absolute; width: 112px; height: 132px; aspect-ratio: auto; border-radius: 0; background: center / contain no-repeat; pointer-events: none; filter: drop-shadow(0 4px 20px rgba(0, 0, 0, .4)); }
+body .hero-media::before { inset: auto; background-color: transparent; background-image: url("../assets/parche-pico.svg"); left: -70px; top: -18px; transform: rotate(-9deg); z-index: 2; }
+body .hero-media::after { inset: auto; background-image: url("../assets/parche-roca.svg"); right: -34px; bottom: 70px; transform: rotate(8deg); z-index: 2; }
+@media (max-width: 760px) { body .hero-media::before { left: -4px; top: -26px; width: 78px; height: 92px; } body .hero-media::after { right: -4px; bottom: 60px; width: 78px; height: 92px; } }
+
+/* Cinta y cifras: planas, con filete */
+.cinta { background: var(--fx-crema); color: var(--fx-ink); border-block: 1px solid var(--fx-ink); padding-block: 12px; }
+.cinta li { font-size: .82rem; }
+.cinta li::after { content: "▲"; font-size: .6em; margin-left: 28px; color: var(--fx-accent); vertical-align: .15em; }
+.cifras b { font-family: var(--fx-font-disp); font-weight: 600; }
+
+/* Entrada y pie: filete en vez de cuadros */
+footer { border-top: 1px solid var(--fx-bg); }
+.contorno { color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--fx-bg) 28%, transparent); font-family: var(--fx-font-disp); font-weight: 800; }
+
+/* Campos: fondo blanco, filete gris, foco en negro */
+.g-campo input, .g-campo select, .g-campo textarea { border: 1px solid #767676; border-radius: var(--fx-r-chico); background: #fff; color: #000; font-family: var(--fx-font-txt); }
+.g-campo input:focus, .g-campo select:focus, .g-campo textarea:focus { border-color: #000; outline: none; }
+
+/* Parche (escudo) reutilizable: <span class="fx-parche"> con ícono de línea dentro */
+.fx-parche { display: inline-grid; place-items: center; width: 64px; height: 76px; border: 2px solid currentColor; border-radius: 14px 14px 50% 50% / 14px 14px 36% 36%; color: var(--fx-accent); background: var(--fx-bg); }
+
+/* Módulo de gimnasio y plantilla: sin sombras duras ni bordes gruesos (body sube la especificidad sobre los <style> de la página) */
+body .caja, body .chat, body .nivel-card, body .plan-card, body .g-card, body .g-kpi, body .kpi, body .bloque, body .mod, body .g-clase, body .g-bloque, body .op, body dialog.g-dlg, body .g-roles button, body .gym-qr, body .g-solo-pro {
+  box-shadow: none; border-width: 1px; border-radius: var(--fx-r-tarjeta); }
+body .g-clase, body .op, body .g-roles button, body .g-sedes button, body .g-dias button, body .g-bloque, body .g-campo input, body .g-campo select, body .g-campo textarea { border-width: 1px; border-radius: var(--fx-r-chico); }
+body .g-clase.mia, body .plan-card.dest, body .g-sedes button[aria-pressed="true"], body .g-dias button[aria-pressed="true"] { box-shadow: none; }
+body .g-card.oscura { box-shadow: none; }
+body .plan-card.dest { border-color: var(--fx-accent); background: var(--fx-crema); }
+body .g-sedes button[aria-pressed="true"], body .g-dias button[aria-pressed="true"] { background: var(--fx-deep); color: var(--fx-bg); }
+body .g-clase.mia { background: var(--fx-crema); }
+body .g-btn { border: 0; background: var(--fx-accent); color: var(--fx-deep); box-shadow: var(--fx-glow); font-size: .95rem; }
+body .g-btn:active:not(:disabled) { transform: scale(.97); box-shadow: none; }
+body .g-btn.sec { background: transparent; color: inherit; border: 1px solid currentColor; box-shadow: none; }
+body .g-btn.rojo { border: 1px solid var(--fx-error); }
+body .oscuro .g-btn { border: 0; box-shadow: var(--fx-glow); } body .oscuro .g-btn.sec { border: 1px solid var(--fx-bg); box-shadow: none; }
+body .durs button { border-width: 1px; border-radius: 999px; }
+body .g-plan .sw { border-width: 1px; border-radius: 999px; }
+body .g-pestanas button { border-radius: 999px; }
+body .g-plan .sw button, body .g-pestanas button { text-transform: none; letter-spacing: 0; }
+body .cab-acc .g-btn, body .cabecera .g-btn { border-radius: var(--fx-r-boton); }
+
+/* Marca en la cabecera y el pie: el logo oscuro va sobre una pastilla crema para leerse en fondos oscuros */
+.cabecera .marca img, footer .marca img, footer img { background: var(--fx-crema); border-radius: var(--fx-r-chico); padding: 3px; object-fit: contain; }
+body .arena .oscuro[data-reveal] { box-shadow: none; border: 0; border-radius: var(--fx-r-tarjeta); }
+
+/* Entrada de la demo (hub): tarjetas planas, etiqueta mono, la principal en el acento */
+body .hub-card { border-width: 1px; border-radius: var(--fx-r-tarjeta); box-shadow: none; }
+body .hub-card:active { transform: scale(.985); }
+body .hub-card small { font-family: var(--fx-mono); font-weight: 400; letter-spacing: .04em; border-radius: 999px; padding: 5px 10px; }
+body .hub-card b { text-transform: none; font-weight: 800; letter-spacing: -.01em; line-height: 1; }
+body .hub-card i { text-transform: none; letter-spacing: 0; font-family: var(--fx-font-txt); font-weight: 500; }
+body .hub-card.principal { border-color: var(--fx-accent); box-shadow: var(--fx-glow); }
+
+/* Propuesta y Premium: mismas superficies planas */
+body .telefono, body .aviso-flot, body .cifra, body .plan, body .ticket, body .foto-marca img, body .tabla-caja, body .mod { box-shadow: none; border-width: 1px; border-radius: var(--fx-r-tarjeta); }
+body .tabla { border-width: 1px; }
+body .plan.reco { border-color: var(--fx-accent); box-shadow: var(--fx-glow); }
+body .p-op { border-width: 1px; }
+body .plan .btn, body .plan.reco .btn { box-shadow: none; }
+body .plan .btn:not(.btn-linea) { box-shadow: var(--fx-glow); }
+body .plan .btn.btn-linea, body .plan:not(.reco) .btn { border: 1px solid currentColor; }
+@media (max-width: 760px) { body .barra .datos, body .barra .datos span { font-size: .72rem; } }
