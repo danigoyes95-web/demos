@@ -1,9 +1,19 @@
-// Números de WhatsApp de la demo. Solo se editan aquí.
-const DEMO = {
-  cliente: 'Dentiident',
-  waCliente: '593963911885',   // WhatsApp de Dentiident (0963911885)
-  waAgencia: '593983139928'    // WhatsApp de la agencia
+/* Dentiident · Ambato — datos del cliente para la demo (generado por nuevo-cliente.py desde clientes/dentiident/cliente.json).
+   Todo número o dato del cliente vive SOLO aquí. Lo que falta va como [MARCADOR]. */
+window.DEMO = {
+  "cliente": "Dentiident",
+  "corto": "Dentiident",
+  "ciudad": "Ambato",
+  "waCliente": "593983139928",
+  "waAgencia": "593983139928",
+  "direccion": "Quiz Quiz y Paccha",
+  "horario": "Lunes a domingo",
+  "domicilio": false,
+  "envio": null,
+  "claveDemo": "dentiident_demo_reservas",
+  "saludoPedido": "Hola Dentiident, quiero reservar desde la web",
+  "instagram": "https://www.instagram.com/dentiident_/",
+  "facebook": "",
+  "sectoresEjemplo": [],
+  "modo": "reserva"
 };
-function wa(numero, texto) {
-  return `https://wa.me/${String(numero).replace(/\D/g, '')}?text=${encodeURIComponent(texto)}`;
-}

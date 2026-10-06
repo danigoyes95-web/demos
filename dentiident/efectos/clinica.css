@@ -1,0 +1,101 @@
+/* efectos/clinica.css · complemento OPCIONAL de estilo "clínica luminosa" (se elige con efectos.usar = ["clinica"]). Se carga después de calma.css.
+   Referencia: captura de Daniel (web dental azul: hero claro con formas orgánicas, la persona recortada sobre una mancha de color, botón píldora,
+   fila de servicios con íconos de línea en una tarjeta blanca). NO copia su logo, textos ni fotos: la forma es de la referencia, el color es el de la marca
+   (en Dentiident: negro y plata medidos del logo). Fuentes sugeridas: Montserrat (titulares de dos pesos) + Inter o la misma Montserrat para el texto.
+   Todo es estático: manchas y tarjetas no se animan. Sin animaciones infinitas nuevas. Colores solo por variables --fx-* (el degradado de la mancha usa
+   --fx-mancha-1/2 y la mancha pequeña --fx-mancha-3; si faltan, salen de la paleta).
+   Hero con recorte: la foto del hero debe ser un PNG/WebP con fondo transparente, recortado hasta el borde inferior (como la referencia). */
+:root {
+  --fx-dur: .8s; --fx-ease: cubic-bezier(.2, .7, .2, 1); --fx-dist: 22px; --fx-fast: .35s;
+  --fx-rv-dur: 800; --fx-rv-step: 100; --fx-rv-ease: cubic-bezier(.2, .7, .2, 1); --fx-rv-dist: 22px; --fx-rv-scale: 1;
+  --fx-mancha-1: var(--fx-accent); --fx-mancha-2: color-mix(in srgb, var(--fx-accent) 60%, var(--fx-deep)); --fx-mancha-3: var(--fx-deep);
+  --fx-radio: 28px;
+}
+
+/* Titulares: dos pesos de la misma familia, en minúscula (no forzada a mayúsculas) */
+.doble, body .hero h1 { text-transform: none; letter-spacing: -.02em; }
+.doble { font-weight: 800; line-height: 1.05; font-size: clamp(2.1rem, 5vw, 3.4rem); }
+.doble span { font-weight: 300; font-size: .62em; margin-bottom: .1em; }
+body .hero h1 { line-height: 1; }
+body .hero h1 .fino { font: 300 clamp(2.1rem, 5.2vw, 3.5rem)/1.05 var(--fx-font-disp); text-transform: none; }
+body .hero h1 .grueso { font: 800 clamp(3rem, 8.6vw, 6rem)/1 var(--fx-font-disp); text-transform: none; letter-spacing: -.03em; }
+body .hero .lead { font-style: italic; font-weight: 400; max-width: 36ch; }
+body .paso h3, body .caja h3, body .chat h3, body .caja-cab b, body .reco b, body .reco .precio, body .pd-precio, body .pd-info h3, body .pd-cat h2, body .pd-hoja-tit, body .pd-res { text-transform: none; letter-spacing: -.01em; }
+body .pd-cat h2 .grueso { font-weight: 800; }
+body .pd-cat h2 .fino { font-weight: 300; }
+
+/* Botones píldora: oscuro sobre fondo claro, claro sobre fondo oscuro */
+.btn { min-height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: var(--fx-deep); color: var(--fx-bg); font: 700 1rem/1 var(--fx-font-txt); box-shadow: 0 8px 20px color-mix(in srgb, var(--fx-deep) 22%, transparent); transition: transform var(--fx-fast) var(--fx-ease); }
+.btn:active { transform: scale(.97); }
+.btn-linea { background: transparent; color: var(--fx-deep); box-shadow: inset 0 0 0 1.5px var(--fx-deep); }
+.oscuro .btn { background: var(--fx-pop); color: var(--fx-deep); box-shadow: none; }
+.oscuro .btn-linea { background: transparent; color: var(--fx-bg); box-shadow: inset 0 0 0 1.5px var(--fx-pop); }
+body .pd-btn { border-radius: 999px; font-weight: 700; letter-spacing: normal; box-shadow: none; }
+
+/* Barra, cabecera y marca: claras, con la marca en negro */
+.barra { background: var(--fx-deep); }
+.barra a { border-radius: 999px; }
+.cabecera { background: color-mix(in srgb, var(--fx-paper) 92%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--fx-ink) 10%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.cabecera .marca, .cabecera nav a { color: var(--fx-ink); }
+.marca b { font: 800 1.35rem/1 var(--fx-font-disp); letter-spacing: -.01em; }
+.marca small { color: var(--fx-ink); opacity: .6; }
+.cabecera nav a { font: 600 .98rem/1 var(--fx-font-txt); border-radius: 999px; }
+.ico { border-width: 1.5px; }
+.ico svg, .barra svg { stroke-width: 1.5; }
+.paso .ico { color: var(--fx-pop); }
+
+/* El hero es claro aunque lleve la clase .oscuro de la plantilla: sus botones vuelven a ser oscuros */
+.hero.oscuro .btn { background: var(--fx-deep); color: var(--fx-bg); box-shadow: 0 8px 20px color-mix(in srgb, var(--fx-deep) 22%, transparent); }
+.hero.oscuro .btn-linea { background: transparent; color: var(--fx-deep); box-shadow: inset 0 0 0 1.5px var(--fx-deep); }
+
+/* Hero claro con manchas orgánicas y la persona recortada (referencia: hero azul de la captura) */
+.hero.oscuro { background: linear-gradient(180deg, var(--fx-bg) 0%, color-mix(in srgb, var(--fx-bg) 82%, var(--fx-pop)) 100%); color: var(--fx-ink); overflow: hidden; }
+.hero.oscuro::before { content: ""; position: absolute; right: -8%; top: -10%; width: 62%; height: 120%; border-radius: 46% 54% 40% 60% / 58% 42% 58% 42%; background: color-mix(in srgb, var(--fx-pop) 55%, var(--fx-bg)); }
+.hero .wrap { position: relative; z-index: 1; align-items: end; }
+body .hero .wrap { padding-bottom: 0; }
+body .hero .wrap > div:first-child { align-self: center; padding-bottom: clamp(48px, 7vw, 96px); }
+body .hero .lead { color: color-mix(in srgb, var(--fx-ink) 78%, var(--fx-bg)); }
+body .hero .hero-media { align-self: end; width: min(100%, 520px); }
+.hero .hero-media::before, .hero .hero-media::after { content: ""; position: absolute; z-index: 0; pointer-events: none; }
+.hero .hero-media::before { width: 17%; aspect-ratio: 1.3; left: 2%; top: 10%; background: var(--fx-mancha-3); border-radius: 58% 42% 52% 48% / 46% 56% 44% 54%; transform: rotate(-14deg); }
+.hero .hero-media::after { width: 10%; aspect-ratio: 1; right: -2%; bottom: 36%; background: var(--fx-bg); border-radius: 50%; box-shadow: -34px 64px 0 -2px var(--fx-mancha-3); }
+body .hero .hero-foto { position: relative; z-index: 1; aspect-ratio: 1 / 1.08; overflow: visible; border-radius: 0; box-shadow: none; background: none; }
+body .hero .hero-foto::before { content: ""; position: absolute; z-index: 0; left: 4%; right: 0; top: 8%; bottom: 0; border-radius: 56% 44% 8% 8% / 46% 40% 0 0; background: linear-gradient(155deg, var(--fx-mancha-1), var(--fx-mancha-2)); }
+body .hero .hero-foto img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
+@media (max-width: 860px) {
+  body .hero .wrap > div:first-child { padding-bottom: 0; }
+  body .hero .hero-media { order: 0; width: min(88%, 380px); justify-self: center; }
+  body .hero .hero-foto { aspect-ratio: 1 / 1.02; }
+}
+
+/* Fila de servicios: tarjeta blanca que sube sobre el hero, íconos de línea en círculo */
+.franja-serv { position: relative; z-index: 3; margin-top: -42px; padding-bottom: clamp(20px, 4vw, 44px); }
+.franja-card { background: var(--fx-paper); border-radius: var(--fx-radio); padding: clamp(22px, 3.4vw, 36px) clamp(16px, 3vw, 40px); text-align: center; box-shadow: 0 -10px 40px color-mix(in srgb, var(--fx-ink) 8%, transparent), 0 14px 36px color-mix(in srgb, var(--fx-ink) 9%, transparent); }
+.franja-card h2 { font: 800 clamp(1.5rem, 3.2vw, 2rem)/1.1 var(--fx-font-disp); letter-spacing: -.02em; }
+.franja-card > p { margin-top: 6px; font-style: italic; color: color-mix(in srgb, var(--fx-ink) 70%, var(--fx-bg)); }
+.franja-card ul { list-style: none; margin: clamp(18px, 3vw, 28px) 0 0; padding: 0; display: grid; gap: 18px 10px; grid-template-columns: repeat(auto-fit, minmax(min(46%, 150px), 1fr)); }
+.franja-card li a { display: flex; flex-direction: column; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--fx-ink); }
+.franja-card .ico { width: 72px; height: 72px; border-width: 1.5px; color: var(--fx-ink); transition: transform var(--fx-fast) var(--fx-ease), background var(--fx-fast); }
+.franja-card .ico svg { width: 34px; height: 34px; stroke-width: 1.4; }
+.franja-card li a b { font: 600 .98rem/1.2 var(--fx-font-txt); }
+.franja-card li:first-child .ico { background: var(--fx-deep); color: var(--fx-bg); border-color: var(--fx-deep); }
+.franja-card li:first-child .ico svg { stroke: var(--fx-bg); }
+.franja-card li a:active .ico { transform: scale(.94); }
+@media (hover: hover) { .franja-card li a:hover .ico { transform: translateY(-4px); } }
+
+/* Carta de tratamientos: tarjetas suaves, sin sombra dura */
+body .pd-lista .pd-item { border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); border-radius: var(--fx-radio); box-shadow: 0 12px 30px color-mix(in srgb, var(--fx-ink) 8%, transparent); padding: 18px 20px; }
+body .pd-btn { text-transform: none; border: 0; }
+body .pd-tab { text-transform: none; border-radius: 999px; letter-spacing: normal; }
+
+/* Tarjetas: esquinas amplias y sombra suave, sin sombra dura */
+body .caja, body .chat, body .galeria figure { border-radius: var(--fx-radio); }
+body .caja { border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); box-shadow: 0 16px 40px color-mix(in srgb, var(--fx-ink) 9%, transparent); background: var(--fx-paper); }
+body .caja-cab { border-bottom: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); }
+body .op { border: 1.5px solid color-mix(in srgb, var(--fx-ink) 16%, transparent); border-radius: 18px; box-shadow: none; background: var(--fx-bg); font-weight: 600; }
+body .op:active { transform: scale(.98); box-shadow: none; }
+body .chat { border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); }
+body .galeria figure { border: 0; background: linear-gradient(155deg, var(--fx-mancha-1), var(--fx-mancha-2)); }
+.donde .oscuro, .arena .oscuro { border-radius: var(--fx-radio) !important; box-shadow: none !important; border: 0 !important; }
+
+@media (prefers-reduced-motion: reduce) { .btn, .franja-card .ico { transition: none; } }

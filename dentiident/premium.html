@@ -4,137 +4,159 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Agenda tu cita — Dentiident (Premium)</title>
+<meta name="theme-color" content="#121315">
 <link rel="icon" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&amp;display=swap">
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/calma.css">
+<link rel="stylesheet" href="efectos/toque.css">
+<link rel="stylesheet" href="efectos/transicion.css">
+<link rel="stylesheet" href="efectos/clinica.css">
+<link rel="stylesheet" href="motor/pedido.css">
+<style>:root { --fx-bg: #F2F4F7; --fx-paper: #FFFFFF; --fx-accent: #B8B8B8; --fx-ink: #101113; --fx-deep: #121315; --fx-pop: #D6D7DB; --fx-mancha-1: #C9CACE; --fx-mancha-2: #8E8F94; --fx-mancha-3: #121315; --fx-font: "Montserrat", sans-serif; --fx-font-disp: "Montserrat", sans-serif; --fx-font-txt: "Montserrat", sans-serif; }</style>
+
+<title>Dentiident · Versión Premium (panel modular)</title>
+<meta name="description" content="Pantalla Premium de la demo de Dentiident: panel modular, módulos y reporte mensual.">
+<link rel="stylesheet" href="estilos/paneles.css">
+<link rel="stylesheet" href="estilos/modulos.css">
+
 <style>
-body{background:var(--niebla)}
-.lienzo{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));align-items:start;padding-block:40px 96px}
-.caja{background:#fff;padding:clamp(22px,3.2vw,38px);box-shadow:0 20px 50px rgba(14,15,15,.08);display:flex;flex-direction:column;gap:24px}
-.reco{background:var(--negro-logo);color:#fff;padding:20px 22px}
-.reco small{color:#A5A6AB;font-size:13px}
-.reco b{display:block;font-weight:700;font-size:26px;line-height:1.15;margin:4px 0}
-.reco span{color:#C9C9CD;font-size:15px}
-h2.paso{font-weight:600;font-size:20px}
-.chips{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));margin-top:12px}
-.chip{min-height:52px;border:1px solid #D9D9DC;background:#fff;color:var(--tinta);font:600 16px var(--f);cursor:pointer;padding:8px 6px;transition:background-color .2s,color .2s,border-color .2s}
-.chip small{display:block;font-weight:400;font-size:13px}
-.chip .n{display:block;font-weight:300;font-size:26px;line-height:1.1}
-.chip[aria-pressed="true"]{background:var(--tinta);border-color:var(--tinta);color:#fff}
-.chip.dom:not([aria-pressed="true"]){border-color:#8E8F94;box-shadow:inset 0 -3px 0 #8E8F94}
-.chip:disabled{background:#EDEDEF;color:#8A8B90;text-decoration:line-through;cursor:not-allowed}
-.nota{margin-top:8px;font-size:14px;color:var(--suave)}
-.datos{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));margin-top:12px}
-.datos label{display:flex;flex-direction:column;gap:6px;font-weight:500;font-size:14px;color:var(--texto)}
-.campo{min-height:50px;border:1px solid #D0D0D4;padding:0 14px;font:400 16px var(--f);color:var(--tinta);background:#fff}
-.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto);margin-top:14px}
-.consent input{width:22px;height:22px;accent-color:var(--tinta);margin-top:1px;flex-shrink:0}
-.lado{display:flex;flex-direction:column;gap:18px}
-.agenda{background:#fff;padding:22px;box-shadow:0 20px 50px rgba(14,15,15,.08)}
-.agenda-cab{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--linea);padding-bottom:14px}
-.agenda-cab b{font-size:20px;font-weight:600}
-.agenda-cab span{font-size:13px;color:var(--suave)}
-.fila{display:flex;gap:14px;padding-top:12px}
-.fila .h{width:52px;flex-shrink:0;font-size:14px;font-weight:600;color:var(--suave);padding-top:10px}
-.fila .c{flex:1;background:var(--niebla);padding:10px 14px;font-size:15px}
-.fila .c small{display:block;opacity:.8;font-size:13px}
-.fila .c.nueva{background:var(--tinta);color:#fff;box-shadow:inset 3px 0 0 #C9C9CD}
-.aviso-wa{background:var(--negro-logo);color:#fff;padding:20px 22px}
-.aviso-wa small{color:#A5A6AB;font-size:13px}
-.check{width:64px;height:64px;border-radius:50%;background:var(--tinta);display:grid;place-items:center}
-.volver{display:inline-flex;align-items:center;min-height:44px;color:#DADADD;text-decoration:none;font-size:15px}
+.lienzo { display: grid; gap: 26px; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 960px) { .lienzo { grid-template-columns: 1fr; } }
+.lado { position: sticky; top: 90px; display: grid; gap: 18px; }
+@media (max-width: 960px) { .lado { position: static; } }
+.mejoras { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); margin-top: 30px; }
+.mejora { display: flex; gap: 14px; align-items: flex-start; }
+.mejora .ico { color: var(--fx-pop); }
+.mejora h3 { font: 800 1.4rem/1 var(--fx-font-disp); text-transform: uppercase; margin-bottom: 4px; }
+.mejora p { color: var(--fx-soft); font-size: 1rem; }
+.dona { display: flex; gap: 18px; align-items: center; }
+.dona .c { width: 110px; height: 110px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; }
+.dona .c::after { content: ""; width: 62px; height: 62px; border-radius: 50%; background: var(--fx-paper); }
+.leyenda { display: grid; gap: 6px; font: 600 1rem var(--fx-font-txt); }
+.leyenda i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; }
 </style>
 </head>
-<body data-pagina="premium" data-secciones='["Elegir día y hora","Datos","Confirmación","Agenda de Dentiident"]'>
+<body data-pagina="Pantalla Premium" data-secciones='["Encabezado", "Panel modular", "Reporte"]'>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5 0 0 1 16 0z"/><path d="M3.5 13.5h17M4 17h16a0 0 0 0 1 0 0 3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M9 7h.01M13 6.5h.01M15.5 8h.01"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h5l2-6h-4M16 11l2 6M12 11 10 7H7"/></symbol>
+  <symbol id="i-envio" viewBox="0 0 24 24"><path d="M21 4 3 11l7 3 3 7z"/><path d="m10 14 4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9h17M7 6.8h.01M9.5 6.8h.01"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pago" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 10h18M7 14h3"/></symbol>
+  <symbol id="i-llave" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-copa" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2v2h-2zM18.5 14.5h2M14.5 18.5h2M18.5 18.5v2"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-tarjeta" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-caja" viewBox="0 0 24 24"><path d="M6 3.5h12v5H6zM4 8.5h16l-1.5 11h-13z"/><path d="M9 13h6"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.5-3.5 2.7-5.5 5.5-5.5s5 2 5.5 5.5M15 14.2c2.6-.4 4.7 1 5.5 4.3"/></symbol>
+  <symbol id="i-juego" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M13 14h3M8 17h2"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-diente" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/></symbol>
+  <symbol id="i-endodoncia" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><path d="M10 9.5c0 2 .5 3.5.7 5.5M14 9.5c0 2-.5 3.5-.7 5.5"/></symbol>
+  <symbol id="i-brackets" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><rect x="9.2" y="7.2" width="5.6" height="4" rx=".9"/><path d="M5 9.2h4.2M14.8 9.2H19"/></symbol>
+  <symbol id="i-sonrisa" viewBox="0 0 24 24"><path d="M3.5 12.5c1.2 4.6 4.7 7 8.5 7s7.3-2.4 8.5-7"/><path d="M5 12.8h14M9 13v4.6M12 13v5.3M15 13v4.6"/><path d="M12 3.5v3M10.5 5h3"/></symbol>
+  <symbol id="i-radio" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M8 17v-6c0-1 .6-1.6 1.4-1.6S10.8 10 10.8 11v6M13.2 17v-6c0-1 .6-1.6 1.4-1.6S16 10 16 11v6"/></symbol>
+</defs></svg>
+
 
 <header class="cabecera"><div class="wrap">
-  <a class="marca" href="index.html"><img src="assets/logo.webp" alt="" width="56" height="56"><span>DENTIIDENT<small>Agenda tu cita</small></span></a>
-  <a class="volver" href="index.html">← Volver a la página</a>
+  <a class="marca" href="inicio.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Dentiident</b><small>Versión Premium</small></span></a>
+  <a class="volver" href="inicio.html">Volver a la página</a>
 </div></header>
-
-<div class="wrap lienzo">
-  <div class="caja fx-e1" id="flujo" aria-live="polite"></div>
-  <div class="lado fx-e5">
-    <h1 class="doble" style="font-size:clamp(30px,3.4vw,44px)"><span>Lo que ve</span>Dentiident</h1>
-    <div class="agenda" id="agenda"></div>
-    <div id="aviso"></div>
+<main>
+<section class="oscuro cab-pag"><div class="wrap">
+  <h1 class="doble fx-entra fx-d1"><span>Premium:</span>un panel que crece contigo</h1>
+  <p class="intro fx-entra fx-d2" style="color:var(--fx-soft)">Todo lo del plan Pro, más un panel modular: tu agenda, tus pacientes y tu reporte, y los módulos se encienden cuando los necesites.</p>
+  <div class="mejoras" data-stagger>
+    <div class="mejora"><span class="ico"><svg><use href="#i-panel"/></svg></span><div><h3>Panel modular</h3><p>Un solo lugar donde se suman módulos sin rehacer nada.</p></div></div>
+    <div class="mejora"><span class="ico"><svg><use href="#i-estrella"/></svg></span><div><h3>Diagnóstico a tu medida</h3><p>Tus preguntas y tus recomendaciones, no una plantilla.</p></div></div>
+    <div class="mejora"><span class="ico"><svg><use href="#i-lista"/></svg></span><div><h3>Reporte mensual</h3><p>Qué servicios se reservan más y en qué horario.</p></div></div>
+    
   </div>
-</div>
+</div></section>
+
+
+<section class="sec" style="padding-top:44px"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Tu panel,</span>a tu medida</h2>
+  <p class="intro" data-reveal>Esto ya viene dentro del plan Premium.</p>
+  <div class="mods" data-stagger>
+    <article class="mod activo"><span class="mod-etiqueta inc">Incluido</span><span class="ico"><svg><use href="#i-agenda"/></svg></span><h3>Agenda de citas</h3><p>Cada reserva de la web, con día, horario y estado.</p><div class="mv"><div class="mv-niv"><span>Lun</span><span class="on">Mar</span><span>Mié</span><span class="on">Jue</span><span>Vie</span></div><small>Ejemplo: citas por día y horario preferido, con estado (por confirmar / confirmada)</small></div></article>
+    <article class="mod activo"><span class="mod-etiqueta inc">Incluido</span><span class="ico"><svg><use href="#i-equipo"/></svg></span><h3>Pacientes</h3><p>Quién reservó, qué se hizo y tus notas.</p><div class="mv mv-tk"><div><span>Cliente de ejemplo</span><em>3 visitas</em></div><div><small>Servicios y notas de cada clienta</small></div></div></article>
+    <article class="mod activo"><span class="mod-etiqueta inc">Incluido</span><span class="ico"><svg><use href="#i-lista"/></svg></span><h3>Reporte mensual</h3><p>Servicios más reservados y horarios con más demanda.</p><div class="mv"><div class="mv-barra"><i style="width:82%"></i></div><div class="mv-barra"><i style="width:56%"></i></div><div class="mv-barra"><i style="width:34%"></i></div><small>Qué servicios se reservan más y en qué horario</small></div></article>
+    
+  </div>
+  <h2 class="doble" style="margin-top:clamp(40px,6vw,72px)" data-reveal><span>Módulos que</span>se suman cuando quieras</h2>
+  <p class="intro" data-reveal>Se cotizan aparte, nunca vienen dentro de un plan. Los marcados como recomendados son los que mejor le sientan a un negocio como el tuyo. Enciende uno para ver cómo se vería.</p>
+  <div class="mods" data-stagger>
+    <article class="mod" data-mod><button type="button" class="sw interruptor" aria-pressed="false" aria-label="Probar el módulo Panel de personal"></button>
+      <span class="mod-etiqueta inc" style="margin-right:auto">Recomendado para ti</span><span class="mod-etiqueta" data-estado>Se cotiza aparte</span><span class="ico"><svg><use href="#i-equipo"/></svg></span><h3>Panel de personal</h3><p>Sumar, canjear, cobrar, ventas del día y ficha completa de cada cliente (cliente 360).</p><div class="mv"><div class="mv-bt"><span>Sumar</span><span>Canjear</span><span>Cobrar</span></div><small>Ventas del día y ficha de cada clienta (cliente 360)</small></div><p class="por-que"><b>Para tu negocio:</b> Varias personas atienden y los tratamientos largos (brackets, endodoncias por fases) piden seguimiento: cada paciente tiene su ficha con visitas, tratamiento en curso y notas, y ves lo que atendió cada una.</p><p class="origen">Se activa junto a fidelización o prepago</p></article>
+    <article class="mod" data-mod><button type="button" class="sw interruptor" aria-pressed="false" aria-label="Probar el módulo Fidelización por puntos y niveles"></button>
+      <span class="mod-etiqueta inc" style="margin-right:auto">Recomendado para ti</span><span class="mod-etiqueta" data-estado>Se cotiza aparte</span><span class="ico"><svg><use href="#i-estrella"/></svg></span><h3>Fidelización por puntos y niveles</h3><p>Cada visita o compra suma puntos y tus clientes suben de nivel. Premios claros, sin papelitos.</p><div class="mv"><div class="mv-niv"><span>Bronce</span><span class="on">Plata</span><span>Oro</span></div><div class="mv-barra"><i style="width:62%"></i></div><small>Ejemplo: 124 de 200 puntos para el siguiente nivel</small></div><p class="por-que"><b>Para tu negocio:</b> Su comunidad en Instagram ya comenta, comparte y participa en sorteos: un beneficio por referir trae pacientes nuevos. El bono se acredita solo después de la primera atención real registrada por el personal.</p><p class="origen">Origen: Beer Club</p></article>
+    <article class="mod" data-mod><button type="button" class="sw interruptor" aria-pressed="false" aria-label="Probar el módulo Paquetes y tarjeta prepago"></button>
+      <span class="mod-etiqueta inc" style="margin-right:auto">Recomendado para ti</span><span class="mod-etiqueta" data-estado>Se cotiza aparte</span><span class="ico"><svg><use href="#i-tarjeta"/></svg></span><h3>Paquetes y tarjeta prepago</h3><p>Vende paquetes de sesiones o saldo prepago con bono y lleva la cuenta de lo que le queda a cada cliente.</p><div class="mv"><span>Paquete de 5 sesiones</span><div class="mv-pts"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div><small>Ejemplo: 3 sesiones usadas, 2 disponibles</small></div><p class="por-que"><b>Para tu negocio:</b> Un tratamiento de ortodoncia se paga por etapas y controles: el paquete deja claro cuántos controles quedan y cuánto se abonó, sin cuentas en cuadernos. Preliminar hasta conocer cómo cobran hoy.</p><p class="origen">Origen: Mocka</p></article>
+    <article class="mod" data-mod><button type="button" class="sw interruptor" aria-pressed="false" aria-label="Probar el módulo Tarjeta de sellos con QR"></button>
+      <span class="mod-etiqueta" data-estado>Se cotiza aparte</span><span class="ico"><svg><use href="#i-estrella"/></svg></span><h3>Tarjeta de sellos con QR</h3><p>Cada visita suma un sello en la tarjeta del celular y, al completar la serie, una sesión sale gratis. El personal sella escaneando su QR.</p><div class="mv"><div class="mv-pts"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="est">★</i></div><small>Ejemplo: 5 sesiones suman 5 sellos y la siguiente es gratis</small></div><p class="origen">Origen: Dermabelle</p></article>
+    <article class="mod" data-mod><button type="button" class="sw interruptor" aria-pressed="false" aria-label="Probar el módulo Tarjeta con QR"></button>
+      <span class="mod-etiqueta" data-estado>Se cotiza aparte</span><span class="ico"><svg><use href="#i-qr"/></svg></span><h3>Tarjeta con QR</h3><p>Cada cliente lleva su tarjeta en el celular; el personal escanea su QR para sumar o canjear.</p><div class="mv mv-qr"><svg viewBox="0 0 9 9" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="1" y="0" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="8" y="0" width="1" height="1"/><rect x="8" y="1" width="1" height="1"/><rect x="8" y="2" width="1" height="1"/><rect x="0" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/><rect x="0" y="8" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="1" y="8" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/><rect x="6" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/></svg><span>Tu clienta muestra su QR y el personal suma<small>Dibujo de ejemplo</small></span></div><p class="origen">Parte del módulo de fidelización</p></article>
+    <article class="mod" data-mod><button type="button" class="sw interruptor" aria-pressed="false" aria-label="Probar el módulo Pedidos que llegan a caja"></button>
+      <span class="mod-etiqueta" data-estado>Se cotiza aparte</span><span class="ico"><svg><use href="#i-caja"/></svg></span><h3>Pedidos que llegan a caja</h3><p>El cliente pide en la web y el pedido aparece listo para cobrar, sin pasar por WhatsApp.</p><div class="mv mv-tk"><div><span>Pedido de productos</span><em>Llega a caja</em></div><div><small>2 × producto de ejemplo</small><small>Por cobrar</small></div></div><p class="origen">Origen: MockaBox</p></article>
+    <article class="mod" data-mod><button type="button" class="sw interruptor" aria-pressed="false" aria-label="Probar el módulo Mini juego con ranking"></button>
+      <span class="mod-etiqueta" data-estado>Se cotiza aparte</span><span class="ico"><svg><use href="#i-juego"/></svg></span><h3>Mini juego con ranking</h3><p>Un juego en tu página con ranking. Si hay premio, se valida con reglas anti-abuso y el personal confirma el canje.</p><div class="mv"><div class="mv-pod"><span style="height:46px">2</span><span style="height:68px">1</span><span style="height:34px">3</span></div><small>Ranking con premio validado por el personal</small></div><p class="origen">Origen: MockaBox · se cotiza aparte</p></article>
+    <article class="mod" data-mod><button type="button" class="sw interruptor" aria-pressed="false" aria-label="Probar el módulo Retos con foto y rutinas con tu coach"></button>
+      <span class="mod-etiqueta" data-estado>Se cotiza aparte</span><span class="ico"><svg><use href="#i-foto"/></svg></span><h3>Retos con foto y rutinas con tu coach</h3><p>La socia sube la foto del reto y el equipo la aprueba antes de dar estrellas. Cada semana recibe su rutina y conversa con su coach.</p><div class="mv"><div class="mv-bt"><span>Foto del reto</span><span>Aprobada</span><span>+2 ★</span></div><small>La socia sube su foto; el equipo la aprueba antes de dar estrellas</small></div><p class="origen">Se suma a la tarjeta de estrellas</p></article>
+    
+  </div>
+  <div class="grid-panel" style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));margin-top:clamp(40px,6vw,72px)">
+    <div class="bloque" data-reveal><h3>Reporte de Dentiident</h3><p id="rep-aviso" style="margin-bottom:12px"></p>
+      <div class="dona"><div class="c" id="dona"></div><div class="leyenda" id="leyenda"></div></div></div>
+    <div class="bloque" data-reveal><h3>Servicios más reservados</h3><div class="barras" id="sectores"></div></div>
+  </div>
+</div></section>
+
+
+
+</main>
 
 <script src="config.js"></script>
 <script>
-window.DEMO = window.DEMO || { cliente: 'Dentiident', waCliente: '593963911885' };
-const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-/* Viene del diagnóstico (index.html) o usa un ejemplo */
-const q = new URLSearchParams(location.search);
-const recos = { dolor: 'Valoración por dolor', estetica: 'Valoración estética', alinear: 'Valoración de ortodoncia', ninos: 'Consulta para niños', revision: 'Revisión y limpieza' };
-const motivo = recos[q.get('m')] ? q.get('m') : 'dolor';
-const diag = { reco: recos[motivo], detalle: q.get('d') || 'Empezó hoy', conoce: q.get('c') || 'Es mi primera vez', cuando: q.get('w') || 'Hoy o mañana' };
-const menor = motivo === 'ninos';
-
-/* Agenda de ejemplo (demo) */
-const dias = [['Jue','1','oct'],['Vie','2','oct'],['Sáb','3','oct'],['Dom','4','oct'],['Lun','5','oct'],['Mar','6','oct']];
-const slots = ['09:00','10:30','12:00','15:00','16:30','18:00'];
-const citas = [
-  [['10:30','Endodoncia · Mario P.','Segunda cita'],['16:30','Limpieza · Ana G.','']],
-  [['09:00','Control · Luis T.','Convenio Policía'],['15:00','Cirugía · Andrea V.','Extracción']],
-  [['12:00','Pacientito · Mateo, 7 años','Con su mamá'],['16:30','Valoración estética · Carla R.','Primera vez']],
-  [['09:00','Control · Sofía M.',''],['12:00','Endodoncia · Jorge L.','Primera cita']],
-  [['10:30','Limpieza · Diana C.',''],['18:00','Valoración · Pedro S.','Convenio Policía']],
-  [['15:00','Control · Valeria N.','']]
-];
-const st = { dia: 3, hora: '', nombre: '', tel: '', consent: false, ok: false };
-const fecha = () => { const d = dias[st.dia]; return `${d[0]} ${d[1]} ${d[2]}`; };
-const listo = () => st.hora && st.nombre.trim().length >= 2 && st.tel.replace(/\D/g, '').length >= 9 && st.consent;
-
-function agenda() {
-  const filas = citas[st.dia].map(c => ({ h: c[0], t: esc(c[1]), d: esc(c[2]) }));
-  if (st.ok) filas.push({ h: st.hora, t: esc(diag.reco) + ' · ' + esc(st.nombre.trim()), d: esc(diag.detalle) + ' · ' + esc(diag.conoce) + ' · desde la web', nueva: true });
-  filas.sort((a, b) => a.h.localeCompare(b.h));
-  document.getElementById('agenda').innerHTML =
-    `<div class="agenda-cab"><b>Agenda · ${fecha()}</b><span>Google Calendar · ejemplo</span></div>` +
-    filas.map(f => `<div class="fila"><div class="h">${f.h}</div><div class="c ${f.nueva ? 'nueva fx-nuevo' : ''}"><b style="font-weight:600">${f.t}</b>${f.d ? `<small>${f.d}</small>` : ''}</div></div>`).join('');
-  document.getElementById('aviso').innerHTML = st.ok
-    ? `<div class="aviso-wa fx-nuevo"><small>Aviso por WhatsApp a Dentiident</small><div style="margin-top:6px">Nueva cita: ${esc(st.nombre.trim())} · ${fecha()}, ${st.hora}. ${esc(diag.reco)}. ${esc(diag.detalle)}. ${esc(diag.conoce)}.</div></div>` : '';
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* Interruptores de módulos: solo muestran cómo quedaría (nada se guarda ni se cobra) */
+document.querySelectorAll('[data-mod]').forEach(m => m.querySelector('.sw').onclick = e => {
+  const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+  e.currentTarget.setAttribute('aria-pressed', on); m.classList.toggle('activo', on);
+  m.querySelector('[data-estado]').textContent = on ? 'Así se vería' : 'Se cotiza aparte';
+});
+/* Reporte: reservas de prueba del navegador o datos de EJEMPLO */
+const EJ = {"llevar": 0, "domicilio": 0, "sectores": {"FICOA": 21, "Atocha": 12, "Miraflores": 10, "Centro": 8, "Huachi": 5, "Izamba": 2}, "franjas": {"Mañana": 22, "Tarde": 41, "Noche": 9}, "servicios": {"Endodoncia": 28, "Ortodoncia": 19, "Estética dental": 14}};
+function reporte() {
+  let cs = []; try { cs = JSON.parse(localStorage.getItem(DEMO.claveDemo) || '[]'); } catch (e) {}
+  const ej = !cs.length, fr = ej ? EJ.franjas : cs.reduce((a, c) => (a[c.franja || 'Sin horario'] = (a[c.franja || 'Sin horario'] || 0) + 1, a), {});
+  const sv = ej ? EJ.servicios : cs.reduce((a, c) => (c.lineas.forEach(l => a[l.nombre] = (a[l.nombre] || 0) + l.cant), a), {});
+  document.getElementById('rep-aviso').innerHTML = ej ? '<span class="chip-ej">Datos de ejemplo</span> Haz una reserva de prueba y el reporte se actualiza.' : '<span class="chip-ej">Tus reservas de prueba</span>';
+  const f = Object.entries(fr).sort((a, b) => b[1] - a[1]), tot = f.reduce((s, x) => s + x[1], 0) || 1, col = ['var(--fx-deep)', 'var(--fx-accent)', 'color-mix(in srgb, var(--fx-deep) 40%, var(--fx-bg))'];
+  let acum = 0; document.getElementById('dona').style.background = `conic-gradient(${f.map(([, n], i) => { const a = acum; acum += n / tot * 100; return `${col[i % 3]} ${a}% ${acum}%`; }).join(', ')})`;
+  document.getElementById('leyenda').innerHTML = f.map(([n, c], i) => `<span><i style="background:${col[i % 3]}"></i>${esc(n)} · ${Math.round(c / tot * 100)} %</span>`).join('') + `<span>${tot} citas</span>`;
+  const filas = Object.entries(sv).sort((a, b) => b[1] - a[1]), max = filas.length ? filas[0][1] : 1;
+  document.getElementById('sectores').innerHTML = filas.map(([n, c]) => `<div class="barra-f"><span>${esc(n)}</span><div class="p"><div style="width:${c / max * 100}%"></div></div><b>${c}</b></div>`).join('');
 }
-
-function flujo() {
-  const f = document.getElementById('flujo');
-  if (st.ok) {
-    f.innerHTML = `<div class="fx-paso" style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
-      <div class="check" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline class="fx-trazo" points="20 6 9 17 4 12"/></svg></div>
-      <h2 class="doble" style="font-size:clamp(30px,3.4vw,42px)"><span>Listo, ${esc(st.nombre.trim().split(' ')[0])}</span>Tu cita está agendada</h2>
-      <div style="font-size:20px;font-weight:600">${fecha()}, ${st.hora}</div>
-      <p style="color:var(--texto);max-width:46ch">Te enviamos la confirmación por WhatsApp y un recordatorio el día anterior. Si necesitas cambiar la hora, responde a ese mensaje.</p>
-      <button type="button" class="btn btn-linea-osc" id="otra">Ver la demo otra vez</button></div>`;
-    document.getElementById('otra').onclick = () => { Object.assign(st, { dia: 3, hora: '', nombre: '', tel: '', consent: false, ok: false }); flujo(); agenda(); };
-    return;
-  }
-  const oc = citas[st.dia].map(c => c[0]);
-  f.innerHTML = `
-    <div class="reco"><small>Tu recomendación</small><b>${esc(diag.reco)}</b><span>${esc(diag.detalle)} · ${esc(diag.conoce)} · ${esc(diag.cuando)}</span></div>
-    <div><h2 class="paso">1. Elige el día</h2><div class="chips">${dias.map((d, i) => `<button type="button" class="chip ${d[0] === 'Dom' ? 'dom' : ''}" data-dia="${i}" aria-pressed="${st.dia === i}"><small>${d[0]}</small><span class="n">${d[1]}</span><small>${d[2]}</small></button>`).join('')}</div>
-      <p class="nota">También atendemos los domingos.</p></div>
-    <div><h2 class="paso">2. Elige la hora</h2><div class="chips">${slots.map(h => `<button type="button" class="chip" data-hora="${h}" aria-pressed="${st.hora === h}" ${oc.includes(h) ? `disabled aria-label="${h} ocupada"` : ''}>${h}</button>`).join('')}</div>
-      <p class="nota">Las horas tachadas ya están ocupadas. [CONFIRMAR HORARIO REAL DE CADA DÍA]</p></div>
-    <div><h2 class="paso">3. ${menor ? 'Datos del representante' : 'Tus datos'}</h2>
-      <div class="datos"><label>${menor ? 'Nombre del representante' : 'Nombre'}<input class="campo" id="nom" autocomplete="name" value="${esc(st.nombre)}"></label><label>WhatsApp<input class="campo" id="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="099 000 0000" value="${esc(st.tel)}"></label></div>
-      <label class="consent"><input type="checkbox" id="con" ${st.consent ? 'checked' : ''}><span>${menor ? 'Soy el representante del menor y acepto' : 'Acepto'} que ${esc(DEMO.cliente)} use estas respuestas solo para preparar la cita y contactarme. [ENLACE AVISO DE PRIVACIDAD]</span></label></div>
-    <button type="button" class="btn btn-tinta" id="conf" ${listo() ? '' : 'disabled'}>Confirmar cita${st.hora ? ' · ' + fecha() + ', ' + st.hora : ''}</button>`;
-  f.querySelectorAll('[data-dia]').forEach(b => b.onclick = () => { st.dia = +b.dataset.dia; st.hora = ''; flujo(); agenda(); });
-  f.querySelectorAll('[data-hora]').forEach(b => b.onclick = () => { st.hora = b.dataset.hora; flujo(); });
-  const upd = () => { document.getElementById('conf').disabled = !listo(); };
-  document.getElementById('nom').oninput = e => { st.nombre = e.target.value; upd(); };
-  document.getElementById('tel').oninput = e => { st.tel = e.target.value; upd(); };
-  document.getElementById('con').onchange = e => { st.consent = e.target.checked; upd(); };
-  document.getElementById('conf').onclick = () => { if (listo()) { st.ok = true; flujo(); agenda(); window.scrollTo({ top: 0, behavior: 'smooth' }); } };
-}
-flujo(); agenda();
+reporte();
+window.addEventListener('storage', reporte);
 </script>
+
+
 <script src="fx.js"></script>
 <script src="demo.js"></script>
 </body>

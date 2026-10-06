@@ -4,315 +4,73 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Dentiident Servicios Odontológicos — Ambato, de domingo a domingo</title>
-<meta name="description" content="Odontología con amor en Ambato. Atención de domingo a domingo. Responde 4 preguntas y agenda tu valoración por WhatsApp.">
-<meta property="og:title" content="Dentiident Servicios Odontológicos">
-<meta property="og:description" content="Descubre qué necesita tu sonrisa en 1 minuto y agenda tu cita, incluso el domingo.">
-<meta property="og:image" content="assets/og.jpg"><!-- [MARCADOR] og.jpg 1200×630 con foto real -->
-<meta name="theme-color" content="#0E0F0F">
+<meta name="theme-color" content="#121315">
 <link rel="icon" href="assets/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Dentist","name":"Dentiident Servicios Odontológicos","telephone":"+593963911885",
- "address":{"@type":"PostalAddress","streetAddress":"Quiz Quiz y Paccha","addressLocality":"Ambato","addressRegion":"Tungurahua","addressCountry":"EC"},
- "sameAs":["https://www.instagram.com/dentiident_/","https://www.facebook.com/dentiident/"]}
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&amp;display=swap">
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/calma.css">
+<link rel="stylesheet" href="efectos/toque.css">
+<link rel="stylesheet" href="efectos/transicion.css">
+<link rel="stylesheet" href="efectos/clinica.css">
+<style>:root { --fx-bg: #F2F4F7; --fx-paper: #FFFFFF; --fx-accent: #B8B8B8; --fx-ink: #101113; --fx-deep: #121315; --fx-pop: #D6D7DB; --fx-mancha-1: #C9CACE; --fx-mancha-2: #8E8F94; --fx-mancha-3: #121315; --fx-font: "Montserrat", sans-serif; --fx-font-disp: "Montserrat", sans-serif; --fx-font-txt: "Montserrat", sans-serif; }</style>
+
+<title>Demo de Dentiident</title>
+<meta name="description" content="Demo de Dentiident: la página, el panel y la propuesta.">
 <style>
-/* Hero */
-.hero{position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;right:-12%;top:-25%;width:820px;height:820px;border-radius:50%;background:radial-gradient(closest-side,rgba(205,206,212,.14),rgba(205,206,212,0));pointer-events:none}
-.hero .wrap{position:relative;display:grid;gap:clamp(36px,5vw,72px);align-items:center;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));padding-block:clamp(48px,7vw,96px) clamp(120px,12vw,150px)}
-.hero h1{font-weight:700;line-height:1;letter-spacing:-.02em;font-size:clamp(40px,5.2vw,70px);max-width:13ch}
-.hero h1 span{display:block;font-weight:200;font-size:.5em;letter-spacing:-.005em;line-height:1.2;color:#C9C9CD;margin-bottom:10px}
-.hero .lead{margin-top:22px;font-size:clamp(17px,1.4vw,19px);color:#B9B9BE;max-width:44ch;font-weight:300}
-.acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-
-/* Diagnóstico */
-.caja{background:#fff;color:var(--tinta);padding:clamp(22px,3vw,34px);box-shadow:0 40px 80px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:18px;min-height:470px}
-.caja-cab{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--linea)}
-.caja-cab img{width:40px;height:40px;border-radius:50%}
-.caja-cab b{font-weight:600;font-size:15px;display:block}
-.caja-cab small{color:var(--suave);font-size:13px}
-.prog{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--suave)}
-.prog .pista{flex:1;height:4px;background:var(--linea);overflow:hidden}
-.prog .pista div{height:4px;background:var(--tinta)}
-.caja h2{font-weight:600;font-size:clamp(22px,2.2vw,28px);line-height:1.15}
-.ops{display:grid;gap:10px}
-.op{display:flex;align-items:center;gap:12px;min-height:56px;padding:12px 16px;background:#fff;border:1px solid #D9D9DC;font:500 16px var(--f);color:var(--tinta);text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s}
-.op svg{width:22px;height:22px;stroke:var(--tinta);flex-shrink:0}
-@media (hover:hover){.op:hover{border-color:var(--tinta);box-shadow:inset 3px 0 0 var(--tinta)}}
-.enlace{align-self:flex-start;min-height:44px;border:0;background:none;color:var(--texto);font:600 15px var(--f);cursor:pointer;padding:0}
-.reco-tit{font-weight:700;font-size:clamp(26px,2.6vw,34px);line-height:1.1}
-.resumen{background:var(--niebla);padding:14px 16px;font-size:15px;color:var(--texto);display:grid;gap:3px}
-.alerta{border-left:3px solid var(--tinta);background:#F7F7F8;padding:12px 14px;font-size:15px}
-.aviso{font-size:13px;color:var(--suave)}
-.check{width:56px;height:56px;border-radius:50%;background:var(--tinta);display:grid;place-items:center}
-
-/* Banda de íconos sobre el borde del hero */
-.banda{position:relative;z-index:2;margin-top:-72px}
-.banda .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,3fr);background:var(--grafito);color:#fff;box-shadow:0 30px 60px rgba(0,0,0,.25)}
-.banda .lema{background:var(--metal);color:var(--tinta);padding:28px 30px;display:flex;align-items:center;font-weight:700;font-size:clamp(20px,2vw,26px);line-height:1.15}
-.banda ul{list-style:none;margin:0;padding:22px clamp(16px,2vw,30px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
-.banda li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:6px 10px;font-size:15px;color:#DADADD;border-left:1px solid #3A3B3E}
-.banda li:first-child{border-left:0}
-.banda .ico{width:60px;height:60px}
-.banda .ico svg{width:28px;height:28px}
-@media (max-width:900px){.banda .wrap{grid-template-columns:1fr}.banda ul{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:18px}.banda li:nth-child(3){border-left:0}}
-
-/* Servicios */
-.servicios{display:grid;gap:44px 36px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-top:52px}
-.servicio{display:flex;gap:18px;align-items:flex-start}
-.servicio h3{font-weight:400;font-size:23px;line-height:1.15}
-.servicio p{margin-top:6px;color:var(--texto);font-size:16px}
-.servicio a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:15px;text-decoration:none;border-bottom:1px solid var(--tinta)}
-.marca-pend{font-size:12px;font-weight:600;color:var(--suave);background:var(--niebla);padding:2px 8px;margin-left:6px;vertical-align:middle}
-
-/* Cómo funciona (secuencia real) */
-.pasos{display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:48px;counter-reset:p}
-.paso{border-top:1px solid #4A4B4F;padding-top:22px}
-.paso b{display:block;font-weight:200;font-size:54px;line-height:1;color:var(--plata)}
-.paso h3{margin-top:14px;font-weight:600;font-size:22px}
-.paso p{margin-top:8px;color:#B9B9BE}
-
-/* Equipo */
-.equipo{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));margin-top:48px}
-.doc{background:#EEF0F3}
-.doc .foto{aspect-ratio:3/2;background:var(--negro-logo);display:grid;place-items:center;color:#A5A6AB;font-size:14px;text-align:center;padding:20px}
-.doc .foto img{width:90px;height:90px;border-radius:50%;opacity:.9;margin:0 auto 12px}
-.doc .txt{padding:28px 30px 32px}
-.doc small{font-size:14px;color:var(--texto)}
-.doc h3{margin-top:10px;font-weight:300;font-size:30px;line-height:1.1}
-.doc h3 strong{font-weight:700}
-.doc p{margin-top:12px;color:var(--texto)}
-
-/* Opiniones */
-.opiniones{display:grid;gap:28px;grid-template-columns:minmax(0,260px) minmax(0,1fr);align-items:center;margin-top:48px}
-@media (max-width:820px){.opiniones{grid-template-columns:1fr}}
-.nota{display:flex;flex-direction:column;gap:6px}
-.nota b{font-weight:700;font-size:48px;line-height:1}
-.nota span{color:var(--texto);font-size:15px}
-.nota a{margin-top:8px;align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--tinta);text-decoration:none;font-weight:600;font-size:15px}
-.tarjetas{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
-.op-card{background:#fff;border:1px solid var(--linea);box-shadow:0 10px 30px rgba(14,15,15,.06);padding:22px;min-height:170px;color:var(--suave);font-size:15px;display:flex;align-items:center;justify-content:center;text-align:center}
-
-/* Preguntas */
-.faq{max-width:900px;margin-top:36px}
-.faq details{border-bottom:1px solid var(--linea);padding:18px 0}
-.faq summary{font-weight:500;font-size:19px;cursor:pointer;min-height:44px;display:flex;align-items:center}
-.faq p{margin-top:8px;color:var(--texto)}
-
-/* Cierre y pie */
-.cierre{text-align:center;position:relative;overflow:hidden}
-.cierre .wrap{max-width:820px}
-.cierre .doble{font-size:clamp(40px,5.4vw,72px)}
-.cierre .intro{margin-inline:auto}
-.cierre .acciones{justify-content:center}
-footer{background:#000;color:#8E8F94;font-size:14px;padding-block:32px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:18px 36px;align-items:center;justify-content:space-between}
-footer img{width:64px;height:64px;border-radius:50%}
-footer a{color:#DADADD}
+/* Entrada de la demo: explica qué es cada página y cómo probarla. Solo variables --fx-* de la marca. */
+.hub-hero { padding-block: clamp(40px, 7vw, 84px) clamp(34px, 5vw, 64px); }
+.hub-lista { display: flex; flex-wrap: wrap; gap: 18px; }
+.hub-card { flex: 1 1 min(100%, 250px); display: grid; gap: 8px; align-content: start; padding: clamp(18px, 3vw, 24px); min-width: 0; text-decoration: none; color: var(--fx-ink); background: var(--fx-bg); border: 3px solid var(--fx-deep); border-radius: 10px; box-shadow: 5px 5px 0 var(--fx-deep); transition: transform .16s var(--fx-ease, ease-out), box-shadow .16s; }
+.hub-card:active { transform: translate(5px, 5px); box-shadow: 0 0 0 var(--fx-deep); }
+.hub-card small { font: 800 .8rem/1 var(--fx-font-txt); letter-spacing: .08em; text-transform: uppercase; background: var(--fx-deep); color: var(--fx-bg); justify-self: start; padding: 5px 8px; border-radius: 4px; }
+.hub-card b { font: 900 clamp(1.7rem, 4vw, 2.2rem)/.95 var(--fx-font-disp); text-transform: uppercase; }
+.hub-card span { font-size: 1.04rem; }
+.hub-card i { font: 800 1.05rem var(--fx-font-disp); font-style: normal; text-transform: uppercase; letter-spacing: .05em; margin-top: 6px; }
+.hub-card.principal { flex-basis: 100%; background: var(--fx-accent); }
+.hub-card.principal small { background: var(--fx-bg); color: var(--fx-deep); }
+.hub-card.principal b { font-size: clamp(2.3rem, 7vw, 3.8rem); }
+.hub-pasos ol { margin: 22px 0 0; padding-left: 1.3em; display: grid; gap: 12px; max-width: 64ch; font-size: 1.1rem; }
+.hub-pasos li::marker { font-weight: 800; }
+.hub-nota { margin-top: 26px; padding-top: 16px; border-top: 2px dashed color-mix(in srgb, var(--fx-deep) 30%, transparent); max-width: 64ch; font-size: .98rem; }
 </style>
 </head>
-<body data-pagina="landing" data-secciones='["Inicio","Diagnóstico","Servicios","Cómo funciona","Equipo","Opiniones","Preguntas","Contacto"]'>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="i-diente" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3.5c-2.4 0-4 1.9-4 4.4 0 2.2 1 3.6 1.6 5.8.6 2.4.8 6.8 2.6 6.8 1.5 0 1.6-4.6 3-4.6h2.6c1.4 0 1.5 4.6 3 4.6 1.8 0 2-4.4 2.6-6.8.6-2.2 1.6-3.6 1.6-5.8 0-2.5-1.6-4.4-4-4.4-1.8 0-2.6 1-4.5 1s-2.7-1-4.5-1z"/></symbol>
-  <symbol id="i-raiz" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3.5c-2.4 0-4 1.9-4 4.4 0 2 1 3.3 1.5 5.2M16.5 3.5c2.4 0 4 1.9 4 4.4 0 2-1 3.3-1.5 5.2M7.5 3.5c1.8 0 2.6 1 4.5 1s2.7-1 4.5-1"/><path d="M9 9v11M15 9v11"/></symbol>
-  <symbol id="i-pinza" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21 11 11M19 21l-6-10"/><path d="M11 11c-1-2-1-5 1-8 2 3 2 6 1 8"/></symbol>
-  <symbol id="i-rayo" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 5 13h6l-1 8 8-10h-6z"/></symbol>
-  <symbol id="i-brillo" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
-  <symbol id="i-alinea" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9c3 2 15 2 18 0M3 15c3-2 15-2 18 0"/><path d="M7 8v8M12 8.5v7M17 8v8"/></symbol>
-  <symbol id="i-nino" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9 10h.01M15 10h.01M8.5 14.5c1.8 2 5.2 2 7 0"/></symbol>
-  <symbol id="i-limpio" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 6 7 6 10.5a6 6 0 0 1-12 0C6 10 9 7 12 3z"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="1.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></symbol>
-  <symbol id="i-escudo" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
-  <symbol id="i-corazon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.5 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></symbol>
-  <symbol id="i-reloj" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
-  <symbol id="i-tel" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
-</defs></svg>
-
-<div class="barra"><div class="wrap">
-  <div class="datos">
-    <span><svg><use href="#i-reloj"/></svg>Atención de domingo a domingo</span>
-    <span><svg><use href="#i-pin"/></svg>Quiz Quiz y Paccha, Ambato</span>
-    <span><svg><use href="#i-tel"/></svg>096 391 1885</span>
-  </div>
-  <a data-wa="Hola, quiero agendar una cita en Dentiident.">Agendar cita</a>
-</div></div>
+<body data-pagina="Inicio de la demo" data-secciones='["Inicio de la demo"]'>
 
 <header class="cabecera"><div class="wrap">
-  <a class="marca" href="#inicio"><img src="assets/logo.webp" alt="" width="56" height="56"><span>DENTIIDENT<small>Servicios odontológicos</small></span></a>
-  <nav aria-label="Principal"><a href="#diagnostico">Diagnóstico</a><a href="#servicios">Servicios</a><a href="#equipo">Equipo</a><a href="#preguntas">Preguntas</a></nav>
+  <a class="marca" href="index.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Dentiident</b><small>Demo para ti</small></span></a>
 </div></header>
 
 <main>
-<section class="hero oscuro" id="inicio"><div class="wrap">
-  <div>
-    <h1><span class="fx-e1">Odontología con amor en Ambato</span><span class="fx-e2 fx-plata-texto" style="display:block;font-weight:700;font-size:1em;margin:0">Tu sonrisa no espera al lunes</span></h1>
-    <p class="lead fx-e3">Atendemos de domingo a domingo. Cuéntanos qué necesitas en 4 preguntas y te respondemos con tu cita, no con más preguntas.</p>
-    <div class="acciones fx-e4">
-      <a class="btn btn-metal" href="#diagnostico">Descubrir qué necesito</a>
-      <a class="btn btn-linea" data-wa="Hola, quiero información sobre una cita en Dentiident.">Escribir por WhatsApp</a>
-    </div>
-  </div>
-  <div class="caja fx-e5" id="diagnostico" aria-live="polite"></div>
+<section class="oscuro hub-hero"><div class="wrap">
+  <h1 class="doble fx-entra fx-d1"><span>Demo de</span>Dentiident</h1>
+  <p class="intro fx-entra fx-d2" style="color:var(--fx-soft)">Así quedaría tu página y lo que recibes con cada plan: la página que ve tu cliente, tu panel, la versión Premium y la propuesta. Todo con datos de ejemplo.</p>
 </div></section>
 
-<section class="banda" aria-label="Por qué Dentiident"><div class="wrap">
-  <div class="lema fx-plata">Cerca de ti, todos los días</div>
-  <ul data-stagger>
-    <li><span class="ico"><svg><use href="#i-cal"/></svg></span>Domingo a domingo</li>
-    <li><span class="ico"><svg><use href="#i-corazon"/></svg></span>Odontología con amor</li>
-    <li><span class="ico"><svg><use href="#i-escudo"/></svg></span>Convenio Policía Nacional</li>
-    <li><span class="ico"><svg><use href="#i-nino"/></svg></span>Pacientitos bienvenidos</li>
-  </ul>
+<section class="sec papel"><div class="wrap">
+  <nav class="hub-lista" aria-label="Páginas de la demo" data-stagger>
+    <a class="hub-card principal" href="inicio.html"><small>Empieza aquí</small><b>Tu página</b><span>Lo que ve tu cliente: tu marca, el diagnóstico y la reserva que te llega lista por WhatsApp.</span><i>Entrar →</i></a>
+    <a class="hub-card" href="panel.html"><small>Plan Pro</small><b>Tu panel</b><span>Cada reserva queda guardada: quién, qué y cuándo. Haz una de prueba y aparece aquí.</span><i>Entrar →</i></a>
+    <a class="hub-card" href="premium.html"><small>Plan Premium</small><b>Panel modular</b><span>Reporte mensual y módulos que se encienden cuando los necesites.</span><i>Entrar →</i></a>
+    <a class="hub-card" href="propuesta.html"><small>Para ti</small><b>La propuesta</b><span>Los tres planes, qué incluye cada uno y los módulos recomendados.</span><i>Entrar →</i></a>
+    
+  </nav>
 </div></section>
 
-<section class="sec" id="servicios"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Lo que hacemos por</span>tu sonrisa</h2>
-  <p class="intro">Cada tratamiento empieza con una valoración: revisamos tu caso y te explicamos opciones, tiempos y precio antes de empezar.</p>
-  <div class="servicios" id="lista-servicios" data-stagger></div>
-</div></section>
-
-<section class="sec oscuro"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Así funciona</span>tu primera cita</h2>
-  <div class="pasos" data-stagger>
-    <div class="paso"><b>1</b><h3>Nos cuentas qué necesitas</h3><p>Con el diagnóstico de esta página o por WhatsApp. Llega con el motivo, desde cuándo y si tienes convenio.</p></div>
-    <div class="paso"><b>2</b><h3>Valoración</h3><p>Revisamos tu caso y te explicamos las opciones, las citas que harían falta y el precio antes de empezar.</p></div>
-    <div class="paso"><b>3</b><h3>Tratamiento y seguimiento</h3><p>Te acompañamos en cada cita y te recordamos la siguiente.</p></div>
-  </div>
-</div></section>
-
-<section class="sec" id="equipo"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Quién te</span>atiende</h2>
-  <div class="equipo" data-stagger>
-    <article class="doc">
-      <div class="foto" data-zoom><div><img src="assets/logo.webp" alt="" width="90" height="90">[FOTO REAL DE LA DOCTORA · 1200×800, fondo del consultorio]</div></div>
-      <div class="txt"><small>[CARGO · TÍTULO]</small><h3>Dra. [NOMBRE] <strong>[APELLIDO]</strong></h3><p>[2 LÍNEAS SOBRE SU EXPERIENCIA, ESCRITAS CON ELLA]</p></div>
-    </article>
-    <article class="doc">
-      <div class="foto" data-zoom><div><img src="assets/logo.webp" alt="" width="90" height="90">[FOTO DEL EQUIPO O DEL CONSULTORIO · 1200×800]</div></div>
-      <div class="txt"><small>Especialistas por tratamiento</small><h3>Nuestro <strong>equipo</strong></h3><p>Te guiamos durante todo tu tratamiento, con asesoría en cada paso. [CONFIRMAR ESPECIALIDADES]</p></div>
-    </article>
-  </div>
-</div></section>
-
-<section class="sec niebla"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Pacientes con</span>razones para sonreír</h2>
-  <div class="opiniones" data-stagger>
-    <div class="nota"><b>88 %</b><span>recomienda Dentiident en Facebook (7 opiniones)</span><a href="https://www.facebook.com/dentiident/" target="_blank" rel="noopener">Ver opiniones</a></div>
-    <div class="tarjetas">
-      <div class="op-card">[OPINIÓN REAL 1 · nombre y tratamiento, con permiso]</div>
-      <div class="op-card">[OPINIÓN REAL 2]</div>
-      <div class="op-card">[OPINIÓN REAL 3]</div>
-    </div>
-  </div>
-</div></section>
-
-<section class="sec" id="preguntas"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Preguntas</span>frecuentes</h2>
-  <div class="faq">
-    <details><summary>¿Atienden los domingos?</summary><p>Sí, atendemos de domingo a domingo. [HORARIO DE CADA DÍA]</p></details>
-    <details><summary>¿Cuánto cuesta la valoración?</summary><p>[PRECIO DE LA VALORACIÓN]. En la valoración te damos el precio del tratamiento antes de empezar.</p></details>
-    <details><summary>¿Cómo funciona el convenio con la Policía Nacional?</summary><p>[CONDICIONES DEL CONVENIO QUE SE PUEDEN PUBLICAR]</p></details>
-    <details><summary>¿Atienden niños?</summary><p>Sí. Los menores vienen acompañados de su representante. [EDAD DESDE LA QUE ATIENDEN]</p></details>
-    <details><summary>¿Dónde están?</summary><p>Quiz Quiz y Paccha, diagonal al parque de los enamorados, Ambato. [CONFIRMAR SEGUNDA SUCURSAL]</p></details>
-  </div>
-</div></section>
-
-<section class="sec oscuro cierre" id="contacto"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Agenda tu cita</span>hoy mismo</h2>
-  <p class="intro">Escríbenos y sal de tu valoración con un plan claro: tratamiento, citas y precio.</p>
-  <div class="acciones"><a class="btn btn-metal" data-wa="Hola, quiero agendar una cita en Dentiident.">Agendar por WhatsApp</a></div>
+<section class="sec"><div class="wrap hub-pasos">
+  <h2 class="doble" data-reveal><span>Cómo</span>probarla</h2>
+  <ol><li><b>Haz una reserva de prueba.</b> Elige en tu página y envía; no se manda nada de verdad.</li><li><b>Míralo en tu panel.</b> La reserva aparece con sus datos.</li><li><b>Compara los planes.</b> En la propuesta están los tres, con precios y qué incluye cada uno.</li></ol>
+  <p class="hub-nota">Los precios, textos y datos con marca amarilla se confirman contigo. Lo que pruebes se guarda solo en este navegador.</p>
 </div></section>
 </main>
 
 <footer><div class="wrap">
-  <img src="assets/logo.webp" alt="Dentiident Servicios Odontológicos" width="64" height="64" loading="lazy">
-  <div>Quiz Quiz y Paccha, Ambato · Atención de domingo a domingo · 096 391 1885<br>
-  <a href="https://www.instagram.com/dentiident_/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/dentiident/" target="_blank" rel="noopener">Facebook</a></div>
+  <img src="assets/logo.webp" alt="Dentiident" width="64" height="64" loading="lazy">
+  <div>Dentiident Ambato · 0963911885</div>
 </div></footer>
 
-<a class="wa-flot" data-wa="Hola, quiero agendar una cita en Dentiident." aria-label="Escribir a Dentiident por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
-
 <script src="config.js"></script>
-<script>
-window.DEMO = window.DEMO || { cliente: 'Dentiident', waCliente: '593963911885' };
-window.wa = window.wa || ((n, t) => `https://wa.me/${String(n).replace(/\D/g, '')}?text=${encodeURIComponent(t)}`);
-const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const enlazarWa = raiz => raiz.querySelectorAll('[data-wa]').forEach(a => { a.href = wa(DEMO.waCliente, a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
-
-/* Servicios: verificados en sus publicaciones; el resto va marcado para confirmar */
-const servicios = [
-  ['i-raiz', 'Endodoncia', 'Tratamiento de conducto para conservar tu diente. Te explicamos cada paso en la valoración.', true],
-  ['i-pinza', 'Cirugía dental', 'Extracciones y cirugía oral, con jornadas especiales durante el año.', true],
-  ['i-nino', 'Odontología para niños', 'Nuestros pacientitos, atendidos con paciencia y acompañados de su representante.', true],
-  ['i-alinea', 'Ortodoncia', 'Alineamos tus dientes con un plan claro de citas y controles.', false],
-  ['i-limpio', 'Revisión y limpieza', 'Revisión completa y limpieza profesional para prevenir problemas.', false],
-  ['i-rayo', 'Urgencias dentales', 'Dolor o molestia fuerte: escríbenos y te buscamos un espacio pronto.', false]
-];
-document.getElementById('lista-servicios').innerHTML = servicios.map(([i, n, t, ok]) =>
-  `<div class="servicio"><span class="ico"><svg><use href="#${i}"/></svg></span><div><h3>${n}${ok ? '' : '<span class="marca-pend">[CONFIRMAR]</span>'}</h3><p>${t}</p><a data-wa="Hola, quiero información sobre ${n.toLowerCase()} en Dentiident.">Consultar</a></div></div>`).join('');
-
-/* Diagnóstico ¿Qué necesita tu sonrisa? */
-const motivos = {
-  dolor:    { txt: 'Tengo dolor o una urgencia', ico: 'i-rayo',   q: '¿Desde cuándo tienes la molestia?', ops: ['Empezó hoy', 'Hace unos días', 'Hace semanas'], reco: 'Valoración por dolor', desc: 'Revisamos la pieza que te molesta y te explicamos las opciones antes de empezar cualquier tratamiento.' },
-  estetica: { txt: 'Quiero mejorar cómo se ve', ico: 'i-brillo',  q: '¿Qué te gustaría mejorar?', ops: ['El color de mis dientes', 'La forma o el desgaste', 'Me falta una pieza', 'Aún no lo sé'], reco: 'Valoración estética', desc: 'Revisamos tu sonrisa y te contamos qué opciones tienes, con tiempos y precios claros.' },
-  alinear:  { txt: 'Alinear mis dientes',        ico: 'i-alinea', q: '¿Has usado brackets antes?', ops: ['Nunca he usado', 'Sí, y se movieron', 'Quiero conocer opciones'], reco: 'Valoración de ortodoncia', desc: 'Evaluamos la posición de tus dientes y te explicamos las alternativas y el tiempo aproximado.' },
-  ninos:    { txt: 'Es para mi hijo o hija',      ico: 'i-nino',   q: '¿Qué edad tiene?', ops: ['Menos de 6 años', 'De 6 a 12 años', 'De 13 a 17 años'], reco: 'Consulta para niños', desc: 'Una primera cita tranquila para que se sienta en confianza. Viene acompañado de su representante.' },
-  revision: { txt: 'Revisión y limpieza',         ico: 'i-limpio', q: '¿Cuándo fue tu última limpieza?', ops: ['Hace menos de un año', 'Hace más de un año', 'No lo recuerdo'], reco: 'Revisión y limpieza', desc: 'Revisión completa y limpieza profesional. Si encontramos algo, te lo explicamos antes de hacer nada.' }
-};
-const conoce = ['Es mi primera vez', 'Ya soy paciente', 'Tengo convenio con la Policía Nacional'];
-const cuando = ['Hoy o mañana', 'Esta semana', 'Solo estoy averiguando'];
-const s = { paso: 1, motivo: '', detalle: '', conoce: '', cuando: '' };
-const caja = document.getElementById('diagnostico');
-const cab = `<div class="caja-cab"><img src="assets/logo.webp" alt="" width="40" height="40"><div><b>¿Qué necesita tu sonrisa?</b><small>Diagnóstico en 1 minuto</small></div></div>`;
-
-function pintar() {
-  if (s.paso <= 4) {
-    const m = motivos[s.motivo];
-    const preg = { 1: 'Cuéntanos qué te trae', 2: m && m.q, 3: '¿Ya nos conoces?', 4: '¿Cuándo quieres tu cita?' }[s.paso];
-    const ops = s.paso === 1 ? Object.entries(motivos).map(([k, v]) => ({ v: k, t: v.txt, i: v.ico }))
-              : (s.paso === 2 ? m.ops : s.paso === 3 ? conoce : cuando).map(t => ({ v: t, t }));
-    caja.innerHTML = `${cab}
-      <div class="prog"><span>Paso ${s.paso} de 4</span><div class="pista"><div class="fx-barra" style="width:${(s.paso - 1) * 25}%"></div></div></div>
-      <div class="fx-paso" style="display:flex;flex-direction:column;gap:16px">
-        <h2>${preg}</h2>
-        <div class="ops">${ops.map(o => `<button type="button" class="op" data-v="${esc(o.v)}">${o.i ? `<svg aria-hidden="true"><use href="#${o.i}"/></svg>` : ''}${esc(o.t)}</button>`).join('')}</div>
-        ${s.paso > 1 ? '<button type="button" class="enlace" id="volver">← Volver</button>' : ''}
-      </div>`;
-    requestAnimationFrame(() => requestAnimationFrame(() => { caja.querySelector('.fx-barra').style.width = (s.paso * 25) + '%'; }));
-    caja.querySelectorAll('.op').forEach(b => b.onclick = () => {
-      s[{ 1: 'motivo', 2: 'detalle', 3: 'conoce', 4: 'cuando' }[s.paso]] = b.dataset.v; s.paso++; pintar();
-    });
-    const v = document.getElementById('volver'); if (v) v.onclick = () => { s.paso--; pintar(); };
-  } else {
-    const m = motivos[s.motivo];
-    const urgente = s.motivo === 'dolor' && s.detalle === 'Empezó hoy';
-    const msg = `Hola, hice el diagnóstico en la web. Motivo: ${m.txt.toLowerCase()}. ${m.q.replace(/[¿?]/g, '')}: ${s.detalle.toLowerCase()}. ${s.conoce}. Quiero cita: ${s.cuando.toLowerCase()}. Me recomendó: ${m.reco}.`;
-    const premium = `premium.html?m=${s.motivo}&d=${encodeURIComponent(s.detalle)}&c=${encodeURIComponent(s.conoce)}&w=${encodeURIComponent(s.cuando)}`;
-    caja.innerHTML = `${cab}
-      <div class="fx-paso" style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
-        <div class="check" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline class="fx-trazo" points="20 6 9 17 4 12"/></svg></div>
-        <div class="reco-tit">${m.reco}</div>
-        <p style="color:var(--texto)">${m.desc}</p>
-        ${urgente ? '<div class="alerta">Si tienes hinchazón que dificulta respirar o tragar, acude a emergencias.</div>' : ''}
-        <div class="resumen" style="width:100%"><div><b>Motivo:</b> ${esc(m.txt)}</div><div><b>Detalle:</b> ${esc(s.detalle)}</div><div><b>Tú:</b> ${esc(s.conoce)}</div><div><b>Cita:</b> ${esc(s.cuando)}</div></div>
-        <a class="btn btn-tinta" style="width:100%" href="${wa(DEMO.waCliente, msg)}" target="_blank" rel="noopener">Agendar por WhatsApp</a>
-        <a class="enlace" href="${premium}">Ver cómo sería eligiendo día y hora (plan Premium)</a>
-        <p class="aviso">Recomendación orientativa. El tratamiento se define en tu valoración.</p>
-        <button type="button" class="enlace" id="reiniciar">Volver a empezar</button>
-      </div>`;
-    document.getElementById('reiniciar').onclick = () => { Object.assign(s, { paso: 1, motivo: '', detalle: '', conoce: '', cuando: '' }); pintar(); };
-  }
-}
-pintar();
-enlazarWa(document);
-</script>
 <script src="fx.js"></script>
 <script src="demo.js"></script>
 </body>
