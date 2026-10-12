@@ -4,7 +4,7 @@ window.TIENDA = {
   nombre: 'Dogo',
   lema: 'Snacks de un solo ingrediente para perros',
   ciudad: 'Quito',                   // [CONFIRMAR]
-  wa: '593999999999',                // [CONFIRMAR] WhatsApp del negocio (593XXXXXXXXX)
+  wa: '593998000495',                // WhatsApp de Dogo: aquí llegan todos los pedidos
   horario: 'Lun a sáb · 9:00 a 19:00', // [CONFIRMAR]
   envio: { domicilio: 2.00, gratisDesde: 20 }, // [CONFIRMAR] costo de envío y monto de envío gratis
   // Precio y costo por pack (tabla de precios del dueño). El panel puede editarlos.
