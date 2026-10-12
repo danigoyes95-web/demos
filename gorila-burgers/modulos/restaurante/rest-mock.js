@@ -202,6 +202,68 @@
     }
   };
 
+  /* ---------- mini juego con premio (espejo de 007_juego.sql; en la demo el reloj es el del navegador) ---------- */
+  const JC = () => (st.juego = st.juego || { cfg: { activo: true, premio: 'Cerveza de Gorila', premios_dia_max: 3, partidas_dia_tel: 3, partidas_hora: 200, dificultad: 1, vigencia_dias: 7, compra_min_cent: 500, min_seg_victoria: 20 }, partidas: [], premios: [], seq: 0 });
+  const telJ = p => { const d = String(p || '').replace(/\D/g, ''); return /^09\d{8}$/.test(d) ? '593' + d.slice(1) : /^593\d{9}$/.test(d) ? d : ''; };
+  const rnd32 = () => Math.floor(Math.random() * 2147483646) + 1;
+  const tokenJ = () => Array.from({ length: 64 }, () => '0123456789abcdef'[Math.floor(Math.random() * 16)]).join('');
+  Object.assign(F, {
+    juego_estado() { const j = JC(), c = j.cfg; return { activo: c.activo, premio: c.premio, dificultad: c.dificultad, vigencia_dias: c.vigencia_dias, compra_min_cent: c.compra_min_cent, hay_cupo: j.premios.filter(x => x.dia === hoy()).length < c.premios_dia_max }; },
+    juego_iniciar(a) {
+      const j = JC(), c = j.cfg, t = telJ(a.p_telefono), dia = hoy();
+      if (!c.activo) err('El juego no está disponible por ahora.');
+      if (String(a.p_nombre || '').trim().length < 2 || String(a.p_nombre).length > 60) err('Escribe tu nombre.');
+      if (!t) err('Escribe un celular válido (09XXXXXXXX).');
+      if (j.premios.some(x => x.tel === t && x.dia === dia)) err('Hoy ya ganaste tu premio. Canjéalo en el local y vuelve mañana.');
+      if (j.partidas.filter(x => x.tel === t && x.dia === dia).length >= c.partidas_dia_tel) err(`Hoy ya usaste tus ${c.partidas_dia_tel} partidas. Vuelve mañana.`);
+      if (j.partidas.filter(x => Date.now() - x.creada < 3600000).length >= c.partidas_hora) err('Hay mucha gente jugando. Inténtalo en unos minutos.');
+      const tok = tokenJ(); j.partidas.push({ id: ++j.seq, token: tok, tel: t, nombre: String(a.p_nombre).trim(), dia, creada: Date.now(), terminada: null, resultado: null });
+      guardar(); return { token: tok, semilla: rnd32(), dificultad: c.dificultad, partidas_restantes: c.partidas_dia_tel - j.partidas.filter(x => x.tel === t && x.dia === dia).length };
+    },
+    juego_terminar(a) {
+      const j = JC(), c = j.cfg, p = j.partidas.find(x => x.token === a.p_token), dia = hoy();
+      if (!p || p.terminada) err('Esta partida ya no es válida.');
+      const seg = (Date.now() - p.creada) / 1000; p.terminada = Date.now(); p.seg = seg;
+      if (seg > 600) { p.resultado = 'invalido'; guardar(); err('Esta partida venció.'); }
+      if (!a.p_gano) { p.resultado = 'perdio'; guardar(); return { resultado: 'perdio' }; }
+      const h = a.p_hitos; let ok = seg >= c.min_seg_victoria && Array.isArray(h) && h.length === 5, ant = 0;
+      if (ok) for (const x of h) { if (typeof x !== 'number' || x - ant < 2) { ok = false; break; } ant = x; }
+      if (ok && ant > seg + 3) ok = false;
+      if (!ok) { p.resultado = 'invalido'; guardar(); return { resultado: 'invalido' }; }
+      if (j.premios.filter(x => x.dia === dia).length >= c.premios_dia_max || j.premios.some(x => x.tel === p.tel && x.dia === dia)) { p.resultado = 'gano_sin_cupo'; guardar(); return { resultado: 'gano_sin_cupo' }; }
+      const AL = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; let cod; do { cod = 'G' + Array.from({ length: 5 }, () => AL[Math.floor(Math.random() * AL.length)]).join(''); } while (j.premios.some(x => x.codigo === cod));
+      const vence = new Date(Date.now() + c.vigencia_dias * 86400000).toISOString();
+      p.resultado = 'gano'; j.premios.push({ codigo: cod, tel: p.tel, nombre: p.nombre, premio: c.premio, dia, creado: new Date().toISOString(), vence, canjeado_en: null, venta_id: null });
+      guardar(); return { resultado: 'gano', codigo: cod, premio: c.premio, vence };
+    },
+    juego_codigo(a) {
+      me(); const r = JC().premios.find(x => x.codigo === String(a.p_codigo || '').trim().toUpperCase()); if (!r) err('Ese código no existe.');
+      return { premio: r.premio, nombre: r.nombre, telefono_fin: r.tel.slice(-4), creado: r.creado, vence: r.vence, estado: r.canjeado_en ? 'canjeado' : new Date(r.vence) < new Date() ? 'vencido' : 'pendiente' };
+    },
+    juego_canjear(a) {
+      me(); const j = JC(), c = j.cfg, r = j.premios.find(x => x.codigo === String(a.p_codigo || '').trim().toUpperCase());
+      if (!r) err('Ese código no existe.'); if (r.canjeado_en) err('Ese código ya se canjeó.'); if (new Date(r.vence) < new Date()) err('Ese código venció.');
+      const v = st.ventas.find(x => x.dia === hoy() && x.numero === a.p_numero_venta);
+      if (!v || v.estado !== 'confirmada') err(`La venta #${a.p_numero_venta} de hoy no existe o no está confirmada.`);
+      if (v.total_cent < c.compra_min_cent) err(`La compra debe ser de al menos $${(c.compra_min_cent / 100).toFixed(2)}.`);
+      if (j.premios.some(x => x.venta_id === v.id)) err('Esa venta ya respaldó otro canje.');
+      r.canjeado_en = new Date().toISOString(); r.venta_id = v.id; guardar(); return { premio: r.premio, nombre: r.nombre, venta: v.numero };
+    },
+    juego_resumen() {
+      soloAdmin(); const j = JC(), c = j.cfg, dia = hoy(), hace7 = menos(dia, 6);
+      return { activo: c.activo, premio: c.premio, premios_dia_max: c.premios_dia_max, dificultad: c.dificultad,
+        hoy: { partidas: j.partidas.filter(x => x.dia === dia && x.terminada).length, ganadores: j.premios.filter(x => x.dia === dia).length, canjeados: j.premios.filter(x => x.dia === dia && x.canjeado_en).length },
+        semana: { partidas: j.partidas.filter(x => x.dia >= hace7 && x.terminada).length, ganadores: j.premios.filter(x => x.dia >= hace7).length, invalidas: j.partidas.filter(x => x.dia >= hace7 && x.resultado === 'invalido').length },
+        pendientes: j.premios.filter(x => !x.canjeado_en && new Date(x.vence) > new Date()).map(x => ({ codigo: x.codigo, nombre: x.nombre, creado: x.creado, vence: x.vence })).reverse() };
+    },
+    juego_config_guardar(a) {
+      soloAdmin(); const c = JC().cfg;
+      if (a.p_dificultad != null && (a.p_dificultad < 0.5 || a.p_dificultad > 1.5)) err('La dificultad va de 0,5 a 1,5.');
+      if (a.p_activo != null) c.activo = !!a.p_activo; if (a.p_premio) c.premio = String(a.p_premio).trim(); if (a.p_premios_dia != null) c.premios_dia_max = a.p_premios_dia; if (a.p_dificultad != null) c.dificultad = a.p_dificultad;
+      guardar(); return null;
+    }
+  });
+
   /* Solo demo: simula ventas del local con la hora actual, para ver el dashboard moverse sin tener otro celular. */
   F.demo_simular = () => {
     const rnd = Math.random, u = { nombre: R.demo.equipo[Math.floor(rnd() * R.demo.equipo.length)] };
