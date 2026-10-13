@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>La Tasca Licores · Vinos, cervezas y licores en Ambato</title>
+<meta name="description" content="Whisky, ron, vodka, tequila, vino, cerveza, cigarrillos y mixers a domicilio en Ambato. Arma tu pedido y lo confirmamos por WhatsApp. Venta solo a mayores de 18 años.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="La Tasca Licores · Vinos, cervezas y licores en Ambato">
+<meta property="og:description" content="Arma tu pedido en un minuto y lo confirmamos por WhatsApp. Venta solo a mayores de 18 años.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="assets/favicon.png">
+<script>try{if(localStorage.getItem('tasca_edad')!=='1')document.documentElement.classList.add('gate')}catch(e){document.documentElement.classList.add('gate')}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --negro:#07070a; --carbon:#0e0e13; --grafito:#17171e; --humo:#23232c; --rojo:#d3141b; --rojo-2:#ea2a31; --rojo-osc:#5a0b0f;
+  --hueso:#f4efe8; --gris:#a8a39b; --linea:rgba(244,239,232,.12);
+  --slab:"Alfa Slab One",Georgia,serif; --cond:"Barlow Condensed",system-ui,sans-serif; --sans:"Manrope",system-ui,sans-serif;
+  --r:18px; --ease:cubic-bezier(.22,.7,.2,1); --dock:96px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--sans);background:var(--negro);color:var(--hueso);line-height:1.55;-webkit-font-smoothing:antialiased;font-size:16px;padding-bottom:calc(var(--dock) + env(safe-area-inset-bottom))}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+@media (min-width:761px){.wrap{padding:0 32px}}
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.rotulo{font-family:var(--cond);font-size:14px;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+h1,h2,h3{font-family:var(--slab);font-weight:400;letter-spacing:-.01em;line-height:1.04}
+html.gate .contenido,html.gate .dock{display:none}
+html.gate body{padding-bottom:0}
+
+/* botones */
+.btn{background:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:4px;padding:15px 28px;font-family:var(--cond);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:transform .2s var(--ease),background-color .2s}
+.btn:active{transform:scale(.97)}
+.btn-rojo{background:var(--rojo);color:#fff}
+.btn-rojo:hover{background:var(--rojo-2)}
+.btn-borde{box-shadow:inset 0 0 0 1.5px rgba(244,239,232,.4)}
+.btn-borde:hover{box-shadow:inset 0 0 0 1.5px var(--hueso)}
+
+/* puerta de edad */
+#puerta{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;background:radial-gradient(70% 60% at 50% 30%,#2a0508 0%,var(--negro) 70%)}
+html.gate #puerta{display:grid}
+.puerta-c{max-width:440px;text-align:center}
+.puerta-c img{width:116px;height:116px;border-radius:50%;margin:0 auto 22px}
+.puerta-c h1{font-size:clamp(30px,8vw,44px);margin-bottom:12px}
+.puerta-c p{color:var(--gris);margin-bottom:26px}
+.puerta-c .acc{display:grid;gap:12px}
+.puerta-c small{display:block;margin-top:22px;color:var(--gris);font-size:12.5px}
+#puerta .no{display:none}
+#puerta.no .si-no{display:none}#puerta.no .no{display:block}
+
+/* chrome */
+.demo-nota{background:var(--rojo);color:#fff;text-align:center;font-size:12.5px;padding:6px 16px;font-weight:600}
+.demo-nota a{text-underline-offset:2px}
+.top{background:#050507;color:var(--gris);font-size:12.5px;border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;gap:18px;justify-content:space-between;padding-block:8px}
+.top span,.top a{display:inline-flex;gap:6px;align-items:center;text-decoration:none}
+.top .ico{width:15px;height:15px}
+nav.menu{position:sticky;top:0;z-index:30;background:rgba(7,7,10,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--linea)}
+nav.menu .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--slab);font-size:20px;line-height:1;color:var(--rojo)}
+.logo img{width:40px;height:40px;border-radius:50%}
+.logo span{color:var(--hueso);font-family:var(--cond);font-size:13px;letter-spacing:.3em;text-transform:uppercase;display:block;margin-top:3px}
+.menu-links{display:flex;gap:30px;font-family:var(--cond);font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.menu-links a{text-decoration:none;color:var(--gris);transition:color .2s}
+.menu-links a:hover{color:var(--hueso)}
+@media (max-width:860px){.menu-links{display:none}}
+@media (max-width:560px){.top .oc{display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:radial-gradient(60% 70% at 50% 62%,#3a060a 0%,var(--negro) 70%);border-bottom:1px solid var(--linea)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;padding-top:28px;padding-bottom:36px}
+.escena{grid-area:1/1/2/4;position:relative;display:grid;place-items:center;min-height:min(74vh,640px)}
+.gigante{position:absolute;left:50%;top:50%;transform:translate(-50%,-56%);font-family:var(--slab);color:var(--rojo);font-size:clamp(88px,18.5vw,270px);line-height:.9;letter-spacing:-.02em;white-space:nowrap;pointer-events:none;user-select:none;animation:entra 1s var(--ease) both}
+.gigante span{display:inline}
+.botella{position:relative;z-index:2;height:min(66vh,560px);width:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.7));animation:flota 6s ease-in-out infinite}
+.hero .izq,.hero .der{position:relative;z-index:3;align-self:end}
+.hero .izq{grid-area:1/1}
+.hero .der{grid-area:1/3;justify-self:end}
+.hero .izq .rotulo{color:var(--rojo-2);display:block;margin-bottom:12px;border-top:1px solid var(--rojo);padding-top:12px;max-width:15em}
+.hero .izq h1{font-size:clamp(24px,2.6vw,36px);max-width:11em}
+.hero .der{font-size:14.5px;max-width:24em}
+.hero .der p{margin-bottom:20px}
+.hero .acc{display:flex;gap:12px;flex-wrap:wrap}
+.ficha{border-top:1px solid var(--linea);background:var(--carbon)}
+.ficha .wrap{display:flex;flex-wrap:wrap;padding-top:0;padding-bottom:0}
+.ficha div{padding:18px 28px 16px 0;margin-right:28px;border-right:1px solid var(--linea)}
+.ficha div:last-child{border:0}
+.ficha b{display:block;font-family:var(--slab);font-size:28px;font-weight:400;line-height:1;color:var(--hueso)}
+.ficha span{font-family:var(--cond);font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris)}
+@media (max-width:760px){
+  .hero .wrap{grid-template-columns:1fr;padding-top:18px}
+  .escena{grid-area:1;min-height:0;padding:8px 0 4px}
+  .gigante{font-size:clamp(84px,31vw,150px);line-height:.82;text-align:center;top:46%}
+  .gigante span{display:block}
+  .botella{height:min(52vh,430px)}
+  .hero .izq{grid-area:2/1;margin-top:20px}
+  .hero .der{grid-area:3/1;justify-self:start;margin-top:18px}
+  .ficha div{margin-right:16px;padding-right:16px}
+}
+
+/* secciones */
+section{padding:88px 0;position:relative}
+@media (max-width:760px){section{padding:60px 0}}
+.cab-sec{display:grid;grid-template-columns:1fr minmax(0,380px);gap:32px;align-items:end;margin-bottom:36px}
+.cab-sec h2{font-size:clamp(32px,4.4vw,56px)}
+.cab-sec h2 em{font-style:normal;color:var(--rojo)}
+.cab-sec p{color:var(--gris)}
+.cab-sec .rotulo{display:block;margin-bottom:14px;color:var(--rojo-2)}
+@media (max-width:760px){.cab-sec{grid-template-columns:1fr;gap:14px;margin-bottom:26px}}
+.alt{background:var(--carbon)}
+
+/* combos */
+.combos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:860px){.combos{grid-template-columns:1fr}}
+.combo{border:1px solid var(--linea);border-radius:var(--r);padding:24px;background:linear-gradient(160deg,#1c1014,var(--grafito));display:flex;flex-direction:column;gap:14px}
+.combo .rotulo{color:var(--rojo-2)}
+.combo h3{font-size:26px}
+.combo p{color:var(--gris);font-size:14.5px}
+.combo ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;flex:1;align-content:flex-start}
+.combo li{border:1px solid var(--linea);border-radius:999px;padding:6px 12px;font-size:13.5px}
+.combo .pie{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--linea);padding-top:16px}
+.combo .pie b{font-family:var(--slab);font-weight:400;font-size:28px}
+
+/* catálogo */
+.herr{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.buscar{flex:1;min-width:220px;position:relative}
+.buscar input{width:100%;font:inherit;background:var(--grafito);color:var(--hueso);border:1.5px solid var(--linea);border-radius:999px;padding:13px 18px 13px 46px}
+.buscar input:focus{outline:2px solid var(--rojo);outline-offset:1px;border-color:transparent}
+.buscar .ico{position:absolute;left:16px;top:50%;margin-top:-11px;color:var(--gris)}
+.pestanas,.ocasiones{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:12px}
+.pestanas::-webkit-scrollbar,.ocasiones::-webkit-scrollbar{display:none}
+.pestanas button,.ocasiones button{flex:none;border:1px solid var(--linea);background:none;border-radius:999px;padding:9px 16px;font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);transition:background-color .2s,color .2s}
+.pestanas button[aria-selected="true"]{background:var(--rojo);border-color:var(--rojo);color:#fff}
+.ocasiones button{font-size:13.5px;padding:6px 13px}
+.ocasiones button[aria-pressed="true"]{border-color:var(--rojo-2);color:var(--hueso)}
+.ocasiones .rotulo{align-self:center;color:var(--gris);font-size:13px;flex:none;margin-right:4px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:22px}
+@media (max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.prod{background:var(--grafito);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px var(--linea);transition:box-shadow .35s var(--ease)}
+.prod.on{box-shadow:0 0 0 2px var(--rojo)}
+.prod .foto{position:relative;height:170px;display:grid;place-items:center;background:radial-gradient(70% 90% at 50% 100%,#4a0a10 0%,var(--carbon) 70%);color:var(--hueso)}
+.prod .foto .ico{width:84px;height:84px;stroke-width:1.1;color:var(--hueso);transition:transform .6s var(--ease)}
+.prod:hover .foto .ico{transform:translateY(-4px) scale(1.04)}
+.prod .num{position:absolute;right:14px;top:10px;font-family:var(--slab);font-size:22px;color:rgba(244,239,232,.35)}
+.prod .tag{position:absolute;left:14px;top:14px;background:var(--rojo);color:#fff;font-family:var(--cond);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:3px}
+.prod .cuerpo{padding:20px 20px 18px;display:flex;flex-direction:column;gap:14px;flex:1}
+.prod h3{font-size:21px;line-height:1.15}
+.prod .pack{font-size:13px;color:var(--gris);margin-top:4px;display:block}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13.5px;border-top:1px solid var(--linea);padding-top:14px;flex:1;align-content:start}
+.spec dt{color:var(--gris)}
+.spec dd{font-weight:600;text-align:right}
+.spec dd.nd{color:var(--gris);font-weight:400}
+.chips{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.chips i{font-style:normal;font-size:12px;border:1px solid var(--linea);border-radius:999px;padding:1px 9px}
+.prod .pie{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--linea);padding-top:14px}
+.precio{font-family:var(--slab);font-size:26px;line-height:1}
+.precio small{display:block;font-family:var(--sans);font-size:12px;color:var(--gris);margin-top:4px}
+.opc{display:grid;gap:8px;border-top:1px solid var(--linea);padding-top:14px}
+.opc .o{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.opc .o b{font-family:var(--slab);font-weight:400;font-size:20px;margin-right:6px}
+.opc .o small{display:block;color:var(--gris);font-size:12.5px}
+.vacio-cat{grid-column:1/-1;color:var(--gris);text-align:center;padding:34px 0}
+.add{border:0;border-radius:4px;background:var(--rojo);color:#fff;font-family:var(--cond);font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;padding:10px 18px;transition:transform .2s var(--ease),background-color .2s}
+.add:hover{background:var(--rojo-2)}
+.add:active{transform:scale(.96)}
+.step{display:inline-flex;align-items:center;border-radius:4px;background:var(--rojo);color:#fff}
+.step button{width:40px;height:40px;border:0;background:none;font-size:20px}
+.step output{min-width:22px;text-align:center;font-weight:700}
+
+/* cómo pedir */
+.pedir{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+.pedir ol{list-style:none;padding:0;display:grid}
+.pedir li{display:grid;grid-template-columns:52px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid var(--linea)}
+.pedir li:last-child{border:0}
+.pedir li span{width:44px;height:44px;border-radius:50%;background:var(--rojo);color:#fff;display:grid;place-items:center;font-family:var(--slab);font-size:18px}
+.pedir li h3{font-size:20px;margin-bottom:4px}
+.pedir li p{color:var(--gris);font-size:15px}
+.chat{background:#0b141a;border-radius:24px;padding:20px;display:grid;gap:10px;font-size:14px;box-shadow:0 0 0 1px var(--linea)}
+.chat .cab{display:flex;gap:10px;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--linea);margin-bottom:4px}
+.chat .cab img{width:36px;height:36px;border-radius:50%}
+.chat .cab small{display:block;color:var(--gris)}
+.bur{background:#1f2c33;border-radius:14px 14px 14px 4px;padding:10px 14px;max-width:90%}
+.bur.yo{justify-self:end;background:#005c4b;border-radius:14px 14px 4px 14px}
+.bur .f{display:flex;justify-content:space-between;gap:18px}
+.bur hr{border:0;border-top:1px dashed rgba(255,255,255,.3);margin:6px 0}
+.chat .eje{font-size:12px;color:var(--gris);text-align:center}
+@media (max-width:860px){.pedir{grid-template-columns:1fr;gap:34px}}
+
+/* responsable + faq */
+.resp{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
+.resp h2{font-size:clamp(30px,4vw,48px);margin-bottom:16px}
+.resp .lead{color:var(--gris);margin-bottom:22px}
+.sello{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;border:2px solid var(--rojo);color:var(--rojo-2);font-family:var(--slab);font-size:22px;margin-bottom:18px}
+details{border-bottom:1px solid var(--linea);padding:18px 0}
+details:first-of-type{border-top:1px solid var(--linea)}
+summary{font-weight:700;font-size:16.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";width:11px;height:11px;flex:none;margin-top:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .3s var(--ease)}
+details[open] summary::after{transform:rotate(225deg)}
+details p{color:var(--gris);margin-top:10px;max-width:46em}
+@media (max-width:860px){.resp{grid-template-columns:1fr;gap:26px}}
+
+/* pie */
+footer{background:#050507;color:var(--gris);padding:64px 0 28px;font-size:14.5px;border-top:1px solid var(--linea)}
+.cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px}
+.cols h3{font-family:var(--cond);font-size:14px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--hueso);margin-bottom:14px}
+.cols ul{list-style:none;padding:0;display:grid;gap:9px}
+.cols a{text-decoration:none}.cols a:hover{color:var(--hueso)}
+.redes{display:flex;gap:10px;margin-top:18px}
+.redes a{width:40px;height:40px;border-radius:50%;border:1px solid var(--linea);display:grid;place-items:center}
+.aviso{border:1px solid var(--rojo-osc);background:#12070a;border-radius:10px;padding:14px 18px;margin-top:40px;color:var(--hueso);font-size:13.5px;display:grid;gap:4px}
+.aviso b{font-family:var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--rojo-2);font-size:15px}
+.legal{border-top:1px solid var(--linea);margin-top:24px;padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px}
+@media (max-width:860px){.cols{grid-template-columns:1fr 1fr}}
+
+/* dock: círculos de categorías + carrito */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(7,7,10,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--linea);padding-bottom:env(safe-area-inset-bottom)}
+.dock-in{max-width:1200px;margin:0 auto;display:flex;align-items:stretch}
+.circulos{flex:1;display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:10px 14px 8px;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 92%,transparent);mask-image:linear-gradient(90deg,#000 92%,transparent)}
+.circulos::-webkit-scrollbar{display:none}
+.cir{flex:none;width:62px;display:grid;justify-items:center;gap:5px;border:0;background:none;scroll-snap-align:start;padding:0}
+.cir i{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--grafito);box-shadow:inset 0 0 0 1.5px rgba(244,239,232,.22);position:relative;transition:transform .25s var(--ease),background-color .25s,box-shadow .25s}
+.cir i .ico{width:28px;height:28px;stroke-width:1.5}
+.cir:active i{transform:scale(.92)}
+.cir:hover i{box-shadow:inset 0 0 0 1.5px var(--rojo-2)}
+.cir b{position:absolute;top:-3px;right:-3px;min-width:19px;height:19px;border-radius:999px;background:var(--rojo);color:#fff;font-size:11px;display:grid;place-items:center;padding:0 5px;font-family:var(--sans)}
+.cir b:empty,.cir b[data-n="0"]{display:none}
+.cir span{font-family:var(--cond);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);line-height:1;white-space:nowrap;max-width:64px;overflow:hidden;text-overflow:ellipsis}
+.cir.combo-c i{background:var(--rojo-osc);box-shadow:inset 0 0 0 1.5px var(--rojo)}
+.carro-b{flex:none;display:grid;justify-items:center;align-content:center;gap:3px;padding:8px 14px 6px 8px;border:0;background:none;border-left:1px solid var(--linea)}
+.carro-b i{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--rojo);color:#fff;position:relative}
+.carro-b i .ico{width:26px}
+.carro-b b{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:999px;background:var(--hueso);color:var(--negro);font-size:11.5px;display:grid;place-items:center;padding:0 5px;font-family:var(--sans)}
+.carro-b b[data-n="0"]{display:none}
+.carro-b span{font-family:var(--cond);font-size:14px;font-weight:700;letter-spacing:.06em;line-height:1}
+
+/* hoja de categoría (sheet) */
+dialog.hoja{border:0;padding:0;margin:auto auto 0;width:min(560px,100%);max-height:82dvh;background:var(--carbon);color:var(--hueso);border-radius:22px 22px 0 0;box-shadow:0 -1px 0 var(--linea);overflow:hidden}
+dialog.hoja[open]{display:flex;flex-direction:column;animation:sube-hoja .38s var(--ease)}
+dialog.hoja::backdrop{background:rgba(0,0,0,.65)}
+@keyframes sube-hoja{from{transform:translateY(40px);opacity:0}}
+.hoja .cab{display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid var(--linea)}
+.hoja .cab i{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--rojo-osc);box-shadow:inset 0 0 0 1.5px var(--rojo)}
+.hoja .cab h2{font-size:24px;flex:1}
+.hoja .cab h2 small{display:block;font-family:var(--sans);font-size:12.5px;color:var(--gris);margin-top:3px}
+.cerrar{border:0;background:none;font-size:30px;line-height:1;width:44px;height:44px}
+.hoja .lista{overflow:auto;padding:6px 18px;flex:1}
+.fila{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--linea)}
+.fila:last-child{border:0}
+.fila .n{flex:1;min-width:0}
+.fila .n b{display:block;font-weight:700;font-size:15px;line-height:1.25}
+.fila .n small{color:var(--gris);font-size:12.5px}
+.fila .p{font-family:var(--slab);font-size:17px;white-space:nowrap}
+.fila.var{padding:9px 0 9px 14px;border-bottom:0}
+.fila.marca{padding:14px 0 2px;border-bottom:0}
+.fila.marca b{font-family:var(--slab);font-weight:400;font-size:19px}
+.hoja .pie-h{padding:12px 18px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--linea);display:flex;gap:10px;background:var(--grafito)}
+.hoja .pie-h .btn{flex:1;padding:13px 10px}
+.hoja .hc{display:grid;gap:14px;padding:16px 0}
+
+/* carrito */
+dialog.carro{border:0;padding:0;margin:0 0 0 auto;height:100%;max-height:100dvh;width:min(460px,100%);background:var(--carbon);color:var(--hueso)}
+dialog.carro::backdrop{background:rgba(0,0,0,.65)}
+.carro form{display:flex;flex-direction:column;height:100%}
+.carro .cab{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--linea)}
+.carro .cab h2{font-size:26px}
+.carro .cuerpo{flex:1;overflow:auto;padding:16px 20px;display:grid;gap:14px;align-content:start}
+.lin{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lin .n{flex:1}
+.lin small{display:block;color:var(--gris)}
+.carro .step button{width:36px;height:36px}
+label.campo{display:grid;gap:6px;font-size:13.5px;font-weight:700}
+.campo input,.campo select{font:inherit;font-weight:500;border:1.5px solid var(--linea);border-radius:10px;padding:12px 14px;background:var(--grafito);color:var(--hueso)}
+.campo input:focus,.campo select:focus{outline:2px solid var(--rojo);outline-offset:1px;border-color:transparent}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg label{border:1.5px solid var(--linea);border-radius:10px;padding:12px;display:flex;gap:8px;align-items:center;font-weight:600;cursor:pointer;background:var(--grafito)}
+.seg label:has(input:checked){border-color:var(--rojo);background:#220a0d}
+.mayor{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--hueso);border:1px solid var(--rojo-osc);background:#12070a;border-radius:10px;padding:12px}
+.mayor input{margin-top:3px;accent-color:var(--rojo);width:18px;height:18px;flex:none}
+.tot{border-top:1px solid var(--linea);padding:14px 20px calc(18px + env(safe-area-inset-bottom));display:grid;gap:6px}
+.tot .lin:last-of-type{font-size:20px;font-weight:800}
+.tot .legal-mini{font-size:12px;color:var(--gris)}
+.err{color:#ff7b7f;font-size:14px;min-height:1em}
+.vacio{color:var(--gris);text-align:center;padding:30px 0}
+.ok-ico{stroke-dasharray:60;stroke-dashoffset:60;animation:dibuja .6s var(--ease) forwards}
+@keyframes dibuja{to{stroke-dashoffset:0}}
+
+/* movimiento (perfil producto con ambiente nocturno: 0.4–0.6 s) */
+@supports (animation-timeline: view()){
+  .ap{animation:sube linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+  @keyframes sube{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+}
+@keyframes entra{from{opacity:0;transform:translate(-50%,-52%) scale(.96)}}
+@keyframes flota{50%{transform:translateY(-8px)}}
+.pop{animation:pop .4s var(--ease)}
+@keyframes pop{50%{transform:scale(1.25)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ok-ico{stroke-dashoffset:0}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LiquorStore","name":"La Tasca Licores","description":"Tienda de vinos, cervezas y licores en Ambato","image":"assets/og.jpg","address":{"@type":"PostalAddress","streetAddress":"Los Guaytambos","addressLocality":"Ambato","postalCode":"180102","addressCountry":"EC"},"areaServed":"Ambato","sameAs":["https://www.instagram.com/latascalicores/"]}
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7Z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.3 2 1-.6 1.6c-3.5.4-8.3-4.4-7.9-7.9L10.3 7l1 2Z"/></symbol>
+  <symbol id="i-carro" viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-lupa" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r=".6"/></symbol>
+  <!-- íconos de categoría (círculos del menú) -->
+  <symbol id="c-vaso" viewBox="0 0 48 48"><path d="M12 10h24l-3 28a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2Z"/><path d="M13.6 22h20.8M20 30l4 4 4-4"/></symbol>
+  <symbol id="c-botella" viewBox="0 0 48 48"><path d="M20 5h8v9c0 3 5 5 5 10v16a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2V24c0-5 5-7 5-10Z"/><path d="M15 28h18v9H15"/></symbol>
+  <symbol id="c-botella-alta" viewBox="0 0 48 48"><path d="M21 3h6v14c0 2 4 4 4 8v17a2 2 0 0 1-2 2H19a2 2 0 0 1-2-2V25c0-4 4-6 4-8Z"/><path d="M17 30h14"/></symbol>
+  <symbol id="c-tequila" viewBox="0 0 48 48"><path d="M19 6h10v6c0 3 8 5 8 12v16a2 2 0 0 1-2 2H13a2 2 0 0 1-2-2V24c0-7 8-9 8-12Z"/><path d="M11 30h26M22 18l2 4 2-4"/></symbol>
+  <symbol id="c-copa" viewBox="0 0 48 48"><path d="M14 5h20c0 12-3 19-10 19S14 17 14 5Z"/><path d="M24 24v16M16 43h16M15.5 14h17"/></symbol>
+  <symbol id="c-cerveza" viewBox="0 0 48 48"><path d="M21 3h6v13l3 6v20a2 2 0 0 1-2 2H20a2 2 0 0 1-2-2V22l3-6Z"/><path d="M18 28h12M21 3h6"/></symbol>
+  <symbol id="c-trago" viewBox="0 0 48 48"><path d="M13 11h22l-3 29H16Z"/><path d="M15.6 20h16.8"/></symbol>
+  <symbol id="c-cigarro" viewBox="0 0 48 48"><path d="M5 29h28v7H5ZM33 29h10v7H33Z"/><path d="M37 23c0-3.5 4-3.5 4-8M30 29v7"/></symbol>
+  <symbol id="c-hielo" viewBox="0 0 48 48"><path d="m24 6 16 8v20l-16 8-16-8V14Z"/><path d="m8 14 16 8 16-8M24 22v20"/></symbol>
+  <symbol id="c-combo" viewBox="0 0 48 48"><path d="M8 21h32v21H8ZM6 14h36v7H6ZM24 14v28"/><path d="M24 14c-2-6-9-6-9-2.5S22 14 24 14c2 0 9 .5 9-2.5S26 8 24 14Z"/></symbol>
+</svg>
+
+<!-- Puerta de edad: si dice que no, no se muestra el catálogo -->
+<div id="puerta" role="dialog" aria-modal="true" aria-labelledby="puerta-t">
+  <div class="puerta-c">
+    <img src="assets/logo.webp" width="116" height="116" alt="La Tasca Licores">
+    <div class="si-no">
+      <h1 id="puerta-t">¿Eres mayor de 18 años?</h1>
+      <p>En La Tasca Licores vendemos alcohol y cigarrillos solo a personas mayores de edad.</p>
+      <div class="acc"><button class="btn btn-rojo" type="button" id="edad-si">Sí, soy mayor de 18</button><button class="btn btn-borde" type="button" id="edad-no">No</button></div>
+      <small>Beber en exceso es perjudicial para la salud. Fumar es perjudicial para la salud.</small>
+    </div>
+    <div class="no"><h1>Todavía no.</h1><p>Esta tienda es solo para mayores de 18 años. Te esperamos cuando cumplas la mayoría de edad.</p><button class="btn btn-borde" type="button" id="edad-volver">Volver</button></div>
+  </div>
+</div>
+
+<div class="contenido">
+<div class="demo-nota">Demo · catálogo y precios de ejemplo · los pedidos de prueba se ven en el <a href="panel.html">panel del dueño</a></div>
+<div class="top"><div class="wrap">
+  <span><svg class="ico"><use href="#i-reloj"/></svg><span data-t="horario"></span></span>
+  <span class="oc"><svg class="ico"><use href="#i-pin"/></svg><span data-t="direccion"></span></span>
+  <a class="wa-link" href="#"><svg class="ico"><use href="#i-wa"/></svg>Escríbenos</a>
+</div></div>
+
+<nav class="menu" aria-label="Principal"><div class="wrap">
+  <a class="logo" href="#" aria-label="La Tasca Licores, inicio"><img src="assets/logo.webp" width="40" height="40" alt=""><div>La Tasca<span>Licores</span></div></a>
+  <div class="menu-links"><a href="#combos">Combos</a><a href="#catalogo">Catálogo</a><a href="#como">Cómo pedir</a><a href="#responsable">Consumo responsable</a></div>
+  <a class="btn btn-rojo wa-link" href="#" style="padding:10px 18px;font-size:14px"><svg class="ico" style="width:18px;height:18px"><use href="#i-wa"/></svg>WhatsApp</a>
+</div></nav>
+
+<main>
+<header class="hero">
+  <div class="wrap">
+    <div class="escena">
+    <div class="gigante" aria-hidden="true"><span>La</span> <span>Tasca</span></div>
+    <!-- Botella ilustrada: provisional hasta tener fotos reales de estudio -->
+    <svg class="botella" viewBox="0 0 200 520" role="img" aria-label="Botella de licor, ilustración">
+      <defs>
+        <linearGradient id="vidrio" x1="0" x2="1"><stop offset="0" stop-color="#050506"/><stop offset=".25" stop-color="#1a1a1f"/><stop offset=".5" stop-color="#0a0a0c"/><stop offset="1" stop-color="#000"/></linearGradient>
+        <linearGradient id="licor" x1="0" x2="1"><stop offset="0" stop-color="#3a0e04"/><stop offset=".3" stop-color="#9a3a10"/><stop offset=".6" stop-color="#5a1a06"/><stop offset="1" stop-color="#1f0702"/></linearGradient>
+      </defs>
+      <rect x="82" y="6" width="36" height="34" rx="4" fill="#0b0b0d" stroke="#2a2a30"/>
+      <path d="M86 40h28v52c0 22 38 34 38 70v318a14 14 0 0 1-14 14H62a14 14 0 0 1-14-14V162c0-36 38-48 38-70Z" fill="url(#vidrio)" stroke="#2c2c33" stroke-width="2"/>
+      <path d="M56 214c0-10 4-14 4-14h80s4 4 4 14v260a8 8 0 0 1-8 8H64a8 8 0 0 1-8-8Z" fill="url(#licor)" opacity=".92"/>
+      <ellipse cx="100" cy="214" rx="44" ry="6" fill="#c0541a" opacity=".5"/>
+      <rect x="58" y="268" width="84" height="132" rx="6" fill="#0b0b0e" stroke="#d3141b" stroke-width="2"/>
+      <text x="100" y="316" text-anchor="middle" font-family="Alfa Slab One,Georgia,serif" font-size="22" fill="#f4efe8">LA TASCA</text>
+      <path d="M72 326h56" stroke="#d3141b" stroke-width="2"/>
+      <text x="100" y="352" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="15" letter-spacing="5" fill="#a8a39b">LICORES</text>
+      <text x="100" y="384" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="13" letter-spacing="3" fill="#a8a39b">AMBATO</text>
+      <path d="M64 110c-4 40-6 120-6 330" stroke="#fff" stroke-opacity=".16" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </svg>
+    </div>
+    <div class="izq">
+      <span class="rotulo">Tienda de vinos, cervezas y licores</span>
+      <h1>Lo que pide la noche, a tu puerta.</h1>
+    </div>
+    <div class="der">
+      <p>Whisky, ron, vodka, tequila, vino, cerveza, cigarrillos y todo para el trago. Arma tu pedido desde el menú de abajo y lo confirmamos por WhatsApp.</p>
+      <div class="acc"><a class="btn btn-rojo" href="#catalogo">Ver catálogo <svg class="ico" style="width:18px;height:18px"><use href="#i-flecha"/></svg></a><a class="btn btn-borde" href="#combos">Combos</a></div>
+    </div>
+  </div>
+  <div class="ficha" aria-label="En resumen"><div class="wrap">
+    <div><b id="f-cat"></b><span>categorías</span></div>
+    <div><b id="f-prod"></b><span>productos</span></div>
+    <div><b id="desde"></b><span>desde</span></div>
+    <div><b>+18</b><span>venta a mayores</span></div>
+  </div></div>
+</header>
+
+<section id="combos"><div class="wrap">
+  <div class="cab-sec ap">
+    <div><span class="rotulo">01 · Combos</span><h2>Ya armados, <em>listos</em> para pedir.</h2></div>
+    <p>Un toque y se suman al pedido. Después puedes cambiar cantidades o quitar lo que no necesites.</p>
+  </div>
+  <div class="combos" id="combos-grid"></div>
+</div></section>
+
+<section id="catalogo" class="alt"><div class="wrap">
+  <div class="cab-sec ap">
+    <div><span class="rotulo">02 · Catálogo</span><h2>Todo lo que <em>puedes pedir.</em></h2></div>
+    <p>Precio por presentación. Los cigarrillos se piden sueltos o por cajetilla. Desde <span class="gratis2"></span> el envío va por nuestra cuenta.</p>
+  </div>
+  <div class="herr"><label class="buscar"><span class="sr">Buscar producto</span><svg class="ico"><use href="#i-lupa"/></svg><input id="q" type="search" placeholder="Buscar: whisky, vino, hielo…" autocomplete="off"></label></div>
+  <div class="pestanas" id="pestanas" role="tablist" aria-label="Categorías"></div>
+  <div class="ocasiones" id="ocasiones" aria-label="Ideal para"></div>
+  <div class="grid" id="grid" aria-live="polite"></div>
+</div></section>
+
+<section id="como"><div class="wrap pedir">
+  <div>
+    <div class="cab-sec ap" style="grid-template-columns:1fr;margin-bottom:10px">
+      <div><span class="rotulo">03 · Pedir</span><h2>Tres pasos <em>y listo.</em></h2></div>
+    </div>
+    <ol>
+      <li><span>1</span><div><h3>Toca un círculo</h3><p>En el menú de abajo eliges la categoría y sumas lo que quieras con un toque.</p></div></li>
+      <li><span>2</span><div><h3>Confírmalo por WhatsApp</h3><p>Se abre WhatsApp con tu pedido ya escrito. Solo lo envías.</p></div></li>
+      <li><span>3</span><div><h3>Recibe y paga</h3><p>Te lo llevamos o lo retiras. El cobro se cierra por WhatsApp.</p></div></li>
+    </ol>
+  </div>
+  <div class="chat ap" aria-hidden="true">
+    <div class="cab"><img src="assets/logo.webp" width="36" height="36" alt=""><div><b>La Tasca Licores</b><small>en línea</small></div></div>
+    <div class="bur yo"><b>Pedido T4F2K</b><div class="f"><span>1 × Old Parr 12 años</span><span>$38,00</span></div><div class="f"><span>2 × Cajetilla Marlboro</span><span>$9,00</span></div><hr><div class="f"><b>Total</b><b>$47,00</b></div><small>Entrega en Los Guaytambos</small></div>
+    <div class="bur">¡Recibido! Te lo llevamos en unos minutos.</div>
+    <div class="eje">Conversación de ejemplo</div>
+  </div>
+</div></section>
+
+<section id="responsable" class="alt"><div class="wrap resp">
+  <div class="ap">
+    <div class="sello">18</div>
+    <h2>Consumo <em style="font-style:normal;color:var(--rojo)">responsable.</em></h2>
+    <p class="lead">Prohibida la venta de alcohol y cigarrillos a menores de 18 años. Podemos pedirte la cédula al entregar.</p>
+    <a class="btn btn-rojo wa-link" href="#"><svg class="ico" style="width:18px;height:18px"><use href="#i-wa"/></svg>Preguntar por WhatsApp</a>
+  </div>
+  <div>
+    <details><summary>¿Venden a menores de edad?</summary><p>No. Pedimos confirmar que eres mayor de 18 años al entrar y al enviar el pedido, y podemos verificar tu cédula en la entrega.</p></details>
+    <details><summary>¿Los cigarrillos se venden sueltos?</summary><p>Sí: puedes pedir por unidad o por cajetilla de 20. Cada opción tiene su propio precio en el catálogo.</p></details>
+    <details><summary>¿A dónde hacen envíos y cuánto cuesta?</summary><p>Entregamos en <span data-t="ciudad"></span>. El envío cuesta <span id="envio-txt"></span> y es gratis desde <span class="gratis2"></span>. También puedes retirar en el local.</p></details>
+    <details><summary>¿Cómo pago?</summary><p>Por transferencia, que se cierra por WhatsApp al confirmar el pedido.</p></details>
+    <details><summary>¿Hay horarios o días sin venta?</summary><p>Respetamos las restricciones de venta de bebidas alcohólicas vigentes. Escríbenos por WhatsApp si dudas.</p></details>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><a class="logo" href="#" style="color:var(--hueso)"><img src="assets/logo.webp" width="40" height="40" alt=""><div>La Tasca<span>Licores</span></div></a><p style="margin-top:14px;max-width:24em" data-t="lema"></p>
+      <div class="redes"><a href="https://www.instagram.com/latascalicores/" target="_blank" rel="noopener" aria-label="Instagram de La Tasca Licores"><svg class="ico" style="width:18px;height:18px"><use href="#i-ig"/></svg></a><a class="wa-link" href="#" aria-label="WhatsApp de La Tasca Licores"><svg class="ico" style="width:18px;height:18px"><use href="#i-wa"/></svg></a></div></div>
+    <div><h3>Tienda</h3><ul><li><a href="#catalogo">Catálogo</a></li><li><a href="#combos">Combos</a></li><li><a href="#como">Cómo pedir</a></li></ul></div>
+    <div><h3>Pedidos</h3><ul><li>Envío <span id="envio-txt2"></span></li><li>Gratis desde <span class="gratis2"></span></li><li>Transferencia</li></ul></div>
+    <div><h3>Contacto</h3><ul><li><a class="wa-link" href="#">WhatsApp</a></li><li data-t="horario"></li><li data-t="direccion"></li></ul></div>
+  </div>
+  <div class="aviso"><b>Consumo responsable</b><span>Prohibida la venta de alcohol y cigarrillos a menores de 18 años. Beber en exceso es perjudicial para la salud. Fumar es perjudicial para la salud.</span></div>
+  <div class="legal"><span>© 2026 La Tasca Licores · <span data-t="ciudad"></span>, Ecuador.</span><span>Si bebes, no conduzcas.</span></div>
+</div></footer>
+
+<!-- Menú de abajo: círculos con lo que se puede agregar + carrito -->
+<div class="dock" role="region" aria-label="Menú para armar tu pedido"><div class="dock-in">
+  <div class="circulos" id="circulos"></div>
+  <button class="carro-b" type="button" data-abrir aria-label="Ver mi pedido"><i><svg class="ico"><use href="#i-carro"/></svg><b id="n-carro" data-n="0">0</b></i><span id="t-carro">$0,00</span></button>
+</div></div>
+
+<dialog class="hoja" id="hoja" aria-labelledby="hoja-t">
+  <div class="cab"><i><svg class="ico" id="hoja-ico"><use href="#c-botella"/></svg></i><h2 id="hoja-t"></h2><button class="cerrar" type="button" data-cerrar-hoja aria-label="Cerrar">×</button></div>
+  <div class="lista" id="hoja-lista"></div>
+  <div class="pie-h"><button class="btn btn-borde" type="button" data-cerrar-hoja>Seguir</button><button class="btn btn-rojo" type="button" id="hoja-ver" data-abrir>Ver mi pedido</button></div>
+</dialog>
+
+<dialog class="carro" id="carro" aria-labelledby="carro-tit">
+  <form method="dialog" novalidate>
+    <div class="cab"><h2 id="carro-tit">Tu pedido</h2><button class="cerrar" value="cancel" aria-label="Cerrar" formnovalidate>×</button></div>
+    <div class="cuerpo" id="cuerpo"></div>
+    <div class="tot" id="tot"></div>
+  </form>
+</dialog>
+</div>
+
+<script src="config.js"></script>
+<script src="comun.js"></script>
+<script>
+(async () => {
+  const { T, LS, api, track, usd, tel, canal, campana } = SP;
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const ico = (id, cls) => `<svg class="ico"${cls ? ` style="${cls}"` : ''}><use href="#${id}"/></svg>`;
+
+  /* ---------- puerta de edad ---------- */
+  const abierta = () => { try { return localStorage.getItem('tasca_edad') === '1'; } catch (e) { return false; } };
+  $('#edad-si').onclick = () => { try { localStorage.setItem('tasca_edad', '1'); } catch (e) {} document.documentElement.classList.remove('gate'); iniciar(); };
+  $('#edad-no').onclick = () => $('#puerta').classList.add('no');   // el catálogo nunca se construye
+  $('#edad-volver').onclick = () => $('#puerta').classList.remove('no');
+  if (abierta()) iniciar();
+
+  async function iniciar() {
+    if (iniciar.hecho) return; iniciar.hecho = true;
+    const P = await SP.cargarCatalogo();            // SKUs: cada variante de cigarrillo es su propio SKU
+    const porSku = Object.fromEntries(P.map(p => [p.sku, p]));
+    const cats = T.categorias.filter(c => P.some(p => p.cat === c.id));
+    let carro = LS.get('tasca_carro', {});
+
+    document.querySelectorAll('[data-t]').forEach(e => e.textContent = T[e.dataset.t]);
+    $('#f-cat').textContent = cats.length;
+    $('#f-prod').textContent = T.productos.length;
+    $('#desde').textContent = usd(Math.min(...P.filter(p => p.variante !== 'suelto').map(p => p.precio))).replace(',00', '');
+    $('#envio-txt').textContent = $('#envio-txt2').textContent = usd(T.envio.domicilio);
+    document.querySelectorAll('.gratis2').forEach(e => e.textContent = usd(T.envio.gratisDesde).replace(',00', ''));
+    const waHola = 'https://wa.me/' + T.wa + '?text=' + encodeURIComponent('Hola La Tasca Licores, quiero hacer una consulta.');
+    document.querySelectorAll('.wa-link').forEach(a => { a.href = waHola; a.target = '_blank'; a.rel = 'noopener'; a.addEventListener('click', () => track('wa_info')); });
+    track('visita');
+
+    /* ---------- controles de cantidad ---------- */
+    const ctrl = sku => {
+      const n = carro[sku] || 0;
+      return n ? `<span class="step"><button type="button" data-menos="${sku}" aria-label="Quitar uno">−</button><output>${n}</output><button type="button" data-mas="${sku}" aria-label="Agregar uno">+</button></span>`
+               : `<button type="button" class="add" data-mas="${sku}">Agregar</button>`;
+    };
+    function cambiar(sku, d) {
+      const n = Math.max(0, (carro[sku] || 0) + d);
+      if (n) carro[sku] = n; else delete carro[sku];
+      if (d > 0) track('carrito', { prod: sku });
+      LS.set('tasca_carro', carro); pintar();
+      const c = $('#n-carro'); c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop');
+    }
+    document.addEventListener('click', e => {
+      const m = e.target.closest('[data-mas]'), r = e.target.closest('[data-menos]');
+      if (m) cambiar(m.dataset.mas, 1); else if (r) cambiar(r.dataset.menos, -1);
+      if (e.target.closest('[data-abrir]')) abrir();
+      if (e.target.closest('[data-cerrar-hoja]')) $('#hoja').close();
+    });
+    const subtotal = () => Object.entries(carro).reduce((s, [k, n]) => s + (porSku[k] ? porSku[k].precio * n : 0), 0);
+    const unidades = () => Object.entries(carro).reduce((s, [k, n]) => s + (porSku[k] ? n : 0), 0);
+    const envio = (sub, modo) => modo === 'domicilio' && sub < T.envio.gratisDesde ? T.envio.domicilio : 0;
+    const porCat = id => P.filter(p => p.cat === id);
+    const nCat = id => porCat(id).reduce((s, p) => s + (carro[p.sku] || 0), 0);
+
+    /* ---------- menú de abajo: círculos ---------- */
+    $('#circulos').innerHTML = `<button type="button" class="cir combo-c" data-hoja="combos"><i><svg class="ico"><use href="#c-combo"/></svg></i><span>Combos</span></button>` +
+      cats.map(c => `<button type="button" class="cir" data-hoja="${c.id}"><i><svg class="ico"><use href="#c-${c.icono}"/></svg><b data-nc="${c.id}" data-n="0"></b></i><span>${c.nombre}</span></button>`).join('');
+    $('#circulos').addEventListener('click', e => { const b = e.target.closest('[data-hoja]'); if (b) abrirHoja(b.dataset.hoja); });
+
+    /* hoja de categoría: filas simples; cigarrillos con dos opciones (suelto / cajetilla) */
+    function filasHoja(catId) {
+      const out = []; let marca = null;
+      for (const p of porCat(catId)) {
+        if (p.variante) {
+          if (marca !== p.base) { marca = p.base; out.push(`<div class="fila marca"><b>${esc(p.marca)}</b></div>`); }
+          out.push(`<div class="fila var"><div class="n"><b>${esc(p.etiqueta)}</b><small>${esc(p.pack)}</small></div><span class="p">${usd(p.precio)}</span><span data-ctrl="${p.sku}">${ctrl(p.sku)}</span></div>`);
+        } else {
+          const det = [p.pack, p.grados ? String(p.grados).replace('.', ',') + ' %' : ''].filter(Boolean).join(' · ');
+          out.push(`<div class="fila"><div class="n"><b>${esc(p.nombre)}</b><small>${esc(det)}</small></div><span class="p">${usd(p.precio)}</span><span data-ctrl="${p.sku}">${ctrl(p.sku)}</span></div>`);
+        }
+      }
+      return out.join('');
+    }
+    function abrirHoja(id) {
+      const h = $('#hoja');
+      if (id === 'combos') {
+        $('#hoja-t').innerHTML = 'Combos<small>Todo armado, un toque</small>'; $('#hoja-ico').innerHTML = '<use href="#c-combo"/>';
+        $('#hoja-lista').innerHTML = '<div class="hc">' + comboHtml() + '</div>';
+      } else {
+        const c = cats.find(x => x.id === id);
+        $('#hoja-t').innerHTML = `${c.nombre}<small>${id === 'cigarrillos' ? 'Elige suelto o cajetilla' : 'Toca Agregar para sumarlo'}</small>`;
+        $('#hoja-ico').innerHTML = `<use href="#c-${c.icono}"/>`;
+        $('#hoja-lista').innerHTML = filasHoja(id);
+      }
+      h.showModal(); $('#hoja-lista').scrollTop = 0; pintar();
+      track('hoja', { cat: id });
+    }
+
+    /* ---------- combos ---------- */
+    function comboHtml() {
+      return T.combos.map(c => {
+        const items = c.items.map(k => porSku[k]).filter(Boolean), tot = items.reduce((s, p) => s + p.precio, 0);
+        return `<article class="combo"><span class="rotulo">Combo</span><h3>${esc(c.nombre)}</h3><p>${esc(c.txt)}</p>
+          <ul>${items.map(p => `<li>${esc(p.nombre)}</li>`).join('')}</ul>
+          <div class="pie"><b>${usd(tot)}</b><button type="button" class="add" data-combo="${c.items.join(',')}">Agregar combo</button></div></article>`;
+      }).join('');
+    }
+    $('#combos-grid').innerHTML = comboHtml();
+    document.addEventListener('click', e => {
+      const b = e.target.closest('[data-combo]'); if (!b) return;
+      b.dataset.combo.split(',').forEach(k => { if (porSku[k]) { carro[k] = (carro[k] || 0) + 1; track('carrito', { prod: k }); } });
+      LS.set('tasca_carro', carro); pintar();
+      if ($('#hoja').open) $('#hoja').close();
+      abrir();
+    });
+
+    /* ---------- catálogo: pestañas, buscador, ocasión ---------- */
+    let tab = 'todos', q = '', oc = '';
+    $('#pestanas').innerHTML = [{ id: 'todos', nombre: 'Todos' }, ...cats].map(c => `<button type="button" role="tab" data-tab="${c.id}" aria-selected="${c.id === 'todos'}">${c.nombre}</button>`).join('');
+    $('#ocasiones').innerHTML = '<span class="rotulo">Ideal para</span>' + Object.entries(T.ideales).map(([k, v]) => `<button type="button" data-oc="${k}" aria-pressed="false">${v}</button>`).join('');
+    $('#pestanas').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; tab = b.dataset.tab; document.querySelectorAll('#pestanas button').forEach(x => x.setAttribute('aria-selected', x === b)); pintarGrid(); });
+    $('#ocasiones').addEventListener('click', e => { const b = e.target.closest('[data-oc]'); if (!b) return; oc = oc === b.dataset.oc ? '' : b.dataset.oc; document.querySelectorAll('#ocasiones [data-oc]').forEach(x => x.setAttribute('aria-pressed', x.dataset.oc === oc)); pintarGrid(); });
+    $('#q').addEventListener('input', e => { q = e.target.value.trim().toLowerCase(); pintarGrid(); });
+    const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+    function fichaHtml(p, i) {
+      const c = T.categorias.find(x => x.id === p.cat);
+      const nd = '<dd class="nd">Por confirmar</dd>';
+      let spec, pie;
+      if (p.vars) {
+        spec = `<dl class="spec"><dt>Presentación</dt><dd>Suelto o cajetilla de 20</dd><dt>Para</dt><dd>Mayores de 18 años</dd></dl>`;
+        pie = `<div class="opc">${p.vars.map(v => `<div class="o"><span><b>${usd(v.precio)}</b><small>${esc(v.etiqueta)} · ${esc(v.pack)}</small></span><span data-ctrl="${v.sku}">${ctrl(v.sku)}</span></div>`).join('')}</div>`;
+      } else {
+        const sin = p.cat === 'mixers';
+        spec = `<dl class="spec"><dt>Presentación</dt><dd>${esc(p.pack)}</dd>
+          ${sin ? '<dt>Alcohol</dt><dd>Sin alcohol</dd>' : `<dt>Grados</dt>${p.grados ? `<dd>${String(p.grados).replace('.', ',')} % alc.</dd>` : nd}<dt>Origen</dt>${p.origen ? `<dd>${esc(p.origen)}</dd>` : nd}`}
+          ${p.ideal && p.ideal.length ? `<dt>Ideal para</dt><dd class="chips">${p.ideal.map(k => `<i>${T.ideales[k]}</i>`).join('')}</dd>` : ''}</dl>`;
+        pie = `<div class="pie"><span class="precio">${usd(p.precio)}<small>${esc(p.pack)}</small></span><span data-ctrl="${p.sku}">${ctrl(p.sku)}</span></div>`;
+      }
+      return `<article class="prod ap" data-base="${p.base}">
+        <div class="foto"><svg class="ico"><use href="#c-${c.icono}"/></svg>${p.tag ? `<span class="tag">${esc(p.tag)}</span>` : ''}<span class="num">${String(i + 1).padStart(2, '0')}</span></div>
+        <div class="cuerpo"><div><h3>${esc(p.marca || p.nombre)}</h3><span class="pack">${esc(c.nombre)}${p.pack ? ' · ' + esc(p.pack) : ''}</span></div>${spec}${pie}</div></article>`;
+    }
+    function pintarGrid() {
+      // agrupa las variantes de cigarrillo en una sola ficha
+      const vistos = new Map();
+      for (const p of P) { if (p.variante) { if (!vistos.has(p.base)) vistos.set(p.base, Object.assign({}, p, { vars: [] })); vistos.get(p.base).vars.push(p); } else vistos.set(p.sku, p); }
+      const lista = [...vistos.values()].filter(p => (tab === 'todos' || p.cat === tab) && (!oc || (p.ideal || []).includes(oc)) &&
+        (!q || norm([p.marca || p.nombre, p.cat, p.pack, p.origen].join(' ')).includes(norm(q))));
+      $('#grid').innerHTML = lista.length ? lista.map(fichaHtml).join('') : '<p class="vacio-cat">No encontramos ese producto. Escríbenos por WhatsApp y lo conseguimos.</p>';
+      pintar();
+    }
+    let vio = false;
+    new IntersectionObserver((en, o) => { if (en.some(e => e.isIntersecting) && !vio) { vio = true; track('catalogo'); o.disconnect(); } }, { threshold: .2 }).observe($('#grid'));
+
+    function pintar() {
+      document.querySelectorAll('[data-ctrl]').forEach(s => { s.innerHTML = ctrl(s.dataset.ctrl); });
+      document.querySelectorAll('.prod').forEach(a => a.classList.toggle('on', P.some(p => p.base === a.dataset.base && carro[p.sku])));
+      document.querySelectorAll('[data-nc]').forEach(b => { const n = nCat(b.dataset.nc); b.textContent = n || ''; b.dataset.n = n; });
+      const n = unidades();
+      $('#n-carro').textContent = n; $('#n-carro').dataset.n = n; $('#t-carro').textContent = usd(subtotal());
+      $('#hoja-ver').textContent = n ? `Ver mi pedido · ${usd(subtotal())}` : 'Ver mi pedido';
+      if ($('#carro').open && !listo) pintarCarro();
+    }
+
+    /* ---------- carrito y envío por WhatsApp ---------- */
+    const dlg = $('#carro');
+    let listo = false;
+    let datos = LS.get('tasca_cliente', { nombre: '', tel: '', sector: '', entrega: 'domicilio', nota: '', mayor: false });
+    function abrir() { listo = false; if ($('#hoja').open) $('#hoja').close(); pintarCarro(); dlg.showModal(); }
+    dlg.addEventListener('close', pintar);
+
+    function pintarCarro() {
+      const ids = Object.keys(carro).filter(k => porSku[k]);
+      if (!ids.length) { $('#cuerpo').innerHTML = '<p class="vacio">Tu pedido está vacío.<br>Toca un círculo del menú y agrega algo.</p>'; $('#tot').innerHTML = ''; return; }
+      $('#cuerpo').innerHTML = ids.map(k => { const p = porSku[k]; return `<div class="lin"><span class="n"><b>${esc(p.nombre)}</b><small>${esc(p.pack)} · ${usd(p.precio)}</small></span><span data-ctrl="${k}">${ctrl(k)}</span></div>`; }).join('') + `
+        <hr style="border:0;border-top:1px solid var(--linea)">
+        <label class="campo">Tu nombre<input id="f-nombre" autocomplete="name" value="${esc(datos.nombre)}"></label>
+        <label class="campo">Tu WhatsApp<input id="f-tel" inputmode="tel" autocomplete="tel" placeholder="09XXXXXXXX" value="${esc(datos.tel)}"></label>
+        <div class="seg" role="radiogroup" aria-label="Entrega">
+          <label><input type="radio" name="entrega" value="domicilio" ${datos.entrega !== 'retiro' ? 'checked' : ''}> A domicilio</label>
+          <label><input type="radio" name="entrega" value="retiro" ${datos.entrega === 'retiro' ? 'checked' : ''}> Retiro</label>
+        </div>
+        <label class="campo" id="c-sector">Sector o barrio<input id="f-sector" list="sectores" value="${esc(datos.sector)}" placeholder="Ej.: Los Guaytambos"><datalist id="sectores">${T.sectores.map(s => `<option value="${esc(s)}">`).join('')}</datalist></label>
+        <label class="campo">Nota (opcional)<input id="f-nota" value="${esc(datos.nota)}" placeholder="Ej.: con hielo, por favor"></label>
+        <label class="mayor"><input type="checkbox" id="f-mayor" ${datos.mayor ? 'checked' : ''}><span>Confirmo que soy <b>mayor de 18 años</b>. Prohibida la venta a menores de edad.</span></label>`;
+      $('#cuerpo').querySelectorAll('input').forEach(i => i.addEventListener('input', () => { leer(); if (i.name === 'entrega') pintarTot(); }));
+      pintarTot();
+    }
+    function leer() {
+      const v = id => (document.getElementById(id) || {}).value || '';
+      datos = { nombre: v('f-nombre').trim(), tel: v('f-tel').trim(), sector: v('f-sector').trim(), nota: v('f-nota').trim(),
+        entrega: (document.querySelector('input[name=entrega]:checked') || {}).value || 'domicilio', mayor: !!(document.getElementById('f-mayor') || {}).checked };
+      LS.set('tasca_cliente', datos);
+      const cs = $('#c-sector'); if (cs) cs.style.display = datos.entrega === 'retiro' ? 'none' : '';
+    }
+    function pintarTot() {
+      leer();
+      const sub = subtotal(), env = envio(sub, datos.entrega), falta = T.envio.gratisDesde - sub;
+      $('#tot').innerHTML = `
+        <div class="lin"><span>Subtotal</span><span>${usd(sub)}</span></div>
+        <div class="lin"><span>Envío</span><span>${datos.entrega === 'retiro' ? 'Retiro' : env ? usd(env) : 'Gratis'}</span></div>
+        ${datos.entrega === 'domicilio' && falta > 0 ? `<small style="color:var(--rojo-2);font-weight:600">Te faltan ${usd(falta)} para el envío gratis</small>` : ''}
+        <div class="lin"><span>Total</span><span>${usd(sub + env)}</span></div>
+        <p class="err" id="err" role="alert"></p>
+        <button type="button" class="btn btn-rojo" id="enviar">${ico('i-wa', 'width:18px;height:18px')} Enviar pedido por WhatsApp</button>
+        <p class="legal-mini">Prohibida la venta a menores de 18 años. Beber en exceso es perjudicial para la salud.</p>`;
+      $('#enviar').onclick = enviar;
+    }
+    let enviando = false;
+    async function enviar() {
+      if (enviando) return;
+      leer();
+      const t = tel(datos.tel), err = $('#err'), btn = $('#enviar');
+      if (datos.nombre.length < 2) { err.textContent = 'Escribe tu nombre.'; return; }
+      if (!/^5939\d{8}$/.test(t)) { err.textContent = 'Revisa tu WhatsApp: 10 dígitos, empieza con 09.'; return; }
+      if (datos.entrega === 'domicilio' && datos.sector.length < 3) { err.textContent = 'Escribe tu sector para el envío.'; return; }
+      if (!datos.mayor) { err.textContent = 'Debes confirmar que eres mayor de 18 años.'; return; }
+      const items = Object.entries(carro).filter(([k]) => porSku[k]).map(([k, n]) => ({ id: k, cant: n }));
+      let res = null, aviso = '';
+      if (api.activo) {
+        const w = window.open('', '_blank');   // se abre antes de esperar a la base para que el navegador no la bloquee
+        enviando = true; btn.disabled = true; btn.lastChild.textContent = ' Enviando…'; err.textContent = '';
+        try {
+          res = await api.rpc('crear_pedido', { p_nombre: datos.nombre, p_tel: t, p_entrega: datos.entrega, p_sector: datos.sector,
+            p_nota: datos.nota, p_items: items, p_canal: canal(), p_campana: campana(), p_mayor: true }, { anon: true });
+        } catch (e) {
+          if (e.servidor) { if (w) w.close(); enviando = false; btn.disabled = false; btn.lastChild.textContent = ' Enviar pedido por WhatsApp'; err.textContent = e.message; return; }
+          aviso = 'sin-conexion';
+        }
+        enviando = false;
+        abrirWa(w, mensaje(res));
+      } else {
+        abrirWa(null, mensaje(null));
+      }
+      track('whatsapp');
+      carro = {}; LS.set('tasca_carro', carro); listo = true;
+      const cod = res ? res.codigo : ultimo;
+      $('#cuerpo').innerHTML = `<div class="vacio"><svg class="ico" style="width:64px;height:64px;margin:0 auto 12px;color:var(--rojo-2);stroke-width:2"><path class="ok-ico" d="m5 12.5 4.5 4.5L19 7.5"/></svg><b style="font-size:22px;color:var(--hueso);font-family:var(--slab);font-weight:400">Pedido ${cod} listo</b><br>Envía el mensaje en WhatsApp y te respondemos para confirmar la entrega.${aviso ? '<br><small>No pudimos registrarlo en línea, pero el mensaje de WhatsApp lleva todo tu pedido.</small>' : ''}<br><br><a class="btn btn-rojo" href="${ultimoWa}" target="_blank" rel="noopener">Abrir WhatsApp de nuevo</a></div>`;
+      $('#tot').innerHTML = '';
+      pintar();
+    }
+    let ultimo = '', ultimoWa = '';
+    function mensaje(res) {
+      const lineas = res ? res.items.map(i => ({ nombre: i.nombre, pack: i.pack, cant: i.cant, precio: +i.precio }))
+                         : Object.entries(carro).filter(([k]) => porSku[k]).map(([k, n]) => ({ nombre: porSku[k].nombre, pack: porSku[k].pack, cant: n, precio: porSku[k].precio }));
+      const sub = res ? +res.subtotal : subtotal(), env = res ? +res.envio : envio(sub, datos.entrega);
+      ultimo = res ? res.codigo : 'T' + Date.now().toString(36).toUpperCase().slice(-5);
+      if (!res && !api.activo) {   // demo: el panel lee los pedidos de este navegador
+        const lista = LS.get('tasca_pedidos', []);
+        lista.push({ id: ultimo, fecha: Date.now(), cliente: { nombre: datos.nombre, tel: tel(datos.tel), sector: datos.sector }, entrega: datos.entrega,
+          items: Object.entries(carro).filter(([k]) => porSku[k]).map(([k, n]) => ({ id: k, cant: n, precio: porSku[k].precio, costo: porSku[k].costo })),
+          envio: env, canal: canal(), estado: 'nuevo', nota: datos.nota });
+        LS.set('tasca_pedidos', lista);
+      }
+      return [`*Pedido ${ultimo}* · ${T.nombre}`, '',
+        ...lineas.map(i => `${i.cant} × ${i.nombre}${i.pack ? ' (' + i.pack + ')' : ''} · ${usd(i.precio * i.cant)}`), '',
+        `Subtotal: ${usd(sub)}`, `Envío: ${datos.entrega === 'retiro' ? 'Retiro' : env ? usd(env) : 'Gratis'}`, `*Total: ${usd(sub + env)}*`, '',
+        `Nombre: ${datos.nombre}`, datos.entrega === 'domicilio' ? `Entrega en: ${datos.sector}` : 'Retiro en el local', datos.nota ? `Nota: ${datos.nota}` : '',
+        'Confirmo que soy mayor de 18 años.'].filter((x, i, a) => x !== '' || a[i - 1] !== '').join('\n');
+    }
+    function abrirWa(w, txt) {
+      ultimoWa = 'https://wa.me/' + T.wa + '?text=' + encodeURIComponent(txt);
+      if (w) { w.location.href = ultimoWa; return; }
+      const n = window.open(ultimoWa, '_blank');   // sin 'noopener': con él, window.open devuelve null
+      if (n) n.opener = null; else location.href = ultimoWa;
+    }
+    pintarGrid();
+  }
+})();
+</script>
+</body>
+</html>
