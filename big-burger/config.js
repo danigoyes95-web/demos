@@ -4,7 +4,7 @@ window.DEMO = {
   "cliente": "Big Burger",
   "corto": "Big Burger",
   "ciudad": "Ambato",
-  "waCliente": "[MARCADOR: wa]",
+  "waCliente": "593983139928",
   "waAgencia": "593983139928",
   "direccion": "[MARCADOR: direccion]",
   "horario": "[MARCADOR: horario]",
