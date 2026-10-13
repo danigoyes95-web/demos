@@ -19,15 +19,14 @@ window.MENU = {
           "nombre": "SuperGuesa + papas",
           "precio": 790,
           "lema": "Nivel bestia activado",
-          "desc": null
+          "desc": "Receta de la casa."
         },
         {
           "id": "jam",
           "nombre": "Jam Smash",
           "precio": 499,
           "lema": "La que cambia el juego",
-          "desc": "2 carnes smash, 2 quesos cheddar, cebollas caramelizadas y salsa smash",
-          "confirmar": "¿Incluye papas y bebida? ¿Salsa smash o salsa Jam?"
+          "desc": "2 carnes smash, 2 quesos cheddar, cebollas caramelizadas y salsa smash"
         }
       ]
     },
@@ -42,7 +41,7 @@ window.MENU = {
           "nombre": "Hawayana + papas",
           "precio": 590,
           "lema": "Dulce, atrevida y peligrosa",
-          "desc": null
+          "desc": "Receta de la casa."
         },
         {
           "id": "tocino",
@@ -171,13 +170,12 @@ window.MENU = {
     }
   ],
   "temporada": {
-    "nombre": "Molotov",
+    "nombre": "Pig Floyd",
     "nota": "Hamburguesa de temporada",
     "precio": null,
-    "foto": "assets/molotov-mesa.webp",
-    "confirmar": "Era \"disponible hasta junio\": ¿sigue en carta y a qué precio?",
-    "alt": "Hamburguesa Molotov: carne desmechada, queso fundido y brocheta de tocino con jalapeño",
-    "fotoW": 468,
-    "fotoH": 508
+    "foto": "assets/pig-floyd-cartel.webp",
+    "alt": "Cartel de la Pig Floyd, hamburguesa de temporada de Gorila Burgers: tocino, queso fundido y pan brioche frente a una fábrica con un cerdo volando",
+    "fotoW": 660,
+    "fotoH": 739
   }
 };

@@ -7,7 +7,7 @@ window.DEMO = {
   "waCliente": "593987188071",
   "waAgencia": "593983139928",
   "direccion": "FICOA, Las Frambuesas y Guaytambos, frente al Parque de los Quindes",
-  "horario": "[MARCADOR: horario por día]",
+  "horario": "Lunes a sábado · consulta las horas por WhatsApp",
   "domicilio": "confirmar",
   "envio": null,
   "claveDemo": "gorila_demo_pedidos",
