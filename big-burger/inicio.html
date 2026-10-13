@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="estilos/base.css">
 <link rel="stylesheet" href="efectos/base.css">
 <link rel="stylesheet" href="efectos/energia.css">
+<link rel="stylesheet" href="efectos/escaparate.css">
 <link rel="stylesheet" href="motor/pedido.css">
 <style>:root { --fx-bg: #F2F0EA; --fx-paper: #FAF8F3; --fx-accent: #E1AC25; --fx-ink: #121212; --fx-deep: #1A1A1A; --fx-pop: #E1AC25; --fx-font: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-font-disp: "Oswald", Impact, "Arial Narrow", sans-serif; --fx-font-txt: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-deep-2: #121212; --fx-line-deep: #2E2E2E; --fx-soft: #D9D6CF; --fx-soft-2: #A9A59D; --fx-warm: #E60202; --fx-chat: #ECE7DD; }</style>
 
@@ -154,34 +155,33 @@
   </footer>
 </dialog>
 
-<section class="rb-hero" id="inicio" aria-roledescription="carrusel" aria-label="Las burgers de Big Burger">
+<section class="rb-hero esc-hero" id="inicio" aria-roledescription="carrusel" aria-label="Las burgers de Big Burger">
   <header class="rb-cab"><div class="wrap">
   <div class="rb-cab-izq">
     <a class="rb-logo" href="#inicio" aria-label="Big Burger, inicio"><img src="assets/logo.webp" alt="" width="52" height="52"></a>
     <button type="button" class="rb-menu-btn" id="rb-abrir" aria-label="Abrir el menú" aria-haspopup="dialog"><i></i><i></i><i></i></button>
   </div>
-  <div class="rb-cab-der">
-    <a class="rb-pill solo-grande" href="#carta">Ver la carta</a>
-    <a class="rb-pill lleno" href="#carta" data-pedir>Ver menú</a>
-  </div>
+  <nav class="esc-nav" aria-label="Secciones"><a href="#diagnostico">¿Qué Big Burger eres?</a><a href="#carta">Carta</a><a href="#como">Cómo pides</a><a href="#donde">Dónde</a></nav>
+  <div class="rb-cab-der"><a class="rb-pill lleno" href="#carta" data-pedir>Ver menú</a></div>
 </div></header>
   <div id="rb-centinela" aria-hidden="true" style="position:absolute;top:140px;left:0;width:1px;height:1px;pointer-events:none"></div>
+  <div class="esc-fondo" aria-hidden="true"></div>
   <div id="rb-glows" aria-hidden="true"></div>
-  <div class="rb-filas" id="rb-filas" aria-hidden="true"></div>
-  <div class="rb-escena" id="rb-escena"><div class="rb-slide on" data-n="0" role="group" aria-roledescription="diapositiva" aria-label="1"><img src="assets/corte-big-mapple.webp" alt="Hamburguesa Big Mapple Burger con tocino, queso, queso labneh y miel maple en pan de papa artesanal" width="591" height="461" fetchpriority="high" decoding="async"></div></div>
-  <div class="rb-pie">
+  <div class="rb-filas" id="rb-filas" data-fijo hidden></div>
+  <p class="esc-palabra" aria-hidden="true">Big Burger</p>
+  <div class="esc-centro">
+    <button type="button" class="esc-flecha" id="rb-ant" aria-label="Burger anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="rb-escena" id="rb-escena"><div class="rb-slide on" data-n="0" role="group" aria-roledescription="diapositiva" aria-label="1"><img src="assets/corte-big-mapple.webp" alt="Hamburguesa Big Mapple Burger con tocino, queso, queso labneh y miel maple en pan de papa artesanal" width="591" height="461" fetchpriority="high" decoding="async"></div></div>
+    <button type="button" class="esc-flecha" id="rb-sig" aria-label="Burger siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+  <p class="esc-sub"><span>Hamburguesas premium</span></p>
+  <div class="esc-pie">
     <div class="rb-texto" aria-live="polite">
       <p class="rb-intro" id="rb-intro"></p>
       <h1 class="rb-nombre" id="rb-nombre"></h1>
       <a class="rb-desc" id="rb-desc" href="#rb-detalle"><span class="rb-precio" id="rb-precio"></span>¡Descúbrela! <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
     </div>
-    <div class="rb-derecha">
-      <div class="rb-controles">
-        <button type="button" class="rb-flecha" id="rb-ant" aria-label="Burger anterior"><svg viewBox="0 0 24 24"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
-        <button type="button" class="rb-flecha" id="rb-sig" aria-label="Burger siguiente"><svg viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
-        <span class="rb-contador" id="rb-n" aria-hidden="true">1</span>
-      </div>
-    </div>
+    <p class="esc-n" aria-hidden="true"><span id="rb-n">1</span></p>
   </div>
 </section>
 
@@ -273,9 +273,6 @@ Retiro: En 30 minutos</div>
   <h2 class="doble" data-reveal><span>¿Listo para tu</span>Big Burger?</h2>
   <div class="acciones"><a class="btn" href="#carta">Armar mi pedido</a><a class="btn btn-linea" data-wa="Hola Big Burger, quiero hacer una consulta.">Escribir por WhatsApp</a></div>
   <div class="demo-links"><a href="panel.html">Ver el panel que recibe Big Burger</a><a href="premium.html">Ver qué suma el plan Premium</a></div>
-</div></section>
-<section class="rb-led" id="rb-led" hidden><div class="wrap">
-  <h2 id="rb-led-tit"></h2><div class="rb-led-cifras" id="rb-led-cifras" role="img" aria-label=""></div><p>Se actualiza con cada venta de Big Burger.</p><span class="rb-ejemplo" id="rb-led-ej" hidden>Cifra de ejemplo de la demo: la real sale de tus ventas</span>
 </div></section>
 
 </main>

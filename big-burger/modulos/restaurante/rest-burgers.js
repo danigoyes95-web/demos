@@ -3,6 +3,7 @@
   const { $, $$, esc, plata } = window.RUI, R = window.RESTDATA, V = R.vitrina, T = R.burgers_txt;
   const slides = $('#rb-escena'), glows = $('#rb-glows'), filas = $('#rb-filas');
   let i = 0, carta = null;
+  const fijo = filas.hasAttribute('data-fijo');   // complemento «escaparate»: una palabra fija (la marca) en lugar de las filas con el nombre de cada burger
   const noMov = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* la primera burger ya viene en el HTML (es lo que más tarda en pintarse): se conserva y solo se agregan las demás */
@@ -24,7 +25,7 @@
     $$('.rb-slide', slides).forEach((s, k) => { s.classList.toggle('on', k === i); s.classList.toggle('antes', k < i); s.setAttribute('aria-hidden', k === i ? 'false' : 'true'); });
     $$('.rb-glow', glows).forEach((g, k) => g.classList.toggle('on', k === i));
     const cambiar = () => filasTexto(b.titulo || b.nombre);
-    if (primera || noMov) cambiar(); else { filas.classList.add('cambia'); setTimeout(() => { cambiar(); filas.classList.remove('cambia'); }, 260); }
+    if (fijo) { /* la palabra no cambia */ } else if (primera || noMov) cambiar(); else { filas.classList.add('cambia'); setTimeout(() => { cambiar(); filas.classList.remove('cambia'); }, 260); }
     $('#rb-intro').textContent = b.intro; $('#rb-nombre').textContent = b.titulo || b.nombre;
     $('#rb-precio').textContent = b.precio_cent ? plata(b.precio_cent) : b.etiqueta; $('#rb-n').textContent = i + 1;
     detalle(b);
