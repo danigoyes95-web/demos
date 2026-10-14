@@ -37,6 +37,7 @@ body .pd-btn { border-radius: 999px; font-weight: 700; letter-spacing: normal; b
 .barra a { border-radius: 999px; }
 .cabecera { background: color-mix(in srgb, var(--fx-paper) 92%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--fx-ink) 10%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .cabecera .marca, .cabecera nav a { color: var(--fx-ink); }
+.cabecera .volver { color: var(--fx-ink); }
 .marca b { font: 800 1.35rem/1 var(--fx-font-disp); letter-spacing: -.01em; }
 .marca small { color: var(--fx-ink); opacity: .6; }
 .cabecera nav a { font: 600 .98rem/1 var(--fx-font-txt); border-radius: 999px; }
@@ -159,3 +160,7 @@ img-comparison-slider:not(:defined) { visibility: visible; }  /* CDN caído: se 
 .donde .mapa iframe { width: 100%; height: 100%; border: 0; display: block; }
 .ad-manija { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--fx-deep); border: 3px solid var(--fx-accent); box-shadow: 0 4px 14px color-mix(in srgb, var(--fx-deep) 45%, transparent); }
 .ad-manija svg { width: 26px; height: 26px; fill: none; stroke: var(--fx-accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Cifras y bloques de los paneles con el mismo acabado suave (sin borde grueso ni sombra dura) */
+body .kpi, body .bloque { border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); border-radius: var(--fx-radio); box-shadow: 0 12px 30px color-mix(in srgb, var(--fx-ink) 8%, transparent); }
+@media (max-width: 520px) { .cabecera .volver { font-size: .78rem; line-height: 1.15; max-width: 92px; text-align: right; letter-spacing: 0; } }

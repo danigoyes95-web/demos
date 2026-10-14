@@ -33,6 +33,16 @@ body { padding-bottom: 0; }
 .portada h1 .grueso { display: block; font: 900 clamp(3.2rem, 8.6vw, 6.4rem)/.86 var(--fx-font-disp); }
 .portada .lead { margin-top: 22px; max-width: 44ch; font-size: 1.2rem; color: var(--fx-soft); }
 .fecha { margin-top: 26px; font-size: 1rem; color: var(--fx-soft-2); }
+/* El panel de la clínica (punto estrella de la propuesta dental) */
+.pn-lista { display: grid; gap: clamp(36px, 6vw, 72px); margin-top: clamp(36px, 5vw, 60px); }
+.pn-bloque { display: grid; gap: clamp(24px, 5vw, 64px); align-items: center; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+.pn-bloque:nth-child(even) .pn-txt { order: 2; }
+.pn-txt h3 { font: 800 clamp(1.5rem, 3vw, 2rem)/1.1 var(--fx-font-disp); margin-bottom: 10px; }
+.pn-txt p { font-size: 1.12rem; max-width: 40ch; }
+.pn-marco { margin: 0; border-radius: var(--fx-radio, 20px); overflow: hidden; background: #fff; border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); box-shadow: 0 22px 50px color-mix(in srgb, var(--fx-ink) 16%, transparent); }
+.pn-marco img { width: 100%; height: auto; display: block; }
+.pn-nota { margin-top: 22px; max-width: 72ch; font-size: .92rem; opacity: .8; }
+@media (max-width: 900px) { .pn-bloque { grid-template-columns: 1fr; } .pn-bloque:nth-child(even) .pn-txt { order: 0; } }
 /* Teléfono */
 .escena { position: relative; display: flex; justify-content: center; }
 .telefono { width: min(300px, 80vw); aspect-ratio: 9 / 18.5; background: #030f10; border-radius: 44px; padding: 11px; box-shadow: 12px 12px 0 var(--fx-accent), 0 0 0 2px #2a5556; }
@@ -146,7 +156,7 @@ body { padding-bottom: 0; }
 .plan.reco .demo { color: var(--fx-pop); }
 </style>
 </head>
-<body data-pagina="Propuesta" data-secciones='["Portada", "Lo que vimos", "Qué cambia", "Planes", "Qué incluye cada plan", "Módulos recomendados", "Premium", "Incluido", "Tiempos y pago", "Qué necesitamos", "Siguiente paso"]'>
+<body data-pagina="Propuesta" data-secciones='["Portada", "El panel de tu clínica", "Lo que vimos", "Qué cambia", "Planes", "Qué incluye cada plan", "Módulos recomendados", "Premium", "Incluido", "Tiempos y pago", "Qué necesitamos", "Siguiente paso"]'>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
@@ -189,14 +199,14 @@ body { padding-bottom: 0; }
 
 <header class="cabecera"><div class="wrap">
   <a class="marca" href="#inicio"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Dentiident</b><small>Propuesta de página web</small></span></a>
-  <nav aria-label="Secciones"><a href="#vimos">Lo que vimos</a><a href="#cambia">Qué cambia</a><a href="#planes">Planes</a><a href="#comparativa">Qué incluye</a><a href="#modulos">Módulos</a><a href="#pago">Pago</a></nav>
+  <nav aria-label="Secciones"><a href="#panel">El panel</a><a href="#vimos">Lo que vimos</a><a href="#cambia">Qué cambia</a><a href="#planes">Planes</a><a href="#comparativa">Qué incluye</a><a href="#modulos">Módulos</a><a href="#pago">Pago</a></nav>
 </div></header>
 
 <main>
 <section class="oscuro portada" id="inicio"><div class="wrap">
   <div>
     <h1><span class="fino fx-entra fx-d1">Que tus pacientes</span><span class="grueso fx-golpe">reserven solas</span></h1>
-    <p class="lead fx-entra fx-d3">Una página con tu marca donde cada paciente elige su tratamiento y te envía la reserva lista. Tú ves tus citas en un panel.</p>
+    <p class="lead fx-entra fx-d3">Una página con tu marca donde cada paciente elige su tratamiento y te envía la reserva lista, y un panel de clínica pensado para tu día a día: agenda, caja, presupuestos y evolución.</p>
     <p class="fecha fx-entra fx-d4">6 oct 2026 · Preparada por Cup 33</p>
   </div>
   <div class="escena fx-entra fx-d2" aria-hidden="true">
@@ -214,6 +224,32 @@ body { padding-bottom: 0; }
     </div></div>
     <div class="aviso-flot"><b>Nueva cita</b>Camila · Ortodoncia · viernes por la tarde</div>
   </div>
+</div></section>
+
+<section class="sec papel" id="panel"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Ya lo hacemos:</span>el panel de tu clínica</h2>
+  <p class="intro" data-reveal>No es una plantilla genérica: es un panel pensado para cómo trabaja una clínica dental. Estas pantallas son de la demo; pruébalo tú con datos de ejemplo.</p>
+  <div class="pn-lista">
+    <div class="pn-bloque" data-reveal>
+      <div class="pn-txt"><h3>Agenda de todos tus doctores</h3><p>Mira el día o la semana, filtra por doctor y confirma cada cita por WhatsApp con un toque.</p></div>
+      <figure class="pn-marco"><img src="assets/panel-agenda.webp" alt="Agenda con las citas de tres doctores, por día" width="900" height="579" loading="lazy"></figure>
+    </div>
+    <div class="pn-bloque" data-reveal>
+      <div class="pn-txt"><h3>Controla lo que entra y lo que sale</h3><p>Cada movimiento queda con su hora y su doctor. Se corrige anulando, nunca borrando.</p></div>
+      <figure class="pn-marco"><img src="assets/panel-caja.webp" alt="Caja diaria con ingresos, egresos y saldo" width="900" height="533" loading="lazy"></figure>
+    </div>
+    <div class="pn-bloque" data-reveal>
+      <div class="pn-txt"><h3>Presupuestos que se aceptan más rápido</h3><p>Arma el presupuesto con tus tratamientos, ponle descuento y envíalo por WhatsApp o imprímelo con tu marca.</p></div>
+      <figure class="pn-marco"><img src="assets/panel-presupuesto.webp" alt="Presupuesto con tratamientos y total, listo para enviar" width="900" height="469" loading="lazy"></figure>
+    </div>
+    <div class="pn-bloque" data-reveal>
+      <div class="pn-txt"><h3>Evolución en un odontograma</h3><p>Toca un diente, elige su estado y deja el registro con fecha y doctor.</p></div>
+      <figure class="pn-marco"><img src="assets/panel-evolucion.webp" alt="Odontograma con el estado de cada diente y la lista de evolución" width="900" height="488" loading="lazy"></figure>
+    </div>
+    
+  </div>
+  <div class="acciones" data-reveal><a class="btn" href="clinica.html">Probar el panel</a><a class="btn btn-linea" href="#planes">Ver los planes</a></div>
+  <p class="pn-nota">Datos, nombres y precios de ejemplo. Qué módulos del panel entran en cada plan se confirma al cotizar. La historia clínica real solo se activa con consentimiento del paciente y almacenamiento seguro.</p>
 </div></section>
 
 <section class="sec" id="vimos"><div class="wrap vimos">
