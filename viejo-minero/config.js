@@ -1,9 +1,9 @@
-/* Paradero El Viejo Minero · [MARCADOR: ciudad] — datos del cliente para la demo (generado por nuevo-cliente.py desde clientes/viejo-minero/cliente.json).
+/* Paradero El Viejo Minero · Ecuador — datos del cliente para la demo (generado por nuevo-cliente.py desde clientes/viejo-minero/cliente.json).
    Todo número o dato del cliente vive SOLO aquí. Lo que falta va como [MARCADOR]. */
 window.DEMO = {
   "cliente": "Paradero El Viejo Minero",
   "corto": "El Viejo Minero",
-  "ciudad": "[MARCADOR: ciudad]",
+  "ciudad": "Ecuador",
   "waCliente": "593992977957",
   "waAgencia": "593983139928",
   "direccion": "[MARCADOR: direccion]",

@@ -1,0 +1,43 @@
+/* efectos/rustico.css · complemento OPCIONAL de estilo "rústico" (efectos.usar = ["rustico"]). Se carga después del perfil.
+   Para paraderos, picanterías y restaurantes de campo: madera oscura con vetas, muros de ladrillo, papel kraft, sellos y luz cálida de farol.
+   TODO ESTÁTICO (sin animaciones, no suma a las 3 infinitas). Texturas con SVG diminuto en data URI, sin imágenes pesadas. Colores de la marca (--fx-*). */
+:root { --fx-rus-veta: .22; --fx-rus-ladrillo: #7a3a22; }
+
+/* Madera: fondo de toda la página y de las secciones oscuras (tablas verticales + veta fina) */
+body.rb-pagina, .rb-pagina .sec {
+  background-color: var(--fx-deep-2);
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,.35) 0 2px, transparent 2px 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .55' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .55  0 0 0 0 .38  0 0 0 0 .2  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  background-size: 160px 100%, 240px 240px; background-blend-mode: normal, soft-light; }
+.rb-pagina .sec.papel, .rb-pagina .sec.arena, .rb-pagina .sec.oscuro.alt { background-color: var(--fx-deep); }
+/* Un halo cálido arriba, como un farol colgado */
+.rb-pagina .sec:first-of-type, .rb-pagina header + .sec { box-shadow: inset 0 120px 160px -80px color-mix(in srgb, var(--fx-accent) 35%, transparent); }
+
+/* Muro de ladrillo para una sección (clase .fx-rus-ladrillo) */
+.fx-rus-ladrillo { background-color: var(--fx-rus-ladrillo);
+  background-image: linear-gradient(rgba(0,0,0,.28) 0 3px, transparent 3px 100%), linear-gradient(90deg, rgba(0,0,0,.28) 0 3px, transparent 3px 100%);
+  background-size: 100% 36px, 84px 72px; background-position: 0 0, 0 0; }
+
+/* Tarjetas y cajas: papel kraft con borde de madera quemada */
+.rb-pagina .caja, .rb-pagina .pd-item, .rb-pagina .tarjeta { background: color-mix(in srgb, var(--fx-bg) 94%, var(--fx-pop)); color: var(--fx-ink);
+  border: 3px solid var(--fx-deep); border-radius: 10px; box-shadow: 0 0 0 2px var(--fx-accent), 0 10px 22px rgba(0,0,0,.45); }
+.rb-pagina .caja-cab { border-bottom: 2px dashed color-mix(in srgb, var(--fx-deep) 45%, transparent); }
+.rb-pagina .caja .intro, .rb-pagina .pd-item .pd-desc { color: color-mix(in srgb, var(--fx-ink) 75%, transparent); }
+
+/* Botones: tabla de madera con letras grabadas, se hunden al tocar */
+.rb-pagina .btn { border-radius: 8px; border: 3px solid var(--fx-deep); background: var(--fx-accent); color: var(--fx-deep); text-transform: uppercase; letter-spacing: .08em;
+  box-shadow: 0 4px 0 var(--fx-deep), inset 0 1px 0 rgba(255,255,255,.35); }
+.rb-pagina .btn:active, .rb-pagina .oscuro .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--fx-deep); }
+.rb-pagina .btn.btn-linea, .rb-pagina .oscuro .btn.btn-linea { background: transparent; color: var(--fx-bg); border: 3px solid var(--fx-bg); box-shadow: 0 4px 0 rgba(0,0,0,.5); }
+
+/* Titulares: grabados en madera (sombra de relieve) */
+.rb-pagina h1, .rb-pagina h2 { text-shadow: 0 2px 0 rgba(0,0,0,.55), 0 0 1px rgba(0,0,0,.8); }
+.rb-pagina .doble span { color: var(--fx-accent); }
+
+/* Sello de goma torcido y cinta de tela con costuras (para etiquetas y separadores) */
+.fx-rus-sello { display: inline-block; transform: rotate(-3deg); padding: 4px 12px; border: 3px double currentColor; border-radius: 6px; font: 700 .9rem/1 var(--fx-font-disp); text-transform: uppercase; letter-spacing: .12em; opacity: .92; }
+.fx-rus-cinta { background: var(--fx-warm); color: var(--fx-bg); border-block: 2px dashed color-mix(in srgb, var(--fx-bg) 60%, transparent); padding: 10px 0; text-align: center; font: 700 1rem/1 var(--fx-font-disp); letter-spacing: .16em; text-transform: uppercase; }
+
+/* Marcos de foto: borde de madera con esquinas, como cuadro colgado */
+.rb-pagina .galeria img, .rb-pagina figure img { border: 6px solid var(--fx-deep); outline: 2px solid var(--fx-accent); border-radius: 4px; box-shadow: 0 12px 24px rgba(0,0,0,.5); }
