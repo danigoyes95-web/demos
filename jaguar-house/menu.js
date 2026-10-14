@@ -11,21 +11,21 @@ window.MENU = {
           "id": "parrilla-1",
           "nombre": "Plato de la parrilla 1",
           "precio": 1290,
-          "lema": "Ejemplo",
+          "lema": "Del fuego a tu mesa",
           "desc": "Plato de ejemplo: se reemplaza con tu carta real"
         },
         {
           "id": "parrilla-2",
           "nombre": "Plato de la parrilla 2",
           "precio": 1490,
-          "lema": "Ejemplo",
+          "lema": "Del fuego a tu mesa",
           "desc": "Plato de ejemplo: se reemplaza con tu carta real"
         },
         {
           "id": "parrilla-3",
           "nombre": "Plato de la parrilla 3",
           "precio": 1690,
-          "lema": "Ejemplo",
+          "lema": "Del fuego a tu mesa",
           "desc": "Plato de ejemplo: se reemplaza con tu carta real"
         }
       ]
@@ -40,14 +40,14 @@ window.MENU = {
           "id": "compartir-1",
           "nombre": "Tabla para compartir 1",
           "precio": 1890,
-          "lema": "Ejemplo",
+          "lema": "Para compartir en el RoofTop",
           "desc": "Plato de ejemplo: se reemplaza con tu carta real"
         },
         {
           "id": "compartir-2",
           "nombre": "Tabla para compartir 2",
           "precio": 2290,
-          "lema": "Ejemplo",
+          "lema": "Para compartir en el RoofTop",
           "desc": "Plato de ejemplo: se reemplaza con tu carta real"
         }
       ]
@@ -62,14 +62,14 @@ window.MENU = {
           "id": "casa-1",
           "nombre": "Plato de la casa 1",
           "precio": 890,
-          "lema": "Ejemplo",
+          "lema": "De la casa",
           "desc": "Plato de ejemplo: se reemplaza con tu carta real"
         },
         {
           "id": "casa-2",
           "nombre": "Plato de la casa 2",
           "precio": 990,
-          "lema": "Ejemplo",
+          "lema": "De la casa",
           "desc": "Plato de ejemplo: se reemplaza con tu carta real"
         }
       ]
