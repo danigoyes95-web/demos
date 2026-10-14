@@ -6,14 +6,14 @@ window.DEMO = {
   "ciudad": "Ecuador",
   "waCliente": "593992977957",
   "waAgencia": "593983139928",
-  "direccion": "[MARCADOR: direccion]",
+  "direccion": "Ubicación por confirmar · consulta por WhatsApp",
   "horario": "Jueves a domingo · consulta las horas por WhatsApp",
   "domicilio": "confirmar",
   "envio": null,
   "claveDemo": "viejo_minero_demo_reservas",
   "saludoPedido": "Hola Paradero El Viejo Minero, quiero hacer un pedido desde la web 🍔",
   "instagram": "https://www.instagram.com/viejo_minero_chaluhouse/",
-  "facebook": "[MARCADOR: facebook]",
+  "facebook": "https://www.instagram.com/viejo_minero_chaluhouse/",
   "sectoresEjemplo": [
     {
       "nombre": "Sector 1",

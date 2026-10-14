@@ -3,126 +3,126 @@ window.MENU = {
   "categorias": [
     {
       "id": "vip",
-      "antes": "[MARCADOR: antes]",
-      "nombre": "[MARCADOR: nombre]",
+      "antes": "Para empezar",
+      "nombre": "Los de la casa",
       "extras": true,
       "items": [
         {
           "id": "burger-1",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Plato de la casa 1",
           "precio": 0,
-          "lema": "[MARCADOR: lema]",
-          "desc": "[MARCADOR: desc]"
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         },
         {
           "id": "burger-2",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Plato de la casa 2",
           "precio": 0,
-          "lema": "[MARCADOR: lema]",
-          "desc": "[MARCADOR: desc]"
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         },
         {
           "id": "burger-3",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Plato de la casa 3",
           "precio": 0,
-          "lema": "[MARCADOR: lema]",
-          "desc": "[MARCADOR: desc]"
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         }
       ]
     },
     {
       "id": "especiales",
-      "antes": "[MARCADOR: antes]",
-      "nombre": "[MARCADOR: nombre]",
+      "antes": "En tabla de madera",
+      "nombre": "Para compartir",
       "extras": true,
       "items": [
         {
           "id": "burger-4",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Tabla para compartir 1",
           "precio": 0,
-          "lema": "[MARCADOR: lema]",
-          "desc": "[MARCADOR: desc]"
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         },
         {
           "id": "burger-5",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Tabla para compartir 2",
           "precio": 0,
-          "lema": "[MARCADOR: lema]",
-          "desc": "[MARCADOR: desc]"
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         }
       ]
     },
     {
       "id": "peques",
-      "antes": "[MARCADOR: antes]",
-      "nombre": "[MARCADOR: nombre]",
+      "antes": "Para brindar",
+      "nombre": "Del bar",
       "extras": true,
       "items": [
         {
           "id": "burger-6",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Del bar 1",
           "precio": 0,
-          "lema": "[MARCADOR: lema]",
-          "desc": "[MARCADOR: desc]"
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         },
         {
           "id": "burger-7",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Del bar 2",
           "precio": 0,
-          "lema": "[MARCADOR: lema]",
-          "desc": "[MARCADOR: desc]"
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         }
       ]
     },
     {
       "id": "papas",
-      "antes": "[MARCADOR: antes]",
-      "nombre": "[MARCADOR: nombre]",
+      "antes": "Para completar",
+      "nombre": "Acompañantes",
       "extras": false,
       "items": [
         {
           "id": "papas-queso",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Acompañante 1",
           "precio": 0,
-          "lema": null,
-          "desc": null
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         },
         {
           "id": "papas",
-          "antes": "[MARCADOR: antes]",
-          "nombre": "[MARCADOR: nombre]",
+          "antes": "Acompañante",
+          "nombre": "Acompañante 2",
           "precio": 0,
-          "lema": null,
-          "desc": null
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         }
       ]
     },
     {
       "id": "bebidas",
-      "antes": "[MARCADOR: antes]",
-      "nombre": "[MARCADOR: nombre]",
+      "antes": "Para acompañar",
+      "nombre": "Bebidas",
       "extras": false,
       "items": [
         {
           "id": "bebida-1",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Bebida 1",
           "precio": 0,
-          "lema": null,
-          "desc": null
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         },
         {
           "id": "bebida-2",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Bebida 2",
           "precio": 0,
-          "lema": null,
-          "desc": null
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         },
         {
           "id": "bebida-3",
-          "nombre": "[MARCADOR: nombre]",
+          "nombre": "Bebida 3",
           "precio": 0,
-          "lema": null,
-          "desc": null
+          "lema": "Consulta por WhatsApp",
+          "desc": "Detalle y precio por confirmar con el local."
         }
       ]
     }
@@ -130,51 +130,51 @@ window.MENU = {
   "extras": [
     {
       "id": "x-carne",
-      "nombre": "[MARCADOR: nombre]",
+      "nombre": "Extra 1",
       "precio": 0
     },
     {
       "id": "x-queso",
-      "nombre": "[MARCADOR: nombre]",
+      "nombre": "Extra 2",
       "precio": 0
     },
     {
       "id": "x-tocino",
-      "nombre": "[MARCADOR: nombre]",
+      "nombre": "Extra 3",
       "precio": 0
     },
     {
       "id": "x-crunch",
-      "nombre": "[MARCADOR: nombre]",
+      "nombre": "Extra 4",
       "precio": 0
     },
     {
       "id": "x-pina",
-      "nombre": "[MARCADOR: nombre]",
+      "nombre": "Extra 5",
       "precio": 0
     },
     {
       "id": "x-salsa",
-      "nombre": "[MARCADOR: nombre]",
+      "nombre": "Extra 6",
       "precio": 0
     },
     {
       "id": "x-caram",
-      "nombre": "[MARCADOR: nombre]",
+      "nombre": "Extra 7",
       "precio": 0
     },
     {
       "id": "x-empan",
-      "nombre": "[MARCADOR: nombre]",
+      "nombre": "Extra 8",
       "precio": 0
     }
   ],
   "temporada": {
-    "nombre": "[MARCADOR: nombre]",
-    "nota": "[MARCADOR: nota]",
+    "nombre": "Plato de temporada",
+    "nota": "Se anuncia en Instagram. Consulta por WhatsApp.",
     "precio": null,
     "foto": null,
-    "alt": "[MARCADOR: alt]",
+    "alt": "Plato de temporada de Paradero El Viejo Minero",
     "fotoW": 468,
     "fotoH": 508
   }
