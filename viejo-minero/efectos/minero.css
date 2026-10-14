@@ -1,0 +1,30 @@
+/* efectos/minero.css · complemento OPCIONAL de estilo "minero" (efectos.usar = ["minero"]). Se carga después del perfil y de rustico.
+   Atardecer de montaña en capas (naranja → rojo → roca), mineros en silueta y luz de lámpara de casco. Pensado para marcas de minería, paraderos y comida de montaña.
+   Las ilustraciones son del cliente (assets/mina.svg), hechas en vector propio: no se copian imágenes de bancos. ESTÁTICO: sin animaciones nuevas. Funciona con el dedo. */
+:root { --fx-min-cielo: linear-gradient(180deg, #FFC15A 0%, #F0703A 52%, #BA380E 100%); }
+
+/* Cabecera/vitrina: cielo de atardecer con la escena minera abajo. Se quitan las filas gigantes de texto (no se parece a otras vitrinas) */
+body .rb-hero { background: var(--fx-min-cielo); background-image: url("../assets/mina.svg"), var(--fx-min-cielo); background-repeat: no-repeat; background-position: center bottom, 0 0; background-size: cover, auto; }
+body .rb-filas { display: none; }
+body .rb-glow { display: none; }
+body .rb-slide img { filter: drop-shadow(0 22px 30px rgba(36, 16, 14, .55)); }
+body .rb-nombre, body .rb-intro, body .rb-desc { color: #FFF6E0; text-shadow: 0 2px 0 rgba(36, 16, 14, .55); }
+body .rb-pie { background: linear-gradient(180deg, transparent, rgba(36, 16, 14, .78) 70%); padding-top: 60px; }
+
+/* Lámpara de casco: halo cálido detrás de la pieza protagonista */
+body .rb-escena::before { content: ""; position: absolute; inset: 6% 18%; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 233, 168, .75), rgba(255, 210, 122, 0) 70%); }
+
+/* Secciones siguientes: roca oscura, con una cresta de montaña arriba */
+body .rb-pagina .sec, body .rb-cats, body .rb-detalle { background-color: #24100E; }
+body .rb-pagina .sec.papel, body .rb-pagina .sec.arena, body .rb-pagina .sec.oscuro.alt { background-color: #2E1713; }
+body .rb-cats::before, body .rb-pagina .sec:first-of-type::before { content: none; }
+body .rb-pagina .doble span, body .rb-pagina .fino { color: #FFC15A; }
+body .rb-pagina .btn:not(.btn-linea) { background: #FFC15A; color: #24100E; border-color: #24100E; }
+
+/* Separador de cresta (clase .fx-min-cresta sobre una sección): triángulos de montaña en el borde superior */
+body .fx-min-cresta { position: relative; }
+body .fx-min-cresta::before { content: ""; position: absolute; left: 0; right: 0; top: -39px; height: 40px; background: inherit;
+  clip-path: polygon(0 100%, 0 70%, 8% 30%, 15% 60%, 24% 10%, 33% 55%, 42% 25%, 51% 65%, 60% 15%, 70% 50%, 80% 20%, 90% 55%, 100% 30%, 100% 100%); }
+
+/* Etiquetas tipo ficha de mina y filete de roca */
+body .fx-min-ficha { display: inline-block; padding: 4px 12px; border: 2px solid #FFC15A; border-radius: 4px; color: #FFC15A; font: 700 .85rem/1 var(--fx-font-disp); letter-spacing: .14em; text-transform: uppercase; }

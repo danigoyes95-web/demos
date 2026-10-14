@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 640" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Mineros al atardecer entre montañas">
+<defs><linearGradient id="c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC15A"/><stop offset=".55" stop-color="#F0703A"/><stop offset="1" stop-color="#BA380E"/></linearGradient>
+<radialGradient id="s"><stop offset="0" stop-color="#FFE9A8"/><stop offset="1" stop-color="#FFD27A"/></radialGradient></defs>
+<rect width="1600" height="640" fill="url(#c)"/>
+<circle cx="360" cy="300" r="200" fill="url(#s)" opacity=".9"/>
+<path d="M0 360 L180 250 L330 330 L520 190 L700 320 L860 230 L1050 340 L1240 200 L1420 300 L1600 230 V640 H0Z" fill="#F58A3F" opacity=".85"/>
+<path d="M0 430 L140 340 L300 410 L470 300 L660 420 L850 330 L1030 430 L1230 310 L1400 400 L1600 330 V640 H0Z" fill="#D9452B"/>
+<path d="M0 500 L200 420 L380 490 L560 410 L760 500 L960 430 L1160 505 L1340 420 L1600 490 V640 H0Z" fill="#9C2A22"/>
+<path d="M0 580 L120 560 L210 585 L330 555 L470 590 L640 560 L800 596 L980 540 L1120 500 L1190 470 L1270 440 L1350 470 L1430 430 L1520 400 L1600 380 V640 H0Z" fill="#3A1A16"/>
+<path d="M980 540 L1030 520 L1070 540 M1190 470 L1230 450 L1270 440 M1350 470 L1400 450" stroke="#5B2A20" stroke-width="6" fill="none"/>
+<g fill="#24100E">
+<!-- minero 1: pico -->
+<ellipse cx="1112" cy="402" rx="19" ry="12"/><rect x="1101" y="410" width="22" height="46" rx="8"/>
+<path d="M1102 456 L1098 506 L1110 506 L1114 470 L1120 506 L1132 506 L1124 456Z"/>
+<path d="M1080 400 Q1112 372 1144 400Z"/><rect x="1076" y="398" width="72" height="7" rx="3"/><circle cx="1112" cy="391" r="5" fill="#FFD27A"/>
+<path d="M1122 424 L1176 372" stroke="#24100E" stroke-width="7" stroke-linecap="round"/><path d="M1160 366 Q1182 358 1192 380 L1180 378 Q1172 372 1160 374Z"/>
+<!-- minero 2: pala -->
+<ellipse cx="1238" cy="376" rx="19" ry="12"/><rect x="1227" y="384" width="22" height="48" rx="8"/>
+<path d="M1228 432 L1222 484 L1234 484 L1240 446 L1246 484 L1258 484 L1250 432Z"/>
+<path d="M1206 374 Q1238 346 1270 374Z"/><rect x="1202" y="372" width="72" height="7" rx="3"/><circle cx="1238" cy="365" r="5" fill="#FFD27A"/>
+<path d="M1252 400 L1292 330" stroke="#24100E" stroke-width="7" stroke-linecap="round"/><path d="M1282 326 L1306 322 L1298 346 L1280 340Z"/>
+<!-- carro minero -->
+<path d="M1370 452 H1450 L1440 486 H1380Z"/><circle cx="1392" cy="492" r="9"/><circle cx="1430" cy="492" r="9"/><path d="M1380 452 L1390 436 L1410 446 L1424 432 L1440 452Z"/>
+</g>
+<g fill="#24100E"><path d="M0 640 V600 L90 575 L180 605 L300 570 L430 610 L560 585 L700 615 V640Z"/><path d="M1500 640 V560 L1560 540 L1600 520 V640Z"/></g>
+</svg>
