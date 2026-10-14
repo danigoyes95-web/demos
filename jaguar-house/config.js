@@ -11,33 +11,21 @@ window.DEMO = {
   "domicilio": "confirmar",
   "envio": null,
   "claveDemo": "jaguar_house_demo_reservas",
-  "saludoPedido": "Hola Jaguar House, quiero hacer un pedido desde la web 🍔",
+  "saludoPedido": "Hola Jaguar House, quiero hacer un pedido desde la web",
   "instagram": "https://www.instagram.com/jaguarhouse.ec/",
   "facebook": "",
   "sectoresEjemplo": [
     {
-      "nombre": "[MARCADOR: sector 1]",
+      "nombre": "Baños centro",
       "costo": 100
     },
     {
-      "nombre": "Atocha",
+      "nombre": "Zona 2 (ejemplo)",
       "costo": 150
     },
     {
-      "nombre": "Miraflores",
-      "costo": 150
-    },
-    {
-      "nombre": "Centro",
+      "nombre": "Zona 3 (ejemplo)",
       "costo": 200
-    },
-    {
-      "nombre": "Huachi",
-      "costo": 250
-    },
-    {
-      "nombre": "Izamba",
-      "costo": 300
     }
   ],
   "modo": null
