@@ -115,7 +115,7 @@
   let hoja;
   function abrirHoja(html, alPintar) {
     if (!hoja) {
-      hoja = document.createElement('dialog'); hoja.className = 'pd-hoja';
+      hoja = document.createElement('dialog'); hoja.className = 'pd-hoja'; hoja.setAttribute('data-lenis-prevent', '');
       hoja.addEventListener('click', e => { if (e.target === hoja) hoja.close(); });
       document.body.append(hoja);
     }

@@ -140,3 +140,22 @@ body .pd-cuenta { background: var(--fx-deep); }
   body .hero h1 .grueso, .hero.oscuro::after, .hero.oscuro .btn:not(.btn-linea)::after { animation: none; }
   .hero.oscuro .btn:not(.btn-linea)::after { display: none; }
 }
+
+/* ---- Antes y después (img-comparison-slider v8, CDN) y mapa ----
+   Línea divisoria y manija con el acento de la marca; sombra para que se vea sobre cualquier foto.
+   Se maneja con el dedo (arrastrar) y con el teclado (flechas, el slider recibe foco). Sin JS o sin CDN queda la foto "antes" a la vista. */
+.ad-lista { display: grid; gap: clamp(22px, 3vw, 36px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); margin-top: 36px; }
+.ad-caso { margin: 0; }
+.ad-slider { display: block; width: 100%; border-radius: var(--fx-radio); overflow: hidden; background: var(--fx-paper); box-shadow: 0 16px 40px color-mix(in srgb, var(--fx-ink) 12%, transparent);
+  --divider-width: 3px; --divider-color: var(--fx-accent); --divider-shadow: 0 0 10px color-mix(in srgb, var(--fx-deep) 45%, transparent);
+  --default-handle-color: var(--fx-accent); --default-handle-opacity: 1; --default-handle-width: 56px; --default-handle-shadow: 0 2px 12px color-mix(in srgb, var(--fx-deep) 45%, transparent);
+  --keyboard-transition-time: .25s; }
+.ad-slider img { width: 100%; height: auto; display: block; }
+.ad-slider:focus-visible { outline: 3px solid var(--fx-deep); outline-offset: 4px; }
+img-comparison-slider:not(:defined) { visibility: visible; }  /* CDN caído: se ve la foto "antes" */
+.ad-caso figcaption { margin-top: 14px; font: 700 1.05rem/1.3 var(--fx-font-txt); }
+.ad-aviso { margin-top: 6px; font: 400 .88rem/1.4 var(--fx-font-txt); font-style: italic; color: color-mix(in srgb, var(--fx-ink) 70%, var(--fx-bg)); }
+.donde .mapa { grid-column: 1 / -1; min-width: 0; width: 100%; height: clamp(260px, 38vw, 460px); border-radius: var(--fx-radio); overflow: hidden; box-shadow: 0 14px 36px color-mix(in srgb, var(--fx-ink) 12%, transparent); }
+.donde .mapa iframe { width: 100%; height: 100%; border: 0; display: block; }
+.ad-manija { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--fx-deep); border: 3px solid var(--fx-accent); box-shadow: 0 4px 14px color-mix(in srgb, var(--fx-deep) 45%, transparent); }
+.ad-manija svg { width: 26px; height: 26px; fill: none; stroke: var(--fx-accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
