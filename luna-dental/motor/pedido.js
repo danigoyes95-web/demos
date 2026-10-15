@@ -6,6 +6,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const R = D.modo === 'reserva';   // opt-in (spa, clínicas): sin para llevar/domicilio; reserva por WhatsApp con día y franja
+  const CL = R && D.clinica && window.CLINICA ? window.CLINICA : null;   // clínica con base: la solicitud se guarda (solicitar_cita) y luego sale por WhatsApp
   const plata = c => (R && !c) ? 'A consultar' : '$' + (c / 100).toFixed(2);
   const wa = (n, t) => `https://wa.me/${String(n).replace(/\D/g, '')}?text=${encodeURIComponent(t)}`;
   const marca = t => `<span class="pd-marca">[CONFIRMAR${t ? ': ' + esc(t) : ''}]</span>`;
@@ -14,7 +15,7 @@
   M.categorias.forEach(c => c.items.forEach(i => items.set(i.id, { ...i, conExtras: c.extras })));
 
   const carrito = [];           // { id, extras: [ids], cant }
-  const datos = { tipo: R ? 'reserva' : '', dia: '', franja: 'Mañana', nombre: '', retiro: 'Lo antes posible', direccion: '', referencia: '', ubicacion: '', nota: '', sector: '', cuando: 'ahora', hora: '' };
+  const datos = { tipo: R ? 'reserva' : '', dia: '', franja: 'Mañana', nombre: '', telefono: '', menor: false, representante: '', consentimiento: false, retiro: 'Lo antes posible', direccion: '', referencia: '', ubicacion: '', nota: '', sector: '', cuando: 'ahora', hora: '' };
   /* Nivel 3 (Premium): la página activa D.sectores (envío por sector) y D.programar (pedido para más tarde). */
   const sectores = () => Array.isArray(D.sectores) ? D.sectores : null;
   const envioActual = () => {
@@ -212,6 +213,21 @@
   function pintarCampos(h) {
     const c = $('#pd-campos', h);
     if (!datos.tipo) { c.innerHTML = ''; return; }
+    if (CL) {
+      const hoy = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Guayaquil' });
+      c.innerHTML = campo('nombre', 'Nombre y apellido del paciente', 'autocomplete="name" maxlength="80" required') +
+        campo('telefono', 'Tu celular (para confirmar la cita)', 'type="tel" inputmode="tel" autocomplete="tel" placeholder="09xxxxxxxx" maxlength="14" required') +
+        campo('dia', '¿Qué día prefieres?', `type="date" min="${hoy}" required`) +
+        `<label class="pd-campo"><span>Horario preferido</span><select id="pd-franja">${[['Mañana', 'Mañana'], ['Tarde', 'Tarde'], ['Cualquiera', 'Cualquier horario']].map(([v, t]) => `<option value="${v}" ${v === datos.franja ? 'selected' : ''}>${t}</option>`).join('')}</select></label>` +
+        `<label class="pd-chk"><input type="checkbox" id="pd-menor" ${datos.menor ? 'checked' : ''}><span>La cita es para un menor de edad</span></label>` +
+        (datos.menor ? campo('representante', 'Nombre de quien autoriza (madre, padre o representante)', 'autocomplete="off" maxlength="80" required') : '') +
+        campo('nota', 'Nota (opcional)', 'maxlength="140" placeholder="Algo que debamos saber"') +
+        `<label class="pd-chk"><input type="checkbox" id="pd-consent" ${datos.consentimiento ? 'checked' : ''}><span>${esc(D.clinica.consentimiento || 'Acepto que se usen mis datos para gestionar mi cita.')} <a href="${esc(D.clinica.privacidad || 'privacidad.html')}" target="_blank" rel="noopener">Política de privacidad</a></span></label>`;
+      c.querySelectorAll('input:not([type=checkbox]), select').forEach(i => i.oninput = i.onchange = () => { datos[i.id.slice(3)] = i.value.trim(); });
+      $('#pd-menor', c).onchange = e => { datos.menor = e.target.checked; if (!datos.menor) datos.representante = ''; pintarCampos(h); };
+      $('#pd-consent', c).onchange = e => { datos.consentimiento = e.target.checked; };
+      return;
+    }
     if (R) {
       c.innerHTML = campo('nombre', 'Tu nombre', 'autocomplete="given-name" required') +
         campo('dia', '¿Qué día prefieres?', 'placeholder="Ej.: viernes o la próxima semana"') +
@@ -248,6 +264,11 @@
   }
 
   function mensaje() {
+    if (CL) return [D.saludoPedido || `Hola ${D.cliente}, quiero reservar desde la web`, '',
+      ...carrito.map(l => `${l.cant} × ${items.get(l.id).nombre}`), '',
+      `Paciente: ${datos.nombre}`, datos.menor ? `Autoriza: ${datos.representante}` : null, `Celular: ${datos.telefono}`,
+      `Día preferido: ${new Date(datos.dia + 'T12:00:00Z').toLocaleDateString('es-EC', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' })}`, `Horario preferido: ${datos.franja}`,
+      datos.nota ? `Nota: ${datos.nota}` : null, datos.ref ? `Solicitud N.º ${datos.ref}` : null].filter(x => x !== null).join('\n');
     if (R) return [D.saludoPedido || `Hola ${D.cliente}, quiero reservar desde la web`, '',
       ...carrito.map(l => `${l.cant} × ${items.get(l.id).nombre}`), '',
       `Nombre: ${datos.nombre}`, datos.dia ? `Día preferido: ${datos.dia}` : null, `Horario preferido: ${datos.franja}`,
@@ -274,8 +295,35 @@
     ].filter(x => x !== null).join('\n');
   }
 
+  const FR = { Mañana: 'manana', Tarde: 'tarde', Cualquiera: 'cualquiera' };
+  async function enviarClinica(h, err) {
+    const hoy = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Guayaquil' });
+    const falta = datos.nombre.length < 2 ? 'Escribe el nombre y apellido del paciente.' : !/^(09\d{8}|593\d{9})$/.test(datos.telefono.replace(/[\s-]/g, '')) ? 'Escribe un celular válido, por ejemplo 0991234567.'
+      : !datos.dia || datos.dia < hoy ? 'Elige un día desde hoy.' : datos.menor && datos.representante.length < 2 ? 'Escribe el nombre de quien autoriza al menor de edad.'
+      : !datos.consentimiento ? 'Para enviar tu solicitud, acepta el tratamiento de tus datos.' : '';
+    if (falta) { err.textContent = falta; return; }
+    err.textContent = ''; const b = $('#pd-enviar', h); b.disabled = true; b.textContent = 'Enviando…';
+    try {
+      const r = await CL.solicitar({ nombre: datos.nombre, telefono: datos.telefono.replace(/[\s-]/g, ''), servicios: carrito.map(l => items.get(l.id).nombre), dia: datos.dia, franja: FR[datos.franja] || 'cualquiera', menor: datos.menor, representante: datos.representante, consentimiento: datos.consentimiento });
+      datos.ref = r && r.ref; datos.guardada = true; window.track && window.track('solicitud_enviada');
+    } catch (e) {
+      b.disabled = false; b.textContent = 'Reservar por WhatsApp';
+      err.innerHTML = `${esc(e.message)} <button type="button" class="pd-btn pd-btn-sec" id="pd-solo-wa">Escribirnos por WhatsApp sin guardar</button>`;
+      $('#pd-solo-wa', h).onclick = () => { datos.ref = null; window.open(wa(D.waCliente, mensaje()), '_blank', 'noopener'); };
+      return;
+    }
+    window.open(wa(D.waCliente, mensaje()), '_blank', 'noopener');
+    abrirHoja(`
+      <div class="pd-listo" aria-hidden="true">✓</div>
+      <h2 class="pd-hoja-tit">Recibimos tu solicitud</h2>
+      <p class="pd-sub">Se abrió WhatsApp con tu mensaje: envíalo para que ${esc(D.corto || D.cliente)} te confirme el día y la hora. Solicitud N.º ${esc(datos.ref)}.</p>
+      <button type="button" class="pd-btn pd-btn-full" id="pd-nuevo">Hacer otra solicitud</button>`,
+      hh => { $('#pd-nuevo', hh).onclick = () => { carrito.length = 0; Object.assign(datos, { nombre: '', telefono: '', dia: '', menor: false, representante: '', consentimiento: false, nota: '', ref: null }); actualizarBarra(); hh.close(); }; });
+  }
+
   function enviar(h) {
     const err = $('#pd-error', h);
+    if (CL) return enviarClinica(h, err);
     const falta = R ? (!datos.nombre ? 'Escribe tu nombre para saber de quién es la reserva.' : '') : !datos.tipo ? 'Elige si lo quieres para llevar o a domicilio.'
       : !datos.nombre ? 'Escribe tu nombre para saber de quién es el pedido.'
       : datos.tipo === 'domicilio' && sectores() && !datos.sector ? 'Elige tu sector para calcular el envío.'

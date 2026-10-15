@@ -26,6 +26,7 @@
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "Dentist", "name": "Luna Dental [MARCADOR: ciudad]", "telephone": "+593983139928", "address": {"@type": "PostalAddress", "streetAddress": "[MARCADOR: dirección]", "addressLocality": "[MARCADOR: ciudad]", "addressRegion": "[MARCADOR: provincia]", "addressCountry": "EC"}, "sameAs": ["https://www.instagram.com/luna_dental_/"]}
 </script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8.0.7/dist/styles.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8.0.7/dist/index.js"></script>
 <style>
@@ -107,7 +108,7 @@
 .demo-links { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; margin-top: 22px; font-size: 1.02rem; }
 </style>
 </head>
-<body data-pagina="Landing (Pro)" data-secciones='["Inicio", "Tratamientos", "Qué necesita tu sonrisa", "Cómo reservas", "Servicios", "Nuestro consultorio", "Antes y después", "Qué cambia", "Dónde estamos", "Cierre"]'>
+<body data-pagina="Landing (Pro)" data-secciones='["Inicio", "Tratamientos", "Qué necesita tu sonrisa", "Tu primera visita", "Cómo reservas", "Servicios", "Nuestro consultorio", "Antes y después", "Quién te atiende", "Así es tu tratamiento", "Preguntas", "Dónde estamos", "Cierre"]'>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
@@ -190,11 +191,20 @@
   <div class="caja" id="caja-diag" aria-live="polite"></div>
 </div></section>
 
+<section class="sec papel tranq" id="tranquilidad"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Tu primera visita,</span>sin sorpresas</h2>
+  <p class="intro" data-reveal>Sabemos que ir al dentista a veces da nervios. Por eso queremos que sepas qué va a pasar antes de sentarte en el sillón.</p>
+  <div class="tr-lista" data-stagger><div class="tr-punto"><span class="ico"><svg><use href="#i-chat"/></svg></span><h3>Hablamos primero</h3><p>En tu valoración conversamos sobre lo que te preocupa y lo que esperas, antes de empezar cualquier tratamiento.</p></div>
+  <div class="tr-punto"><span class="ico"><svg><use href="#i-lista"/></svg></span><h3>Te explicamos las opciones</h3><p>La doctora revisa tu caso y te cuenta qué alternativas tienes, con palabras claras.</p></div>
+  <div class="tr-punto"><span class="ico"><svg><use href="#i-pago"/></svg></span><h3>Precio claro antes de empezar</h3><p>Recibes el presupuesto por escrito y decides con calma. No empezamos nada sin tu aceptación.</p></div>
+  </div>
+</div></section>
+
 <section class="sec oscuro" id="como"><div class="wrap">
   <h2 class="doble" data-reveal><span>Reservar es</span>así de simple</h2>
   <div class="pasos" data-stagger>
     <div class="paso"><span class="ico"><svg><use href="#i-lista"/></svg></span><div><b>1</b><h3>Elige tu tratamiento</h3><p>Marca lo que te interesa en la lista de tratamientos.</p></div></div>
-    <div class="paso"><span class="ico"><svg><use href="#i-reloj"/></svg></span><div><b>2</b><h3>Dinos cuándo</h3><p>Tu nombre, el día y el horario que prefieres.</p></div></div>
+    <div class="paso"><span class="ico"><svg><use href="#i-reloj"/></svg></span><div><b>2</b><h3>Dinos cuándo</h3><p>Tu nombre, tu celular, el día y el horario que prefieres.</p></div></div>
     <div class="paso"><span class="ico"><svg><use href="#i-chat"/></svg></span><div><b>3</b><h3>Confirmamos por WhatsApp</h3><p>Te escribimos para confirmar tu cita.</p></div></div>
     
   </div>
@@ -242,22 +252,33 @@
   </div>
 </div></section>
 
-<section class="sec papel" id="cambia"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Menos mensajes,</span>más citas</h2>
-  <p class="intro" data-reveal>Ejemplo de cómo cambia el primer contacto con tus clientes.</p>
-  <div class="cambia" data-stagger>
-    <div class="chat"><h3><span class="ico" style="width:40px;height:40px"><svg style="width:20px;height:20px"><use href="#i-chat"/></svg></span>Hoy (ejemplo)</h3>
-      <div class="burbuja yo">Hola, ¿cuánto cuesta un tratamiento de ortodoncia?</div><div class="burbuja yo">¿Tienen turno esta semana?</div><div class="burbuja">Déjame revisar la agenda y te aviso</div><div class="burbuja yo">¿Atienden niños?</div><div class="burbuja yo">Gracias, lo pienso</div>
-    </div>
-    <div class="chat despues"><h3><span class="ico" style="width:40px;height:40px"><svg style="width:20px;height:20px"><use href="#i-envio"/></svg></span>Con tu página (ejemplo)</h3>
-      <div class="burbuja yo">Hola Luna Dental, quiero reservar desde la web
+<section class="sec" id="equipo"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Quién te</span>atiende</h2>
+  <p class="intro" data-reveal>Conoce a la doctora que cuida tu sonrisa.</p>
+  <div class="eq-lista" data-stagger><article class="eq-doc"><div class="eq-foto"><img src="assets/marcador.svg" alt="[MARCADOR: foto de la Dra. Micaela]" width="572" height="553" loading="lazy"></div>
+    <h3>Dra. Micaela <span class="pend">[MARCADOR: apellido]</span></h3><p class="eq-rol"><span class="pend">[MARCADOR: especialidad y universidad]</span></p><p><span class="pend">[MARCADOR: presentación corta de la doctora: formación y enfoque; la da ella]</span></p></article>
+  </div>
+</div></section>
 
-1 × Valoración inicial
+<section class="sec oscuro proceso" id="proceso"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Así es tu</span>tratamiento</h2>
+  <ol class="pr-pasos" data-stagger><li><b>1</b><h3>Valoración</h3><p>Conversamos y revisamos tu caso.</p></li>
+  <li><b>2</b><h3>Diagnóstico y plan</h3><p>La doctora te explica qué necesitas y en qué orden.</p></li>
+  <li><b>3</b><h3>Presupuesto claro</h3><p>Recibes los valores por escrito, sin compromiso.</p></li>
+  <li><b>4</b><h3>Tratamiento y seguimiento</h3><p>Empezamos cuando tú decides y te acompañamos en los controles.</p></li>
+  </ol>
+</div></section>
 
-Nombre: Camila
-Día preferido: viernes
-Horario preferido: Tarde</div>
-    </div>
+
+
+<section class="sec papel" id="preguntas"><div class="wrap faq-wrap">
+  <h2 class="doble" data-reveal><span>Preguntas</span>frecuentes</h2>
+  <div class="faq" data-reveal><details><summary>¿Duele?</summary><p>Cuéntale a la doctora lo que te preocupa: lo conversan antes de empezar y se hace lo posible para que estés cómodo. Cada caso es distinto.</p></details>
+  <details><summary>¿Cuánto cuesta?</summary><p>Depende de cada caso. En la valoración la doctora te explica las opciones y recibes el presupuesto antes de empezar.</p></details>
+  <details><summary>¿Atienden niñas y niños?</summary><p>Sí, entre nuestras áreas está la odontopediatría. Al pedir la cita marca «La cita es para un menor de edad» y escribe el nombre de quien lo autoriza.</p></details>
+  <details><summary>¿Qué áreas atienden?</summary><p>Odontopediatría, ortodoncia, estética dental, implantes, prótesis y cirugía oral.</p></details>
+  <details><summary>¿Qué pasa en la primera cita?</summary><p>Es una valoración: conversamos, revisamos tu caso y te explicamos las opciones. No empezamos ningún tratamiento sin tu aceptación.</p></details>
+  <details><summary>¿Cómo confirmo mi cita?</summary><p>Envías tu solicitud desde esta página con tu día y horario preferidos. El equipo te escribe por WhatsApp para confirmar la hora exacta.</p></details>
   </div>
 </div></section>
 
@@ -284,7 +305,7 @@ Horario preferido: Tarde</div>
 <section class="sec oscuro cierre"><div class="wrap">
   <h2 class="doble" data-reveal><span>Tu sonrisa</span>te espera</h2>
   <div class="acciones"><a class="btn" href="#carta">Reservar mi cita</a><a class="btn btn-linea" data-wa="Hola, quiero información sobre sus tratamientos">Escribir por WhatsApp</a></div>
-  <div class="demo-links"><a href="panel.html">Ver el panel de reservas (Pro)</a><a href="premium.html">Ver la versión Premium</a></div>
+  <div class="demo-links"><a href="panel.html">Ver el panel del equipo</a><a href="premium.html">Ver el panel del dueño</a></div>
 </div></section>
 </main>
 
@@ -299,11 +320,13 @@ Horario preferido: Tarde</div>
 
 <script src="config.js"></script>
 <script src="menu.js"></script>
+<script src="modulos/clinica/clinica-seed.js"></script><script src="modulos/clinica/clinica-mock.js"></script><script src="modulos/clinica/clinica-api.js"></script>
 <script src="motor/pedido.js"></script>
 <script>
 const P = Pedido, esc = P.esc, plata = P.plata;
 const wa = (n, t) => `https://wa.me/${String(n).replace(/\D/g, '')}?text=${encodeURIComponent(t)}`;
-document.querySelectorAll('[data-wa]').forEach(a => { a.href = wa(DEMO.waCliente, a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
+window.track = (ev, p) => { try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: ev }, p || {})); if (window.gtag) gtag('event', ev, p || {}); } catch (e) {} };
+document.querySelectorAll('[data-wa]').forEach(a => { a.href = wa(DEMO.waCliente, a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; a.addEventListener('click', () => track('whatsapp_click', { lugar: a.classList.contains('wa-flot') ? 'flotante' : a.closest('section') ? a.closest('section').id || 'pagina' : 'pagina' })); });
 ['ig', 'ig2'].forEach(i => document.getElementById(i).href = DEMO.instagram);
 { const fb = document.getElementById('fb'); if (fb) fb.href = DEMO.facebook; }
 P.pintarCarta('#carta-lista');
@@ -334,7 +357,7 @@ function pintar() {
       <div class="reco"><small>${esc(DIAG.hoy)}</small><b>${esc(it.nombre)}</b>${it.lema ? `<p><strong>${esc(it.lema)}.</strong></p>` : ''}
         <p>${it.desc ? esc(it.desc) : '<span class="pend">[CONFIRMAR ingredientes]</span>'}</p><div class="precio">${plata(it.precio)}</div></div>
       ${comp ? `<p>${esc(DIAG.compartir.texto)} <strong>${esc(comp.nombre)}</strong> por ${plata(comp.precio)}.</p>` : ''}
-      <button type="button" class="btn" id="add-reco">Agregar a mi pedido</button>
+      <button type="button" class="btn" id="add-reco">${DEMO.modo === 'reserva' ? 'Agregar a mi reserva' : 'Agregar a mi pedido'}</button>
       ${comp ? `<button type="button" class="btn btn-linea" id="add-comp">Sumar ${esc(comp.nombre)}</button>` : ''}
       <div style="display:flex;gap:18px;flex-wrap:wrap"><a class="enlace" href="#carta">Ver toda la carta</a><button type="button" class="enlace" id="otra">Probar otra vez</button></div></div>`;
     document.getElementById('add-reco').onclick = () => P.abrirProducto(id);

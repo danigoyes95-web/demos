@@ -1,0 +1,145 @@
+/* clinica-mock.js · backend de DEMOSTRACIÓN en el navegador: imita las funciones SQL de modulos/clinica/supabase/migrations con las mismas reglas
+   (consentimiento, topes, precio desde el tarifario, caja y presupuestos inmutables, resumen solo para admin). Los datos son de ejemplo y se guardan
+   solo en este navegador (localStorage). En producción este archivo no se carga: clinica-api.js llama a Supabase.
+   Los nombres y tratamientos salen de window.CLINICA_SEED (clinica-seed.js, generado desde cliente.json → clinica.mock). */
+(() => {
+  const SEED = window.CLINICA_SEED || {}, P = ((window.DEMO || {}).claveDemo || 'clinica') + '_mock_';
+  const TZ = 'America/Guayaquil', AHORA = () => new Date();
+  const ymd = d => d.toLocaleDateString('en-CA', { timeZone: TZ });
+  const hoy = () => ymd(AHORA());
+  const suma = (s, n) => { const d = new Date(s + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  const dif = (a, b) => Math.round((new Date(a + 'T12:00:00Z') - new Date(b + 'T12:00:00Z')) / 864e5);
+  const dow = s => (new Date(s + 'T12:00:00Z').getUTCDay() + 6) % 7 + 1;      // 1 = lunes … 7 = domingo
+  const hm = () => AHORA().toLocaleTimeString('en-GB', { timeZone: TZ, hour: '2-digit', minute: '2-digit' });
+  const mins = h => +h.slice(0, 2) * 60 + +h.slice(3, 5);
+  const hhmm = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+  const err = m => { throw new Error(m); };
+  const R2 = n => Math.round(n * 100) / 100;
+
+  /* Datos de ejemplo reproducibles (PRNG con semilla) */
+  function sembrar() {
+    let s = 20261015; const r = () => (s = (s * 1664525 + 1013904223) % 4294967296) / 4294967296, pick = a => a[Math.floor(r() * a.length)];
+    const E = { sec: 0, id: () => ++E.sec };
+    const servicios = (SEED.servicios || []).map((n, i) => ({ id: i + 1, nombre: n, categoria: 'General', descripcion: null, duracion_min: SEED.duracion || 30, precio: null, activo: true }));
+    const doctores = (SEED.doctores || []).map((d, i) => ({ id: i + 1, nombre: d.nombre, especialidad: d.especialidad || null, color: d.color, activo: true }));
+    const tarifario = (SEED.tarifario || []).map((t, i) => ({ id: i + 1, nombre: t.nombre, precio: t.precio, activo: true }));
+    const nombres = SEED.pacientes || ['Camila R.', 'Andrés M.', 'Lucía P.', 'Mateo S.', 'Valeria T.', 'Joaquín L.', 'Sofía N.', 'Daniel C.', 'Paula V.', 'Martín A.'];
+    const h = hoy(), pacientes = nombres.map((n, i) => ({ id: i + 1, nombre: n, telefono: '59398' + String(1000000 + i * 7919).slice(0, 7), creado: suma(h, -Math.floor(r() * 80)) }));
+    const citas = [], caja = [], pres = [], sols = [];
+    for (let d = -60; d <= 7; d++) {
+      const dia = suma(h, d); if (dow(dia) === 7) continue;
+      const n = 3 + Math.floor(r() * 4);
+      for (let k = 0; k < n; k++) {
+        const hi = 8 * 60 + Math.floor(r() * 16) * 30, sv = pick(servicios), p = pick(pacientes), dc = pick(doctores);
+        const pasado = d < 0, est = !pasado ? (r() < .3 ? 'pendiente' : 'confirmada') : (r() < .84 ? 'atendida' : r() < .5 ? 'no_vino' : 'cancelada');
+        const c = { id: E.id(), pac: p.id, servicio_id: sv.id, dia, hora: hhmm(hi), duracion: sv.duracion_min, estado: est, doctor_id: dc.id }; citas.push(c);
+        if (est === 'atendida') {
+          const t = tarifario.find(x => x.nombre === sv.nombre) || pick(tarifario);
+          caja.push({ id: E.id(), dia, hora: hhmm(hi + 40), descripcion: t.nombre, importe: R2(t.precio * (r() < .2 ? 2 : 1)), tipo: 'ing', doctor_id: dc.id, anulado: false });
+        }
+      }
+      if (r() < .35) caja.push({ id: E.id(), dia, hora: '16:10', descripcion: pick(['Guantes descartables', 'Material de curación', 'Limpieza']), importe: R2(8 + r() * 40), tipo: 'egr', doctor_id: null, anulado: false });
+      if (d < 0 && r() < .45) {
+        const t = pick(tarifario), cant = 1 + Math.floor(r() * 3), tot = R2(t.precio * cant), edad = -d, est = edad > 12 ? (r() < .55 ? 'aceptado' : 'rechazado') : (r() < .45 ? 'aceptado' : 'enviado');
+        pres.push({ id: E.id(), paciente: pick(nombres), doctor_id: pick(doctores).id, descuento: 0, total: tot, estado: est, seguimiento: est === 'enviado' ? suma(dia, 5) : null, creado: dia, items: [{ descripcion: t.nombre, cant, precio: t.precio }] });
+      }
+    }
+    for (let k = 0; k < 14; k++) { const dia = suma(h, -Math.floor(r() * 40)); sols.push({ id: E.id(), nombre: pick(nombres), telefono: pick(pacientes).telefono, servicio_ids: [pick(servicios).id], dia, franja: pick(['manana', 'tarde']), para_menor: false, representante: null, estado: r() < .75 ? 'agendada' : 'descartada', creado: dia + 'T10:00:00' }); }
+    [['Ejemplo: Ana L.', 'tarde'], ['Ejemplo: Familia Vega (niño)', 'manana'], ['Ejemplo: Rodrigo B.', 'cualquiera']].forEach(([n, f], i) => sols.push({ id: E.id(), nombre: n.replace('Ejemplo: ', ''), telefono: '5939' + (70000000 + i * 1111111), servicio_ids: [servicios[i % servicios.length].id], dia: suma(h, 2 + i), franja: f, para_menor: i === 1, representante: i === 1 ? 'Marcela Vega' : null, estado: 'nueva', creado: AHORA().toISOString() }));
+    return { sec: E.sec, servicios, doctores, tarifario, pacientes, citas, caja, pres, sols, capacidad: SEED.capacidad || 2, max_hora: 20, rol: null };
+  }
+  let db; const cargar = () => { try { db = JSON.parse(localStorage.getItem(P + 'db')); } catch (e) {} if (!db || db.v !== 2) { db = sembrar(); db.v = 2; } return db; };
+  const guardar = () => { try { localStorage.setItem(P + 'db', JSON.stringify(db)); } catch (e) {} };
+  const id = () => ++db.sec;
+  const quien = () => { const r = db.rol; if (!r) err('No autorizado'); return r; };
+  const admin = () => { if (quien() !== 'admin') err('Solo admin.'); };
+  const sv = i => db.servicios.find(s => s.id === i), dc = i => db.doctores.find(d => d.id === i), pc = i => db.pacientes.find(p => p.id === i);
+  const tel = t => { const d = String(t || '').replace(/\D/g, ''); return /^09\d{8}$/.test(d) ? '593' + d.slice(1) : /^593\d{9}$/.test(d) ? d : ''; };
+
+  const F = {
+    yo() { return db.rol ? { nombre: db.rol === 'admin' ? 'Dueña (demo)' : 'Recepción (demo)', rol: db.rol } : null; },
+    servicios_lista() { return db.servicios.filter(s => s.activo); },
+    solicitar_cita(a) {
+      const t = tel(a.p_telefono), h = hoy(); const ids = [...new Set(a.p_servicios || [])];
+      if (a.p_consentimiento !== true) err('Para enviar tu solicitud, acepta el tratamiento de tus datos.');
+      if (String(a.p_nombre || '').trim().length < 2) err('Escribe tu nombre y apellido.');
+      if (!t) err('Escribe un celular válido (09...).');
+      if (!a.p_dia || a.p_dia < h || a.p_dia > suma(h, 60)) err('Elige un día dentro de los próximos 60 días.');
+      if (!['manana', 'tarde', 'cualquiera'].includes(a.p_franja)) err('Elige mañana o tarde.');
+      if (a.p_menor && String(a.p_representante || '').trim().length < 2) err('Si el paciente es menor de edad, escribe el nombre de quien autoriza.');
+      if (!ids.length || ids.length > 4 || ids.some(i => !sv(i) || !sv(i).activo)) err('Elige entre 1 y 4 tratamientos de la lista.');
+      const reciente = db.sols.filter(s => s.creado > new Date(Date.now() - 36e5).toISOString()).length; if (reciente >= db.max_hora) err('Hay muchas solicitudes en este momento. Intenta en un rato o escríbenos por WhatsApp.');
+      if (db.sols.filter(s => s.telefono === t && s.creado > new Date(Date.now() - 864e5).toISOString()).length >= 3) err('Ya recibimos tus solicitudes de hoy. Te escribiremos para confirmar.');
+      const n = { id: id(), nombre: String(a.p_nombre).trim().slice(0, 80), telefono: t, servicio_ids: ids, dia: a.p_dia, franja: a.p_franja, para_menor: !!a.p_menor, representante: a.p_menor ? String(a.p_representante).trim().slice(0, 80) : null, estado: 'nueva', creado: AHORA().toISOString() };
+      db.sols.push(n); guardar(); return { ok: true, ref: n.id };
+    },
+    solicitudes_lista(a) { quien(); const e = a.p_estado || 'nueva'; return db.sols.filter(s => s.estado === e).sort((x, y) => x.creado < y.creado ? -1 : 1).map(s => ({ id: s.id, nombre: s.nombre, telefono: s.telefono, dia: s.dia, franja: s.franja, para_menor: s.para_menor, representante: s.representante, servicios: s.servicio_ids.map(i => ({ id: i, nombre: sv(i).nombre })), creado: s.creado, estado: s.estado })); },
+    solicitud_descartar(a) { quien(); const s = db.sols.find(x => x.id === a.p_id && x.estado === 'nueva'); if (!s) err('Solicitud no encontrada o ya atendida.'); s.estado = 'descartada'; guardar(); return null; },
+    solicitud_agendar(a) {
+      quien(); const s = db.sols.find(x => x.id === a.p_id); if (!s || s.estado !== 'nueva') err('Solicitud no encontrada o ya atendida.');
+      if (a.p_doctor != null && !(dc(a.p_doctor) || {}).activo) err('Doctor no válido.');
+      if (!s.servicio_ids.includes(a.p_servicio)) err('Elige uno de los tratamientos de la solicitud.');
+      if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(a.p_hora || '')) err('Hora no válida.');
+      const dur = sv(a.p_servicio).duracion_min, i0 = mins(a.p_hora), solapadas = db.citas.filter(c => c.dia === a.p_dia && ['pendiente', 'confirmada'].includes(c.estado) && mins(c.hora) < i0 + dur && mins(c.hora) + c.duracion > i0).length;
+      if (solapadas >= db.capacidad) err('Ese horario se acaba de llenar. Elige otro, por favor.');
+      let p = db.pacientes.find(x => x.telefono === s.telefono); if (!p) { p = { id: id(), nombre: s.nombre, telefono: s.telefono, creado: hoy() }; db.pacientes.push(p); }
+      const c = { id: id(), pac: p.id, servicio_id: a.p_servicio, dia: a.p_dia, hora: a.p_hora, duracion: dur, estado: 'confirmada', doctor_id: a.p_doctor ?? null }; db.citas.push(c);
+      s.estado = 'agendada'; guardar(); return { cita: c.id, nombre: p.nombre, telefono: p.telefono };
+    },
+    doctores_lista() { quien(); return db.doctores.slice(); },
+    doctor_guardar(a) { admin(); if (String(a.p_nombre || '').trim().length < 2) err('Escribe el nombre del doctor.'); if (!/^#[0-9a-f]{6}$/i.test(a.p_color || '')) err('Color no válido.');
+      let d = a.p_id ? dc(a.p_id) : null; if (!d) { d = { id: id() }; db.doctores.push(d); } Object.assign(d, { nombre: a.p_nombre.trim(), especialidad: (a.p_especialidad || '').trim() || null, color: a.p_color, activo: a.p_activo !== false }); guardar(); return d.id; },
+    tarifario_lista() { quien(); return db.tarifario.slice(); },
+    tarifario_guardar(a) { admin(); if (String(a.p_nombre || '').trim().length < 2) err('Escribe el nombre del tratamiento.'); if (!(a.p_precio >= 0 && a.p_precio <= 100000)) err('Precio no válido.');
+      let t = a.p_id ? db.tarifario.find(x => x.id === a.p_id) : null; if (!t) { t = { id: id() }; db.tarifario.push(t); } Object.assign(t, { nombre: a.p_nombre.trim(), precio: R2(a.p_precio), activo: a.p_activo !== false }); guardar(); return t.id; },
+    clinica_agenda(a) { quien(); if (!a.p_desde || !a.p_hasta || a.p_hasta < a.p_desde || dif(a.p_hasta, a.p_desde) > 62) err('Rango de fechas no válido.');
+      return db.citas.filter(c => c.dia >= a.p_desde && c.dia <= a.p_hasta && c.estado !== 'cancelada').sort((x, y) => (x.dia + x.hora) < (y.dia + y.hora) ? -1 : 1).map(c => ({ id: c.id, estado: c.estado, dia: c.dia, hora: c.hora, duracion: c.duracion, servicio: sv(c.servicio_id).nombre, nombre: pc(c.pac).nombre, telefono: pc(c.pac).telefono, doctor_id: c.doctor_id })); },
+    cita_estado(a) { quien(); if (!['pendiente', 'confirmada', 'atendida', 'cancelada', 'no_vino'].includes(a.p_estado)) err('Estado no válido.'); const c = db.citas.find(x => x.id === a.p_cita); if (!c) err('Cita no encontrada.'); c.estado = a.p_estado; guardar(); return null; },
+    cita_doctor(a) { quien(); if (a.p_doctor != null && !(dc(a.p_doctor) || {}).activo) err('Doctor no válido.'); const c = db.citas.find(x => x.id === a.p_cita); if (!c) err('Cita no encontrada.'); c.doctor_id = a.p_doctor; guardar(); return null; },
+    caja_dia(a) { quien(); const m = db.caja.filter(x => x.dia === a.p_dia), v = m.filter(x => !x.anulado), s = t => R2(v.filter(x => x.tipo === t).reduce((q, x) => q + x.importe, 0));
+      return { items: m.sort((x, y) => x.hora < y.hora ? -1 : 1).map(x => ({ id: x.id, hora: x.hora, descripcion: x.descripcion, importe: x.importe, tipo: x.tipo, doctor_id: x.doctor_id, anulado: x.anulado, motivo: x.motivo || null })), ingresos: s('ing'), egresos: s('egr') }; },
+    caja_registrar(a) { quien(); if (String(a.p_descripcion || '').trim().length < 2) err('Escribe una descripción.'); if (!(a.p_importe > 0 && a.p_importe <= 100000)) err('Importe no válido.'); if (!['ing', 'egr'].includes(a.p_tipo)) err('Tipo no válido.');
+      const m = { id: id(), dia: hoy(), hora: hm(), descripcion: a.p_descripcion.trim().slice(0, 80), importe: R2(a.p_importe), tipo: a.p_tipo, doctor_id: a.p_doctor ?? null, anulado: false }; db.caja.push(m); guardar(); return m.id; },
+    caja_anular(a) { quien(); if (String(a.p_motivo || '').trim().length < 3) err('Escribe el motivo de la anulación.'); const m = db.caja.find(x => x.id === a.p_id && !x.anulado); if (!m) err('Movimiento no encontrado o ya anulado.'); m.anulado = true; m.motivo = a.p_motivo.trim().slice(0, 120); guardar(); return null; },
+    presupuesto_guardar(a) { quien(); if (String(a.p_paciente || '').trim().length < 2) err('Escribe el nombre del paciente.'); if (!(a.p_descuento >= 0 && a.p_descuento <= 50)) err('El descuento va de 0 a 50 %.');
+      const its = a.p_items; if (!Array.isArray(its) || !its.length || its.length > 20) err('Agrega de 1 a 20 tratamientos.'); let sub = 0; const lin = its.map(x => { const t = db.tarifario.find(y => y.id === x.tarifario_id && y.activo); if (!t) err('Tratamiento no válido.'); if (!(x.cant >= 1 && x.cant <= 20)) err('Cantidad entre 1 y 20.'); sub += t.precio * x.cant; return { descripcion: t.nombre, cant: x.cant, precio: t.precio }; });
+      const p = { id: id(), paciente: a.p_paciente.trim().slice(0, 80), doctor_id: a.p_doctor ?? null, descuento: a.p_descuento, total: R2(sub * (100 - a.p_descuento) / 100), estado: 'enviado', seguimiento: a.p_seguimiento || null, creado: hoy(), items: lin }; db.pres.push(p); guardar(); return { id: p.id, total: p.total }; },
+    presupuestos_lista(a) { quien(); return db.pres.filter(p => !a.p_estado || p.estado === a.p_estado).sort((x, y) => y.id - x.id).slice(0, 100); },
+    presupuesto_estado(a) { quien(); if (!['aceptado', 'rechazado'].includes(a.p_estado)) err('Estado no válido.'); const p = db.pres.find(x => x.id === a.p_id && x.estado === 'enviado'); if (!p) err('Presupuesto no encontrado o ya decidido.'); p.estado = a.p_estado; guardar(); return null; },
+    dueno_resumen(a) {
+      admin(); const d0 = a.p_desde, d1 = a.p_hasta; if (!d0 || !d1 || d1 < d0 || dif(d1, d0) > 365) err('Rango de fechas no válido (máximo 1 año).');
+      const dias = dif(d1, d0) + 1, p0 = suma(d0, -dias), p1 = suma(d0, -1), h = hoy(), en = (x, i, f) => x >= i && x <= f;
+      const C = db.citas.filter(c => en(c.dia, d0, d1)), V = C.filter(c => c.estado !== 'cancelada'), n = (l, e) => l.filter(c => c.estado === e).length;
+      const cuenta = (arr, k) => { const m = new Map(); arr.forEach(x => m.set(k(x), (m.get(k(x)) || 0) + 1)); return m; };
+      const doctorDe = i => dc(i) || { nombre: 'Sin asignar', color: '#8E8F94' };
+      const pdoc = new Map(); V.forEach(c => { const d = doctorDe(c.doctor_id), o = pdoc.get(d.nombre) || { doctor: d.nombre, color: d.color, citas: 0, atendidas: 0 }; o.citas++; if (c.estado === 'atendida') o.atendidas++; pdoc.set(d.nombre, o); });
+      const ptrat = [...cuenta(V, c => sv(c.servicio_id).nombre)].map(([nombre, n]) => ({ nombre, n })).sort((x, y) => y.n - x.n).slice(0, 8);
+      const K = db.caja.filter(m => !m.anulado), Ki = m => m.tipo === 'ing' && !m.anulado, suma_ = (l, f) => R2(l.filter(f).reduce((q, x) => q + x.importe, 0));
+      const Kr = db.caja.filter(m => en(m.dia, d0, d1)), ing = suma_(Kr, Ki), egr = suma_(Kr, m => m.tipo === 'egr' && !m.anulado);
+      const serie = Array.from({ length: dias }, (_, k) => { const dia = suma(d0, k); return { dia, ing: suma_(Kr, m => m.dia === dia && Ki(m)), egr: suma_(Kr, m => m.dia === dia && m.tipo === 'egr' && !m.anulado) }; });
+      const ddoc = new Map(); Kr.filter(Ki).forEach(m => { const d = doctorDe(m.doctor_id), o = ddoc.get(d.nombre) || { doctor: d.nombre, color: d.color, ingresos: 0 }; o.ingresos = R2(o.ingresos + m.importe); ddoc.set(d.nombre, o); });
+      const PR = db.pres.filter(p => en(p.creado, d0, d1)), S = db.sols.filter(s => en(s.creado.slice(0, 10), d0, d1)), pa = (l, e) => l.filter(p => p.estado === e);
+      const A = { c: db.citas.filter(c => en(c.dia, p0, p1) && c.estado === 'atendida').length, i: suma_(db.caja.filter(m => en(m.dia, p0, p1)), Ki), n: db.pacientes.filter(p => en(p.creado, p0, p1)).length, s: db.sols.filter(s => en(s.creado.slice(0, 10), p0, p1)).length, m: R2(db.pres.filter(p => en(p.creado, p0, p1) && p.estado === 'aceptado').reduce((q, p) => q + p.total, 0)) };
+      return {
+        desde: d0, hasta: d1, dias,
+        citas: { total: V.length, atendidas: n(C, 'atendida'), no_vino: n(C, 'no_vino'), canceladas: n(C, 'cancelada'), por_doctor: [...pdoc.values()].sort((x, y) => y.citas - x.citas), por_tratamiento: ptrat,
+          por_dia_semana: [1, 2, 3, 4, 5, 6, 7].map(k => ({ dia: k, n: V.filter(c => dow(c.dia) === k).length })), por_franja: { manana: V.filter(c => mins(c.hora) < 780).length, tarde: V.filter(c => mins(c.hora) >= 780).length } },
+        solicitudes: { recibidas: S.length, agendadas: n(S, 'agendada'), descartadas: n(S, 'descartada'), pendientes: db.sols.filter(s => s.estado === 'nueva').length },
+        caja: { ingresos: ing, egresos: egr, cobros: Kr.filter(Ki).length, anulados: Kr.filter(m => m.anulado).length, serie, por_doctor: [...ddoc.values()].sort((x, y) => y.ingresos - x.ingresos) },
+        presupuestos: { enviados: PR.length, aceptados: pa(PR, 'aceptado').length, rechazados: pa(PR, 'rechazado').length, monto_enviado: R2(PR.reduce((q, p) => q + p.total, 0)), monto_aceptado: R2(pa(PR, 'aceptado').reduce((q, p) => q + p.total, 0)),
+          seguimientos: db.pres.filter(p => p.estado === 'enviado' && p.seguimiento && p.seguimiento <= h).sort((x, y) => x.seguimiento < y.seguimiento ? -1 : 1).slice(0, 10).map(p => ({ id: p.id, paciente: p.paciente, total: p.total, seguimiento: p.seguimiento, dias_vencido: dif(h, p.seguimiento) })) },
+        pacientes: { nuevos: db.pacientes.filter(p => en(p.creado, d0, d1)).length, total: db.pacientes.length },
+        anterior: { citas_atendidas: A.c, ingresos: A.i, nuevos: A.n, solicitudes: A.s, monto_aceptado: A.m }
+      };
+    }
+  };
+
+  window.CLINICA_MOCK = {
+    rpc(fn, args) { cargar(); const f = F[fn]; if (!f) return Promise.reject(new Error('Función no disponible en la demo: ' + fn));
+      return new Promise((ok, no) => setTimeout(() => { try { ok(JSON.parse(JSON.stringify(f(args) ?? null))); } catch (e) { no(e); } }, 120)); },
+    sesion() { cargar(); return Promise.resolve(F.yo()); },
+    entrar(rol) { cargar(); db.rol = rol === 'admin' ? 'admin' : 'recepcion'; guardar(); return Promise.resolve(F.yo()); },
+    salir() { cargar(); db.rol = null; guardar(); },
+    reiniciar() { try { localStorage.removeItem(P + 'db'); } catch (e) {} db = null; }
+  };
+})();

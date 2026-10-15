@@ -15,5 +15,13 @@ window.DEMO = {
   "instagram": "https://www.instagram.com/luna_dental_/",
   "facebook": "",
   "sectoresEjemplo": [],
-  "modo": "reserva"
+  "modo": "reserva",
+  "clinica": {
+    "modo": "demo",
+    "url": "",
+    "anonKey": "",
+    "schema": "luna_dental",
+    "consentimiento": "Acepto que Luna Dental use mis datos (nombre, celular y datos de la cita) para gestionar mi solicitud y contactarme.",
+    "privacidad": "privacidad.html"
+  }
 };
