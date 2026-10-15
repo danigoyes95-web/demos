@@ -46,9 +46,11 @@
     }
     for (let k = 0; k < 14; k++) { const dia = suma(h, -Math.floor(r() * 40)); sols.push({ id: E.id(), nombre: pick(nombres), telefono: pick(pacientes).telefono, servicio_ids: [pick(servicios).id], dia, franja: pick(['manana', 'tarde']), para_menor: false, representante: null, estado: r() < .75 ? 'agendada' : 'descartada', creado: dia + 'T10:00:00' }); }
     [['Ejemplo: Ana L.', 'tarde'], ['Ejemplo: Familia Vega (niño)', 'manana'], ['Ejemplo: Rodrigo B.', 'cualquiera']].forEach(([n, f], i) => sols.push({ id: E.id(), nombre: n.replace('Ejemplo: ', ''), telefono: '5939' + (70000000 + i * 1111111), servicio_ids: [servicios[i % servicios.length].id], dia: suma(h, 2 + i), franja: f, para_menor: i === 1, representante: i === 1 ? 'Marcela Vega' : null, estado: 'nueva', creado: AHORA().toISOString() }));
-    return { sec: E.sec, servicios, doctores, tarifario, pacientes, citas, caja, pres, sols, capacidad: SEED.capacidad || 2, max_hora: 20, rol: null };
+    const horario = [1, 2, 3, 4, 5, 6, 7].map(d => ({ dia: d, abre: d < 7 ? '09:00' : null, cierra: d < 7 ? '18:00' : null, pausa_ini: d < 7 ? '13:00' : null, pausa_fin: d < 7 ? '14:00' : null }));
+    const staff = [{ user_id: 'u-admin', nombre: 'Dueña (demo)', email: 'duena@demo.test', rol: 'admin' }, { user_id: 'u-recep', nombre: 'Recepción (demo)', email: 'recepcion@demo.test', rol: 'recepcion' }];
+    return { sec: E.sec, horario, staff, servicios, doctores, tarifario, pacientes, citas, caja, pres, sols, capacidad: SEED.capacidad || 2, max_hora: 20, rol: null };
   }
-  let db; const cargar = () => { try { db = JSON.parse(localStorage.getItem(P + 'db')); } catch (e) {} if (!db || db.v !== 2) { db = sembrar(); db.v = 2; } return db; };
+  let db; const cargar = () => { try { db = JSON.parse(localStorage.getItem(P + 'db')); } catch (e) {} if (!db || db.v !== 3) { db = sembrar(); db.v = 3; } return db; };
   const guardar = () => { try { localStorage.setItem(P + 'db', JSON.stringify(db)); } catch (e) {} };
   const id = () => ++db.sec;
   const quien = () => { const r = db.rol; if (!r) err('No autorizado'); return r; };
@@ -56,6 +58,14 @@
   const sv = i => db.servicios.find(s => s.id === i), dc = i => db.doctores.find(d => d.id === i), pc = i => db.pacientes.find(p => p.id === i);
   const tel = t => { const d = String(t || '').replace(/\D/g, ''); return /^09\d{8}$/.test(d) ? '593' + d.slice(1) : /^593\d{9}$/.test(d) ? d : ''; };
 
+  const validar = (dia, hora, dur) => {
+    if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(hora || '')) err('Hora no válida.');
+    const h = db.horario.find(x => x.dia === dow(dia) && x.abre); if (!h) err('Ese día no atendemos.');
+    const i = mins(hora), a = mins(h.abre), c = mins(h.cierra);
+    if (i < a || i + dur > c) err('Ese horario está fuera del horario de atención.');
+    if (h.pausa_ini && i < mins(h.pausa_fin) && i + dur > mins(h.pausa_ini)) err('Ese horario no está disponible (hora de almuerzo).');
+  };
+  const llena = (dia, hora, dur, excluir) => db.citas.filter(c => c.id !== excluir && c.dia === dia && ['pendiente', 'confirmada'].includes(c.estado) && mins(c.hora) < mins(hora) + dur && mins(c.hora) + c.duracion > mins(hora)).length >= db.capacidad;
   const F = {
     yo() { return db.rol ? { nombre: db.rol === 'admin' ? 'Dueña (demo)' : 'Recepción (demo)', rol: db.rol } : null; },
     servicios_lista() { return db.servicios.filter(s => s.activo); },
@@ -79,9 +89,8 @@
       quien(); const s = db.sols.find(x => x.id === a.p_id); if (!s || s.estado !== 'nueva') err('Solicitud no encontrada o ya atendida.');
       if (a.p_doctor != null && !(dc(a.p_doctor) || {}).activo) err('Doctor no válido.');
       if (!s.servicio_ids.includes(a.p_servicio)) err('Elige uno de los tratamientos de la solicitud.');
-      if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(a.p_hora || '')) err('Hora no válida.');
-      const dur = sv(a.p_servicio).duracion_min, i0 = mins(a.p_hora), solapadas = db.citas.filter(c => c.dia === a.p_dia && ['pendiente', 'confirmada'].includes(c.estado) && mins(c.hora) < i0 + dur && mins(c.hora) + c.duracion > i0).length;
-      if (solapadas >= db.capacidad) err('Ese horario se acaba de llenar. Elige otro, por favor.');
+      const dur = sv(a.p_servicio).duracion_min; validar(a.p_dia, a.p_hora, dur);
+      if (llena(a.p_dia, a.p_hora, dur)) err('Ese horario se acaba de llenar. Elige otro, por favor.');
       let p = db.pacientes.find(x => x.telefono === s.telefono); if (!p) { p = { id: id(), nombre: s.nombre, telefono: s.telefono, creado: hoy() }; db.pacientes.push(p); }
       const c = { id: id(), pac: p.id, servicio_id: a.p_servicio, dia: a.p_dia, hora: a.p_hora, duracion: dur, estado: 'confirmada', doctor_id: a.p_doctor ?? null }; db.citas.push(c);
       s.estado = 'agendada'; guardar(); return { cita: c.id, nombre: p.nombre, telefono: p.telefono };
@@ -94,6 +103,28 @@
       let t = a.p_id ? db.tarifario.find(x => x.id === a.p_id) : null; if (!t) { t = { id: id() }; db.tarifario.push(t); } Object.assign(t, { nombre: a.p_nombre.trim(), precio: R2(a.p_precio), activo: a.p_activo !== false }); guardar(); return t.id; },
     clinica_agenda(a) { quien(); if (!a.p_desde || !a.p_hasta || a.p_hasta < a.p_desde || dif(a.p_hasta, a.p_desde) > 62) err('Rango de fechas no válido.');
       return db.citas.filter(c => c.dia >= a.p_desde && c.dia <= a.p_hasta && c.estado !== 'cancelada').sort((x, y) => (x.dia + x.hora) < (y.dia + y.hora) ? -1 : 1).map(c => ({ id: c.id, estado: c.estado, dia: c.dia, hora: c.hora, duracion: c.duracion, servicio: sv(c.servicio_id).nombre, nombre: pc(c.pac).nombre, telefono: pc(c.pac).telefono, doctor_id: c.doctor_id })); },
+    cita_nueva(a) {
+      quien(); const t = tel(a.p_telefono), h = hoy(); if (!t) err('Escribe un celular válido (09...).'); const v = sv(a.p_servicio); if (!v || !v.activo) err('Tratamiento no disponible.');
+      if (a.p_doctor != null && !(dc(a.p_doctor) || {}).activo) err('Doctor no válido.'); if (!a.p_dia || a.p_dia < h) err('Elige un día desde hoy.');
+      validar(a.p_dia, a.p_hora, v.duracion_min); if (llena(a.p_dia, a.p_hora, v.duracion_min)) err('Ese horario ya está lleno.');
+      let p = db.pacientes.find(x => x.telefono === t); if (!p) { if (String(a.p_nombre || '').trim().length < 2) err('Escribe el nombre del paciente.'); p = { id: id(), nombre: a.p_nombre.trim().slice(0, 80), telefono: t, creado: h }; db.pacientes.push(p); }
+      const c = { id: id(), pac: p.id, servicio_id: v.id, dia: a.p_dia, hora: a.p_hora, duracion: v.duracion_min, estado: 'confirmada', doctor_id: a.p_doctor ?? null }; db.citas.push(c); guardar(); return { cita: c.id, nombre: p.nombre, telefono: p.telefono };
+    },
+    mover_cita(a) { quien(); const c = db.citas.find(x => x.id === a.p_cita); if (!c) err('Cita no encontrada.'); validar(a.p_dia, a.p_hora, c.duracion); if (llena(a.p_dia, a.p_hora, c.duracion, c.id)) err('Ese horario ya está lleno.');
+      c.dia = a.p_dia; c.hora = a.p_hora; if (['cancelada', 'no_vino'].includes(c.estado)) c.estado = 'confirmada'; guardar(); return null; },
+    config_admin() { quien(); return { config: { capacidad: db.capacidad, paso_min: 20, sellos_meta: 5 }, servicios: db.servicios.map((s, i) => ({ ...s, orden: i + 1, fidelidad: false })), horario: db.horario.map(h => ({ ...h })),
+      equipo: db.rol === 'admin' ? db.staff.map(m => ({ ...m, yo: m.rol === db.rol })) : undefined }; },
+    config_guardar(a) { admin(); if (!(a.p_capacidad >= 1 && a.p_capacidad <= 10)) err('Cabinas entre 1 y 10.'); db.capacidad = a.p_capacidad; guardar(); return null; },
+    servicio_guardar(a) { admin(); if (String(a.p_nombre || '').trim().length < 2) err('Escribe el nombre del servicio.'); if (!(a.p_duracion >= 15 && a.p_duracion <= 240)) err('Duración entre 15 y 240 min.');
+      let s = a.p_id ? sv(a.p_id) : null; if (!s) { s = { id: id(), categoria: 'Tratamientos', descripcion: null, precio: null }; db.servicios.push(s); } Object.assign(s, { nombre: a.p_nombre.trim(), duracion_min: a.p_duracion, activo: a.p_activo !== false }); guardar(); return s.id; },
+    horario_guardar(a) { admin(); const h = db.horario.find(x => x.dia === a.p_dia); if (!h) err('Día no válido.');
+      if (!a.p_abre || !a.p_cierra) { Object.assign(h, { abre: null, cierra: null, pausa_ini: null, pausa_fin: null }); guardar(); return null; }
+      if (a.p_cierra <= a.p_abre) err('La hora de cierre debe ser después de la de apertura.'); if (h.pausa_ini && (h.pausa_ini < a.p_abre || h.pausa_fin > a.p_cierra)) err('new row for relation "horario" violates check constraint "horario_pausa_ok"'); Object.assign(h, { abre: a.p_abre, cierra: a.p_cierra }); guardar(); return null; },
+    horario_pausa_guardar(a) { admin(); const h = db.horario.find(x => x.dia === a.p_dia); if (!a.p_ini || !a.p_fin) { if (h) { h.pausa_ini = null; h.pausa_fin = null; guardar(); } return null; }
+      if (!h || !h.abre) err('Primero define el horario de ese día.'); if (a.p_ini < h.abre || a.p_fin > h.cierra || a.p_fin <= a.p_ini) err('new row for relation "horario" violates check constraint "horario_pausa_ok"'); h.pausa_ini = a.p_ini; h.pausa_fin = a.p_fin; guardar(); return null; },
+    equipo_guardar(a) { admin(); if (!['admin', 'recepcion'].includes(a.p_rol)) err('Rol no válido.'); if (!/^[^@\s]+@[^@\s]+$/.test(a.p_email || '')) err('Ese correo no tiene usuario. Créalo primero en Supabase › Authentication › Add user.');
+      let m = db.staff.find(x => x.email === a.p_email.toLowerCase()); if (!m) { m = { user_id: 'u-' + id(), email: a.p_email.toLowerCase() }; db.staff.push(m); } Object.assign(m, { nombre: a.p_nombre || a.p_email.split('@')[0], rol: a.p_rol }); guardar(); return null; },
+    equipo_quitar(a) { admin(); const m = db.staff.find(x => x.user_id === a.p_user); if (!m) return null; if (m.rol === db.rol) err('No puedes quitarte tu propio acceso.'); db.staff = db.staff.filter(x => x !== m); guardar(); return null; },
     cita_estado(a) { quien(); if (!['pendiente', 'confirmada', 'atendida', 'cancelada', 'no_vino'].includes(a.p_estado)) err('Estado no válido.'); const c = db.citas.find(x => x.id === a.p_cita); if (!c) err('Cita no encontrada.'); c.estado = a.p_estado; guardar(); return null; },
     cita_doctor(a) { quien(); if (a.p_doctor != null && !(dc(a.p_doctor) || {}).activo) err('Doctor no válido.'); const c = db.citas.find(x => x.id === a.p_cita); if (!c) err('Cita no encontrada.'); c.doctor_id = a.p_doctor; guardar(); return null; },
     caja_dia(a) { quien(); const m = db.caja.filter(x => x.dia === a.p_dia), v = m.filter(x => !x.anulado), s = t => R2(v.filter(x => x.tipo === t).reduce((q, x) => q + x.importe, 0));
