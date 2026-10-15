@@ -35,22 +35,28 @@
         const c = { id: E.id(), pac: p.id, servicio_id: sv.id, dia, hora: hhmm(hi), duracion: sv.duracion_min, estado: est, doctor_id: dc.id }; citas.push(c);
         if (est === 'atendida') {
           const t = tarifario.find(x => x.nombre === sv.nombre) || pick(tarifario);
-          caja.push({ id: E.id(), dia, hora: hhmm(hi + 40), descripcion: t.nombre, importe: R2(t.precio * (r() < .2 ? 2 : 1)), tipo: 'ing', doctor_id: dc.id, anulado: false });
+          caja.push({ id: E.id(), dia, hora: hhmm(hi + 40), descripcion: t.nombre, importe: R2(t.precio * (r() < .2 ? 2 : 1)), tipo: 'ing', doctor_id: dc.id, anulado: false, cli: p.id });
         }
       }
       if (r() < .35) caja.push({ id: E.id(), dia, hora: '16:10', descripcion: pick(['Guantes descartables', 'Material de curación', 'Limpieza']), importe: R2(8 + r() * 40), tipo: 'egr', doctor_id: null, anulado: false });
       if (d < 0 && r() < .45) {
         const t = pick(tarifario), cant = 1 + Math.floor(r() * 3), tot = R2(t.precio * cant), edad = -d, est = edad > 12 ? (r() < .55 ? 'aceptado' : 'rechazado') : (r() < .45 ? 'aceptado' : 'enviado');
-        pres.push({ id: E.id(), paciente: pick(nombres), doctor_id: pick(doctores).id, descuento: 0, total: tot, estado: est, seguimiento: est === 'enviado' ? suma(dia, 5) : null, creado: dia, items: [{ descripcion: t.nombre, cant, precio: t.precio }] });
+        const pp = pick(pacientes); pres.push({ id: E.id(), cli: pp.id, paciente: pp.nombre, doctor_id: pick(doctores).id, descuento: 0, total: tot, estado: est, seguimiento: est === 'enviado' ? suma(dia, 5) : null, creado: dia, items: [{ descripcion: t.nombre, cant, precio: t.precio }] });
       }
     }
     for (let k = 0; k < 14; k++) { const dia = suma(h, -Math.floor(r() * 40)); sols.push({ id: E.id(), nombre: pick(nombres), telefono: pick(pacientes).telefono, servicio_ids: [pick(servicios).id], dia, franja: pick(['manana', 'tarde']), para_menor: false, representante: null, estado: r() < .75 ? 'agendada' : 'descartada', creado: dia + 'T10:00:00' }); }
     [['Ejemplo: Ana L.', 'tarde'], ['Ejemplo: Familia Vega (niño)', 'manana'], ['Ejemplo: Rodrigo B.', 'cualquiera']].forEach(([n, f], i) => sols.push({ id: E.id(), nombre: n.replace('Ejemplo: ', ''), telefono: '5939' + (70000000 + i * 1111111), servicio_ids: [servicios[i % servicios.length].id], dia: suma(h, 2 + i), franja: f, para_menor: i === 1, representante: i === 1 ? 'Marcela Vega' : null, estado: 'nueva', creado: AHORA().toISOString() }));
     const horario = [1, 2, 3, 4, 5, 6, 7].map(d => ({ dia: d, abre: d < 7 ? '09:00' : null, cierra: d < 7 ? '18:00' : null, pausa_ini: d < 7 ? '13:00' : null, pausa_fin: d < 7 ? '14:00' : null }));
     const staff = [{ user_id: 'u-admin', nombre: 'Dueña (demo)', email: 'duena@demo.test', rol: 'admin' }, { user_id: 'u-recep', nombre: 'Recepción (demo)', email: 'recepcion@demo.test', rol: 'recepcion' }];
-    return { sec: E.sec, horario, staff, servicios, doctores, tarifario, pacientes, citas, caja, pres, sols, capacidad: SEED.capacidad || 2, max_hora: 20, rol: null };
+    const consent = [], clin = [], odo = [], evo = [], aud = [];
+    pacientes.slice(0, 4).forEach((p, i) => { p.datos = { cedula: '17' + String(10000000 + i * 137).slice(0, 8), nacimiento: ['1988-03-14', '1975-09-02', '2014-06-21', '1996-12-30'][i], email: `paciente${i + 1}@ejemplo.test`, direccion: 'Dirección de ejemplo', contacto_nombre: 'Contacto de ejemplo', contacto_tel: '0990000000', representante: i === 2 ? 'Madre de ejemplo' : null };
+      consent.push({ cli: p.id, tipo: 'tratamiento', otorgado: true, quien: i === 2 ? 'Madre de ejemplo' : p.nombre, dia: suma(h, -30) });
+      clin.push({ cli: p.id, alergias: i === 0 ? 'Penicilina (ejemplo)' : null, medicamentos: i === 1 ? 'Losartán (ejemplo)' : null, antecedentes_medicos: i === 1 ? 'Hipertensión controlada (ejemplo)' : null, antecedentes_odonto: 'Limpieza previa (ejemplo)', habitos: null, observaciones: i === 2 ? 'Niño con ansiedad al sillón (ejemplo)' : null, actualizado: suma(h, -30) + ' 10:00' });
+      odo.push({ cli: p.id, diente: i === 2 ? 54 : 16, estado: 'caries', nota: 'Ejemplo', dia: suma(h, -30) }, { cli: p.id, diente: i === 2 ? 54 : 16, estado: 'resina', nota: 'Tratada (ejemplo)', dia: suma(h, -20) });
+      evo.push({ id: E.id(), cli: p.id, dia: suma(h, -30) + ' 10:30', motivo: 'Dolor al masticar (ejemplo)', diagnostico: 'Caries oclusal (ejemplo)', procedimiento: 'Resina (ejemplo)', indicaciones: 'Evitar masticar 2 horas (ejemplo)', doctor_id: 1, autor: 'Dra. Micaela', corrige_id: null, cita_id: null }); });
+    return { sec: E.sec, consent, clin, odo, evo, aud, horario, staff, servicios, doctores, tarifario, pacientes, citas, caja, pres, sols, capacidad: SEED.capacidad || 2, max_hora: 20, rol: null };
   }
-  let db; const cargar = () => { try { db = JSON.parse(localStorage.getItem(P + 'db')); } catch (e) {} if (!db || db.v !== 3) { db = sembrar(); db.v = 3; } return db; };
+  let db; const cargar = () => { try { db = JSON.parse(localStorage.getItem(P + 'db')); } catch (e) {} if (!db || db.v !== 4) { db = sembrar(); db.v = 4; } return db; };
   const guardar = () => { try { localStorage.setItem(P + 'db', JSON.stringify(db)); } catch (e) {} };
   const id = () => ++db.sec;
   const quien = () => { const r = db.rol; if (!r) err('No autorizado'); return r; };
@@ -58,6 +64,11 @@
   const sv = i => db.servicios.find(s => s.id === i), dc = i => db.doctores.find(d => d.id === i), pc = i => db.pacientes.find(p => p.id === i);
   const tel = t => { const d = String(t || '').replace(/\D/g, ''); return /^09\d{8}$/.test(d) ? '593' + d.slice(1) : /^593\d{9}$/.test(d) ? d : ''; };
 
+  const esClinico = () => db.rol === 'admin' || db.rol === 'doctor';
+  const clinico = () => { if (!esClinico()) err('No autorizado'); };
+  const consiente = i => { if (!db.pacientes.find(x => x.id === i)) err('Paciente no encontrado.'); const c = db.consent.filter(x => x.cli === i && x.tipo === 'tratamiento'); if (!c.length || !c[c.length - 1].otorgado) err('Primero registra el consentimiento de tratamiento del paciente.'); };
+  const audita = (i, accion, detalle) => db.aud.push({ cuando: hoy() + ' ' + hm(), quien: db.rol === 'admin' ? 'Dueña (demo)' : 'Doctor (demo)', accion, paciente: (db.pacientes.find(x => x.id === i) || {}).nombre, detalle: detalle || null, cli: i });
+  const FDI = [11,12,13,14,15,16,17,18,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,41,42,43,44,45,46,47,48,51,52,53,54,55,61,62,63,64,65,71,72,73,74,75,81,82,83,84,85];
   const validar = (dia, hora, dur) => {
     if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(hora || '')) err('Hora no válida.');
     const h = db.horario.find(x => x.dia === dow(dia) && x.abre); if (!h) err('Ese día no atendemos.');
@@ -67,7 +78,7 @@
   };
   const llena = (dia, hora, dur, excluir) => db.citas.filter(c => c.id !== excluir && c.dia === dia && ['pendiente', 'confirmada'].includes(c.estado) && mins(c.hora) < mins(hora) + dur && mins(c.hora) + c.duracion > mins(hora)).length >= db.capacidad;
   const F = {
-    yo() { return db.rol ? { nombre: db.rol === 'admin' ? 'Dueña (demo)' : 'Recepción (demo)', rol: db.rol } : null; },
+    yo() { return db.rol ? { nombre: { admin: 'Dueña (demo)', doctor: 'Doctor (demo)', recepcion: 'Recepción (demo)' }[db.rol], rol: db.rol } : null; },
     servicios_lista() { return db.servicios.filter(s => s.activo); },
     solicitar_cita(a) {
       const t = tel(a.p_telefono), h = hoy(); const ids = [...new Set(a.p_servicios || [])];
@@ -122,19 +133,51 @@
       if (a.p_cierra <= a.p_abre) err('La hora de cierre debe ser después de la de apertura.'); if (h.pausa_ini && (h.pausa_ini < a.p_abre || h.pausa_fin > a.p_cierra)) err('new row for relation "horario" violates check constraint "horario_pausa_ok"'); Object.assign(h, { abre: a.p_abre, cierra: a.p_cierra }); guardar(); return null; },
     horario_pausa_guardar(a) { admin(); const h = db.horario.find(x => x.dia === a.p_dia); if (!a.p_ini || !a.p_fin) { if (h) { h.pausa_ini = null; h.pausa_fin = null; guardar(); } return null; }
       if (!h || !h.abre) err('Primero define el horario de ese día.'); if (a.p_ini < h.abre || a.p_fin > h.cierra || a.p_fin <= a.p_ini) err('new row for relation "horario" violates check constraint "horario_pausa_ok"'); h.pausa_ini = a.p_ini; h.pausa_fin = a.p_fin; guardar(); return null; },
-    equipo_guardar(a) { admin(); if (!['admin', 'recepcion'].includes(a.p_rol)) err('Rol no válido.'); if (!/^[^@\s]+@[^@\s]+$/.test(a.p_email || '')) err('Ese correo no tiene usuario. Créalo primero en Supabase › Authentication › Add user.');
+    equipo_guardar(a) { admin(); if (!['admin', 'doctor', 'recepcion'].includes(a.p_rol)) err('Rol no válido.'); if (!/^[^@\s]+@[^@\s]+$/.test(a.p_email || '')) err('Ese correo no tiene usuario. Créalo primero en Supabase › Authentication › Add user.');
       let m = db.staff.find(x => x.email === a.p_email.toLowerCase()); if (!m) { m = { user_id: 'u-' + id(), email: a.p_email.toLowerCase() }; db.staff.push(m); } Object.assign(m, { nombre: a.p_nombre || a.p_email.split('@')[0], rol: a.p_rol }); guardar(); return null; },
     equipo_quitar(a) { admin(); const m = db.staff.find(x => x.user_id === a.p_user); if (!m) return null; if (m.rol === db.rol) err('No puedes quitarte tu propio acceso.'); db.staff = db.staff.filter(x => x !== m); guardar(); return null; },
+    pacientes_buscar(a) { quien(); const q = String(a.p_q || '').trim().toLowerCase(), h = hoy();
+      return db.pacientes.filter(p => q.length < 2 || p.nombre.toLowerCase().includes(q) || p.telefono.includes(q) || ((p.datos || {}).cedula || '').toLowerCase().includes(q)).slice().reverse().slice(0, 40).map(p => {
+        const cs = db.citas.filter(c => c.pac === p.id && c.estado !== 'cancelada'), pas = cs.filter(c => c.dia <= h).map(c => c.dia).sort(), fut = db.citas.filter(c => c.pac === p.id && c.dia > h && ['pendiente', 'confirmada'].includes(c.estado)).map(c => c.dia).sort();
+        return { id: p.id, nombre: p.nombre, telefono: p.telefono, cedula: (p.datos || {}).cedula || null, citas: cs.length, ultima: pas.length ? pas[pas.length - 1] : null, proxima: fut[0] || null }; }); },
+    paciente_ficha(a) { quien(); const p = db.pacientes.find(x => x.id === a.p_id); if (!p) err('Paciente no encontrado.'); const clin = esClinico();
+      if (clin) db.aud.push({ cuando: hoy() + ' ' + hm(), quien: db.rol === 'admin' ? 'Dueña (demo)' : 'Doctor (demo)', accion: 'ver_ficha', paciente: p.nombre, detalle: null, cli: p.id });
+      const cons = {}; db.consent.filter(c => c.cli === p.id).forEach(c => cons[c.tipo] = c);
+      const odo = {}; db.odo.filter(o => o.cli === p.id).forEach(o => odo[o.diente] = o); const cv = db.clin.filter(c => c.cli === p.id);
+      guardar(); return { id: p.id, nombre: p.nombre, telefono: p.telefono, creado: p.creado, datos: p.datos || null,
+        citas: db.citas.filter(c => c.pac === p.id).sort((x, y) => (y.dia + y.hora) < (x.dia + x.hora) ? -1 : 1).map(c => ({ id: c.id, dia: c.dia, hora: c.hora, duracion: c.duracion, servicio: sv(c.servicio_id).nombre, estado: c.estado, doctor: (dc(c.doctor_id) || {}).nombre || null })),
+        cobros: db.caja.filter(m => m.cli === p.id).sort((x, y) => y.id - x.id).map(m => ({ id: m.id, dia: m.dia, descripcion: m.descripcion, importe: m.importe, tipo: m.tipo, anulado: m.anulado })),
+        presupuestos: db.pres.filter(x => x.cli === p.id).sort((x, y) => y.id - x.id).map(x => ({ id: x.id, dia: x.creado, total: x.total, estado: x.estado, descuento: x.descuento, items: x.items })),
+        consentimientos: Object.values(cons).map(c => ({ tipo: c.tipo, otorgado: c.otorgado, quien: c.quien, dia: c.dia })), acceso_clinico: clin,
+        clinico: clin ? (cv.length ? cv[cv.length - 1] : null) : null, odontograma: clin ? Object.values(odo).map(o => ({ diente: o.diente, estado: o.estado, nota: o.nota, dia: o.dia })) : null,
+        evoluciones: clin ? db.evo.filter(e => e.cli === p.id).sort((x, y) => y.id - x.id) : null }; },
+    paciente_guardar(a) { quien(); const t = tel(a.p_telefono), h = hoy(); if (String(a.p_nombre || '').trim().length < 2) err('Escribe el nombre del paciente.'); if (!t) err('Escribe un celular válido (09...).');
+      if (a.p_nacimiento && (a.p_nacimiento > h || a.p_nacimiento < '1900-01-01')) err('La fecha de nacimiento no es válida.');
+      if (a.p_nacimiento && a.p_nacimiento > suma(h, -365 * 18) && String(a.p_representante || '').trim().length < 2) err('Para un menor de edad escribe el nombre de su representante.');
+      if (a.p_cedula && !/^[0-9A-Za-z-]{5,20}$/.test(a.p_cedula)) err('La cédula no es válida.');
+      if (db.pacientes.some(x => x.id !== a.p_id && (x.telefono === t || (a.p_cedula && (x.datos || {}).cedula === a.p_cedula)))) err('Ya existe un paciente con ese celular o esa cédula.');
+      let p = a.p_id ? db.pacientes.find(x => x.id === a.p_id) : null; if (a.p_id && !p) err('Paciente no encontrado.'); if (!p) { p = { id: id(), creado: h }; db.pacientes.push(p); }
+      Object.assign(p, { nombre: a.p_nombre.trim().slice(0, 80), telefono: t, datos: { cedula: a.p_cedula || null, nacimiento: a.p_nacimiento || null, email: a.p_email || null, direccion: a.p_direccion || null, contacto_nombre: a.p_contacto_nombre || null, contacto_tel: a.p_contacto_tel || null, representante: a.p_representante || null } }); guardar(); return { id: p.id }; },
+    consentimiento_registrar(a) { quien(); if (!['datos', 'tratamiento', 'imagenes'].includes(a.p_tipo)) err('Tipo no válido.'); if (String(a.p_quien || '').trim().length < 2) err('Escribe el nombre de quien da el consentimiento (el paciente o su representante).'); if (!db.pacientes.find(x => x.id === a.p_id)) err('Paciente no encontrado.');
+      db.consent.push({ cli: a.p_id, tipo: a.p_tipo, otorgado: !!a.p_otorgado, quien: a.p_quien.trim(), dia: hoy() }); guardar(); return null; },
+    paciente_clinico_guardar(a) { clinico(); consiente(a.p_id); db.clin.push({ cli: a.p_id, alergias: a.p_alergias || null, medicamentos: a.p_medicamentos || null, antecedentes_medicos: a.p_antecedentes_medicos || null, antecedentes_odonto: a.p_antecedentes_odonto || null, habitos: a.p_habitos || null, observaciones: a.p_observaciones || null, actualizado: hoy() + ' ' + hm() }); audita(a.p_id, 'editar_clinico'); guardar(); return null; },
+    odontograma_marcar(a) { clinico(); consiente(a.p_id); if (!FDI.includes(a.p_diente) || !['sano', 'caries', 'resina', 'endodoncia', 'corona', 'brackets', 'implante', 'protesis', 'ausente'].includes(a.p_estado)) err('Diente o estado no válido.');
+      db.odo.push({ cli: a.p_id, diente: a.p_diente, estado: a.p_estado, nota: a.p_nota || null, dia: hoy() }); audita(a.p_id, 'odontograma', a.p_diente + ' ' + a.p_estado); guardar(); return null; },
+    evolucion_guardar(a) { clinico(); consiente(a.p_id); if (String(a.p_motivo || '').trim().length < 3) err('Escribe el motivo de la consulta.'); if (a.p_doctor != null && !dc(a.p_doctor)) err('Doctor no válido.');
+      if (a.p_cita != null && !db.citas.some(c => c.id === a.p_cita && c.pac === a.p_id)) err('Esa cita no es de este paciente.'); if (a.p_corrige != null && !db.evo.some(e => e.id === a.p_corrige && e.cli === a.p_id)) err('La nota que corriges no es de este paciente.');
+      const e = { id: id(), cli: a.p_id, dia: hoy() + ' ' + hm(), motivo: a.p_motivo.trim(), diagnostico: a.p_diagnostico || null, procedimiento: a.p_procedimiento || null, indicaciones: a.p_indicaciones || null, doctor: (dc(a.p_doctor) || {}).nombre || null, autor: db.rol === 'admin' ? 'Dueña (demo)' : 'Doctor (demo)', corrige_id: a.p_corrige ?? null, cita_id: a.p_cita ?? null };
+      db.evo.push(e); audita(a.p_id, a.p_corrige ? 'corrige_evolucion' : 'evolucion', String(e.id)); guardar(); return e.id; },
+    auditoria_lista(a) { admin(); return db.aud.filter(x => !a.p_id || x.cli === a.p_id).slice().reverse().slice(0, a.p_limite || 100).map(x => ({ cuando: x.cuando, quien: x.quien, accion: x.accion, paciente: x.paciente, detalle: x.detalle })); },
     cita_estado(a) { quien(); if (!['pendiente', 'confirmada', 'atendida', 'cancelada', 'no_vino'].includes(a.p_estado)) err('Estado no válido.'); const c = db.citas.find(x => x.id === a.p_cita); if (!c) err('Cita no encontrada.'); c.estado = a.p_estado; guardar(); return null; },
     cita_doctor(a) { quien(); if (a.p_doctor != null && !(dc(a.p_doctor) || {}).activo) err('Doctor no válido.'); const c = db.citas.find(x => x.id === a.p_cita); if (!c) err('Cita no encontrada.'); c.doctor_id = a.p_doctor; guardar(); return null; },
     caja_dia(a) { quien(); const m = db.caja.filter(x => x.dia === a.p_dia), v = m.filter(x => !x.anulado), s = t => R2(v.filter(x => x.tipo === t).reduce((q, x) => q + x.importe, 0));
       return { items: m.sort((x, y) => x.hora < y.hora ? -1 : 1).map(x => ({ id: x.id, hora: x.hora, descripcion: x.descripcion, importe: x.importe, tipo: x.tipo, doctor_id: x.doctor_id, anulado: x.anulado, motivo: x.motivo || null })), ingresos: s('ing'), egresos: s('egr') }; },
     caja_registrar(a) { quien(); if (String(a.p_descripcion || '').trim().length < 2) err('Escribe una descripción.'); if (!(a.p_importe > 0 && a.p_importe <= 100000)) err('Importe no válido.'); if (!['ing', 'egr'].includes(a.p_tipo)) err('Tipo no válido.');
-      const m = { id: id(), dia: hoy(), hora: hm(), descripcion: a.p_descripcion.trim().slice(0, 80), importe: R2(a.p_importe), tipo: a.p_tipo, doctor_id: a.p_doctor ?? null, anulado: false }; db.caja.push(m); guardar(); return m.id; },
+      const m = { id: id(), dia: hoy(), hora: hm(), descripcion: a.p_descripcion.trim().slice(0, 80), importe: R2(a.p_importe), tipo: a.p_tipo, doctor_id: a.p_doctor ?? null, anulado: false, cli: a.p_clienta ?? null }; if (a.p_clienta != null && !db.pacientes.find(x => x.id === a.p_clienta)) err('Paciente no encontrado.'); db.caja.push(m); guardar(); return m.id; },
     caja_anular(a) { quien(); if (String(a.p_motivo || '').trim().length < 3) err('Escribe el motivo de la anulación.'); const m = db.caja.find(x => x.id === a.p_id && !x.anulado); if (!m) err('Movimiento no encontrado o ya anulado.'); m.anulado = true; m.motivo = a.p_motivo.trim().slice(0, 120); guardar(); return null; },
     presupuesto_guardar(a) { quien(); if (String(a.p_paciente || '').trim().length < 2) err('Escribe el nombre del paciente.'); if (!(a.p_descuento >= 0 && a.p_descuento <= 50)) err('El descuento va de 0 a 50 %.');
       const its = a.p_items; if (!Array.isArray(its) || !its.length || its.length > 20) err('Agrega de 1 a 20 tratamientos.'); let sub = 0; const lin = its.map(x => { const t = db.tarifario.find(y => y.id === x.tarifario_id && y.activo); if (!t) err('Tratamiento no válido.'); if (!(x.cant >= 1 && x.cant <= 20)) err('Cantidad entre 1 y 20.'); sub += t.precio * x.cant; return { descripcion: t.nombre, cant: x.cant, precio: t.precio }; });
-      const p = { id: id(), paciente: a.p_paciente.trim().slice(0, 80), doctor_id: a.p_doctor ?? null, descuento: a.p_descuento, total: R2(sub * (100 - a.p_descuento) / 100), estado: 'enviado', seguimiento: a.p_seguimiento || null, creado: hoy(), items: lin }; db.pres.push(p); guardar(); return { id: p.id, total: p.total }; },
+      if (a.p_clienta != null && !db.pacientes.find(x => x.id === a.p_clienta)) err('Paciente no encontrado.'); const p = { id: id(), cli: a.p_clienta ?? null, paciente: a.p_paciente.trim().slice(0, 80), doctor_id: a.p_doctor ?? null, descuento: a.p_descuento, total: R2(sub * (100 - a.p_descuento) / 100), estado: 'enviado', seguimiento: a.p_seguimiento || null, creado: hoy(), items: lin }; db.pres.push(p); guardar(); return { id: p.id, total: p.total }; },
     presupuestos_lista(a) { quien(); return db.pres.filter(p => !a.p_estado || p.estado === a.p_estado).sort((x, y) => y.id - x.id).slice(0, 100); },
     presupuesto_estado(a) { quien(); if (!['aceptado', 'rechazado'].includes(a.p_estado)) err('Estado no válido.'); const p = db.pres.find(x => x.id === a.p_id && x.estado === 'enviado'); if (!p) err('Presupuesto no encontrado o ya decidido.'); p.estado = a.p_estado; guardar(); return null; },
     dueno_resumen(a) {
@@ -169,7 +212,7 @@
     rpc(fn, args) { cargar(); const f = F[fn]; if (!f) return Promise.reject(new Error('Función no disponible en la demo: ' + fn));
       return new Promise((ok, no) => setTimeout(() => { try { ok(JSON.parse(JSON.stringify(f(args) ?? null))); } catch (e) { no(e); } }, 120)); },
     sesion() { cargar(); return Promise.resolve(F.yo()); },
-    entrar(rol) { cargar(); db.rol = rol === 'admin' ? 'admin' : 'recepcion'; guardar(); return Promise.resolve(F.yo()); },
+    entrar(rol) { cargar(); db.rol = ['admin', 'doctor'].includes(rol) ? rol : 'recepcion'; guardar(); return Promise.resolve(F.yo()); },
     salir() { cargar(); db.rol = null; guardar(); },
     reiniciar() { try { localStorage.removeItem(P + 'db'); } catch (e) {} db = null; }
   };
