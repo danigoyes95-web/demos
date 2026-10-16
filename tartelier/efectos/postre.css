@@ -1,0 +1,133 @@
+/* efectos/postre.css · complemento OPCIONAL de estilo "vitrina de repostería" (se elige con efectos.usar = ["postre"]). Se carga después del perfil.
+   Referencia de Daniel (Sweet Loaf): titular gigante detrás, el postre al centro como protagonista, etiquetas en píldora alrededor, botón
+   redondo sobre el postre y cinta de texto en movimiento al pie del hero. Se toma la forma; el color, la fuente y las fotos son del cliente.
+   Fuentes sugeridas (marca.fuentes_href): Cormorant Garamond (serif con cursiva) + Jost. Colores solo por variables --fx-*.
+   Hero: plantillas/landing.html bloque {{#postre}}; pide landing.hero.etiquetas (3–4), cta_circulo y foto (el plato, cuadrada).
+   Animaciones infinitas: solo la cinta y el latido del botón redondo (2; con el pulso del WhatsApp flotante son 3). Solo transform y opacity. */
+:root {
+  --fx-dur: .7s; --fx-ease: cubic-bezier(.22, .8, .3, 1); --fx-dist: 22px; --fx-fast: .25s;
+  --fx-rv-dur: 700; --fx-rv-step: 90; --fx-rv-ease: cubic-bezier(.22, .8, .3, 1); --fx-rv-dist: 20px; --fx-rv-scale: 1;
+  --fx-hilo: color-mix(in srgb, var(--fx-ink) 16%, transparent);
+}
+body { letter-spacing: 0; }
+
+/* Titulares: serif; la línea fina va en cursiva */
+.doble, body .hero h1 { font-family: var(--fx-font-disp); text-transform: none; letter-spacing: -.01em; }
+.doble { font: 600 clamp(2.4rem, 5.6vw, 4rem)/1 var(--fx-font-disp); }
+.doble span { display: block; font: italic 500 .56em/1.1 var(--fx-font-disp); margin-bottom: .1em; letter-spacing: 0; }
+.marca b, .cabecera nav a, .barra a, .btn { text-transform: none; }
+.marca b { font: 600 1.6rem/1 var(--fx-font-disp); letter-spacing: 0; }
+.paso h3, .caja h3, .chat h3, .caja-cab b, .reco b { text-transform: none; font-family: var(--fx-font-disp); font-weight: 600; letter-spacing: -.005em; }
+.paso h3 { font-size: 1.8rem; }
+.paso b { font: 500 1rem var(--fx-font-txt); letter-spacing: .1em; }
+.reco .precio, .pd-precio { font-family: var(--fx-font-disp); font-weight: 600; }
+
+/* Botones píldora, planos; el color se invierte sobre fondo oscuro */
+.btn { min-height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: var(--fx-deep); color: var(--fx-bg); font: 500 1rem/1 var(--fx-font-txt); letter-spacing: .02em; box-shadow: none; background-image: none; }
+.btn:active { transform: scale(.97); box-shadow: none; }
+.btn-linea { background: transparent; color: var(--fx-deep); box-shadow: inset 0 0 0 1.5px var(--fx-deep); }
+.oscuro .btn, .oscuro .btn:active { background: var(--fx-pop); color: var(--fx-deep); box-shadow: none; border: 0; }
+.oscuro .btn-linea { background: transparent; color: var(--fx-bg); box-shadow: inset 0 0 0 1.5px var(--fx-pop); }
+body .pd-btn { border-radius: 999px; box-shadow: none; font-weight: 500; letter-spacing: .02em; }
+body .pd-btn:active { transform: scale(.97); }
+
+/* Cabecera crema con filete; la barra superior queda en azul de la marca */
+.cabecera { background: color-mix(in srgb, var(--fx-bg) 94%, transparent); border-bottom: 1px solid var(--fx-hilo); }
+.cabecera .marca, .cabecera nav a { color: var(--fx-ink); }
+.marca img { border-radius: 8px; }
+.marca small { color: var(--fx-ink); opacity: .65; font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; }
+.cabecera nav a { font: 400 1rem/1 var(--fx-font-txt); border-radius: 999px; }
+.barra a { border-radius: 999px; font: 500 .9rem/1 var(--fx-font-txt); }
+
+/* ---------- Hero: el postre es el centro ---------- */
+.hero-postre { position: relative; overflow: hidden; background: var(--fx-bg); color: var(--fx-ink); }
+.hero-postre::before { content: ""; position: absolute; left: 50%; top: 56%; width: min(120vw, 1200px); aspect-ratio: 1; margin: calc(min(120vw, 1200px) / -2) 0 0 calc(min(120vw, 1200px) / -2); border-radius: 50%;
+  background: radial-gradient(closest-side, var(--fx-paper), transparent 72%); pointer-events: none; }
+.hero.hero-postre .wrap.hp { position: relative; display: flex; grid-template-columns: none; gap: 0; width: min(1180px, 100% - 36px); flex-direction: column; align-items: center; text-align: center; padding-block: clamp(22px, 4vw, 44px) clamp(30px, 4vw, 50px); }
+.hero.hero-postre h1.hp-titulo { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.hero.hero-postre .hp-titulo .fino { display: block; font: italic 500 clamp(1.35rem, 3vw, 2.1rem)/1.1 var(--fx-font-disp); letter-spacing: .01em; margin-bottom: .15em; }
+.hero.hero-postre .hp-titulo .grueso { display: block; font: 600 clamp(2.9rem, 12.6vw, 6.6rem)/.95 var(--fx-font-disp); text-transform: uppercase; letter-spacing: .005em; text-wrap: balance; }
+@media (min-width: 900px) { .hero.hero-postre .hp-titulo .grueso { font-size: clamp(5rem, 7.3vw, 7.2rem); white-space: nowrap; } }
+.hp-escena { position: relative; z-index: 2; width: min(100%, 1040px); margin-top: 10px; display: flex; flex-direction: column; align-items: center; }
+@media (min-width: 900px) { .hp-escena { margin-top: clamp(-24px, -1.6vw, -14px); } }
+.hp-plato { position: relative; width: clamp(250px, 32vw, 440px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--fx-paper);
+  box-shadow: 0 0 0 10px var(--fx-paper), 0 0 0 11px var(--fx-hilo), 0 34px 60px -26px color-mix(in srgb, var(--fx-deep) 55%, transparent); }
+.hp-plato img { width: 100%; height: 100%; object-fit: cover; }
+.hp-pildoras { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.hp-pildoras a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--fx-deep); background: color-mix(in srgb, var(--fx-bg) 80%, transparent); font: 500 .98rem/1 var(--fx-font-txt); letter-spacing: .02em; text-decoration: none; color: var(--fx-ink); }
+.hp-pildoras a:active { background: var(--fx-deep); color: var(--fx-bg); }
+.hp-pedir { position: absolute; z-index: 3; right: 6%; bottom: 82px; display: grid; place-items: center; width: 92px; height: 92px; border-radius: 50%; background: var(--fx-deep); color: var(--fx-bg); text-decoration: none; font: 600 1.15rem/1 var(--fx-font-disp); letter-spacing: .02em; }
+.hp-pedir::after { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 1px solid var(--fx-deep); opacity: 0; animation: fx-latido 3.2s ease-out 1.4s infinite; }
+@keyframes fx-latido { 0% { transform: scale(.9); opacity: .5; } 70%, 100% { transform: scale(1.22); opacity: 0; } }
+.hp-pedir:active { transform: scale(.95); }
+@media (min-width: 900px) {
+  .hp-escena { display: block; height: clamp(300px, 38vw, 480px); }
+  .hp-plato { position: absolute; left: 50%; top: 0; margin-left: calc(clamp(250px, 32vw, 440px) / -2); }
+  .hp-pildoras { position: absolute; inset: 0; margin: 0; display: block; }
+  .hp-pildoras li { position: absolute; }
+  .hp-pildoras li:nth-child(1) { left: 3%; top: 20%; } .hp-pildoras li:nth-child(2) { left: 10%; top: 60%; }
+  .hp-pildoras li:nth-child(3) { right: 4%; top: 26%; } .hp-pildoras li:nth-child(4) { right: 4%; top: 62%; }
+  .hp-pedir { right: auto; bottom: 10%; left: 50%; margin-left: calc(clamp(250px, 32vw, 440px) / 2 - 56px); width: 112px; height: 112px; font-size: 1.3rem; }
+}
+.hp-pie { max-width: 62ch; margin-top: clamp(20px, 3vw, 34px); position: relative; z-index: 2; }
+.hero.hero-postre .hp-pie .lead { margin-top: 0; max-width: none; font-size: 1.15rem; font-weight: 400; color: var(--fx-ink); }
+.hp-pie .acciones { justify-content: center; }
+@media (max-width: 899px) { .hp-pedir { right: calc(50% - 150px); bottom: auto; top: 54%; } }
+@media (max-width: 420px) { .hp-pedir { right: 8px; width: 82px; height: 82px; font-size: 1.05rem; } }
+
+/* Cinta de texto al pie del hero (1 animación infinita) */
+.cinta-postre { overflow: hidden; background: var(--fx-deep); color: var(--fx-bg); padding-block: 14px; }
+.cinta-pista { display: flex; width: max-content; animation: fx-cinta-p 40s linear infinite; }
+.cinta-postre ul { display: flex; list-style: none; margin: 0; padding: 0; }
+.cinta-postre li { display: flex; align-items: center; white-space: nowrap; font: italic 500 1.35rem/1 var(--fx-font-disp); padding-inline: 18px; }
+.cinta-postre li::after { content: "•"; margin-left: 36px; font-style: normal; opacity: .6; }
+@keyframes fx-cinta-p { to { transform: translateX(-50%); } }
+
+/* ---------- Resto de la página ---------- */
+.diag .caja, .caja, .chat { border: 1px solid var(--fx-hilo); border-radius: 24px; box-shadow: none; }
+.op { border: 1px solid var(--fx-hilo); border-radius: 16px; box-shadow: none; background: var(--fx-bg); font-weight: 500; }
+.op:active { transform: scale(.985); box-shadow: none; }
+.reco { border-radius: 18px; }
+.chat.despues { border-color: var(--fx-deep); }
+.burbuja { border-radius: 16px; }
+.caja-cab img, .marca img { border-radius: 8px; }
+.sec.papel .caja { background: var(--fx-bg); }
+
+/* Carta: tarjetas con la foto arriba, sin sombra dura */
+.pd-lista .pd-item, body .pd-item { border: 1px solid var(--fx-hilo); border-radius: 22px; box-shadow: none; padding: 12px 12px 16px; background: var(--fx-paper); }
+.pd-lista .pd-item .pd-foto { height: 280px; border-radius: 16px; }
+.pd-lista .pd-item .pd-info { padding: 6px 6px 0; }
+body .pd-nombre, .pd-item h3 { font-family: var(--fx-font-disp); font-weight: 600; font-size: 1.55rem; letter-spacing: -.005em; text-transform: none; }
+
+body .pd-cat h2 { text-transform: none; line-height: 1.1; margin-bottom: 18px; }
+body .pd-cat h2 .fino { font: italic 500 1.5rem var(--fx-font-disp); }
+body .pd-cat h2 .grueso { font: 600 1.9rem var(--fx-font-disp); }
+@media (min-width: 1000px) { body .pd-lista { grid-template-columns: repeat(3, 1fr); } }
+
+/* Galería: fotos redondeadas y sin giro */
+.galeria figure { border: 0; border-radius: 22px; aspect-ratio: 4 / 5; }
+.galeria figure:nth-child(2), .galeria figure:nth-child(3) { transform: none; }
+.galeria figure:nth-child(2) { margin-top: 28px; }
+@media (max-width: 700px) { .galeria figure:nth-child(2) { margin-top: 0; } }
+
+/* Dónde: tarjeta azul con esquinas suaves */
+#donde .oscuro { border: 0 !important; box-shadow: none !important; border-radius: 28px !important; }
+#donde .oscuro h3 { text-transform: none !important; font: 600 2rem/1 var(--fx-font-disp) !important; }
+#donde .oscuro p { font: 600 clamp(2rem, 6vw, 3rem)/1 var(--fx-font-disp) !important; }
+
+/* Cierre: contorno con la marca, más suave */
+.contorno { font: 600 clamp(5rem, 20vw, 15rem)/.85 var(--fx-font-disp); text-transform: none; -webkit-text-stroke: 1px color-mix(in srgb, var(--fx-pop) 28%, transparent); letter-spacing: -.02em; }
+
+footer img, .marca img { border-radius: 8px; }
+.cabecera .marca img { display: none; }   /* el logo (palabra completa) no se lee a 52 px: la cabecera usa el nombre en serif; el logo va en el pie, el favicon y la vista previa */
+footer img { width: 120px; height: 120px; }
+.wa-flot::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #25D366; animation: fx-pulso-p 3s ease-out infinite; }
+@keyframes fx-pulso-p { from { transform: scale(1); opacity: .7; } to { transform: scale(1.55); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cinta-pista, .hp-pedir::after, .wa-flot::before { animation: none !important; }
+  .hp-pedir::after { display: none; }
+}
+
+/* Propuesta: «Recomendado» como píldora (el sello girado de energía se salía de la pantalla a 375 px) */
+.plan .sello { top: -16px !important; right: 14px !important; width: auto !important; height: auto !important; white-space: nowrap; padding: 8px 16px; border: 0; border-radius: 999px; transform: none; background: var(--fx-deep); color: var(--fx-bg); font: 500 .9rem/1 var(--fx-font-txt); letter-spacing: .04em; }
