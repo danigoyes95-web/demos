@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1B1B1D">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&amp;display=swap">
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/calma.css">
+<link rel="stylesheet" href="efectos/toque.css">
+<link rel="stylesheet" href="efectos/transicion.css">
+<link rel="stylesheet" href="efectos/clinica.css">
+<link rel="stylesheet" href="efectos/centro.css">
+<style>:root { --fx-bg: #F7F6F2; --fx-paper: #FFFFFF; --fx-accent: #B89830; --fx-ink: #1B1B1D; --fx-deep: #1B1B1D; --fx-pop: #EFE7CF; --fx-mancha-1: #E8DDB8; --fx-mancha-2: #8C8C8C; --fx-mancha-3: #1B1B1D; --fx-font: "Montserrat", sans-serif; --fx-font-disp: "Montserrat", sans-serif; --fx-font-txt: "Montserrat", sans-serif; --fx-rosa: #EFE7CF; --fx-rosa-2: #B89830; --fx-metal-1: #8A6D1F; --fx-metal-2: #B89830; --fx-metal-3: #E8DDB8; --fx-tinte-1: #EFE7CF; --fx-tinte-2: #E6E6E6; --fx-tinte-3: #E3D5A6; --fx-tinte-4: #F1EFE8; }</style>
+
+<title>Panel de clínica · Diamond</title>
+<meta name="description" content="Panel de clínica de la demo de Diamond: agenda, caja diaria, presupuestos y evolución con odontograma. Datos de ejemplo.">
+<link rel="stylesheet" href="estilos/paneles.css">
+<style>
+/* Panel de clínica (demo con datos de ejemplo, todo en el navegador). Colores solo por variables --fx-*; los de estado clínico son semánticos. */
+.app { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 0; background: var(--fx-paper); border-radius: var(--fx-radio, 24px); overflow: hidden; box-shadow: 0 24px 60px color-mix(in srgb, var(--fx-ink) 16%, transparent); border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); }
+.riel { background: linear-gradient(180deg, var(--fx-deep), color-mix(in srgb, var(--fx-deep) 70%, #5d5e64)); display: flex; flex-direction: column; align-items: stretch; padding: 14px 0; gap: 6px; }
+.riel button { display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 64px; border: 0; background: none; color: var(--fx-pop); font: 600 .72rem/1.1 var(--fx-font-txt); cursor: pointer; border-left: 4px solid transparent; padding: 8px 4px; }
+.riel button svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.riel button[aria-selected="true"] { background: color-mix(in srgb, var(--fx-bg) 14%, transparent); color: #fff; border-left-color: var(--fx-rosa, var(--fx-accent)); }
+.riel button:focus-visible { outline: 3px solid var(--fx-rosa, var(--fx-pop)); outline-offset: -3px; }
+.app > div { min-width: 0; }
+.vista { padding: clamp(16px, 2.6vw, 28px); min-width: 0; }
+.vista[hidden] { display: none; }
+.vista h2 { font: 800 clamp(1.5rem, 3vw, 2rem)/1.1 var(--fx-font-disp); letter-spacing: -.02em; margin-bottom: 4px; }
+.vista > p.sub { color: color-mix(in srgb, var(--fx-ink) 70%, var(--fx-bg)); margin-bottom: 16px; max-width: 70ch; }
+.ctrl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+.cb { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--fx-ink) 22%, transparent); background: var(--fx-bg); color: var(--fx-ink); font: 600 .95rem/1 var(--fx-font-txt); cursor: pointer; }
+.cb[aria-pressed="true"], .cb.on { background: var(--fx-deep); color: var(--fx-bg); border-color: var(--fx-deep); }
+.cb.hoy { background: linear-gradient(145deg, #E9EAEC, var(--fx-metal-2, #B8B8B8)); color: var(--fx-deep); border-color: transparent; }
+.cb:focus-visible { outline: 3px solid var(--fx-deep); outline-offset: 2px; }
+.doc-chip { display: inline-flex; align-items: center; gap: 8px; }
+.doc-chip i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); }
+/* Agenda */
+.agenda { overflow-x: auto; border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); border-radius: 16px; background: #fff; -webkit-overflow-scrolling: touch; }
+.ag-grid { display: grid; min-width: 560px; }
+.ag-cab { position: sticky; top: 0; background: var(--fx-deep); color: var(--fx-bg); font: 700 .9rem/1.2 var(--fx-font-txt); padding: 10px 6px; text-align: center; border-left: 1px solid color-mix(in srgb, var(--fx-bg) 20%, transparent); }
+.ag-hora { font: 600 .78rem var(--fx-font-txt); color: color-mix(in srgb, var(--fx-ink) 60%, #fff); padding: 4px 6px; border-top: 1px solid color-mix(in srgb, var(--fx-ink) 10%, transparent); height: 44px; background: color-mix(in srgb, var(--fx-bg) 80%, #fff); }
+.ag-col { position: relative; border-left: 1px solid color-mix(in srgb, var(--fx-ink) 10%, transparent); background-image: repeating-linear-gradient(to bottom, transparent 0 43px, color-mix(in srgb, var(--fx-ink) 10%, transparent) 43px 44px); }
+.cita { position: absolute; left: 3px; right: 3px; border: 0; border-radius: 8px; padding: 4px 8px; text-align: left; background: color-mix(in srgb, var(--c) 16%, #fff); border-top: 4px solid var(--c); color: var(--fx-ink); font: 400 .78rem/1.25 var(--fx-font-txt); cursor: pointer; overflow: hidden; min-height: 36px; box-shadow: 0 2px 6px color-mix(in srgb, var(--fx-ink) 14%, transparent); }
+.cita b { display: block; font-weight: 700; }
+.cita[aria-pressed="true"] { outline: 3px solid var(--fx-deep); outline-offset: 1px; z-index: 2; }
+.detalle { margin-top: 14px; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--fx-bg) 88%, var(--fx-rosa, #fff)); display: grid; gap: 6px; }
+.detalle[hidden] { display: none; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px; font: 600 .85rem var(--fx-font-txt); }
+.leyenda i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: var(--c); margin-right: 6px; vertical-align: -1px; }
+/* Formularios */
+.fila { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); align-items: end; margin-bottom: 14px; }
+.campo label { display: block; font: 600 .85rem var(--fx-font-txt); margin-bottom: 4px; }
+.campo input, .campo select { width: 100%; min-height: 46px; padding: 0 12px; border-radius: 12px; border: 1.5px solid color-mix(in srgb, var(--fx-ink) 22%, transparent); background: #fff; font: 400 1rem var(--fx-font-txt); color: var(--fx-ink); }
+.campo input:focus-visible, .campo select:focus-visible { outline: 3px solid var(--fx-deep); outline-offset: 1px; }
+.tabla { width: 100%; border-collapse: collapse; font-size: .98rem; }
+.tabla th { text-align: left; font: 700 .8rem var(--fx-font-txt); text-transform: uppercase; letter-spacing: .05em; color: color-mix(in srgb, var(--fx-ink) 65%, #fff); padding: 8px 6px; border-bottom: 2px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); }
+.tabla td { padding: 10px 6px; border-bottom: 1px solid color-mix(in srgb, var(--fx-ink) 10%, transparent); vertical-align: top; }
+.tabla td.n, .tabla th.n { text-align: right; white-space: nowrap; }
+.anulado td { text-decoration: line-through; opacity: .5; }
+.mini { min-height: 38px; padding: 0 12px; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--fx-ink) 25%, transparent); background: #fff; font: 600 .85rem var(--fx-font-txt); cursor: pointer; }
+.ing { color: #1d7a4a; font-weight: 700; } .egr { color: #a3294a; font-weight: 700; }
+.dos { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 960px) { .dos { grid-template-columns: 1fr; } }
+/* Hoja de presupuesto */
+.hoja-p { background: #fff; border-radius: 6px; padding: clamp(18px, 3vw, 30px); box-shadow: 0 14px 34px color-mix(in srgb, var(--fx-ink) 18%, transparent); transform: rotate(-.6deg); border: 1px solid color-mix(in srgb, var(--fx-ink) 10%, transparent); }
+.hoja-p header { display: flex; gap: 12px; align-items: center; padding-bottom: 12px; border-bottom: 2px solid var(--fx-deep); margin-bottom: 14px; }
+.hoja-p header img { width: 48px; height: 48px; border-radius: 50%; }
+.hoja-p h3 { font: 800 1.3rem/1 var(--fx-font-disp); }
+.hoja-p .tot { display: flex; justify-content: space-between; font: 800 1.3rem var(--fx-font-disp); padding-top: 12px; margin-top: 8px; border-top: 2px solid var(--fx-deep); }
+.hoja-p small { display: block; margin-top: 10px; color: color-mix(in srgb, var(--fx-ink) 65%, #fff); font-size: .8rem; }
+/* Odontograma 2D */
+.odo { display: grid; gap: 10px; justify-items: center; padding: 16px 8px; border-radius: 16px; background: #fff; border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); overflow-x: auto; }
+.arc { display: flex; gap: 4px; }
+.arc .mid { width: 10px; border-left: 2px dashed color-mix(in srgb, var(--fx-ink) 25%, transparent); margin: 0 3px; }
+.dte { width: 38px; min-height: 54px; border-radius: 10px 10px 16px 16px; border: 2px solid color-mix(in srgb, var(--fx-ink) 30%, transparent); background: #fff; display: grid; place-items: end center; padding-bottom: 4px; font: 700 .72rem var(--fx-font-txt); color: var(--fx-ink); cursor: pointer; background-image: linear-gradient(to bottom, var(--e, transparent) 0 60%, transparent 60%); }
+.dte[aria-pressed="true"] { outline: 3px solid var(--fx-deep); outline-offset: 2px; }
+.dte[data-e="ausente"] { opacity: .4; border-style: dashed; }
+.dte:focus-visible { outline: 3px solid var(--fx-deep); outline-offset: 2px; }
+.estados { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.estados .cb i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--c); margin-right: 6px; border: 1px solid color-mix(in srgb, var(--fx-ink) 30%, transparent); }
+.aviso-clin { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--fx-marca-bg, #fff3c4); color: var(--fx-marca-ink, #5a3b00); font: 600 .9rem/1.4 var(--fx-font-txt); }
+@media (max-width: 760px) {
+  .app { grid-template-columns: 1fr; }
+  .riel { flex-direction: row; overflow-x: auto; padding: 0; }
+  .riel button { flex: 1 0 25%; min-height: 60px; border-left: 0; border-bottom: 4px solid transparent; }
+  .riel button[aria-selected="true"] { border-bottom-color: var(--fx-rosa, var(--fx-accent)); }
+}
+@media print { body * { visibility: hidden; } .hoja-p, .hoja-p * { visibility: visible; } .hoja-p { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; transform: none; } }
+</style>
+</head>
+<body data-pagina="Panel de clínica" data-secciones='["Agenda", "Caja", "Presupuesto", "Evolución"]'>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5 0 0 1 16 0z"/><path d="M3.5 13.5h17M4 17h16a0 0 0 0 1 0 0 3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M9 7h.01M13 6.5h.01M15.5 8h.01"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h5l2-6h-4M16 11l2 6M12 11 10 7H7"/></symbol>
+  <symbol id="i-envio" viewBox="0 0 24 24"><path d="M21 4 3 11l7 3 3 7z"/><path d="m10 14 4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9h17M7 6.8h.01M9.5 6.8h.01"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pago" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 10h18M7 14h3"/></symbol>
+  <symbol id="i-llave" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-copa" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2v2h-2zM18.5 14.5h2M14.5 18.5h2M18.5 18.5v2"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-tarjeta" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-caja" viewBox="0 0 24 24"><path d="M6 3.5h12v5H6zM4 8.5h16l-1.5 11h-13z"/><path d="M9 13h6"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.5-3.5 2.7-5.5 5.5-5.5s5 2 5.5 5.5M15 14.2c2.6-.4 4.7 1 5.5 4.3"/></symbol>
+  <symbol id="i-juego" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M13 14h3M8 17h2"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-diente" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/></symbol>
+  <symbol id="i-endodoncia" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><path d="M10 9.5c0 2 .5 3.5.7 5.5M14 9.5c0 2-.5 3.5-.7 5.5"/></symbol>
+  <symbol id="i-brackets" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><rect x="9.2" y="7.2" width="5.6" height="4" rx=".9"/><path d="M5 9.2h4.2M14.8 9.2H19"/></symbol>
+  <symbol id="i-sonrisa" viewBox="0 0 24 24"><path d="M3.5 12.5c1.2 4.6 4.7 7 8.5 7s7.3-2.4 8.5-7"/><path d="M5 12.8h14M9 13v4.6M12 13v5.3M15 13v4.6"/><path d="M12 3.5v3M10.5 5h3"/></symbol>
+  <symbol id="i-radio" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M8 17v-6c0-1 .6-1.6 1.4-1.6S10.8 10 10.8 11v6M13.2 17v-6c0-1 .6-1.6 1.4-1.6S16 10 16 11v6"/></symbol>
+  <symbol id="i-protesis" viewBox="0 0 24 24"><path vector-effect="non-scaling-stroke" transform="translate(.5 6) scale(.52)" d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><path vector-effect="non-scaling-stroke" transform="translate(11.5 6) scale(.52)" d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><path d="M9.6 11.4h4.8"/></symbol>
+  <symbol id="i-cirugia" viewBox="0 0 24 24"><path d="M3.5 20.5l8.6-8.6"/><path d="M12.1 11.9l6.2-7.4c.5-.6 1.4-.6 1.9-.1l.1.1c.5.5.5 1.300 0 1.800l-7.600 6.400"/><path d="M14.2 14.2l-2.400-2.400"/></symbol>
+</defs></svg>
+
+
+<header class="cabecera"><div class="wrap">
+  <a class="marca" href="inicio.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Diamond</b><small>Panel de clínica</small></span></a>
+  <a class="volver" href="inicio.html">Volver a la página</a>
+</div></header>
+<main>
+<section class="oscuro cab-pag"><div class="wrap">
+  <h1 class="doble fx-entra fx-d1"><span>El panel de tu clínica:</span>agenda, caja y pacientes</h1>
+  <p class="intro fx-entra fx-d2" style="color:var(--fx-soft)">Diseñado para el día a día de una clínica dental con varias áreas: ves a todos tus doctores en una agenda, controlas la caja del día, armas presupuestos para enviar por WhatsApp y registras la evolución en un odontograma.</p>
+  <p class="fx-entra fx-d3" style="margin-top:14px"><span class="chip-ej">Datos y precios de ejemplo</span> <span style="color:var(--fx-soft)">Todo lo que pruebes se guarda solo en este navegador.</span></p>
+</div></section>
+<section class="sec" style="padding-top:36px"><div class="wrap">
+  <div class="app">
+    <nav class="riel" role="tablist" aria-label="Secciones del panel">
+      <button type="button" role="tab" id="t-agenda" aria-selected="true" aria-controls="v-agenda"><svg viewBox="0 0 24 24"><use href="#i-agenda"/></svg>Agenda</button>
+      <button type="button" role="tab" id="t-caja" aria-selected="false" aria-controls="v-caja"><svg viewBox="0 0 24 24"><use href="#i-caja"/></svg>Caja</button>
+      <button type="button" role="tab" id="t-presupuesto" aria-selected="false" aria-controls="v-presupuesto"><svg viewBox="0 0 24 24"><use href="#i-pago"/></svg>Presupuesto</button>
+      <button type="button" role="tab" id="t-evolucion" aria-selected="false" aria-controls="v-evolucion"><svg viewBox="0 0 24 24"><use href="#i-diente"/></svg>Evolución</button>
+    </nav>
+    <div>
+      <div class="vista" id="v-agenda" role="tabpanel" aria-labelledby="t-agenda">
+        <h2>Agenda de todos tus doctores</h2><p class="sub">Mira el día o la semana, filtra por doctor y confirma cada cita por WhatsApp con un toque.</p>
+        <div class="ctrl" id="ag-nav"><button type="button" class="cb" id="ag-ant">Anterior</button><button type="button" class="cb hoy" id="ag-hoy">Hoy</button><button type="button" class="cb" id="ag-sig">Siguiente</button>
+          <span style="width:8px"></span><button type="button" class="cb" id="vi-dia" aria-pressed="true">Por día</button><button type="button" class="cb" id="vi-sem" aria-pressed="false">Por semana</button></div>
+        <div class="ctrl" id="ag-docs" aria-label="Doctores"></div>
+        <div class="agenda" data-lenis-prevent><div class="ag-grid" id="ag-grid"></div></div>
+        <div class="detalle" id="ag-det" hidden></div>
+        <div class="leyenda" id="ag-ley"></div>
+      </div>
+      <div class="vista" id="v-caja" role="tabpanel" aria-labelledby="t-caja" hidden>
+        <h2>Caja diaria</h2><p class="sub">Anota lo que entra y lo que sale. Cada movimiento queda con su hora y su doctor, y se corrige anulando, nunca borrando.</p>
+        <div class="kpis" id="caja-kpis" style="margin-bottom:16px"></div>
+        <form class="fila" id="caja-form" autocomplete="off">
+          <div class="campo"><label for="c-desc">Descripción</label><input id="c-desc" required maxlength="60" placeholder="ej.: 1 resina"></div>
+          <div class="campo"><label for="c-imp">Importe</label><input id="c-imp" type="number" step="0.01" min="0.01" required placeholder="ej.: 35.00"></div>
+          <div class="campo"><label for="c-tipo">Tipo</label><select id="c-tipo"><option value="ing">Ingreso</option><option value="egr">Egreso</option></select></div>
+          <div class="campo"><label for="c-doc">Doctor</label><select id="c-doc"></select></div>
+          <button class="btn" type="submit">Añadir</button>
+        </form>
+        <div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Hora</th><th>Descripción</th><th>Doctor</th><th class="n">Importe</th><th></th></tr></thead><tbody id="caja-lista"></tbody></table></div>
+        <p class="sub" style="margin-top:10px;font-size:.88rem">Los movimientos no se borran: se anulan y queda el registro.</p>
+      </div>
+      <div class="vista" id="v-presupuesto" role="tabpanel" aria-labelledby="t-presupuesto" hidden>
+        <h2>Presupuestos que se aceptan más rápido</h2><p class="sub">Arma el presupuesto con tus tratamientos, ponle descuento si corresponde y envíalo por WhatsApp o imprímelo con tu marca. Los precios de esta demo son de ejemplo.</p>
+        <div class="dos">
+          <div>
+            <div class="campo" style="margin-bottom:10px"><label for="p-pac">Paciente</label><input id="p-pac" maxlength="50" value="Paciente de ejemplo"></div>
+            <div class="fila"><div class="campo"><label for="p-item">Tratamiento</label><select id="p-item"></select></div>
+              <div class="campo"><label for="p-cant">Cantidad</label><input id="p-cant" type="number" min="1" max="20" value="1"></div>
+              <button type="button" class="btn" id="p-add">Agregar</button></div>
+            <div class="campo" style="max-width:200px;margin-bottom:14px"><label for="p-desc">Descuento (%)</label><input id="p-desc" type="number" min="0" max="50" value="0"></div>
+            <div class="acciones" style="margin-top:0"><button type="button" class="btn" id="p-wa">Enviar por WhatsApp</button><button type="button" class="btn btn-linea" id="p-print">Imprimir</button></div>
+          </div>
+          <div class="hoja-p" id="hoja"><header><img src="assets/logo.webp" alt="" width="48" height="48"><div><h3>Diamond Odontología Especializada</h3><span style="font-size:.85rem">Presupuesto · <span id="h-fecha"></span></span></div></header>
+            <p><strong id="h-pac"></strong></p>
+            <table class="tabla"><thead><tr><th>Descripción</th><th class="n">Cant.</th><th class="n">Importe</th><th></th></tr></thead><tbody id="p-lista"></tbody></table>
+            <div class="tot"><span>Total</span><span id="p-total"></span></div>
+            <small>Valores de ejemplo, sujetos a valoración. Válido por 15 días.</small></div>
+        </div>
+      </div>
+      <div class="vista" id="v-evolucion" role="tabpanel" aria-labelledby="t-evolucion" hidden>
+        <h2>Evolución del paciente</h2><p class="sub">Toca un diente, elige su estado y regístralo en la evolución con la fecha y el doctor.</p>
+        <div class="odo" id="odo" aria-label="Odontograma"></div>
+        <div class="estados" id="estados" role="group" aria-label="Estado del diente"></div>
+        <div class="fila"><div class="campo"><label for="e-doc">Doctor</label><select id="e-doc"></select></div><div class="campo"><label for="e-nota">Nota</label><input id="e-nota" maxlength="80" placeholder="ej.: control en 15 días"></div><button type="button" class="btn" id="e-add">Registrar en la evolución</button></div>
+        <div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Fecha</th><th>Diente</th><th>Estado</th><th>Doctor</th><th>Nota</th></tr></thead><tbody id="e-lista"></tbody></table></div>
+        <p class="aviso-clin">Datos clínicos ficticios, solo para mostrar el diseño. La historia clínica real exige consentimiento del paciente y almacenamiento seguro: se define con la clínica antes de activarla.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+</main>
+<script src="config.js"></script>
+<script>
+const C = {"marca_sub": "Panel de clínica", "h1_fino": "El panel de tu clínica:", "h1_grueso": "agenda, caja y pacientes", "intro": "Diseñado para el día a día de una clínica dental con varias áreas: ves a todos tus doctores en una agenda, controlas la caja del día, armas presupuestos para enviar por WhatsApp y registras la evolución en un odontograma.", "doctores": [{"id": "d1", "nombre": "Dr. Andrés Vaca", "color": "#5F6168"}, {"id": "d2", "nombre": "Dra. Natalia Gavilanes", "color": "#4A78C2"}, {"id": "d3", "nombre": "Doctora C (ejemplo)", "color": "#2E8B6F"}], "tipos": {"primera": {"nombre": "Valoración inicial", "color": "#4A78C2"}, "pediatria": {"nombre": "Cirugía maxilofacial", "color": "#D6609A"}, "orto": {"nombre": "Ortodoncia", "color": "#2E8B6F"}, "estetica": {"nombre": "Estética dental", "color": "#5F6168"}, "implante": {"nombre": "Implantes y rehabilitación", "color": "#6B5BA8"}, "control": {"nombre": "Control", "color": "#8E8F94"}}, "agenda": {"titulo": "Agenda de todos tus doctores", "texto": "Mira el día o la semana, filtra por doctor y confirma cada cita por WhatsApp con un toque."}, "citas": [{"id": "a1", "dia": 0, "doctor": "d1", "hora": "08:15", "dur": 45, "paciente": "Renata B.", "motivo": "Valoración inicial", "tipo": "primera"}, {"id": "a2", "dia": 0, "doctor": "d1", "hora": "09:30", "dur": 45, "paciente": "Tomás G. (niño)", "motivo": "Ortodoncia · control", "tipo": "orto"}, {"id": "a3", "dia": 0, "doctor": "d2", "hora": "08:30", "dur": 30, "paciente": "Ivana S.", "motivo": "Control de ortodoncia", "tipo": "orto"}, {"id": "a4", "dia": 0, "doctor": "d2", "hora": "10:00", "dur": 60, "paciente": "Esteban V.", "motivo": "Valoración para implante", "tipo": "implante"}, {"id": "a5", "dia": 0, "doctor": "d3", "hora": "09:00", "dur": 60, "paciente": "Julia M.", "motivo": "Estética dental", "tipo": "estetica"}, {"id": "a6", "dia": 0, "doctor": "d3", "hora": "11:00", "dur": 30, "paciente": "Nicolás P.", "motivo": "Control", "tipo": "control"}, {"id": "a7", "dia": 1, "doctor": "d1", "hora": "08:30", "dur": 45, "paciente": "Emilia R. (niña)", "motivo": "Ortodoncia · primera visita", "tipo": "orto"}, {"id": "a8", "dia": 1, "doctor": "d2", "hora": "09:30", "dur": 30, "paciente": "Sebastián L.", "motivo": "Control de ortodoncia", "tipo": "orto"}, {"id": "a9", "dia": 1, "doctor": "d3", "hora": "10:30", "dur": 60, "paciente": "Paola C.", "motivo": "Control de rehabilitación", "tipo": "implante"}, {"id": "a10", "dia": 2, "doctor": "d1", "hora": "09:00", "dur": 45, "paciente": "Gabriel T.", "motivo": "Valoración inicial", "tipo": "primera"}, {"id": "a11", "dia": 2, "doctor": "d2", "hora": "08:00", "dur": 30, "paciente": "Mía H.", "motivo": "Control", "tipo": "control"}, {"id": "a12", "dia": 3, "doctor": "d3", "hora": "08:30", "dur": 60, "paciente": "Andrea F.", "motivo": "Estética dental", "tipo": "estetica"}, {"id": "a13", "dia": 4, "doctor": "d1", "hora": "10:00", "dur": 30, "paciente": "Lorenzo D. (niño)", "motivo": "Ortodoncia · control", "tipo": "orto"}], "caja": {"titulo": "Caja diaria", "texto": "Anota lo que entra y lo que sale. Cada movimiento queda con su hora y su doctor, y se corrige anulando, nunca borrando.", "items": [{"hora": "08:40", "desc": "Valoración inicial", "importe": 20, "tipo": "ing", "doctor": "d1"}, {"hora": "10:15", "desc": "1 control de ortodoncia", "importe": 40, "tipo": "ing", "doctor": "d2"}, {"hora": "11:30", "desc": "Guantes descartables", "importe": 12.5, "tipo": "egr", "doctor": "d1"}, {"hora": "12:05", "desc": "Rehabilitación oral (abono)", "importe": 60, "tipo": "ing", "doctor": "d3"}]}, "presupuesto": {"titulo": "Presupuestos que se aceptan más rápido", "texto": "Arma el presupuesto con tus tratamientos, ponle descuento si corresponde y envíalo por WhatsApp o imprímelo con tu marca. Los precios de esta demo son de ejemplo.", "paciente": "Paciente de ejemplo", "inicial": [{"nombre": "Valoración inicial", "cant": 1}, {"nombre": "Control de ortodoncia", "cant": 2}]}, "tarifario": [{"nombre": "Valoración inicial", "precio": 20}, {"nombre": "Consulta de cirugía maxilofacial", "precio": 25}, {"nombre": "Control de ortodoncia", "precio": 40}, {"nombre": "Estética dental (por pieza)", "precio": 80}, {"nombre": "Valoración para implante", "precio": 30}, {"nombre": "Control de rehabilitación", "precio": 35}], "evolucion": {"titulo": "Evolución del paciente", "texto": "Toca un diente, elige su estado y regístralo en la evolución con la fecha y el doctor.", "aviso": "Datos clínicos ficticios, solo para mostrar el diseño. La historia clínica real exige consentimiento del paciente y almacenamiento seguro: se define con la clínica antes de activarla.", "entradas": [{"fecha": "08 oct 2026", "diente": 46, "estado": "caries", "doctor": "d1", "nota": "Se detecta en la valoración (ejemplo)"}, {"fecha": "12 oct 2026", "diente": 36, "estado": "implante", "doctor": "d2", "nota": "Control de la etapa (ejemplo)"}]}, "estados": [{"id": "sano", "nombre": "Sano", "color": "#FFFFFF"}, {"id": "caries", "nombre": "Caries", "color": "#C9435A"}, {"id": "resina", "nombre": "Resina", "color": "#4A78C2"}, {"id": "corona", "nombre": "Corona", "color": "#E0A030"}, {"id": "brackets", "nombre": "Brackets", "color": "#2E8B6F"}, {"id": "implante", "nombre": "Implante", "color": "#6B5BA8"}, {"id": "ausente", "nombre": "Ausente", "color": "#8E8F94"}], "dientes": {"46": "caries", "11": "resina", "21": "resina", "24": "brackets", "25": "brackets", "36": "implante", "16": "corona", "28": "ausente"}, "consentimiento": "Acepto que Diamond use mis datos (nombre, celular y datos de la cita) para gestionar mi solicitud y contactarme.", "semilla": {"duracion_min": 40, "paso_min": 20, "horario": {"dias": [1, 2, 3, 4, 5, 6], "abre": "09:00", "cierra": "18:00", "pausa": ["13:00", "14:00"]}}, "mock": {"servicios": ["Valoración inicial", "Cirugía maxilofacial", "Ortodoncia", "Estética dental", "Implantes", "Rehabilitación oral", "Cirugía oral"], "duracion": 30, "capacidad": 2, "doctores": [{"nombre": "Dr. Andrés Vaca", "especialidad": null, "color": "#5F6168"}, {"nombre": "Dra. Natalia Gavilanes", "especialidad": null, "color": "#4A78C2"}, {"nombre": "Doctora C (ejemplo)", "especialidad": null, "color": "#2E8B6F"}], "tarifario": [{"nombre": "Valoración inicial", "precio": 20}, {"nombre": "Consulta de cirugía maxilofacial", "precio": 25}, {"nombre": "Control de ortodoncia", "precio": 40}, {"nombre": "Estética dental (por pieza)", "precio": 80}, {"nombre": "Valoración para implante", "precio": 30}, {"nombre": "Control de rehabilitación", "precio": 35}], "pacientes": ["Camila R.", "Andrés M.", "Lucía P.", "Mateo S.", "Valeria T.", "Joaquín L.", "Sofía N.", "Daniel C.", "Paula V.", "Martín A.", "Renata B.", "Tomás G.", "Ivana S.", "Esteban V."]}, "consentimiento_doc": {"titulo": "Consentimiento informado y autorización de tratamiento de datos personales", "responsable": "[MARCADOR: razón social y RUC de la clínica]", "conservacion": "[MARCADOR: tiempo que la clínica conserva la historia clínica]", "contacto": "[MARCADOR: correo o WhatsApp para ejercer derechos sobre los datos]", "secciones": [{"t": "1. Atención odontológica", "p": "Declaro que el odontólogo o la odontóloga me explicó, en palabras que pude entender, el diagnóstico, el tratamiento propuesto, sus alternativas, sus beneficios y sus posibles riesgos, y que pude hacer todas las preguntas que quise. Entiendo que ningún tratamiento garantiza un resultado y que los resultados varían en cada persona. Autorizo los procedimientos que acordemos; si durante la atención hiciera falta algo adicional, se me consultará antes, salvo una urgencia."}, {"t": "2. Mis datos personales y de salud", "p": "Autorizo a {clinica} (responsable del tratamiento: {responsable}) a tratar mis datos de identificación y contacto y mis datos de salud (antecedentes, alergias, odontograma, evolución, cobros y presupuestos) para atenderme, gestionar mis citas, mis cobros y mis presupuestos, y cumplir las obligaciones legales de la historia clínica. Sé que los datos de salud son sensibles: solo los ve el personal autorizado (odontólogos y administración), y cada acceso queda registrado."}, {"t": "3. Comunicaciones", "p": "Autorizo que me contacten por llamada o WhatsApp para confirmar mis citas y darme indicaciones. Entiendo que mi historia clínica no se envía por esos medios."}, {"t": "4. Mis derechos", "p": "Puedo pedir acceso a mis datos, su rectificación o actualización, su eliminación cuando la ley lo permita (la historia clínica debe conservarse por el plazo legal), oponerme a ciertos usos, pedir su portabilidad y retirar este consentimiento en cualquier momento, escribiendo a {contacto}. Retirarlo no afecta lo ya realizado. Conservación: {conservacion}."}, {"t": "5. Menores de edad", "p": "Si el paciente es menor de edad, este consentimiento lo da su madre, padre o representante legal, que firma abajo."}], "imagenes": "Autorizo el uso de fotografías de mi caso solo para mi historia clínica.", "imagenes_difusion": "Autorizo el uso de fotografías de mi caso para difusión (redes y página web), cuidando mi identidad."}};
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const $$$ = n => '$' + Number(n).toFixed(2);
+const wa = t => `https://wa.me/${String(DEMO.waCliente).replace(/\D/g, '')}?text=${encodeURIComponent(t)}`;
+const guardar = (k, v) => { try { localStorage.setItem(DEMO.claveDemo + '_' + k, JSON.stringify(v)); } catch (e) {} };
+const leer = (k, d) => { try { const v = localStorage.getItem(DEMO.claveDemo + '_' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
+const DOC = Object.fromEntries(C.doctores.map(d => [d.id, d])), TIPO = C.tipos;
+
+/* Pestañas (teclado: flechas) */
+const tabs = $$('.riel button');
+function ir(t) { tabs.forEach(b => { const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; $('#' + b.getAttribute('aria-controls')).hidden = !on; }); }
+tabs.forEach((b, i) => { b.onclick = () => ir(b); b.onkeydown = e => { const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (d) { e.preventDefault(); const n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); ir(n); } }; });
+ir(tabs[0]);
+$$('select#c-doc, select#e-doc').forEach(s => s.innerHTML = C.doctores.map(d => `<option value="${esc(d.id)}">${esc(d.nombre)}</option>`).join(''));
+
+/* Agenda: por día (una columna por doctor) o por semana (una columna por día) */
+const IH = 44, H0 = 8 * 60, HN = 17;
+const ag = { dia: 0, vista: 'dia', docs: new Set(C.doctores.map(d => d.id)), sel: null };
+const fechaDia = i => { const d = new Date(); d.setDate(d.getDate() + i); return d; };
+const etq = i => fechaDia(i).toLocaleDateString('es-EC', { weekday: 'short', day: '2-digit', month: 'short', timeZone: 'America/Guayaquil' });
+const hm = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+const mins = s => +s.slice(0, 2) * 60 + +s.slice(3);
+function pintarAgenda() {
+  const docs = C.doctores.filter(d => ag.docs.has(d.id));
+  const cols = ag.vista === 'dia' ? docs.map(d => ({ t: d.nombre, f: c => c.doctor === d.id && c.dia === ag.dia })) : [0, 1, 2, 3, 4].map(i => ({ t: etq(i), f: c => c.dia === i && ag.docs.has(c.doctor) }));
+  const g = $('#ag-grid'); g.style.gridTemplateColumns = `56px repeat(${Math.max(cols.length, 1)}, minmax(130px, 1fr))`;
+  const filas = (HN - 8) * 2;
+  let h = '<div class="ag-cab">' + (ag.vista === 'dia' ? esc(etq(ag.dia)) : 'Semana') + '</div>' + cols.map(c => `<div class="ag-cab">${esc(c.t)}</div>`).join('');
+  h += `<div>${Array.from({ length: filas }, (_, i) => `<div class="ag-hora">${i % 2 ? '' : hm(H0 + i * 30)}</div>`).join('')}</div>`;
+  cols.forEach(col => {
+    h += `<div class="ag-col" style="height:${filas * IH}px">` + C.citas.filter(col.f).map(c => {
+      const ini = mins(c.hora), t = TIPO[c.tipo] || { color: '#8E8F94', nombre: '' };
+      return `<button type="button" class="cita" data-id="${esc(c.id)}" aria-pressed="${ag.sel === c.id}" style="--c:${t.color};top:${(ini - H0) / 30 * IH}px;height:${c.dur / 30 * IH - 2}px"><b>${esc(c.hora)} · ${esc(c.paciente)}</b>${esc(c.motivo)}</button>`;
+    }).join('') + '</div>';
+  });
+  g.innerHTML = h;
+  $$('.cita').forEach(b => b.onclick = () => { ag.sel = ag.sel === b.dataset.id ? null : b.dataset.id; pintarAgenda(); detalle(); });
+  $('#ag-ant').disabled = $('#ag-sig').disabled = ag.vista !== 'dia'; $('#ag-ant').style.opacity = $('#ag-sig').style.opacity = ag.vista === 'dia' ? 1 : .4;
+}
+function detalle() {
+  const c = C.citas.find(x => x.id === ag.sel), d = $('#ag-det'); d.hidden = !c; if (!c) return;
+  const msg = `Hola ${c.paciente}, te escribimos de ${DEMO.cliente} para confirmar tu cita (${c.motivo}) el ${etq(c.dia)} a las ${c.hora}.`;
+  d.innerHTML = `<b>${esc(c.paciente)} · ${esc(c.hora)} (${c.dur} min)</b><span>${esc(c.motivo)} · ${esc(DOC[c.doctor].nombre)}</span><div class="acciones" style="margin-top:6px"><a class="btn" target="_blank" rel="noopener" href="${wa(msg)}">Confirmar por WhatsApp</a><button type="button" class="btn btn-linea" id="det-x">Cerrar</button></div>`;
+  $('#det-x').onclick = () => { ag.sel = null; pintarAgenda(); detalle(); };
+}
+$('#ag-ant').onclick = () => { ag.dia = Math.max(0, ag.dia - 1); pintarAgenda(); };
+$('#ag-sig').onclick = () => { ag.dia = Math.min(4, ag.dia + 1); pintarAgenda(); };
+$('#ag-hoy').onclick = () => { ag.dia = 0; pintarAgenda(); };
+[['#vi-dia', 'dia'], ['#vi-sem', 'sem']].forEach(([s, v]) => $(s).onclick = () => { ag.vista = v; $('#vi-dia').setAttribute('aria-pressed', v === 'dia'); $('#vi-sem').setAttribute('aria-pressed', v === 'sem'); pintarAgenda(); });
+$('#ag-docs').innerHTML = C.doctores.map(d => `<button type="button" class="cb doc-chip" data-d="${esc(d.id)}" aria-pressed="true" style="--c:${d.color}"><i></i>${esc(d.nombre)}</button>`).join('');
+$$('#ag-docs .cb').forEach(b => b.onclick = () => { const id = b.dataset.d; ag.docs.has(id) ? ag.docs.delete(id) : ag.docs.add(id); b.setAttribute('aria-pressed', ag.docs.has(id)); pintarAgenda(); });
+$('#ag-ley').innerHTML = Object.values(TIPO).map(t => `<span><i style="--c:${t.color}"></i>${esc(t.nombre)}</span>`).join('');
+pintarAgenda();
+
+/* Caja diaria: los movimientos se anulan, no se borran */
+let caja = leer('caja', null) || C.caja.items.map((m, i) => ({ ...m, id: i + 1, hora: m.hora, anulado: false }));
+function pintarCaja() {
+  const v = caja.filter(m => !m.anulado), ing = v.filter(m => m.tipo === 'ing').reduce((s, m) => s + m.importe, 0), egr = v.filter(m => m.tipo === 'egr').reduce((s, m) => s + m.importe, 0);
+  $('#caja-kpis').innerHTML = [['Ingresos', $$$(ing), 'del día'], ['Egresos', $$$(egr), 'del día'], ['Saldo', $$$(ing - egr), 'ingresos menos egresos']].map(([a, b, c]) => `<div class="kpi"><small>${a}</small><b>${b}</b><span>${c}</span></div>`).join('');
+  $('#caja-lista').innerHTML = caja.slice().reverse().map(m => `<tr class="${m.anulado ? 'anulado' : ''}"><td>${esc(m.hora)}</td><td>${esc(m.desc)}</td><td>${esc(DOC[m.doctor]?.nombre || '')}</td><td class="n ${m.tipo}">${m.tipo === 'egr' ? '−' : '+'}${$$$(m.importe)}</td><td>${m.anulado ? 'Anulado' : `<button type="button" class="mini" data-a="${m.id}">Anular</button>`}</td></tr>`).join('');
+  $$('[data-a]').forEach(b => b.onclick = () => { caja.find(m => m.id === +b.dataset.a).anulado = true; guardar('caja', caja); pintarCaja(); });
+}
+$('#caja-form').onsubmit = e => { e.preventDefault(); const imp = parseFloat($('#c-imp').value); if (!(imp > 0)) return;
+  caja.push({ id: Date.now(), hora: new Date().toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Guayaquil' }), desc: $('#c-desc').value.trim(), importe: Math.round(imp * 100) / 100, tipo: $('#c-tipo').value, doctor: $('#c-doc').value, anulado: false });
+  guardar('caja', caja); e.target.reset(); pintarCaja(); };
+pintarCaja();
+
+/* Presupuesto */
+let pres = []; $('#p-item').innerHTML = C.tarifario.map((t, i) => `<option value="${i}">${esc(t.nombre)} · ${$$$(t.precio)}</option>`).join('');
+$('#h-fecha').textContent = new Date().toLocaleDateString('es-EC', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'America/Guayaquil' });
+const totalP = () => Math.round(pres.reduce((s, l) => s + l.precio * l.cant, 0) * (1 - Math.min(50, Math.max(0, +$('#p-desc').value || 0)) / 100) * 100) / 100;
+function pintarPres() {
+  $('#h-pac').textContent = $('#p-pac').value.trim() || 'Paciente';
+  $('#p-lista').innerHTML = pres.length ? pres.map((l, i) => `<tr><td>${esc(l.nombre)}</td><td class="n">${l.cant}</td><td class="n">${$$$(l.precio * l.cant)}</td><td><button type="button" class="mini" data-q="${i}" aria-label="Quitar ${esc(l.nombre)}">Quitar</button></td></tr>`).join('') : '<tr><td colspan="4">Agrega tratamientos para armar el presupuesto.</td></tr>';
+  $('#p-total').textContent = $$$(totalP());
+  $$('[data-q]').forEach(b => b.onclick = () => { pres.splice(+b.dataset.q, 1); pintarPres(); });
+}
+$('#p-add').onclick = () => { const t = C.tarifario[+$('#p-item').value], c = Math.min(20, Math.max(1, parseInt($('#p-cant').value) || 1)); const ex = pres.find(l => l.nombre === t.nombre); ex ? ex.cant += c : pres.push({ ...t, cant: c }); pintarPres(); };
+['#p-pac', '#p-desc'].forEach(s => $(s).oninput = pintarPres);
+$('#p-wa').onclick = () => { if (!pres.length) { $('#p-add').click(); } window.open(wa(`Presupuesto de ${DEMO.cliente} para ${$('#p-pac').value.trim() || 'paciente'}:\n` + pres.map(l => `${l.cant} × ${l.nombre}: ${$$$(l.precio * l.cant)}`).join('\n') + `\nTotal: ${$$$(totalP())}\n(Valores de ejemplo, sujetos a valoración)`), '_blank', 'noopener'); };
+$('#p-print').onclick = () => window.print();
+pres = C.presupuesto.inicial.map(n => ({ ...C.tarifario.find(t => t.nombre === n.nombre), cant: n.cant })); pintarPres();
+
+/* Evolución con odontograma 2D (numeración FDI) */
+const ESTADOS = C.estados, ESTADO = Object.fromEntries(ESTADOS.map(e => [e.id, e]));
+const SUP = [18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28], INF = [48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38];
+let dientes = leer('dientes', null) || { ...C.dientes }, evo = leer('evo', null) || C.evolucion.entradas.slice(), selD = 36, selE = 'resina';
+const fila = a => `<div class="arc">${a.map((n, i) => (i === 8 ? '<span class="mid"></span>' : '') + `<button type="button" class="dte" data-n="${n}" data-e="${dientes[n] || 'sano'}" aria-pressed="${n === selD}" aria-label="Diente ${n}, ${ESTADO[dientes[n] || 'sano'].nombre}" style="--e:${ESTADO[dientes[n] || 'sano'].color}">${n}</button>`).join('')}</div>`;
+function pintarOdo() {
+  $('#odo').innerHTML = fila(SUP) + fila(INF);
+  $$('.dte').forEach(b => b.onclick = () => { selD = +b.dataset.n; pintarOdo(); });
+  $('#estados').innerHTML = ESTADOS.map(e => `<button type="button" class="cb" aria-pressed="${e.id === selE}" data-e="${e.id}"><i style="--c:${e.color}"></i>${esc(e.nombre)}</button>`).join('') + `<span style="align-self:center;font:600 .9rem var(--fx-font-txt)">Diente seleccionado: ${selD}</span>`;
+  $$('#estados .cb').forEach(b => b.onclick = () => { selE = b.dataset.e; dientes[selD] = selE; guardar('dientes', dientes); pintarOdo(); });
+  $('#e-lista').innerHTML = evo.slice().reverse().map(x => `<tr><td>${esc(x.fecha)}</td><td>${esc(x.diente)}</td><td>${esc(ESTADO[x.estado]?.nombre || x.estado)}</td><td>${esc(DOC[x.doctor]?.nombre || '')}</td><td>${esc(x.nota || '')}</td></tr>`).join('');
+}
+$('#e-add').onclick = () => { evo.push({ fecha: new Date().toLocaleDateString('es-EC', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'America/Guayaquil' }), diente: selD, estado: dientes[selD] || 'sano', doctor: $('#e-doc').value, nota: $('#e-nota').value.trim() }); guardar('evo', evo); $('#e-nota').value = ''; pintarOdo(); };
+pintarOdo();
+</script>
+<script src="fx.js"></script>
+<script src="demo.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+/* Scroll suave y calmado (clínica): lerp bajo, sin inercia exagerada. Sin Lenis si el usuario pidió menos movimiento o si el CDN no cargó (la página scrollea normal).
+   Los enlaces #ancla respetan scroll-padding-top de la página (cabecera fija).
+   Para frenar a Lenis dentro de un mapa, un modal o un contenedor con scroll propio: atributo data-lenis-prevent. */
+(function () {
+  if (typeof Lenis === 'undefined' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const lenis = new Lenis({ lerp: 0.08, smoothWheel: true, anchors: true });
+  if (window.gsap && window.ScrollTrigger) {   /* si la página usa GSAP ScrollTrigger, Lenis va en su ticker */
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+  window.lenis = lenis;
+})();
+</script>
+
+</body>
+</html>
