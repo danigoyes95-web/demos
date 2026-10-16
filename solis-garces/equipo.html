@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#72367E">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&amp;display=swap">
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/calma.css">
+<link rel="stylesheet" href="efectos/toque.css">
+<link rel="stylesheet" href="efectos/transicion.css">
+<link rel="stylesheet" href="efectos/clinica.css">
+<link rel="stylesheet" href="efectos/centro.css">
+<style>:root { --fx-bg: #F8F5FA; --fx-paper: #FFFFFF; --fx-accent: #72367E; --fx-ink: #2B2430; --fx-deep: #4A2354; --fx-pop: #78C4C6; --fx-mancha-1: #78C4C6; --fx-mancha-2: #72367E; --fx-mancha-3: #4A2354; --fx-font: "Montserrat", sans-serif; --fx-font-disp: "Montserrat", sans-serif; --fx-font-txt: "Montserrat", sans-serif; --fx-rosa: #EADCF0; --fx-rosa-2: #C9A6D6; --fx-metal-1: #72367E; --fx-metal-2: #78C4C6; --fx-metal-3: #E3F2F2; --fx-tinte-1: #E9DDEE; --fx-tinte-2: #DDF1F1; --fx-tinte-3: #D6BFE0; --fx-tinte-4: #C4E6E6; }</style>
+
+<title>Panel del equipo · Solís Garcés</title>
+<meta name="description" content="Panel del equipo de Solís Garcés: solicitudes, agenda, caja y presupuestos.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="estilos/paneles.css">
+<link rel="stylesheet" href="modulos/clinica/clinica-panel.css">
+</head>
+<body data-pagina="Panel del equipo" data-secciones='["Solicitudes", "Agenda", "Pacientes", "Caja", "Presupuestos"]'>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5 0 0 1 16 0z"/><path d="M3.5 13.5h17M4 17h16a0 0 0 0 1 0 0 3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M9 7h.01M13 6.5h.01M15.5 8h.01"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h5l2-6h-4M16 11l2 6M12 11 10 7H7"/></symbol>
+  <symbol id="i-envio" viewBox="0 0 24 24"><path d="M21 4 3 11l7 3 3 7z"/><path d="m10 14 4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9h17M7 6.8h.01M9.5 6.8h.01"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pago" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 10h18M7 14h3"/></symbol>
+  <symbol id="i-llave" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-copa" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2v2h-2zM18.5 14.5h2M14.5 18.5h2M18.5 18.5v2"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-tarjeta" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-caja" viewBox="0 0 24 24"><path d="M6 3.5h12v5H6zM4 8.5h16l-1.5 11h-13z"/><path d="M9 13h6"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.5-3.5 2.7-5.5 5.5-5.5s5 2 5.5 5.5M15 14.2c2.6-.4 4.7 1 5.5 4.3"/></symbol>
+  <symbol id="i-juego" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M13 14h3M8 17h2"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-diente" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/></symbol>
+  <symbol id="i-endodoncia" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><path d="M10 9.5c0 2 .5 3.5.7 5.5M14 9.5c0 2-.5 3.5-.7 5.5"/></symbol>
+  <symbol id="i-brackets" viewBox="0 0 24 24"><path d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><rect x="9.2" y="7.2" width="5.6" height="4" rx=".9"/><path d="M5 9.2h4.2M14.8 9.2H19"/></symbol>
+  <symbol id="i-sonrisa" viewBox="0 0 24 24"><path d="M3.5 12.5c1.2 4.6 4.7 7 8.5 7s7.3-2.4 8.5-7"/><path d="M5 12.8h14M9 13v4.6M12 13v5.3M15 13v4.6"/><path d="M12 3.5v3M10.5 5h3"/></symbol>
+  <symbol id="i-radio" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M8 17v-6c0-1 .6-1.6 1.4-1.6S10.8 10 10.8 11v6M13.2 17v-6c0-1 .6-1.6 1.4-1.6S16 10 16 11v6"/></symbol>
+  <symbol id="i-protesis" viewBox="0 0 24 24"><path vector-effect="non-scaling-stroke" transform="translate(.5 6) scale(.52)" d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><path vector-effect="non-scaling-stroke" transform="translate(11.5 6) scale(.52)" d="M8 3.8c-2.4 0-3.8 1.7-3.8 4 0 1.9 1 3.3 1.5 5 .5 2 .7 7 2.5 7 1.4 0 1.2-3.6 3.8-3.6s2.4 3.6 3.8 3.6c1.8 0 2-5 2.5-7 .5-1.7 1.5-3.1 1.5-5 0-2.3-1.4-4-3.8-4-1.6 0-2.5.9-4 .9s-2.4-.9-4-.9z"/><path d="M9.6 11.4h4.8"/></symbol>
+  <symbol id="i-cirugia" viewBox="0 0 24 24"><path d="M3.5 20.5l8.6-8.6"/><path d="M12.1 11.9l6.2-7.4c.5-.6 1.4-.6 1.9-.1l.1.1c.5.5.5 1.300 0 1.800l-7.600 6.400"/><path d="M14.2 14.2l-2.400-2.400"/></symbol>
+</defs></svg>
+
+
+<header class="cabecera"><div class="wrap">
+  <a class="marca" href="inicio.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Solís Garcés</b><small>Panel del equipo</small></span></a>
+  <a class="volver" href="inicio.html">Volver a la página</a>
+</div></header>
+<main>
+<section class="oscuro cab-pag"><div class="wrap">
+  <h1 class="doble fx-entra fx-d1"><span>El panel de tu equipo:</span>solicitudes, agenda y caja</h1>
+  <p class="intro fx-entra fx-d2" style="color:var(--fx-soft)">Aquí llegan las solicitudes de tu página. Las conviertes en citas con su hora y su doctor, y llevas la agenda, la caja y los presupuestos de toda la clínica.</p>
+  <p class="fx-entra fx-d3" style="margin-top:14px"><span class="chip-ej">Datos y precios de ejemplo</span> <span style="color:var(--fx-soft)">Todo lo que pruebes se guarda solo en este navegador.</span></p>
+</div></section>
+
+<section class="sec" style="padding-top:36px"><div class="wrap">
+  <div id="puerta" hidden></div>
+  <div id="contenido" hidden>
+  <div class="app">
+    <nav class="riel" role="tablist" aria-label="Secciones del panel">
+
+      <button type="button" role="tab" id="t-solicitudes" aria-selected="false" aria-controls="v-solicitudes"><svg viewBox="0 0 24 24"><use href="#i-chat"/></svg>Solicitudes <span class="n" id="n-sol" hidden></span></button>
+      <button type="button" role="tab" id="t-agenda" aria-selected="false" aria-controls="v-agenda"><svg viewBox="0 0 24 24"><use href="#i-agenda"/></svg>Agenda</button>
+      <button type="button" role="tab" id="t-pacientes" aria-selected="false" aria-controls="v-pacientes"><svg viewBox="0 0 24 24"><use href="#i-equipo"/></svg>Pacientes</button>
+      <button type="button" role="tab" id="t-caja" aria-selected="false" aria-controls="v-caja"><svg viewBox="0 0 24 24"><use href="#i-caja"/></svg>Caja</button>
+      <button type="button" role="tab" id="t-presupuestos" aria-selected="false" aria-controls="v-presupuestos"><svg viewBox="0 0 24 24"><use href="#i-pago"/></svg>Presupuestos</button>
+
+
+
+
+
+    </nav>
+    <div>
+      <div class="barra-sesion"><span><span class="rol-chip" id="s-rol"></span> <span id="s-nombre"></span></span>
+        <span><a href="dueno.html" id="s-dueno" hidden>Panel del dueño</a> <button type="button" id="s-salir">Salir</button></span></div>
+
+      <div class="vista" id="v-solicitudes" role="tabpanel" aria-labelledby="t-solicitudes">
+        <h2>Solicitudes de cita</h2><p class="sub">Cada solicitud llega de la página con el consentimiento del paciente. Confírmala con día y hora exactos y quedará en la agenda.</p>
+        <div class="ctrl" id="sol-filtro" aria-label="Estado"><button type="button" class="cb" data-e="nueva" aria-pressed="true">Nuevas</button><button type="button" class="cb" data-e="agendada" aria-pressed="false">Agendadas</button><button type="button" class="cb" data-e="descartada" aria-pressed="false">Descartadas</button></div>
+        <div class="tarjetas" id="sol-lista" aria-live="polite"></div>
+      </div>
+
+      <div class="vista" id="v-agenda" role="tabpanel" aria-labelledby="t-agenda" hidden>
+        <h2>Agenda de todos tus doctores</h2><p class="sub">Mira el día o la semana, filtra por doctor y cambia el estado de cada cita. Los cambios quedan guardados.</p>
+        <div class="ctrl"><button type="button" class="cb" id="ag-ant">Anterior</button><button type="button" class="cb hoy" id="ag-hoy">Hoy</button><button type="button" class="cb" id="ag-sig">Siguiente</button>
+          <span style="width:8px"></span><button type="button" class="cb" id="vi-dia" aria-pressed="true">Por día</button><button type="button" class="cb" id="vi-sem" aria-pressed="false">Por semana</button></div>
+        <div class="ctrl" id="ag-docs" aria-label="Doctores"></div>
+        <div class="ctrl"><button type="button" class="cb" id="nc-abrir" aria-expanded="false" aria-controls="nc-form">+ Nueva cita</button></div>
+        <form class="agendar" id="nc-form" hidden autocomplete="off" style="margin-bottom:14px">
+          <div class="campo"><label for="nc-nombre">Paciente</label><input id="nc-nombre" maxlength="80" required placeholder="Nombre y apellido"></div>
+          <div class="campo"><label for="nc-tel">Celular</label><input id="nc-tel" type="tel" inputmode="tel" maxlength="14" required placeholder="09xxxxxxxx"></div>
+          <div class="campo"><label for="nc-sv">Tratamiento</label><select id="nc-sv"></select></div>
+          <div class="campo"><label for="nc-dia">Día</label><input id="nc-dia" type="date" required></div>
+          <div class="campo"><label for="nc-hora">Hora</label><input id="nc-hora" type="time" step="300" required></div>
+          <div class="campo"><label for="nc-doc">Doctor</label><select id="nc-doc"></select></div>
+          <button class="btn" type="submit">Crear cita</button><p class="err-f" id="nc-err" role="alert" style="grid-column:1/-1"></p>
+        </form>
+        <div class="agenda" data-lenis-prevent><div class="ag-grid" id="ag-grid"></div></div>
+        <div class="detalle" id="ag-det" hidden></div>
+        <div class="leyenda" id="ag-ley"></div>
+      </div>
+
+      <div class="vista" id="v-pacientes" role="tabpanel" aria-labelledby="t-pacientes" hidden>
+        <div id="pa-buscar">
+          <h2>Pacientes</h2>
+          <p class="sub">La ficha de cada paciente: sus datos, su historial de citas, cobros y presupuestos y, para los doctores, la historia clínica, el odontograma y la evolución. Lo clínico solo lo ven administración y los doctores, y cada vez que se abre queda registrado.</p>
+          <div class="fila" style="grid-template-columns:minmax(0,1fr) auto"><div class="campo"><label for="pa-q">Buscar por nombre, celular o cédula</label><input id="pa-q" type="search" maxlength="60" autocomplete="off"></div><button type="button" class="btn" id="pa-nuevo">+ Nuevo paciente</button></div>
+          <div class="tarjetas" id="pa-lista" aria-live="polite"></div>
+        </div>
+        <div id="pa-ficha" hidden></div>
+      </div>
+
+      <div class="vista" id="v-caja" role="tabpanel" aria-labelledby="t-caja" hidden>
+        <h2>Caja diaria</h2><p class="sub">Anota lo que entra y lo que sale. Cada movimiento queda con su hora, su doctor y quién lo registró; se corrige anulando con un motivo, nunca borrando.</p>
+        <div class="fila" style="max-width:260px"><div class="campo"><label for="c-dia">Día</label><input id="c-dia" type="date"></div></div>
+        <div class="kpis" id="caja-kpis" style="margin-bottom:16px"></div>
+        <form class="fila" id="caja-form" autocomplete="off">
+          <div class="campo"><label for="c-desc">Descripción</label><input id="c-desc" required maxlength="80" placeholder="ej.: 1 control"></div>
+          <div class="campo"><label for="c-imp">Importe</label><input id="c-imp" type="number" step="0.01" min="0.01" max="100000" required placeholder="ej.: 35.00"></div>
+          <div class="campo"><label for="c-tipo">Tipo</label><select id="c-tipo"><option value="ing">Ingreso</option><option value="egr">Egreso</option></select></div>
+          <div class="campo"><label for="c-doc">Doctor</label><select id="c-doc"></select></div>
+          <button class="btn" type="submit">Añadir</button>
+        </form>
+        <p class="err-f" id="c-err" role="alert"></p>
+        <div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Hora</th><th>Descripción</th><th>Doctor</th><th class="n">Importe</th><th></th></tr></thead><tbody id="caja-lista"></tbody></table></div>
+      </div>
+
+      <div class="vista" id="v-presupuestos" role="tabpanel" aria-labelledby="t-presupuestos" hidden>
+        <h2>Presupuestos que se aceptan más rápido</h2><p class="sub">El precio de cada tratamiento sale del tarifario de la clínica; el total lo calcula el sistema. Guárdalo, envíalo por WhatsApp y dale seguimiento.</p>
+        <div class="dos">
+          <div>
+            <div class="campo" style="margin-bottom:10px"><label for="p-pac">Paciente</label><input id="p-pac" maxlength="80" autocomplete="off"></div>
+            <div class="fila"><div class="campo"><label for="p-item">Tratamiento</label><select id="p-item"></select></div>
+              <div class="campo"><label for="p-cant">Cantidad</label><input id="p-cant" type="number" min="1" max="20" value="1"></div>
+              <button type="button" class="btn" id="p-add">Agregar</button></div>
+            <div class="fila"><div class="campo"><label for="p-doc">Doctor</label><select id="p-doc"></select></div>
+              <div class="campo"><label for="p-desc">Descuento (%)</label><input id="p-desc" type="number" min="0" max="50" value="0"></div>
+              <div class="campo"><label for="p-seg">Seguimiento</label><input id="p-seg" type="date"></div></div>
+            <table class="tabla"><thead><tr><th>Descripción</th><th class="n">Cant.</th><th class="n">Importe</th><th></th></tr></thead><tbody id="p-lista"></tbody></table>
+            <div class="tot" style="display:flex;justify-content:space-between;font:800 1.3rem var(--fx-font-disp);padding-top:10px;margin-top:6px;border-top:2px solid var(--fx-deep)"><span>Total (aprox.)</span><span id="p-total"></span></div>
+            <p class="err-f" id="p-err" role="alert"></p>
+            <div class="acciones" style="margin-top:6px"><button type="button" class="btn" id="p-guardar">Guardar y enviar por WhatsApp</button></div>
+          </div>
+          <div><h3 style="font:800 1.15rem var(--fx-font-disp);margin-bottom:8px">Guardados</h3>
+            <div class="ctrl" id="pl-filtro"><button type="button" class="cb" data-e="" aria-pressed="true">Todos</button><button type="button" class="cb" data-e="enviado" aria-pressed="false">En espera</button><button type="button" class="cb" data-e="aceptado" aria-pressed="false">Aceptados</button><button type="button" class="cb" data-e="rechazado" aria-pressed="false">Rechazados</button></div>
+            <div class="tarjetas" id="pl-lista"></div></div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <dialog class="mini-dlg" id="dlg-motivo"><form method="dialog" id="dlg-form"><h3>Anular movimiento</h3><p id="dlg-txt"></p>
+    <div class="campo"><label for="dlg-m">Motivo (obligatorio)</label><input id="dlg-m" maxlength="120" required></div>
+    <div class="acciones"><button class="btn" type="submit" value="ok">Anular</button><button class="btn btn-linea" type="button" id="dlg-x">Cancelar</button></div></form></dialog>
+
+  </div>
+</div></section>
+</main>
+
+<script src="config.js"></script>
+<script src="modulos/clinica/clinica-seed.js"></script><script src="modulos/clinica/clinica-mock.js"></script>
+<script src="modulos/clinica/clinica-api.js"></script>
+<script src="modulos/clinica/clinica-ui.js"></script>
+<script src="modulos/clinica/clinica-panel.js"></script>
+<script src="modulos/clinica/clinica-pacientes.js"></script>
+
+<script src="fx.js"></script>
+<script src="demo.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+/* Scroll suave y calmado (clínica): lerp bajo, sin inercia exagerada. Sin Lenis si el usuario pidió menos movimiento o si el CDN no cargó (la página scrollea normal).
+   Los enlaces #ancla respetan scroll-padding-top de la página (cabecera fija).
+   Para frenar a Lenis dentro de un mapa, un modal o un contenedor con scroll propio: atributo data-lenis-prevent. */
+(function () {
+  if (typeof Lenis === 'undefined' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const lenis = new Lenis({ lerp: 0.08, smoothWheel: true, anchors: true });
+  if (window.gsap && window.ScrollTrigger) {   /* si la página usa GSAP ScrollTrigger, Lenis va en su ticker */
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+  window.lenis = lenis;
+})();
+</script>
+
+</body>
+</html>
