@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a1220">
+<title>Delicias del Mar · Marisquería de autor en Ambato</title>
+<meta name="description" content="Cocina ecuatoriana de mar desde 1994. Mariscos, desayunos y brunch, cafetería de especialidad y coctelería de autor en Ambato.">
+<link rel="icon" href="assets/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+:root{
+  --bg:#0a1220; --bg2:#0f1a2e; --card:#13213a; --ink:#f4efe6; --mut:#a7b0c2;
+  --gold:#c9a45c; --gold2:#e8cf9a; --coral:#e2603f; --line:rgba(201,164,92,.28);
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.eyebrow{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:500}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.05}
+h2{font-size:clamp(2.2rem,5vw,3.8rem)}
+h2 em,h1 em{font-style:italic;color:var(--gold2)}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.95rem 1.9rem;border-radius:99px;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;transition:.35s;cursor:pointer;border:1px solid transparent;font-family:var(--sans)}
+.btn-gold{background:linear-gradient(135deg,#e8cf9a,#c9a45c);color:#1a1408;box-shadow:0 10px 30px -10px rgba(201,164,92,.6)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 16px 36px -10px rgba(201,164,92,.8)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,.03);backdrop-filter:blur(6px)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold2)}
+
+/* NAV */
+header{position:fixed;inset:0 0 auto;z-index:50;transition:.4s}
+header.stuck{background:rgba(10,18,32,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar{background:linear-gradient(90deg,#8a6a2c,#c9a45c,#8a6a2c);color:#1a1408;text-align:center;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;padding:.45rem 10px;font-weight:500}
+nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+.brand{display:flex;align-items:center;gap:.8rem;font-family:var(--serif);font-size:1.45rem;font-weight:600}
+.brand img{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold)}
+.links{display:flex;gap:2.2rem;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase}
+.links a{opacity:.8;transition:.3s;position:relative}
+.links a:hover{opacity:1;color:var(--gold2)}
+.nav-cta{padding:.65rem 1.4rem}
+@media(max-width:900px){.links{display:none}}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;min-height:100svh;display:flex;align-items:center;padding:150px 0 90px;
+  background:radial-gradient(900px 600px at 78% 45%,rgba(201,164,92,.18),transparent 60%),radial-gradient(700px 500px at 5% 100%,rgba(226,96,63,.10),transparent 60%),var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;position:relative}
+.hero h1{font-size:clamp(3rem,7.4vw,6.2rem);margin:1.2rem 0 1.4rem}
+.hero p.lead{font-size:1.15rem;color:var(--mut);max-width:520px;margin-bottom:2.2rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.proof{display:flex;gap:2.6rem;margin-top:3.2rem;padding-top:1.8rem;border-top:1px solid var(--line);flex-wrap:wrap}
+.proof b{font-family:var(--serif);font-size:2.4rem;font-weight:500;color:var(--gold2);display:block;line-height:1}
+.proof span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.plate{position:relative;aspect-ratio:4/5;width:100%;max-width:520px;margin-left:auto}
+.plate .frame{position:absolute;inset:0;border-radius:260px 260px 24px 24px;overflow:hidden;border:1px solid var(--gold);box-shadow:0 50px 90px -30px #000,0 0 0 12px rgba(201,164,92,.07)}
+.plate img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform .2s}
+.plate::before{content:"";position:absolute;inset:-22px -22px 22px 22px;border:1px solid var(--line);border-radius:280px 280px 30px 30px;z-index:-1}
+.badge{position:absolute;left:-34px;bottom:48px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1.3rem;display:flex;gap:.9rem;align-items:center;box-shadow:0 24px 50px -20px #000;animation:float 6s ease-in-out infinite}
+.badge i{font-style:normal;font-size:1.6rem}
+.badge b{font-family:var(--serif);font-size:1.25rem;font-weight:500;display:block;line-height:1.1}
+.badge small{color:var(--mut);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.seal{position:absolute;right:-18px;top:30px;width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#e8cf9a,#b88b3c);color:#1a1408;display:grid;place-items:center;text-align:center;font-family:var(--serif);line-height:1;box-shadow:0 20px 40px -14px #000;animation:spin 24s linear infinite}
+.seal span{display:block;animation:spin 24s linear infinite reverse;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-family:var(--sans);font-weight:500}
+.seal b{font-size:2.2rem;display:block;font-weight:600;letter-spacing:0}
+@keyframes float{50%{transform:translateY(-12px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.plate{margin:2rem auto 0;max-width:400px}.badge{left:-6px}.seal{right:-6px}}
+
+/* MARQUEE */
+.marquee{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:1.1rem 0}
+.marquee div{display:flex;gap:3rem;white-space:nowrap;width:max-content;animation:mq 38s linear infinite;font-family:var(--serif);font-style:italic;font-size:1.7rem;color:var(--gold2)}
+.marquee span::after{content:"✦";margin-left:3rem;color:var(--gold);font-style:normal;font-size:1rem}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:7rem 0}
+.head{text-align:center;max-width:680px;margin:0 auto 4rem}
+.head h2{margin:1rem 0}
+.head p{color:var(--mut)}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.cat{position:relative;aspect-ratio:3/4.2;border-radius:18px;overflow:hidden;border:1px solid var(--line);cursor:pointer}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s}
+.cat:hover img{transform:scale(1.1)}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,18,32,.95) 5%,rgba(10,18,32,.1) 60%)}
+.cat div{position:absolute;inset:auto 0 0;padding:1.5rem;z-index:2}
+.cat h3{font-size:1.9rem}
+.cat small{color:var(--gold2);letter-spacing:.2em;text-transform:uppercase;font-size:.7rem}
+@media(max-width:900px){.cats{grid-template-columns:repeat(2,1fr)}}
+
+/* STORY */
+.story{background:var(--bg2);position:relative}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.collage{position:relative;aspect-ratio:1/1.05}
+.collage img{position:absolute;object-fit:cover;border-radius:18px;border:1px solid var(--line);box-shadow:0 30px 60px -24px #000}
+.collage .a{inset:0 22% 18% 0;width:78%;height:82%}
+.collage .b{right:0;bottom:0;width:52%;height:50%;border:6px solid var(--bg2)}
+.story h2{margin:1rem 0 1.5rem}
+.story p{color:var(--mut);margin-bottom:1.2rem}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2rem}
+.pillars div{border-left:2px solid var(--gold);padding-left:1rem}
+.pillars b{font-family:var(--serif);font-size:1.3rem;font-weight:500;display:block}
+.pillars span{font-size:.9rem;color:var(--mut)}
+@media(max-width:900px){.story-grid{grid-template-columns:1fr;gap:3rem}}
+
+/* MENU */
+.tabs{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem}
+.tab{padding:.6rem 1.4rem;border-radius:99px;border:1px solid var(--line);background:none;color:var(--mut);font:500 .78rem var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:.3s}
+.tab.on,.tab:hover{background:var(--gold);color:#1a1408;border-color:var(--gold)}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.dish{display:grid;grid-template-columns:130px 1fr;gap:1.3rem;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:1rem;transition:.4s;align-items:center}
+.dish:hover{transform:translateY(-5px);border-color:var(--gold)}
+.dish img{width:130px;height:130px;object-fit:cover;border-radius:14px}
+.dish h3{font-size:1.5rem;display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.dish h3 span{font-family:var(--sans);font-size:1rem;color:var(--gold2);font-weight:500}
+.dish p{font-size:.9rem;color:var(--mut);margin-top:.35rem}
+.dish[hidden]{display:none}
+.note{text-align:center;margin-top:2rem;font-size:.78rem;color:var(--mut)}
+@media(max-width:900px){.menu-grid{grid-template-columns:1fr}.dish{grid-template-columns:96px 1fr}.dish img{width:96px;height:96px}}
+
+/* EXPERIENCES */
+.exp{background:linear-gradient(180deg,var(--bg),var(--bg2))}
+.exp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.exp-grid div{background:var(--bg);padding:2.4rem 1.3rem;text-align:center;transition:.4s}
+.exp-grid div:hover{background:var(--card)}
+.exp-grid i{font-style:normal;font-size:2rem;display:block;margin-bottom:1rem}
+.exp-grid h3{font-size:1.4rem;margin-bottom:.4rem}
+.exp-grid p{font-size:.85rem;color:var(--mut)}
+@media(max-width:900px){.exp-grid{grid-template-columns:1fr 1fr}}
+
+/* SOCIAL */
+.ig{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.ig img{aspect-ratio:1;width:100%;object-fit:cover;border-radius:14px;filter:saturate(1.05);transition:.5s}
+.ig a:hover img{transform:scale(1.03);filter:saturate(1.3)}
+.ig a{overflow:hidden;border-radius:14px;display:block}
+.ig-cta{text-align:center;margin-top:2.4rem}
+@media(max-width:700px){.ig{grid-template-columns:1fr 1fr}}
+
+/* RESERVE */
+.reserve{position:relative;background:radial-gradient(700px 400px at 20% 20%,rgba(201,164,92,.16),transparent 70%),var(--bg2)}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.res-grid h2{margin:1rem 0 1.2rem}
+.res-grid p{color:var(--mut)}
+.info{margin-top:2rem;display:grid;gap:.9rem;font-size:.95rem}
+.info b{color:var(--gold2);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;display:block}
+form{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:2.4rem;display:grid;gap:1.1rem;box-shadow:0 40px 80px -40px #000}
+form h3{font-size:2rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:grid;gap:.4rem}
+input,select{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;color:var(--ink);font:300 1rem var(--sans);width:100%;color-scheme:dark}
+input:focus,select:focus{outline:none;border-color:var(--gold)}
+form .btn{justify-content:center;margin-top:.4rem}
+form small{color:var(--mut);text-align:center;font-size:.75rem}
+@media(max-width:900px){.res-grid{grid-template-columns:1fr;gap:2.5rem}.row{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding:3rem 0 5.5rem;text-align:center;color:var(--mut);font-size:.85rem}
+footer .brand{justify-content:center;margin-bottom:1rem;color:var(--ink)}
+footer p+p{margin-top:.4rem}
+
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px -6px rgba(37,211,102,.6);transition:.3s}
+.wa:hover{transform:scale(1.1)}
+.wa svg{width:30px;height:30px;fill:#fff}
+
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s,transform 1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <div class="topbar">Cocina ecuatoriana de mar · Desde 1994 · Ambato</div>
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="brand"><img src="assets/logo.webp" alt="Logo Delicias del Mar">Delicias del Mar</a>
+      <div class="links"><a href="#carta">Carta</a><a href="#historia">Historia</a><a href="#experiencias">Experiencias</a><a href="#reservar">Ubicación</a></div>
+      <a href="#reservar" class="btn btn-gold nav-cta">Reservar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <span class="eyebrow">Marisquería de autor · Ambato</span>
+      <h1>El mar,<br>servido con <em>elegancia</em></h1>
+      <p class="lead">Treinta años honrando la cocina ecuatoriana de mar. Mariscos frescos, técnica de autor y una mesa pensada para celebrar los momentos que importan.</p>
+      <div class="hero-actions">
+        <a href="#reservar" class="btn btn-gold">Reservar mesa →</a>
+        <a href="#carta" class="btn btn-ghost">Ver la carta</a>
+      </div>
+      <div class="proof">
+        <div><b>1994</b><span>Nuestra historia</span></div>
+        <div><b>15 mil+</b><span>Seguidores</span></div>
+        <div><b>5</b><span>Experiencias</span></div>
+      </div>
+    </div>
+    <div class="plate rv">
+      <div class="frame"><img id="heroImg" src="assets/picada.webp" alt="Picada de frutos del mar y tenazas de cangrejo con patacones"></div>
+      <div class="seal"><span><b>30</b>años de sabor</span></div>
+      <div class="badge"><i>🦀</i><div><b>Tenazas de cangrejo</b><small>Plato insignia</small></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div>
+  <span>Tenazas de cangrejo</span><span>Picada de frutos del mar</span><span>Pulpo a la parrilla</span><span>Encebollado de la casa</span><span>Brunch de mar</span><span>Coctelería de autor</span>
+  <span>Tenazas de cangrejo</span><span>Picada de frutos del mar</span><span>Pulpo a la parrilla</span><span>Encebollado de la casa</span><span>Brunch de mar</span><span>Coctelería de autor</span>
+</div></div>
+
+<section id="carta-cats">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">La experiencia</span><h2>Del mar a tu <em>mesa</em></h2><p>Cuatro formas de vivir Delicias del Mar, de la mañana a la noche.</p></div>
+    <div class="cats">
+      <a class="cat rv" href="#carta"><img src="assets/tenazas.webp" alt="Tenazas de cangrejo" loading="lazy"><div><small>Insignia</small><h3>Mariscos</h3></div></a>
+      <a class="cat rv" href="#carta"><img src="assets/desayuno.webp" alt="Desayuno y brunch" loading="lazy"><div><small>Mañanas</small><h3>Brunch</h3></div></a>
+      <a class="cat rv" href="#carta"><img src="assets/encebollado.webp" alt="Encebollado" loading="lazy"><div><small>Tradición</small><h3>Clásicos</h3></div></a>
+      <a class="cat rv" href="#carta"><img src="assets/pulpo.webp" alt="Pulpo a la parrilla" loading="lazy"><div><small>Chef</small><h3>De autor</h3></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="historia">
+  <div class="wrap story-grid">
+    <div class="collage rv">
+      <img class="a" src="assets/sarten.webp" alt="Mariscos en sartén" loading="lazy">
+      <img class="b" src="assets/menu.webp" alt="Carta de Delicias del Mar" loading="lazy">
+    </div>
+    <div class="rv">
+      <span class="eyebrow">Desde 1994</span>
+      <h2>Una historia que <em>siempre vuelve</em></h2>
+      <p>Empezamos como un pequeño local familiar en Ambato. Hoy somos una casa de mar que evolucionó con los años sin perder lo esencial: producto fresco, sazón ecuatoriana y la calidez de recibir a cada familia como propia.</p>
+      <p>Cada plato cuenta una historia; cada mesa, un recuerdo.</p>
+      <div class="pillars">
+        <div><b>Producto del día</b><span>Mariscos seleccionados con exigencia.</span></div>
+        <div><b>Técnica de autor</b><span>Raíz ecuatoriana, presentación impecable.</span></div>
+        <div><b>Servicio cálido</b><span>Atención cuidada, de principio a fin.</span></div>
+        <div><b>Para celebrar</b><span>Cumpleaños y encuentros inolvidables.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="carta">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">La carta</span><h2>Platos que todo ambateño <em>debe probar</em></h2><p>Una selección de nuestros favoritos.</p></div>
+    <div class="tabs rv">
+      <button class="tab on" data-f="all">Todo</button><button class="tab" data-f="mar">Mariscos</button><button class="tab" data-f="clasico">Clásicos</button><button class="tab" data-f="brunch">Brunch</button>
+    </div>
+    <div class="menu-grid rv">
+      <article class="dish" data-c="mar"><img src="assets/tenazas.webp" alt="" loading="lazy"><div><h3>Tenazas de cangrejo <span>$—</span></h3><p>Crujientes, rellenas, con patacones y salsa rosada de la casa.</p></div></article>
+      <article class="dish" data-c="mar"><img src="assets/picada.webp" alt="" loading="lazy"><div><h3>Picada frutos del mar <span>$—</span></h3><p>Para compartir: camarón, pescado y calamar apanados con patacón.</p></div></article>
+      <article class="dish" data-c="mar"><img src="assets/pulpo.webp" alt="" loading="lazy"><div><h3>Pulpo a la parrilla <span>$—</span></h3><p>Cocción lenta y sellado al fuego, sobre cremoso de la casa.</p></div></article>
+      <article class="dish" data-c="mar"><img src="assets/sarten.webp" alt="" loading="lazy"><div><h3>Mariscos en sartén <span>$—</span></h3><p>Salteado en crema con el mejor producto del día.</p></div></article>
+      <article class="dish" data-c="clasico"><img src="assets/encebollado.webp" alt="" loading="lazy"><div><h3>Encebollado de la casa <span>$—</span></h3><p>Un clásico que se volvió imprescindible. Caldo profundo y marisco.</p></div></article>
+      <article class="dish" data-c="brunch"><img src="assets/desayuno.webp" alt="" loading="lazy"><div><h3>Desayuno marinero <span>$—</span></h3><p>Cazuela de mariscos, fruta fresca, jugo y café de especialidad.</p></div></article>
+    </div>
+    <p class="note">Precios referenciales por definir con el restaurante · Demo</p>
+  </div>
+</section>
+
+<section class="exp" id="experiencias">
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">Más que mariscos</span><h2>Cada ocasión, una <em>experiencia</em></h2></div>
+    <div class="exp-grid rv">
+      <div><i>🦞</i><h3>Mariscos</h3><p>Los más ricos, desde 1994.</p></div>
+      <div><i>🍳</i><h3>Desayunos y brunch</h3><p>Mañanas con sabor a mar.</p></div>
+      <div><i>☕</i><h3>Cafetería</h3><p>Café de especialidad.</p></div>
+      <div><i>🍹</i><h3>Coctelería</h3><p>Bebidas de autor.</p></div>
+      <div><i>🐶</i><h3>Pet friendly</h3><p>Tu mascota también es bienvenida.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head rv"><span class="eyebrow">@deliciasdelmar</span><h2>Sigue nuestra <em>mesa</em></h2><p>Más de 15 mil personas ya viven Delicias del Mar en Instagram.</p></div>
+    <div class="ig rv">
+      <a href="https://www.instagram.com/deliciasdelmar/" target="_blank" rel="noopener"><img src="assets/tenazas.webp" alt="" loading="lazy"></a>
+      <a href="https://www.instagram.com/deliciasdelmar/" target="_blank" rel="noopener"><img src="assets/encebollado.webp" alt="" loading="lazy"></a>
+      <a href="https://www.instagram.com/deliciasdelmar/" target="_blank" rel="noopener"><img src="assets/pulpo.webp" alt="" loading="lazy"></a>
+      <a href="https://www.instagram.com/deliciasdelmar/" target="_blank" rel="noopener"><img src="assets/desayuno.webp" alt="" loading="lazy"></a>
+    </div>
+    <div class="ig-cta"><a class="btn btn-ghost" href="https://www.instagram.com/deliciasdelmar/" target="_blank" rel="noopener">Ver en Instagram</a></div>
+  </div>
+</section>
+
+<section class="reserve" id="reservar">
+  <div class="wrap res-grid">
+    <div class="rv">
+      <span class="eyebrow">Reservas</span>
+      <h2>Tu mesa te está <em>esperando</em></h2>
+      <p>Reserva en segundos y te confirmamos por WhatsApp. Cumpleaños y grupos: pregunta por nuestras promociones cumpleañeras.</p>
+      <div class="info">
+        <div><b>Dónde</b>Av. González Suárez y Abdón Calderón, Ambato, Ecuador</div>
+        <div><b>Horarios</b>Por confirmar con el restaurante</div>
+      </div>
+    </div>
+    <form class="rv" id="rf">
+      <h3>Reservar mesa</h3>
+      <label>Nombre<input name="n" required placeholder="Tu nombre"></label>
+      <div class="row">
+        <label>Fecha<input type="date" name="d" required></label>
+        <label>Hora<input type="time" name="h" required value="13:00"></label>
+      </div>
+      <div class="row">
+        <label>Personas<select name="p"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select></label>
+        <label>Ocasión<select name="o"><option>Almuerzo / cena</option><option>Cumpleaños</option><option>Brunch</option><option>Celebración</option></select></label>
+      </div>
+      <button class="btn btn-gold" type="submit">Confirmar por WhatsApp</button>
+      <small>Se abrirá WhatsApp con tu solicitud lista para enviar.</small>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><img src="assets/logo.webp" alt="" style="width:46px;height:46px;border-radius:50%;border:1px solid var(--gold)">Delicias del Mar</div>
+    <p>Cocina ecuatoriana de mar · Desde 1994 · Ambato, Ecuador</p>
+    <p>Demo de diseño — fotografías tomadas del Instagram público del restaurante · contenido de ejemplo hasta validación del cliente.</p>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/593000000000" id="wa" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 2 17.8L.6 23.4l5.7-1.5A11.8 11.8 0 0 0 20.5 3.5zM12 21.5a9.7 9.7 0 0 1-5-1.4l-.4-.2-3.4.9.9-3.3-.2-.4A9.7 9.7 0 1 1 12 21.5zm5.3-7.3c-.3-.1-1.7-.8-2-.9s-.5-.1-.7.1-.8.9-.9 1.1-.3.2-.6.1a7.9 7.9 0 0 1-3.9-3.4c-.3-.5.3-.5.8-1.6a.6.6 0 0 0 0-.5c-.1-.1-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.3 3.3 0 0 0-1 2.4 5.7 5.7 0 0 0 1.2 3c.1.2 2.100 3.200 5.100 4.500 1.900.8 2.600.9 3.500.7a3 3 0 0 0 2-1.400 2.500 2.500 0 0 0 .2-1.400c-.1-.1-.3-.2-.6-.3z"/></svg></a>
+
+<script>
+const hd=document.getElementById('hd');
+addEventListener('scroll',()=>hd.classList.toggle('stuck',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*90+'ms';io.observe(el)});
+const hi=document.getElementById('heroImg');
+addEventListener('scroll',()=>{if(scrollY<900)hi.style.transform=`scale(1.08) translateY(${scrollY*.05}px)`},{passive:true});
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
+  document.querySelectorAll('.dish').forEach(d=>d.hidden=t.dataset.f!=='all'&&d.dataset.c!==t.dataset.f);
+});
+document.getElementById('rf').onsubmit=e=>{
+  e.preventDefault();const f=new FormData(e.target);
+  const m=`Hola Delicias del Mar, quiero reservar:\n• Nombre: ${f.get('n')}\n• Fecha: ${f.get('d')} ${f.get('h')}\n• Personas: ${f.get('p')}\n• Ocasión: ${f.get('o')}`;
+  window.open('https://wa.me/593000000000?text='+encodeURIComponent(m),'_blank');
+};
+</script>
+</body>
+</html>
