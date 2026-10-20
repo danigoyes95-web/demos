@@ -7,13 +7,15 @@
 <meta name="theme-color" content="#0a1220">
 <title>Delicias del Mar · Marisquería de autor en Ambato</title>
 <meta name="description" content="Cocina ecuatoriana de mar desde 1994. Mariscos, desayunos y brunch, cafetería de especialidad y coctelería de autor en Ambato.">
+<meta property="og:title" content="Delicias del Mar · Marisquería de autor en Ambato"><meta property="og:description" content="Mariscos desde 1994, brunch, coctelería de autor y las mejores celebraciones de cumpleaños."><meta property="og:image" content="assets/picada.webp"><meta property="og:locale" content="es_EC">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Delicias del Mar","servesCuisine":"Mariscos, cocina ecuatoriana","foundingDate":"1994","address":{"@type":"PostalAddress","streetAddress":"Av. González Suárez y Abdón Calderón","addressLocality":"Ambato","addressCountry":"EC"},"sameAs":["https://www.instagram.com/deliciasdelmar/"]}</script>
 <link rel="icon" href="assets/logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
 <style>
 :root{
   --bg:#0a1220; --bg2:#0f1a2e; --card:#13213a; --ink:#f4efe6; --mut:#a7b0c2;
-  --gold:#c9a45c; --gold2:#e8cf9a; --coral:#e2603f; --line:rgba(201,164,92,.28);
+  --sky:#8fd0e8; --sky2:#cfeaf5; --paper:#f4f9fc; --navy:#0a1220; --gold:#c9a45c; --gold2:#e8cf9a; --coral:#e2603f; --line:rgba(201,164,92,.28);
   --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -50,7 +52,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 
   background:radial-gradient(900px 600px at 78% 45%,rgba(201,164,92,.18),transparent 60%),radial-gradient(700px 500px at 5% 100%,rgba(226,96,63,.10),transparent 60%),var(--bg)}
 .hero::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");pointer-events:none}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;position:relative}
-.hero h1{font-size:clamp(3rem,7.4vw,6.2rem);margin:1.2rem 0 1.4rem}
+.hero h1{font-size:clamp(2.7rem,5.6vw,5rem);margin:1.2rem 0 1.4rem}
 .hero p.lead{font-size:1.15rem;color:var(--mut);max-width:520px;margin-bottom:2.2rem}
 .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
 .proof{display:flex;gap:2.6rem;margin-top:3.2rem;padding-top:1.8rem;border-top:1px solid var(--line);flex-wrap:wrap}
@@ -168,6 +170,42 @@ footer p+p{margin-top:.4rem}
 .rv{opacity:0;transform:translateY(34px);transition:opacity 1s,transform 1s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+.eyebrow.sky{color:var(--sky)}
+.topbar{background:linear-gradient(90deg,#5aa9c8,#cfeaf5 50%,#5aa9c8);color:#0a1220}
+.pill{display:inline-flex;align-items:center;gap:.6rem;margin-bottom:1.4rem;padding:.45rem 1rem;border:1px solid rgba(143,208,232,.4);border-radius:99px;background:rgba(143,208,232,.08);color:var(--sky2);font-size:.78rem;letter-spacing:.08em}
+.pill b{background:var(--sky);color:#0a1220;border-radius:99px;padding:.1rem .6rem;font-weight:600;font-size:.7rem;letter-spacing:.14em}
+.moments{display:flex;justify-content:center;flex-wrap:wrap;gap:.6rem 2.2rem;padding:1.6rem 0;background:var(--paper);color:var(--navy);font-family:var(--serif);font-size:1.5rem;font-style:italic}
+.moments span{display:flex;align-items:center;gap:2.2rem}
+.moments span+span::before{content:"〰";color:#5aa9c8;font-style:normal;font-size:1.1rem;margin-left:-.4rem}
+.wave{display:block;width:100%;height:60px;margin-top:-1px}
+/* CUMPLEAÑOS */
+.bday{background:var(--paper);color:var(--navy);padding:6.5rem 0 7rem;position:relative}
+.bday .eyebrow{color:#3d8cad}
+.bday h2 em{color:#b88b3c}
+.bday-grid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+.bday-photo{position:relative}
+.bday-photo img{width:100%;border-radius:22px;box-shadow:0 40px 70px -30px rgba(10,18,32,.55);aspect-ratio:900/585;object-fit:cover}
+.bday-photo::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:1.5px solid #8fd0e8;border-radius:24px;z-index:-1}
+.free{position:absolute;right:-16px;bottom:-26px;background:var(--navy);color:var(--ink);padding:1.2rem 1.6rem;border-radius:18px;text-align:center;box-shadow:0 24px 50px -16px rgba(10,18,32,.7);border:1px solid var(--gold)}
+.free small{display:block;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky)}
+.free b{font-family:var(--serif);font-size:2.6rem;font-weight:600;color:var(--gold2);line-height:1;display:block}
+.bday h2{margin:1rem 0 1.2rem}
+.bday p.lead{color:#4a5870;font-size:1.08rem;margin-bottom:1.8rem}
+.perks{display:grid;gap:.8rem;margin-bottom:1.8rem}
+.perks div{display:flex;gap:1rem;align-items:center;background:#fff;border:1px solid #d9e8f0;border-radius:16px;padding:.9rem 1.1rem;transition:.3s}
+.perks div:hover{border-color:#5aa9c8;transform:translateX(6px)}
+.perks i{font-style:normal;width:42px;height:42px;border-radius:50%;background:var(--sky2);display:grid;place-items:center;font-size:1.2rem;flex:none}
+.perks b{font-weight:500;display:block;line-height:1.2}
+.perks span{font-size:.85rem;color:#5d6b82}
+.when{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.8rem;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#3d8cad;font-weight:500}
+.bday .fine{margin-top:1rem;font-size:.75rem;color:#7a879b}
+@media(max-width:900px){.bday-grid{grid-template-columns:1fr;gap:3.2rem}.free{right:8px}.moments{font-size:1.2rem}}
+/* PEOPLE */
+.people{background:linear-gradient(180deg,var(--bg2),var(--bg));text-align:center;padding:6rem 0}
+.people blockquote{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);line-height:1.2;max-width:880px;margin:1.4rem auto 0;font-weight:400}
+.people blockquote em{color:var(--sky);font-style:italic}
 </style>
 </head>
 <body>
@@ -177,7 +215,7 @@ footer p+p{margin-top:.4rem}
   <div class="wrap">
     <nav>
       <a href="#top" class="brand"><img src="assets/logo.webp" alt="Logo Delicias del Mar">Delicias del Mar</a>
-      <div class="links"><a href="#carta">Carta</a><a href="#historia">Historia</a><a href="#experiencias">Experiencias</a><a href="#reservar">Ubicación</a></div>
+      <div class="links"><a href="#carta">Carta</a><a href="#cumpleanos">Cumpleaños</a><a href="#historia">Historia</a><a href="#experiencias">Experiencias</a><a href="#reservar">Ubicación</a></div>
       <a href="#reservar" class="btn btn-gold nav-cta">Reservar</a>
     </nav>
   </div>
@@ -187,9 +225,9 @@ footer p+p{margin-top:.4rem}
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="rv">
-      <span class="eyebrow">Marisquería de autor · Ambato</span>
-      <h1>El mar,<br>servido con <em>elegancia</em></h1>
-      <p class="lead">Treinta años honrando la cocina ecuatoriana de mar. Mariscos frescos, técnica de autor y una mesa pensada para celebrar los momentos que importan.</p>
+      <a href="#cumpleanos" class="pill"><b>NUEVO</b> Festeja GRATIS tu cumpleaños en fin de semana →</a><br><span class="eyebrow">Marisquería de autor · Ambato</span>
+      <h1>El mar, servido con <em>elegancia</em> y compartido con quien más quieres</h1>
+      <p class="lead">Treinta años honrando la cocina ecuatoriana de mar. Aquí lo importante son las personas: familias, amigos y celebraciones que se vuelven recuerdo.</p>
       <div class="hero-actions">
         <a href="#reservar" class="btn btn-gold">Reservar mesa →</a>
         <a href="#carta" class="btn btn-ghost">Ver la carta</a>
@@ -225,6 +263,38 @@ footer p+p{margin-top:.4rem}
   </div>
 </section>
 
+<div class="moments"><span>Cumpleaños</span><span>Familias</span><span>Reencuentros</span><span>Aniversarios</span><span>Brunch entre amigos</span></div>
+
+<section class="bday" id="cumpleanos">
+  <div class="wrap bday-grid">
+    <div class="bday-photo rv">
+      <img src="assets/cumpleanos.webp" alt="Celebración de cumpleaños en Delicias del Mar con postre, velita y cóctel" loading="lazy">
+      <div class="free"><small>Fin de semana</small><b>GRATIS</b><small>tu festejo</small></div>
+    </div>
+    <div class="rv">
+      <span class="eyebrow">Promoción cumpleañera</span>
+      <h2>Los cumpleaños también <em>cuentan una historia</em></h2>
+      <p class="lead">Nos enfocamos en la gente. Por eso, cuando celebras con nosotros, cuidamos cada detalle para que ese día se recuerde.</p>
+      <div class="when"><span>📅 Viernes y sábados</span><span>🕓 Desde las 16h00</span></div>
+      <div class="perks">
+        <div><i>🎈</i><p><b>Mesa decorada</b><span>Lista y ambientada para tu festejo.</span></p></div>
+        <div><i>🍹</i><p><b>Cóctel de bienvenida</b><span>Para todos tus invitados.</span></p></div>
+        <div><i>🍰</i><p><b>Postre especial</b><span>El brindis perfecto para soplar la vela.</span></p></div>
+        <div><i>🥂</i><p><b>Acceso a nuestro Happy Hour</b><span>Para extender la celebración.</span></p></div>
+      </div>
+      <a href="#reservar" class="btn btn-gold" data-oc="Cumpleaños">Reservar mi cumpleaños →</a>
+      <p class="fine">*Aplican condiciones. Confirma disponibilidad al reservar.</p>
+    </div>
+  </div>
+</section>
+
+<section class="people">
+  <div class="wrap rv">
+    <span class="eyebrow sky">Nuestra esencia</span>
+    <blockquote>“Cada mesa cuenta una historia. La nuestra es <em>acompañar la tuya</em>.”</blockquote>
+  </div>
+</section>
+
 <section class="story" id="historia">
   <div class="wrap story-grid">
     <div class="collage rv">
@@ -239,7 +309,7 @@ footer p+p{margin-top:.4rem}
       <div class="pillars">
         <div><b>Producto del día</b><span>Mariscos seleccionados con exigencia.</span></div>
         <div><b>Técnica de autor</b><span>Raíz ecuatoriana, presentación impecable.</span></div>
-        <div><b>Servicio cálido</b><span>Atención cuidada, de principio a fin.</span></div>
+        <div><b>Gente primero</b><span>Familias que vuelven por el trato, no solo por el plato.</span></div>
         <div><b>Para celebrar</b><span>Cumpleaños y encuentros inolvidables.</span></div>
       </div>
     </div>
@@ -295,7 +365,7 @@ footer p+p{margin-top:.4rem}
     <div class="rv">
       <span class="eyebrow">Reservas</span>
       <h2>Tu mesa te está <em>esperando</em></h2>
-      <p>Reserva en segundos y te confirmamos por WhatsApp. Cumpleaños y grupos: pregunta por nuestras promociones cumpleañeras.</p>
+      <p>Reserva en segundos y te confirmamos por WhatsApp. ¿Cumpleaños? Elige la ocasión y te contamos cómo festejar gratis en fin de semana.</p>
       <div class="info">
         <div><b>Dónde</b>Av. González Suárez y Abdón Calderón, Ambato, Ecuador</div>
         <div><b>Horarios</b>Por confirmar con el restaurante</div>
@@ -340,6 +410,7 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));
   document.querySelectorAll('.dish').forEach(d=>d.hidden=t.dataset.f!=='all'&&d.dataset.c!==t.dataset.f);
 });
+document.querySelectorAll('[data-oc]').forEach(a=>a.addEventListener('click',()=>{document.querySelector('#rf [name=o]').value=a.dataset.oc}));
 document.getElementById('rf').onsubmit=e=>{
   e.preventDefault();const f=new FormData(e.target);
   const m=`Hola Delicias del Mar, quiero reservar:\n• Nombre: ${f.get('n')}\n• Fecha: ${f.get('d')} ${f.get('h')}\n• Personas: ${f.get('p')}\n• Ocasión: ${f.get('o')}`;
