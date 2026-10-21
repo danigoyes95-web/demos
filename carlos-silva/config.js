@@ -1,0 +1,11 @@
+/* Datos del coach · lo único que se cambia por cliente. MODO DEMO: todo se guarda solo en este navegador (localStorage). */
+window.COACH = {
+  nombre: 'Carlos Silva', titulo: 'Personal Trainer', lema: 'Asume el desafío para un cuerpo fuerte',
+  wa: '593998094368', ig: 'krlos_guevara', ig2: 'fitzopne_of',
+  claveDemo: 'coach',   // clave del panel en la demo (con backend real se cambia por login)
+  servicios: [
+    ['Guía nutricional', 'apple'], ['Plan alimenticio (Dieta)', 'plate'], ['Chequeo InBody mensual', 'scale'],
+    ['Apoyo vía WhatsApp 24/7', 'chat'], ['Seguimiento 1:1', 'user'], ['Rutinas personalizadas', 'dumbbell'],
+    ['Evaluación técnica semanal', 'check'], ['Planes presenciales y virtuales', 'pin'], ['Asesoría en suplementación deportiva', 'pill']
+  ]
+};

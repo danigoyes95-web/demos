@@ -1,0 +1,27 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carlos Silva · Personal Trainer</title><meta name="description" content="Entrenamiento personalizado, plan alimenticio y seguimiento 1:1 con Carlos Silva.">
+<meta name="theme-color" content="#05090d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<style>.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;max-width:1050px;margin:auto;padding:40px 20px 30px}
+h1{font-size:clamp(40px,8vw,76px);line-height:.95;font-weight:800;letter-spacing:-.02em}h1 span{color:var(--neon);display:block;font-style:italic}
+.sub{letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-size:13px;margin:10px 0 18px}.lema{font-size:19px;margin-bottom:22px}
+.foto{border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 0 60px #19e3ee33;max-width:330px;justify-self:center}.foto img{display:block;width:100%;height:auto}
+.srv{max-width:1050px;margin:auto;padding:10px 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.srv .card{display:flex;gap:12px;align-items:center;border-color:#19e3ee55}.srv svg{color:var(--neon)}
+.sist{max-width:1050px;margin:auto;padding:0 20px 50px}.sist h2{margin-bottom:12px}.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+footer{text-align:center;color:var(--mut);padding:30px 20px 50px;font-size:14px}.demo{background:#ffc85722;color:var(--warn);text-align:center;font-size:13px;padding:6px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.foto{order:-1;max-width:240px}}</style></head><body>
+<div class="demo">Demo del sistema · los datos se guardan solo en este navegador</div>
+<header class="hero"><div><h1>Carlos<span>Silva</span></h1><p class="sub">Personal Trainer</p><p class="lema" id="lema"></p>
+<p style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" id="wa" href="#">Escríbeme por WhatsApp</a><a class="btn sec" href="cliente.html?demo=c1">Ver portal del cliente</a></p></div>
+<div class="foto"><img src="assets/carlos.jpg" alt="Carlos Silva, personal trainer" width="200" height="455"></div></header>
+<section class="srv" id="srv" aria-label="Servicios"></section>
+<section class="sist"><h2>Todo tu plan, en tu bolsillo</h2><div class="g3">
+<div class="card"><h3>Rutina en PDF</h3><p>Cada día de entrenamiento con series, repeticiones, descansos y cómo hacer cada ejercicio.</p></div>
+<div class="card"><h3>Plan alimenticio en PDF</h3><p>Calorías, macros, comidas con horarios e indicaciones, ajustadas a tu objetivo.</p></div>
+<div class="card"><h3>Guía visual por ejercicio</h3><p>Figura animada, pasos, errores comunes y respiración. Para que cada repetición cuente.</p></div></div>
+<p style="margin-top:16px"><a class="btn sec sm" href="panel.html">Acceso del coach</a></p></section>
+<footer><p>Progreso constante para alcanzar tu mejor versión física y mental.</p><p id="ct" style="margin-top:8px"></p></footer>
+<script src="config.js"></script><script src="ejercicios.js"></script><script src="app.js"></script><script>
+const C=COACH,{esc,ico,wa}=CS;lema.textContent=C.lema;document.getElementById('wa').href=wa(C.wa,'Hola Carlos, quiero información sobre tus planes de entrenamiento.');
+srv.innerHTML=C.servicios.map(s=>`<div class="card">${ico(s[1])}<b>${esc(s[0])}</b></div>`).join('');
+ct.innerHTML=`WhatsApp +${esc(C.wa)} · Instagram @${esc(C.ig)} · @${esc(C.ig2)}`;</script></body></html>

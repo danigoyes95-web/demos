@@ -1,0 +1,106 @@
+/* Datos, plantillas, calculadoras, PDF y enlace del cliente. MODO DEMO: localStorage del navegador. */
+(() => {
+  const C = window.COACH, KEY = 'cs_demo_v1';
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const hoy = () => new Date().toISOString().slice(0, 10), uid = () => Math.random().toString(36).slice(2, 9);
+  const fecha = d => d ? new Date(d + 'T12:00').toLocaleDateString('es-EC', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+  const dias = n => { const d = new Date(); d.setDate(d.getDate() - n); return d.toISOString().slice(0, 10); };
+  const d = (nombre, foco, ex) => ({ nombre, foco, ej: ex.map(([id, s, r, dsc, nota]) => ({ id, series: s, reps: r, desc: dsc, nota: nota || '' })) });
+  /* ---- plantillas de rutina ---- */
+  const RUTINAS = {
+    'Hipertrofia · 4 días': { nombre: 'Hipertrofia 4 días (torso/pierna)', semanas: 8, dias: [
+      d('Día 1 · Torso A', 'Pecho y espalda', [['press-banca', 4, '6-8', '90 s'], ['remo-barra', 4, '8-10', '90 s'], ['press-inclinado', 3, '10-12', '75 s'], ['jalon', 3, '10-12', '75 s'], ['curl-barra', 3, '10-12', '60 s'], ['pushdown', 3, '10-12', '60 s']]),
+      d('Día 2 · Pierna A', 'Cuádriceps y glúteo', [['sentadilla', 4, '6-8', '2 min'], ['rumano', 3, '8-10', '90 s'], ['zancadas', 3, '10 c/pierna', '75 s'], ['ext-cuad', 3, '12-15', '60 s'], ['talones', 4, '15', '45 s'], ['plancha', 3, '45 s', '45 s']]),
+      d('Día 3 · Torso B', 'Hombro y brazos', [['press-militar', 4, '6-8', '90 s'], ['dominadas', 3, 'al fallo -1', '2 min', 'Con banda si no llega a 6'], ['elev-frontal', 3, '12-15', '60 s'], ['press-frances', 3, '10-12', '60 s'], ['curl-barra', 3, '10-12', '60 s']]),
+      d('Día 4 · Pierna B', 'Glúteo e isquios', [['peso-muerto', 4, '5', '2-3 min'], ['hip-thrust', 4, '8-10', '90 s'], ['zancadas', 3, '12 c/pierna', '75 s'], ['crunch', 3, '15-20', '45 s'], ['elev-piernas', 3, '12-15', '45 s']])] },
+    'Fuerza · 3 días full body': { nombre: 'Fuerza 3 días (cuerpo completo)', semanas: 8, dias: [
+      d('Día A', 'Sentadilla + empuje', [['sentadilla', 5, '5', '3 min'], ['press-banca', 5, '5', '3 min'], ['remo-barra', 4, '6-8', '2 min'], ['plancha', 3, '45 s', '45 s']]),
+      d('Día B', 'Peso muerto + hombro', [['peso-muerto', 4, '4-5', '3 min'], ['press-militar', 4, '6', '2 min'], ['dominadas', 4, '5-8', '2 min'], ['crunch', 3, '15', '45 s']]),
+      d('Día C', 'Pierna + pecho', [['sentadilla', 4, '6', '2 min'], ['press-inclinado', 4, '8', '90 s'], ['rumano', 3, '8', '90 s'], ['mountain', 3, '30 s', '45 s']])] },
+    'Definición · 4 días + cardio': { nombre: 'Definición 4 días', semanas: 6, dias: [
+      d('Día 1', 'Pierna y core', [['sentadilla', 4, '10-12', '60 s'], ['zancadas', 3, '12 c/pierna', '45 s'], ['hip-thrust', 3, '12', '60 s'], ['plancha', 3, '60 s', '30 s']]),
+      d('Día 2', 'Torso (empuje)', [['press-inclinado', 4, '10-12', '60 s'], ['press-militar', 3, '10-12', '60 s'], ['flexiones', 3, 'al fallo -2', '45 s'], ['pushdown', 3, '12-15', '45 s']]),
+      d('Día 3', 'Cardio + core', [['mountain', 5, '40 s', '20 s', 'Circuito HIIT'], ['elev-piernas', 4, '15', '30 s'], ['crunch', 4, '20', '30 s']]),
+      d('Día 4', 'Torso (tirón)', [['jalon', 4, '10-12', '60 s'], ['remo-barra', 4, '10-12', '60 s'], ['curl-barra', 3, '12-15', '45 s'], ['elev-frontal', 3, '15', '45 s']])] },
+    'Principiante · 3 días': { nombre: 'Adaptación 3 días', semanas: 4, dias: [
+      d('Día 1', 'Cuerpo completo', [['sentadilla', 3, '12', '75 s', 'Sin carga o barra vacía'], ['flexiones', 3, '8-12', '60 s', 'Con rodillas si hace falta'], ['jalon', 3, '12', '60 s'], ['plancha', 3, '30 s', '45 s']]),
+      d('Día 2', 'Cuerpo completo', [['zancadas', 3, '10 c/pierna', '60 s'], ['press-militar', 3, '12', '60 s'], ['rumano', 3, '12', '75 s'], ['crunch', 3, '12', '45 s']]),
+      d('Día 3', 'Cuerpo completo', [['hip-thrust', 3, '12', '60 s'], ['press-inclinado', 3, '12', '60 s'], ['remo-barra', 3, '12', '60 s'], ['elev-piernas', 3, '10', '45 s']])] }
+  };
+  /* ---- calculadoras ---- */
+  const calc = {
+    edad: nac => nac ? Math.floor((Date.now() - new Date(nac)) / 31557600000) : 30,
+    tmb: (sx, kg, cm, ed) => 10 * kg + 6.25 * cm - 5 * ed + (sx === 'F' ? -161 : 5),   // Mifflin-St Jeor
+    imc: (kg, cm) => kg / ((cm / 100) ** 2),
+    macros(kcal, kg, obj) { const p = Math.round(kg * (obj === 'definicion' ? 2.2 : 1.9)), g = Math.round(kg * (obj === 'volumen' ? 1 : 0.9)), c = Math.max(0, Math.round((kcal - p * 4 - g * 9) / 4)); return { p, g, c }; },
+    kcalObj(tdee, obj) { return Math.round(tdee * (obj === 'definicion' ? 0.8 : obj === 'volumen' ? 1.1 : 1)); },
+    rm: (kg, reps) => Math.round(kg * (1 + reps / 30)),                                   // Epley
+    fcMax: ed => 220 - ed
+  };
+  const ACT = { 1.2: 'Sedentario', 1.375: 'Ligero (1-3 días)', 1.55: 'Moderado (3-5 días)', 1.725: 'Alto (6-7 días)' };
+  const planBase = (kcal, m) => ({ kcal, p: m.p, c: m.c, g: m.g, agua: '3 L al día', notas: 'Pesar los alimentos en crudo. Ajustamos cada 2 semanas según el chequeo.',
+    comidas: [
+      { h: '07:00', n: 'Desayuno', it: ['3 huevos enteros + 2 claras', '60 g de avena con canela', '1 fruta'] },
+      { h: '10:00', n: 'Colación', it: ['1 yogur griego natural', '20 g de nueces'] },
+      { h: '13:00', n: 'Almuerzo', it: ['180 g de pechuga de pollo', '200 g de arroz cocido', 'Ensalada libre + 1 cdta de aceite de oliva'] },
+      { h: '16:30', n: 'Pre-entreno', it: ['1 plátano', '1 scoop de proteína (opcional)'] },
+      { h: '20:00', n: 'Cena', it: ['170 g de carne magra o pescado', '200 g de camote o papa', 'Verduras al vapor'] }] });
+  /* ---- almacenamiento ---- */
+  function semilla() {
+    const mk = (id, nombre, sx, nac, cm, obj, mod, tel, ml) => ({ id, nombre, sx, nac, cm, obj, mod, tel, nivel: 'Intermedio', lesiones: '', inicio: dias(70), estado: 'activo', parq: { corazon: false, dolor: false, mareo: false, hueso: false, medic: false, embarazo: false }, notas: '', rutina: null, plan: null, supl: [], medidas: ml, evals: [], sesiones: [] });
+    const A = mk('c1', 'Mateo Andrade', 'M', '1996-04-12', 176, 'volumen', 'presencial', '593991112233', [
+      { f: dias(62), kg: 71.2, gr: 17.5, mm: 31.4, vis: 6, agua: 52 }, { f: dias(32), kg: 73.6, gr: 16.9, mm: 33.0, vis: 5, agua: 53 }, { f: dias(3), kg: 75.4, gr: 16.2, mm: 34.5, vis: 5, agua: 53.4 }]);
+    A.rutina = JSON.parse(JSON.stringify(RUTINAS['Hipertrofia · 4 días'])); A.rutina.obj = 'Ganar masa muscular';
+    const t = calc.tmb('M', 75.4, 176, 29) * 1.55; A.plan = planBase(calc.kcalObj(t, 'volumen'), calc.macros(calc.kcalObj(t, 'volumen'), 75.4, 'volumen'));
+    A.supl = [{ n: 'Creatina monohidratada', dosis: '5 g', mom: 'Cualquier hora, todos los días' }, { n: 'Proteína whey', dosis: '1 scoop (30 g)', mom: 'Post-entreno o para completar proteína' }];
+    A.evals = [{ f: dias(5), nota: 'Buena profundidad en sentadilla. Cuidar rodillas hacia adentro en la subida.', it: [{ id: 'sentadilla', pt: 4, n: 'Rodillas ligeramente adentro' }, { id: 'press-banca', pt: 5, n: 'Excelente trayectoria' }, { id: 'remo-barra', pt: 3, n: 'Espalda redondea con carga alta' }] }];
+    A.sesiones = [{ f: dias(2), rpe: 8, n: 'Torso A' }, { f: dias(4), rpe: 7, n: 'Pierna A' }];
+    const B = mk('c2', 'Valentina Ruiz', 'F', '1999-09-03', 164, 'definicion', 'virtual', '593984445566', [
+      { f: dias(40), kg: 66.8, gr: 31.0, mm: 22.1, vis: 4, agua: 47 }, { f: dias(9), kg: 63.9, gr: 28.2, mm: 22.4, vis: 3, agua: 48.5 }]);
+    B.rutina = JSON.parse(JSON.stringify(RUTINAS['Definición · 4 días + cardio'])); B.rutina.obj = 'Perder grasa y tonificar';
+    const t2 = calc.tmb('F', 63.9, 164, 26) * 1.375; B.plan = planBase(calc.kcalObj(t2, 'definicion'), calc.macros(calc.kcalObj(t2, 'definicion'), 63.9, 'definicion'));
+    const Cc = mk('c3', 'Sebastián Mora', 'M', '1988-01-20', 181, 'salud', 'presencial', '593977778899', []); Cc.nivel = 'Principiante'; Cc.inicio = dias(3); Cc.parq.dolor = true; Cc.lesiones = 'Dolor lumbar ocasional';
+    return { clientes: [A, B, Cc], custom: [] };
+  }
+  const LS = { get() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }, set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} } };
+  let db = LS.get() || semilla();
+  db.custom.forEach(c => { if (!EJ.get(c.id)) { const e = EJ.agregarPersonalizado(c); e.id = c.id; } });
+  const Store = { db: () => db, save() { LS.set(db); }, reset() { db = semilla(); LS.set(db); }, cliente: id => db.clientes.find(c => c.id === id),
+    nuevo() { const c = { id: uid(), nombre: 'Nuevo cliente', sx: 'M', nac: '1995-01-01', cm: 170, obj: 'salud', mod: 'presencial', tel: '', nivel: 'Principiante', lesiones: '', inicio: hoy(), estado: 'activo', parq: {}, notas: '', rutina: null, plan: null, supl: [], medidas: [], evals: [], sesiones: [] }; db.clientes.unshift(c); Store.save(); return c; } };
+  /* ---- semáforo de seguimiento ---- */
+  const pend = c => { const u = c.medidas.at(-1), e = c.evals.at(-1);
+    return { inbody: !u || (Date.now() - new Date(u.f)) / 864e5 > 30, eval: !e || (Date.now() - new Date(e.f)) / 864e5 > 7, riesgo: Object.values(c.parq || {}).some(Boolean) }; };
+  /* ---- PDF: documento imprimible → "Guardar como PDF" ---- */
+  const cab = (t, c) => `<div class="cab"><div><h1>${esc(t)}</h1><small>${esc(c.nombre)} · ${esc(fecha(hoy()))}</small></div><div style="text-align:right"><b>${esc(C.nombre)}</b><br><small>${esc(C.titulo)} · WhatsApp +${esc(C.wa)}<br>@${esc(C.ig)}</small></div></div>`;
+  const pie = `<div class="pie">Programa personalizado. Detén el ejercicio y consulta si sientes dolor agudo, mareo o falta de aire. Este documento no sustituye una valoración médica. Escríbele a tu coach por WhatsApp para dudas o ajustes.</div>`;
+  const Doc = {
+    rutina(c) { const r = c.rutina; if (!r) return '<p>Sin rutina asignada.</p>';
+      return `<div class="doc">${cab('Rutina · ' + r.nombre, c)}<p><b>Objetivo:</b> ${esc(r.obj || c.obj)} · <b>Duración:</b> ${esc(r.semanas)} semanas · <b>Nivel:</b> ${esc(c.nivel)}</p>` +
+        r.dias.map(di => `<h2>${esc(di.nombre)} — ${esc(di.foco)}</h2>` + di.ej.map(x => { const e = EJ.get(x.id); if (!e) return '';
+          return `<div class="ex">${EJ.frames(e)}<div><b>${esc(e.n)}</b><br><small>${esc(e.mus)}</small><br><b>${esc(x.series)} × ${esc(x.reps)}</b> · descanso ${esc(x.desc)}${x.nota ? `<br><i>${esc(x.nota)}</i>` : ''}<ol style="margin:4px 0 0 16px;padding:0;font-size:9.5pt">${e.pasos.map(p => `<li>${esc(p)}</li>`).join('')}</ol><small>⚠ ${esc(e.err[0] || '')}</small></div></div>`; }).join('')).join('') + pie + '</div>'; },
+    plan(c) { const p = c.plan; if (!p) return '<p>Sin plan alimenticio asignado.</p>';
+      return `<div class="doc">${cab('Plan alimenticio', c)}<table><tr><th>Calorías</th><th>Proteína</th><th>Carbohidratos</th><th>Grasas</th><th>Agua</th></tr><tr><td>${esc(p.kcal)} kcal</td><td>${esc(p.p)} g</td><td>${esc(p.c)} g</td><td>${esc(p.g)} g</td><td>${esc(p.agua)}</td></tr></table>` +
+        p.comidas.map(m => `<h2>${esc(m.h)} · ${esc(m.n)}</h2><ul>${m.it.map(i => `<li>${esc(i)}</li>`).join('')}</ul>`).join('') +
+        (p.notas ? `<h2>Indicaciones</h2><p>${esc(p.notas)}</p>` : '') + (c.supl.length ? `<h2>Suplementación</h2><table><tr><th>Producto</th><th>Dosis</th><th>Cuándo</th></tr>${c.supl.map(s => `<tr><td>${esc(s.n)}</td><td>${esc(s.dosis)}</td><td>${esc(s.mom)}</td></tr>`).join('')}</table>` : '') + pie + '</div>'; },
+    progreso(c) { const m = c.medidas; return `<div class="doc">${cab('Reporte de progreso', c)}${m.length ? `<table><tr><th>Fecha</th><th>Peso (kg)</th><th>% grasa</th><th>Masa muscular (kg)</th><th>Grasa visceral</th><th>Agua %</th></tr>${m.map(x => `<tr><td>${esc(fecha(x.f))}</td><td>${esc(x.kg)}</td><td>${esc(x.gr)}</td><td>${esc(x.mm)}</td><td>${esc(x.vis)}</td><td>${esc(x.agua)}</td></tr>`).join('')}</table>` : '<p>Aún no hay chequeos InBody.</p>'}` +
+        c.evals.slice(-3).map(e => `<h2>Evaluación técnica · ${esc(fecha(e.f))}</h2><p>${esc(e.nota)}</p><table><tr><th>Ejercicio</th><th>Técnica (1-5)</th><th>Comentario</th></tr>${e.it.map(i => `<tr><td>${esc(EJ.get(i.id)?.n || i.id)}</td><td>${esc(i.pt)}</td><td>${esc(i.n)}</td></tr>`).join('')}</table>`).join('') + pie + '</div>'; },
+    imprimir(html, titulo) { const r = document.getElementById('print-root'); r.innerHTML = html; const t = document.title; document.title = titulo; window.print(); document.title = t; setTimeout(() => r.innerHTML = '', 500); }
+  };
+  /* ---- enlace del cliente: el plan viaja dentro del link (sin servidor) ---- */
+  const b64 = u8 => btoa(String.fromCharCode(...u8)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const unb64 = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
+  const Link = {
+    paquete: c => ({ v: 1, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: c.rutina, plan: c.plan, supl: c.supl, medidas: c.medidas.slice(-6), evals: c.evals.slice(-3), cm: c.cm, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }),
+    async codificar(o) { const u = new TextEncoder().encode(JSON.stringify(o));
+      if (window.CompressionStream) { const cs = new Response(new Blob([u]).stream().pipeThrough(new CompressionStream('gzip'))); return 'g.' + b64(new Uint8Array(await cs.arrayBuffer())); }
+      return 'j.' + b64(u); },
+    async decodificar(s) { const [t, v] = [s.slice(0, 2), s.slice(2)]; let u = unb64(v);
+      if (t === 'g.') u = new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
+      return JSON.parse(new TextDecoder().decode(u)); },
+    async url(c) { return new URL('cliente.html', location.href).href + '#p=' + await Link.codificar(Link.paquete(c)); }
+  };
+  const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
+  const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
+  const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
+  window.CS = { esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+})();

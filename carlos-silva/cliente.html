@@ -1,0 +1,49 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mi plan · Carlos Silva</title><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#05090d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap"><link rel="stylesheet" href="estilos.css">
+<style>main{max-width:760px;margin:auto;padding:16px 16px 90px}h1{font-size:26px}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:8px 0 14px;flex-wrap:wrap}
+nav{position:fixed;bottom:0;left:0;right:0;background:#071016ee;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px);z-index:5}
+nav button{background:none;border:0;color:var(--mut);padding:8px 10px;border-radius:10px;font-size:13px;min-height:44px}nav button[aria-selected=true]{color:var(--neon);font-weight:700}
+.dia{margin-bottom:14px}.dia summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;min-height:44px;align-items:center}
+.row{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);width:100%;background:none;border-left:0;border-right:0;border-bottom:0;text-align:left}
+.row svg{width:100%;height:auto;background:#08121a;border-radius:10px}.row b{display:block}.row small{color:var(--mut)}.pill{color:var(--neon);font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}.k b{display:block;font-size:26px}.k small{color:var(--mut)}
+.ok{color:var(--ok)}table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px;border-bottom:1px solid var(--line);text-align:left}
+.vacio{text-align:center;padding:40px 10px;color:var(--mut)}.bar{height:8px;background:var(--bg2);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--neon)}</style></head><body>
+<main id="m"><p class="vacio">Cargando tu plan…</p></main><nav id="nv" hidden></nav><div id="print-root"></div>
+<script src="config.js"></script><script src="ejercicios.js"></script><script src="app.js"></script><script src="ui.js"></script><script>
+const {esc,fecha,hoy,Doc,Link,wa,calc}=CS,C=COACH;let c=null,tab='hoy',LS={get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+async function cargar(){const q=new URLSearchParams(location.search),h=new URLSearchParams(location.hash.slice(1));
+ try{if(h.get('p')){const o=await Link.decodificar(h.get('p'));(o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});return o}
+  if(q.get('demo')){const k=CS.Store.cliente(q.get('demo'));if(k)return Link.paquete(k)}}catch(e){console.warn(e)}return null}
+const clave=()=>'cs_cli_'+(c.nombre||'')+'_'+(c.creado||'');
+const ses=()=>LS.get(clave())||[];
+function pdfs(){return `<p style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button class="btn sm" data-pdf="rutina">⬇ Rutina en PDF</button><button class="btn sm" data-pdf="plan">⬇ Plan alimenticio en PDF</button><button class="btn sm sec" data-pdf="progreso">⬇ Mi progreso</button></p>`}
+function vistaHoy(){const r=c.rutina,s=ses(),sem=s.filter(x=>Date.now()-new Date(x.f)<7*864e5).length,meta=r?r.dias.length:0,u=c.medidas.at(-1);
+ const sig=r?r.dias[s.length%r.dias.length]:null;
+ return `<div class="kpis"><div class="card k"><b>${sem}/${meta}</b><small>entrenos esta semana</small></div><div class="card k"><b>${u?esc(u.kg)+' kg':'—'}</b><small>último peso</small></div><div class="card k"><b>${c.plan?esc(c.plan.kcal):'—'}</b><small>kcal objetivo</small></div></div>
+ <div class="bar" role="progressbar" aria-valuenow="${sem}" aria-valuemax="${meta}"><i style="width:${meta?Math.min(100,sem/meta*100):0}%"></i></div>
+ ${sig?`<div class="card" style="margin-top:14px"><small class="pill">TOCA HOY</small><h2>${esc(sig.nombre)}</h2><p>${esc(sig.foco)} · ${sig.ej.length} ejercicios</p><p style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" id="ver">Ver ejercicios</button><button class="btn sm sec" id="hecho">Marcar como hecho</button></p></div>`:''}
+ ${pdfs()}<div class="card"><h3>Reportar a Carlos</h3><label>Peso de hoy (kg)<input id="pe" type="number" step="0.1" inputmode="decimal"></label><label style="margin-top:8px">¿Cómo te fue? (esfuerzo 1-10)<input id="rp" type="number" min="1" max="10" inputmode="numeric"></label><p style="margin-top:10px"><button class="btn sm" id="rep">Enviar por WhatsApp</button></p></div>`}
+function vistaRutina(){const r=c.rutina;if(!r)return '<p class="vacio">Tu coach aún no te asigna una rutina.</p>';
+ return pdfs()+`<p style="color:var(--mut);margin-bottom:10px">${esc(r.nombre)} · ${esc(r.semanas)} semanas. Toca un ejercicio para ver cómo hacerlo.</p>`+r.dias.map((d,i)=>`<details class="card dia" ${i?'':'open'}><summary>${esc(d.nombre)} <small style="color:var(--mut)">${esc(d.foco)}</small></summary>`+d.ej.map(x=>{const e=EJ.get(x.id);return e?`<button class="row" data-ej="${esc(e.id)}"><div>${EJ.miniatura(e)}</div><div><b>${esc(e.n)}</b><span class="pill">${esc(x.series)} × ${esc(x.reps)}</span> <small>· descanso ${esc(x.desc)}</small>${x.nota?`<br><small>${esc(x.nota)}</small>`:''}</div></button>`:''}).join('')+`</details>`).join('')}
+function vistaPlan(){const p=c.plan;if(!p)return '<p class="vacio">Tu coach aún no te asigna un plan alimenticio.</p>';
+ return pdfs()+`<div class="kpis"><div class="card k"><b>${esc(p.kcal)}</b><small>kcal</small></div><div class="card k"><b>${esc(p.p)} g</b><small>proteína</small></div><div class="card k"><b>${esc(p.c)} g</b><small>carbohidratos</small></div><div class="card k"><b>${esc(p.g)} g</b><small>grasas</small></div></div>`+
+ p.comidas.map(m=>`<div class="card" style="margin-bottom:10px"><b>${esc(m.h)} · ${esc(m.n)}</b><ul style="margin:6px 0 0 18px">${m.it.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`).join('')+
+ `<p style="color:var(--mut)">💧 ${esc(p.agua)}. ${esc(p.notas)}</p>`+(c.supl.length?`<h3 style="margin:14px 0 6px">Suplementación</h3>`+c.supl.map(s=>`<div class="card" style="margin-bottom:8px"><b>${esc(s.n)}</b> · ${esc(s.dosis)}<br><small>${esc(s.mom)}</small></div>`).join(''):'')}
+function vistaProg(){const m=c.medidas;if(!m.length)return '<p class="vacio">Aún no hay chequeos InBody. Se hacen una vez al mes.</p>';const a=m[0],z=m.at(-1),dl=(k,inv)=>{const v=z[k]-a[k];return `<span class="${(inv?v<=0:v>=0)?'ok':''}">${v>0?'+':''}${v.toFixed(1)}</span>`};
+ return pdfs()+`<div class="kpis"><div class="card k"><b>${dl('kg')}</b><small>kg de peso</small></div><div class="card k"><b>${dl('gr',1)}</b><small>% grasa</small></div><div class="card k"><b>${dl('mm')}</b><small>kg músculo</small></div></div>
+ <div class="card"><table><tr><th>Fecha</th><th>Peso</th><th>% grasa</th><th>Músculo</th></tr>${m.map(x=>`<tr><td>${esc(fecha(x.f))}</td><td>${esc(x.kg)}</td><td>${esc(x.gr)}</td><td>${esc(x.mm)}</td></tr>`).join('')}</table></div>`+
+ (c.evals.length?`<h3 style="margin:14px 0 6px">Evaluación técnica</h3>`+c.evals.slice(-1).map(e=>`<div class="card"><small>${esc(fecha(e.f))}</small><p>${esc(e.nota)}</p>${e.it.map(i=>`<p><b>${esc(EJ.get(i.id)?.n||i.id)}</b> · ${'★'.repeat(i.pt)}${'☆'.repeat(5-i.pt)}<br><small>${esc(i.n)}</small></p>`).join('')}</div>`).join(''):'')}
+function vistaEj(){return EJ.grupos.map(g=>`<h3 style="margin:14px 0 6px">${esc(g)}</h3>`+EJ.lista.filter(e=>e.gr===g).map(e=>`<button class="row" data-ej="${esc(e.id)}"><div>${EJ.miniatura(e)}</div><div><b>${esc(e.n)}</b><small>${esc(e.mus)}</small></div></button>`).join('')).join('')}
+const V={hoy:vistaHoy,rutina:vistaRutina,plan:vistaPlan,prog:vistaProg,ej:vistaEj};
+function pintar(){m.innerHTML=`<div class="top"><div><small style="color:var(--neon)">${esc(C.nombre.toUpperCase())} · PERSONAL TRAINER</small><h1>Hola, ${esc(c.nombre.split(' ')[0])}</h1></div><a class="btn sm" href="${wa(C.wa,'Hola Carlos, soy '+c.nombre+'.')}" target="_blank" rel="noopener">WhatsApp</a></div>`+V[tab]();
+ nv.innerHTML=[['hoy','Hoy'],['rutina','Rutina'],['plan','Plan'],['prog','Progreso'],['ej','Ejercicios']].map(([k,t])=>`<button data-t="${k}" aria-selected="${k==tab}">${t}</button>`).join('');
+ const g=id=>document.getElementById(id);
+ if(g('ver'))g('ver').onclick=()=>{tab='rutina';pintar();scrollTo(0,0)};
+ if(g('hecho'))g('hecho').onclick=()=>{const s=ses();s.push({f:hoy(),n:'Entreno'});LS.set(clave(),s);pintar()};
+ if(g('rep'))g('rep').onclick=()=>{const kg=+g('pe').value,rp=+g('rp').value;open(wa(C.wa,`Hola Carlos, soy ${c.nombre}. Reporte ${fecha(hoy())}: entrenos de la semana ${ses().filter(x=>Date.now()-new Date(x.f)<7*864e5).length}`+(kg?`, peso ${kg} kg`:'')+(rp?`, esfuerzo ${rp}/10`:'')+'.'),'_blank','noopener')}}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-t]');if(t){tab=t.dataset.t;pintar();scrollTo(0,0)}
+ const p=e.target.closest('[data-pdf]');if(p){const k={nombre:c.nombre,...c};Doc.imprimir(Doc[p.dataset.pdf](k),p.dataset.pdf+' - '+c.nombre)}});
+cargar().then(o=>{if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;nv.hidden=false;pintar()});
+</script></body></html>
