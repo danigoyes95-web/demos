@@ -14,6 +14,7 @@
   <nav class="nav">
     <a class="brand" href="#inicio"><span data-logo="46"></span><span><b>Pancho Pincho</b><small>¡Sabor popular!</small></span></a>
     <a class="l" href="#menu">Menú</a>
+    <a class="l" href="#local">El local</a>
     <a class="l" href="#horario">Horario</a>
     <a class="l" href="#ubicacion">Ubicación</a>
     <a class="l" href="#contacto">Contacto</a>
@@ -25,29 +26,7 @@
     <h1 class="h3d">Pinchos<br>a la<br>parrilla</h1>
   </div>
 
-  <div class="ring">
-    <svg viewBox="0 0 400 400" aria-label="Pinchos a la parrilla">
-      <defs><clipPath id="cc"><circle cx="200" cy="200" r="200"/></clipPath></defs>
-      <g clip-path="url(#cc)">
-        <ellipse cx="200" cy="318" rx="190" ry="62" fill="#c9ccd1" stroke="#1c1a17" stroke-width="6"/>
-        <ellipse cx="200" cy="308" rx="160" ry="48" fill="#eef0f3" stroke="#1c1a17" stroke-width="4"/>
-        <g transform="rotate(-14 200 250)">
-          <line x1="40" y1="250" x2="372" y2="250" stroke="#d9a35b" stroke-width="9" stroke-linecap="round"/>
-          <g stroke="#1c1a17" stroke-width="5" stroke-linejoin="round">
-            <rect x="70" y="212" width="52" height="68" rx="16" fill="#a8501f"/>
-            <rect x="118" y="214" width="48" height="64" rx="14" fill="#3f9b3a"/>
-            <rect x="162" y="210" width="56" height="72" rx="16" fill="#8f3f16"/>
-            <rect x="214" y="214" width="48" height="64" rx="14" fill="#e0261b"/>
-            <rect x="258" y="212" width="54" height="68" rx="16" fill="#a8501f"/>
-          </g>
-          <path d="M66 214q22-26 46-6t44-4 46 4 40-4 36 10" fill="none" stroke="#ffd21f" stroke-width="9" stroke-linecap="round"/>
-          <path d="M70 232q22-20 46-4t44-4 46 4 40-4" fill="none" stroke="#fffdf3" stroke-width="6" stroke-linecap="round"/>
-        </g>
-        <g transform="translate(150 70)"><path d="M0 40l14 16 12-26 14 26 14-26 12 26 14-16-6 30H6z" fill="#ffd21f" stroke="#1c1a17" stroke-width="5" stroke-linejoin="round"/></g>
-        <g fill="#ffd21f" stroke="#1c1a17" stroke-width="3"><path d="M70 120l6 14 14 6-14 6-6 14-6-14-14-6 14-6z"/><path d="M330 150l5 11 11 5-11 5-5 11-5-11-11-5 11-5z"/></g>
-      </g>
-    </svg>
-  </div>
+  <div class="ring"><img src="assets/pincho.jpg" alt="Pincho a la parrilla en bolsa Pancho Pincho"></div>
 
   <div class="disc" data-star="16,42" id="disc"><div>Descuento<b id="discPct">10%</b>por pedir<br>online</div></div>
 
@@ -97,10 +76,23 @@
   <div class="grid" id="grid"></div>
 </section>
 
+<section class="sec gal" id="local">
+  <div class="head"><h2 class="h3d">Así es Pancho Pincho</h2><p>Un local con carácter, pinchos a la parrilla y mucho sabor popular.</p></div>
+  <div class="collage">
+    <figure class="ph p-local"><img src="assets/local.jpg" alt="Fachada de Pancho Pincho en Ingahurco" loading="lazy"><span class="pill y">Ingahurco · Ambato</span></figure>
+    <figure class="ph p-payaso"><img src="assets/payaso.jpg" alt="Nuestro payaso, mascota del local" loading="lazy"><span class="pill r">Nuestro payaso 🤡</span></figure>
+    <figure class="ph p-parr"><img src="assets/parrilla.jpg" alt="Pinchos a la parrilla" loading="lazy"><span class="pill y">Listos para ti</span></figure>
+    <figure class="ph p-inv"><img src="assets/invasion.jpg" alt="Pincho con salsa, la invasión" loading="lazy"><span class="pill b">La invasión 🇪🇨</span></figure>
+  </div>
+</section>
+
 <section class="combo">
-  <div class="script">Combo pa' campeones</div>
-  <h2 class="h3d">Pincho + Moro</h2>
-  <button class="btn y" id="addCombo">Agregar combo · <span id="comboPrice"></span></button>
+  <div class="combo-in">
+    <div><div class="script">Combo pa' campeones</div>
+    <h2 class="h3d">Pincho + Moro</h2>
+    <button class="btn y" id="addCombo">Agregar combo · <span id="comboPrice"></span></button></div>
+    <img src="assets/parrilla.jpg" alt="Pinchos a la parrilla con acompañantes" loading="lazy">
+  </div>
 </section>
 
 <section class="sec info" id="horario">
@@ -113,6 +105,7 @@
       <p id="estado" style="margin-top:10px"></p>
     </div>
     <div class="card">
+      <img class="fachada" src="assets/local.jpg" alt="Fachada Pancho Pincho" loading="lazy">
       <h3>📍 Ubicación</h3>
       <div class="big" id="ciudad"></div>
       <p style="margin-top:8px">Ven a comer en el local o retira tu pedido sin hacer fila.</p>
