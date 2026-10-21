@@ -57,8 +57,11 @@ label{display:block;font-weight:600;font-size:.82rem;margin:10px 0 4px}
 .hero .arc{position:absolute;left:50%;bottom:calc(215px - 60vw);transform:translateX(-50%);width:150vw;height:60vw;border-radius:50%;background:var(--pink);z-index:3}
 .hero .chars{position:absolute;inset:0;z-index:4;pointer-events:none}
 .char{position:absolute;filter:drop-shadow(0 4px 0 rgba(0,0,0,.12));animation:bob 2.4s ease-in-out infinite}
-.char.c1{left:calc(50% - min(32vw,330px));bottom:150px;width:clamp(120px,13vw,170px)}
-.char.c2{right:calc(50% - min(37vw,380px));bottom:140px;width:clamp(120px,13vw,170px);animation-delay:-1.2s}
+.hero .chars .char{animation:none;filter:none}
+.hero .chars .char.c1{position:absolute;left:calc(50% - min(37vw,400px));bottom:150px;width:clamp(120px,14vw,200px);transform:rotate(-5deg);animation:bobL 3s ease-in-out infinite}
+.hero .chars .char.c2{position:absolute;right:calc(50% - min(40vw,430px));bottom:130px;width:clamp(120px,14vw,200px);transform:rotate(4deg);animation:bobR 3s ease-in-out infinite -1.5s}
+@keyframes bobL{50%{transform:translateY(-8px) rotate(-3deg)}}
+@keyframes bobR{50%{transform:translateY(-8px) rotate(6deg)}}
 @keyframes bob{50%{transform:translateY(-8px) rotate(2deg)}}
 .hero .foot{position:absolute;left:0;right:0;bottom:0;height:120px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;z-index:8;font-size:.88rem;font-weight:500}
 .hero .foot .go{text-align:center}
@@ -205,7 +208,7 @@ table.t input[type=text],table.t input[type=number],table.t select{padding:5px 8
  .hero .burst{left:auto;right:2vw;top:33vh;width:170px}.hero .burst .script{font-size:1.4rem}
  .hero .ring{width:74vw;top:60%}
  .hero .disc{width:128px;left:3vw;right:auto;top:auto;bottom:330px}
- .char.c1{left:2vw;bottom:140px;width:100px}.char.c2{right:2vw;bottom:140px;width:100px}
+ .hero .chars .char.c1{left:2vw;bottom:130px;width:104px}.hero .chars .char.c2{right:2vw;bottom:120px;width:104px}.char.ph{padding:5px 5px 7px;box-shadow:3px 3px 0 var(--ink);border-width:2px}
  .hero .foot{font-size:.7rem}.hero .foot .btn{padding:10px 18px}
  .hero .foot .tel,.hero .foot .web{max-width:28vw}
  .kanban{grid-template-columns:1fr}
