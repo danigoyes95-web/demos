@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Recepción · Pancho Pincho</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="demo-tabs" id="demo-tabs"></div>
+<div class="app">
+  <div class="top">
+    <div class="brand"><span data-logo="52"></span><h1>Recepción<small>Pedidos en vivo · Pancho Pincho</small></h1></div>
+    <div class="clock" id="clock"></div>
+    <label class="switch" id="swAbierto"><i></i><span id="swTxt"></span></label>
+    <button class="btn r" id="newOrd">+ Pedido de mostrador</button>
+  </div>
+
+  <div class="kanban" id="kanban"></div>
+
+  <div class="panel card" style="margin-top:22px">
+    <h3>Producto agotado · toca para marcar</h3>
+    <div class="chips" id="stock"></div>
+  </div>
+</div>
+
+<div class="modal" id="mNew"><div class="box card">
+  <h3 class="h3d" style="font-size:1.6rem;margin-bottom:12px">Pedido de mostrador</h3>
+  <div class="pgrid" id="pgrid"></div>
+  <label>Nombre del cliente</label><input id="nName" placeholder="Mostrador" maxlength="30">
+  <label>¿Cómo?</label><div class="seg" id="nTipo"><button data-t="Comer aquí" class="on">🍽️ Comer aquí</button><button data-t="Para llevar">🛍️ Para llevar</button></div>
+  <label>Nota</label><input id="nNota" placeholder="Sin picante…" maxlength="80">
+  <div class="tr t" style="margin-top:14px"><span>Total</span><span id="nTot">$0.00</span></div>
+  <div style="display:flex;gap:10px;margin-top:14px"><button class="btn" id="nCancel">Cancelar</button><button class="btn r" id="nOk" style="flex:1">Enviar a la parrilla</button></div>
+</div></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+(function(){
+  const $=id=>document.getElementById(id), M=PP.money, E=PP.esc;
+  PP.tabs('Recepción');
+  const COLS=[['nuevo','🆕 Nuevos'],['parrilla','🔥 En parrilla'],['listo','✅ Listos'],['entregado','🎉 Entregados']];
+  const NEXT={nuevo:['parrilla','A la parrilla 🔥'],parrilla:['listo','Marcar listo ✅'],listo:['entregado','Entregar 🎉']};
+  const ORIGEN={web:['web','Web'],whatsapp:['wa','WhatsApp'],mostrador:['mo','Mostrador']};
+  let known=null;
+
+  function render(s,fromOther){
+    s=s||PP.get();
+    const today=s.orders.filter(o=>PP.sameDay(o.t,Date.now()));
+    const ids=new Set(today.map(o=>o.id));
+    let fresh=[];
+    if(known){fresh=[...ids].filter(i=>!known.has(i)); if(fresh.length&&fromOther===true)PP.beep()}
+    known=ids;
+    $('kanban').innerHTML=COLS.map(([k,t])=>{
+      let list=today.filter(o=>o.estado===k).sort((a,b)=>k==='entregado'?b.t-a.t:a.t-b.t);
+      if(k==='entregado')list=list.slice(0,8);
+      return `<div class="col ${k}"><h2>${t}<em>${today.filter(o=>o.estado===k).length}</em></h2>${list.map(o=>card(o,fresh.includes(o.id))).join('')||'<div class="empty">Sin pedidos</div>'}</div>`;
+    }).join('');
+    $('swAbierto').classList.toggle('on',s.settings.abierto);
+    $('swTxt').textContent=s.settings.abierto?'Local ABIERTO (recibe pedidos web)':'Local CERRADO';
+    $('stock').innerHTML=s.menu.filter(m=>m.activo).map(m=>`<button class="chip ${m.agotado?'off':''}" data-stock="${m.id}">${E(m.ico||'')} ${E(m.nombre)}</button>`).join('');
+  }
+  function age(t){const m=Math.max(0,Math.round((Date.now()-t)/60000));return m}
+  function card(o,fresh){
+    const [cl,tx]=ORIGEN[o.origen]||ORIGEN.mostrador, a=age(o.t), live=['nuevo','parrilla','listo'].includes(o.estado), nx=NEXT[o.estado];
+    return `<div class="ord ${fresh?'fresh':''}"><div class="h"><b>#${o.n}</b><span class="tag ${cl}">${tx}</span><span class="age ${live&&a>15?'late':''}">${PP.hhmm(o.t)}${live?' · hace '+a+' min':''}</span></div>
+      <div class="meta"><b>${E(o.cliente)}</b> · ${E(o.tipo)}</div>
+      <ul>${o.items.map(i=>`<li><b>${i.qty}×</b>${E(i.nombre)}</li>`).join('')}</ul>
+      ${o.nota?`<div class="nota">📝 ${E(o.nota)}</div>`:''}
+      <div class="act"><span class="paid ${o.pagado?'si':'no'}">${o.pagado?'Pagado · '+o.pago:'Por cobrar · '+o.pago}</span><span class="tot">${M(o.total)}</span></div>
+      <div class="act">${nx?`<button class="btn sm y" data-go="${o.id}" data-st="${nx[0]}">${nx[1]}</button>`:''}
+      ${!o.pagado&&o.estado!=='cancelado'?`<button class="btn sm g" data-pay="${o.id}">Cobrar</button>`:''}
+      ${live?`<button class="btn sm" data-x="${o.id}" title="Cancelar">✕</button>`:''}</div></div>`;
+  }
+  function mut(id,fn){PP.update(s=>{const o=s.orders.find(x=>x.id===id);if(o)fn(o)})}
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('button'); if(!t)return;
+    if(t.dataset.go)mut(t.dataset.go,o=>{o.estado=t.dataset.st;if(o.estado==='entregado')o.pagado=true});
+    if(t.dataset.pay)mut(t.dataset.pay,o=>{o.pagado=true;PP.toast('Cobrado '+M(o.total)+' ('+o.pago+')')});
+    if(t.dataset.x&&confirm('¿Cancelar este pedido?'))mut(t.dataset.x,o=>{o.estado='cancelado'});
+    if(t.dataset.stock)PP.update(s=>{const m=s.menu.find(x=>x.id===t.dataset.stock);m.agotado=!m.agotado});
+  });
+  $('swAbierto').onclick=()=>PP.update(s=>{s.settings.abierto=!s.settings.abierto});
+
+  /* pedido de mostrador */
+  let cart={},tipo='Comer aquí';
+  function drawNew(){
+    const s=PP.get();
+    $('pgrid').innerHTML=s.menu.filter(m=>m.activo).map(m=>`<button class="pbtn" data-p="${m.id}" ${m.agotado?'disabled':''}>${cart[m.id]?`<i>${cart[m.id]}</i>`:''}<b>${E(m.ico||'')} ${E(m.nombre)}</b><span>${M(m.precio)}</span></button>`).join('');
+    $('nTot').textContent=M(Object.keys(cart).reduce((a,id)=>a+cart[id]*s.menu.find(m=>m.id===id).precio,0));
+  }
+  $('newOrd').onclick=()=>{cart={};$('nName').value='';$('nNota').value='';drawNew();$('mNew').classList.add('on')};
+  $('nCancel').onclick=()=>$('mNew').classList.remove('on');
+  $('pgrid').onclick=e=>{const b=e.target.closest('[data-p]');if(!b)return;cart[b.dataset.p]=(cart[b.dataset.p]||0)+1;drawNew()};
+  $('pgrid').oncontextmenu=e=>{const b=e.target.closest('[data-p]');if(!b)return;e.preventDefault();const id=b.dataset.p;if(cart[id]&&--cart[id]<=0)delete cart[id];drawNew()};
+  $('nTipo').onclick=e=>{const b=e.target.closest('button');if(!b)return;tipo=b.dataset.t;[...$('nTipo').children].forEach(x=>x.classList.toggle('on',x===b))};
+  $('nOk').onclick=()=>{
+    if(!Object.keys(cart).length){PP.toast('Agrega al menos un producto');return}
+    const o=PP.createOrder({items:Object.keys(cart).map(id=>({id,qty:cart[id]})),cliente:$('nName').value.trim()||'Mostrador',tipo,origen:'mostrador',nota:$('nNota').value.trim()});
+    $('mNew').classList.remove('on');PP.toast('Pedido #'+o.n+' enviado a la parrilla');
+  };
+  /* "Toca para sumar · clic derecho para restar" */
+  $('pgrid').title='Toca para sumar · clic derecho para restar';
+
+  PP.on((s,other)=>{render(s,other)});
+  render(PP.get());
+  setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit',hour12:false})},1000);
+  $('clock').textContent=new Date().toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit',hour12:false});
+  setInterval(()=>render(PP.get()),30000);
+})();
+</script>
+</body>
+</html>
