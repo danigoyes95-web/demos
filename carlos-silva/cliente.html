@@ -1,16 +1,16 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mi plan · Carlos Silva</title><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#05090d">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap"><link rel="stylesheet" href="estilos.css">
-<style>main{max-width:760px;margin:auto;padding:16px 16px 90px}h1{font-size:26px}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:8px 0 14px;flex-wrap:wrap}
-nav{position:fixed;bottom:0;left:0;right:0;background:#071016ee;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px);z-index:5}
-nav button{background:none;border:0;color:var(--mut);padding:8px 10px;border-radius:10px;font-size:13px;min-height:44px}nav button[aria-selected=true]{color:var(--neon);font-weight:700}
+<style>main{max-width:760px;margin:auto;padding:16px 16px 40px}h1{font-size:26px}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:8px 0 14px;flex-wrap:wrap}
+nav{position:sticky;top:0;background:#071016f2;border-bottom:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px;backdrop-filter:blur(8px);z-index:5;overflow-x:auto}
+nav button{background:none;border:0;color:var(--mut);padding:8px 10px;border-radius:10px;font-size:13px;min-height:44px}nav button[aria-selected=true]{color:var(--neon);font-weight:700;box-shadow:inset 0 -2px var(--neon);border-radius:0}
 .dia{margin-bottom:14px}.dia summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;min-height:44px;align-items:center}
 .row{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);width:100%;background:none;border-left:0;border-right:0;border-bottom:0;text-align:left}
 .row svg{width:100%;height:auto;background:#08121a;border-radius:10px}.row b{display:block}.row small{color:var(--mut)}.pill{color:var(--neon);font-weight:700}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}.k b{display:block;font-size:26px}.k small{color:var(--mut)}
 .ok{color:var(--ok)}table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px;border-bottom:1px solid var(--line);text-align:left}
 .vacio{text-align:center;padding:40px 10px;color:var(--mut)}.bar{height:8px;background:var(--bg2);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--neon)}</style></head><body>
-<main id="m"><p class="vacio">Cargando tu plan…</p></main><nav id="nv" hidden></nav><div id="print-root"></div>
+<nav id="nv" hidden aria-label="Secciones"></nav><main id="m"><p class="vacio">Cargando tu plan…</p></main><div id="print-root"></div>
 <script src="config.js"></script><script src="ejercicios.js"></script><script src="app.js"></script><script src="ui.js"></script><script>
 const {esc,fecha,hoy,Doc,Link,wa,calc}=CS,C=COACH;let c=null,tab='hoy',LS={get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 async function cargar(){const q=new URLSearchParams(location.search),h=new URLSearchParams(location.hash.slice(1));
