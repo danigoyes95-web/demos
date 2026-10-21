@@ -1,27 +1,50 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Carlos Silva · Personal Trainer</title><meta name="description" content="Entrenamiento personalizado, plan alimenticio y seguimiento 1:1 con Carlos Silva.">
-<meta name="theme-color" content="#05090d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="estilos.css">
-<style>.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;max-width:1050px;margin:auto;padding:40px 20px 30px}
-h1{font-size:clamp(40px,8vw,76px);line-height:.95;font-weight:800;letter-spacing:-.02em}h1 span{color:var(--neon);display:block;font-style:italic}
-.sub{letter-spacing:.2em;text-transform:uppercase;color:var(--mut);font-size:13px;margin:10px 0 18px}.lema{font-size:19px;margin-bottom:22px}
-.foto{border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 0 60px #19e3ee33;max-width:330px;justify-self:center}.foto img{display:block;width:100%;height:auto}
-.srv{max-width:1050px;margin:auto;padding:10px 20px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.srv .card{display:flex;gap:12px;align-items:center;border-color:#19e3ee55}.srv svg{color:var(--neon)}
-.sist{max-width:1050px;margin:auto;padding:0 20px 50px}.sist h2{margin-bottom:12px}.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-footer{text-align:center;color:var(--mut);padding:30px 20px 50px;font-size:14px}.demo{background:#ffc85722;color:var(--warn);text-align:center;font-size:13px;padding:6px}
-@media(max-width:760px){.hero{grid-template-columns:1fr}.foto{order:-1;max-width:240px}}</style></head><body>
+<meta name="theme-color" content="#05090d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Outfit:wght@300;400;600&display=swap"><link rel="stylesheet" href="estilos.css">
+<style>html{scroll-behavior:smooth}body{font-weight:300}.or{font-family:Orbitron,var(--f)}
+.demo{background:#ffc85722;color:var(--warn);text-align:center;font-size:12px;padding:5px}
+header.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:20px;padding:14px 5vw;background:linear-gradient(90deg,#05090d 0%,#0aa9b8cc 50%,#05090d 100%);backdrop-filter:blur(10px)}
+.logo{display:flex;gap:10px;align-items:center;text-decoration:none;font-family:Orbitron;font-weight:700;font-size:13px;line-height:1.1;letter-spacing:.08em}.logo i{display:flex;gap:3px;align-items:flex-end;height:24px}.logo i b{width:6px;background:#fff;border-radius:2px}
+.nav nav{display:flex;gap:26px;margin:0 auto;font-size:13px;letter-spacing:.12em;text-transform:uppercase}.nav nav a{text-decoration:none;opacity:.85;padding:8px 2px}.nav nav a:hover{opacity:1;color:#fff;text-shadow:0 0 12px var(--neon)}
+.hero{position:relative;min-height:calc(100svh - 90px);display:flex;align-items:center;padding:60px 5vw;overflow:hidden;isolation:isolate}
+.hero .bg{position:absolute;inset:0;z-index:-2;background:radial-gradient(60% 70% at 78% 40%,#19e3ee33,transparent 70%)}
+.hero .ph{position:absolute;right:7vw;bottom:0;height:100%;width:auto;max-width:48vw;z-index:-1;object-fit:contain;object-position:right bottom;filter:grayscale(1) contrast(1.15) brightness(.95);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%,#000 70%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 30%,#000 70%,transparent 100%);animation:zoom 18s ease-in-out infinite alternate}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(0deg,#0000 0 3px,#0003 3px 4px);pointer-events:none}
+@keyframes zoom{to{transform:scale(1.04)}}
+.hero h1{font-family:Orbitron;font-weight:500;font-size:clamp(30px,5.6vw,76px);line-height:1.02;letter-spacing:.02em;text-transform:uppercase;max-width:14ch}
+.hero h1 b{display:block;font-weight:900;color:var(--neon);text-shadow:0 0 28px #19e3ee88}
+.hero p.t{max-width:46ch;margin:22px 0 28px;color:#cfe3e6;font-size:15px}.cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:Orbitron;font-size:12px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 0 22px #19e3ee55;transition:transform .2s,box-shadow .2s}.btn:hover{transform:translateY(-2px);box-shadow:0 0 34px #19e3eeaa}.btn.sec{box-shadow:none}
+.stats{display:flex;gap:30px;margin-top:38px;flex-wrap:wrap}.stats b{display:block;font-family:Orbitron;font-size:28px;color:var(--neon)}.stats small{color:var(--mut);letter-spacing:.1em;text-transform:uppercase;font-size:11px}
+.blk{padding:80px 5vw}.blk h2{font-family:Orbitron;font-size:clamp(24px,4vw,44px);text-transform:uppercase;font-weight:700;line-height:1.05;margin-bottom:8px}.blk h2 span{color:var(--neon)}.blk .lead{color:var(--mut);max-width:56ch;margin-bottom:30px}
+.srv{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.srv .card{display:flex;gap:14px;align-items:center;padding:20px;background:linear-gradient(135deg,#0d1a22,#07131a);border-color:#19e3ee44;transition:transform .25s,box-shadow .25s,border-color .25s}
+.srv .card:hover{transform:translateY(-4px);border-color:var(--neon);box-shadow:0 8px 40px #19e3ee33}.srv svg{width:32px;height:32px;color:var(--neon);filter:drop-shadow(0 0 8px var(--neon))}.srv b{font-weight:600;font-size:16px}
+.demo2{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;background:linear-gradient(180deg,#05090d,#07161d 50%,#05090d)}
+.demo2 .vis{border:1px solid #19e3ee55;border-radius:24px;padding:12px;background:#06101699;box-shadow:0 0 60px #19e3ee22}.demo2 .vis svg{max-height:380px}.demo2 ul{list-style:none;padding:0;display:grid;gap:12px}.demo2 li{display:flex;gap:12px;align-items:flex-start}.demo2 li::before{content:"";width:10px;height:10px;margin-top:7px;background:var(--neon);border-radius:50%;box-shadow:0 0 12px var(--neon);flex:none}
+.fin{text-align:center;background:radial-gradient(50% 100% at 50% 100%,#19e3ee33,transparent)}.fin h2{margin-inline:auto;max-width:18ch}.fin .cta{justify-content:center;margin-top:22px}
+footer{text-align:center;color:var(--mut);padding:30px 20px 50px;font-size:14px}footer a{color:var(--neon);text-decoration:none}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero .ph{animation:none}}
+@media(max-width:860px){.nav nav{display:none}header.nav{justify-content:space-between}.hero .ph{right:0;max-width:80vw;opacity:.32}.demo2{grid-template-columns:1fr}.blk{padding:56px 6vw}}</style></head><body>
 <div class="demo">Demo del sistema · los datos se guardan solo en este navegador</div>
-<header class="hero"><div><h1>Carlos<span>Silva</span></h1><p class="sub">Personal Trainer</p><p class="lema" id="lema"></p>
-<p style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" id="wa" href="#">Escríbeme por WhatsApp</a><a class="btn sec" href="cliente.html?demo=c1">Ver portal del cliente</a></p></div>
-<div class="foto"><img src="assets/carlos.jpg" alt="Carlos Silva, personal trainer" width="200" height="455"></div></header>
-<section class="srv" id="srv" aria-label="Servicios"></section>
-<section class="sist"><h2>Todo tu plan, en tu bolsillo</h2><div class="g3">
-<div class="card"><h3>Rutina en PDF</h3><p>Cada día de entrenamiento con series, repeticiones, descansos y cómo hacer cada ejercicio.</p></div>
-<div class="card"><h3>Plan alimenticio en PDF</h3><p>Calorías, macros, comidas con horarios e indicaciones, ajustadas a tu objetivo.</p></div>
-<div class="card"><h3>Guía visual por ejercicio</h3><p>Figura animada, pasos, errores comunes y respiración. Para que cada repetición cuente.</p></div></div>
-<p style="margin-top:16px"><a class="btn sec sm" href="panel.html">Acceso del coach</a></p></section>
-<footer><p>Progreso constante para alcanzar tu mejor versión física y mental.</p><p id="ct" style="margin-top:8px"></p></footer>
+<header class="nav"><a class="logo" href="#inicio" aria-label="Carlos Silva, inicio"><i aria-hidden="true"><b style="height:14px"></b><b style="height:24px"></b><b style="height:18px"></b></i><span>CARLOS<br>SILVA</span></a>
+<nav aria-label="Principal"><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#sistema">Tu plan</a><a href="#contacto">Contacto</a></nav><a class="btn sm" id="wa0" href="#">Agenda tu cita</a></header>
+<section class="hero" id="inicio"><div class="bg"></div><img class="ph" src="assets/carlos.jpg" alt="Carlos Silva, personal trainer" fetchpriority="high">
+<div><h1>Asume el desafío <b>para un cuerpo fuerte</b></h1><p class="t" id="lema">Entrenamiento personalizado, plan alimenticio y seguimiento 1:1. Progreso constante para alcanzar tu mejor versión física y mental.</p>
+<div class="cta"><a class="btn" id="wa" href="#">Quiero empezar</a><a class="btn sec" href="cliente.html?demo=c1">Ver portal del cliente</a></div>
+<div class="stats"><div><b>1:1</b><small>seguimiento</small></div><div><b>24/7</b><small>apoyo WhatsApp</small></div><div><b>PDF</b><small>rutina y dieta</small></div></div></div></section>
+<section class="blk" id="servicios"><h2 class="rv">Todo lo que <span>incluye</span></h2><p class="lead rv">Un acompañamiento completo, presencial o virtual.</p><div class="srv" id="srv"></div></section>
+<section class="blk demo2" id="sistema"><div class="vis rv" id="fig" aria-hidden="true"></div><div class="rv"><h2>Cada ejercicio, <span>bien hecho</span></h2><p class="lead">Tu plan vive en tu celular: sabes qué hacer, cómo hacerlo y qué comer.</p>
+<ul><li>Rutina personalizada en PDF, con la referencia visual de cada ejercicio.</li><li>Plan alimenticio con calorías, macros y horarios.</li><li>Chequeo InBody mensual y evaluación técnica semanal.</li><li>Carlos a un mensaje de distancia, por WhatsApp.</li></ul>
+<p style="margin-top:22px"><a class="btn sec sm" href="panel.html">Acceso del coach</a></p></div></section>
+<section class="blk fin" id="contacto"><h2 class="rv">Tu mejor versión <span>empieza hoy</span></h2><div class="cta rv"><a class="btn" id="wa2" href="#">Escríbeme por WhatsApp</a></div></section>
+<footer><p id="ct"></p></footer>
 <script src="config.js"></script><script src="ejercicios.js"></script><script src="app.js"></script><script>
-const C=COACH,{esc,ico,wa}=CS;lema.textContent=C.lema;document.getElementById('wa').href=wa(C.wa,'Hola Carlos, quiero información sobre tus planes de entrenamiento.');
-srv.innerHTML=C.servicios.map(s=>`<div class="card">${ico(s[1])}<b>${esc(s[0])}</b></div>`).join('');
-ct.innerHTML=`WhatsApp +${esc(C.wa)} · Instagram @${esc(C.ig)} · @${esc(C.ig2)}`;</script></body></html>
+const C=COACH,{esc,ico,wa}=CS,msg=wa(C.wa,'Hola Carlos, quiero información sobre tus planes de entrenamiento.');
+['wa0','wa','wa2'].forEach(i=>document.getElementById(i).href=msg);
+srv.innerHTML=C.servicios.map(s=>`<div class="card rv">${ico(s[1])}<b>${esc(s[0])}</b></div>`).join('');
+ct.innerHTML=`WhatsApp +${esc(C.wa)} · <a href="https://instagram.com/${esc(C.ig)}" target="_blank" rel="noopener">@${esc(C.ig)}</a> · <a href="https://instagram.com/${esc(C.ig2)}" target="_blank" rel="noopener">@${esc(C.ig2)}</a>`;
+EJ.animar(fig,EJ.get('sentadilla'));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.15});document.querySelectorAll('.rv').forEach(e=>io.observe(e));</script></body></html>
