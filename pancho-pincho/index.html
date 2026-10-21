@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pancho Pincho · Pinchos con sabor popular</title>
+<meta name="description" content="Pinchos a la parrilla en Ingahurco, Ambato. Pide online y retira en el local.">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="demo-tabs" id="demo-tabs"></div>
+
+<header class="hero" id="inicio">
+  <nav class="nav">
+    <a class="brand" href="#inicio"><span data-logo="46"></span><span><b>Pancho Pincho</b><small>¡Sabor popular!</small></span></a>
+    <a class="l" href="#menu">Menú</a>
+    <a class="l" href="#horario">Horario</a>
+    <a class="l" href="#ubicacion">Ubicación</a>
+    <a class="l" href="#contacto">Contacto</a>
+    <button class="btn y sm cartbtn" id="openCart">🛒 Mi pedido <i id="cartN">0</i></button>
+  </nav>
+
+  <div class="burst" data-star="14,38"><div class="script">¡Sabor<br>popular!</div></div>
+  <div class="copy">
+    <h1 class="h3d">Pinchos<br>a la<br>parrilla</h1>
+  </div>
+
+  <div class="ring">
+    <svg viewBox="0 0 400 400" aria-label="Pinchos a la parrilla">
+      <defs><clipPath id="cc"><circle cx="200" cy="200" r="200"/></clipPath></defs>
+      <g clip-path="url(#cc)">
+        <ellipse cx="200" cy="318" rx="190" ry="62" fill="#c9ccd1" stroke="#1c1a17" stroke-width="6"/>
+        <ellipse cx="200" cy="308" rx="160" ry="48" fill="#eef0f3" stroke="#1c1a17" stroke-width="4"/>
+        <g transform="rotate(-14 200 250)">
+          <line x1="40" y1="250" x2="372" y2="250" stroke="#d9a35b" stroke-width="9" stroke-linecap="round"/>
+          <g stroke="#1c1a17" stroke-width="5" stroke-linejoin="round">
+            <rect x="70" y="212" width="52" height="68" rx="16" fill="#a8501f"/>
+            <rect x="118" y="214" width="48" height="64" rx="14" fill="#3f9b3a"/>
+            <rect x="162" y="210" width="56" height="72" rx="16" fill="#8f3f16"/>
+            <rect x="214" y="214" width="48" height="64" rx="14" fill="#e0261b"/>
+            <rect x="258" y="212" width="54" height="68" rx="16" fill="#a8501f"/>
+          </g>
+          <path d="M66 214q22-26 46-6t44-4 46 4 40-4 36 10" fill="none" stroke="#ffd21f" stroke-width="9" stroke-linecap="round"/>
+          <path d="M70 232q22-20 46-4t44-4 46 4 40-4" fill="none" stroke="#fffdf3" stroke-width="6" stroke-linecap="round"/>
+        </g>
+        <g transform="translate(150 70)"><path d="M0 40l14 16 12-26 14 26 14-26 12 26 14-16-6 30H6z" fill="#ffd21f" stroke="#1c1a17" stroke-width="5" stroke-linejoin="round"/></g>
+        <g fill="#ffd21f" stroke="#1c1a17" stroke-width="3"><path d="M70 120l6 14 14 6-14 6-6 14-6-14-14-6 14-6z"/><path d="M330 150l5 11 11 5-11 5-5 11-5-11-11-5 11-5z"/></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="disc" data-star="16,42" id="disc"><div>Descuento<b id="discPct">10%</b>por pedir<br>online</div></div>
+
+  <div class="arc"></div>
+  <div class="chars">
+    <!-- Pincho con piernas -->
+    <svg class="char c1" viewBox="0 0 100 170">
+      <g stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="50" y1="6" x2="50" y2="108" stroke="#d9a35b"/>
+        <rect x="26" y="14" width="48" height="26" rx="10" fill="#a8501f"/>
+        <rect x="24" y="44" width="52" height="30" rx="11" fill="#3f9b3a"/>
+        <rect x="26" y="78" width="48" height="28" rx="10" fill="#8f3f16"/>
+        <path d="M26 58q-18 6-20 22M74 58q20-10 22-28" fill="none"/>
+        <path d="M42 106l-8 40M58 106l10 40" fill="none"/>
+        <ellipse cx="30" cy="150" rx="15" ry="7" fill="#2a8c4a"/><ellipse cx="74" cy="150" rx="15" ry="7" fill="#2a8c4a"/>
+      </g>
+      <circle cx="41" cy="56" r="4.5" fill="#fff" stroke="#1c1a17" stroke-width="2"/><circle cx="59" cy="56" r="4.5" fill="#fff" stroke="#1c1a17" stroke-width="2"/>
+      <circle cx="42" cy="57" r="2" fill="#1c1a17"/><circle cx="60" cy="57" r="2" fill="#1c1a17"/>
+      <path d="M40 65q10 10 20 0" fill="#e0261b" stroke="#1c1a17" stroke-width="2.5" stroke-linejoin="round"/>
+    </svg>
+    <!-- Choclo con piernas -->
+    <svg class="char c2" viewBox="0 0 100 170">
+      <g stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M50 10c22 0 30 26 30 52s-8 52-30 52-30-26-30-52 8-52 30-52z" fill="#ffd21f"/>
+        <path d="M30 120q20 26 40 0l-6-14H36z" fill="#3f9b3a"/>
+        <path d="M20 66q-18 6-18 22M80 66q18-10 20-30" fill="none"/>
+        <path d="M42 126l-6 22M58 126l8 22" fill="none"/>
+        <ellipse cx="32" cy="152" rx="14" ry="7" fill="#ff8a00"/><ellipse cx="72" cy="152" rx="14" ry="7" fill="#ff8a00"/>
+      </g>
+      <g fill="#e6a800"><circle cx="34" cy="28" r="2.5"/><circle cx="46" cy="22" r="2.5"/><circle cx="58" cy="22" r="2.5"/><circle cx="68" cy="30" r="2.5"/><circle cx="30" cy="92" r="2.5"/><circle cx="70" cy="92" r="2.5"/><circle cx="40" cy="100" r="2.5"/><circle cx="60" cy="100" r="2.5"/></g>
+      <circle cx="41" cy="54" r="5" fill="#fff" stroke="#1c1a17" stroke-width="2"/><circle cx="59" cy="54" r="5" fill="#fff" stroke="#1c1a17" stroke-width="2"/>
+      <circle cx="42" cy="55" r="2.2" fill="#1c1a17"/><circle cx="60" cy="55" r="2.2" fill="#1c1a17"/>
+      <path d="M40 66q10 11 20 0z" fill="#e0261b" stroke="#1c1a17" stroke-width="2.5" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="foot">
+    <span class="tel">📞 <span id="tel"></span></span>
+    <div class="go"><span class="chev">︿</span><a class="btn y" href="#menu">PEDIR AHORA</a></div>
+    <span class="web">📷 @<span id="ig"></span></span>
+  </div>
+</header>
+
+<section class="sec" id="menu">
+  <div class="head"><h2 class="h3d">Nuestro menú</h2><p>Cada pincho tiene su canción 🎶 Arma tu pedido y lo preparamos en la parrilla.</p></div>
+  <div class="cats" id="cats"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="combo">
+  <div class="script">Combo pa' campeones</div>
+  <h2 class="h3d">Pincho + Moro</h2>
+  <button class="btn y" id="addCombo">Agregar combo · <span id="comboPrice"></span></button>
+</section>
+
+<section class="sec info" id="horario">
+  <div class="head"><h2 class="h3d" style="color:var(--yellow)">¡Ñaño! Conoce nuestro horario</h2></div>
+  <div class="cols">
+    <div class="card" id="ubicacion">
+      <h3>⏰ Horario</h3>
+      <div class="big" id="horarioTxt"></div>
+      <p style="margin-top:8px">Pedidos online hasta 15 min antes de cerrar.</p>
+      <p id="estado" style="margin-top:10px"></p>
+    </div>
+    <div class="card">
+      <h3>📍 Ubicación</h3>
+      <div class="big" id="ciudad"></div>
+      <p style="margin-top:8px">Ven a comer en el local o retira tu pedido sin hacer fila.</p>
+      <a class="btn b sm" id="maps" target="_blank" rel="noopener" style="margin-top:12px">Ver en Google Maps</a>
+    </div>
+    <div class="card" id="contacto">
+      <h3>📲 Contacto</h3>
+      <div class="big" id="tel2"></div>
+      <p style="margin-top:8px">Pedidos grandes o eventos: escríbenos por WhatsApp.</p>
+      <a class="btn g sm" id="wa" target="_blank" rel="noopener" style="margin-top:12px">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer class="pie">
+  <b>Pancho Pincho</b> · Ingahurco, Ambato · Demo con datos de ejemplo.<br>
+  Paneles de la demo: <a href="recepcion.html">Recepción</a> · <a href="dueno.html">Dueño</a>
+</footer>
+
+<!-- Carrito -->
+<aside class="drawer" id="drawer">
+  <header><h3>Mi pedido</h3><button class="btn sm" id="closeCart">Cerrar ✕</button></header>
+  <div class="body" id="cartBody"></div>
+  <div class="tot" id="cartTot"></div>
+</aside>
+
+<!-- Confirmación / seguimiento -->
+<div class="modal" id="trk"><div class="box card">
+  <div style="text-align:center"><div class="script" style="font-size:1.6rem">¡Gracias, <span id="tName"></span>!</div>
+  <h2 class="h3d" style="font-size:2.4rem;margin:6px 0">Pedido #<span id="tN"></span></h2></div>
+  <div class="steps" id="steps"></div>
+  <p id="tMsg" style="text-align:center;font-weight:600;margin:10px 0"></p>
+  <p style="text-align:center;font-size:.8rem;opacity:.7">Esta pantalla se actualiza sola cuando recepción mueve tu pedido.</p>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap"><a class="btn g sm" id="tWa" target="_blank" rel="noopener">Avisar por WhatsApp</a><button class="btn sm" id="tClose">Seguir viendo el menú</button></div>
+</div></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+(function(){
+  const L=PP.L, $=id=>document.getElementById(id);
+  PP.tabs('Vitrina');
+  document.querySelectorAll('[data-star]').forEach(e=>{const[a,b]=e.dataset.star.split(',');e.style.clipPath=PP.star(+a,+b)});
+  $('tel').textContent=L.tel;$('tel2').textContent=L.tel;$('ig').textContent=L.ig;$('ciudad').textContent=L.ciudad;
+  $('maps').href=L.maps;$('wa').href='https://wa.me/'+L.wa;
+
+  let cart={}, cat='Todos', myOrder=null, tipo='Para llevar', pago='efectivo';
+  const S=()=>PP.get();
+  const items=()=>S().menu.filter(m=>m.activo);
+
+  function renderStatic(){
+    const s=S(); $('horarioTxt').textContent=s.settings.horario;
+    $('estado').innerHTML=s.settings.abierto?'<span class="tag" style="background:#b9e6b0">● Abierto ahora · recibiendo pedidos</span>':'<span class="tag" style="background:#ffd0d9">● Cerrado por ahora</span>';
+    const p=s.settings.promo; $('disc').style.display=p.activo?'':'none'; $('discPct').textContent=p.pct+'%';
+    const c=s.menu.find(m=>m.id==='c1'); if(c){$('comboPrice').textContent=PP.money(c.precio);}
+  }
+  function renderMenu(){
+    const list=items(), cats=['Todos',...new Set(list.map(m=>m.cat))];
+    if(!cats.includes(cat))cat='Todos';
+    $('cats').innerHTML=cats.map(c=>`<button class="${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
+    $('grid').innerHTML=list.filter(m=>cat==='Todos'||m.cat===cat).map(m=>`
+      <article class="card item ${m.agotado?'out':''}">
+        ${m.agotado?'<span class="sold">AGOTADO</span>':''}
+        <div class="ico">${PP.esc(m.ico||'🍢')}</div><h3>${PP.esc(m.nombre)}</h3><p>${PP.esc(m.desc||'')}</p>
+        <div class="row"><span class="price">${PP.money(m.precio)}</span>
+        <button class="btn y sm" data-add="${m.id}" ${m.agotado?'disabled':''}>+ Agregar</button></div></article>`).join('');
+  }
+  function cartCount(){return Object.values(cart).reduce((a,b)=>a+b,0)}
+  function renderCart(){
+    const s=S(), p=s.settings.promo, rows=Object.keys(cart).map(id=>{const m=s.menu.find(x=>x.id===id);return m&&{m,q:cart[id]}}).filter(Boolean);
+    $('cartN').textContent=cartCount();
+    if(!rows.length){$('cartBody').innerHTML='<div class="empty" style="padding:50px 0">Tu pedido está vacío.<br>¡Agrega unos pinchos! 🍢</div>';$('cartTot').innerHTML='';return}
+    const sub=rows.reduce((a,r)=>a+r.m.precio*r.q,0), d=p.activo?+(sub*p.pct/100).toFixed(2):0;
+    $('cartBody').innerHTML=rows.map(r=>`<div class="line"><span class="n">${PP.esc(r.m.nombre)}<br><small>${PP.money(r.m.precio)}</small></span>
+      <div class="qty"><button data-dec="${r.m.id}">−</button><b>${r.q}</b><button data-add="${r.m.id}">+</button></div><b>${PP.money(r.m.precio*r.q)}</b></div>`).join('')+
+      `<label>Tu nombre</label><input id="fName" placeholder="Ej. María" maxlength="30">
+       <label>¿Cómo lo quieres?</label><div class="seg" id="segTipo"><button data-t="Para llevar" class="${tipo==='Para llevar'?'on':''}">🛍️ Para llevar</button><button data-t="Comer aquí" class="${tipo==='Comer aquí'?'on':''}">🍽️ Comer aquí</button></div>
+       <label>Pago</label><div class="seg" id="segPago">${['efectivo','transferencia','tarjeta'].map(x=>`<button data-p="${x}" class="${pago===x?'on':''}">${x[0].toUpperCase()+x.slice(1)}</button>`).join('')}</div>
+       <label>Nota para la parrilla (opcional)</label><input id="fNota" placeholder="Sin picante, bien cocido…" maxlength="80">`;
+    $('cartTot').innerHTML=`<div class="tr"><span>Subtotal</span><span>${PP.money(sub)}</span></div>`+(d?`<div class="tr" style="color:var(--ok);font-weight:700"><span>${PP.esc(p.texto)} (−${p.pct}%)</span><span>−${PP.money(d)}</span></div>`:'')+
+      `<div class="tr t"><span>Total</span><span>${PP.money(sub-d)}</span></div><button class="btn r" id="send" style="width:100%;margin-top:12px" ${s.settings.abierto?'':'disabled'}>${s.settings.abierto?'Enviar pedido':'Local cerrado'}</button>`;
+  }
+  const keep=()=>{const n=$('fName'),o=$('fNota');return[n&&n.value,o&&o.value]};
+  function rerenderCart(){const[n,o]=keep();renderCart();if(n!=null&&$('fName')){$('fName').value=n;$('fNota').value=o}}
+
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('button,a'); if(!t)return;
+    if(t.dataset.c){cat=t.dataset.c;renderMenu()}
+    if(t.dataset.add){cart[t.dataset.add]=(cart[t.dataset.add]||0)+1;rerenderCart();PP.toast('Agregado al pedido 🍢');if(t.closest('.item'))bump()}
+    if(t.dataset.dec){const id=t.dataset.dec;cart[id]--;if(cart[id]<=0)delete cart[id];rerenderCart()}
+    if(t.dataset.t){tipo=t.dataset.t;rerenderCart()}
+    if(t.dataset.p){pago=t.dataset.p;rerenderCart()}
+    if(t.id==='send')send();
+  });
+  function bump(){const b=$('cartN');b.animate([{transform:'scale(1.6)'},{transform:'scale(1)'}],{duration:250})}
+  $('openCart').onclick=()=>{rerenderCart();$('drawer').classList.add('on')};
+  $('closeCart').onclick=()=>$('drawer').classList.remove('on');
+  $('addCombo').onclick=()=>{cart.c1=(cart.c1||0)+1;rerenderCart();$('drawer').classList.add('on')};
+
+  function send(){
+    const name=($('fName').value||'').trim();
+    if(!name){$('fName').focus();PP.toast('Dinos tu nombre para el pedido');return}
+    const o=PP.createOrder({items:Object.keys(cart).map(id=>({id,qty:cart[id]})),cliente:name,tipo,pago,origen:'web',nota:$('fNota').value.trim()});
+    cart={};myOrder=o.id;$('drawer').classList.remove('on');rerenderCart();
+    $('tName').textContent=name;$('tN').textContent=o.n;
+    const lines=o.items.map(i=>i.qty+'x '+i.nombre).join(', ');
+    $('tWa').href='https://wa.me/'+L.wa+'?text='+encodeURIComponent('Hola Pancho Pincho, soy '+name+'. Hice el pedido #'+o.n+' ('+lines+'). Total '+PP.money(o.total)+'. '+tipo+'.');
+    $('trk').classList.add('on');renderTrack();
+  }
+  const ST=[['nuevo','📝','Recibido'],['parrilla','🔥','En la parrilla'],['listo','✅','¡Listo!'],['entregado','🎉','Entregado']];
+  const MSG={nuevo:'Recepción ya vio tu pedido.',parrilla:'Tus pinchos están en la parrilla 🔥',listo:'¡Tu pedido está listo! Pasa por el mostrador.',entregado:'¡Buen provecho! Gracias por elegirnos.',cancelado:'Tu pedido fue cancelado. Escríbenos por WhatsApp.'};
+  function renderTrack(){
+    if(!myOrder)return; const o=S().orders.find(x=>x.id===myOrder); if(!o)return;
+    const idx=ST.findIndex(s=>s[0]===o.estado);
+    $('steps').innerHTML=ST.map((s,i)=>`<div class="${i<idx||(i===idx&&idx===3)?'done':i===idx?'cur':''}"><span>${s[1]}</span>${s[2]}</div>`).join('');
+    $('tMsg').textContent=MSG[o.estado]||'';
+  }
+  $('tClose').onclick=()=>$('trk').classList.remove('on');
+
+  PP.on(()=>{renderStatic();renderMenu();rerenderCart();renderTrack()});
+  renderStatic();renderMenu();renderCart();
+})();
+</script>
+</body>
+</html>
