@@ -141,7 +141,7 @@
     get: id => X.find(e => e.id === id),
     frames: (ex, w) => `<div class="frames"><figure>${svg(draw(ex.a, ex), w)}<figcaption>1 · Inicio</figcaption></figure>` +
       (ex.est ? '' : `<span class="arrow" aria-hidden="true">→</span><figure>${svg(draw(ex.b, ex), w)}<figcaption>2 · Final</figcaption></figure>`) + `</div>`,
-    miniatura: ex => svg(draw(ex.b, ex)),
+    miniatura: ex => ex.img ? `<img src="${ex.img}" alt="" loading="lazy">` : svg(draw(ex.b, ex)),
     /* animación en loop: devuelve función para detenerla */
     animar(el, ex) {
       if (ex.est) { el.innerHTML = svg(draw(ex.a, ex)); return () => {}; }

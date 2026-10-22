@@ -37,6 +37,9 @@
     rm: (kg, reps) => Math.round(kg * (1 + reps / 30)),                                   // Epley
     fcMax: ed => 220 - ed
   };
+  const SCHED = { 1: [0], 2: [0, 3], 3: [0, 2, 4], 4: [0, 1, 3, 4], 5: [0, 1, 2, 3, 4], 6: [0, 1, 2, 3, 4, 5], 7: [0, 1, 2, 3, 4, 5, 6] };
+  /* día de la semana (0=lunes) de cada día de rutina: el elegido por el coach o un reparto por defecto */
+  const diaSem = (r, i) => { const d = r.dias[i]; return d.dow !== undefined && d.dow !== '' && d.dow !== null ? +d.dow : (SCHED[Math.min(7, r.dias.length)] || [])[i]; };
   const ACT = { 1.2: 'Sedentario', 1.375: 'Ligero (1-3 días)', 1.55: 'Moderado (3-5 días)', 1.725: 'Alto (6-7 días)' };
   const planBase = (kcal, m) => ({ kcal, p: m.p, c: m.c, g: m.g, agua: '3 L al día', notas: 'Pesar los alimentos en crudo. Ajustamos cada 2 semanas según el chequeo.',
     comidas: [
@@ -50,7 +53,7 @@
     const mk = (id, nombre, sx, nac, cm, obj, mod, tel, ml) => ({ id, nombre, sx, nac, cm, obj, mod, tel, nivel: 'Intermedio', lesiones: '', inicio: dias(70), estado: 'activo', parq: { corazon: false, dolor: false, mareo: false, hueso: false, medic: false, embarazo: false }, notas: '', rutina: null, plan: null, supl: [], medidas: ml, evals: [], sesiones: [] });
     const A = mk('c1', 'Mateo Andrade', 'M', '1996-04-12', 176, 'volumen', 'presencial', '593991112233', [
       { f: dias(62), kg: 71.2, gr: 17.5, mm: 31.4, vis: 6, agua: 52 }, { f: dias(32), kg: 73.6, gr: 16.9, mm: 33.0, vis: 5, agua: 53 }, { f: dias(3), kg: 75.4, gr: 16.2, mm: 34.5, vis: 5, agua: 53.4 }]);
-    A.rutina = JSON.parse(JSON.stringify(RUTINAS['Hipertrofia · 4 días'])); A.rutina.obj = 'Ganar masa muscular';
+    A.rutina = JSON.parse(JSON.stringify(RUTINAS['Hipertrofia · 4 días'])); A.rutina.obj = 'Ganar masa muscular'; [[0, 0, 35], [0, 1, 30], [0, 2, 24], [0, 3, 45], [0, 4, 15], [0, 5, 20]].forEach(([a, b, kg]) => A.rutina.dias[a].ej[b].kg = kg);
     const t = calc.tmb('M', 75.4, 176, 29) * 1.55; A.plan = planBase(calc.kcalObj(t, 'volumen'), calc.macros(calc.kcalObj(t, 'volumen'), 75.4, 'volumen'));
     A.supl = [{ n: 'Creatina monohidratada', dosis: '5 g', mom: 'Cualquier hora, todos los días' }, { n: 'Proteína whey', dosis: '1 scoop (30 g)', mom: 'Post-entreno o para completar proteína' }];
     A.evals = [{ f: dias(5), nota: 'Buena profundidad en sentadilla. Cuidar rodillas hacia adentro en la subida.', it: [{ id: 'sentadilla', pt: 4, n: 'Rodillas ligeramente adentro' }, { id: 'press-banca', pt: 5, n: 'Excelente trayectoria' }, { id: 'remo-barra', pt: 3, n: 'Espalda redondea con carga alta' }] }];
@@ -76,8 +79,8 @@
   const Doc = {
     rutina(c) { const r = c.rutina; if (!r) return '<p>Sin rutina asignada.</p>';
       return `<div class="doc">${cab('Rutina · ' + r.nombre, c)}<p><b>Objetivo:</b> ${esc(r.obj || c.obj)} · <b>Duración:</b> ${esc(r.semanas)} semanas · <b>Nivel:</b> ${esc(c.nivel)}</p>` +
-        r.dias.map(di => `<h2>${esc(di.nombre)} — ${esc(di.foco)}</h2>` + di.ej.map(x => { const e = EJ.get(x.id); if (!e) return '';
-          return `<div class="ex">${EJ.frames(e)}<div><b>${esc(e.n)}</b><br><small>${esc(e.mus)}</small><br><b>${esc(x.series)} × ${esc(x.reps)}</b> · descanso ${esc(x.desc)}${x.nota ? `<br><i>${esc(x.nota)}</i>` : ''}<ol style="margin:4px 0 0 16px;padding:0;font-size:9.5pt">${e.pasos.map(p => `<li>${esc(p)}</li>`).join('')}</ol><small>⚠ ${esc(e.err[0] || '')}</small></div></div>`; }).join('')).join('') + pie + '</div>'; },
+        r.dias.map((di, di_i) => `<h2>${esc(di.nombre)} — ${esc(di.foco)} <small>(${['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'][diaSem(r, di_i)] || ''})</small></h2>` + di.ej.map(x => { const e = EJ.get(x.id); if (!e) return '';
+          return `<div class="ex">${EJ.frames(e)}<div><b>${esc(e.n)}</b><br><small>${esc(e.mus)}</small><br><b>${esc(x.series)} × ${esc(x.reps)}</b>${x.kg ? ' · ' + esc(x.kg) + ' kg' : ''} · descanso ${esc(x.desc)}${x.nota ? `<br><i>${esc(x.nota)}</i>` : ''}<ol style="margin:4px 0 0 16px;padding:0;font-size:9.5pt">${e.pasos.map(p => `<li>${esc(p)}</li>`).join('')}</ol><small>⚠ ${esc(e.err[0] || '')}</small></div></div>`; }).join('')).join('') + pie + '</div>'; },
     plan(c) { const p = c.plan; if (!p) return '<p>Sin plan alimenticio asignado.</p>';
       return `<div class="doc">${cab('Plan alimenticio', c)}<table><tr><th>Calorías</th><th>Proteína</th><th>Carbohidratos</th><th>Grasas</th><th>Agua</th></tr><tr><td>${esc(p.kcal)} kcal</td><td>${esc(p.p)} g</td><td>${esc(p.c)} g</td><td>${esc(p.g)} g</td><td>${esc(p.agua)}</td></tr></table>` +
         p.comidas.map(m => `<h2>${esc(m.h)} · ${esc(m.n)}</h2><ul>${m.it.map(i => `<li>${esc(i)}</li>`).join('')}</ul>`).join('') +
@@ -102,5 +105,5 @@
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
   const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
-  window.CS = { esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+  window.CS = { diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
 })();
