@@ -48,6 +48,15 @@
       { h: '13:00', n: 'Almuerzo', it: ['180 g de pechuga de pollo', '200 g de arroz cocido', 'Ensalada libre + 1 cdta de aceite de oliva'] },
       { h: '16:30', n: 'Pre-entreno', it: ['1 plátano', '1 scoop de proteína (opcional)'] },
       { h: '20:00', n: 'Cena', it: ['170 g de carne magra o pescado', '200 g de camote o papa', 'Verduras al vapor'] }] });
+  /* ---- métricas de cumplimiento (compartidas por panel y portal). H = { 'YYYY-MM-DD': [idx de ejercicios hechos], 'mYYYY-MM-DD': [comidas] } ---- */
+  const dowDe = f => (new Date(f + 'T12:00').getDay() + 6) % 7;
+  const diaDe = (c, f) => { const r = c.rutina; if (!r) return null; const i = r.dias.findIndex((_, k) => diaSem(r, k) === dowDe(f)); return i < 0 ? null : r.dias[i]; };
+  const M = {
+    dia(c, H, f) { const d = diaDe(c, f); if (!d || !d.ej.length) return null; return { hecho: Math.min((H[f] || []).length, d.ej.length), total: d.ej.length }; },
+    pct(c, H, desde = 0, n = 7) { let h = 0, t = 0; for (let i = desde; i < desde + n; i++) { const x = M.dia(c, H, dias(i)); if (x) { h += x.hecho; t += x.total; } } return t ? h / t * 100 : null; },
+    completos(c, H, desde = 0, n = 7) { let k = 0; for (let i = desde; i < desde + n; i++) { const x = M.dia(c, H, dias(i)); if (x && x.hecho >= x.total) k++; } return k; },
+    racha(c, H) { let r = 0; for (let i = 0; i < 60; i++) { const x = M.dia(c, H, dias(i)); if (!x) continue; if (x.hecho >= x.total) r++; else if (i === 0) continue; else break; } return r; }
+  };
   /* ---- almacenamiento ---- */
   function semilla() {
     const mk = (id, nombre, sx, nac, cm, obj, mod, tel, ml) => ({ id, nombre, sx, nac, cm, obj, mod, tel, nivel: 'Intermedio', lesiones: '', inicio: dias(70), estado: 'activo', parq: { corazon: false, dolor: false, mareo: false, hueso: false, medic: false, embarazo: false }, notas: '', rutina: null, plan: null, supl: [], medidas: ml, evals: [], sesiones: [] });
@@ -63,6 +72,8 @@
     B.rutina = JSON.parse(JSON.stringify(RUTINAS['Definición · 4 días + cardio'])); B.rutina.obj = 'Perder grasa y tonificar';
     const t2 = calc.tmb('F', 63.9, 164, 26) * 1.375; B.plan = planBase(calc.kcalObj(t2, 'definicion'), calc.macros(calc.kcalObj(t2, 'definicion'), 63.9, 'definicion'));
     const Cc = mk('c3', 'Sebastián Mora', 'M', '1988-01-20', 181, 'salud', 'presencial', '593977778899', []); Cc.nivel = 'Principiante'; Cc.inicio = dias(3); Cc.parq.dolor = true; Cc.lesiones = 'Dolor lumbar ocasional';
+    const sembrar = (c, nivel) => { c.marcas = {}; for (let i = 1; i < 28; i++) { const f = dias(i), d = diaDe(c, f); if (!d) continue; const ok = ((i * 37 + c.nombre.length) % 10) < nivel; c.marcas[f] = d.ej.map((_, k) => k).slice(0, ok ? d.ej.length : Math.floor(d.ej.length / 2)); if (ok) c.marcas['m' + f] = [0, 1, 2, 3]; } };
+    sembrar(A, 9); sembrar(B, 6);
     return { clientes: [A, B, Cc], custom: [] };
   }
   const LS = { get() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }, set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} } };
@@ -102,6 +113,9 @@
     vinculo: id => vinc.get(id) || {},
     async nuevoCodigo(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { codigo_hash: await sha256(t) } }); vinc.set(id, Object.assign({}, vinc.get(id), { codigo: true })); return t; },
     async desvincular(id) { await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { user_id: null, codigo_hash: null } }); vinc.set(id, {}); },
+    async actividadTodos() { if (!remoto) return Object.fromEntries(db.clientes.map(c => [c.id, c.marcas || {}]));
+      const r = await api.rest(`marcas?fecha=gte.${dias(28)}&select=cliente_id,fecha,clave&limit=5000`), o = {};
+      r.forEach(x => { const k = x.clave[0] === 'm' ? 'm' + x.fecha : x.fecha; ((o[x.cliente_id] ??= {})[k] ??= []).push(+x.clave.slice(1)); }); return o; },
     async actividad(id) { const q = encodeURIComponent(id); const [m, r] = await Promise.all([api.rest(`marcas?cliente_id=eq.${q}&order=fecha.desc&limit=300`), api.rest(`reportes?cliente_id=eq.${q}&order=created_at.desc&limit=15`)]); return { marcas: m, reportes: r }; },
     miPlan: () => api.rpc('mi_plan'), reclamar: c => api.rpc('reclamar', { p_codigo: c }),
     marcar: (f, k, on) => api.rpc('marcar', { p_fecha: f, p_clave: k, p_on: on }), marcas: d => api.rpc('mis_marcas', { p_desde: d }),
@@ -131,7 +145,7 @@
   const b64 = u8 => btoa(String.fromCharCode(...u8)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const unb64 = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
   const Link = {
-    paquete: c => ({ v: 1, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: c.rutina, plan: c.plan, supl: c.supl, medidas: c.medidas.slice(-6), evals: c.evals.slice(-3), cm: c.cm, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }),
+    paquete: c => ({ v: 1, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: c.rutina, plan: c.plan, supl: c.supl, medidas: c.medidas.slice(-6), evals: c.evals.slice(-3), cm: c.cm, marcas: c.marcas || {}, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }),
     async codificar(o) { const u = new TextEncoder().encode(JSON.stringify(o));
       if (window.CompressionStream) { const cs = new Response(new Blob([u]).stream().pipeThrough(new CompressionStream('gzip'))); return 'g.' + b64(new Uint8Array(await cs.arrayBuffer())); }
       return 'j.' + b64(u); },
@@ -143,5 +157,5 @@
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
   const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
-  window.CS = { remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+  window.CS = { M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
 })();
