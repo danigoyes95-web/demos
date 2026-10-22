@@ -72,6 +72,7 @@ create or replace function carlos.mi_cliente() returns uuid
 language sql stable security definer set search_path = '' as
 $$ select id from carlos.clientes where user_id = auth.uid() and activo $$;
 revoke all on function carlos.mi_cliente() from public;
+grant execute on function carlos.mi_cliente() to authenticated;   -- lo usan las políticas de Storage
 
 -- Vincula la cuenta recién creada con el cliente, usando el código que le dio Carlos (un solo uso).
 create or replace function carlos.reclamar(p_codigo text) returns boolean
@@ -93,13 +94,15 @@ begin
   select * into c from carlos.clientes where user_id = auth.uid() and activo;
   if not found then return null; end if;
   return jsonb_build_object(
-    'v', 2, 'nombre', c.datos->>'nombre', 'obj', c.datos->>'obj', 'nivel', c.datos->>'nivel', 'cm', c.datos->'cm',
-    'creado', to_char(c.created_at, 'YYYY-MM-DD'),
+    'v', 2, 'cid', c.id, 'nombre', c.datos->>'nombre', 'obj', c.datos->>'obj', 'nivel', c.datos->>'nivel', 'cm', c.datos->'cm', 'sx', c.datos->>'sx',
+    'creado', to_char(c.created_at, 'YYYY-MM-DD'), 'vence', c.datos->>'vence',
     'rutina', c.datos->'rutina', 'plan', c.datos->'plan', 'supl', coalesce(c.datos->'supl', '[]'::jsonb),
     'medidas', (select coalesce(jsonb_agg(e order by o), '[]'::jsonb) from (
         select e, o from jsonb_array_elements(coalesce(c.datos->'medidas', '[]'::jsonb)) with ordinality t(e, o) order by o desc limit 6) s),
     'evals', (select coalesce(jsonb_agg(e order by o), '[]'::jsonb) from (
         select e, o from jsonb_array_elements(coalesce(c.datos->'evals', '[]'::jsonb)) with ordinality t(e, o) order by o desc limit 3) s),
+    'medcorp', (select coalesce(jsonb_agg(e order by o), '[]'::jsonb) from (
+        select e, o from jsonb_array_elements(coalesce(c.datos->'medcorp', '[]'::jsonb)) with ordinality t(e, o) order by o desc limit 6) s),
     'custom', (select coalesce(jsonb_agg(x.datos), '[]'::jsonb) from carlos.ejercicios_custom x));
 end $$;
 
@@ -126,12 +129,56 @@ begin
   insert into carlos.reportes(cliente_id, peso, rpe, nota) values (cid, p_peso, p_rpe, left(p_nota, 500));
 end $$;
 
+-- Fotos del check-in (frente, lateral, espalda): archivos en Storage (bucket privado) + registro aquí.
+create table if not exists carlos.fotos (
+  cliente_id uuid not null references carlos.clientes(id) on delete cascade,
+  fecha date not null,
+  vista text not null check (vista in ('frente', 'lateral', 'espalda')),
+  path text not null,
+  created_at timestamptz not null default now(),
+  primary key (cliente_id, fecha, vista)
+);
+alter table carlos.fotos enable row level security;
+drop policy if exists coach_fotos on carlos.fotos;
+create policy coach_fotos on carlos.fotos for select to authenticated using (carlos.es_coach());
+
+create or replace function carlos.registrar_foto(p_fecha date, p_vista text, p_path text) returns boolean
+language plpgsql security definer set search_path = '' as $$
+declare cid uuid := carlos.mi_cliente();
+begin
+  if cid is null or p_vista not in ('frente', 'lateral', 'espalda') or p_fecha not between current_date - 8 and current_date + 8 then return false; end if;
+  if p_path <> cid::text || '/' || p_fecha::text || '/' || p_vista || '.jpg' then return false; end if;
+  insert into carlos.fotos(cliente_id, fecha, vista, path) values (cid, p_fecha, p_vista, p_path)
+    on conflict (cliente_id, fecha, vista) do update set path = excluded.path, created_at = now();
+  return true;
+end $$;
+
+create or replace function carlos.mis_fotos() returns jsonb
+language sql stable security definer set search_path = '' as $$
+  select coalesce(jsonb_agg(jsonb_build_object('f', to_char(fecha, 'YYYY-MM-DD'), 'v', vista) order by fecha desc), '[]'::jsonb)
+    from carlos.fotos where cliente_id = carlos.mi_cliente() $$;
+
+-- Bucket privado: solo JPEG de hasta 5 MB. Cada cliente solo toca su carpeta (<id_cliente>/...); el coach lee todo.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('fotos', 'fotos', false, 5242880, array['image/jpeg'])
+on conflict (id) do update set public = false, file_size_limit = 5242880, allowed_mime_types = array['image/jpeg'];
+drop policy if exists fotos_cliente_insert on storage.objects;
+create policy fotos_cliente_insert on storage.objects for insert to authenticated
+  with check (bucket_id = 'fotos' and (storage.foldername(name))[1] = carlos.mi_cliente()::text);
+drop policy if exists fotos_cliente_update on storage.objects;
+create policy fotos_cliente_update on storage.objects for update to authenticated
+  using (bucket_id = 'fotos' and (storage.foldername(name))[1] = carlos.mi_cliente()::text)
+  with check (bucket_id = 'fotos' and (storage.foldername(name))[1] = carlos.mi_cliente()::text);
+drop policy if exists fotos_leer on storage.objects;
+create policy fotos_leer on storage.objects for select to authenticated
+  using (bucket_id = 'fotos' and (carlos.es_coach() or (storage.foldername(name))[1] = carlos.mi_cliente()::text));
+
 do $$ declare f text; begin
-  foreach f in array array['reclamar(text)', 'mi_plan()', 'marcar(date,text,boolean)', 'mis_marcas(date)', 'reportar(numeric,int,text)'] loop
+  foreach f in array array['reclamar(text)', 'mi_plan()', 'marcar(date,text,boolean)', 'mis_marcas(date)', 'reportar(numeric,int,text)', 'registrar_foto(date,text,text)', 'mis_fotos()'] loop
     execute format('revoke all on function carlos.%s from public', f);
     execute format('grant execute on function carlos.%s to authenticated', f);
   end loop; end $$;
 
 grant usage on schema carlos to authenticated;
 grant select, insert, update, delete on carlos.clientes, carlos.ejercicios_custom to authenticated;
-grant select on carlos.marcas, carlos.reportes to authenticated;
+grant select on carlos.marcas, carlos.reportes, carlos.fotos to authenticated;

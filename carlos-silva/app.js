@@ -2,9 +2,10 @@
 (() => {
   const C = window.COACH, KEY = 'cs_demo_v1';
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const hoy = () => new Date().toISOString().slice(0, 10), uid = () => Math.random().toString(36).slice(2, 9);
+  const ymd = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'),   // fecha LOCAL (UTC cambia el día después de las 19:00 en Ecuador)
+    hoy = () => ymd(new Date()), uid = () => Math.random().toString(36).slice(2, 9);
   const fecha = d => d ? new Date(d + 'T12:00').toLocaleDateString('es-EC', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
-  const dias = n => { const d = new Date(); d.setDate(d.getDate() - n); return d.toISOString().slice(0, 10); };
+  const dias = n => { const d = new Date(); d.setDate(d.getDate() - n); return ymd(d); };
   const d = (nombre, foco, ex) => ({ nombre, foco, ej: ex.map(([id, s, r, dsc, nota]) => ({ id, series: s, reps: r, desc: dsc, nota: nota || '' })) });
   /* ---- plantillas de rutina ---- */
   const RUTINAS = {
@@ -57,6 +58,26 @@
     completos(c, H, desde = 0, n = 7) { let k = 0; for (let i = desde; i < desde + n; i++) { const x = M.dia(c, H, dias(i)); if (x && x.hecho >= x.total) k++; } return k; },
     racha(c, H) { let r = 0; for (let i = 0; i < 60; i++) { const x = M.dia(c, H, dias(i)); if (!x) continue; if (x.hecho >= x.total) r++; else if (i === 0) continue; else break; } return r; }
   };
+  /* ---- mensualidad, check-in y medidas corporales ---- */
+  const MC = [['cuello', 'Cuello'], ['hombros', 'Hombros'], ['pecho', 'Pecho'], ['brazo', 'Brazo'], ['cintura', 'Cintura'], ['abdomen', 'Abdomen'], ['cadera', 'Cadera'], ['muslo', 'Muslo'], ['pantorrilla', 'Pantorrilla']];
+  const DIAS_N = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+  /* check-in = sábado. Se sube desde el viernes al mediodía; el aviso "mañana es tu check-in" sale el viernes desde las 18:00. */
+  const ventana = (now = new Date()) => { const w = (now.getDay() + 6) % 7, h = now.getHours(), d = new Date(now); d.setDate(d.getDate() + (w <= 5 ? 5 - w : -1));
+    return { fecha: ymd(d), estado: w === 5 ? 'hoy' : w === 6 ? 'pasado' : (w === 4 && h >= 18) ? 'aviso' : 'proximo', puede: (w === 4 && h >= 12) || w >= 5 }; };
+  const venceDias = (c, now = new Date()) => { if (!c.vence) return null; const a = new Date(c.vence + 'T00:00'), b = new Date(ymd(now) + 'T00:00'); return Math.round((a - b) / 864e5); };
+  const msgVence = c => { const d = venceDias(c); return `Hola ${c.nombre.split(' ')[0]}, tu mensualidad ${d < 0 ? 'venció' : d === 0 ? 'vence hoy' : 'vence en ' + d + ' día' + (d === 1 ? '' : 's')} (${fecha(c.vence)}). ¿Renovamos para que sigas sin pausa? 💪`; };
+  const msgCheckin = (c, e = 'aviso') => `Hola ${c.nombre.split(' ')[0]}, ${e === 'aviso' ? 'mañana sábado es tu check-in 📸' : e === 'hoy' ? 'hoy es tu check-in 📸' : 'te faltan las fotos de tu check-in 📸'} Sube tus 3 fotos (frente, lateral y espalda) en tu portal para que pueda hacer tu comparativa.`;
+  const renovar = (c, dias = 30) => { const b = c.vence && c.vence > hoy() ? new Date(c.vence + 'T12:00') : new Date(); b.setDate(b.getDate() + dias); c.vence = ymd(b); };
+  const notificar = (clave, titulo, cuerpo) => { try { if (!('Notification' in window) || Notification.permission !== 'granted') return; const k = 'cs_nt_' + clave + '_' + hoy(); if (localStorage.getItem(k)) return; localStorage.setItem(k, '1'); new Notification(titulo, { body: cuerpo, icon: 'assets/carlos.jpg' }); } catch (e) {} };
+  /* siluetas de ejemplo para la demo de fotos */
+  const silueta = (vista, k) => { const w = 38 * k, sh = vista === 'lateral' ? 20 : w * 1.15, p = vista === 'lateral' ? 24 * k : w * .75;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 320"><rect width="240" height="320" fill="#0b1a22"/><rect x="0" y="296" width="240" height="24" fill="#12303b"/><g fill="#19e3ee" fill-opacity=".85"><circle cx="120" cy="52" r="20"/><rect x="${120 - sh}" y="76" width="${sh * 2}" height="100" rx="26"/><rect x="${120 - p}" y="172" width="${p * 2}" height="40" rx="14"/><rect x="${120 - p + 2}" y="208" width="${p - 6}" height="88" rx="9"/><rect x="${124}" y="208" width="${p - 6}" height="88" rx="9"/></g><text x="120" y="312" fill="#8fb0b8" font-size="11" text-anchor="middle" font-family="sans-serif">foto de ejemplo · ${vista}</text></svg>`;
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg); };
+  /* reduce la foto antes de subirla (ahorra datos y espacio) */
+  const comprimir = async (file, max = 1280, q = .82) => { const bm = await createImageBitmap(file, { imageOrientation: 'from-image' }), k = Math.min(1, max / Math.max(bm.width, bm.height)), cv = document.createElement('canvas');
+    cv.width = Math.round(bm.width * k); cv.height = Math.round(bm.height * k); cv.getContext('2d').drawImage(bm, 0, 0, cv.width, cv.height);
+    return new Promise((ok, no) => cv.toBlob(b => b ? ok(b) : no(new Error('No se pudo procesar la foto.')), 'image/jpeg', q)); };
+  const blobUrl = b => new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); });
   /* ---- almacenamiento ---- */
   function semilla() {
     const mk = (id, nombre, sx, nac, cm, obj, mod, tel, ml) => ({ id, nombre, sx, nac, cm, obj, mod, tel, nivel: 'Intermedio', lesiones: '', inicio: dias(70), estado: 'activo', parq: { corazon: false, dolor: false, mareo: false, hueso: false, medic: false, embarazo: false }, notas: '', rutina: null, plan: null, supl: [], medidas: ml, evals: [], sesiones: [] });
@@ -74,6 +95,9 @@
     const Cc = mk('c3', 'Sebastián Mora', 'M', '1988-01-20', 181, 'salud', 'presencial', '593977778899', []); Cc.nivel = 'Principiante'; Cc.inicio = dias(3); Cc.parq.dolor = true; Cc.lesiones = 'Dolor lumbar ocasional';
     const sembrar = (c, nivel) => { c.marcas = {}; for (let i = 1; i < 28; i++) { const f = dias(i), d = diaDe(c, f); if (!d) continue; const ok = ((i * 37 + c.nombre.length) % 10) < nivel; c.marcas[f] = d.ej.map((_, k) => k).slice(0, ok ? d.ej.length : Math.floor(d.ej.length / 2)); if (ok) c.marcas['m' + f] = [0, 1, 2, 3]; } };
     sembrar(A, 9); sembrar(B, 6);
+    A.vence = dias(-5); B.vence = dias(-22); Cc.vence = dias(-27);   // A vence en 5 días: se ve el aviso
+    A.medcorp = [{ f: dias(62), cuello: 37, hombros: 112, pecho: 98, brazo: 32, cintura: 82, abdomen: 86, cadera: 98, muslo: 56, pantorrilla: 37 }, { f: dias(32), cuello: 37.5, hombros: 114, pecho: 100, brazo: 33.5, cintura: 81, abdomen: 84, cadera: 99, muslo: 57, pantorrilla: 37.5 }, { f: dias(3), cuello: 38, hombros: 116, pecho: 102, brazo: 35, cintura: 80, abdomen: 83, cadera: 100, muslo: 58.5, pantorrilla: 38 }];
+    B.medcorp = [{ f: dias(40), cuello: 31, hombros: 98, pecho: 92, brazo: 28, cintura: 78, abdomen: 88, cadera: 102, muslo: 60, pantorrilla: 36 }, { f: dias(9), cuello: 30.5, hombros: 98, pecho: 90, brazo: 27.5, cintura: 73, abdomen: 82, cadera: 99, muslo: 58, pantorrilla: 35.5 }];
     return { clientes: [A, B, Cc], custom: [] };
   }
   const LS = { get() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }, set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} } };
@@ -110,6 +134,26 @@
     async init() { if (!remoto) return; const f = await api.rest('clientes?select=id,datos,user_id,codigo_hash&order=created_at.desc'), x = await api.rest('ejercicios_custom?select=id,datos');
       db = { clientes: f.map(r => Object.assign({}, r.datos, { id: r.id })), custom: x.map(r => r.datos) }; vinc = new Map(f.map(r => [r.id, { vinculado: !!r.user_id, codigo: !!r.codigo_hash }])); snap = new Map(db.clientes.map(c => [c.id, JSON.stringify(c)])); snapC = new Map(db.custom.map(c => [c.id, JSON.stringify(c)])); regCustom(); },
     save() { if (!remoto) { LS.set(db); return; } estadoFn('guardando'); clearTimeout(tmr); tmr = setTimeout(flush, 700); }, flush: () => { clearTimeout(tmr); return flush(); },
+    fotos: {
+      DEMO_KEY: 'cs_fotos_demo', _cache: {},
+      _ls() { try { return JSON.parse(localStorage.getItem('cs_fotos_demo')) || {}; } catch (e) { return {}; } },
+      async lista(cid, coach) { if (remoto) return coach ? (await api.rest(`fotos?cliente_id=eq.${encodeURIComponent(cid)}&order=fecha.desc&select=fecha,vista`)).map(x => ({ f: x.fecha, v: x.vista })) : await api.rpc('mis_fotos');
+        const out = [], L = Store.fotos._ls()[cid] || {}; Object.keys(L).forEach(f => Object.keys(L[f]).forEach(v => out.push({ f, v })));
+        if (cid === 'c1') [dias(42), dias(7)].forEach((f, i) => ['frente', 'lateral', 'espalda'].forEach(v => out.push({ f, v, demo: i }))); return out.sort((x, y) => x.f < y.f ? 1 : -1); },
+      async estado(fecha) { if (remoto) { const r = await api.rest(`fotos?fecha=eq.${fecha}&select=cliente_id,vista`), o = {}; r.forEach(x => o[x.cliente_id] = (o[x.cliente_id] || 0) + 1); return o; }
+        const L = Store.fotos._ls(), o = {}; Object.keys(L).forEach(cid => { const n = Object.keys(L[cid][fecha] || {}).length; if (n) o[cid] = n; }); return o; },
+      async subir(cid, fecha, vista, file) {
+        if (!remoto) { const b = await comprimir(file, 800, .7), u = await blobUrl(b), L = Store.fotos._ls(); (L[cid] ??= {})[fecha] ??= {}; L[cid][fecha][vista] = u;
+          try { localStorage.setItem('cs_fotos_demo', JSON.stringify(L)); } catch (e) { throw new Error('No hay espacio en el navegador para más fotos de la demo.'); } return; }
+        const b = await comprimir(file), path = `${cid}/${fecha}/${vista}.jpg`;
+        const ir = () => fetch(`${SB.url}/storage/v1/object/fotos/${path}`, { method: 'POST', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + ses.get().at, 'Content-Type': 'image/jpeg', 'x-upsert': 'true' }, body: b });
+        let r = await ir(); if (r.status === 401 && await refrescar()) r = await ir(); if (!r.ok) throw new Error('No se pudo subir la foto (' + r.status + ').');
+        if (!(await api.rpc('registrar_foto', { p_fecha: fecha, p_vista: vista, p_path: path }))) throw new Error('La foto no se pudo registrar.'); delete Store.fotos._cache[path]; },
+      async url(cid, f, v, demo) { if (!remoto) { const x = (Store.fotos._ls()[cid] || {})[f]; return x && x[v] ? x[v] : silueta(v, demo === 0 ? 1.18 : 1); }
+        const path = `${cid}/${f}/${v}.jpg`, c = Store.fotos._cache[path]; if (c) return c;
+        const ir = () => fetch(`${SB.url}/storage/v1/object/sign/fotos/${path}`, { method: 'POST', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + ses.get().at, 'Content-Type': 'application/json' }, body: JSON.stringify({ expiresIn: 3600 }) });
+        let r = await ir(); if (r.status === 401 && await refrescar()) r = await ir(); if (!r.ok) return ''; const j = await r.json(); return Store.fotos._cache[path] = SB.url + '/storage/v1' + j.signedURL; }
+    },
     vinculo: id => vinc.get(id) || {},
     async nuevoCodigo(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { codigo_hash: await sha256(t) } }); vinc.set(id, Object.assign({}, vinc.get(id), { codigo: true })); return t; },
     async desvincular(id) { await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { user_id: null, codigo_hash: null } }); vinc.set(id, {}); },
@@ -138,6 +182,7 @@
         p.comidas.map(m => `<h2>${esc(m.h)} · ${esc(m.n)}</h2><ul>${m.it.map(i => `<li>${esc(i)}</li>`).join('')}</ul>`).join('') +
         (p.notas ? `<h2>Indicaciones</h2><p>${esc(p.notas)}</p>` : '') + (c.supl.length ? `<h2>Suplementación</h2><table><tr><th>Producto</th><th>Dosis</th><th>Cuándo</th></tr>${c.supl.map(s => `<tr><td>${esc(s.n)}</td><td>${esc(s.dosis)}</td><td>${esc(s.mom)}</td></tr>`).join('')}</table>` : '') + pie + '</div>'; },
     progreso(c) { const m = c.medidas; return `<div class="doc">${cab('Reporte de progreso', c)}${m.length ? `<table><tr><th>Fecha</th><th>Peso (kg)</th><th>% grasa</th><th>Masa muscular (kg)</th><th>Grasa visceral</th><th>Agua %</th></tr>${m.map(x => `<tr><td>${esc(fecha(x.f))}</td><td>${esc(x.kg)}</td><td>${esc(x.gr)}</td><td>${esc(x.mm)}</td><td>${esc(x.vis)}</td><td>${esc(x.agua)}</td></tr>`).join('')}</table>` : '<p>Aún no hay chequeos InBody.</p>'}` +
+        (c.medcorp && c.medcorp.length ? `<h2>Medidas corporales (cm)</h2><table><tr><th>Fecha</th>${MC.map(x => `<th>${x[1]}</th>`).join('')}</tr>${c.medcorp.map(m => `<tr><td>${esc(fecha(m.f))}</td>${MC.map(x => `<td>${esc(m[x[0]] ?? '—')}</td>`).join('')}</tr>`).join('')}</table>` : '') +
         c.evals.slice(-3).map(e => `<h2>Evaluación técnica · ${esc(fecha(e.f))}</h2><p>${esc(e.nota)}</p><table><tr><th>Ejercicio</th><th>Técnica (1-5)</th><th>Comentario</th></tr>${e.it.map(i => `<tr><td>${esc(EJ.get(i.id)?.n || i.id)}</td><td>${esc(i.pt)}</td><td>${esc(i.n)}</td></tr>`).join('')}</table>`).join('') + pie + '</div>'; },
     imprimir(html, titulo) { const r = document.getElementById('print-root'); r.innerHTML = html; const t = document.title; document.title = titulo; window.print(); document.title = t; setTimeout(() => r.innerHTML = '', 500); }
   };
@@ -145,7 +190,7 @@
   const b64 = u8 => btoa(String.fromCharCode(...u8)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const unb64 = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
   const Link = {
-    paquete: c => ({ v: 1, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: c.rutina, plan: c.plan, supl: c.supl, medidas: c.medidas.slice(-6), evals: c.evals.slice(-3), cm: c.cm, marcas: c.marcas || {}, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }),
+    paquete: c => ({ v: 1, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: c.rutina, plan: c.plan, supl: c.supl, medidas: c.medidas.slice(-6), evals: c.evals.slice(-3), cm: c.cm, sx: c.sx, cid: c.id, vence: c.vence, medcorp: (c.medcorp || []).slice(-6), marcas: c.marcas || {}, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }),
     async codificar(o) { const u = new TextEncoder().encode(JSON.stringify(o));
       if (window.CompressionStream) { const cs = new Response(new Blob([u]).stream().pipeThrough(new CompressionStream('gzip'))); return 'g.' + b64(new Uint8Array(await cs.arrayBuffer())); }
       return 'j.' + b64(u); },
@@ -157,5 +202,5 @@
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
   const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
-  window.CS = { M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+  window.CS = { ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, notificar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
 })();

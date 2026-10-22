@@ -16,4 +16,12 @@ El cliente abre `cliente.html`, **crea su cuenta** (correo + clave propia), pega
 El cliente solo puede: ver su plan, marcar ejercicios/comidas y reportar peso/esfuerzo. Carlos ve ese avance en el panel.
 Si el cliente cambia de celular, entra con su correo; si olvida la clave, la recupera por correo. *Quitar acceso* lo desvincula.
 
+## Fotos del check-in
+`schema.sql` crea el bucket privado `fotos` (solo JPEG, máx. 5 MB) y sus reglas: cada cliente solo sube y ve su propia carpeta; Carlos ve todas. No hay que configurar nada más en Storage. Las fotos se reducen en el celular antes de subirse.
+
+## Avisos
+- **Mensualidad:** Carlos fija la fecha de vencimiento en el perfil del cliente (botón *Renovar +30 días*). El cliente ve un aviso en su portal desde 7 días antes; Carlos lo ve en el Resumen con un botón de WhatsApp.
+- **Check-in del sábado:** desde el viernes 18:00 el portal avisa *"Mañana es tu check-in"* y el Resumen de Carlos lista quién falta, con botón de WhatsApp para recordar.
+- Los avisos aparecen al abrir el portal y, si el cliente los activa, como notificación del navegador. **Un aviso que llegue al celular con la app cerrada** requiere notificaciones push (instalar el portal como app + un servicio programado en Supabase); no está incluido todavía.
+
 Con `url` vacío la app corre en modo demo (datos de ejemplo en el navegador).

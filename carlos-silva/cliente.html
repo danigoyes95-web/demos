@@ -22,7 +22,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px;borde
 const {esc,fecha,hoy,Doc,Link,wa,diaSem}=CS,C=COACH;let c=null,tab='res',sel=0;
 const LS={get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const DN=['L','M','M','J','V','S','D'],DL=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
-const hoyIdx=()=>(new Date().getDay()+6)%7,iso=n=>{const d=new Date();d.setDate(d.getDate()-hoyIdx()+n);return d.toISOString().slice(0,10)};
+const hoyIdx=()=>(new Date().getDay()+6)%7,iso=n=>{const d=new Date();d.setDate(d.getDate()-hoyIdx()+n);return CS.ymd(d)};
 const clave=()=>'cs_cli_'+(c.nombre||'')+'_'+(c.creado||''),Sv=CS.Store;let cache={};const hechos=()=>CS.remoto?cache:(LS.get(clave())||c.marcas||{});
 const rutinaDia=n=>c.rutina?c.rutina.dias.find((_,i)=>diaSem(c.rutina,i)===n):null;
 const ic={res:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',ent:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12"/></svg>',com:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M5 3v8M17 3c-2 2-3 5-3 8h3v10"/></svg>',pro:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>',ej:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><circle cx="12" cy="5" r="2"/><path d="M6 21l2-9-3-3 4-2h6l4 2-3 3 2 9M9 12h6"/></svg>'};
@@ -43,15 +43,34 @@ function vCom(){const p=c.plan;if(!p)return '<p class="vacio">Tu coach aún no t
  return `<div class="kpis"><div class="card k"><b>${esc(p.kcal)}</b><small>kcal</small></div><div class="card k"><b>${esc(p.p)} g</b><small>proteína</small></div><div class="card k"><b>${esc(p.c)} g</b><small>carbos</small></div><div class="card k"><b>${esc(p.g)} g</b><small>grasas</small></div></div>`+
  p.comidas.map((m,i)=>`<div class="it ${h.includes(i)?'ok':''}" style="grid-template-columns:64px 1fr 44px"><span class="th" style="font-weight:700;color:var(--neon);font-size:14px">${esc(m.h)}</span><div class="tx"><b>${esc(m.n)}</b><small>${m.it.map(esc).join(' · ')}</small></div><button class="ck" data-cm="${i}" aria-pressed="${h.includes(i)}" aria-label="Marcar ${esc(m.n)}">✓</button></div>`).join('')+
  `<p style="color:var(--mut);margin-top:12px">💧 ${esc(p.agua)}. ${esc(p.notas)}</p>`+(c.supl.length?`<div class="sec-t"><b>Suplementación</b></div>`+c.supl.map(s=>`<div class="card" style="margin-bottom:8px"><b>${esc(s.n)}</b> · ${esc(s.dosis)}<br><small style="color:var(--mut)">${esc(s.mom)}</small></div>`).join(''):'')+pdfs()}
-function vPro(){const m=c.medidas,H=hechos();const sem=[0,1,2,3,4,5,6].filter(n=>{const d=rutinaDia(n),h=H[iso(n)];return d&&h&&h.length===d.ej.length}).length,meta=c.rutina?c.rutina.dias.length:0;
+function vPro(){const m=c.medidas,H=hechos();const extra=`<div class="dash" style="margin-top:14px">${cardCheckin()}</div><div class="sec-t"><b>Mis fotos</b><span>antes y después</span></div><div class="glass" id="cmp"></div>${medCorpHtml()}`;const sem=[0,1,2,3,4,5,6].filter(n=>{const d=rutinaDia(n),h=H[iso(n)];return d&&h&&h.length===d.ej.length}).length,meta=c.rutina?c.rutina.dias.length:0;
  const bloque=`<div class="kpis"><div class="card k"><b>${sem}/${meta}</b><small>entrenos completos esta semana</small></div>${m.length?`<div class="card k"><b>${esc(m.at(-1).kg)} kg</b><small>último peso</small></div>`:''}</div>`;
- if(!m.length)return bloque+'<p class="vacio">Aún no hay chequeos InBody. Se hacen una vez al mes.</p>';
+ if(!m.length)return extra+bloque+'<p class="vacio">Aún no hay chequeos InBody. Se hacen una vez al mes.</p>';
  const a=m[0],z=m.at(-1),dl=(k,inv)=>{const v=z[k]-a[k];return `<span class="${(inv?v<=0:v>=0)?'ok-c':''}">${v>0?'+':''}${v.toFixed(1)}</span>`};
- return bloque+`<div class="kpis"><div class="card k"><b>${dl('kg')}</b><small>kg de peso</small></div><div class="card k"><b>${dl('gr',1)}</b><small>% grasa</small></div><div class="card k"><b>${dl('mm')}</b><small>kg músculo</small></div></div>
+ return extra+bloque+`<div class="kpis"><div class="card k"><b>${dl('kg')}</b><small>kg de peso</small></div><div class="card k"><b>${dl('gr',1)}</b><small>% grasa</small></div><div class="card k"><b>${dl('mm')}</b><small>kg músculo</small></div></div>
  <div class="card"><table><tr><th>Fecha</th><th>Peso</th><th>% grasa</th><th>Músculo</th></tr>${m.map(x=>`<tr><td>${esc(fecha(x.f))}</td><td>${esc(x.kg)}</td><td>${esc(x.gr)}</td><td>${esc(x.mm)}</td></tr>`).join('')}</table></div>`+
  (c.evals.length?`<div class="sec-t"><b>Evaluación técnica</b></div>`+c.evals.slice(-1).map(e=>`<div class="card"><small>${esc(fecha(e.f))}</small><p>${esc(e.nota)}</p>${e.it.map(i=>`<p><b>${esc(EJ.get(i.id)?.n||i.id)}</b> · ${'★'.repeat(i.pt)}${'☆'.repeat(5-i.pt)}<br><small style="color:var(--mut)">${esc(i.n)}</small></p>`).join('')}</div>`).join(''):'')+`<div class="dl"><button class="btn sm sec" data-pdf="progreso">⬇ Mi progreso en PDF</button></div>`}
 function vEj(){return EJ.grupos.map(g=>`<div class="sec-t"><b>${esc(g)}</b></div>`+EJ.lista.filter(e=>e.gr===g).map(e=>`<div class="it" style="grid-template-columns:64px 1fr"><span class="th" data-ej="${esc(e.id)}">${EJ.miniatura(e)}</span><button class="tx" data-ej="${esc(e.id)}"><b>${esc(e.n)}</b><small>${esc(e.mus)}</small></button></div>`).join('')).join('')}
 const {M}=CS,fi=n=>CS.dias(n);
+let FOTOS=[],pickV=null;
+const nF=f=>FOTOS.filter(x=>x.f===f).length,VN={frente:'Frente',lateral:'Lateral',espalda:'Espalda'};
+function avisosHtml(){const o=[],d=CS.venceDias(c),v=CS.ventana(),n=nF(v.fecha),u=c.medidas.at(-1),prox=u?Math.ceil((new Date(u.f).getTime()+30*864e5-Date.now())/864e5):null;
+ if(d!=null&&d<=7){const t=d<0?`Tu mensualidad venció hace ${-d} día${d<-1?'s':''}`:d===0?'Tu mensualidad vence hoy':`Tu mensualidad vence en ${d} día${d===1?'':'s'} (${fecha(c.vence)})`;
+  o.push(`<div class="av ${d<=3?'r':'w'}" role="status"><span>⏳ ${t}</span><a class="btn sm" href="${wa(C.wa,'Hola Carlos, soy '+c.nombre+'. Quiero renovar mi mensualidad.')}" target="_blank" rel="noopener">Renovar</a></div>`);CS.notificar('vence',t,'Escríbele a Carlos para renovar y no perder tu ritmo.')}
+ if(v.estado!=='proximo'){if(n>=3)o.push(`<div class="av g" role="status"><span>✓ Check-in enviado. ¡Gracias!</span></div>`);else{const t=v.estado==='aviso'?'Mañana sábado es tu check-in':v.estado==='hoy'?'Hoy es tu check-in':'Te faltan fotos de tu check-in';
+  o.push(`<div class="av" role="status"><span>📸 ${t}: sube tus 3 fotos (${n}/3)</span><button class="btn sm" data-t="pro">Subir</button></div>`);CS.notificar('checkin',t,'Sube tus fotos de frente, lateral y espalda en tu portal.')}}
+ if(prox!=null&&prox<=3)o.push(`<div class="av w" role="status"><span>📊 Esta semana toca tu chequeo InBody</span></div>`);
+ if('Notification' in window&&Notification.permission==='default'&&o.length)o.push(`<div class="av"><span>🔔 Activa los avisos en este celular</span><button class="btn sm sec" id="nt">Activar</button></div>`);
+ return o.join('')}
+function cardCheckin(){const v=CS.ventana(),n=nF(v.fecha);
+ if(!v.puede&&n===0)return `<div class="glass"><h3>Próximo check-in</h3><b class="or" style="font-size:18px">Sábado ${esc(fecha(v.fecha))}</b><p style="color:var(--mut);margin-top:6px">El viernes desde el mediodía podrás subir tus 3 fotos: frente, lateral y espalda. Te avisaremos.</p></div>`;
+ const sl=Object.keys(VN).map(k=>{const ok=FOTOS.some(x=>x.f===v.fecha&&x.v===k);return `<button class="slot ${ok?'ok':''}" data-pick="${k}" aria-label="${ok?'Cambiar':'Subir'} foto ${VN[k].toLowerCase()}">${ok?`<img data-pv="${k}" alt="Tu foto de ${VN[k].toLowerCase()}">`:'<b>＋</b>'}<span>${VN[k]}${ok?' ✓':''}</span></button>`}).join('');
+ return `<div class="glass"><h3>Check-in · sábado ${esc(fecha(v.fecha))}</h3><div style="display:flex;align-items:center;gap:10px"><b class="or" style="font-size:20px">${n}/3</b><span style="color:var(--mut);font-size:14px">${n>=3?'¡Listo! Carlos ya puede hacer tu comparativa.':'Sube las 3 fotos para tu comparativa.'}</span></div><div class="slots">${sl}</div>
+ <input type="file" accept="image/*" id="fi" hidden><p id="fe" role="alert" style="color:var(--bad);min-height:18px;font-size:13px"></p>
+ <details><summary style="cursor:pointer;color:var(--mut);font-size:14px;min-height:32px">Cómo tomar las fotos</summary><ul style="margin:6px 0 0 18px;color:var(--mut);font-size:14px"><li>Cuerpo completo, de pies a cabeza.</li><li>Luz pareja y fondo liso; ropa ajustada o deportiva.</li><li>Cámara a la altura del ombligo y siempre a la misma distancia.</li><li>Frente: brazos relajados. Lateral: brazos al costado. Espalda: igual que de frente.</li></ul></details>
+ <p style="color:var(--mut);font-size:12px;margin-top:8px">🔒 Solo tú y Carlos ven estas fotos.</p></div>`}
+function medCorpHtml(){const mc=c.medcorp||[];if(!mc.length)return '';const a=mc[0],z=mc.at(-1);
+ return `<div class="sec-t"><b>Medidas corporales</b><span>${esc(fecha(z.f))}</span></div><div class="glass"><table class="mct"><tr><th>Zona</th><th>Inicio</th><th>Hoy</th><th>Cambio</th></tr>${CS.MC.filter(x=>z[x[0]]!=null).map(([k,n])=>{const d=mc.length>1?z[k]-a[k]:0;return `<tr><td>${n}</td><td>${a[k]??'—'}</td><td><b>${z[k]}</b></td><td class="${d?'ne':''}">${mc.length>1?(d>0?'▲ ':d<0?'▼ ':'')+Math.abs(d).toFixed(1).replace('.',',')+' cm':'—'}</td></tr>`}).join('')}</table></div>`}
 function vRes(){const H=hechos(),hi=hoyIdx(),pw=M.pct(c,H,0,7),racha=M.racha(c,H),dh=rutinaDia(hi),hh=(H[iso(hi)]||[]).length,m=c.medidas,u=m.at(-1),a=m[0],p=c.plan;
  const sem=[0,1,2,3,4,5,6].map(n=>{const d=rutinaDia(n),h=(H[iso(n)]||[]).length;return d?Math.min(100,Math.round(h/d.ej.length*100)):0});
  const msg=pw==null?'Tu coach está preparando tu plan.':pw>=80?'¡Estás imparable! Así se construye un cuerpo fuerte. 💪':pw>=50?'Buen ritmo. Un entreno más y cierras la semana fuerte.':'Cada repetición suma. Empieza hoy, Carlos cuenta contigo.';
@@ -70,14 +89,18 @@ function pintar(){const H=hechos(),hi=hoyIdx();
  m.innerHTML=`<div class="top"><div class="hd"><div><small>${esc(C.nombre.toUpperCase())} · PERSONAL TRAINER</small><h1>HOY</h1></div><a class="btn sm" href="${wa(C.wa,'Hola Carlos, soy '+c.nombre+'.')}" target="_blank" rel="noopener">WhatsApp</a></div>
  <div class="wk" role="group" aria-label="Semana">${DN.map((l,i)=>{const d=rutinaDia(i),h=H[iso(i)],ok=d&&h&&h.length===d.ej.length;return `<button data-w="${i}" class="${i===hi?'hoy':''} ${d?'':'des'}" aria-pressed="${i===sel}" aria-label="${DL[i]}${d?'':' (descanso)'}">${l}${ok?'<i></i>':''}</button>`}).join('')}</div>
  <div class="seg" role="tablist">${[['res','Resumen'],['ent','Entreno'],['com','Comidas'],['pro','Progreso'],['ej','Ejercicios']].map(([k,t])=>`<button role="tab" data-t="${k}" aria-selected="${k===tab}">${ic[k]}${t}</button>`).join('')}</div></div>
- <p style="color:var(--mut);font-size:14px;margin:12px 0 0">${tab==='ent'||tab==='com'?`${DL[sel]}, ${fecha(iso(sel))}`:''}</p>`+V[tab]()+(CS.remoto?'<p style="text-align:center;margin-top:24px"><button class="btn sec sm" id="salir">Cerrar sesión</button></p>':'');
+ ${avisosHtml()}<p style="color:var(--mut);font-size:14px;margin:12px 0 0">${tab==='ent'||tab==='com'?`${DL[sel]}, ${fecha(iso(sel))}`:''}</p>`+V[tab]()+(CS.remoto?'<p style="text-align:center;margin-top:24px"><button class="btn sec sm" id="salir">Cerrar sesión</button></p>':'');
  if(document.getElementById('salir'))document.getElementById('salir').onclick=()=>{Sv.api.salir();location.reload()};
  const g=id=>document.getElementById(id);CH.contar(m);
+ if(g('nt'))g('nt').onclick=async()=>{try{await Notification.requestPermission()}catch(e){}pintar()};
+ if(tab==='pro'){if(g('cmp'))CS.comparador(g('cmp'),c.cid,false);const v=CS.ventana();document.querySelectorAll('[data-pv]').forEach(async i=>{i.src=await Sv.fotos.url(c.cid,v.fecha,i.dataset.pv)})}
+ if(g('fi'))g('fi').onchange=async e=>{const f=e.target.files[0];if(!f||!pickV)return;const v=CS.ventana(),er=g('fe');er.textContent='Subiendo foto…';try{await Sv.fotos.subir(c.cid,v.fecha,pickV,f);FOTOS=FOTOS.filter(x=>!(x.f===v.fecha&&x.v===pickV));FOTOS.push({f:v.fecha,v:pickV});pintar()}catch(x){er.textContent=x.message||'No se pudo subir la foto.'}};
  if(g('rep'))g('rep').onclick=async()=>{const kg=+g('pe').value,rp=+g('rp').value;if(CS.remoto){try{await Sv.reportar(kg,rp,'')}catch(e){}}open(wa(C.wa,`Hola Carlos, soy ${c.nombre}. Reporte ${fecha(hoy())}: ${(H[iso(hi)]||[]).length} ejercicios hechos`+(kg?`, peso ${kg} kg`:'')+(rp?`, esfuerzo ${rp}/10`:'')+'.'),'_blank','noopener')}}
 async function marcar(k,j){const H=hechos(),a=H[k]||[],i=a.indexOf(j),on=i<0;on?a.push(j):a.splice(i,1);H[k]=a;if(!CS.remoto)LS.set(clave(),H);const y=scrollY;pintar();scrollTo(0,y);
  if(CS.remoto){try{await Sv.marcar(k[0]==='m'?k.slice(1):k,(k[0]==='m'?'m':'e')+j,on)}catch(e){const b=H[k]||[],q=b.indexOf(j);on?b.splice(q,1):b.push(j);pintar();alert('No se pudo guardar. Revisa tu conexión.')}}}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-t]');if(t){tab=t.dataset.t;pintar();scrollTo(0,0);return}
  const w=e.target.closest('[data-w]');if(w){sel=+w.dataset.w;if(tab!=='ent'&&tab!=='com')tab='ent';pintar();return}
+ const pk=e.target.closest('[data-pick]');if(pk){pickV=pk.dataset.pick;const fi=document.getElementById('fi');fi.value='';fi.click();return}
  const k=e.target.closest('[data-ck]');if(k){marcar(iso(sel),+k.dataset.ck);return}const cm=e.target.closest('[data-cm]');if(cm){marcar('m'+iso(sel),+cm.dataset.cm);return}
  const p=e.target.closest('[data-pdf]');if(p)Doc.imprimir(Doc[p.dataset.pdf](c),p.dataset.pdf+' - '+c.nombre)});
 /* ---------- acceso con cuenta (producción) ---------- */
@@ -95,11 +118,11 @@ function codigoUI(msg){frm('CÓDIGO DE INVITACIÓN',`<p style="color:var(--mut);
  document.getElementById('out').onclick=()=>{Sv.api.salir();location.reload()};
  document.getElementById('go').onclick=async()=>{const k=document.getElementById('cd').value.trim();try{if(await Sv.reclamar(k))arrancar();else codigoUI('Código incorrecto o ya usado. Pídele uno nuevo a Carlos.')}catch(e){codigoUI('No se pudo vincular: '+e.message)}}}
 async function arrancar(msg){
- if(!CS.remoto){const o=await cargar();if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;sel=hoyIdx();pintar();return}
+ if(!CS.remoto){const o=await cargar();if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}sel=hoyIdx();pintar();return}
  if(!Sv.api.hayCuenta())return authUI(msg);
  let o;try{o=await Sv.miPlan()}catch(e){if(e.status===401||e.status===403){Sv.api.salir();return authUI('Tu sesión venció. Ingresa de nuevo.')}m.innerHTML='<p class="vacio">No se pudo conectar. Revisa tu internet e intenta de nuevo.</p>';return}
  if(!o)return codigoUI();
- (o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});c=o;
+ (o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});c=o;try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}
  try{cache={};(await Sv.marcas(CS.dias(30))||[]).forEach(x=>{const k=x.k[0]==='m'?'m'+x.f:x.f;(cache[k]??=[]).push(+x.k.slice(1))})}catch(e){}
  sel=hoyIdx();pintar()}
 arrancar();
