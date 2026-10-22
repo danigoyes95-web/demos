@@ -2,7 +2,9 @@
 window.COACH = {
   nombre: 'Carlos Silva', titulo: 'Personal Trainer', lema: 'Asume el desafío para un cuerpo fuerte',
   wa: '593998094368', ig: 'krlos_guevara', ig2: 'fitzopne_of',
-  claveDemo: 'coach',   // clave del panel en la demo (con backend real se cambia por login)
+  // Base de datos. Vacío = modo demo (datos de ejemplo solo en el navegador). Solo va la clave anon, NUNCA service_role.
+  supabase: { url: '', anonKey: '', schema: 'carlos' },
+  claveDemo: 'coach',   // solo modo demo;   
   servicios: [
     ['Guía nutricional', 'apple'], ['Plan alimenticio (Dieta)', 'plate'], ['Chequeo InBody mensual', 'scale'],
     ['Apoyo vía WhatsApp 24/7', 'chat'], ['Seguimiento 1:1', 'user'], ['Rutinas personalizadas', 'dumbbell'],

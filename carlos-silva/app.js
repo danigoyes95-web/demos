@@ -66,10 +66,39 @@
     return { clientes: [A, B, Cc], custom: [] };
   }
   const LS = { get() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }, set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} } };
-  let db = LS.get() || semilla();
-  db.custom.forEach(c => { if (!EJ.get(c.id)) { const e = EJ.agregarPersonalizado(c); e.id = c.id; } });
-  const Store = { db: () => db, save() { LS.set(db); }, reset() { db = semilla(); LS.set(db); }, cliente: id => db.clientes.find(c => c.id === id),
-    nuevo() { const c = { id: uid(), nombre: 'Nuevo cliente', sx: 'M', nac: '1995-01-01', cm: 170, obj: 'salud', mod: 'presencial', tel: '', nivel: 'Principiante', lesiones: '', inicio: hoy(), estado: 'activo', parq: {}, notas: '', rutina: null, plan: null, supl: [], medidas: [], evals: [], sesiones: [] }; db.clientes.unshift(c); Store.save(); return c; } };
+  /* ---- Supabase (REST sin librería). Sin url/anonKey en config.js = modo demo ---- */
+  const SB = C.supabase || {}, remoto = !!(SB.url && SB.anonKey), SES = 'cs_sesion';
+  const ses = { get() { try { return JSON.parse(localStorage.getItem(SES)); } catch (e) { return null; } }, set(v) { try { v ? localStorage.setItem(SES, JSON.stringify(v)) : localStorage.removeItem(SES); } catch (e) {} } };
+  const guardarSes = j => ses.set({ at: j.access_token, rt: j.refresh_token });
+  async function refrescar() { const s = ses.get(); if (!s || !s.rt) return false;
+    const r = await fetch(`${SB.url}/auth/v1/token?grant_type=refresh_token`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ refresh_token: s.rt }) }).catch(() => null);
+    if (!r || !r.ok) { ses.set(null); return false; } guardarSes(await r.json()); return true; }
+  async function http(path, o = {}) {
+    const ir = () => { const s = ses.get(); return fetch(`${SB.url}${path}`, { method: o.method || 'GET', keepalive: !!o.keepalive, headers: Object.assign({ apikey: SB.anonKey, Authorization: 'Bearer ' + (s && !o.anon ? s.at : SB.anonKey), 'Content-Type': 'application/json', 'Content-Profile': SB.schema, 'Accept-Profile': SB.schema }, o.prefer ? { Prefer: o.prefer } : {}), body: o.body ? JSON.stringify(o.body) : undefined }); };
+    let r = await ir(); if (r.status === 401 && ses.get() && await refrescar()) r = await ir();
+    const t = await r.text(); let j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {}
+    if (!r.ok) { const e = new Error((j && (j.message || j.msg)) || 'Error de conexión'); e.status = r.status; throw e; } return j; }
+  const api = { activo: remoto, hayCuenta: () => !!ses.get(), salir() { ses.set(null); },
+    async login(correo, clave) { const r = await fetch(`${SB.url}/auth/v1/token?grant_type=password`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: correo, password: clave }) });
+      if (!r.ok) throw new Error('Correo o clave incorrectos.'); guardarSes(await r.json()); },
+    rest: (p, o) => http('/rest/v1/' + p, o), rpc: (fn, args, o) => http('/rest/v1/rpc/' + fn, Object.assign({ method: 'POST', body: args || {} }, o)) };
+  const sha256 = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
+  const token = () => { const u = crypto.getRandomValues(new Uint8Array(32)); return btoa(String.fromCharCode(...u)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
+  let db = remoto ? { clientes: [], custom: [] } : (LS.get() || semilla()), snap = new Map(), snapC = new Map(), tmr = null, estadoFn = () => {};
+  const regCustom = () => db.custom.forEach(c => { if (!EJ.get(c.id)) { const e = EJ.agregarPersonalizado(c); e.id = c.id; } });
+  regCustom();
+  async function flush() {
+    try { for (const c of db.clientes) { const s = JSON.stringify(c); if (snap.get(c.id) !== s) { await api.rest('clientes?on_conflict=id', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: { id: c.id, datos: c, activo: c.estado === 'activo' } }); snap.set(c.id, s); } }
+      for (const x of db.custom) { const s = JSON.stringify(x); if (snapC.get(x.id) !== s) { await api.rest('ejercicios_custom?on_conflict=id', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: { id: x.id, datos: x } }); snapC.set(x.id, s); } }
+      estadoFn('ok'); } catch (e) { estadoFn('error', e.message); } }
+  const Store = { db: () => db, remoto, api, estado(fn) { estadoFn = fn; },
+    async init() { if (!remoto) return; const f = await api.rest('clientes?select=id,datos&order=created_at.desc'), x = await api.rest('ejercicios_custom?select=id,datos');
+      db = { clientes: f.map(r => Object.assign({}, r.datos, { id: r.id })), custom: x.map(r => r.datos) }; snap = new Map(db.clientes.map(c => [c.id, JSON.stringify(c)])); snapC = new Map(db.custom.map(c => [c.id, JSON.stringify(c)])); regCustom(); },
+    save() { if (!remoto) { LS.set(db); return; } estadoFn('guardando'); clearTimeout(tmr); tmr = setTimeout(flush, 700); }, flush: () => { clearTimeout(tmr); return flush(); },
+    async nuevoToken(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { token_hash: await sha256(t) } }); return t; },
+    async planPorToken(t) { return api.rpc('plan_por_token', { p_token: t }, { anon: true }); },
+    reset() { if (remoto) return; db = semilla(); LS.set(db); }, cliente: id => db.clientes.find(c => c.id === id),
+    nuevo() { const c = { id: remoto ? crypto.randomUUID() : uid(), nombre: 'Nuevo cliente', sx: 'M', nac: '1995-01-01', cm: 170, obj: 'salud', mod: 'presencial', tel: '', nivel: 'Principiante', lesiones: '', inicio: hoy(), estado: 'activo', parq: {}, notas: '', rutina: null, plan: null, supl: [], medidas: [], evals: [], sesiones: [], consent: '' }; db.clientes.unshift(c); Store.save(); return c; } };
   /* ---- semáforo de seguimiento ---- */
   const pend = c => { const u = c.medidas.at(-1), e = c.evals.at(-1);
     return { inbody: !u || (Date.now() - new Date(u.f)) / 864e5 > 30, eval: !e || (Date.now() - new Date(e.f)) / 864e5 > 7, riesgo: Object.values(c.parq || {}).some(Boolean) }; };
@@ -100,10 +129,10 @@
     async decodificar(s) { const [t, v] = [s.slice(0, 2), s.slice(2)]; let u = unb64(v);
       if (t === 'g.') u = new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
       return JSON.parse(new TextDecoder().decode(u)); },
-    async url(c) { return new URL('cliente.html', location.href).href + '#p=' + await Link.codificar(Link.paquete(c)); }
+    async url(c) { const base = new URL('cliente.html', location.href).href; if (remoto) { const t = await Store.nuevoToken(c.id); c.enlace = hoy(); Store.save(); return base + '#t=' + t; } return base + '#p=' + await Link.codificar(Link.paquete(c)); }
   };
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
   const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
-  window.CS = { diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+  window.CS = { remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
 })();

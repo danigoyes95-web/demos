@@ -27,8 +27,9 @@ const clave=()=>'cs_cli_'+(c.nombre||'')+'_'+(c.creado||''),hechos=()=>LS.get(cl
 const rutinaDia=n=>c.rutina?c.rutina.dias.find((_,i)=>diaSem(c.rutina,i)===n):null;
 const ic={ent:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12"/></svg>',com:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M5 3v8M17 3c-2 2-3 5-3 8h3v10"/></svg>',pro:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>',ej:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><circle cx="12" cy="5" r="2"/><path d="M6 21l2-9-3-3 4-2h6l4 2-3 3 2 9M9 12h6"/></svg>'};
 async function cargar(){const q=new URLSearchParams(location.search),h=new URLSearchParams(location.hash.slice(1));
- try{if(h.get('p')){const o=await Link.decodificar(h.get('p'));(o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});return o}
-  if(q.get('demo')){const k=CS.Store.cliente(q.get('demo'));if(k)return Link.paquete(k)}}catch(e){console.warn(e)}return null}
+ try{if(h.get('t')&&CS.remoto){const o=await CS.Store.planPorToken(h.get('t'));if(o){(o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}})}return o}
+  if(h.get('p')&&!CS.remoto){const o=await Link.decodificar(h.get('p'));(o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});return o}
+  if(q.get('demo')&&!CS.remoto){const k=CS.Store.cliente(q.get('demo'));if(k)return Link.paquete(k)}}catch(e){console.warn(e)}return null}
 const detalle=x=>{const r=/^\d+$/.test(String(x.reps).trim())?x.reps+' repeticiones':x.reps;return [x.series+' series',r,x.kg?x.kg+' kg':'',x.desc].filter(Boolean).join(' · ')};
 function lista(d,fecha){const h=hechos()[fecha]||[];return d.ej.map((x,j)=>{const e=EJ.get(x.id);if(!e)return '';const ok=h.includes(j);
  return `<div class="it ${ok?'ok':''}"><span class="th" data-ej="${esc(e.id)}" role="button" tabindex="0" aria-label="Ver ${esc(e.n)}">${EJ.miniatura(e)}</span><button class="tx" data-ej="${esc(e.id)}"><b>${esc(e.n)}</b><small>${esc(detalle(x))}</small>${x.nota?`<small><br>${esc(x.nota)}</small>`:''}</button><button class="ck" data-ck="${j}" aria-pressed="${ok}" aria-label="Marcar ${esc(e.n)} como hecho">✓</button></div>`}).join('')}
@@ -64,5 +65,5 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-t]');if(t)
  const w=e.target.closest('[data-w]');if(w){sel=+w.dataset.w;if(tab!=='ent'&&tab!=='com')tab='ent';pintar();return}
  const k=e.target.closest('[data-ck]');if(k){marcar(iso(sel),+k.dataset.ck);return}const cm=e.target.closest('[data-cm]');if(cm){marcar('m'+iso(sel),+cm.dataset.cm);return}
  const p=e.target.closest('[data-pdf]');if(p)Doc.imprimir(Doc[p.dataset.pdf](c),p.dataset.pdf+' - '+c.nombre)});
-cargar().then(o=>{if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;sel=hoyIdx();pintar()});
+cargar().then(o=>{if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan o el enlace ya no está activo.<br>Pídele a Carlos un enlace nuevo por WhatsApp.</p>';return}c=o;sel=hoyIdx();pintar()});
 </script></body></html>
