@@ -81,10 +81,14 @@
   const api = { activo: remoto, hayCuenta: () => !!ses.get(), salir() { ses.set(null); },
     async login(correo, clave) { const r = await fetch(`${SB.url}/auth/v1/token?grant_type=password`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: correo, password: clave }) });
       if (!r.ok) throw new Error('Correo o clave incorrectos.'); guardarSes(await r.json()); },
+    async registrar(correo, clave) { const r = await fetch(`${SB.url}/auth/v1/signup`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: correo, password: clave }) });
+      const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(/registered|exists/i.test(j.msg || j.message || j.error_description || '') ? 'Ese correo ya tiene cuenta: ingresa con tu clave.' : (j.msg || j.message || 'No se pudo crear la cuenta.'));
+      if (j.access_token) { guardarSes(j); return true; } return false; },
+    async recuperar(correo) { await fetch(`${SB.url}/auth/v1/recover`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: correo }) }); },
     rest: (p, o) => http('/rest/v1/' + p, o), rpc: (fn, args, o) => http('/rest/v1/rpc/' + fn, Object.assign({ method: 'POST', body: args || {} }, o)) };
   const sha256 = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
   const token = () => { const u = crypto.getRandomValues(new Uint8Array(32)); return btoa(String.fromCharCode(...u)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
-  let db = remoto ? { clientes: [], custom: [] } : (LS.get() || semilla()), snap = new Map(), snapC = new Map(), tmr = null, estadoFn = () => {};
+  let db = remoto ? { clientes: [], custom: [] } : (LS.get() || semilla()), snap = new Map(), snapC = new Map(), vinc = new Map(), tmr = null, estadoFn = () => {};
   const regCustom = () => db.custom.forEach(c => { if (!EJ.get(c.id)) { const e = EJ.agregarPersonalizado(c); e.id = c.id; } });
   regCustom();
   async function flush() {
@@ -92,11 +96,16 @@
       for (const x of db.custom) { const s = JSON.stringify(x); if (snapC.get(x.id) !== s) { await api.rest('ejercicios_custom?on_conflict=id', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: { id: x.id, datos: x } }); snapC.set(x.id, s); } }
       estadoFn('ok'); } catch (e) { estadoFn('error', e.message); } }
   const Store = { db: () => db, remoto, api, estado(fn) { estadoFn = fn; },
-    async init() { if (!remoto) return; const f = await api.rest('clientes?select=id,datos&order=created_at.desc'), x = await api.rest('ejercicios_custom?select=id,datos');
-      db = { clientes: f.map(r => Object.assign({}, r.datos, { id: r.id })), custom: x.map(r => r.datos) }; snap = new Map(db.clientes.map(c => [c.id, JSON.stringify(c)])); snapC = new Map(db.custom.map(c => [c.id, JSON.stringify(c)])); regCustom(); },
+    async init() { if (!remoto) return; const f = await api.rest('clientes?select=id,datos,user_id,codigo_hash&order=created_at.desc'), x = await api.rest('ejercicios_custom?select=id,datos');
+      db = { clientes: f.map(r => Object.assign({}, r.datos, { id: r.id })), custom: x.map(r => r.datos) }; vinc = new Map(f.map(r => [r.id, { vinculado: !!r.user_id, codigo: !!r.codigo_hash }])); snap = new Map(db.clientes.map(c => [c.id, JSON.stringify(c)])); snapC = new Map(db.custom.map(c => [c.id, JSON.stringify(c)])); regCustom(); },
     save() { if (!remoto) { LS.set(db); return; } estadoFn('guardando'); clearTimeout(tmr); tmr = setTimeout(flush, 700); }, flush: () => { clearTimeout(tmr); return flush(); },
-    async nuevoToken(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { token_hash: await sha256(t) } }); return t; },
-    async planPorToken(t) { return api.rpc('plan_por_token', { p_token: t }, { anon: true }); },
+    vinculo: id => vinc.get(id) || {},
+    async nuevoCodigo(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { codigo_hash: await sha256(t) } }); vinc.set(id, Object.assign({}, vinc.get(id), { codigo: true })); return t; },
+    async desvincular(id) { await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { user_id: null, codigo_hash: null } }); vinc.set(id, {}); },
+    async actividad(id) { const q = encodeURIComponent(id); const [m, r] = await Promise.all([api.rest(`marcas?cliente_id=eq.${q}&order=fecha.desc&limit=300`), api.rest(`reportes?cliente_id=eq.${q}&order=created_at.desc&limit=15`)]); return { marcas: m, reportes: r }; },
+    miPlan: () => api.rpc('mi_plan'), reclamar: c => api.rpc('reclamar', { p_codigo: c }),
+    marcar: (f, k, on) => api.rpc('marcar', { p_fecha: f, p_clave: k, p_on: on }), marcas: d => api.rpc('mis_marcas', { p_desde: d }),
+    reportar: (peso, rpe, nota) => api.rpc('reportar', { p_peso: peso || null, p_rpe: rpe || null, p_nota: nota || '' }),
     reset() { if (remoto) return; db = semilla(); LS.set(db); }, cliente: id => db.clientes.find(c => c.id === id),
     nuevo() { const c = { id: remoto ? crypto.randomUUID() : uid(), nombre: 'Nuevo cliente', sx: 'M', nac: '1995-01-01', cm: 170, obj: 'salud', mod: 'presencial', tel: '', nivel: 'Principiante', lesiones: '', inicio: hoy(), estado: 'activo', parq: {}, notas: '', rutina: null, plan: null, supl: [], medidas: [], evals: [], sesiones: [], consent: '' }; db.clientes.unshift(c); Store.save(); return c; } };
   /* ---- semáforo de seguimiento ---- */
@@ -129,7 +138,7 @@
     async decodificar(s) { const [t, v] = [s.slice(0, 2), s.slice(2)]; let u = unb64(v);
       if (t === 'g.') u = new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
       return JSON.parse(new TextDecoder().decode(u)); },
-    async url(c) { const base = new URL('cliente.html', location.href).href; if (remoto) { const t = await Store.nuevoToken(c.id); c.enlace = hoy(); Store.save(); return base + '#t=' + t; } return base + '#p=' + await Link.codificar(Link.paquete(c)); }
+    async url(c) { return new URL('cliente.html', location.href).href + '#p=' + await Link.codificar(Link.paquete(c)); }
   };
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
