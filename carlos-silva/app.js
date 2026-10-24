@@ -78,6 +78,16 @@
     cv.width = Math.round(bm.width * k); cv.height = Math.round(bm.height * k); cv.getContext('2d').drawImage(bm, 0, 0, cv.width, cv.height);
     return new Promise((ok, no) => cv.toBlob(b => b ? ok(b) : no(new Error('No se pudo procesar la foto.')), 'image/jpeg', q)); };
   const blobUrl = b => new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); });
+  /* ---- temporizadores y registro de series ---- */
+  const seg = t => { const m = String(t || '').match(/(\d+)(?:\s*-\s*(\d+))?\s*(min|m|s|seg)\b/i); if (!m) return 90; const a = +m[1], b = m[2] ? +m[2] : a, u = /^m/i.test(m[3]) ? 60 : 1; return Math.max(10, Math.round((a + b) / 2 * u / 15) * 15); };
+  const trabajo = r => { const m = String(r || '').match(/^\s*(\d+)\s*(s|seg)\b/i); return m ? +m[1] : null; };   // "45 s" => ejercicio por tiempo
+  const nSeries = x => Math.max(1, Math.min(12, parseInt(x.series) || 3));
+  const repsObj = r => { const m = String(r || '').match(/\d+/); return m ? +m[0] : ''; };
+  const SR = {
+    mejor: (L, e) => L.filter(x => x.e === e).reduce((m, x) => !m || x.kg > m.kg || (x.kg === m.kg && x.r > m.r) ? x : m, null),
+    sesiones: (L, e) => { const o = {}; L.filter(x => x.e === e).forEach(x => (o[x.f] ??= []).push(x)); return Object.keys(o).sort().map(f => ({ f, sets: o[f].sort((a, b) => a.s - b.s), max: Math.max(...o[f].map(x => x.kg)) })); },
+    ejercicios: L => [...new Set(L.map(x => x.e))]
+  };
   /* ---- almacenamiento ---- */
   function semilla() {
     const mk = (id, nombre, sx, nac, cm, obj, mod, tel, ml) => ({ id, nombre, sx, nac, cm, obj, mod, tel, nivel: 'Intermedio', lesiones: '', inicio: dias(70), estado: 'activo', parq: { corazon: false, dolor: false, mareo: false, hueso: false, medic: false, embarazo: false }, notas: '', rutina: null, plan: null, supl: [], medidas: ml, evals: [], sesiones: [] });
@@ -154,6 +164,17 @@
         const ir = () => fetch(`${SB.url}/storage/v1/object/sign/fotos/${path}`, { method: 'POST', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + ses.get().at, 'Content-Type': 'application/json' }, body: JSON.stringify({ expiresIn: 3600 }) });
         let r = await ir(); if (r.status === 401 && await refrescar()) r = await ir(); if (!r.ok) return ''; const j = await r.json(); return Store.fotos._cache[path] = SB.url + '/storage/v1' + j.signedURL; }
     },
+    series: {
+      _ls(cid) { try { return JSON.parse(localStorage.getItem('cs_series_' + cid)) || []; } catch (e) { return []; } },
+      _demo(cid) { const c = Store.cliente(cid); if (!c || !c.rutina || cid !== 'c1') return []; const out = [];
+        for (let i = 1; i < 42; i++) { const f = dias(i), d = diaDe(c, f); if (!d) continue; const hechos = (c.marcas || {})[f] || [];
+          d.ej.forEach((x, j) => { if (!hechos.includes(j) || trabajo(x.reps)) return; const sem = Math.floor(i / 7), base = Math.max(5, (+x.kg || 20) - sem * 2.5), r0 = repsObj(x.reps) || 10;
+            for (let s = 1; s <= nSeries(x); s++) out.push({ f, e: x.id, s, kg: base, r: Math.max(1, r0 - (s > 3 ? 1 : 0)) }); }); } return out; },
+      async cargar(cid, coach) { if (remoto) return coach ? (await api.rest(`series?cliente_id=eq.${encodeURIComponent(cid)}&order=fecha.desc&limit=3000&select=fecha,ejercicio,serie,kg,reps`)).map(x => ({ f: x.fecha, e: x.ejercicio, s: x.serie, kg: +x.kg, r: x.reps })) : (await api.rpc('mis_series', { p_desde: dias(120) })).map(x => ({ f: x.f, e: x.e, s: x.s, kg: +x.kg, r: x.r }));
+        return Store.series._demo(cid).concat(Store.series._ls(cid)); },
+      async guardar(cid, f, e, s, kg, r) { if (remoto) { if (!(await api.rpc('guardar_serie', { p_fecha: f, p_ej: e, p_serie: s, p_kg: kg, p_reps: r }))) throw new Error('No se pudo guardar la serie.'); return; }
+        const L = Store.series._ls(cid).filter(x => !(x.f === f && x.e === e && x.s === s)); L.push({ f, e, s, kg, r }); try { localStorage.setItem('cs_series_' + cid, JSON.stringify(L)); } catch (x) {} }
+    },
     vinculo: id => vinc.get(id) || {},
     async nuevoCodigo(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { codigo_hash: await sha256(t) } }); vinc.set(id, Object.assign({}, vinc.get(id), { codigo: true })); return t; },
     async desvincular(id) { await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { user_id: null, codigo_hash: null } }); vinc.set(id, {}); },
@@ -202,5 +223,5 @@
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
   const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
-  window.CS = { ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, notificar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+  window.CS = { seg, trabajo, nSeries, repsObj, SR, ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, notificar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
 })();

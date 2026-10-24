@@ -173,12 +173,43 @@ drop policy if exists fotos_leer on storage.objects;
 create policy fotos_leer on storage.objects for select to authenticated
   using (bucket_id = 'fotos' and (carlos.es_coach() or (storage.foldername(name))[1] = carlos.mi_cliente()::text));
 
+-- Registro de series: kg y repeticiones de cada serie (alimenta récords y gráficos de carga del coach).
+create table if not exists carlos.series (
+  cliente_id uuid not null references carlos.clientes(id) on delete cascade,
+  fecha date not null,
+  ejercicio text not null check (ejercicio ~ '^[a-z0-9-]{1,40}$'),
+  serie int not null check (serie between 1 and 12),
+  kg numeric not null check (kg between 0 and 1000),
+  reps int not null check (reps between 0 and 300),
+  updated_at timestamptz not null default now(),
+  primary key (cliente_id, fecha, ejercicio, serie)
+);
+alter table carlos.series enable row level security;
+drop policy if exists coach_series on carlos.series;
+create policy coach_series on carlos.series for select to authenticated using (carlos.es_coach());
+
+create or replace function carlos.guardar_serie(p_fecha date, p_ej text, p_serie int, p_kg numeric, p_reps int) returns boolean
+language plpgsql security definer set search_path = '' as $$
+declare cid uuid := carlos.mi_cliente();
+begin
+  if cid is null or p_fecha not between current_date - 8 and current_date + 1 then return false; end if;
+  if p_kg is null or p_reps is null then return false; end if;
+  insert into carlos.series(cliente_id, fecha, ejercicio, serie, kg, reps) values (cid, p_fecha, p_ej, p_serie, p_kg, p_reps)
+    on conflict (cliente_id, fecha, ejercicio, serie) do update set kg = excluded.kg, reps = excluded.reps, updated_at = now();
+  return true;
+end $$;
+
+create or replace function carlos.mis_series(p_desde date) returns jsonb
+language sql stable security definer set search_path = '' as $$
+  select coalesce(jsonb_agg(jsonb_build_object('f', to_char(fecha, 'YYYY-MM-DD'), 'e', ejercicio, 's', serie, 'kg', kg, 'r', reps) order by fecha desc, ejercicio, serie), '[]'::jsonb)
+    from (select * from carlos.series where cliente_id = carlos.mi_cliente() and fecha >= greatest(p_desde, current_date - 400) order by fecha desc limit 3000) x $$;
+
 do $$ declare f text; begin
-  foreach f in array array['reclamar(text)', 'mi_plan()', 'marcar(date,text,boolean)', 'mis_marcas(date)', 'reportar(numeric,int,text)', 'registrar_foto(date,text,text)', 'mis_fotos()'] loop
+  foreach f in array array['reclamar(text)', 'mi_plan()', 'marcar(date,text,boolean)', 'mis_marcas(date)', 'reportar(numeric,int,text)', 'registrar_foto(date,text,text)', 'mis_fotos()', 'guardar_serie(date,text,int,numeric,int)', 'mis_series(date)'] loop
     execute format('revoke all on function carlos.%s from public', f);
     execute format('grant execute on function carlos.%s to authenticated', f);
   end loop; end $$;
 
 grant usage on schema carlos to authenticated;
 grant select, insert, update, delete on carlos.clientes, carlos.ejercicios_custom to authenticated;
-grant select on carlos.marcas, carlos.reportes, carlos.fotos to authenticated;
+grant select on carlos.marcas, carlos.reportes, carlos.fotos, carlos.series to authenticated;
