@@ -66,3 +66,4 @@ dialog h3{margin-bottom:4px}dialog ol,dialog ul{padding-left:20px;margin:6px 0 1
 fieldset{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:12px}legend{color:var(--mut);font-size:13px;padding:0 6px}
 .rd{display:flex;gap:8px;align-items:center;color:var(--ink);font-size:15px;margin-top:6px;min-height:36px}.rd input{width:auto;min-height:0}
 h4.ft{color:var(--neon);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:14px 0 4px}
+[hidden]{display:none!important}

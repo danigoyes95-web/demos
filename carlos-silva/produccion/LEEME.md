@@ -22,8 +22,12 @@ Si el cliente cambia de celular, entra con su correo; si olvida la clave, la rec
 ## Ficha de ingreso y exámenes
 Al entrar por primera vez, el cliente ve el aviso *Completa tu ficha de ingreso*: 7 pasos (cuerpo, dieta actual, entrenamiento, rutina diaria, alimentación, salud con medicamentos y exámenes). Se guarda en una tabla aparte (`fichas`), así lo que escribe el cliente no se pisa con lo que edita Carlos. Los exámenes (PDF o foto, máx. 10 MB) van al bucket privado `examenes`. Solo Carlos y el propio cliente acceden; **la ficha nunca se incluye en el plan que ve el cliente ni en sus PDF**. Carlos la ve en la pestaña *Ficha* del cliente y puede descargarla en PDF.
 
+## Activar la mensualidad
+Cuando el cliente paga (transferencia, depósito o efectivo), Carlos abre su perfil → *Mensualidad* → **Activar mensualidad**, escribe monto, método, comprobante y período (1, 2, 3, 6 meses u otro). Queda activa hasta la fecha calculada; si el cliente aún tenía días, se suman. Hay historial de pagos, *Anular último pago* y *Suspender*. El Resumen muestra los **ingresos del mes**.
+**Sin mensualidad activa el cliente no recibe su rutina ni su plan** (lo hace cumplir la base de datos, no solo la pantalla); solo ve un aviso para enviar el comprobante por WhatsApp y puede completar su ficha. La mensualidad vale hasta el día de vencimiento inclusive, con hora de Ecuador.
+
 ## Avisos
-- **Mensualidad:** Carlos fija la fecha de vencimiento en el perfil del cliente (botón *Renovar +30 días*). El cliente ve un aviso en su portal desde 7 días antes; Carlos lo ve en el Resumen con un botón de WhatsApp.
+- **Mensualidad:** el cliente ve un aviso 7 días antes de vencer. El cliente ve un aviso en su portal desde 7 días antes; Carlos lo ve en el Resumen con un botón de WhatsApp.
 - **Check-in del sábado:** desde el viernes 18:00 el portal avisa *"Mañana es tu check-in"* y el Resumen de Carlos lista quién falta, con botón de WhatsApp para recordar.
 - Los avisos aparecen al abrir el portal y, si el cliente los activa, como notificación del navegador. **Un aviso que llegue al celular con la app cerrada** requiere notificaciones push (instalar el portal como app + un servicio programado en Supabase); no está incluido todavía.
 

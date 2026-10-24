@@ -86,6 +86,12 @@ begin
   return n = 1;
 end $$;
 
+-- Mensualidad: el coach la activa desde su panel (fecha 'vence' dentro de datos). Activa = vence >= hoy (hora de Ecuador).
+create or replace function carlos.hoy() returns date language sql stable set search_path = '' as
+$$ select (now() at time zone 'America/Guayaquil')::date $$;
+create or replace function carlos.mensualidad_activa(p_datos jsonb) returns boolean language sql stable set search_path = '' as
+$$ select coalesce((p_datos->>'vence') ~ '^\d{4}-\d{2}-\d{2}$' and (p_datos->>'vence')::date >= (now() at time zone 'America/Guayaquil')::date, false) $$;
+
 -- Plan del cliente: SOLO lo que debe ver (sin teléfono, lesiones, PAR-Q, notas ni consentimiento).
 create or replace function carlos.mi_plan() returns jsonb
 language plpgsql stable security definer set search_path = '' as $$
@@ -93,8 +99,12 @@ declare c carlos.clientes;
 begin
   select * into c from carlos.clientes where user_id = auth.uid() and activo;
   if not found then return null; end if;
+  if not carlos.mensualidad_activa(c.datos) then   -- sin mensualidad: no se entrega rutina, plan ni seguimiento
+    return jsonb_build_object('v', 2, 'cid', c.id, 'nombre', c.datos->>'nombre', 'activa', false, 'vence', c.datos->>'vence',
+      'creado', to_char(c.created_at, 'YYYY-MM-DD'), 'rutina', null, 'plan', null, 'supl', '[]'::jsonb, 'medidas', '[]'::jsonb, 'evals', '[]'::jsonb, 'medcorp', '[]'::jsonb, 'custom', '[]'::jsonb);
+  end if;
   return jsonb_build_object(
-    'v', 2, 'cid', c.id, 'nombre', c.datos->>'nombre', 'obj', c.datos->>'obj', 'nivel', c.datos->>'nivel', 'cm', c.datos->'cm', 'sx', c.datos->>'sx',
+    'v', 2, 'activa', true, 'cid', c.id, 'nombre', c.datos->>'nombre', 'obj', c.datos->>'obj', 'nivel', c.datos->>'nivel', 'cm', c.datos->'cm', 'sx', c.datos->>'sx',
     'creado', to_char(c.created_at, 'YYYY-MM-DD'), 'vence', c.datos->>'vence',
     'rutina', c.datos->'rutina', 'plan', c.datos->'plan', 'supl', coalesce(c.datos->'supl', '[]'::jsonb),
     'medidas', (select coalesce(jsonb_agg(e order by o), '[]'::jsonb) from (
@@ -111,6 +121,7 @@ language plpgsql security definer set search_path = '' as $$
 declare cid uuid := carlos.mi_cliente();
 begin
   if cid is null or p_fecha not between current_date - 8 and current_date + 8 then return; end if;
+  if not carlos.mensualidad_activa((select datos from carlos.clientes where id = cid)) then return; end if;
   if p_on then insert into carlos.marcas(cliente_id, fecha, clave) values (cid, p_fecha, p_clave) on conflict do nothing;
   else delete from carlos.marcas where cliente_id = cid and fecha = p_fecha and clave = p_clave; end if;
 end $$;
@@ -194,6 +205,7 @@ declare cid uuid := carlos.mi_cliente();
 begin
   if cid is null or p_fecha not between current_date - 8 and current_date + 1 then return false; end if;
   if p_kg is null or p_reps is null then return false; end if;
+  if not carlos.mensualidad_activa((select datos from carlos.clientes where id = cid)) then return false; end if;
   insert into carlos.series(cliente_id, fecha, ejercicio, serie, kg, reps) values (cid, p_fecha, p_ej, p_serie, p_kg, p_reps)
     on conflict (cliente_id, fecha, ejercicio, serie) do update set kg = excluded.kg, reps = excluded.reps, updated_at = now();
   return true;

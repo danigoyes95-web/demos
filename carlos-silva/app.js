@@ -67,6 +67,12 @@
   const venceDias = (c, now = new Date()) => { if (!c.vence) return null; const a = new Date(c.vence + 'T00:00'), b = new Date(ymd(now) + 'T00:00'); return Math.round((a - b) / 864e5); };
   const msgVence = c => { const d = venceDias(c); return `Hola ${c.nombre.split(' ')[0]}, tu mensualidad ${d < 0 ? 'venció' : d === 0 ? 'vence hoy' : 'vence en ' + d + ' día' + (d === 1 ? '' : 's')} (${fecha(c.vence)}). ¿Renovamos para que sigas sin pausa? 💪`; };
   const msgCheckin = (c, e = 'aviso') => `Hola ${c.nombre.split(' ')[0]}, ${e === 'aviso' ? 'mañana sábado es tu check-in 📸' : e === 'hoy' ? 'hoy es tu check-in 📸' : 'te faltan las fotos de tu check-in 📸'} Sube tus 3 fotos (frente, lateral y espalda) en tu portal para que pueda hacer tu comparativa.`;
+  const activa = c => !!(c.vence && c.vence >= hoy());
+  const hastaDe = (c, fPago, dias) => { const base = c.vence && c.vence >= fPago ? c.vence : fPago, d = new Date(base + 'T12:00'); d.setDate(d.getDate() + dias); return ymd(d); };
+  const activar = (c, p) => { const hasta = hastaDe(c, p.f, p.dias); (c.pagos ??= []).push({ id: uid(), f: p.f, monto: p.monto, metodo: p.metodo, ref: p.ref || '', dias: p.dias, prev: c.vence || '', hasta }); c.vence = hasta; c.estado = 'activo'; return hasta; };
+  const anularPago = c => { const p = (c.pagos || []).pop(); if (p) c.vence = p.prev || ''; return p; };
+  const msgActiva = c => `Hola ${c.nombre.split(' ')[0]}, recibí tu pago ✅ Tu mensualidad está activa hasta el ${fecha(c.vence)}. ¡A entrenar! 💪`;
+  const dinero = n => '$' + (+n).toFixed(2).replace('.', ',').replace(/,00$/, '');
   const renovar = (c, dias = 30) => { const b = c.vence && c.vence > hoy() ? new Date(c.vence + 'T12:00') : new Date(); b.setDate(b.getDate() + dias); c.vence = ymd(b); };
   const notificar = (clave, titulo, cuerpo) => { try { if (!('Notification' in window) || Notification.permission !== 'granted') return; const k = 'cs_nt_' + clave + '_' + hoy(); if (localStorage.getItem(k)) return; localStorage.setItem(k, '1'); new Notification(titulo, { body: cuerpo, icon: 'assets/carlos.jpg' }); } catch (e) {} };
   /* siluetas de ejemplo para la demo de fotos */
@@ -113,6 +119,8 @@
       comida: { prefer: 'Pollo, arroz, huevos, aguacate, frutas', rechaza: 'Hígado, coliflor', alergias: 'Ninguna', intol: 'Lactosa (leve)', liquidos: 2.5 },
       salud: { lesiones: 'Molestia en hombro derecho (2022), ya recuperada.', fam: { hipertension: true }, famOtros: '', meds: 'no', medsLista: [] } } })); } catch (e) {}
     A.vence = dias(-5); B.vence = dias(-22); Cc.vence = dias(-27);   // A vence en 5 días: se ve el aviso
+    A.pagos = [{ id: 'p1', f: dias(55), monto: 45, metodo: 'Transferencia', ref: 'TR-0987', dias: 30, prev: '', hasta: dias(25) }, { id: 'p2', f: dias(25), monto: 45, metodo: 'Transferencia', ref: 'TR-1042', dias: 30, prev: dias(25), hasta: dias(-5) }];
+    B.pagos = [{ id: 'p3', f: dias(8), monto: 45, metodo: 'Transferencia', ref: 'TR-1100', dias: 30, prev: '', hasta: dias(-22) }];
     A.medcorp = [{ f: dias(62), cuello: 37, hombros: 112, pecho: 98, brazo: 32, cintura: 82, abdomen: 86, cadera: 98, muslo: 56, pantorrilla: 37 }, { f: dias(32), cuello: 37.5, hombros: 114, pecho: 100, brazo: 33.5, cintura: 81, abdomen: 84, cadera: 99, muslo: 57, pantorrilla: 37.5 }, { f: dias(3), cuello: 38, hombros: 116, pecho: 102, brazo: 35, cintura: 80, abdomen: 83, cadera: 100, muslo: 58.5, pantorrilla: 38 }];
     B.medcorp = [{ f: dias(40), cuello: 31, hombros: 98, pecho: 92, brazo: 28, cintura: 78, abdomen: 88, cadera: 102, muslo: 60, pantorrilla: 36 }, { f: dias(9), cuello: 30.5, hombros: 98, pecho: 90, brazo: 27.5, cintura: 73, abdomen: 82, cadera: 99, muslo: 58, pantorrilla: 35.5 }];
     return { clientes: [A, B, Cc], custom: [] };
@@ -238,7 +246,7 @@
   const b64 = u8 => btoa(String.fromCharCode(...u8)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const unb64 = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
   const Link = {
-    paquete: c => ({ v: 1, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: c.rutina, plan: c.plan, supl: c.supl, medidas: c.medidas.slice(-6), evals: c.evals.slice(-3), cm: c.cm, sx: c.sx, cid: c.id, vence: c.vence, medcorp: (c.medcorp || []).slice(-6), marcas: c.marcas || {}, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }),
+    paquete: c => { const ok = activa(c); return ({ v: 1, activa: ok, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: ok ? c.rutina : null, plan: ok ? c.plan : null, supl: ok ? c.supl : [], medidas: ok ? c.medidas.slice(-6) : [], evals: ok ? c.evals.slice(-3) : [], cm: c.cm, sx: c.sx, cid: c.id, vence: c.vence, medcorp: ok ? (c.medcorp || []).slice(-6) : [], marcas: c.marcas || {}, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }); },
     async codificar(o) { const u = new TextEncoder().encode(JSON.stringify(o));
       if (window.CompressionStream) { const cs = new Response(new Blob([u]).stream().pipeThrough(new CompressionStream('gzip'))); return 'g.' + b64(new Uint8Array(await cs.arrayBuffer())); }
       return 'j.' + b64(u); },
@@ -250,5 +258,5 @@
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
   const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
-  window.CS = { blobUrl, seg, trabajo, nSeries, repsObj, SR, ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, notificar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+  window.CS = { activa, hastaDe, activar, anularPago, msgActiva, dinero, blobUrl, seg, trabajo, nSeries, repsObj, SR, ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, notificar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
 })();

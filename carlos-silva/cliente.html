@@ -136,7 +136,13 @@ function vRes(){const H=hechos(),hi=hoyIdx(),pw=M.pct(c,H,0,7),racha=M.racha(c,H
  ${p?`<div class="glass"><h3>Tu nutrición</h3><div style="display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap">${CH.donut([{v:p.p*4,color:'#19e3ee'},{v:p.c*4,color:'#3ddc97'},{v:p.g*9,color:'#ffc857'}],{size:128,w:18,centro:p.kcal,sub:'kcal',aria:'Distribución de macros'})}<div class="leg"><span><i style="background:#19e3ee"></i>Proteína <b>${esc(p.p)} g</b></span><span><i style="background:#3ddc97"></i>Carbos <b>${esc(p.c)} g</b></span><span><i style="background:#ffc857"></i>Grasas <b>${esc(p.g)} g</b></span></div></div><p style="text-align:center;margin-top:10px"><button class="btn sec sm" data-t="com">Ver mis comidas</button></p></div>`:''}
  ${m.length?`<div><div class="sec-t" style="margin-top:0"><b>Mi evolución</b><span>desde ${esc(fecha(a.f))}</span></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${tile('Peso','kg','kg',c.obj==='definicion')}${tile('Grasa','gr','%',1)}${tile('Músculo','mm','kg')}<div class="glass" style="padding:14px"><h3 style="margin-bottom:4px">Próximo InBody</h3><b class="or" style="font-size:22px;font-weight:900">${prox<=0?'¡Ya toca!':prox}<small style="font-size:12px;color:var(--mut)">${prox>0?' días':''}</small></b><div style="margin-top:6px;color:var(--mut);font-size:12px">Chequeo mensual con Carlos</div></div></div></div>`:''}</div>`}
 const V={res:vRes,ent:vEnt,com:vCom,pro:vPro,ej:vEj};
-function pintar(){const H=hechos(),hi=hoyIdx();
+function inactivoUI(){const first=esc(c.nombre.split(' ')[0]);
+ m.innerHTML=`<div class="top"><div class="hd"><div><small>${esc(C.nombre.toUpperCase())} · PERSONAL TRAINER</small><h1>HOLA, ${first.toUpperCase()}</h1></div></div></div>
+ <div class="glass hero-d" style="text-align:center;margin-top:16px"><div style="font-size:44px">🔒</div><h2 class="or" style="font-size:20px;margin:6px 0">${c.vence?'Tu mensualidad venció':'Tu mensualidad aún no está activa'}</h2><p style="color:var(--mut);margin-bottom:14px">${c.vence?`Venció el ${esc(fecha(c.vence))}. `:''}Cuando Carlos confirme tu pago volverás a ver tu rutina y tu plan.</p>
+ <a class="btn" href="${wa(C.wa,'Hola Carlos, soy '+c.nombre+'. Te envío el comprobante de mi pago de la mensualidad.')}" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a></div>
+ <div class="glass" style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px"><span><b>Mi ficha de ingreso</b><br><small style="color:var(--mut)">${FICHA&&FICHA.completa?'Completa ✓':'Pendiente: llénala mientras se activa tu plan'}</small></span><button class="btn sm sec" data-ficha>${FICHA&&FICHA.completa?'Editar':'Completar'}</button></div>`+(CS.remoto?'<p style="text-align:center;margin-top:24px"><button class="btn sec sm" id="salir">Cerrar sesión</button></p>':'');
+ const s=document.getElementById('salir');if(s)s.onclick=()=>{Sv.api.salir();location.reload()}}
+function pintar(){if(c.activa===false){inactivoUI();return}const H=hechos(),hi=hoyIdx();
  m.innerHTML=`<div class="top"><div class="hd"><div><small>${esc(C.nombre.toUpperCase())} · PERSONAL TRAINER</small><h1>HOY</h1></div><a class="btn sm" href="${wa(C.wa,'Hola Carlos, soy '+c.nombre+'.')}" target="_blank" rel="noopener">WhatsApp</a></div>
  <div class="wk" role="group" aria-label="Semana">${DN.map((l,i)=>{const d=rutinaDia(i),h=H[iso(i)],ok=d&&h&&h.length===d.ej.length;return `<button data-w="${i}" class="${i===hi?'hoy':''} ${d?'':'des'}" aria-pressed="${i===sel}" aria-label="${DL[i]}${d?'':' (descanso)'}">${l}${ok?'<i></i>':''}</button>`}).join('')}</div>
  <div class="seg" role="tablist">${[['res','Resumen'],['ent','Entreno'],['com','Comidas'],['pro','Progreso'],['ej','Ejercicios']].map(([k,t])=>`<button role="tab" data-t="${k}" aria-selected="${k===tab}">${ic[k]}${t}</button>`).join('')}</div></div>
@@ -177,11 +183,13 @@ function codigoUI(msg){frm('CÓDIGO DE INVITACIÓN',`<p style="color:var(--mut);
  document.getElementById('out').onclick=()=>{Sv.api.salir();location.reload()};
  document.getElementById('go').onclick=async()=>{const k=document.getElementById('cd').value.trim();try{if(await Sv.reclamar(k))arrancar();else codigoUI('Código incorrecto o ya usado. Pídele uno nuevo a Carlos.')}catch(e){codigoUI('No se pudo vincular: '+e.message)}}}
 async function arrancar(msg){
- if(!CS.remoto){const o=await cargar();if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}sel=hoyIdx();pintar();return}
+ if(!CS.remoto){const o=await cargar();if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}if(c.activa!==false){try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}}sel=hoyIdx();pintar();return}
  if(!Sv.api.hayCuenta())return authUI(msg);
  let o;try{o=await Sv.miPlan()}catch(e){if(e.status===401||e.status===403){Sv.api.salir();return authUI('Tu sesión venció. Ingresa de nuevo.')}m.innerHTML='<p class="vacio">No se pudo conectar. Revisa tu internet e intenta de nuevo.</p>';return}
  if(!o)return codigoUI();
- (o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});c=o;try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}
+ (o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});c=o;try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}
+ if(c.activa===false){pintar();return}
+ try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}
  try{cache={};(await Sv.marcas(CS.dias(30))||[]).forEach(x=>{const k=x.k[0]==='m'?'m'+x.f:x.f;(cache[k]??=[]).push(+x.k.slice(1))})}catch(e){}
  sel=hoyIdx();pintar()}
 arrancar();
