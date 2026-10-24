@@ -7,7 +7,12 @@
   let evt = null, rol = 'cliente';
   addEventListener('beforeinstallprompt', e => { e.preventDefault(); evt = e; refrescar(); });
   addEventListener('appinstalled', () => { evt = null; refrescar(); });
-  if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(() => {});
+  /* La app solo se ofrece una vez que la persona entró: antes no hay manifiesto, así el navegador no propone instalar desde la portada, el manual o la pantalla de ingreso. */
+  function activar(r) {
+    rol = r || rol;
+    if (!document.querySelector('link[rel=manifest]')) { const l = document.createElement('link'); l.rel = 'manifest'; l.href = rol === 'coach' ? 'manifest-panel.webmanifest' : 'manifest-cliente.webmanifest'; document.head.appendChild(l); }
+    if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
   async function instalar() { if (!evt) return false; evt.prompt(); const r = await evt.userChoice.catch(() => ({})); evt = null; return r.outcome === 'accepted'; }
   const falta = () => !standalone();
   function pasoInstalar() {
@@ -28,7 +33,7 @@
   }
   function refrescar() { const d = document.getElementById('dPwa'); if (d && d.open) mostrar(rol); document.querySelectorAll('[data-pwa-estado]').forEach(e => e.hidden = !falta()); }
   /* se muestra solo si la app no está instalada y no la pospusieron en las últimas 24 h */
-  function auto(r) { rol = r; refrescar(); const t = +get('fz_pwa_later') || 0; if (falta() && Date.now() - t > 864e5) setTimeout(() => { if (!document.querySelector('dialog[open]')) mostrar(r); }, 900); }
-  window.PWA = { mostrar, auto, falta, standalone, instalar, banner: () => falta() ? `<div class="av" role="status"><span>📲 Instala la app en tu celular</span><button class="btn sm" data-pwa>Ver cómo</button></div>` : '' };
+  function auto(r) { rol = r; activar(r); refrescar(); const t = +get('fz_pwa_later') || 0; if (falta() && Date.now() - t > 864e5) setTimeout(() => { if (!document.querySelector('dialog[open]')) mostrar(r); }, 900); }
+  window.PWA = { mostrar, auto, activar, falta, standalone, instalar, banner: () => falta() ? `<div class="av" role="status"><span>📲 Instala la app en tu celular</span><button class="btn sm" data-pwa>Ver cómo</button></div>` : '' };
   document.addEventListener('click', e => { if (e.target.closest('[data-pwa]')) mostrar(rol); });
 })();
