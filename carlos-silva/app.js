@@ -105,6 +105,13 @@
     const Cc = mk('c3', 'Sebastián Mora', 'M', '1988-01-20', 181, 'salud', 'presencial', '593977778899', []); Cc.nivel = 'Principiante'; Cc.inicio = dias(3); Cc.parq.dolor = true; Cc.lesiones = 'Dolor lumbar ocasional';
     const sembrar = (c, nivel) => { c.marcas = {}; for (let i = 1; i < 28; i++) { const f = dias(i), d = diaDe(c, f); if (!d) continue; const ok = ((i * 37 + c.nombre.length) % 10) < nivel; c.marcas[f] = d.ej.map((_, k) => k).slice(0, ok ? d.ej.length : Math.floor(d.ej.length / 2)); if (ok) c.marcas['m' + f] = [0, 1, 2, 3]; } };
     sembrar(A, 9); sembrar(B, 6);
+    try { if (!localStorage.getItem('cs_ficha_c1')) localStorage.setItem('cs_ficha_c1', JSON.stringify({ completa: true, datos: { v: 1, fecha: dias(70), consent: dias(70),
+      cuerpo: { peso: 71.2, estatura: 176, grasa: 17.5, edad: 29, peso3m: 69, pesoMax: 74 },
+      dieta: [{ h: '07:00', d: '3 huevos + 2 tostadas integrales (60 g) + 1 plátano' }, { h: '13:00', d: 'Arroz 200 g, pechuga 150 g, ensalada' }, { h: '20:00', d: 'Atún 1 lata, pan 80 g, aguacate 50 g' }], dietaNotas: 'Fines de semana como fuera de casa.',
+      entreno: { dias: { 0: 'Pecho y tríceps · press banca 4×8, aperturas 3×12 · descanso 90 s · tempo 2-0-1', 2: 'Espalda y bíceps · dominadas 4×6, remo 4×8', 4: 'Pierna · sentadilla 4×8, prensa 3×12' }, pesasH: '18:00', pesasDur: '75 min', cardioH: '07:00 (sábado)', cardioDur: '30 min' },
+      rutina: { levanta: '06:00', acuesta: '22:30', trabajo: '08:30 a 17:30', trabajoFisico: 'no', trabajoDetalle: 'Trabajo de oficina' },
+      comida: { prefer: 'Pollo, arroz, huevos, aguacate, frutas', rechaza: 'Hígado, coliflor', alergias: 'Ninguna', intol: 'Lactosa (leve)', liquidos: 2.5 },
+      salud: { lesiones: 'Molestia en hombro derecho (2022), ya recuperada.', fam: { hipertension: true }, famOtros: '', meds: 'no', medsLista: [] } } })); } catch (e) {}
     A.vence = dias(-5); B.vence = dias(-22); Cc.vence = dias(-27);   // A vence en 5 días: se ve el aviso
     A.medcorp = [{ f: dias(62), cuello: 37, hombros: 112, pecho: 98, brazo: 32, cintura: 82, abdomen: 86, cadera: 98, muslo: 56, pantorrilla: 37 }, { f: dias(32), cuello: 37.5, hombros: 114, pecho: 100, brazo: 33.5, cintura: 81, abdomen: 84, cadera: 99, muslo: 57, pantorrilla: 37.5 }, { f: dias(3), cuello: 38, hombros: 116, pecho: 102, brazo: 35, cintura: 80, abdomen: 83, cadera: 100, muslo: 58.5, pantorrilla: 38 }];
     B.medcorp = [{ f: dias(40), cuello: 31, hombros: 98, pecho: 92, brazo: 28, cintura: 78, abdomen: 88, cadera: 102, muslo: 60, pantorrilla: 36 }, { f: dias(9), cuello: 30.5, hombros: 98, pecho: 90, brazo: 27.5, cintura: 73, abdomen: 82, cadera: 99, muslo: 58, pantorrilla: 35.5 }];
@@ -175,6 +182,26 @@
       async guardar(cid, f, e, s, kg, r) { if (remoto) { if (!(await api.rpc('guardar_serie', { p_fecha: f, p_ej: e, p_serie: s, p_kg: kg, p_reps: r }))) throw new Error('No se pudo guardar la serie.'); return; }
         const L = Store.series._ls(cid).filter(x => !(x.f === f && x.e === e && x.s === s)); L.push({ f, e, s, kg, r }); try { localStorage.setItem('cs_series_' + cid, JSON.stringify(L)); } catch (x) {} }
     },
+    ficha: {
+      _ls(cid) { try { return JSON.parse(localStorage.getItem('cs_ficha_' + cid)); } catch (e) { return null; } },
+      async cargar(cid, coach) { if (remoto) { if (coach) { const r = await api.rest(`fichas?cliente_id=eq.${encodeURIComponent(cid)}&select=datos,completa`); return r[0] || null; } return await api.rpc('mi_ficha'); } return Store.ficha._ls(cid); },
+      async guardar(cid, datos, completa) { if (remoto) { if (!(await api.rpc('guardar_ficha', { p_datos: datos, p_completa: completa }))) throw new Error('No se pudo guardar la ficha.'); return; }
+        try { localStorage.setItem('cs_ficha_' + cid, JSON.stringify({ datos, completa })); } catch (e) { throw new Error('No hay espacio en el navegador.'); } },
+      async estado() { if (remoto) { const r = await api.rest('fichas?select=cliente_id,completa'), o = {}; r.forEach(x => o[x.cliente_id] = x.completa); return o; } const o = {}; db.clientes.forEach(c => { const f = Store.ficha._ls(c.id); if (f) o[c.id] = f.completa; }); return o; }
+    },
+    examenes: {
+      _ls(cid) { try { return JSON.parse(localStorage.getItem('cs_exam_' + cid)) || []; } catch (e) { return []; } },
+      async lista(cid, coach) { if (remoto) return coach ? (await api.rest(`examenes?cliente_id=eq.${encodeURIComponent(cid)}&order=created_at.desc&select=id,nombre,created_at,path`)).map(x => ({ id: x.id, n: x.nombre, f: x.created_at.slice(0, 10), p: x.path })) : await api.rpc('mis_examenes'); return Store.examenes._ls(cid); },
+      async subir(cid, file) { const tipos = { 'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png' }; let ext = tipos[file.type]; if (!ext) throw new Error('Solo PDF o foto (JPG/PNG).');
+        let blob = file; if (ext !== 'pdf') { blob = await comprimir(file, 1800, .85); ext = 'jpg'; } if (blob.size > (remoto ? 10485760 : 1500000)) throw new Error(remoto ? 'El archivo pesa más de 10 MB.' : 'En la demo el límite es 1,5 MB.');
+        const nombre = (file.name || 'Examen').replace(/\.[^.]+$/, '').slice(0, 100) || 'Examen';
+        if (!remoto) { const L = Store.examenes._ls(cid); L.unshift({ id: uid(), n: nombre, f: hoy(), u: await blobUrl(blob) }); try { localStorage.setItem('cs_exam_' + cid, JSON.stringify(L)); } catch (e) { throw new Error('No hay espacio en el navegador.'); } return; }
+        const path = `${cid}/${crypto.randomUUID()}.${ext}`, ir = () => fetch(`${SB.url}/storage/v1/object/examenes/${path}`, { method: 'POST', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + ses.get().at, 'Content-Type': blob.type || 'application/pdf' }, body: blob });
+        let r = await ir(); if (r.status === 401 && await refrescar()) r = await ir(); if (!r.ok) throw new Error('No se pudo subir el archivo (' + r.status + ').');
+        if (!(await api.rpc('registrar_examen', { p_nombre: nombre, p_path: path }))) throw new Error('No se pudo registrar el examen.'); },
+      async url(x) { if (!remoto) return x.u; const ir = () => fetch(`${SB.url}/storage/v1/object/sign/examenes/${x.p}`, { method: 'POST', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + ses.get().at, 'Content-Type': 'application/json' }, body: JSON.stringify({ expiresIn: 600 }) });
+        let r = await ir(); if (r.status === 401 && await refrescar()) r = await ir(); if (!r.ok) return ''; return SB.url + '/storage/v1' + (await r.json()).signedURL; }
+    },
     vinculo: id => vinc.get(id) || {},
     async nuevoCodigo(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { codigo_hash: await sha256(t) } }); vinc.set(id, Object.assign({}, vinc.get(id), { codigo: true })); return t; },
     async desvincular(id) { await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { user_id: null, codigo_hash: null } }); vinc.set(id, {}); },
@@ -223,5 +250,5 @@
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
   const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
-  window.CS = { seg, trabajo, nSeries, repsObj, SR, ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, notificar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+  window.CS = { blobUrl, seg, trabajo, nSeries, repsObj, SR, ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, notificar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
 })();

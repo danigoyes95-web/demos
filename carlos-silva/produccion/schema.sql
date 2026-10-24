@@ -204,12 +204,75 @@ language sql stable security definer set search_path = '' as $$
   select coalesce(jsonb_agg(jsonb_build_object('f', to_char(fecha, 'YYYY-MM-DD'), 'e', ejercicio, 's', serie, 'kg', kg, 'r', reps) order by fecha desc, ejercicio, serie), '[]'::jsonb)
     from (select * from carlos.series where cliente_id = carlos.mi_cliente() and fecha >= greatest(p_desde, current_date - 400) order by fecha desc limit 3000) x $$;
 
+-- Ficha de ingreso (anamnesis): la escribe el CLIENTE; va en tabla aparte para que el panel del coach nunca la pise.
+create table if not exists carlos.fichas (
+  cliente_id uuid primary key references carlos.clientes(id) on delete cascade,
+  datos jsonb not null default '{}'::jsonb,
+  completa boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+alter table carlos.fichas enable row level security;
+drop policy if exists coach_fichas on carlos.fichas;
+create policy coach_fichas on carlos.fichas for select to authenticated using (carlos.es_coach());
+
+create or replace function carlos.guardar_ficha(p_datos jsonb, p_completa boolean) returns boolean
+language plpgsql security definer set search_path = '' as $$
+declare cid uuid := carlos.mi_cliente();
+begin
+  if cid is null or p_datos is null or jsonb_typeof(p_datos) <> 'object' or pg_column_size(p_datos) > 60000 then return false; end if;
+  insert into carlos.fichas(cliente_id, datos, completa) values (cid, p_datos, coalesce(p_completa, false))
+    on conflict (cliente_id) do update set datos = excluded.datos, completa = excluded.completa, updated_at = now();
+  return true;
+end $$;
+
+create or replace function carlos.mi_ficha() returns jsonb
+language sql stable security definer set search_path = '' as $$
+  select jsonb_build_object('datos', datos, 'completa', completa) from carlos.fichas where cliente_id = carlos.mi_cliente() $$;
+
+-- Exámenes médicos (PDF/foto): archivos en un bucket privado + registro aquí. Solo los ve el coach y el propio cliente.
+create table if not exists carlos.examenes (
+  id uuid primary key default gen_random_uuid(),
+  cliente_id uuid not null references carlos.clientes(id) on delete cascade,
+  nombre text not null check (length(nombre) <= 120),
+  path text not null unique,
+  created_at timestamptz not null default now()
+);
+alter table carlos.examenes enable row level security;
+drop policy if exists coach_examenes on carlos.examenes;
+create policy coach_examenes on carlos.examenes for select to authenticated using (carlos.es_coach());
+
+create or replace function carlos.registrar_examen(p_nombre text, p_path text) returns boolean
+language plpgsql security definer set search_path = '' as $$
+declare cid uuid := carlos.mi_cliente();
+begin
+  if cid is null or p_nombre is null or length(p_nombre) not between 1 and 120 then return false; end if;
+  if p_path !~ ('^' || cid::text || '/[0-9a-f-]{36}\.(pdf|jpg|png)$') then return false; end if;
+  if (select count(*) from carlos.examenes where cliente_id = cid) >= 20 then return false; end if;
+  insert into carlos.examenes(cliente_id, nombre, path) values (cid, p_nombre, p_path) on conflict (path) do nothing;
+  return true;
+end $$;
+
+create or replace function carlos.mis_examenes() returns jsonb
+language sql stable security definer set search_path = '' as $$
+  select coalesce(jsonb_agg(jsonb_build_object('id', id, 'n', nombre, 'f', to_char(created_at, 'YYYY-MM-DD'), 'p', path) order by created_at desc), '[]'::jsonb)
+    from carlos.examenes where cliente_id = carlos.mi_cliente() $$;
+
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('examenes', 'examenes', false, 10485760, array['application/pdf', 'image/jpeg', 'image/png'])
+on conflict (id) do update set public = false, file_size_limit = 10485760, allowed_mime_types = array['application/pdf', 'image/jpeg', 'image/png'];
+drop policy if exists examenes_cliente_insert on storage.objects;
+create policy examenes_cliente_insert on storage.objects for insert to authenticated
+  with check (bucket_id = 'examenes' and (storage.foldername(name))[1] = carlos.mi_cliente()::text);
+drop policy if exists examenes_leer on storage.objects;
+create policy examenes_leer on storage.objects for select to authenticated
+  using (bucket_id = 'examenes' and (carlos.es_coach() or (storage.foldername(name))[1] = carlos.mi_cliente()::text));
+
 do $$ declare f text; begin
-  foreach f in array array['reclamar(text)', 'mi_plan()', 'marcar(date,text,boolean)', 'mis_marcas(date)', 'reportar(numeric,int,text)', 'registrar_foto(date,text,text)', 'mis_fotos()', 'guardar_serie(date,text,int,numeric,int)', 'mis_series(date)'] loop
+  foreach f in array array['reclamar(text)', 'mi_plan()', 'marcar(date,text,boolean)', 'mis_marcas(date)', 'reportar(numeric,int,text)', 'registrar_foto(date,text,text)', 'mis_fotos()', 'guardar_serie(date,text,int,numeric,int)', 'mis_series(date)', 'guardar_ficha(jsonb,boolean)', 'mi_ficha()', 'registrar_examen(text,text)', 'mis_examenes()'] loop
     execute format('revoke all on function carlos.%s from public', f);
     execute format('grant execute on function carlos.%s to authenticated', f);
   end loop; end $$;
 
 grant usage on schema carlos to authenticated;
 grant select, insert, update, delete on carlos.clientes, carlos.ejercicios_custom to authenticated;
-grant select on carlos.marcas, carlos.reportes, carlos.fotos, carlos.series to authenticated;
+grant select on carlos.marcas, carlos.reportes, carlos.fotos, carlos.series, carlos.fichas, carlos.examenes to authenticated;

@@ -19,6 +19,9 @@ Si el cliente cambia de celular, entra con su correo; si olvida la clave, la rec
 ## Fotos del check-in
 `schema.sql` crea el bucket privado `fotos` (solo JPEG, máx. 5 MB) y sus reglas: cada cliente solo sube y ve su propia carpeta; Carlos ve todas. No hay que configurar nada más en Storage. Las fotos se reducen en el celular antes de subirse.
 
+## Ficha de ingreso y exámenes
+Al entrar por primera vez, el cliente ve el aviso *Completa tu ficha de ingreso*: 7 pasos (cuerpo, dieta actual, entrenamiento, rutina diaria, alimentación, salud con medicamentos y exámenes). Se guarda en una tabla aparte (`fichas`), así lo que escribe el cliente no se pisa con lo que edita Carlos. Los exámenes (PDF o foto, máx. 10 MB) van al bucket privado `examenes`. Solo Carlos y el propio cliente acceden; **la ficha nunca se incluye en el plan que ve el cliente ni en sus PDF**. Carlos la ve en la pestaña *Ficha* del cliente y puede descargarla en PDF.
+
 ## Avisos
 - **Mensualidad:** Carlos fija la fecha de vencimiento en el perfil del cliente (botón *Renovar +30 días*). El cliente ve un aviso en su portal desde 7 días antes; Carlos lo ve en el Resumen con un botón de WhatsApp.
 - **Check-in del sábado:** desde el viernes 18:00 el portal avisa *"Mañana es tu check-in"* y el Resumen de Carlos lista quién falta, con botón de WhatsApp para recordar.
