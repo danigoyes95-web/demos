@@ -12,7 +12,7 @@
 
 ## Cómo funciona el acceso del cliente
 Carlos, en el panel del cliente → *PDF y acceso* → **Generar código de invitación** y lo envía por WhatsApp.
-El cliente abre `cliente.html`, **crea su cuenta** (correo + clave propia), pega el código y queda vinculado. El código es de un solo uso.
+El cliente abre el enlace (que ya trae el código), escribe su correo, **elige su clave** y queda vinculado en un solo paso. El código es de un solo uso.
 El cliente solo puede: ver su plan, marcar ejercicios/comidas y reportar peso/esfuerzo. Carlos ve ese avance en el panel.
 Si el cliente cambia de celular, entra con su correo; si olvida la clave, la recupera por correo. *Quitar acceso* lo desvincula.
 
