@@ -1,0 +1,281 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manual del coach · Carlos Silva</title><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#05090d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Outfit:wght@300;400;600;800&display=swap">
+<link rel="stylesheet" href="estilos.css">
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:16px}body{background:radial-gradient(120% 50% at 50% -10%,#0b3a44 0,#05090d 60%) no-repeat #05090d;font-weight:300;line-height:1.6}
+.wrap{max-width:900px;margin:auto;padding:0 18px 80px}
+header.h{padding:44px 0 24px}header.h small{letter-spacing:.2em;color:var(--neon);font-family:Orbitron;font-size:12px}
+header.h h1{font-family:Orbitron;font-weight:900;font-size:clamp(28px,6vw,48px);line-height:1.05;margin:8px 0;text-shadow:0 0 26px #19e3ee55}header.h p{color:var(--mut);max-width:60ch}
+.links{display:grid;gap:10px;margin:18px 0}.lk{display:grid;grid-template-columns:150px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid #19e3ee33;border-radius:14px;background:#0b1a22}
+.lk b{font-weight:600}.lk a{color:var(--neon);word-break:break-all}.lk small{color:var(--mut)}
+nav.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px;margin:20px 0 10px}nav.toc a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:12px;text-decoration:none;background:#0a161d;font-size:15px}nav.toc a:hover{border-color:var(--neon)}nav.toc span{color:var(--neon);font-family:Orbitron;font-size:12px;margin-right:8px}
+section{margin-top:44px}section>h2{font-family:Orbitron;font-size:clamp(20px,3.6vw,28px);margin-bottom:6px}section>h2 span{color:var(--neon)}section>.lead{color:var(--mut);margin-bottom:14px}
+h3{font-size:17px;margin:22px 0 6px;color:#fff;font-weight:600}h3::before{content:"";display:inline-block;width:8px;height:8px;background:var(--neon);border-radius:50%;margin-right:10px;box-shadow:0 0 10px var(--neon)}
+p,li{font-size:16px}ul,ol{padding-left:22px;margin:6px 0}li{margin:4px 0}
+.box{border:1px solid #19e3ee44;background:#19e3ee12;border-radius:14px;padding:12px 14px;margin:12px 0}.box.w{border-color:#ffc85766;background:#ffc85714}.box.r{border-color:#ff6b6b66;background:#ff6b6b14}.box b.t{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px}
+table.t{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px}table.t th,table.t td{padding:9px 10px;border-bottom:1px solid #ffffff14;text-align:left;vertical-align:top}table.t th{color:var(--neon);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.msg{border-left:3px solid var(--neon);background:#0b1a22;padding:10px 14px;border-radius:0 12px 12px 0;margin:10px 0;font-size:15px;color:#dcecef;white-space:pre-line}
+.kbd{font-family:ui-monospace,monospace;background:#0f2530;border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:14px}
+.pasos{counter-reset:p;list-style:none;padding:0}.pasos li{counter-increment:p;position:relative;padding:6px 0 6px 42px;min-height:38px}.pasos li::before{content:counter(p);position:absolute;left:0;top:4px;width:30px;height:30px;border-radius:50%;background:var(--neon);color:#03181c;font-weight:800;display:grid;place-items:center;font-size:14px}
+.sem{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:10px 0}.sem div{border:1px solid var(--line);border-radius:14px;padding:12px;background:#0a161d}.sem b{color:var(--neon);display:block;font-family:Orbitron;font-size:13px;margin-bottom:4px}
+.top{position:fixed;right:14px;bottom:14px;z-index:5;background:var(--neon);color:#03181c;border-radius:999px;padding:10px 16px;font-weight:700;text-decoration:none;box-shadow:0 0 20px #19e3ee66}
+@media(max-width:640px){.lk{grid-template-columns:1fr}}
+@media print{
+ body>.wrap:not(#x){display:block!important}
+ body{background:#fff!important;color:#111!important}.wrap{max-width:none;padding:0}.top,nav.toc{display:none!important}
+ header.h h1{color:#111;text-shadow:none}header.h p,.lead,small{color:#444!important}h3{color:#111}h3::before{box-shadow:none}
+ .lk,.box,.msg,.sem div{background:#f4fafb!important;border-color:#9fd6dc!important;color:#111!important}.lk a,section>h2 span,table.t th,header.h small,.sem b{color:#0a7f8c!important}
+ table.t th,table.t td{border-color:#ccc!important}.kbd{background:#eee;color:#111;border-color:#ccc}p,li{color:#111}
+ section{break-inside:auto;margin-top:24px}h2,h3{break-after:avoid}.msg,.box,.sem div,tr{break-inside:avoid}.pasos li::before{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ @page{margin:14mm}
+}
+</style></head><body><div class="wrap">
+
+<header class="h"><small>MANUAL DEL COACH</small><h1>Todo tu negocio,<br>en un solo lugar</h1>
+<p>Esta guía te explica, pantalla por pantalla, qué tiene cada cliente, qué puedes hacer tú y qué ve y hace el cliente. Léela una vez completa y úsala luego como consulta.</p></header>
+
+<section id="enlaces" style="margin-top:6px"><h2>Tus <span>enlaces</span></h2>
+<div class="links">
+<div class="lk"><b>Panel del coach</b><a href="panel.html" id="l1"></a><small>solo para ti</small></div>
+<div class="lk"><b>Portal del cliente</b><a href="cliente.html" id="l2"></a><small>para tus clientes</small></div>
+<div class="lk"><b>Página pública</b><a href="./" id="l3"></a><small>tu vitrina</small></div>
+<div class="lk"><b>Este manual</b><a href="manual.html" id="l4"></a><small>consulta</small></div>
+</div>
+<div class="box"><b class="t">Cómo entrar al panel</b>Abre el enlace del panel e ingresa con tu correo y tu contraseña. <b>Cámbiala la primera vez</b> en <i>Datos → Cambiar mi contraseña</i> y no la compartas. Si la olvidas, usa <b>Olvidé mi clave</b> en la pantalla de ingreso: te llega un correo con un enlace para crear una nueva. El panel se mantiene abierto en ese navegador; usa <i>Datos → Cerrar sesión</i> si lo usas en un equipo ajeno.</div>
+<div class="box w"><b class="t">Importante</b>El portal del cliente y el panel son enlaces distintos. A tus clientes les envías <b>solo el enlace del portal</b> y su código de invitación (ver sección 4). Nunca el del panel.</div>
+</section>
+
+<nav class="toc" aria-label="Contenido">
+<a href="#panel"><span>1</span>Cómo está organizado el panel</a><a href="#resumen"><span>2</span>El Resumen (tu tablero)</a>
+<a href="#clientes"><span>3</span>Clientes: qué tiene cada uno</a><a href="#acceso"><span>4</span>Dar acceso a un cliente</a>
+<a href="#mensualidad"><span>5</span>Mensualidad y pagos</a><a href="#entreno"><span>6</span>Rutinas, cargas y ejercicios</a>
+<a href="#nutri"><span>7</span>Alimentación y suplementos</a><a href="#seguimiento"><span>8</span>InBody, medidas, fotos y evaluación</a>
+<a href="#herramientas"><span>9</span>Ejercicios, calculadoras y datos</a><a href="#portal"><span>10</span>Lo que ve y hace el cliente</a>
+<a href="#semana"><span>11</span>Tu semana ideal</a><a href="#seguridad"><span>12</span>Privacidad y seguridad</a>
+<a href="#faq"><span>13</span>Problemas frecuentes</a>
+</nav>
+
+<section id="panel"><h2>1. Cómo está <span>organizado el panel</span></h2>
+<p class="lead">A la izquierda (arriba en el celular) tienes cinco secciones. Abajo ves si tus cambios se están guardando.</p>
+<table class="t"><tr><th>Sección</th><th>Para qué sirve</th></tr>
+<tr><td><b>Resumen</b></td><td>Tu tablero: cobros, check-in, quién entrena, quién necesita atención.</td></tr>
+<tr><td><b>Clientes</b></td><td>La lista de clientes y la ficha completa de cada uno. Aquí pasas la mayor parte del tiempo.</td></tr>
+<tr><td><b>Ejercicios</b></td><td>Biblioteca visual de ejercicios, donde puedes agregar los tuyos.</td></tr>
+<tr><td><b>Calculadoras</b></td><td>Gasto calórico, macros, IMC y 1RM.</td></tr>
+<tr><td><b>Datos</b></td><td>Copia de seguridad, cambiar tu contraseña y cerrar sesión.</td></tr>
+<tr><td><b>📘 Manual</b></td><td>Este manual, siempre a la mano.</td></tr></table>
+<div class="box"><b class="t">Se guarda solo</b>No hay botón "Guardar". Cada cambio se envía a la base de datos al segundo. Mira el indicador: <b>Guardado ✓</b> = todo bien. Si dice <b>⚠ No se pudo guardar</b>, revisa tu internet y no cierres la página hasta que vuelva a decir Guardado.</div>
+</section>
+
+<section id="resumen"><h2>2. El Resumen, <span>tu tablero</span></h2>
+<p class="lead">Es lo primero que ves. Te dice qué hacer hoy sin abrir cliente por cliente.</p>
+<table class="t"><tr><th>Tarjeta</th><th>Qué muestra y qué hacer</th></tr>
+<tr><td><b>Portada con anillo</b></td><td>Saludo, cuántos clientes necesitan atención y el <b>cumplimiento del equipo</b> en los últimos 7 días (qué % de los ejercicios planificados se hicieron).</td></tr>
+<tr><td><b>⏳ Mensualidades por vencer</b></td><td>Clientes que vencen en 7 días o menos, vencidos y los que aún no tienen pago. Botón <b>Activar</b> (registra el pago) y <b>Recordar</b> (abre WhatsApp con el mensaje listo).</td></tr>
+<tr><td><b>📸 Check-in del sábado</b></td><td>Cuántos clientes ya subieron sus 3 fotos. Botón <b>Recordar</b> a los que faltan.</td></tr>
+<tr><td><b>Ingresos del mes</b></td><td>Suma de los pagos que registraste este mes y cuántos fueron.</td></tr>
+<tr><td><b>Clientes activos · Entrenos completos · Músculo ganado · Grasa corporal</b></td><td>Indicadores del equipo: cuántos activos, días de entreno completados (comparado con la semana pasada), kilos de músculo ganados entre todos y bajada promedio de % de grasa desde el inicio.</td></tr>
+<tr><td><b>Actividad del equipo · 14 días</b></td><td>Barras con los ejercicios que marcaron tus clientes cada día.</td></tr>
+<tr><td><b>Objetivos</b></td><td>Cuántos clientes tienes por objetivo (ganar masa, perder grasa, salud, fuerza).</td></tr>
+<tr><td><b>Constancia</b></td><td>Ranking de quién entrena más, con medallas y la mejor racha.</td></tr>
+<tr><td><b>Transformaciones</b></td><td>Peso de cada cliente con su tendencia. Toca uno para abrir su ficha.</td></tr>
+<tr><td><b>Requieren atención</b></td><td>Etiquetas: <b>InBody</b> (último chequeo hace más de 30 días), <b>Evaluación técnica</b> (más de 7 días sin evaluar), <b>PAR-Q</b> (marcó alguna alerta de salud) y <b>Ficha pendiente</b> (aún no llena su ficha).</td></tr></table>
+<div class="box w"><b class="t">Ojo con los gráficos</b>La actividad y la constancia salen de lo que el cliente <b>marca en su portal</b>. Un cliente que entrena pero no marca aparece en 0%. Recuérdales marcar.</div>
+</section>
+
+<section id="clientes"><h2>3. Clientes: <span>qué tiene cada uno</span></h2>
+<p class="lead">En <i>Clientes</i> ves la lista con etiquetas (mensualidad, rutina, plan). Con <b>+ Nuevo</b> creas uno. Al abrir un cliente verás estas pestañas:</p>
+
+<h3>Perfil</h3>
+<p>Nombre, WhatsApp (con código de país, ej. <span class="kbd">593999999999</span>), fecha de nacimiento, estatura, sexo, objetivo, modalidad (presencial/virtual), nivel, lesiones y tus notas privadas. Aquí también están:</p>
+<ul><li><b>Mensualidad:</b> estado, activar, suspender e historial de pagos (sección 5).</li>
+<li><b>Autorización de datos:</b> marca la casilla cuando el cliente autoriza el uso de sus datos de salud. Se guarda con la fecha.</li>
+<li><b>Cuestionario PAR-Q:</b> seis preguntas de aptitud. Si marcas alguna, el cliente aparece con alerta en el Resumen: pide autorización médica antes de subir la intensidad.</li></ul>
+
+<h3>Ficha</h3>
+<p>La <b>ficha de ingreso</b> que llena el propio cliente en su portal: peso en ayunas, estatura, edad, dieta actual con gramos, entrenamiento actual, horarios, alimentos preferidos y rechazados, alergias, lesiones, antecedentes familiares, medicamentos (qué usa, dosis semanal, semanas) y exámenes médicos (PDF o foto). Aquí la lees ordenada, abres los exámenes, la <b>descargas en PDF</b> o <b>importas la estatura y las lesiones al perfil</b>. Si aún no la llenó, hay un botón para pedírsela por WhatsApp.</p>
+
+<h3>Rutina</h3>
+<p>Elige una plantilla (Hipertrofia 4 días, Fuerza 3 días, Definición 4 días, Principiante 3 días) y ajústala. Detalle en la sección 6.</p>
+
+<h3>Alimentación</h3>
+<p>Calculas su gasto, generas un plan base y lo editas: calorías, macros, comidas con horario, hidratación e indicaciones. Detalle en la sección 7.</p>
+
+<h3>InBody y medidas</h3>
+<p>Registras el chequeo InBody mensual (peso, % grasa, masa muscular, grasa visceral, agua) y las <b>medidas corporales</b> en cm. Hay gráfico de evolución y tablas con el cambio desde el inicio.</p>
+
+<h3>Fotos</h3>
+<p>Ves cuántas fotos del check-in subió esta semana (frente, lateral y espalda) y usas el <b>comparador antes/después</b> con deslizador.</p>
+
+<h3>Cargas</h3>
+<p>Lo que el cliente anota en cada serie: <b>kg y repeticiones</b>. Ves el récord de cada ejercicio, su tendencia, las últimas 6 sesiones serie por serie y el volumen de la semana.</p>
+
+<h3>Eval. técnica</h3>
+<p>Tu evaluación semanal: calificas de 1 a 5 la técnica de cada ejercicio de su rutina, con una corrección corta y una observación general. El cliente ve la última en su Progreso.</p>
+
+<h3>Suplementos</h3>
+<p>El protocolo de suplementación: producto, dosis y cuándo tomarlo. Se muestra al cliente junto a su plan y sale en el PDF del plan.</p>
+
+<h3>PDF y acceso</h3>
+<p>Descarga la <b>rutina</b>, el <b>plan alimenticio</b> y el <b>reporte de progreso</b> en PDF; genera el <b>código de invitación</b> del cliente; y mira su <b>avance de los últimos 14 días</b> (ejercicios y comidas marcados) y sus <b>reportes</b> de peso y esfuerzo.</p>
+<div class="box"><b class="t">Cómo sacar un PDF</b>Pulsa el botón del PDF: se abre la ventana de impresión. Elige <b>Guardar como PDF</b> como destino y guárdalo; luego envíalo por WhatsApp.</div>
+</section>
+
+<section id="acceso"><h2>4. Dar acceso <span>a un cliente</span></h2>
+<p class="lead">El cliente crea su propio usuario y clave. Tú nunca ves su contraseña.</p>
+<ol class="pasos">
+<li>Crea al cliente con <b>Clientes → + Nuevo</b> y llena su perfil (con su WhatsApp).</li>
+<li>Entra a su pestaña <b>PDF y acceso</b> y pulsa <b>Generar código de invitación</b>.</li>
+<li>Pulsa <b>Enviar por WhatsApp</b>: se abre el chat con el mensaje listo (enlace + código). <b>El código se muestra una sola vez</b> y sirve para una sola persona.</li>
+<li>El cliente abre el enlace, elige <b>Crear cuenta</b> con su correo y una clave, confirma su correo si se lo piden, e ingresa el código.</li>
+<li>Listo: en esa pestaña verás <b>✓ Cuenta vinculada</b>.</li></ol>
+<div class="msg">Hola, [nombre] 👋 Este es tu acceso para ver tu rutina y tu plan: [enlace del portal]
+Tu código de invitación: [código]
+Entra, crea tu cuenta con tu correo y escribe el código.</div>
+<table class="t"><tr><th>Situación</th><th>Qué hacer</th></tr>
+<tr><td>El cliente olvidó su clave</td><td>Que use <b>Olvidé mi clave</b> en el portal: le llega un correo con un enlace para crear una clave nueva.</td></tr>
+<tr><td>Cambió de celular</td><td>Que ingrese con su correo y clave. No necesita código nuevo.</td></tr>
+<tr><td>Perdió el código antes de usarlo</td><td>Genera uno nuevo.</td></tr>
+<tr><td>Quieres cortarle el acceso (o vincular otro correo)</td><td><b>Quitar acceso</b>. Luego genera un código nuevo si corresponde.</td></tr></table>
+</section>
+
+<section id="mensualidad"><h2>5. Mensualidad <span>y pagos</span></h2>
+<p class="lead">El cliente solo ve su plan mientras su mensualidad esté activa.</p>
+<ul><li><b>Cliente nuevo:</b> arranca <b>activo por 30 días</b>, con el primer mes incluido.</li>
+<li><b>Cuando paga (transferencia, depósito o efectivo):</b> en su Perfil → <b>Mensualidad</b> → <b>Registrar pago y extender</b> (o <b>Activar mensualidad</b> si ya venció).</li></ul>
+<ol class="pasos"><li>Escribe el <b>monto</b>, el <b>método</b> y el <b>número de comprobante</b> (opcional).</li>
+<li>Confirma la <b>fecha del pago</b> y elige el <b>período</b>: 1, 2, 3 o 6 meses, u otro número de días.</li>
+<li>Mira la línea azul: te dice hasta qué fecha quedará activa. Si aún le quedaban días, <b>se suman</b>.</li>
+<li>Pulsa <b>Activar</b>. Aparece <b>Avisar por WhatsApp</b> con un mensaje de confirmación listo.</li></ol>
+<table class="t"><tr><th>Botón</th><th>Qué hace</th></tr>
+<tr><td><b>Solo registrar el pago (sin extender)</b></td><td>Anota el monto sin cambiar la fecha. Úsalo para registrar el pago del primer mes, que ya viene incluido.</td></tr>
+<tr><td><b>Anular último pago</b></td><td>Borra el último pago y la mensualidad vuelve a su vencimiento anterior. Úsalo si te equivocaste.</td></tr>
+<tr><td><b>Suspender</b></td><td>Corta el acceso del cliente de inmediato.</td></tr></table>
+<h3>Qué pasa con un cliente sin mensualidad activa</h3>
+<p>Entra a su portal pero <b>no ve rutina, plan, comidas ni progreso</b>. Ve un aviso con un botón para enviarte el comprobante por WhatsApp y puede seguir llenando su ficha. Esto lo controla la base de datos: no hay forma de saltárselo.</p>
+<h3>Avisos automáticos</h3>
+<ul><li>Siete días antes de vencer, el cliente ve un aviso en su portal con botón de <b>Renovar</b>. Tú lo ves en el Resumen con el botón <b>Recordar</b>.</li>
+<li>La mensualidad vale <b>hasta el día de vencimiento inclusive</b> (hora de Ecuador).</li></ul>
+<div class="box w"><b class="t">Importante</b>No hay cobro automático ni se suben comprobantes: tú confirmas el pago en tu banco y lo registras aquí. Los ingresos del Resumen salen de lo que registres.</div>
+</section>
+
+<section id="entreno"><h2>6. Rutinas, cargas <span>y ejercicios</span></h2>
+<h3>Armar la rutina</h3>
+<ol class="pasos"><li>En la pestaña <b>Rutina</b> elige una plantilla y pulsa <b>Cargar plantilla</b>.</li>
+<li>Edita el nombre, el objetivo y las semanas. En cada día cambia el <b>nombre</b>, el <b>enfoque</b> y el <b>día de la semana</b> en que se entrena.</li>
+<li>Por cada ejercicio ajusta <b>series, repeticiones, kg (meta) y descanso</b>. Toca el nombre del ejercicio para ver su demostración.</li>
+<li>Usa <b>+ Ejercicio</b> (buscador con filtro por grupo), <b>+ Día</b>, <b>✕</b> para quitar y <b>Quitar día</b>.</li></ol>
+<div class="box"><b class="t">Ejercicios por tiempo</b>Si en repeticiones escribes algo como <span class="kbd">45 s</span> (plancha, mountain climbers), el portal le muestra un temporizador de trabajo en vez de pedirle repeticiones.</div>
+<div class="box"><b class="t">El descanso arma el temporizador</b>Lo que escribas en descanso (<span class="kbd">90 s</span>, <span class="kbd">2 min</span>, <span class="kbd">1-2 min</span>) es el tiempo que el cliente verá correr entre series.</div>
+<h3>Lo que hace el cliente en cada ejercicio</h3>
+<p>Toca el ejercicio, anota por cada serie los <b>kg del máximo</b> y las <b>repeticiones</b>, y pulsa ✓. Arranca solo el temporizador de descanso. Al terminar todas las series, el ejercicio se marca hecho. Si supera su récord, ve 🏆.</p>
+<h3>Cómo usar la pestaña Cargas</h3>
+<ul><li>Si el cliente <b>supera las repeticiones meta</b> con el mismo peso en varias sesiones, es señal para subirle la carga.</li>
+<li>Si la tendencia baja varias semanas, revisa descanso, sueño, alimentación o técnica.</li></ul>
+<h3>Cómo se usa para el seguimiento</h3>
+<p>El cliente ve en su portal la semana en círculos (L M M J V S D): los días con punto verde son los completos. Cada día muestra su lista de ejercicios con kg, series y descanso.</p>
+</section>
+
+<section id="nutri"><h2>7. Alimentación <span>y suplementos</span></h2>
+<h3>Plan alimenticio</h3>
+<ol class="pasos"><li>En <b>Alimentación</b> verás su gasto calculado (TMB con la fórmula Mifflin-St Jeor) a partir del último peso de su InBody (si no tiene, usa 70 kg como referencia), su estatura y su edad. Elige su <b>nivel de actividad</b> y pulsa <b>Generar plan base</b>.</li>
+<li>El plan base ajusta las calorías según su objetivo (−20 % definición, +10 % masa) y reparte macros. <b>Es un punto de partida</b>: edítalo.</li>
+<li>Cambia calorías, proteína, carbohidratos, grasas e hidratación. En cada comida edita <b>hora</b>, <b>nombre</b> y los <b>alimentos (uno por línea)</b>. Usa <b>+ Comida</b> y <b>Quitar</b>.</li>
+<li>Escribe las <b>indicaciones</b> generales y descarga el <b>PDF del plan</b>.</li></ol>
+<div class="box w"><b class="t">Revisa siempre</b>Antes de generar el plan, lee su <b>Ficha</b>: alergias, intolerancias, medicamentos y enfermedades cambian lo que puedes indicar. Si el cliente tiene una condición médica, derívalo a su médico o nutricionista.</div>
+<h3>Qué ve el cliente</h3>
+<p>En <b>Comidas</b>: calorías y macros, cada comida con su hora, un ✓ para marcarla, la hidratación y los suplementos.</p>
+<h3>Suplementos</h3>
+<p>En la pestaña <b>Suplementos</b> agrega producto, dosis y cuándo tomarlo. Recomienda solo lo que tenga respaldo y confirma que no choque con sus medicamentos.</p>
+</section>
+
+<section id="seguimiento"><h2>8. InBody, medidas, fotos <span>y evaluación</span></h2>
+<h3>Chequeo InBody (una vez al mes)</h3>
+<p>En <b>InBody y medidas</b> → <i>Registrar chequeo InBody</i>: fecha, peso, % de grasa, masa muscular, grasa visceral y agua corporal. Con dos chequeos se dibuja el gráfico de evolución. Si pasan 30 días sin chequeo, el cliente aparece en <b>Requieren atención</b> y él ve que le toca.</p>
+<h3>Medidas corporales (cm)</h3>
+<p>Mismo lugar, tarjeta de arriba: <b>cuello, hombros, pecho, brazo, cintura, abdomen, cadera, muslo y pantorrilla</b>. Llena las que midas. Verás la tabla por fecha, la fila <b>Cambio</b> desde la primera medida y el <b>índice cintura/cadera</b> con la referencia de la OMS. El cliente ve su versión en Progreso.</p>
+<div class="box"><b class="t">Mide siempre igual</b>Misma hora, misma cinta, mismo punto del cuerpo y en ayunas, para que las comparaciones valgan.</div>
+<h3>Check-in del sábado: las 3 fotos</h3>
+<ul><li>El cliente puede subir sus fotos <b>desde el viernes al mediodía</b>. El <b>viernes desde las 18:00</b> su portal le avisa "Mañana es tu check-in".</li>
+<li>Son tres: <b>frente, lateral y espalda</b>. Él las toma desde su celular; se reducen automáticamente antes de subirse.</li>
+<li>Tú ves el estado en el Resumen (tarjeta Check-in) y en la pestaña <b>Fotos</b> de cada cliente.</li></ul>
+<h3>El comparador antes/después</h3>
+<p>En <b>Fotos</b> elige la fecha de <b>Antes</b> y la de <b>Después</b>, escoge la vista (Frente, Lateral o Espalda) y desliza la barra. Necesitas al menos dos check-ins.</p>
+<h3>Evaluación técnica semanal</h3>
+<p>En <b>Eval. técnica</b>: escribe una observación general y califica de 1 a 5 cada ejercicio, con una corrección breve. Se guarda con la fecha. Si pasan 7 días sin evaluar, el cliente aparece en el Resumen. Para ejercicios que dependen de la postura, pídele un video corto por WhatsApp.</p>
+</section>
+
+<section id="herramientas"><h2>9. Ejercicios, calculadoras <span>y datos</span></h2>
+<h3>Biblioteca de ejercicios</h3>
+<p>22 ejercicios con figura animada, músculos, pasos, errores comunes y respiración (se ven en el portal del cliente también). Filtra por grupo y toca uno para ver la animación. Con <b>+ Propio</b> agregas uno tuyo: nombre, grupo, músculos, pasos y, si quieres, el <b>enlace a un video tuyo</b>. Tus ejercicios se pueden usar en las rutinas.</p>
+<h3>Calculadoras</h3>
+<ul><li><b>Gasto y macros:</b> sexo, peso, estatura, edad, actividad y objetivo → TMB, mantenimiento, calorías objetivo, macros e IMC.</li>
+<li><b>1RM estimado:</b> con el peso y las repeticiones que hizo, calcula su máximo (fórmula de Epley) y el 70 % y 85 %.</li></ul>
+<h3>Datos</h3>
+<ul><li><b>Descargar copia (JSON):</b> haz una copia <b>cada semana</b>. Es tu respaldo de clientes y rutinas.</li>
+<li><b>Cambiar mi contraseña:</b> escribe la nueva dos veces y guarda.</li>
+<li><b>Cerrar sesión:</b> sal siempre si usas un equipo que no es tuyo.</li></ul>
+</section>
+
+<section id="portal"><h2>10. Lo que ve y hace <span>el cliente</span></h2>
+<p class="lead">Es una página pensada para el celular. Tiene cinco pestañas arriba.</p>
+<table class="t"><tr><th>Pestaña</th><th>Qué hay</th></tr>
+<tr><td><b>Resumen</b></td><td>Su semana con anillo de cumplimiento y racha, el entreno de hoy, constancia por día, su nutrición (donut de macros) y su evolución de peso, grasa y músculo. Aquí salen los avisos (mensualidad, check-in, InBody, ficha).</td></tr>
+<tr><td><b>Entreno</b></td><td>La lista del día. Toca un ejercicio para registrar series y usar el temporizador; el círculo ✓ lo marca hecho. Botones para descargar su rutina y plan en PDF y para reportarte su peso y esfuerzo por WhatsApp.</td></tr>
+<tr><td><b>Comidas</b></td><td>Calorías, macros, cada comida con hora y ✓, hidratación, suplementos.</td></tr>
+<tr><td><b>Progreso</b></td><td>Subir sus fotos del check-in, ver su ficha, sus cargas y récords, sus fotos antes/después, sus medidas corporales, sus chequeos InBody y tu última evaluación técnica.</td></tr>
+<tr><td><b>Ejercicios</b></td><td>La biblioteca completa para consultar cómo se hace cada ejercicio.</td></tr></table>
+<h3>Lo que el cliente NO ve</h3>
+<p>Su teléfono, tus notas privadas, el cuestionario PAR-Q, el consentimiento ni la ficha de otros clientes. Tampoco puede cambiar su rutina ni su plan. Si su mensualidad no está activa, solo ve el aviso y su ficha.</p>
+<h3>Mensaje para presentarle la app a tus clientes</h3>
+<div class="msg">Hola [nombre] 💪 Ya tienes tu app de entrenamiento. Ahí vas a ver tu rutina, tu plan de comidas y tu progreso.
+1) Abre el enlace que te envié.
+2) Crea tu cuenta con tu correo y pega tu código de invitación.
+3) Llena tu ficha de ingreso (5 minutos).
+4) Marca cada ejercicio y anota tus pesos. El viernes en la noche te recordaré tu check-in del sábado: sube tus 3 fotos (frente, lateral y espalda).
+Cualquier duda, me escribes por aquí.</div>
+<div class="box"><b class="t">Consejo</b>Pídeles guardar el portal como acceso directo en su pantalla de inicio: en el navegador, menú → <i>Añadir a pantalla de inicio</i>.</div>
+</section>
+
+<section id="semana"><h2>11. Tu semana <span>ideal</span></h2>
+<p class="lead">Una rutina corta para que el panel trabaje por ti.</p>
+<div class="sem">
+<div><b>LUNES</b>Revisa el Resumen: quién no entrenó y quién tiene InBody o evaluación pendiente. Escribe a los que se quedaron atrás.</div>
+<div><b>MARTES A JUEVES</b>Arma planes nuevos, revisa Cargas y ajusta rutinas. Atiende fichas pendientes y activa mensualidades.</div>
+<div><b>VIERNES</b>En la noche (desde las 18:00) pulsa <b>Recordar</b> a quien aún no subió fotos. Revisa mensualidades por vencer.</div>
+<div><b>SÁBADO</b>Check-in: revisa fotos con el comparador, mide InBody y medidas corporales a quien le toque.</div>
+<div><b>DOMINGO</b>Evaluación técnica semanal y descarga tu copia de seguridad (Datos).</div>
+</div>
+</section>
+
+<section id="seguridad"><h2>12. Privacidad <span>y seguridad</span></h2>
+<ul><li>Los datos de salud, fotos, exámenes y medicamentos de tus clientes son <b>sensibles</b>. Úsalos solo para su entrenamiento y su nutrición y no los compartas.</li>
+<li>Cada cliente solo ve lo suyo. Las fotos y exámenes están en un espacio privado: solo tú y ese cliente los ven.</li>
+<li><b>Contraseña:</b> usa una fuerte y única. Si crees que otra persona la conoce, cámbiala de inmediato en <i>Datos → Cambiar mi contraseña</i>.</li>
+<li><b>Códigos de invitación:</b> son de un solo uso y personales. Si un código llegó a la persona equivocada, usa <b>Quitar acceso</b> y genera otro.</li>
+<li><b>Copias de seguridad:</b> descarga tu copia de Datos cada semana y guárdala en un lugar seguro.</li>
+<li><b>Autorización:</b> marca en el Perfil del cliente que autorizó el uso de sus datos. Está en su ficha de ingreso.</li></ul>
+<div class="box r"><b class="t">Medicamentos y salud</b>Si un cliente indica que usa medicamentos o tiene una enfermedad de importancia, no ajustes el plan por tu cuenta: recomiéndale consultar a su médico. Esta app no reemplaza la valoración médica.</div>
+</section>
+
+<section id="faq"><h2>13. Problemas <span>frecuentes</span></h2>
+<table class="t"><tr><th>Problema</th><th>Solución</th></tr>
+<tr><td>El panel dice <b>Sin permiso</b></td><td>Entraste con un correo que no es el de coach. Usa el correo de Carlos.</td></tr>
+<tr><td>Olvidaste tu contraseña</td><td>En la pantalla de ingreso del panel pulsa <b>Olvidé mi clave</b> (escribe antes tu correo) y sigue el enlace que te llega.</td></tr>
+<tr><td>Dice <b>⚠ No se pudo guardar</b></td><td>Revisa tu internet y espera a que diga Guardado ✓ antes de salir.</td></tr>
+<tr><td>El cliente no ve su rutina o su plan</td><td>Revisa su <b>Mensualidad</b> (¿está activa?), que tenga una <b>rutina asignada</b> y que su cuenta esté <b>vinculada</b> (PDF y acceso).</td></tr>
+<tr><td>El cliente dice "código incorrecto o ya usado"</td><td>El código sirve una vez. Genera uno nuevo.</td></tr>
+<tr><td>No le llega el correo de confirmación</td><td>Pídele que revise spam. Si no llega, que pruebe con otro correo.</td></tr>
+<tr><td>No se pueden subir las fotos</td><td>Pasa solo desde el <b>viernes al mediodía</b> hasta el domingo. Pide que revise internet y que use la foto desde la cámara o la galería.</td></tr>
+<tr><td>El cliente no puede marcar ejercicios</td><td>Revisa que su mensualidad esté activa. Sin ella no se guardan las marcas ni las series.</td></tr>
+<tr><td>Los gráficos de un cliente están en 0 %</td><td>Probablemente no marca sus ejercicios. Recuérdale hacerlo después de cada serie.</td></tr>
+<tr><td>No se ven los cambios después de una actualización</td><td>Recarga con <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">R</span> (en el celular, cierra y abre el navegador).</td></tr>
+<tr><td>El cliente cambió de celular</td><td>Que ingrese con su correo y su clave. No hace falta código.</td></tr></table>
+<div class="box"><b class="t">¿Algo más?</b>Si no encuentras la respuesta aquí, escribe a quien te entregó el sistema con una captura de pantalla de lo que ves.</div>
+</section>
+
+</div><a class="top" href="#enlaces" aria-label="Volver arriba">↑ Arriba</a>
+<script>
+(()=>{const o=location.origin.startsWith('http')?location.origin+location.pathname.replace(/manual\.html$/,''):'';[['l1','panel.html'],['l2','cliente.html'],['l3',''],['l4','manual.html']].forEach(([i,p])=>{const a=document.getElementById(i);if(a){a.textContent=o?o+p:p||'./';}})})();
+</script></body></html>

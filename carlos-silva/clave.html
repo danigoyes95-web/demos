@@ -1,0 +1,15 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nueva clave · Carlos Silva</title><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#05090d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Outfit:wght@300;400;600&display=swap"><link rel="stylesheet" href="estilos.css">
+<style>body{background:radial-gradient(120% 60% at 50% -10%,#0b3a44 0,#05090d 60%) no-repeat #05090d;display:grid;place-items:center;min-height:100vh;padding:18px}main{width:min(420px,100%)}h1{font-family:Orbitron;font-size:22px;margin-bottom:6px}.ok{color:var(--ok)}.bad{color:var(--bad)}</style></head><body>
+<main class="glass"><small style="color:var(--neon);letter-spacing:.16em;font-family:Orbitron;font-size:11px">CARLOS SILVA · PERSONAL TRAINER</small><h1>Crea tu nueva clave</h1><div id="c"></div></main>
+<script src="config.js"></script><script src="ejercicios.js"></script><script src="app.js"></script><script>
+const c=document.getElementById('c'),h=new URLSearchParams(location.hash.slice(1)),tok=h.get('access_token'),err=h.get('error_description');
+history.replaceState(null,'',location.pathname);   // saca el token de la barra de direcciones
+if(!CS.remoto)c.innerHTML='<p>Esta página solo funciona con la base de datos conectada.</p>';
+else if(!tok)c.innerHTML=`<p class="bad">${err?CS.esc(err.replace(/\+/g,' ')):'El enlace no es válido o ya venció.'}</p><p style="margin-top:10px;color:var(--mut)">Vuelve a pedir el cambio con "Olvidé mi clave" y abre el enlace del correo más reciente.</p><p style="margin-top:12px"><a class="btn sm" href="cliente.html">Ir al portal</a> <a class="btn sm sec" href="panel.html">Ir al panel</a></p>`;
+else{c.innerHTML=`<label>Clave nueva (mínimo 8 caracteres)<input id="p1" type="password" autocomplete="new-password" minlength="8"></label><label style="margin-top:8px">Repite la clave<input id="p2" type="password" autocomplete="new-password"></label><p id="e" role="alert" class="bad" style="min-height:20px;margin-top:8px"></p><p><button class="btn" id="g">Guardar clave</button></p>`;
+ document.getElementById('g').onclick=async()=>{const a=document.getElementById('p1').value,b=document.getElementById('p2').value,e=document.getElementById('e');
+  if(a.length<8){e.textContent='Usa al menos 8 caracteres.';return}if(a!==b){e.textContent='Las claves no coinciden.';return}
+  try{await CS.Store.api.cambiarClave(a,tok);c.innerHTML='<p class="ok" style="font-size:18px">✓ Clave actualizada</p><p style="margin:10px 0;color:var(--mut)">Ya puedes ingresar con tu nueva clave.</p><p><a class="btn" href="cliente.html">Ir al portal</a> <a class="btn sec" href="panel.html">Ir al panel</a></p>'}catch(x){e.textContent=x.message}}}
+</script></body></html>

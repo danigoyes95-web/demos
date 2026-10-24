@@ -144,6 +144,8 @@
     async registrar(correo, clave) { const r = await fetch(`${SB.url}/auth/v1/signup`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: correo, password: clave }) });
       const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(/registered|exists/i.test(j.msg || j.message || j.error_description || '') ? 'Ese correo ya tiene cuenta: ingresa con tu clave.' : (j.msg || j.message || 'No se pudo crear la cuenta.'));
       if (j.access_token) { guardarSes(j); return true; } return false; },
+    async cambiarClave(nueva, token) { const r = await fetch(`${SB.url}/auth/v1/user`, { method: 'PUT', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + (token || (ses.get() || {}).at), 'Content-Type': 'application/json' }, body: JSON.stringify({ password: nueva }) });
+      if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(/same|different/i.test(j.msg || j.message || '') ? 'La clave nueva debe ser distinta a la anterior.' : /weak|short|least/i.test(j.msg || j.message || '') ? 'La clave es muy débil: usa al menos 8 caracteres con letras y números.' : (j.msg || j.message || 'No se pudo cambiar la clave.')); } },
     async recuperar(correo) { await fetch(`${SB.url}/auth/v1/recover`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: correo }) }); },
     rest: (p, o) => http('/rest/v1/' + p, o), rpc: (fn, args, o) => http('/rest/v1/rpc/' + fn, Object.assign({ method: 'POST', body: args || {} }, o)) };
   const sha256 = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
