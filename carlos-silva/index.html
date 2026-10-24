@@ -1,5 +1,5 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Carlos Silva · Personal Trainer</title><meta name="description" content="Entrenamiento personalizado, plan alimenticio y seguimiento 1:1 con Carlos Silva.">
+<title>FitZone Training · Carlos Silva, Personal Trainer</title><link rel="manifest" href="manifest-cliente.webmanifest"><link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png"><link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48.png"><link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="FitZone"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="description" content="Entrenamiento personalizado, plan alimenticio y seguimiento 1:1 con Carlos Silva.">
 <meta name="theme-color" content="#05090d"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Outfit:wght@300;400;600&display=swap"><link rel="stylesheet" href="estilos.css">
 <style>html{scroll-behavior:smooth}body{font-weight:300}.or{font-family:Orbitron,var(--f)}
@@ -29,7 +29,7 @@ footer{text-align:center;color:var(--mut);padding:30px 20px 50px;font-size:14px}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero .ph{animation:none}}
 @media(max-width:860px){.nav nav{display:none}header.nav{justify-content:space-between}.hero .ph{right:0;max-width:80vw;opacity:.32}.demo2{grid-template-columns:1fr}.blk{padding:56px 6vw}}</style></head><body>
 <div class="demo" id="demoB" hidden>Demo del sistema · los datos se guardan solo en este navegador</div>
-<header class="nav"><a class="logo" href="#inicio" aria-label="Carlos Silva, inicio"><i aria-hidden="true"><b style="height:14px"></b><b style="height:24px"></b><b style="height:18px"></b></i><span>CARLOS<br>SILVA</span></a>
+<header class="nav"><a class="logo" href="#inicio" aria-label="FitZone Training, inicio"><img src="assets/icons/shark-128.png" width="40" height="40" alt="" style="border-radius:10px"><span>FITZONE<br>TRAINING</span></a>
 <nav aria-label="Principal"><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#sistema">Tu plan</a><a href="#contacto">Contacto</a></nav><a class="btn sm" id="wa0" href="#">Agenda tu cita</a></header>
 <section class="hero" id="inicio"><div class="bg"></div><img class="ph" src="assets/carlos.jpg" alt="Carlos Silva, personal trainer" fetchpriority="high">
 <div><h1>Asume el desafío <b>para un cuerpo fuerte</b></h1><p class="t" id="lema">Entrenamiento personalizado, plan alimenticio y seguimiento 1:1. Progreso constante para alcanzar tu mejor versión física y mental.</p>
@@ -41,7 +41,7 @@ footer{text-align:center;color:var(--mut);padding:30px 20px 50px;font-size:14px}
 <p style="margin-top:22px"><a class="btn sec sm" href="panel.html">Acceso del coach</a></p></div></section>
 <section class="blk fin" id="contacto"><h2 class="rv">Tu mejor versión <span>empieza hoy</span></h2><div class="cta rv"><a class="btn" id="wa2" href="#">Escríbeme por WhatsApp</a></div></section>
 <footer><p id="ct"></p></footer>
-<script src="config.js"></script><script src="ejercicios.js"></script><script src="app.js"></script><script>
+<script src="config.js"></script><script src="ejercicios.js"></script><script src="app.js"></script><script src="pwa.js"></script><script>
 const C=COACH,{esc,ico,wa}=CS,msg=wa(C.wa,'Hola Carlos, quiero información sobre tus planes de entrenamiento.');
 if(!(C.supabase&&C.supabase.url))document.getElementById('demoB').hidden=false;else{const pc=document.getElementById('pc');pc.textContent='Acceso clientes';pc.href='cliente.html'}
 ['wa0','wa','wa2'].forEach(i=>document.getElementById(i).href=msg);

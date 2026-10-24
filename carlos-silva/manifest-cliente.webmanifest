@@ -1,0 +1,19 @@
+{
+  "id": "./cliente.html",
+  "name": "FitZone Training",
+  "short_name": "FitZone",
+  "description": "Tu rutina, tu plan de comidas y tu progreso con Carlos Silva.",
+  "lang": "es",
+  "start_url": "./cliente.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#05090d",
+  "theme_color": "#05090d",
+  "categories": ["fitness", "health", "lifestyle"],
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
