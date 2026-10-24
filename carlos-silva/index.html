@@ -28,12 +28,12 @@ footer{text-align:center;color:var(--mut);padding:30px 20px 50px;font-size:14px}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}.rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.hero .ph{animation:none}}
 @media(max-width:860px){.nav nav{display:none}header.nav{justify-content:space-between}.hero .ph{right:0;max-width:80vw;opacity:.32}.demo2{grid-template-columns:1fr}.blk{padding:56px 6vw}}</style></head><body>
-<div class="demo">Demo del sistema · los datos se guardan solo en este navegador</div>
+<div class="demo" id="demoB" hidden>Demo del sistema · los datos se guardan solo en este navegador</div>
 <header class="nav"><a class="logo" href="#inicio" aria-label="Carlos Silva, inicio"><i aria-hidden="true"><b style="height:14px"></b><b style="height:24px"></b><b style="height:18px"></b></i><span>CARLOS<br>SILVA</span></a>
 <nav aria-label="Principal"><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#sistema">Tu plan</a><a href="#contacto">Contacto</a></nav><a class="btn sm" id="wa0" href="#">Agenda tu cita</a></header>
 <section class="hero" id="inicio"><div class="bg"></div><img class="ph" src="assets/carlos.jpg" alt="Carlos Silva, personal trainer" fetchpriority="high">
 <div><h1>Asume el desafío <b>para un cuerpo fuerte</b></h1><p class="t" id="lema">Entrenamiento personalizado, plan alimenticio y seguimiento 1:1. Progreso constante para alcanzar tu mejor versión física y mental.</p>
-<div class="cta"><a class="btn" id="wa" href="#">Quiero empezar</a><a class="btn sec" href="cliente.html?demo=c1">Ver portal del cliente</a></div>
+<div class="cta"><a class="btn" id="wa" href="#">Quiero empezar</a><a class="btn sec" id="pc" href="cliente.html?demo=c1">Ver portal del cliente</a></div>
 <div class="stats"><div><b>1:1</b><small>seguimiento</small></div><div><b>24/7</b><small>apoyo WhatsApp</small></div><div><b>PDF</b><small>rutina y dieta</small></div></div></div></section>
 <section class="blk" id="servicios"><h2 class="rv">Todo lo que <span>incluye</span></h2><p class="lead rv">Un acompañamiento completo, presencial o virtual.</p><div class="srv" id="srv"></div></section>
 <section class="blk demo2" id="sistema"><div class="vis rv" id="fig" aria-hidden="true"></div><div class="rv"><h2>Cada ejercicio, <span>bien hecho</span></h2><p class="lead">Tu plan vive en tu celular: sabes qué hacer, cómo hacerlo y qué comer.</p>
@@ -43,6 +43,7 @@ footer{text-align:center;color:var(--mut);padding:30px 20px 50px;font-size:14px}
 <footer><p id="ct"></p></footer>
 <script src="config.js"></script><script src="ejercicios.js"></script><script src="app.js"></script><script>
 const C=COACH,{esc,ico,wa}=CS,msg=wa(C.wa,'Hola Carlos, quiero información sobre tus planes de entrenamiento.');
+if(!(C.supabase&&C.supabase.url))document.getElementById('demoB').hidden=false;else{const pc=document.getElementById('pc');pc.textContent='Acceso clientes';pc.href='cliente.html'}
 ['wa0','wa','wa2'].forEach(i=>document.getElementById(i).href=msg);
 srv.innerHTML=C.servicios.map(s=>`<div class="card rv">${ico(s[1])}<b>${esc(s[0])}</b></div>`).join('');
 ct.innerHTML=`WhatsApp +${esc(C.wa)} · <a href="https://instagram.com/${esc(C.ig)}" target="_blank" rel="noopener">@${esc(C.ig)}</a> · <a href="https://instagram.com/${esc(C.ig2)}" target="_blank" rel="noopener">@${esc(C.ig2)}</a>`;
