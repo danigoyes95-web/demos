@@ -170,20 +170,25 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-t]');if(t)
  const p=e.target.closest('[data-pdf]');if(p)Doc.imprimir(Doc[p.dataset.pdf](c),p.dataset.pdf+' - '+c.nombre)});
 /* ---------- acceso con cuenta (producción) ---------- */
 const frm=(t,cuerpo)=>{m.innerHTML=`<div class="card" style="margin-top:12vh"><h1 class="or" style="font-family:Orbitron;font-size:24px;margin-bottom:4px">${t}</h1>${cuerpo}</div>`};
-const hc=new URLSearchParams(location.hash.slice(1));let CODIGO=(hc.get('c')||'').trim();if(CODIGO)history.replaceState(null,'',location.pathname+location.search);
-function authUI(msg,modo){modo=modo||(CODIGO?'up':'in');frm('MI PLAN',`<p style="color:var(--mut);margin-bottom:10px">${esc(C.nombre)} · Personal Trainer</p><div class="seg" style="margin-bottom:12px"><button data-m="in" aria-selected="${modo==='in'}">Ingresar</button><button data-m="up" aria-selected="${modo==='up'}">Crear cuenta</button></div>
- <label>Tu correo<input id="em" type="email" autocomplete="username"></label><label style="margin-top:8px">${modo==='in'?'Tu clave':'Elige tu clave (mínimo 8 caracteres)'}<input id="pw" type="password" autocomplete="${modo==='in'?'current-password':'new-password'}" minlength="8"></label>${modo==='up'?`<label style="margin-top:8px">Código de invitación de Carlos<input id="cd" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(CODIGO)}" placeholder="Pégalo aquí si no vino en el enlace"></label>`:''}
- <p id="er" role="alert" style="color:var(--bad);margin-top:8px;min-height:20px">${esc(msg||'')}</p><p style="margin-top:6px"><button class="btn" id="go">${modo==='in'?'Ingresar':'Crear mi cuenta'}</button></p>
- ${modo==='in'?'<p style="margin-top:12px"><button class="btn sec sm" id="rec">Olvidé mi clave</button></p>':'<p style="color:var(--mut);font-size:13px;margin-top:10px">Es un solo paso: tu correo, tu clave y el código que te envió Carlos.</p>'}`);
+const hc=new URLSearchParams(location.hash.slice(1));let CODIGO=(hc.get('c')||'').trim(),RESET=(hc.get('r')||'').trim();if(CODIGO||RESET)history.replaceState(null,'',location.pathname+location.search);
+function authUI(msg,modo){modo=modo||(RESET?'rst':CODIGO?'up':'in');
+ const lab={in:['Tu clave','current-password'],up:['Elige tu clave (mínimo 8 caracteres)','new-password'],rst:['Tu nueva clave (mínimo 8 caracteres)','new-password']}[modo];
+ const tabs=modo==='rst'?`<p style="color:var(--mut);margin-bottom:12px">Escribe tu correo y la clave nueva que quieras usar.</p>`:`<div class="seg" style="margin-bottom:12px"><button data-m="in" aria-selected="${modo==='in'}">Ingresar</button><button data-m="up" aria-selected="${modo==='up'}">Crear cuenta</button></div>`;
+ const cod=modo==='up'?`<label style="margin-top:8px">Código de invitación de Carlos<input id="cd" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(CODIGO)}" placeholder="Pégalo aquí si no vino en el enlace"></label>`:modo==='rst'?`<label style="margin-top:8px">Código del enlace de Carlos<input id="cd" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(RESET)}" placeholder="Viene dentro del enlace que te envió"></label>`:'';
+ const pie=modo==='in'?`<p style="color:var(--mut);font-size:13px;margin-top:14px">¿Olvidaste tu clave? <a href="${wa(C.wa,'Hola Carlos, soy '+(c&&c.nombre||'tu cliente')+'. Olvidé mi clave del portal, ¿me envías un enlace para crear una nueva?')}" target="_blank" rel="noopener" style="color:var(--neon)">Escríbele a Carlos</a> y te envía un enlace para crear una nueva.</p>`:modo==='up'?'<p style="color:var(--mut);font-size:13px;margin-top:10px">Es un solo paso: tu correo, tu clave y el código que te envió Carlos.</p>':'';
+ frm(modo==='rst'?'NUEVA CLAVE':'MI PLAN',`<p style="color:var(--mut);margin-bottom:10px">${esc(C.nombre)} · Personal Trainer</p>${tabs}
+ <label>Tu correo<input id="em" type="email" autocomplete="username"></label><label style="margin-top:8px">${lab[0]}<input id="pw" type="password" autocomplete="${lab[1]}" minlength="8"></label>${cod}
+ <p id="er" role="alert" style="color:var(--bad);margin-top:8px;min-height:20px">${esc(msg||'')}</p><p style="margin-top:6px"><button class="btn" id="go">${modo==='in'?'Ingresar':modo==='up'?'Crear mi cuenta':'Guardar mi nueva clave'}</button></p>${pie}`);
  m.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>authUI('',b.dataset.m));
  const er=t=>document.getElementById('er').textContent=t;
  document.getElementById('go').onclick=async()=>{const e=document.getElementById('em').value.trim(),k=document.getElementById('pw').value;if(!e||k.length<8){er('Escribe tu correo y una clave de al menos 8 caracteres.');return}
   try{if(modo==='in'){await Sv.api.login(e,k);arrancar();return}
-   const cod=(document.getElementById('cd').value||'').trim();if(cod.length<20){er('Escribe el código de invitación que te envió Carlos.');return}CODIGO=cod;
-   const ok=await Sv.api.registrar(e,k);if(!ok){authUI('Tu cuenta se creó. Revisa tu correo para confirmarla y luego ingresa.','in');return}
-   try{if(await Sv.reclamar(cod)){CODIGO='';arrancar();return}}catch(x){}
-   codigoUI('El código es incorrecto o ya fue usado. Pídele uno nuevo a Carlos.')}catch(x){er(x.message)}};
- const rc=document.getElementById('rec');if(rc)rc.onclick=async()=>{const e=document.getElementById('em').value.trim();if(!e){er('Escribe tu correo arriba.');return}await Sv.api.recuperar(e);er('Si el correo existe, te enviamos un enlace para cambiar la clave.')}}
+   const cd=(document.getElementById('cd').value||'').trim();if(cd.length<20){er('Escribe el código que te envió Carlos.');return}
+   if(modo==='rst'){if(!(await Sv.restablecer(e,cd,k))){er('No se pudo cambiar la clave: revisa que el correo sea el de tu cuenta y que el enlace no se haya usado ya. Pídele uno nuevo a Carlos.');return}
+     RESET='';await Sv.api.login(e,k);arrancar();return}
+   CODIGO=cd;const ok=await Sv.api.registrar(e,k);if(!ok){authUI('Tu cuenta se creó. Ya puedes ingresar con tu correo y tu clave.','in');return}
+   try{if(await Sv.reclamar(cd)){CODIGO='';arrancar();return}}catch(x){}
+   codigoUI('El código es incorrecto o ya fue usado. Pídele uno nuevo a Carlos.')}catch(x){er(x.message)}}}
 function codigoUI(msg){frm('CÓDIGO DE INVITACIÓN',`<p style="color:var(--mut);margin-bottom:10px">Pega el código que te envió Carlos por WhatsApp para ver tu plan.</p><label>Código<input id="cd" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(CODIGO)}"></label><p id="er" role="alert" style="color:var(--bad);margin-top:8px;min-height:20px">${esc(msg||'')}</p><p style="margin-top:6px"><button class="btn" id="go">Vincular</button> <button class="btn sec sm" id="out">Salir</button></p>`);
  document.getElementById('out').onclick=()=>{Sv.api.salir();location.reload()};
  document.getElementById('go').onclick=async()=>{const k=document.getElementById('cd').value.trim();try{if(await Sv.reclamar(k))arrancar();else codigoUI('Código incorrecto o ya usado. Pídele uno nuevo a Carlos.')}catch(e){codigoUI('No se pudo vincular: '+e.message)}}}

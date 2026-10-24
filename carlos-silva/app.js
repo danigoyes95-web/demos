@@ -144,9 +144,6 @@
     async registrar(correo, clave) { const r = await fetch(`${SB.url}/auth/v1/signup`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: correo, password: clave }) });
       const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(/registered|exists/i.test(j.msg || j.message || j.error_description || '') ? 'Ese correo ya tiene cuenta: ingresa con tu clave.' : (j.msg || j.message || 'No se pudo crear la cuenta.'));
       if (j.access_token) { guardarSes(j); return true; } return false; },
-    async cambiarClave(nueva, token) { const r = await fetch(`${SB.url}/auth/v1/user`, { method: 'PUT', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + (token || (ses.get() || {}).at), 'Content-Type': 'application/json' }, body: JSON.stringify({ password: nueva }) });
-      if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(/same|different/i.test(j.msg || j.message || '') ? 'La clave nueva debe ser distinta a la anterior.' : /weak|short|least/i.test(j.msg || j.message || '') ? 'La clave es muy débil: usa al menos 8 caracteres con letras y números.' : (j.msg || j.message || 'No se pudo cambiar la clave.')); } },
-    async recuperar(correo) { await fetch(`${SB.url}/auth/v1/recover`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: correo }) }); },
     rest: (p, o) => http('/rest/v1/' + p, o), rpc: (fn, args, o) => http('/rest/v1/rpc/' + fn, Object.assign({ method: 'POST', body: args || {} }, o)) };
   const sha256 = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
   const token = () => { const u = crypto.getRandomValues(new Uint8Array(32)); return btoa(String.fromCharCode(...u)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
@@ -219,6 +216,7 @@
       const r = await api.rest(`marcas?fecha=gte.${dias(28)}&select=cliente_id,fecha,clave&limit=5000`), o = {};
       r.forEach(x => { const k = x.clave[0] === 'm' ? 'm' + x.fecha : x.fecha; ((o[x.cliente_id] ??= {})[k] ??= []).push(+x.clave.slice(1)); }); return o; },
     async actividad(id) { const q = encodeURIComponent(id); const [m, r] = await Promise.all([api.rest(`marcas?cliente_id=eq.${q}&order=fecha.desc&limit=300`), api.rest(`reportes?cliente_id=eq.${q}&order=created_at.desc&limit=15`)]); return { marcas: m, reportes: r }; },
+    restablecer: (email, codigo, clave) => api.rpc('restablecer_clave', { p_email: email, p_codigo: codigo, p_clave: clave }, { anon: true }),
     miPlan: () => api.rpc('mi_plan'), reclamar: c => api.rpc('reclamar', { p_codigo: c }),
     marcar: (f, k, on) => api.rpc('marcar', { p_fecha: f, p_clave: k, p_on: on }), marcas: d => api.rpc('mis_marcas', { p_desde: d }),
     reportar: (peso, rpe, nota) => api.rpc('reportar', { p_peso: peso || null, p_rpe: rpe || null, p_nota: nota || '' }),

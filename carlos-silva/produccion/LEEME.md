@@ -10,11 +10,13 @@
 7. **Authentication → URL Configuration**: Site URL = dirección donde se publica (para el correo de "olvidé mi clave").
 8. Copias de seguridad: el plan gratis de Supabase no las hace diarias; usa plan Pro o descarga la copia desde el panel (Datos) cada semana.
 
+> Si ya ejecutaste una versión anterior de `schema.sql`, basta ejecutar `parche-restablecer-clave.sql` para añadir el restablecimiento de clave sin correo.
+
 ## Cómo funciona el acceso del cliente
 Carlos, en el panel del cliente → *PDF y acceso* → **Generar código de invitación** y lo envía por WhatsApp.
 El cliente abre el enlace (que ya trae el código), escribe su correo, **elige su clave** y queda vinculado en un solo paso. El código es de un solo uso.
 El cliente solo puede: ver su plan, marcar ejercicios/comidas y reportar peso/esfuerzo. Carlos ve ese avance en el panel.
-Si el cliente cambia de celular, entra con su correo; si olvida la clave, la recupera por correo. *Quitar acceso* lo desvincula.
+Si el cliente cambia de celular, entra con su correo y clave. Si **olvida la clave**, Carlos pulsa *Restablecer clave* en su ficha y le envía por WhatsApp un enlace de un solo uso para que cree una nueva: **no depende de correo** (Supabase no necesita SMTP). *Quitar acceso* lo desvincula.
 
 ## Fotos del check-in
 `schema.sql` crea el bucket privado `fotos` (solo JPEG, máx. 5 MB) y sus reglas: cada cliente solo sube y ve su propia carpeta; Carlos ve todas. No hay que configurar nada más en Storage. Las fotos se reducen en el celular antes de subirse.
