@@ -4,6 +4,7 @@ window.COACH = {
   wa: '593998094368', ig: 'krlos_guevara', ig2: 'fitzopne_of',
   // Base de datos. Vacío = modo demo (datos de ejemplo solo en el navegador). Solo va la clave anon, NUNCA service_role.
   supabase: { url: '', anonKey: '', schema: 'carlos' },
+  diasPrimerMes: 30,   // días de mensualidad con que arranca un cliente nuevo (el primer mes ya viene pagado)
   claveDemo: 'coach',   // solo modo demo;   
   servicios: [
     ['Guía nutricional', 'apple'], ['Plan alimenticio (Dieta)', 'plate'], ['Chequeo InBody mensual', 'scale'],

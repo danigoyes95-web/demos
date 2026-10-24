@@ -221,7 +221,7 @@
     marcar: (f, k, on) => api.rpc('marcar', { p_fecha: f, p_clave: k, p_on: on }), marcas: d => api.rpc('mis_marcas', { p_desde: d }),
     reportar: (peso, rpe, nota) => api.rpc('reportar', { p_peso: peso || null, p_rpe: rpe || null, p_nota: nota || '' }),
     reset() { if (remoto) return; db = semilla(); LS.set(db); }, cliente: id => db.clientes.find(c => c.id === id),
-    nuevo() { const c = { id: remoto ? crypto.randomUUID() : uid(), nombre: 'Nuevo cliente', sx: 'M', nac: '1995-01-01', cm: 170, obj: 'salud', mod: 'presencial', tel: '', nivel: 'Principiante', lesiones: '', inicio: hoy(), estado: 'activo', parq: {}, notas: '', rutina: null, plan: null, supl: [], medidas: [], evals: [], sesiones: [], consent: '' }; db.clientes.unshift(c); Store.save(); return c; } };
+    nuevo() { const c = { id: remoto ? crypto.randomUUID() : uid(), nombre: 'Nuevo cliente', sx: 'M', nac: '1995-01-01', cm: 170, obj: 'salud', mod: 'presencial', tel: '', nivel: 'Principiante', lesiones: '', inicio: hoy(), estado: 'activo', parq: {}, notas: '', rutina: null, plan: null, supl: [], medidas: [], evals: [], sesiones: [], consent: '', vence: (() => { const d = new Date(); d.setDate(d.getDate() + (C.diasPrimerMes ?? 30)); return ymd(d); })() }; db.clientes.unshift(c); Store.save(); return c; } };
   /* ---- semáforo de seguimiento ---- */
   const pend = c => { const u = c.medidas.at(-1), e = c.evals.at(-1);
     return { inbody: !u || (Date.now() - new Date(u.f)) / 864e5 > 30, eval: !e || (Date.now() - new Date(e.f)) / 864e5 > 7, riesgo: Object.values(c.parq || {}).some(Boolean) }; };
