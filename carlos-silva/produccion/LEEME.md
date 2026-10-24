@@ -36,13 +36,6 @@ Cuando el cliente paga (transferencia, depósito o efectivo), Carlos abre su per
 Con `url` vacío la app corre en modo demo (datos de ejemplo en el navegador).
 
 
-## Notificaciones push (app instalada)
-La app se instala en el celular (Android: Chrome; iPhone: Safari → *Añadir a pantalla de inicio*, iOS 16.4+) y puede recibir avisos aunque esté cerrada. El envío automático necesita estos pasos **una sola vez**:
-
-1. **SQL:** ejecuta `parche-notificaciones.sql` (o el `schema.sql` completo). Crea la tabla donde se guardan las suscripciones de cada celular.
-2. **Función:** en Supabase → *Edge Functions* → *Create a new function*, nómbrala **`avisos`**, pega el contenido de `edge-function-avisos.ts` y despliega. En su configuración **desactiva "Verify JWT"** (la protege un secreto propio).
-3. **Secretos:** *Edge Functions → Secrets* (o *Project Settings → Edge Functions*): crea `VAPID_PUBLIC`, `VAPID_PRIVATE`, `VAPID_SUBJECT` (usa `https://fitzonetraining.github.io`) y `CRON_SECRET` (una clave larga inventada por ti). La clave `VAPID_PUBLIC` también va en `config.js` → `vapidPublic`. **`VAPID_PRIVATE` es secreta: nunca va en el repositorio.**
-4. **Programar:** edita `programar-avisos.sql` (cambia `PROYECTO` y `SECRETO` por tu referencia de proyecto y el valor de `CRON_SECRET`) y ejecútalo. Programa: mensualidades todos los días 9:00 y check-in los viernes 18:00 (hora de Ecuador).
-5. **Probar:** instala la app en el celular de Carlos, activa las notificaciones, y ejecuta la línea de prueba que viene comentada al final de `programar-avisos.sql`. Debe llegarle "Prueba de notificaciones ✅".
-
-Sin estos pasos la app igual se instala y funciona; solo faltan los avisos automáticos con la app cerrada (al abrir la app siguen saliendo los avisos dentro de la pantalla).
+## App instalable (FitZone Training)
+El panel y el portal se pueden instalar en el celular como una app, con el ícono del tiburón neón (Android: Chrome → *Instalar app*; iPhone: Safari → *Compartir → Añadir a pantalla de inicio*). Al entrar, la app muestra una guía de instalación. No requiere ninguna configuración en Supabase. Funciona con mala señal con la última copia guardada.
+Los avisos (mensualidad por vencer, check-in) aparecen **dentro de la app** al abrirla; no hay notificaciones push.

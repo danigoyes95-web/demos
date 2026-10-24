@@ -71,7 +71,6 @@ function tick(){if(!T)return;const r=Math.max(0,Math.ceil((T.fin-Date.now())/100
  if(pill){pill.className=(abierto?'':'on ')+(fin?'fin':'');pill.innerHTML=`<span>${T.tipo==='trabajo'?'⏱ Serie':'⏳ Descanso'}</span><b>${fin?'¡YA!':mmss(r)}</b>`}
  const v=document.getElementById('tv');if(v){v.textContent=fin?'¡Siguiente serie!':mmss(r);document.getElementById('tb').style.width=(r/T.total*100)+'%';document.getElementById('tt').textContent=(T.tipo==='trabajo'?'Serie en curso · ':'Descanso · ')+T.etq;document.getElementById('tm').classList.toggle('fin',fin)}
  if(fin&&!T.hecho){T.hecho=true;beep();try{navigator.vibrate&&navigator.vibrate([250,120,250,120,400])}catch(e){}
-  try{if(document.hidden&&Notification.permission==='granted')new Notification(T.tipo==='trabajo'?'¡Serie terminada!':'¡Termina el descanso!',{body:T.etq})}catch(e){}
   if(T.tipo==='trabajo'&&reg&&reg.j===T.j){guardarSet(T.s,T.total)}}}
 function detenerT(){T=null;clearInterval(iv);const p=document.getElementById('pill');if(p)p.className='';const v=document.getElementById('tm');if(v)v.hidden=true}
 const clampN=(x)=>Math.max(1,Math.min(12,parseInt(x.series)||3));
@@ -106,9 +105,9 @@ let FOTOS=[],pickV=null;
 const nF=f=>FOTOS.filter(x=>x.f===f).length,VN={frente:'Frente',lateral:'Lateral',espalda:'Espalda'};
 function avisosHtml(){const o=[],d=CS.venceDias(c),v=CS.ventana(),n=nF(v.fecha),u=c.medidas.at(-1),prox=u?Math.ceil((new Date(u.f).getTime()+30*864e5-Date.now())/864e5):null;
  if(d!=null&&d<=7){const t=d<0?`Tu mensualidad venció hace ${-d} día${d<-1?'s':''}`:d===0?'Tu mensualidad vence hoy':`Tu mensualidad vence en ${d} día${d===1?'':'s'} (${fecha(c.vence)})`;
-  o.push(`<div class="av ${d<=3?'r':'w'}" role="status"><span>⏳ ${t}</span><a class="btn sm" href="${wa(C.wa,'Hola Carlos, soy '+c.nombre+'. Quiero renovar mi mensualidad.')}" target="_blank" rel="noopener">Renovar</a></div>`);CS.notificar('vence',t,'Escríbele a Carlos para renovar y no perder tu ritmo.')}
+  o.push(`<div class="av ${d<=3?'r':'w'}" role="status"><span>⏳ ${t}</span><a class="btn sm" href="${wa(C.wa,'Hola Carlos, soy '+c.nombre+'. Quiero renovar mi mensualidad.')}" target="_blank" rel="noopener">Renovar</a></div>`)}
  if(v.estado!=='proximo'){if(n>=3)o.push(`<div class="av g" role="status"><span>✓ Check-in enviado. ¡Gracias!</span></div>`);else{const t=v.estado==='aviso'?'Mañana sábado es tu check-in':v.estado==='hoy'?'Hoy es tu check-in':'Te faltan fotos de tu check-in';
-  o.push(`<div class="av" role="status"><span>📸 ${t}: sube tus 3 fotos (${n}/3)</span><button class="btn sm" data-t="pro">Subir</button></div>`);CS.notificar('checkin',t,'Sube tus fotos de frente, lateral y espalda en tu portal.')}}
+  o.push(`<div class="av" role="status"><span>📸 ${t}: sube tus 3 fotos (${n}/3)</span><button class="btn sm" data-t="pro">Subir</button></div>`)}}
  if(!FICHA||!FICHA.completa)o.push(`<div class="av w" role="status"><span>📝 ${FICHA?'Termina':'Completa'} tu ficha de ingreso (5 min)</span><button class="btn sm" data-ficha>${FICHA?'Continuar':'Empezar'}</button></div>`);
  if(prox!=null&&prox<=3)o.push(`<div class="av w" role="status"><span>📊 Esta semana toca tu chequeo InBody</span></div>`);
  if(window.PWA&&PWA.falta())o.push(PWA.banner());
@@ -192,14 +191,14 @@ function codigoUI(msg){frm('CÓDIGO DE INVITACIÓN',`<p style="color:var(--mut);
  document.getElementById('out').onclick=()=>{Sv.api.salir();location.reload()};
  document.getElementById('go').onclick=async()=>{const k=document.getElementById('cd').value.trim();try{if(await Sv.reclamar(k))arrancar();else codigoUI('Código incorrecto o ya usado. Pídele uno nuevo a Carlos.')}catch(e){codigoUI('No se pudo vincular: '+e.message)}}}
 async function arrancar(msg){
- if(!CS.remoto){const o=await cargar();if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}if(c.activa!==false){try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}}sel=hoyIdx();pintar();if(window.PWA){PWA.auto('cliente');PWA.sync()}return}
+ if(!CS.remoto){const o=await cargar();if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}if(c.activa!==false){try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}}sel=hoyIdx();pintar();if(window.PWA){PWA.auto('cliente')}return}
  if(!Sv.api.hayCuenta())return authUI(msg);
  let o;try{o=await Sv.miPlan()}catch(e){if(e.status===401||e.status===403){Sv.api.salir();return authUI('Tu sesión venció. Ingresa de nuevo.')}m.innerHTML='<p class="vacio">No se pudo conectar. Revisa tu internet e intenta de nuevo.</p>';return}
  if(!o)return codigoUI();
  (o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});c=o;try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}
- if(c.activa===false){pintar();if(window.PWA){PWA.auto('cliente');PWA.sync()}return}
+ if(c.activa===false){pintar();if(window.PWA){PWA.auto('cliente')}return}
  try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}
  try{cache={};(await Sv.marcas(CS.dias(30))||[]).forEach(x=>{const k=x.k[0]==='m'?'m'+x.f:x.f;(cache[k]??=[]).push(+x.k.slice(1))})}catch(e){}
- sel=hoyIdx();pintar();if(window.PWA){PWA.auto('cliente');PWA.sync()}}
+ sel=hoyIdx();pintar();if(window.PWA){PWA.auto('cliente')}}
 arrancar();
 </script></body></html>
