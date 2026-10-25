@@ -138,7 +138,14 @@
   X.forEach(norm);
   const lerp = (a, b, t) => { const r = {}; K.forEach(k => r[k] = a[k] + (b[k] - a[k]) * t); return r; };
   const E = {
-    lista: X, grupos: ['Pecho', 'Espalda', 'Pierna', 'Hombro', 'Brazo', 'Core'],
+    lista: X,
+    /* grupos que se ofrecen al crear/editar (incluye los que no tienen ejercicios aún) */
+    GRUPOS_BASE: ['Pecho', 'Espalda', 'Pierna', 'Glúteo', 'Hombro', 'Brazo', 'Core', 'Full body', 'Cardio', 'Movilidad'],
+    /* grupos con al menos un ejercicio: los de siempre más cualquiera que Carlos haya creado */
+    get grupos() { const fijos = ['Pecho', 'Espalda', 'Pierna', 'Hombro', 'Brazo', 'Core'], extra = [...new Set(X.map(x => x.gr).filter(g => g && !fijos.includes(g)))];
+      const orden = g => { const i = E.GRUPOS_BASE.indexOf(g); return i < 0 ? 999 : i; };
+      return [...fijos, ...extra.sort((a, b) => orden(a) - orden(b) || a.localeCompare(b, 'es'))]; },
+    gruposForm() { return [...new Set([...E.GRUPOS_BASE, ...E.grupos])]; },
     get: id => X.find(e => e.id === id),
     frames: (ex, w) => `<div class="frames"><figure>${svg(draw(ex.a, ex), w)}<figcaption>1 · Inicio</figcaption></figure>` +
       (ex.est ? '' : `<span class="arrow" aria-hidden="true">→</span><figure>${svg(draw(ex.b, ex), w)}<figcaption>2 · Final</figcaption></figure>`) + `</div>`,

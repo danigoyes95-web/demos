@@ -206,7 +206,8 @@ const A={
  formEj(id){const ex=id?EJ.get(id):null,d=$('#dg'),bi=ex&&!ex.custom,v=x=>esc(x==null?'':x);d.onclick=null;d.oninput=null;
   d.innerHTML=`<button class="btn sec sm x" onclick="dg.close()" aria-label="Cerrar">✕</button><h3>${ex?(bi?'Editar ejercicio de la biblioteca':'Editar ejercicio propio'):'Ejercicio propio nuevo'}</h3>
   <label>Nombre<input id="n_n" maxlength="60" value="${v(ex&&ex.n)}"></label>
-  <div class="fx"><label>Grupo<select id="n_g">${EJ.grupos.map(g=>`<option ${ex&&ex.gr===g?'selected':''}>${g}</option>`).join('')}</select></label><label>Nivel<select id="n_l">${['Principiante','Intermedio','Avanzado','Personalizado'].map(g=>`<option ${(ex?ex.niv:'Personalizado')===g?'selected':''}>${g}</option>`).join('')}</select></label></div>
+  <div class="fx"><label>Grupo muscular<select id="n_g">${EJ.gruposForm().map(g=>`<option ${ex&&ex.gr===g?'selected':''}>${esc(g)}</option>`).join('')}<option value="__nuevo">➕ Otro grupo (escribirlo)…</option></select></label><label>Nivel<select id="n_l">${['Principiante','Intermedio','Avanzado','Personalizado'].map(g=>`<option ${(ex?ex.niv:'Personalizado')===g?'selected':''}>${g}</option>`).join('')}</select></label></div>
+  <label id="n_gw" hidden>Nombre del grupo nuevo<input id="n_gn" maxlength="24" placeholder="Ej: Tren superior, Estiramientos…"></label>
   <label>Músculos que trabaja<input id="n_m" value="${v(ex&&ex.mus)}"></label>
   <label>Pasos (uno por línea)<textarea id="n_p" rows="4">${v(ex?ex.pasos.join('\n'):'')}</textarea></label>
   <label>Errores comunes (uno por línea)<textarea id="n_e" rows="3">${v(ex?ex.err.join('\n'):'')}</textarea></label>
@@ -215,9 +216,11 @@ const A={
   <p id="n_er" role="alert" class="bad" style="min-height:18px;margin-top:6px"></p>
   <p class="tools"><button class="btn" id="n_ok">Guardar</button>${bi&&ex._orig?'<button class="btn sec" id="n_rs">Restaurar original</button>':''}</p>`;
   d.showModal();
-  $('#n_ok').onclick=()=>{const n=$('#n_n').value.trim(),vd=$('#n_v').value.trim(),er=$('#n_er');if(!n){er.textContent='Escribe el nombre del ejercicio.';return}if(vd&&!/^https?:\/\//i.test(vd)){er.textContent='El enlace del video debe empezar con https://';return}
+  $('#n_g').onchange=()=>{const nw=$('#n_g').value==='__nuevo';$('#n_gw').hidden=!nw;if(nw)$('#n_gn').focus()};
+  $('#n_ok').onclick=()=>{const n=$('#n_n').value.trim(),vd=$('#n_v').value.trim(),er=$('#n_er');let gr=$('#n_g').value;
+   if(gr==='__nuevo'){const t=$('#n_gn').value.trim().replace(/\s+/g,' ');if(t.length<2){er.textContent='Escribe el nombre del grupo nuevo (mínimo 2 letras).';return}const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),ya=EJ.gruposForm().find(g=>norm(g)===norm(t));gr=ya||t.charAt(0).toUpperCase()+t.slice(1)}if(!n){er.textContent='Escribe el nombre del ejercicio.';return}if(vd&&!/^https?:\/\//i.test(vd)){er.textContent='El enlace del video debe empezar con https://';return}
    const lin=s=>s.split('\n').map(x=>x.trim()).filter(Boolean),prev=ex&&Store.customDe(ex.id)||{},
-    o=Object.assign({},prev,{id:ex?ex.id:'x'+Date.now().toString(36),n,gr:$('#n_g').value,niv:$('#n_l').value,mus:$('#n_m').value.trim(),pasos:lin($('#n_p').value),err:lin($('#n_e').value),resp:$('#n_r').value.trim(),video:vd});if(bi)o.ov=1;
+    o=Object.assign({},prev,{id:ex?ex.id:'x'+Date.now().toString(36),n,gr,niv:$('#n_l').value,mus:$('#n_m').value.trim(),pasos:lin($('#n_p').value),err:lin($('#n_e').value),resp:$('#n_r').value.trim(),video:vd});if(bi)o.ov=1;
    Store.guardarCustom(o);d.close();pintar()};
   const rs=$('#n_rs');if(rs)rs.onclick=()=>{if(confirm('¿Volver al ejercicio original de la biblioteca? Se pierden tus cambios.')){Store.borrarCustom(ex.id);d.close();pintar()}}},
  delex(b){const id=b.dataset.id,ex=EJ.get(id);if(!ex)return;
