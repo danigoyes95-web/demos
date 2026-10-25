@@ -11,6 +11,7 @@
 8. Copias de seguridad: el plan gratis de Supabase no las hace diarias; usa plan Pro o descarga la copia desde el panel (Datos) cada semana.
 
 > Si ya ejecutaste una versión anterior de `schema.sql`, basta ejecutar `parche-restablecer-clave.sql` para añadir el restablecimiento de clave sin correo.
+> Para poder **eliminar clientes** (borra también sus fotos y su cuenta de acceso) ejecuta `parche-eliminar-cliente.sql` en el SQL Editor.
 
 ## Cómo funciona el acceso del cliente
 Carlos, en el panel del cliente → *PDF y acceso* → **Generar código de invitación** y lo envía por WhatsApp.

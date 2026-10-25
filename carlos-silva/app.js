@@ -215,6 +215,17 @@
     customDe: id => db.custom.find(x => x.id === id),
     usoEjercicio: id => db.clientes.filter(c => ((c.rutina || {}).dias || []).some(d => d.ej.some(x => x.id === id))),
     quitarDeRutinas(id) { db.clientes.forEach(c => ((c.rutina || {}).dias || []).forEach(d => { d.ej = d.ej.filter(x => x.id !== id); })); Store.save(); },
+    /* eliminar un cliente por completo: archivos de Storage, registro con todo su historial y su cuenta de acceso */
+    async eliminarCliente(id) {
+      if (remoto) { clearTimeout(tmr); await flush(); const q = encodeURIComponent(id);
+        const [f, e] = await Promise.all([api.rest(`fotos?cliente_id=eq.${q}&select=path`), api.rest(`examenes?cliente_id=eq.${q}&select=path`)]);
+        const borrar = async (bucket, rutas) => { if (!rutas.length) return;
+          const ir = () => fetch(`${SB.url}/storage/v1/object/${bucket}`, { method: 'DELETE', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + ses.get().at, 'Content-Type': 'application/json' }, body: JSON.stringify({ prefixes: rutas }) });
+          let r = await ir(); if (r.status === 401 && await refrescar()) r = await ir(); if (!r.ok) throw new Error('No se pudieron borrar los archivos (' + r.status + '). No se eliminó al cliente.'); };
+        await borrar('fotos', f.map(x => x.path)); await borrar('examenes', e.map(x => x.path));
+        if (!(await api.rpc('eliminar_cliente', { p_id: id }))) throw new Error('No se pudo eliminar al cliente.'); }
+      else { try { ['cs_ficha_', 'cs_exam_', 'cs_series_'].forEach(k => localStorage.removeItem(k + id)); const F = JSON.parse(localStorage.getItem('cs_fotos_demo') || '{}'); delete F[id]; localStorage.setItem('cs_fotos_demo', JSON.stringify(F)); } catch (x) {} }
+      db.clientes = db.clientes.filter(c => c.id !== id); snap.delete(id); vinc.delete(id); if (!remoto) LS.set(db); },
     vinculo: id => vinc.get(id) || {},
     async nuevoCodigo(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { codigo_hash: await sha256(t) } }); vinc.set(id, Object.assign({}, vinc.get(id), { codigo: true })); return t; },
     async desvincular(id) { await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { user_id: null, codigo_hash: null } }); vinc.set(id, {}); },
