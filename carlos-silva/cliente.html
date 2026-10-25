@@ -35,7 +35,7 @@ const clave=()=>'cs_cli_'+(c.nombre||'')+'_'+(c.creado||''),Sv=CS.Store;let cach
 const rutinaDia=n=>c.rutina?c.rutina.dias.find((_,i)=>diaSem(c.rutina,i)===n):null;
 const ic={res:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',ent:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12"/></svg>',com:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M5 3v8M17 3c-2 2-3 5-3 8h3v10"/></svg>',pro:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>',ej:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><circle cx="12" cy="5" r="2"/><path d="M6 21l2-9-3-3 4-2h6l4 2-3 3 2 9M9 12h6"/></svg>'};
 async function cargar(){const q=new URLSearchParams(location.search),h=new URLSearchParams(location.hash.slice(1));
- try{  if(h.get('p')){const o=await Link.decodificar(h.get('p'));(o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});return o}
+ try{  if(h.get('p')){const o=await Link.decodificar(h.get('p'));(o.custom||[]).forEach(x=>EJ.aplicar(x));return o}
   if(q.get('demo')&&!CS.remoto){const k=CS.Store.cliente(q.get('demo'));if(k)return Link.paquete(k)}}catch(e){console.warn(e)}return null}
 const detalle=x=>{const r=/^\d+$/.test(String(x.reps).trim())?x.reps+' repeticiones':x.reps;return [x.series+' series',r,x.kg?x.kg+' kg':'',x.desc].filter(Boolean).join(' · ')};
 function lista(d,fecha){const h=hechos()[fecha]||[];return d.ej.map((x,j)=>{const e=EJ.get(x.id);if(!e)return '';const ok=h.includes(j);
@@ -58,7 +58,7 @@ function vPro(){const m=c.medidas,H=hechos();const extra=`<div class="dash" styl
  return extra+bloque+`<div class="kpis"><div class="card k"><b>${dl('kg')}</b><small>kg de peso</small></div><div class="card k"><b>${dl('gr',1)}</b><small>% grasa</small></div><div class="card k"><b>${dl('mm')}</b><small>kg músculo</small></div></div>
  <div class="card"><table><tr><th>Fecha</th><th>Peso</th><th>% grasa</th><th>Músculo</th></tr>${m.map(x=>`<tr><td>${esc(fecha(x.f))}</td><td>${esc(x.kg)}</td><td>${esc(x.gr)}</td><td>${esc(x.mm)}</td></tr>`).join('')}</table></div>`+
  (c.evals.length?`<div class="sec-t"><b>Evaluación técnica</b></div>`+c.evals.slice(-1).map(e=>`<div class="card"><small>${esc(fecha(e.f))}</small><p>${esc(e.nota)}</p>${e.it.map(i=>`<p><b>${esc(EJ.get(i.id)?.n||i.id)}</b> · ${'★'.repeat(i.pt)}${'☆'.repeat(5-i.pt)}<br><small style="color:var(--mut)">${esc(i.n)}</small></p>`).join('')}</div>`).join(''):'')+`<div class="dl"><button class="btn sm sec" data-pdf="progreso">⬇ Mi progreso en PDF</button></div>`}
-function vEj(){return EJ.grupos.map(g=>`<div class="sec-t"><b>${esc(g)}</b></div>`+EJ.lista.filter(e=>e.gr===g).map(e=>`<div class="it" style="grid-template-columns:64px 1fr"><span class="th" data-ej="${esc(e.id)}">${EJ.miniatura(e)}</span><button class="tx" data-ej="${esc(e.id)}"><b>${esc(e.n)}</b><small>${esc(e.mus)}</small></button></div>`).join('')).join('')}
+function vEj(){return EJ.grupos.map(g=>`<div class="sec-t"><b>${esc(g)}</b></div>`+EJ.visibles().filter(e=>e.gr===g).map(e=>`<div class="it" style="grid-template-columns:64px 1fr"><span class="th" data-ej="${esc(e.id)}">${EJ.miniatura(e)}</span><button class="tx" data-ej="${esc(e.id)}"><b>${esc(e.n)}</b><small>${esc(e.mus)}</small></button></div>`).join('')).join('')}
 const {M}=CS,fi=n=>CS.dias(n);
 let FICHA=null,SERIES=[],T=null,AC=null,reg=null,iv=null,wl=null;
 const fmt=n=>String(+(+n).toFixed(1)).replace('.',','),mmss=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
@@ -195,7 +195,7 @@ async function arrancar(msg){
  if(!Sv.api.hayCuenta())return authUI(msg);
  let o;try{o=await Sv.miPlan()}catch(e){if(e.status===401||e.status===403){Sv.api.salir();return authUI('Tu sesión venció. Ingresa de nuevo.')}m.innerHTML='<p class="vacio">No se pudo conectar. Revisa tu internet e intenta de nuevo.</p>';return}
  if(!o)return codigoUI();
- (o.custom||[]).forEach(x=>{if(!EJ.get(x.id)){const e=EJ.agregarPersonalizado(x);e.id=x.id}});c=o;try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}
+ (o.custom||[]).forEach(x=>EJ.aplicar(x));c=o;try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}
  if(c.activa===false){pintar();if(window.PWA){PWA.auto('cliente')}return}
  try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}
  try{cache={};(await Sv.marcas(CS.dias(30))||[]).forEach(x=>{const k=x.k[0]==='m'?'m'+x.f:x.f;(cache[k]??=[]).push(+x.k.slice(1))})}catch(e){}

@@ -133,6 +133,7 @@
       err: ['Cadera levantada', 'Manos adelantadas', 'Perder el ritmo respiratorio'], resp: 'Respiración rítmica, 2 pasos por ciclo.',
       a: { x: 150, t: 62, ua: 0, fa: 0, th: 100, sh: -10, th2: -62, sh2: -62 }, b: { x: 150, t: 62, ua: 0, fa: 0, th: -62, sh: -62, th2: 100, sh2: -10 } }
   ];
+  const CAMPOS = ['n', 'gr', 'mus', 'niv', 'pasos', 'err', 'resp', 'video'];
   const norm = e => { e.a = full(e.a); e.b = full(e.b); e.eq = e.eq || {}; return e; };
   X.forEach(norm);
   const lerp = (a, b, t) => { const r = {}; K.forEach(k => r[k] = a[k] + (b[k] - a[k]) * t); return r; };
@@ -151,7 +152,15 @@
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.innerHTML = svg(draw(ex.b, ex)); return () => {}; }
       raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
     },
-    agregarPersonalizado(o) { const ex = norm({ id: 'x' + Date.now().toString(36), n: o.n, gr: o.gr, eq: {}, mus: o.mus || '', niv: 'Personalizado', pasos: o.pasos || [], err: [], resp: '', video: o.video || '', a: {}, b: {}, custom: 1 }); X.push(ex); return ex; }
+    /* crea o actualiza un ejercicio: propio (custom) o edición de uno de la biblioteca (ov). Guarda el original para poder restaurarlo. */
+    aplicar(o) { let ex = E.get(o.id);
+      if (!ex) { ex = norm({ id: o.id, n: o.n || 'Ejercicio', gr: o.gr || 'Core', eq: {}, mus: '', niv: 'Personalizado', pasos: [], err: [], resp: '', video: '', a: {}, b: {}, custom: 1 }); X.push(ex); }
+      else if (!ex.custom && !ex._orig && CAMPOS.some(k => o[k] !== undefined)) ex._orig = CAMPOS.reduce((m, k) => (m[k] = Array.isArray(ex[k]) ? ex[k].slice() : ex[k], m), {});
+      CAMPOS.forEach(k => { if (o[k] !== undefined) ex[k] = Array.isArray(o[k]) ? o[k].slice() : o[k]; }); ex.oculto = !!o.oculto; return ex; },
+    restaurar(id) { const ex = E.get(id); if (ex && ex._orig) { CAMPOS.forEach(k => ex[k] = Array.isArray(ex._orig[k]) ? ex._orig[k].slice() : ex._orig[k]); ex.oculto = false; delete ex._orig; } },
+    quitar(id) { const i = X.findIndex(x => x.id === id && x.custom); if (i >= 0) X.splice(i, 1); },
+    visibles: () => X.filter(x => !x.oculto),
+    agregarPersonalizado(o) { return E.aplicar(Object.assign({ id: 'x' + Date.now().toString(36) }, o)); }
   };
   window.EJ = E;
 })();

@@ -147,10 +147,11 @@
   const sha256 = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
   const token = () => { const u = crypto.getRandomValues(new Uint8Array(32)); return btoa(String.fromCharCode(...u)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
   let db = remoto ? { clientes: [], custom: [] } : (LS.get() || semilla()), snap = new Map(), snapC = new Map(), vinc = new Map(), tmr = null, estadoFn = () => {};
-  const regCustom = () => db.custom.forEach(c => { if (!EJ.get(c.id)) { const e = EJ.agregarPersonalizado(c); e.id = c.id; } });
+  const regCustom = () => db.custom.forEach(c => EJ.aplicar(c));
   regCustom();
   async function flush() {
     try { for (const c of db.clientes) { const s = JSON.stringify(c); if (snap.get(c.id) !== s) { await api.rest('clientes?on_conflict=id', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: { id: c.id, datos: c, activo: c.estado === 'activo' } }); snap.set(c.id, s); } }
+      for (const [id] of [...snapC]) if (!db.custom.some(x => x.id === id)) { await api.rest('ejercicios_custom?id=eq.' + encodeURIComponent(id), { method: 'DELETE', prefer: 'return=minimal' }); snapC.delete(id); }   // ejercicios eliminados
       for (const x of db.custom) { const s = JSON.stringify(x); if (snapC.get(x.id) !== s) { await api.rest('ejercicios_custom?on_conflict=id', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: { id: x.id, datos: x } }); snapC.set(x.id, s); } }
       estadoFn('ok'); } catch (e) { estadoFn('error', e.message); } }
   const Store = { db: () => db, remoto, api, estado(fn) { estadoFn = fn; },
@@ -208,6 +209,12 @@
       async url(x) { if (!remoto) return x.u; const ir = () => fetch(`${SB.url}/storage/v1/object/sign/examenes/${x.p}`, { method: 'POST', headers: { apikey: SB.anonKey, Authorization: 'Bearer ' + ses.get().at, 'Content-Type': 'application/json' }, body: JSON.stringify({ expiresIn: 600 }) });
         let r = await ir(); if (r.status === 401 && await refrescar()) r = await ir(); if (!r.ok) return ''; return SB.url + '/storage/v1' + (await r.json()).signedURL; }
     },
+    /* ejercicios propios y ediciones de la biblioteca (db.custom) */
+    guardarCustom(o) { const i = db.custom.findIndex(x => x.id === o.id); i < 0 ? db.custom.push(o) : db.custom[i] = o; EJ.aplicar(o); Store.save(); },
+    borrarCustom(id) { const i = db.custom.findIndex(x => x.id === id); if (i >= 0) db.custom.splice(i, 1); const x = EJ.get(id); if (x && x.custom) EJ.quitar(id); else EJ.restaurar(id); Store.save(); },
+    customDe: id => db.custom.find(x => x.id === id),
+    usoEjercicio: id => db.clientes.filter(c => ((c.rutina || {}).dias || []).some(d => d.ej.some(x => x.id === id))),
+    quitarDeRutinas(id) { db.clientes.forEach(c => ((c.rutina || {}).dias || []).forEach(d => { d.ej = d.ej.filter(x => x.id !== id); })); Store.save(); },
     vinculo: id => vinc.get(id) || {},
     async nuevoCodigo(id) { const t = token(); await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { codigo_hash: await sha256(t) } }); vinc.set(id, Object.assign({}, vinc.get(id), { codigo: true })); return t; },
     async desvincular(id) { await api.rest('clientes?id=eq.' + encodeURIComponent(id), { method: 'PATCH', prefer: 'return=minimal', body: { user_id: null, codigo_hash: null } }); vinc.set(id, {}); },
