@@ -67,3 +67,4 @@ fieldset{border:1px solid var(--line);border-radius:12px;padding:10px 12px;margi
 .rd{display:flex;gap:8px;align-items:center;color:var(--ink);font-size:15px;margin-top:6px;min-height:36px}.rd input{width:auto;min-height:0}
 h4.ft{color:var(--neon);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:14px 0 4px}
 [hidden]{display:none!important}
+.mealb{margin-top:12px}.mealb>b{display:block;color:var(--acc,#00e5ff);font-size:14px}.mealb .rowd{grid-template-columns:128px 1fr;margin-top:6px}
