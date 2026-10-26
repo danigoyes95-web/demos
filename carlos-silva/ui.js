@@ -11,6 +11,17 @@
       ${e.video ? `<p style="margin-top:10px"><a class="btn sm" href="${esc(/^https?:\/\//.test(e.video) ? e.video : '#')}" target="_blank" rel="noopener">▶ Ver video del coach</a></p>` : ''}
       <p style="font-size:12px;color:var(--mut);margin-top:10px">Figura esquemática de referencia. Ante dudas, pide a Carlos que revise tu técnica por WhatsApp.</p>`;
     dg.querySelector('.x').onclick = () => dg.close(); dg.showModal(); stop(); stop = EJ.animar(dg.querySelector('.vis'), e); };
+  /* galería de todos los check-ins (para que el coach vea cada foto apenas se sube, sin esperar a tener 2 fechas) */
+  CS.galeria = async (el, cid, coach) => {
+    el.innerHTML = '<p style="color:var(--mut)">Cargando fotos…</p>'; let L;
+    try { L = await CS.Store.fotos.lista(cid, coach); } catch (e) { el.innerHTML = '<p class="bad">No se pudieron cargar las fotos.</p>'; return; }
+    const fechas = [...new Set(L.map(x => x.f))].sort().reverse(), VN = { frente: 'Frente', lateral: 'Lateral', espalda: 'Espalda' };
+    if (!fechas.length) { el.innerHTML = '<p style="color:var(--mut)">Aún no hay fotos de check-in.</p>'; return; }
+    el.innerHTML = fechas.map(f => `<div class="gal-f"><b>${esc(CS.fecha(f))}</b> <small style="color:var(--mut)">${L.filter(x => x.f === f).length}/3 fotos</small><div class="gal">${Object.keys(VN).map(v => { const t = L.find(x => x.f === f && x.v === v); return t ? `<button class="gal-i" data-gf="${f}" data-gv="${v}"${t.demo !== undefined ? ` data-gd="${t.demo}"` : ''} aria-label="Ver foto ${VN[v]} ${esc(CS.fecha(f))}"><img alt="${VN[v]}"><span>${VN[v]}</span></button>` : `<div class="gal-i vacio"><span>${VN[v]}<br>sin foto</span></div>`; }).join('')}</div></div>`).join('');
+    const U = b => CS.Store.fotos.url(cid, b.dataset.gf, b.dataset.gv, b.dataset.gd === undefined ? undefined : +b.dataset.gd);
+    el.querySelectorAll('.gal-i[data-gf]').forEach(async b => { b.querySelector('img').src = await U(b); });
+    el.onclick = async ev => { const b = ev.target.closest('.gal-i[data-gf]'); if (!b) return; const o = document.createElement('div'); o.className = 'gal-o'; o.innerHTML = `<button aria-label="Cerrar">✕</button><img alt="Foto ${VN[b.dataset.gv]}"><p>${VN[b.dataset.gv]} · ${esc(CS.fecha(b.dataset.gf))}</p>`; o.onclick = () => o.remove(); document.body.appendChild(o); o.querySelector('img').src = await U(b); };
+  };
   /* comparador antes/después con deslizador, por vista (frente · lateral · espalda) */
   CS.comparador = async (el, cid, coach) => {
     el.innerHTML = '<p style="color:var(--mut)">Cargando fotos…</p>'; let L;
