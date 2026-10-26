@@ -32,7 +32,7 @@ const LS={get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return
 const DN=['L','M','M','J','V','S','D'],DL=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
 const hoyIdx=()=>(new Date().getDay()+6)%7,iso=n=>{const d=new Date();d.setDate(d.getDate()-hoyIdx()+n);return CS.ymd(d)};
 const clave=()=>'cs_cli_'+(c.nombre||'')+'_'+(c.creado||''),Sv=CS.Store;let cache={};const hechos=()=>CS.remoto?cache:(LS.get(clave())||c.marcas||{});
-const rutinaDia=n=>c.rutina?c.rutina.dias.find((_,i)=>diaSem(c.rutina,i)===n):null;
+const rutinaDia=n=>c.rutina?CS.diaEf(c,n):null;
 const ic={res:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',ent:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12"/></svg>',com:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8M5 3v8M17 3c-2 2-3 5-3 8h3v10"/></svg>',pro:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>',ej:'<svg class="ico" viewBox="0 0 24 24" style="width:18px;height:18px"><circle cx="12" cy="5" r="2"/><path d="M6 21l2-9-3-3 4-2h6l4 2-3 3 2 9M9 12h6"/></svg>'};
 async function cargar(){const q=new URLSearchParams(location.search),h=new URLSearchParams(location.hash.slice(1));
  try{  if(h.get('p')){const o=await Link.decodificar(h.get('p'));(o.custom||[]).forEach(x=>EJ.aplicar(x));return o}
