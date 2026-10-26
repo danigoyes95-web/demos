@@ -20,7 +20,7 @@ window.COACH = {
       items: ['Rutina personalizada con referencia visual de cada ejercicio', 'Plan alimenticio con calorías, macros y horarios', 'Seguimiento 1:1 y apoyo por WhatsApp 24/7'] }
   ],
   // Fotos de la comunidad: súbelas a assets/comunidad/ y agrega aquí su nombre, ej. ['assets/comunidad/foto1.jpg']
-  comunidad: [],
+  comunidad: ['assets/comunidad/1.jpg', 'assets/comunidad/2.jpg', 'assets/comunidad/3.jpg', 'assets/comunidad/4.jpg', 'assets/comunidad/5.jpg', 'assets/comunidad/6.jpg'],
   servicios: [
     ['Guía nutricional', 'apple'], ['Plan alimenticio (Dieta)', 'plate'], ['Chequeo InBody mensual', 'scale'],
     ['Apoyo vía WhatsApp 24/7', 'chat'], ['Seguimiento 1:1', 'user'], ['Rutinas personalizadas', 'dumbbell'],
