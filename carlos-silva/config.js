@@ -7,6 +7,20 @@ window.COACH = {
   supabase: { url: '', anonKey: '', schema: 'carlos' },
   diasPrimerMes: 30,   // días de mensualidad con que arranca un cliente nuevo (el primer mes ya viene pagado)
   claveDemo: 'coach',   // solo modo demo;   
+  // Planes de la landing. cupos: número de cupos que quedan (null = solo muestra «Cupos limitados»). precio: texto opcional, ej. '$40 / mes'.
+  planes: [
+    { id: 'presencial', nombre: 'Presencial', tag: 'Entrena con Carlos', cupos: null, precio: '',
+      desc: 'Sesiones en persona con corrección técnica en vivo y todo el seguimiento de FitZone.',
+      items: ['Todo lo incluido en la asesoría (guía nutricional, dieta, InBody, apoyo 24/7)', 'Corrección de técnica en cada ejercicio', 'Horarios: 5 am a 11 am · 4 pm a 9 pm'] },
+    { id: 'semipresencial', nombre: 'Semipresencial', tag: 'Lo mejor de los dos mundos', cupos: null, precio: '',
+      desc: 'Combina sesiones presenciales con seguimiento a distancia durante la semana.',
+      items: ['Sesiones presenciales según tu agenda', 'Rutina y plan alimenticio en tu portal', 'Apoyo por WhatsApp y evaluación técnica semanal'] },
+    { id: 'virtual', nombre: 'Virtual', tag: 'Desde donde estés', cupos: null, precio: '',
+      desc: 'Entrena en casa o en tu gimnasio con la guía de Carlos a un mensaje de distancia.',
+      items: ['Rutina personalizada con referencia visual de cada ejercicio', 'Plan alimenticio con calorías, macros y horarios', 'Seguimiento 1:1 y apoyo por WhatsApp 24/7'] }
+  ],
+  // Fotos de la comunidad: súbelas a assets/comunidad/ y agrega aquí su nombre, ej. ['assets/comunidad/foto1.jpg']
+  comunidad: [],
   servicios: [
     ['Guía nutricional', 'apple'], ['Plan alimenticio (Dieta)', 'plate'], ['Chequeo InBody mensual', 'scale'],
     ['Apoyo vía WhatsApp 24/7', 'chat'], ['Seguimiento 1:1', 'user'], ['Rutinas personalizadas', 'dumbbell'],
