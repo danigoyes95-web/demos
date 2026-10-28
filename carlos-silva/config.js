@@ -20,6 +20,9 @@ window.COACH = {
       items: ['Rutina personalizada con referencia visual de cada ejercicio', 'Plan alimenticio con calorías, macros y horarios', 'Seguimiento 1:1 y apoyo por WhatsApp 24/7'] }
   ],
   // Fotos de la comunidad: súbelas a assets/comunidad/ y agrega aquí su nombre, ej. ['assets/comunidad/foto1.jpg']
+  // Testimonios y cambios físicos (sección «Los resultados hablan por sí mismos»). Si está vacío, la sección no se muestra en la página pública.
+  // Cada uno: { nombre: 'Nombre', rol: 'Alumna a distancia', texto: 'Testimonio…', foto: 'assets/resultados/1.jpg', antes: 'assets/resultados/1-antes.jpg' }   («antes» es opcional: si lo pones, se muestra antes/después)
+  resultados: [],
   comunidad: ['assets/comunidad/1.jpg', 'assets/comunidad/2.jpg', 'assets/comunidad/3.jpg', 'assets/comunidad/4.jpg', 'assets/comunidad/5.jpg', 'assets/comunidad/6.jpg', 'assets/comunidad/7.jpg', 'assets/comunidad/8.jpg', 'assets/comunidad/9.jpg'],
   servicios: [
     ['Guía nutricional', 'apple'], ['Plan alimenticio (Dieta)', 'plate'], ['Chequeo InBody mensual', 'scale'],
