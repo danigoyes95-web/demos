@@ -127,6 +127,7 @@
       comida: { prefer: 'Pollo, arroz, huevos, aguacate, frutas', rechaza: 'Hígado, coliflor', alergias: 'Ninguna', intol: 'Lactosa (leve)', liquidos: 2.5 },
       salud: { lesiones: 'Molestia en hombro derecho (2022), ya recuperada.', fam: { hipertension: true }, famOtros: '', meds: 'no', medsLista: [] } } })); } catch (e) {}
     A.vence = dias(-5); B.vence = dias(-22); Cc.vence = dias(-27);   // A vence en 5 días: se ve el aviso
+    A.recursos = [{ id: 'r2', t: 'Proteína: cuánta necesitas de verdad', u: 'https://es.wikipedia.org/wiki/Prote%C3%ADna', k: 'lectura', n: '', f: dias(12) }, { id: 'r1', t: 'Cómo respirar y bracear en la sentadilla', u: 'https://www.youtube.com/', k: 'video', n: 'Míralo antes del entreno de piernas', f: dias(2) }];
     A.pagos = [{ id: 'p1', f: dias(55), monto: 45, metodo: 'Transferencia', ref: 'TR-0987', dias: 30, prev: '', hasta: dias(25) }, { id: 'p2', f: dias(25), monto: 45, metodo: 'Transferencia', ref: 'TR-1042', dias: 30, prev: dias(25), hasta: dias(-5) }];
     B.pagos = [{ id: 'p3', f: dias(8), monto: 45, metodo: 'Transferencia', ref: 'TR-1100', dias: 30, prev: '', hasta: dias(-22) }];
     A.medcorp = [{ f: dias(62), cuello: 37, hombros: 112, pecho: 98, brazo: 32, cintura: 82, abdomen: 86, cadera: 98, muslo: 56, pantorrilla: 37 }, { f: dias(32), cuello: 37.5, hombros: 114, pecho: 100, brazo: 33.5, cintura: 81, abdomen: 84, cadera: 99, muslo: 57, pantorrilla: 37.5 }, { f: dias(3), cuello: 38, hombros: 116, pecho: 102, brazo: 35, cintura: 80, abdomen: 83, cadera: 100, muslo: 58.5, pantorrilla: 38 }];
@@ -172,7 +173,7 @@
   const Store = { db: () => db, remoto, api, estado(fn) { estadoFn = fn; }, alVencer(fn) { alVencer = fn; },
     async init() { if (!remoto) return; const f = await api.rest('clientes?select=id,datos,user_id,codigo_hash&order=created_at.desc'), x = await api.rest('ejercicios_custom?select=id,datos');
       db = { clientes: f.map(r => Object.assign({}, r.datos, { id: r.id })), custom: x.map(r => r.datos) }; vinc = new Map(f.map(r => [r.id, { vinculado: !!r.user_id, codigo: !!r.codigo_hash }])); snap = new Map(db.clientes.map(c => [c.id, JSON.stringify(c)])); snapC = new Map(db.custom.map(c => [c.id, JSON.stringify(c)])); regCustom(); },
-    save() { if (!remoto) { LS.set(db); return; } estadoFn('guardando'); clearTimeout(tmr); tmr = setTimeout(flush, 700); }, flush: () => { clearTimeout(tmr); return flush(); },
+    save() { if (!remoto) { LS.set(db); estadoFn('ok'); return; } estadoFn('guardando'); clearTimeout(tmr); tmr = setTimeout(flush, 700); }, flush: () => { clearTimeout(tmr); return flush(); },
     fotos: {
       DEMO_KEY: 'cs_fotos_demo', _cache: {},
       _ls() { try { return JSON.parse(localStorage.getItem('cs_fotos_demo')) || {}; } catch (e) { return {}; } },
@@ -278,7 +279,7 @@
   const b64 = u8 => btoa(String.fromCharCode(...u8)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const unb64 = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
   const Link = {
-    paquete: c => { const ok = activa(c); return ({ v: 1, activa: ok, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: ok ? c.rutina : null, plan: ok ? c.plan : null, supl: ok ? c.supl : [], medidas: ok ? c.medidas.slice(-6) : [], evals: ok ? c.evals.slice(-3) : [], cm: c.cm, sx: c.sx, cid: c.id, vence: c.vence, medcorp: ok ? (c.medcorp || []).slice(-6) : [], marcas: c.marcas || {}, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }); },
+    paquete: c => { const ok = activa(c); return ({ v: 1, activa: ok, nombre: c.nombre, obj: c.obj, nivel: c.nivel, rutina: ok ? c.rutina : null, plan: ok ? c.plan : null, supl: ok ? c.supl : [], medidas: ok ? c.medidas.slice(-6) : [], evals: ok ? c.evals.slice(-3) : [], cm: c.cm, sx: c.sx, cid: c.id, vence: c.vence, medcorp: ok ? (c.medcorp || []).slice(-6) : [], recursos: ok ? (c.recursos || []).slice(-30).reverse() : [], marcas: c.marcas || {}, creado: hoy(), custom: (db.custom || []).filter(x => (c.rutina?.dias || []).some(dd => dd.ej.some(e => e.id === x.id))) }); },
     async codificar(o) { const u = new TextEncoder().encode(JSON.stringify(o));
       if (window.CompressionStream) { const cs = new Response(new Blob([u]).stream().pipeThrough(new CompressionStream('gzip'))); return 'g.' + b64(new Uint8Array(await cs.arrayBuffer())); }
       return 'j.' + b64(u); },

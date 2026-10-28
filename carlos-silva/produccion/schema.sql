@@ -107,6 +107,8 @@ begin
     'v', 2, 'activa', true, 'cid', c.id, 'nombre', c.datos->>'nombre', 'obj', c.datos->>'obj', 'nivel', c.datos->>'nivel', 'cm', c.datos->'cm', 'sx', c.datos->>'sx',
     'creado', to_char(c.created_at, 'YYYY-MM-DD'), 'vence', c.datos->>'vence',
     'rutina', c.datos->'rutina', 'plan', c.datos->'plan', 'supl', coalesce(c.datos->'supl', '[]'::jsonb),
+    'recursos', (select coalesce(jsonb_agg(e order by o desc), '[]'::jsonb) from (
+        select e, o from jsonb_array_elements(coalesce(c.datos->'recursos', '[]'::jsonb)) with ordinality t(e, o) order by o desc limit 30) s),
     'medidas', (select coalesce(jsonb_agg(e order by o), '[]'::jsonb) from (
         select e, o from jsonb_array_elements(coalesce(c.datos->'medidas', '[]'::jsonb)) with ordinality t(e, o) order by o desc limit 6) s),
     'evals', (select coalesce(jsonb_agg(e order by o), '[]'::jsonb) from (
