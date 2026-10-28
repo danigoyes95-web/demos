@@ -193,6 +193,7 @@ function authUI(msg,modo){modo=modo||(RESET?'rst':CODIGO?'up':'in');
 function codigoUI(msg){frm('CÓDIGO DE INVITACIÓN',`<p style="color:var(--mut);margin-bottom:10px">Pega el código que te envió Carlos por WhatsApp para ver tu plan.</p><label>Código<input id="cd" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(CODIGO)}"></label><p id="er" role="alert" style="color:var(--bad);margin-top:8px;min-height:20px">${esc(msg||'')}</p><p style="margin-top:6px"><button class="btn" id="go">Vincular</button> <button class="btn sec sm" id="out">Salir</button></p>`);
  document.getElementById('out').onclick=()=>{Sv.api.salir();location.reload()};
  document.getElementById('go').onclick=async()=>{const k=document.getElementById('cd').value.trim();try{if(await Sv.reclamar(k))arrancar();else codigoUI('Código incorrecto o ya usado. Pídele uno nuevo a Carlos.')}catch(e){codigoUI('No se pudo vincular: '+e.message)}}}
+Sv.alVencer(()=>{const d=document.getElementById('dReg');if(d&&d.open)d.close();authUI('Tu sesión venció. Ingresa de nuevo.')});
 async function arrancar(msg){
  if(!CS.remoto){const o=await cargar();if(!o){m.innerHTML='<p class="vacio">No encontramos tu plan.<br>Pídele a Carlos tu enlace por WhatsApp.</p>';return}c=o;try{FICHA=await Sv.ficha.cargar(c.cid,false)}catch(e){}if(c.activa!==false){try{FOTOS=await Sv.fotos.lista(c.cid,false)}catch(e){}try{SERIES=await Sv.series.cargar(c.cid,false)}catch(e){}}sel=hoyIdx();pintar();if(window.PWA){PWA.auto('cliente')}return}
  if(!Sv.api.hayCuenta())return authUI(msg);

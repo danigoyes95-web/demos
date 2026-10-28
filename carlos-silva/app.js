@@ -138,12 +138,18 @@
   const SB = C.supabase || {}, remoto = !!(SB.url && SB.anonKey), SES = 'cs_sesion';
   const ses = { get() { try { return JSON.parse(localStorage.getItem(SES)); } catch (e) { return null; } }, set(v) { try { v ? localStorage.setItem(SES, JSON.stringify(v)) : localStorage.removeItem(SES); } catch (e) {} } };
   const guardarSes = j => ses.set({ at: j.access_token, rt: j.refresh_token });
-  async function refrescar() { const s = ses.get(); if (!s || !s.rt) return false;
-    const r = await fetch(`${SB.url}/auth/v1/token?grant_type=refresh_token`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ refresh_token: s.rt }) }).catch(() => null);
-    if (!r || !r.ok) { ses.set(null); return false; } guardarSes(await r.json()); return true; }
+  /* renueva la sesión. `viejo` = el token que dio 401: si otra pestaña ya lo renovó, se reutiliza (el refresh token es de un solo uso y renovarlo dos veces cerraba la sesión) */
+  async function refrescar(viejo) { const run = async () => { const s = ses.get(); if (!s || !s.rt) return false; if (viejo && s.at !== viejo) return true;
+      const r = await fetch(`${SB.url}/auth/v1/token?grant_type=refresh_token`, { method: 'POST', headers: { apikey: SB.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ refresh_token: s.rt }) }).catch(() => null);
+      if (!r) return false;   // sin internet: no se cierra la sesión
+      if (!r.ok) { ses.set(null); return false; } guardarSes(await r.json()); return true; };
+    return navigator.locks ? navigator.locks.request('cs_refresh', run) : run(); }
+  let alVencer = null;
   async function http(path, o = {}) {
-    const ir = () => { const s = ses.get(); return fetch(`${SB.url}${path}`, { method: o.method || 'GET', keepalive: !!o.keepalive, headers: Object.assign({ apikey: SB.anonKey, Authorization: 'Bearer ' + (s && !o.anon ? s.at : SB.anonKey), 'Content-Type': 'application/json', 'Content-Profile': SB.schema, 'Accept-Profile': SB.schema }, o.prefer ? { Prefer: o.prefer } : {}), body: o.body ? JSON.stringify(o.body) : undefined }); };
-    let r = await ir(); if (r.status === 401 && ses.get() && await refrescar()) r = await ir();
+    let usado = null;
+    const ir = () => { const s = ses.get(); usado = s && !o.anon ? s.at : null; return fetch(`${SB.url}${path}`, { method: o.method || 'GET', keepalive: !!o.keepalive, headers: Object.assign({ apikey: SB.anonKey, Authorization: 'Bearer ' + (s && !o.anon ? s.at : SB.anonKey), 'Content-Type': 'application/json', 'Content-Profile': SB.schema, 'Accept-Profile': SB.schema }, o.prefer ? { Prefer: o.prefer } : {}), body: o.body ? JSON.stringify(o.body) : undefined }); };
+    let r = await ir();
+    if (r.status === 401 && usado) { if (await refrescar(usado)) r = await ir(); else if (!ses.get()) { const e = new Error('Tu sesión venció. Entra de nuevo.'); e.status = 401; e.sesion = true; if (alVencer) alVencer(); throw e; } }
     const t = await r.text(); let j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {}
     if (!r.ok) { const e = new Error((j && (j.message || j.msg)) || 'Error de conexión'); e.status = r.status; throw e; } return j; }
   const api = { activo: remoto, hayCuenta: () => !!ses.get(), salir() { ses.set(null); },
@@ -163,7 +169,7 @@
       for (const [id] of [...snapC]) if (!db.custom.some(x => x.id === id)) { await api.rest('ejercicios_custom?id=eq.' + encodeURIComponent(id), { method: 'DELETE', prefer: 'return=minimal' }); snapC.delete(id); }   // ejercicios eliminados
       for (const x of db.custom) { const s = JSON.stringify(x); if (snapC.get(x.id) !== s) { await api.rest('ejercicios_custom?on_conflict=id', { method: 'POST', prefer: 'resolution=merge-duplicates,return=minimal', body: { id: x.id, datos: x } }); snapC.set(x.id, s); } }
       estadoFn('ok'); } catch (e) { estadoFn('error', e.message); } }
-  const Store = { db: () => db, remoto, api, estado(fn) { estadoFn = fn; },
+  const Store = { db: () => db, remoto, api, estado(fn) { estadoFn = fn; }, alVencer(fn) { alVencer = fn; },
     async init() { if (!remoto) return; const f = await api.rest('clientes?select=id,datos,user_id,codigo_hash&order=created_at.desc'), x = await api.rest('ejercicios_custom?select=id,datos');
       db = { clientes: f.map(r => Object.assign({}, r.datos, { id: r.id })), custom: x.map(r => r.datos) }; vinc = new Map(f.map(r => [r.id, { vinculado: !!r.user_id, codigo: !!r.codigo_hash }])); snap = new Map(db.clientes.map(c => [c.id, JSON.stringify(c)])); snapC = new Map(db.custom.map(c => [c.id, JSON.stringify(c)])); regCustom(); },
     save() { if (!remoto) { LS.set(db); return; } estadoFn('guardando'); clearTimeout(tmr); tmr = setTimeout(flush, 700); }, flush: () => { clearTimeout(tmr); return flush(); },

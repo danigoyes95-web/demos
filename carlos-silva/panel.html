@@ -21,6 +21,7 @@ const db=()=>Store.db(),cur=()=>Store.cliente(cid),save=()=>Store.save();
 const R=CS.remoto;$('#lm').hidden=!R;$('#ld').innerHTML=R?'Acceso solo para Carlos.':'Demo: la clave es <b>coach</b>';
 function est(s,m){const e=$('#est');if(!e)return;e.textContent=s==='guardando'?'Guardando…':s==='ok'?'Guardado ✓':'⚠ No se pudo guardar: '+m;e.className=s==='error'?'bad':s==='ok'?'ok':''}
 Store.estado(est);
+Store.alVencer(()=>{const d=$('#dg');if(d&&d.open)d.close();$('#login').hidden=false;$('#app').hidden=true;$('#er').textContent='Tu sesión venció. Entra de nuevo con tu correo y clave.'});
 async function entrar(){try{await Store.init();$('#login').hidden=true;$('#app').hidden=false;pintar();if(window.PWA){PWA.auto('coach')}}catch(e){Store.api.salir();$('#login').hidden=false;$('#app').hidden=true;$('#er').textContent=e.status===401||e.status===403?'Sin permiso. Revisa que tu usuario sea coach.':'No se pudo conectar: '+e.message}}
 $('#go').onclick=async()=>{$('#er').textContent='';if(R){try{await Store.api.login($('#em').value.trim(),$('#pw').value)}catch(e){$('#er').textContent=e.message;return}entrar()}else if($('#pw').value===C.claveDemo){sessionStorage.setItem('cs_ok','1');entrar()}else $('#er').textContent='Clave incorrecta.'};
 $('#pw').onkeydown=e=>{if(e.key==='Enter')$('#go').click()};
