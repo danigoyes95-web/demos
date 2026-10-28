@@ -22,7 +22,12 @@ window.COACH = {
   // Fotos de la comunidad: súbelas a assets/comunidad/ y agrega aquí su nombre, ej. ['assets/comunidad/foto1.jpg']
   // Testimonios y cambios físicos (sección «Los resultados hablan por sí mismos»). Si está vacío, la sección no se muestra en la página pública.
   // Cada uno: { nombre: 'Nombre', rol: 'Alumna a distancia', texto: 'Testimonio…', foto: 'assets/resultados/1.jpg', antes: 'assets/resultados/1-antes.jpg' }   («antes» es opcional: si lo pones, se muestra antes/después)
-  resultados: [],
+  resultados: [
+    { historia: true, etiqueta: 'Historia de un atleta', titulo: 'De la preparación al podio',
+      nombre: 'Atleta FitZone Training', rol: 'Competidor · entrenado por Carlos Silva',
+      texto: 'Todo gran resultado empieza con una decisión. Este atleta confió en el plan de Carlos y se puso a trabajar en serio: entrenos medidos, comidas planificadas y revisiones constantes. Semana a semana fue ajustando detalles, sin atajos y sin excusas. El día de la competencia el esfuerzo se vio en el escenario, y volvió a casa con el cuello lleno de medallas. Para Carlos no es solo un trofeo: es la prueba de que, con disciplina y buena guía, el cuerpo y la mente llegan mucho más lejos de lo que uno cree.',
+      foto: 'assets/comunidad/3.jpg' }
+  ],
   comunidad: ['assets/comunidad/1.jpg', 'assets/comunidad/2.jpg', 'assets/comunidad/3.jpg', 'assets/comunidad/4.jpg', 'assets/comunidad/5.jpg', 'assets/comunidad/6.jpg', 'assets/comunidad/7.jpg', 'assets/comunidad/8.jpg', 'assets/comunidad/9.jpg'],
   servicios: [
     ['Guía nutricional', 'apple'], ['Plan alimenticio (Dieta)', 'plate'], ['Chequeo InBody mensual', 'scale'],
