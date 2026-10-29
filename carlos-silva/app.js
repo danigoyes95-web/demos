@@ -70,7 +70,7 @@
   const DIAS_N = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
   /* check-in = sábado. Se sube desde el viernes al mediodía; el aviso "mañana es tu check-in" sale el viernes desde las 18:00. */
   const ventana = (now = new Date()) => { const w = (now.getDay() + 6) % 7, h = now.getHours(), d = new Date(now); d.setDate(d.getDate() + (w <= 5 ? 5 - w : -1));
-    return { fecha: ymd(d), estado: w === 5 ? 'hoy' : w === 6 ? 'pasado' : (w === 4 && h >= 18) ? 'aviso' : 'proximo', puede: (w === 4 && h >= 12) || w >= 5 }; };
+    return { fecha: ymd(d), estado: w === 5 ? 'hoy' : w === 6 ? 'pasado' : (w === 4 && h >= 18) ? 'aviso' : 'proximo', puede: true }; };   /* se pueden subir las fotos cuando quieran (así el primer día queda el «antes»); el check-in oficial es el sábado */
   const venceDias = (c, now = new Date()) => { if (!c.vence) return null; const a = new Date(c.vence + 'T00:00'), b = new Date(ymd(now) + 'T00:00'); return Math.round((a - b) / 864e5); };
   const msgVence = c => { const d = venceDias(c); return `Hola ${c.nombre.split(' ')[0]}, tu mensualidad ${d < 0 ? 'venció' : d === 0 ? 'vence hoy' : 'vence en ' + d + ' día' + (d === 1 ? '' : 's')} (${fecha(c.vence)}). ¿Renovamos para que sigas sin pausa? 💪`; };
   const msgCheckin = (c, e = 'aviso') => `Hola ${c.nombre.split(' ')[0]}, ${e === 'aviso' ? 'mañana sábado es tu check-in 📸' : e === 'hoy' ? 'hoy es tu check-in 📸' : 'te faltan las fotos de tu check-in 📸'} Sube tus 3 fotos (frente, lateral y espalda) en tu portal para que pueda hacer tu comparativa.`;

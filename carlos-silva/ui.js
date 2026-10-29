@@ -27,7 +27,11 @@
     el.innerHTML = '<p style="color:var(--mut)">Cargando fotos…</p>'; let L;
     try { L = await CS.Store.fotos.lista(cid, coach); } catch (e) { el.innerHTML = '<p class="bad">No se pudieron cargar las fotos.</p>'; return; }
     const fechas = [...new Set(L.map(x => x.f))].sort();
-    if (fechas.length < 2) { el.innerHTML = `<p style="color:var(--mut)">${fechas.length ? 'Falta un segundo check-in para poder comparar.' : 'Aún no hay fotos de check-in.'}</p>`; return; }
+    if (fechas.length < 2) {
+      const vacio = coach ? 'Cuando el cliente suba sus fotos del check-in aparecerán aquí. Con 2 check-ins (dos fechas) podrás deslizar para ver el antes y el después.' : 'Sube tus 3 fotos arriba (frente, lateral y espalda). Con 2 check-ins podrás deslizar y ver tu antes y después.';
+      if (!fechas.length) { el.innerHTML = `<div class="cmp-vacio"><svg viewBox="0 0 120 150" width="64" aria-hidden="true"><circle cx="60" cy="34" r="20" fill="#19e3ee33"/><path d="M20 140c0-34 18-58 40-58s40 24 40 58z" fill="#19e3ee22"/></svg><p>${esc(vacio)}</p></div>`; return; }
+      el.innerHTML = `<p style="color:var(--mut);margin:0 0 8px">Primer check-in: <b style="color:var(--ink)">${esc(CS.fecha(fechas[0]))}</b>. Falta un segundo check-in para poder comparar.</p><div class="gal" id="cmp1"></div>`;
+      const g = el.querySelector('#cmp1'); ['frente', 'lateral', 'espalda'].forEach(async v => { const t = L.find(x => x.f === fechas[0] && x.v === v); const f = document.createElement('div'); f.className = 'gal-i' + (t ? '' : ' vacio'); if (t) { const im = document.createElement('img'); im.alt = v; f.appendChild(im); g.appendChild(f); im.src = await CS.Store.fotos.url(cid, fechas[0], v, t.demo); } else { f.innerHTML = '<span>' + v + '<br>sin foto</span>'; g.appendChild(f); } }); return; }
     const st = { a: fechas[0], b: fechas.at(-1), v: 'frente' }, VN = { frente: 'Frente', lateral: 'Lateral', espalda: 'Espalda' };
     const tiene = (f, v) => L.find(x => x.f === f && x.v === v), demo = (f, v) => (tiene(f, v) || {}).demo;
     const opt = s => fechas.map(f => `<option value="${f}" ${f === s ? 'selected' : ''}>${esc(CS.fecha ? CS.fecha(f) : f)}</option>`).join('');
