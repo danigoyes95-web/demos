@@ -20,6 +20,12 @@ window.COACH = {
       items: ['Rutina personalizada con referencia visual de cada ejercicio', 'Plan alimenticio con calorías, macros y horarios', 'Seguimiento 1:1 y apoyo por WhatsApp 24/7'] }
   ],
   // Fotos de la comunidad: súbelas a assets/comunidad/ y agrega aquí su nombre, ej. ['assets/comunidad/foto1.jpg']
+  // Formas de pago que ven los clientes en su app (para que renueven a tiempo). Se cambian aquí.
+  pagos: {
+    titular: 'Carlos Silva Guevara', ci: '1803807500', email: 'krlos9698@gmail.com',
+    cuentas: [ { banco: 'Banco Guayaquil', tipo: 'Ahorros', num: '0043086159', color: '#ff2d8a' }, { banco: 'Banco Pichincha', tipo: 'Ahorros', num: '2204322169', color: '#ffd400' } ],
+    nota: 'Haz tu transferencia o depósito y envía el comprobante a Carlos por WhatsApp: así tu mes se activa o se renueva sin quedarte sin plan.'
+  },
   // Testimonios y cambios físicos (sección «Los resultados hablan por sí mismos»). Si está vacío, la sección no se muestra en la página pública.
   // Cada uno: { nombre: 'Nombre', rol: 'Alumna a distancia', texto: 'Testimonio…', foto: 'assets/resultados/1.jpg', antes: 'assets/resultados/1-antes.jpg' }   («antes» es opcional: si lo pones, se muestra antes/después)
   resultados: [
