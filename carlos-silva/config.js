@@ -24,6 +24,7 @@ window.COACH = {
   pagos: {
     titular: 'Carlos Silva Guevara', ci: '1803807500', email: 'krlos9698@gmail.com',
     cuentas: [ { banco: 'Banco Guayaquil', tipo: 'Ahorros', num: '0043086159', color: '#ff2d8a' }, { banco: 'Banco Pichincha', tipo: 'Ahorros', num: '2204322169', color: '#ffd400' } ],
+    tarjeta: { titulo: 'Tarjeta de crédito o débito', texto: '¿Vives en otro país o prefieres pagar con tarjeta? Pídele a Carlos tu link de pago por WhatsApp y paga seguro desde donde estés.' },
     nota: 'Haz tu transferencia o depósito y envía el comprobante a Carlos por WhatsApp: así tu mes se activa o se renueva sin quedarte sin plan.'
   },
   // Testimonios y cambios físicos (sección «Los resultados hablan por sí mismos»). Si está vacío, la sección no se muestra en la página pública.
