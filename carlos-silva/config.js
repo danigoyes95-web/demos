@@ -20,6 +20,8 @@ window.COACH = {
       items: ['Rutina personalizada con referencia visual de cada ejercicio', 'Plan alimenticio con calorías, macros y horarios', 'Seguimiento 1:1 y apoyo por WhatsApp 24/7'] }
   ],
   // Fotos de la comunidad: súbelas a assets/comunidad/ y agrega aquí su nombre, ej. ['assets/comunidad/foto1.jpg']
+  // Nutricionista que diseña los planes alimenticios: su logo sale en la pestaña Comidas del cliente y en el PDF del plan.
+  nutricionista: { nombre: 'Alejandro Silva', titulo: 'Nutricionista', logo: 'assets/alejandro-silva.png', texto: 'Tu plan alimenticio está diseñado por' },
   // Formas de pago que ven los clientes en su app (para que renueven a tiempo). Se cambian aquí.
   pagos: {
     titular: 'Carlos Silva Guevara', ci: '1803807500', email: 'krlos9698@gmail.com',
