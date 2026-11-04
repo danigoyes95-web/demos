@@ -113,8 +113,8 @@ const nF=f=>FOTOS.filter(x=>x.f===f).length,VN={frente:'Frente',lateral:'Lateral
 function avisosHtml(){const o=[],d=CS.venceDias(c),v=CS.ventana(),n=nF(v.fecha),u=c.medidas.at(-1),prox=u?Math.ceil((new Date(u.f).getTime()+30*864e5-Date.now())/864e5):null;
  if(d!=null&&d<=7){const t=d<0?`Tu mensualidad venció hace ${-d} día${d<-1?'s':''}`:d===0?'Tu mensualidad vence hoy':`Tu mensualidad vence en ${d} día${d===1?'':'s'} (${fecha(c.vence)})`;
   o.push(`<div class="av ${d<=3?'r':'w'}" role="status"><span>⏳ ${t}</span><a class="btn sm" href="${wa(C.wa,'Hola Carlos, soy '+c.nombre+'. Quiero renovar mi mensualidad.')}" target="_blank" rel="noopener">Renovar</a><button class="btn sm sec" data-pagar>Cómo pagar</button></div>`)}
- if(v.estado!=='proximo'){if(n>=3)o.push(`<div class="av g" role="status"><span>✓ Check-in enviado. ¡Gracias!</span></div>`);else{const t=v.estado==='aviso'?'Mañana sábado es tu check-in':v.estado==='hoy'?'Hoy es tu check-in':'Te faltan fotos de tu check-in';
-  o.push(`<div class="av" role="status"><span>📸 ${t}: sube tus 3 fotos (${n}/3)</span><button class="btn sm" data-t="pro">Subir</button></div>`)}}
+ if(n>=3){if(v.estado!=='proximo')o.push(`<div class="av g" role="status"><span>✓ Check-in enviado. ¡Gracias!</span></div>`)}else{const t=v.estado==='aviso'?'Mañana sábado es tu check-in':v.estado==='hoy'?'Hoy es tu check-in':v.estado==='pasado'?'Te faltan fotos de tu check-in':'Check-in de la semana';
+  o.push(`<div class="av" role="status"><span>📸 ${t}: sube tus 3 fotos cuando quieras (${n}/3)</span><button class="btn sm" data-t="pro">Subir</button></div>`)}
  if(!FICHA||!FICHA.completa)o.push(`<div class="av w" role="status"><span>📝 ${FICHA?'Termina':'Completa'} tu ficha de ingreso (5 min)</span><button class="btn sm" data-ficha>${FICHA?'Continuar':'Empezar'}</button></div>`);
  if(prox!=null&&prox<=3)o.push(`<div class="av w" role="status"><span>📊 Esta semana toca tu chequeo InBody</span></div>`);
  if(window.PWA&&PWA.falta())o.push(PWA.banner());
