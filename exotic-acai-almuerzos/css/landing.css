@@ -206,3 +206,4 @@
   .hojas.h2 { width: 320px; height: 320px; left: -90px; bottom: -80px; }
   .hojas.h3 { width: 300px; height: 300px; }
 }
+.hero-cta .btn { white-space: nowrap; }

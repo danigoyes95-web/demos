@@ -97,3 +97,9 @@ textarea.inp { min-height: 88px; resize: vertical; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
+
+/* marca (logo + nombre) compartida */
+.marca { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--crema); }
+.marca img { border-radius: 50%; }
+.marca span { display: flex; flex-direction: column; font-family: var(--f-display); font-weight: 800; font-size: 1.05rem; line-height: 1; letter-spacing: -.01em; }
+.marca small { font: 600 .62rem/1 var(--f-sans); letter-spacing: .16em; text-transform: uppercase; opacity: .7; margin-top: 4px; }
