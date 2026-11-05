@@ -60,6 +60,8 @@
     S.platos = SEED.platos.map((p) => Object.assign({}, p, pl.edit[p.id] || {})).concat(pl.add);
     const mm = L.get('mermas', { add: [], del: [] });
     S.mermas = (SEED.mermas || []).filter((m) => !mm.del.includes(m.id)).concat(mm.add);
+    S.cambios = L.get('cambios', {});
+    S.votos = L.get('votos', {});
     S.semana = L.get('semana', SEED.semana);
     S.categorias = SEED.categorias;
     S.events = L.get('events', []);
@@ -79,6 +81,13 @@
   EA.guardarMerma = (m) => { const mm = L.get('mermas', { add: [], del: [] }); m.id = 'MN' + Date.now().toString(36).toUpperCase(); mm.add.push(m); L.set('mermas', mm); EA.reload(); };
   EA.borrarMerma = (id) => { const mm = L.get('mermas', { add: [], del: [] }); const i = mm.add.findIndex((x) => x.id === id); if (i >= 0) mm.add.splice(i, 1); else mm.del.push(id); L.set('mermas', mm); EA.reload(); };
   EA.mermasRango = (a, b) => EA.state.mermas.filter((m) => m.f >= a && m.f <= b);
+  EA.cambiarPlato = (subId, fecha, platoId) => { const c = L.get('cambios', {}); c[subId] = c[subId] || {}; if (platoId) c[subId][fecha] = platoId; else delete c[subId][fecha]; L.set('cambios', c); EA.reload(); };
+  EA.valorarPlato = (subId, fecha, platoId, estrellas, comentario) => {
+    const v = L.get('votos', {}); const k = subId + '|' + fecha; if (v[k]) return false; v[k] = estrellas; L.set('votos', v);
+    const p = EA.plato(platoId); if (!p) return false; const n = p.votos + 1;
+    EA.guardarPlato(Object.assign({}, p, { rating: +((p.rating * p.votos + estrellas) / n).toFixed(2), votos: n, comentarios: (comentario ? [comentario].concat(p.comentarios || []) : p.comentarios || []).slice(0, 8) }));
+    return true;
+  };
   EA.guardarSemana = (s) => { L.set('semana', s); EA.reload(); };
   EA.marcarEntrega = (fecha, subId, v) => { const e = L.get('entregas', {}); e[fecha] = e[fecha] || {}; if (v) e[fecha][subId] = 1; else delete e[fecha][subId]; L.set('entregas', e); EA.reload(); };
   EA.guardarPerms = (p) => { L.set('perms', p); EA.reload(); };
@@ -113,6 +122,8 @@
   EA.proximaRenovacion = (s, desde) => { desde = desde || EA.hoy(); for (let k = 1; k < 60; k++) { const f = EA.addMeses(s.inicio, k); if (f > desde) return f; } return null; };
   /* qué plato recibe un suscriptor un día dado (según su plan y restricciones) */
   EA.platoPara = (s, d) => {
+    const camb = EA.state.cambios[s.id] && EA.state.cambios[s.id][d];
+    if (camb && EA.plato(camb)) return { plato: EA.plato(camb), ajuste: false, cambiado: true };
     const w = EA.dow(d); const ids = EA.state.semana[String(w)] || []; const dishes = ids.map(EA.plato).filter(Boolean);
     if (!dishes.length) return null;
     const slotPlan = { oficina: 0, fit: 1, especial: 2 }[s.plan];

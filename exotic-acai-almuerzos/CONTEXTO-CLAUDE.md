@@ -42,6 +42,8 @@ Permisos (`CFG.permisos` en `config/plans.js`): ✅ edita · 👁 solo lectura �
 
 - Cocina tiene 3 pestañas: **Hoy y mañana**, **Mermas** (registro por producto y motivo, costo, gráficos y alerta si suben) y **Lo que más piden** (ranking de platos por valoración y pedidos para saber qué ofrecer más). Las mermas son mock en `data/seed.js` y se guardan en `localStorage`.
 
+- **Mi menú** (`mi-menu.html`): cuenta del cliente. Se entra con el WhatsApp registrado (en la versión real: enlace personal por WhatsApp, sin contraseña). Ve su menú de la semana según plan, restricciones y frecuencia (feriados, pausas), puede pausar días, cambiar el plato de un día futuro (se refleja en Cocina), valorar platos entregados (alimenta Menús y las alertas) y cancelar. Está enlazada desde la bienvenida del flujo y desde la landing.
+
 ## Datos provisionales (confirmar con el cliente)
 Todos viven en `config/plans.js`.
 - Precios PVP con IVA: Oficina $85 (20) / $55 (12) · Fit $105 / $68 · Especial $110 / $72.
@@ -69,4 +71,4 @@ cd exotic-acai-almuerzos && python3 -m http.server 8765
 Regenerar datos mock: `python3 tools/generar-datos.py`.
 
 ## Mapa de archivos
-`config/plans.js` planes, públicos, zonas, equipo, permisos · `js/core.js` store, cálculos y UI común · `js/landing.js`, `js/flujo.js` · `js/admin/*.js` una vista por sección · `css/brand.css|landing.css|flujo.css|app.css` · `data/seed.*` · `supabase/schema.sql` (fase 2).
+`config/plans.js` planes, públicos, zonas, equipo, permisos · `js/core.js` store, cálculos y UI común · `js/landing.js`, `js/flujo.js`, `js/cliente.js` · `js/admin/*.js` una vista por sección · `css/brand.css|landing.css|flujo.css|app.css` · `data/seed.*` · `supabase/schema.sql` (fase 2).
