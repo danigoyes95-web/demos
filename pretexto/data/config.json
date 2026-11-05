@@ -1,0 +1,109 @@
+{
+ "brand": {
+  "name": "El Pretexto",
+  "sub": "Liquor Store",
+  "tagline": "Cualquiera es bueno…",
+  "city": "Ambato"
+ },
+ "whatsapp": "593990000000",
+ "etaMin": 30,
+ "pickupMin": 15,
+ "minOrder": 5.0,
+ "venderCigarrillos": true,
+ "realImages": false,
+ "leySeca": {
+  "on": false,
+  "msg": "Hoy no hay venta por disposición de ley seca. Volvemos pronto."
+ },
+ "hours": {
+  "0": {
+   "open": "10:00",
+   "close": "22:00",
+   "closed": false
+  },
+  "1": {
+   "open": "10:00",
+   "close": "23:00",
+   "closed": false
+  },
+  "2": {
+   "open": "10:00",
+   "close": "23:00",
+   "closed": false
+  },
+  "3": {
+   "open": "10:00",
+   "close": "23:00",
+   "closed": false
+  },
+  "4": {
+   "open": "10:00",
+   "close": "02:00",
+   "closed": false
+  },
+  "5": {
+   "open": "10:00",
+   "close": "02:00",
+   "closed": false
+  },
+  "6": {
+   "open": "10:00",
+   "close": "02:00",
+   "closed": false
+  }
+ },
+ "zones": [
+  {
+   "id": "centro",
+   "name": "Centro",
+   "cost": 1.0
+  },
+  {
+   "id": "ingahurco",
+   "name": "Ingahurco",
+   "cost": 1.5
+  },
+  {
+   "id": "huachi-chico",
+   "name": "Huachi Chico",
+   "cost": 1.5
+  },
+  {
+   "id": "ficoa",
+   "name": "Ficoa",
+   "cost": 2.0
+  },
+  {
+   "id": "atocha",
+   "name": "Atocha",
+   "cost": 2.0
+  },
+  {
+   "id": "miraflores",
+   "name": "Miraflores",
+   "cost": 2.0
+  },
+  {
+   "id": "huachi-grande",
+   "name": "Huachi Grande",
+   "cost": 2.5
+  },
+  {
+   "id": "celiano-monge",
+   "name": "Celiano Monge",
+   "cost": 2.5
+  },
+  {
+   "id": "pinllo",
+   "name": "Pinllo",
+   "cost": 3.0
+  }
+ ],
+ "bank": {
+  "banco": "Banco DEMO",
+  "tipo": "Cuenta de ahorros",
+  "numero": "0000000000",
+  "titular": "El Pretexto (demo)"
+ },
+ "payLink": "https://pago.ejemplo.ec/pretexto"
+}
