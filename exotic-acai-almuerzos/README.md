@@ -12,3 +12,5 @@ python3 -m http.server 8765      # desde esta carpeta
 
 Prueba el embudo con una fuente: `/?utm_source=instagram&utm_campaign=reel-almuerzo-oficina`.
 Contexto completo para retomar el trabajo: `CONTEXTO-CLAUDE.md`.
+
+Última publicación: 2026-11-05 (incluye Mi menú, mermas y equipo sin rol Dueño).
