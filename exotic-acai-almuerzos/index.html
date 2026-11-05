@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#483469">
+<title>Exotic Açaí · Suscripción de almuerzos saludables en Ambato</title>
+<meta name="description" content="Almuerzos saludables con entrega en Ambato a precio fijo mensual. Para oficina, gym o dieta especial, con menús diseñados por una nutricionista.">
+<meta property="og:title" content="Exotic Açaí · Suscripción de almuerzos saludables">
+<meta property="og:description" content="Elige tu plan y recibe tu almuerzo en Ambato. Macros en cada plato.">
+<meta property="og:image" content="assets/img/og.jpg">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/brand.css">
+<link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+<a class="sr" href="#planes">Ir a los planes</a>
+<div class="demo-bar" role="note">DEMO · datos de ejemplo · <a href="admin/">panel interno</a></div>
+
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="marca" href="#top" aria-label="Exotic Açaí, inicio"><img src="assets/img/logo.webp" width="44" height="44" alt=""><span>Exotic Açaí<small>Almuerzos</small></span></a>
+    <a class="btn btn-verde btn-sm" href="#planes" data-cta="header">Elige tu plan</a>
+  </div>
+</header>
+
+<main>
+<!-- 1 · HERO -->
+<section class="hero" id="inicio">
+  <i class="hojas h1" aria-hidden="true"></i><i class="hojas h2" aria-hidden="true"></i>
+  <div class="wrap hero-in">
+    <div class="hero-txt">
+      <p class="eyebrow">Suscripción mensual de almuerzos · Ambato</p>
+      <h1 id="h-titulo">Almuerzo sano en tu oficina, sin pensar qué comer.</h1>
+      <p class="lead" id="h-sub"></p>
+      <fieldset class="selector">
+        <legend>Soy de:</legend>
+        <div class="selector-in" id="selector"></div>
+      </fieldset>
+      <div class="hero-cta">
+        <a class="btn btn-verde" href="#planes" data-cta="hero">Elige tu plan <svg class="ic go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <p class="ancla" id="h-ancla"></p>
+      </div>
+      <ul class="puntos" id="h-puntos"></ul>
+    </div>
+    <div class="hero-vis" aria-hidden="false">
+      <div class="plato" id="h-plato">
+        <img id="h-img" src="assets/img/plato-d01-pollo-a-la-plancha-con-quinua.svg" alt="Ilustración referencial del plato del día" width="560" height="455">
+        <div class="macro m-p"><b id="h-p">38 g</b><span>proteína</span></div>
+        <div class="macro m-k"><b id="h-k">486</b><span>kcal</span></div>
+        <div class="plato-nombre" id="h-nombre"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · CÓMO FUNCIONA -->
+<section class="sec sec-crema" id="como">
+  <div class="wrap">
+    <header class="sec-head"><p class="eyebrow dark">Cómo funciona</p><h2>Tres pasos y no vuelves a pensar en el almuerzo.</h2></header>
+    <ol class="pasos">
+      <li><span class="num">1</span><h3>Eliges tu plan</h3><p>Oficina, gym o dieta especial. Cuéntanos qué comes y qué no, y escoges 5 o 3 días a la semana.</p></li>
+      <li><span class="num">2</span><h3>Recibes tu menú semanal</h3><p>Cada semana ves tus platos con calorías y macros. Si necesitas un cambio, lo pides por WhatsApp.</p></li>
+      <li><span class="num">3</span><h3>Te llega el almuerzo</h3><p>En tu oficina o en tu casa, en la ventana de horario que elegiste. También puedes retirarlo en el local.</p></li>
+    </ol>
+    <div class="sec-cta"><a class="btn btn-acai" href="#planes" data-cta="como">Ver planes y precios <svg class="ic go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+  </div>
+</section>
+
+<!-- 3 · MENÚ DE LA SEMANA -->
+<section class="sec sec-blanca" id="menu">
+  <div class="wrap">
+    <header class="sec-head"><p class="eyebrow dark">Menú de la semana</p><h2>Así se ve lo que comes, con los números a la vista.</h2><p class="sub">Cada día hay un plato para cada plan. Calorías, proteína, carbohidratos y grasa por porción.</p></header>
+    <div class="dias" id="dias" role="tablist" aria-label="Día de la semana"></div>
+    <div class="filtros" id="filtros" aria-label="Filtrar por etiqueta"></div>
+    <div class="platos" id="platos"></div>
+    <p class="nota">Fotos referenciales. Las porciones y gramos pueden variar ±5 %.</p>
+    <div class="sec-cta"><a class="btn btn-acai" href="#planes" data-cta="menu">Elige tu plan <svg class="ic go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+  </div>
+</section>
+
+<!-- 4 · PLANES -->
+<section class="sec sec-acai" id="planes">
+  <i class="hojas h3" aria-hidden="true"></i>
+  <div class="wrap">
+    <header class="sec-head claro"><p class="eyebrow">Planes y precios</p><h2>Un precio fijo al mes. Sin letra chica.</h2><p class="sub">Precios con IVA incluido. Pagas una vez al mes y puedes pausar o cancelar cuando quieras.</p></header>
+    <div class="frec" role="group" aria-label="Frecuencia"><button class="chip on" data-frec="20" aria-pressed="true">5 días a la semana <small>20 almuerzos</small></button><button class="chip" data-frec="12" aria-pressed="false">3 días a la semana <small>12 almuerzos</small></button></div>
+    <div class="planes" id="planes-grid"></div>
+    <details class="comparar" id="comparar"><summary>Comparar los tres planes <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><div class="tabla-wrap" id="tabla"></div></details>
+  </div>
+</section>
+
+<!-- 5 · EQUIPO -->
+<section class="sec sec-crema" id="equipo">
+  <div class="wrap">
+    <header class="sec-head"><p class="eyebrow dark">Quiénes lo hacen</p><h2>Cada plato pasa por manos que conoces.</h2></header>
+    <div class="equipo" id="equipo-grid"></div>
+    <p class="nota">Fotos del equipo: pendientes de reemplazar por las de Cris.</p>
+  </div>
+</section>
+
+<!-- 6 · ZONAS -->
+<section class="sec sec-blanca" id="zonas">
+  <div class="wrap zonas-in">
+    <div>
+      <header class="sec-head"><p class="eyebrow dark">Zonas y horarios de entrega</p><h2>Llegamos a tu oficina o a tu casa en Ambato.</h2></header>
+      <ul class="zonas" id="zonas-list"></ul>
+      <p class="hint" style="margin-top:14px">Extra mensual por zona, sumado a tu plan. Entrega de lunes a viernes, excepto feriados.</p>
+    </div>
+    <aside class="horarios">
+      <h3>Elige tu ventana</h3>
+      <ul id="ventanas"></ul>
+      <div class="retiro"><span class="ic-b" id="ic-store"></span><div><b>Retiro en el local</b><p id="retiro-dir"></p><p class="hint">Sin costo extra.</p></div></div>
+      <a class="btn btn-ghost" id="wa-zona" href="#" target="_blank" rel="noopener">¿Tu zona no aparece? Escríbenos</a>
+    </aside>
+  </div>
+</section>
+
+<!-- 7 · FAQ -->
+<section class="sec sec-crema" id="faq">
+  <div class="wrap faq-in">
+    <header class="sec-head"><p class="eyebrow dark">Preguntas frecuentes</p><h2>Lo que más nos preguntan antes de empezar.</h2></header>
+    <div class="faq" id="faq-list"></div>
+  </div>
+</section>
+
+<!-- 8 · CTA FINAL -->
+<section class="final" id="final">
+  <i class="hojas h1" aria-hidden="true"></i><i class="hojas h2" aria-hidden="true"></i>
+  <div class="wrap final-in">
+    <h2 id="final-t">Tu almuerzo de la próxima semana ya se puede apartar.</h2>
+    <p class="lead" id="final-s"></p>
+    <a class="btn btn-verde" href="#planes" data-cta="final">Elige tu plan <svg class="ic go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+</main>
+
+<footer class="pie">
+  <div class="wrap pie-in">
+    <div class="marca"><img src="assets/img/logo.webp" width="44" height="44" alt=""><span>Exotic Açaí<small>Comida tropical</small></span></div>
+    <p id="pie-dir"></p>
+    <p><a id="pie-ig" href="#" target="_blank" rel="noopener">Instagram</a> · <a id="pie-wa" href="#" target="_blank" rel="noopener">WhatsApp</a></p>
+    <p class="hint">Demo con datos de ejemplo. Facturación electrónica: próximamente.</p>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky"><a class="btn btn-verde" href="#planes" data-cta="sticky">Elige tu plan</a></div>
+<a class="wa-flot" id="wa-flot" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></a>
+
+<script src="config/plans.js"></script>
+<script src="data/seed.js"></script>
+<script src="js/core.js"></script>
+<script src="js/landing.js"></script>
+</body>
+</html>
