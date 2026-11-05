@@ -17,6 +17,7 @@
     inicios:     { t: 'Inicios del flujo', v: (k) => fmt.num(k.inicios), d: (c, p) => A.delta(c.inicios, p.inicios) },
     conversion:  { t: 'Conversión visita→pago', v: (k) => fmt.pct(k.conversion, 2), d: (c, p) => A.delta(c.conversion, p.conversion) },
     porciones:   { t: 'Porciones a preparar hoy', v: () => fmt.num(EA.entregasDia(EA.hoy())), d: () => '<span class="kd neu">mañana ' + fmt.num(EA.entregasDia(nextLab())) + '</span>' },
+    mermas:      { t: 'Mermas (30 días)', v: () => fmt.money(EA.mermasRango(EA.addDias(EA.hoy(), -29), EA.hoy()).reduce((n, m) => n + m.costo, 0), 0), d: () => '<span class="kd neu">costo estimado</span>' },
     valoracion:  { t: 'Valoración de platos', v: () => EA.valoracionMedia().toFixed(1) + ' / 5', d: () => '<span class="kd neu">' + EA.state.platos.reduce((n, p) => n + p.votos, 0) + ' votos</span>' }
   };
   const ALL_KPIS = ['activos', 'nuevos', 'cancelados', 'churn', 'mrr', 'cobrado', 'margen', 'entregados', 'ticket'];

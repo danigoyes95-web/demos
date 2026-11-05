@@ -5,7 +5,7 @@
   const nextLab = () => { let d = EA.addDias(EA.hoy(), 1); while (!EA.esLaborable(d)) d = EA.addDias(d, 1); return d; };
   const key = (s, d) => EA.state.entregas[d] && EA.state.entregas[d][s.id];
 
-  A.views.cocina = (el, nivel) => {
+  function vistaDia(el, nivel) {
     const hoy = EA.hoy(), man = nextLab(); let fecha = hoy;
     // demo: la primera ventana de hoy ya salió
     if (!EA.L.get('entr_seed', false)) { EA.state.subs.filter((s) => EA.recibe(s, hoy) && s.zona !== 'retiro' && s.ventana === C.ventanas[0]).forEach((s) => EA.marcarEntrega(hoy, s.id, true)); EA.L.set('entr_seed', true); }
@@ -50,5 +50,59 @@
       const t = e.target.closest('[data-f]'); if (t) { fecha = t.dataset.f; draw(); return; }
       const b = e.target.closest('[data-e]'); if (b && edit) { EA.marcarEntrega(fecha, b.dataset.e, !key({ id: b.dataset.e }, fecha)); draw(); }
     };
+  }
+
+  /* ───── Mermas ───── */
+  const MOTIVOS = ['vencimiento', 'sobrante de producción', 'error de preparación', 'devolución de cliente', 'daño en transporte'];
+  const UNID = { ingrediente: 'kg', plato: 'porción', empaque: 'u' };
+  function vistaMermas(el, nivel) {
+    const edit = nivel === 'edit', hoy = EA.hoy(), a = EA.addDias(hoy, -29), ant = [EA.addDias(hoy, -59), EA.addDias(hoy, -30)];
+    const L = EA.mermasRango(a, hoy), costo = L.reduce((n, m) => n + m.costo, 0), prev = EA.mermasRango(ant[0], ant[1]).reduce((n, m) => n + m.costo, 0);
+    const ing = EA.state.gastos.filter((g) => g.cat === 'ingredientes' && g.f >= a && g.f <= hoy).reduce((n, g) => n + g.monto, 0);
+    const porMot = {}, porItem = {}; L.forEach((m) => { porMot[m.motivo] = (porMot[m.motivo] || 0) + m.costo; const o = (porItem[m.item] = porItem[m.item] || { c: 0, n: 0, u: m.unidad, q: 0 }); o.c += m.costo; o.n++; o.q += m.cant; });
+    const top = Object.entries(porItem).sort((x, y) => y[1].c - x[1].c);
+    el.innerHTML = '<div class="kpis">' + A.kpi('Mermas · 30 días', fmt.money(costo, 0), A.delta(costo, prev, true), 'vs 30 días previos') + A.kpi('% de lo comprado', fmt.pct(ing ? costo / ing * 100 : 0), '', 'sobre compras de ingredientes') + A.kpi('Registros', fmt.num(L.length)) + A.kpi('Mayor motivo', top.length ? esc(Object.entries(porMot).sort((x, y) => y[1] - x[1])[0][0]) : '—') + '</div>' +
+      (top.length ? '<div class="alerta">' + icon('info') + '<div><b>Lo que más se pierde: ' + esc(top[0][0]) + '</b><span>' + top[0][1].n + ' registros por ' + fmt.money(top[0][1].c, 0) + ' en 30 días. Ajusta la compra o la porción de ese producto.</span></div></div>' : '') +
+      '<div class="grid g2"><div class="cd"><div class="cd-h"><div><h3>Por motivo</h3><p>Costo estimado, últimos 30 días</p></div></div>' + A.cv('c-mot') + '</div><div class="cd"><div class="cd-h"><div><h3>Por semana</h3><p>Últimas 8 semanas</p></div></div>' + A.cv('c-sem') + '</div></div>' +
+      '<div class="cd"><div class="cd-h"><div><h3>Registro de mermas</h3><p>Lo más reciente primero</p></div>' + (edit ? '<button class="btn btn-acai btn-sm" id="nm">' + icon('plus') + ' Registrar merma</button>' : '') + '</div><div class="tw"><table class="tbl"><thead><tr><th>Fecha</th><th>Producto</th><th class="r">Cantidad</th><th>Motivo</th><th class="r">Costo</th><th></th></tr></thead><tbody>' +
+      (EA.state.mermas.slice().sort((x, y) => y.f.localeCompare(x.f)).slice(0, 40).map((m) => '<tr><td>' + fmt.fechaCorta(m.f) + '</td><td><b>' + esc(m.item) + '</b><br><small class="hint">' + esc(m.tipo) + (m.nota ? ' · ' + esc(m.nota) : '') + '</small></td><td class="r">' + fmt.num(m.cant, m.unidad === 'kg' ? 1 : 0) + ' ' + esc(m.unidad) + '</td><td>' + esc(m.motivo) + '</td><td class="r">' + fmt.money(m.costo) + '</td><td class="r">' + (edit ? '<button class="mini pel" data-md="' + m.id + '" aria-label="Eliminar">' + icon('trash') + '</button>' : '') + '</td></tr>').join('') || '<tr><td colspan="6" class="vacio">Sin mermas registradas.</td></tr>') + '</tbody></table></div></div>';
+    A.chart('c-mot', { type: 'doughnut', data: { labels: MOTIVOS, datasets: [{ data: MOTIVOS.map((k) => Math.round(porMot[k] || 0)), backgroundColor: [A.COL.ac, A.COL.ho, A.COL.ac3, A.COL.ho2, A.COL.ac2], borderWidth: 2, borderColor: '#fff' }] }, options: { cutout: '58%' } });
+    const lun = EA.addDias(hoy, -((EA.dow(hoy) + 6) % 7)), sem = [];
+    for (let i = 7; i >= 0; i--) { const x = EA.addDias(lun, -7 * i); sem.push([fmt.fechaCorta(x), EA.mermasRango(x, EA.addDias(x, 6)).reduce((n, m) => n + m.costo, 0)]); }
+    A.chart('c-sem', { type: 'bar', data: { labels: sem.map((x) => x[0]), datasets: [{ label: 'Mermas (US$)', data: sem.map((x) => Math.round(x[1])), backgroundColor: A.COL.ac, borderRadius: 6 }] }, options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true }, x: { grid: { display: false } } } } });
+    el.onclick = (e) => {
+      const d = e.target.closest('[data-md]'); if (d && edit) { EA.borrarMerma(d.dataset.md); EA.toast('Merma eliminada'); vistaMermas(el, nivel); return; }
+      if (!e.target.closest('#nm') || !edit) return;
+      const mo = EA.modal({ title: 'Registrar merma', body: '<form id="mf" class="fgrid"><div class="fgrid c2"><label class="f"><span>Fecha</span><input class="inp" type="date" name="f" required value="' + hoy + '" max="' + hoy + '"></label><label class="f"><span>Tipo</span><select class="inp" name="tipo"><option value="ingrediente">Ingrediente</option><option value="plato">Plato preparado</option><option value="empaque">Empaque</option></select></label></div>' +
+        '<label class="f"><span>Producto</span><input class="inp" name="item" required placeholder="Ej.: Aguacate, Pollo, Bowl vegano"></label><div class="fgrid c2"><label class="f"><span>Cantidad</span><input class="inp" name="cant" type="number" step="0.1" min="0.1" required></label><label class="f"><span>Unidad</span><select class="inp" name="unidad"><option>kg</option><option>porción</option><option>u</option></select></label></div>' +
+        '<div class="fgrid c2"><label class="f"><span>Motivo</span><select class="inp" name="motivo">' + MOTIVOS.map((x) => '<option>' + x + '</option>').join('') + '</select></label><label class="f"><span>Costo estimado (US$)</span><input class="inp" name="costo" type="number" step="0.01" min="0.01" required></label></div><label class="f"><span>Nota (opcional)</span><input class="inp" name="nota"></label>' +
+        '<div class="btn-fila" style="justify-content:flex-end"><button type="button" class="btn btn-ghost btn-sm" data-close>Cancelar</button><button class="btn btn-acai btn-sm">Guardar</button></div></form>' });
+      const f = mo.el.querySelector('#mf'); f.tipo.onchange = () => { f.unidad.value = UNID[f.tipo.value]; };
+      f.onsubmit = (ev) => { ev.preventDefault(); EA.guardarMerma({ f: f.f.value, tipo: f.tipo.value, item: f.item.value.trim(), cant: +f.cant.value, unidad: f.unidad.value, motivo: f.motivo.value, costo: +(+f.costo.value).toFixed(2), nota: f.nota.value.trim() }); mo.close(); EA.toast('Merma registrada'); vistaMermas(el, nivel); };
+    };
+  }
+
+  /* ───── Lo que más piden: platos para empujar ───── */
+  function vistaTop(el) {
+    const hoy = EA.hoy(), a = EA.addDias(hoy, -27), cnt = {}, porPlan = {};
+    EA.rango(a, hoy).forEach((d) => { if (!EA.esLaborable(d)) return; EA.state.subs.forEach((s) => { if (!EA.recibe(s, d)) return; const r = EA.platoPara(s, d); if (!r) return; cnt[r.plato.id] = (cnt[r.plato.id] || 0) + 1; (porPlan[r.plato.id] = porPlan[r.plato.id] || {})[s.plan] = 1; }); });
+    const mer = {}; EA.mermasRango(a, hoy).filter((m) => m.tipo === 'plato').forEach((m) => { mer[m.item] = (mer[m.item] || 0) + m.cant; });
+    const P = EA.state.platos.map((p) => ({ p, n: cnt[p.id] || 0 })), tot = P.reduce((n, x) => n + x.n, 0) || 1;
+    const maxN = Math.max.apply(null, P.map((x) => x.n)) || 1;
+    P.forEach((x) => { x.score = (x.p.votos ? x.p.rating / 5 : 0.5) * 0.6 + (x.n / maxN) * 0.4; });
+    const orden = P.slice().sort((x, y) => y.score - x.score), mejores = orden.filter((x) => x.p.votos >= 10).slice(0, 3), revisar = orden.filter((x) => x.p.votos >= 10 && x.p.rating < 4).slice(-3).reverse();
+    const card = (x, i) => '<div class="alerta a-ok">' + icon('star') + '<div><b>' + (i + 1) + '. ' + esc(x.p.nombre) + '</b><span>' + x.p.rating.toFixed(1) + ' ★ con ' + x.p.votos + ' votos · ' + x.n + ' porciones en 4 semanas · ' + x.p.p + ' g de proteína</span></div></div>';
+    el.innerHTML = '<div class="cd"><div class="cd-h"><div><h3>Para ofrecer más</h3><p>Mezcla valoración de clientes (60 %) y pedidos de las últimas 4 semanas (40 %).</p></div></div><div class="alertas">' + (mejores.map(card).join('') || '<p class="vacio">Aún no hay votos suficientes.</p>') + '</div></div>' +
+      (revisar.length ? '<div class="cd"><div class="cd-h"><div><h3>Para revisar con Leo</h3><p>Valoración bajo 4,0.</p></div></div><div class="alertas">' + revisar.map((x) => '<div class="alerta">' + icon('alert') + '<div><b>' + esc(x.p.nombre) + '</b><span>' + x.p.rating.toFixed(1) + ' ★ con ' + x.p.votos + ' votos' + ((x.p.comentarios || []).length ? ' · “' + esc(x.p.comentarios[0]) + '”' : '') + '</span></div></div>').join('') + '</div></div>' : '') +
+      '<div class="cd"><div class="cd-h"><div><h3>Ranking de platos</h3><p>Últimas 4 semanas</p></div></div><div class="tw"><table class="tbl"><thead><tr><th>Plato</th><th>Valoración</th><th class="r">Porciones</th><th class="r">% del total</th><th class="r">Proteína</th></tr></thead><tbody>' +
+      P.slice().sort((x, y) => y.n - x.n).map((x) => '<tr><td><b>' + esc(x.p.nombre) + '</b></td><td>' + (x.p.votos ? A.estrellas(x.p.rating) : '<span class="hint">Sin votos</span>') + '</td><td class="r"><b>' + x.n + '</b></td><td class="r">' + fmt.pct(x.n / tot * 100, 0) + '</td><td class="r">' + x.p.p + ' g</td></tr>').join('') + '</tbody></table></div></div>';
+  }
+
+  A.views.cocina = (el, nivel) => {
+    let tab = 'dia';
+    el.innerHTML = A.tabsUI([['dia', 'Hoy y mañana'], ['mermas', 'Mermas'], ['top', 'Lo que más piden']], tab) + '<div id="cc" style="display:grid;gap:18px;margin-top:18px"></div>';
+    const draw = () => { A.destroyCharts(); $$('.tab', el).forEach((t) => t.setAttribute('aria-selected', t.dataset.tab === tab)); const h = $('#cc'); h.onclick = null; ({ dia: vistaDia, mermas: vistaMermas, top: vistaTop })[tab](h, nivel); };
+    el.querySelector('.tabs').onclick = (e) => { const t = e.target.closest('[data-tab]'); if (t) { tab = t.dataset.tab; draw(); } };
+    draw();
   };
 })();

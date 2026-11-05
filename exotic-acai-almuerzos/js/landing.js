@@ -99,8 +99,8 @@
   }
 
   /* ── equipo ── */
-  const BIO = { daniel: 'Mantiene la plataforma de suscripciones funcionando.', duenio: 'Responde por la calidad de cada entrega.', nicolas: 'Cocina cada plato y cuida los puntos de cocción.', leo: 'Diseña los menús y calcula los macros de cada plato.', cris: 'Muestra en redes lo que cocinamos cada semana.', salo: 'Cuida que el precio fijo sea sostenible.' };
-  const orden = ['nicolas', 'leo', 'cris', 'salo', 'daniel', 'duenio'];
+  const BIO = { daniel: 'Mantiene la plataforma de suscripciones funcionando.', nicolas: 'Dueño de Exotic Açaí. Cocina cada plato y responde por cada entrega.', leo: 'Diseña los menús y calcula los macros de cada plato.', cris: 'Muestra en redes lo que cocinamos cada semana.', salo: 'Cuida que el precio fijo sea sostenible.' };
+  const orden = ['nicolas', 'leo', 'cris', 'salo', 'daniel'];
   function renderEquipo() {
     $('#equipo-grid').innerHTML = orden.map((id) => C.equipo.find((u) => u.id === id)).map((u) => '<article class="miembro"><span class="av" aria-hidden="true" data-foto="equipo-' + u.id + '.jpg">' + esc(u.iniciales) + '</span><h3>' + esc(u.corto || u.nombre) + '</h3><p class="cargo">' + esc(u.cargo) + '</p><p>' + BIO[u.id] + '</p></article>').join('');
   }

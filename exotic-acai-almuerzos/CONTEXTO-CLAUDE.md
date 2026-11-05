@@ -12,11 +12,12 @@ Para retomar el proyecto en otra sesión. Última actualización: 2026-11-05.
 | Persona | Cargo | Rol |
 |---|---|---|
 | Daniel | Tecnología y plataforma | Admin (ve todo) |
-| Dueño de Exotic Açaí | Dirección | Admin (ve todo) |
-| Nicolás | Chef | Cocina |
+| Nicolás | **Chef y dueño** de Exotic Açaí | Admin (ve todo, incluida Cocina) |
 | Leo | **Nutricionista** (confirmado) | Menús |
 | Cris | Redes y contenido | Contenido |
 | Salo | Contabilidad y finanzas | Finanzas |
+
+El rol **Cocina** sigue existiendo en la matriz de permisos (para un futuro ayudante de cocina) pero hoy no tiene persona asignada: Nicolás es Admin. No hay rol "Dueño" aparte.
 
 Permisos (`CFG.permisos` en `config/plans.js`): ✅ edita · 👁 solo lectura · 🔸 resumen. El Admin puede cambiarlos en la app (Equipo y permisos).
 
@@ -38,6 +39,10 @@ Permisos (`CFG.permisos` en `config/plans.js`): ✅ edita · 👁 solo lectura �
 - Pago **simulado** y marcado como demo en todo el flujo.
 - Facturación electrónica SRI: solo placeholder "próximamente".
 - Supabase: `supabase/schema.sql` está escrito pero **NO se ha ejecutado ni conectado** (instrucción del usuario: es demo).
+
+- Cocina tiene 3 pestañas: **Hoy y mañana**, **Mermas** (registro por producto y motivo, costo, gráficos y alerta si suben) y **Lo que más piden** (ranking de platos por valoración y pedidos para saber qué ofrecer más). Las mermas son mock en `data/seed.js` y se guardan en `localStorage`.
+
+- **Mi menú** (`mi-menu.html`): cuenta del cliente. Se entra con el WhatsApp registrado (en la versión real: enlace personal por WhatsApp, sin contraseña). Ve su menú de la semana según plan, restricciones y frecuencia (feriados, pausas), puede pausar días, cambiar el plato de un día futuro (se refleja en Cocina), valorar platos entregados (alimenta Menús y las alertas) y cancelar. Está enlazada desde la bienvenida del flujo y desde la landing.
 
 ## Datos provisionales (confirmar con el cliente)
 Todos viven en `config/plans.js`.
@@ -66,4 +71,4 @@ cd exotic-acai-almuerzos && python3 -m http.server 8765
 Regenerar datos mock: `python3 tools/generar-datos.py`.
 
 ## Mapa de archivos
-`config/plans.js` planes, públicos, zonas, equipo, permisos · `js/core.js` store, cálculos y UI común · `js/landing.js`, `js/flujo.js` · `js/admin/*.js` una vista por sección · `css/brand.css|landing.css|flujo.css|app.css` · `data/seed.*` · `supabase/schema.sql` (fase 2).
+`config/plans.js` planes, públicos, zonas, equipo, permisos · `js/core.js` store, cálculos y UI común · `js/landing.js`, `js/flujo.js`, `js/cliente.js` · `js/admin/*.js` una vista por sección · `css/brand.css|landing.css|flujo.css|app.css` · `data/seed.*` · `supabase/schema.sql` (fase 2).
