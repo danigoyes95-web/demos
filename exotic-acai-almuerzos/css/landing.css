@@ -200,7 +200,7 @@
   .hero-in { grid-template-columns: 1.05fr .95fr; align-items: center; padding-block: 56px 88px; gap: 40px; }
   .hero h1 { font-size: clamp(3.4rem, 5.4vw, 5rem); }
   .sec { padding-block: 96px; }
-  .equipo { grid-template-columns: repeat(6, 1fr); }
+  .equipo { grid-template-columns: repeat(5, 1fr); }
   .miembro { padding: 18px 14px; }
   .hojas.h1 { width: 380px; height: 380px; right: -60px; top: -60px; }
   .hojas.h2 { width: 320px; height: 320px; left: -90px; bottom: -80px; }

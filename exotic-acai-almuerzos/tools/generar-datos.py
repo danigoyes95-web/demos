@@ -300,8 +300,30 @@ CATEGORIAS = [
     {'id': 'servicios', 'nombre': 'Servicios', 'tipo': 'fijo'},
 ]
 
+# ───────── mermas (registro de la cocina) · generador aparte para no alterar el resto de los datos
+RM = random.Random(77)
+M_ITEMS = [  # nombre, tipo, unidad, costo unitario, peso
+    ('Pollo', 'ingrediente', 'kg', 4.2, 5), ('Res magra', 'ingrediente', 'kg', 7.5, 3), ('Pescado blanco', 'ingrediente', 'kg', 6.8, 2),
+    ('Verduras frescas', 'ingrediente', 'kg', 1.4, 6), ('Aguacate', 'ingrediente', 'u', 0.7, 7), ('Quinua cocida', 'ingrediente', 'kg', 3.0, 2),
+    ('Arroz integral cocido', 'ingrediente', 'kg', 1.6, 3), ('Tofu', 'ingrediente', 'kg', 5.0, 1), ('Plato preparado', 'plato', 'porción', 2.6, 6), ('Envases', 'empaque', 'u', 0.18, 2)]
+M_MOT = ['vencimiento', 'sobrante de producción', 'error de preparación', 'devolución de cliente', 'daño en transporte']
+mermas = []
+for d in daterange(dt.date(2026, 8, 17), HOY):
+    if d.weekday() > 4 or d in FERIADOS: continue
+    for _ in range(RM.choice([0, 1, 1, 2]) if (HOY - d).days > 6 else 2):
+        nom, tipo, un, cu, _w = RM.choices(M_ITEMS, weights=[x[4] for x in M_ITEMS])[0]
+        if nom == 'Aguacate': mot = 'vencimiento' if RM.random() < .8 else 'sobrante de producción'
+        elif tipo == 'plato': mot = 'sobrante de producción' if RM.random() < .7 else RM.choice(['devolución de cliente', 'error de preparación'])
+        else: mot = RM.choices(M_MOT, weights=[4, 3, 2, 1, 1])[0]
+        cant = {'kg': RM.uniform(.4, 3.2), 'u': RM.uniform(3, 13), 'porción': RM.uniform(1, 5), }.get(un) or 0
+        if nom == 'Envases': cant = RM.uniform(6, 30)
+        cant *= 0.85
+        if (HOY - d).days <= 6: cant *= 3.0      # esta semana subieron las mermas (alerta de la demo)
+        cant = round(cant, 1) if un == 'kg' else int(round(cant))
+        mermas.append({'id': 'M%03d' % (len(mermas) + 1), 'f': d.isoformat(), 'tipo': tipo, 'item': nom, 'cant': cant, 'unidad': un, 'motivo': mot, 'costo': round(cant * cu, 2), 'nota': ''})
+
 seed = {'hoy': HOY.isoformat(), 'subs': subs, 'pagos': pagos, 'funnel': funnel, 'platos': platos, 'semana': semana,
-        'gastos': gastos, 'categorias': CATEGORIAS}
+        'gastos': gastos, 'categorias': CATEGORIAS, 'mermas': mermas}
 
 os.makedirs(os.path.join(ROOT, 'data'), exist_ok=True)
 js = json.dumps(seed, ensure_ascii=False, separators=(',', ':'))

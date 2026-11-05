@@ -12,11 +12,12 @@ Para retomar el proyecto en otra sesión. Última actualización: 2026-11-05.
 | Persona | Cargo | Rol |
 |---|---|---|
 | Daniel | Tecnología y plataforma | Admin (ve todo) |
-| Dueño de Exotic Açaí | Dirección | Admin (ve todo) |
-| Nicolás | Chef | Cocina |
+| Nicolás | **Chef y dueño** de Exotic Açaí | Admin (ve todo, incluida Cocina) |
 | Leo | **Nutricionista** (confirmado) | Menús |
 | Cris | Redes y contenido | Contenido |
 | Salo | Contabilidad y finanzas | Finanzas |
+
+El rol **Cocina** sigue existiendo en la matriz de permisos (para un futuro ayudante de cocina) pero hoy no tiene persona asignada: Nicolás es Admin. No hay rol "Dueño" aparte.
 
 Permisos (`CFG.permisos` en `config/plans.js`): ✅ edita · 👁 solo lectura · 🔸 resumen. El Admin puede cambiarlos en la app (Equipo y permisos).
 
@@ -38,6 +39,8 @@ Permisos (`CFG.permisos` en `config/plans.js`): ✅ edita · 👁 solo lectura �
 - Pago **simulado** y marcado como demo en todo el flujo.
 - Facturación electrónica SRI: solo placeholder "próximamente".
 - Supabase: `supabase/schema.sql` está escrito pero **NO se ha ejecutado ni conectado** (instrucción del usuario: es demo).
+
+- Cocina tiene 3 pestañas: **Hoy y mañana**, **Mermas** (registro por producto y motivo, costo, gráficos y alerta si suben) y **Lo que más piden** (ranking de platos por valoración y pedidos para saber qué ofrecer más). Las mermas son mock en `data/seed.js` y se guardan en `localStorage`.
 
 ## Datos provisionales (confirmar con el cliente)
 Todos viven en `config/plans.js`.

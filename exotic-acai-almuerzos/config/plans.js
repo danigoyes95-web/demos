@@ -80,8 +80,7 @@ window.CFG = {
   /* ── Equipo y roles ── */
   equipo: [
     { id: 'daniel', nombre: 'Daniel', cargo: 'Tecnología y plataforma', rol: 'admin',     iniciales: 'D' },
-    { id: 'duenio', nombre: 'Dueño de Exotic Açaí', corto: 'Dueño', cargo: 'Dirección', rol: 'admin', iniciales: 'EA' },
-    { id: 'nicolas', nombre: 'Nicolás', cargo: 'Chef · cocina',               rol: 'cocina',    iniciales: 'N' },
+    { id: 'nicolas', nombre: 'Nicolás', cargo: 'Chef y dueño',               rol: 'admin',     iniciales: 'N' },
     { id: 'leo',     nombre: 'Leo',     cargo: 'Nutricionista · menús',       rol: 'menus',     iniciales: 'L' },
     { id: 'cris',    nombre: 'Cris',    cargo: 'Redes sociales y contenido',  rol: 'contenido', iniciales: 'C' },
     { id: 'salo',    nombre: 'Salo',    cargo: 'Contabilidad y finanzas',     rol: 'finanzas',  iniciales: 'S' }
@@ -108,7 +107,7 @@ window.CFG = {
   },
   /* indicadores / gráficos / alertas visibles en la versión 🔸 resumida de cada rol */
   resumen: {
-    cocina:    { kpis: ['entregados', 'activos', 'porciones'], charts: ['dias'], alertas: ['plato'] },
+    cocina:    { kpis: ['entregados', 'porciones', 'mermas'], charts: ['dias'], alertas: ['plato', 'mermas'] },
     menus:     { kpis: ['entregados', 'valoracion', 'activos'], charts: ['planes', 'dias'], alertas: ['plato'] },
     contenido: { kpis: ['visitas', 'inicios', 'nuevos', 'conversion'], charts: ['embudo', 'fuentes'], alertas: ['conversion'] }
   },

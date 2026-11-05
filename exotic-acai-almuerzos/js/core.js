@@ -58,6 +58,8 @@
     S.pagos = SEED.pagos.map((p) => Object.assign({}, p, pp[p.id] || {})).concat(L.get('pagosNew', []));
     S.gastos = SEED.gastos.filter((g) => !gx.del.includes(g.id)).map((g) => Object.assign({}, g, gx.edit[g.id] || {})).concat(gx.add);
     S.platos = SEED.platos.map((p) => Object.assign({}, p, pl.edit[p.id] || {})).concat(pl.add);
+    const mm = L.get('mermas', { add: [], del: [] });
+    S.mermas = (SEED.mermas || []).filter((m) => !mm.del.includes(m.id)).concat(mm.add);
     S.semana = L.get('semana', SEED.semana);
     S.categorias = SEED.categorias;
     S.events = L.get('events', []);
@@ -74,6 +76,9 @@
   EA.guardarGasto = (g) => { const gx = L.get('gastos', { add: [], edit: {}, del: [] }); const i = gx.add.findIndex((x) => x.id === g.id); if (i >= 0) gx.add[i] = g; else if (g.id && SEED.gastos.some((x) => x.id === g.id)) gx.edit[g.id] = g; else { g.id = 'G' + Date.now().toString(36).toUpperCase(); gx.add.push(g); } L.set('gastos', gx); EA.reload(); };
   EA.borrarGasto = (id) => { const gx = L.get('gastos', { add: [], edit: {}, del: [] }); const i = gx.add.findIndex((x) => x.id === id); if (i >= 0) gx.add.splice(i, 1); else gx.del.push(id); L.set('gastos', gx); EA.reload(); };
   EA.guardarPlato = (p) => { const pl = L.get('platos', { edit: {}, add: [] }); const i = pl.add.findIndex((x) => x.id === p.id); if (i >= 0) pl.add[i] = p; else if (SEED.platos.some((x) => x.id === p.id)) pl.edit[p.id] = p; else { p.id = 'dx' + Date.now().toString(36); pl.add.push(p); } L.set('platos', pl); EA.reload(); return p; };
+  EA.guardarMerma = (m) => { const mm = L.get('mermas', { add: [], del: [] }); m.id = 'MN' + Date.now().toString(36).toUpperCase(); mm.add.push(m); L.set('mermas', mm); EA.reload(); };
+  EA.borrarMerma = (id) => { const mm = L.get('mermas', { add: [], del: [] }); const i = mm.add.findIndex((x) => x.id === id); if (i >= 0) mm.add.splice(i, 1); else mm.del.push(id); L.set('mermas', mm); EA.reload(); };
+  EA.mermasRango = (a, b) => EA.state.mermas.filter((m) => m.f >= a && m.f <= b);
   EA.guardarSemana = (s) => { L.set('semana', s); EA.reload(); };
   EA.marcarEntrega = (fecha, subId, v) => { const e = L.get('entregas', {}); e[fecha] = e[fecha] || {}; if (v) e[fecha][subId] = 1; else delete e[fecha][subId]; L.set('entregas', e); EA.reload(); };
   EA.guardarPerms = (p) => { L.set('perms', p); EA.reload(); };
@@ -176,6 +181,8 @@
     const ven = S.subs.filter((s) => EA.activoEn(s, hoy) && !s.fin).map((s) => ({ s, f: EA.proximaRenovacion(s) })).filter((x) => x.f && x.f <= lim);
     if (ven.length) out.push({ id: 'vencen', icon: 'calendar', titulo: ven.length + ' suscripciones vencen en 7 días', detalle: 'Se renuevan entre el ' + EA.fmt.fechaCorta(EA.addDias(hoy, 1)) + ' y el ' + EA.fmt.fechaCorta(lim) + '. Confirma que el cobro quede listo.', ir: 'suscriptores' });
     S.platos.filter((p) => p.votos >= 10 && p.rating < 3.8).forEach((p) => out.push({ id: 'plato', icon: 'star', titulo: 'Plato con baja valoración: ' + p.nombre, detalle: p.rating.toFixed(1) + ' / 5 con ' + p.votos + ' votos. Leo puede ajustarlo en Menús.', ir: 'menus' }));
+    const mS = suma(EA.mermasRango(EA.addDias(hoy, -6), hoy), (m) => m.costo), mP = suma(EA.mermasRango(EA.addDias(hoy, -34), EA.addDias(hoy, -7)), (m) => m.costo) / 4;
+    if (mP && mS > mP * 1.5) out.push({ id: 'mermas', icon: 'alert', titulo: 'Las mermas subieron esta semana', detalle: EA.fmt.money(mS, 0) + ' vs ' + EA.fmt.money(mP, 0) + ' de promedio semanal. Revisa los motivos en Cocina › Mermas.', ir: 'cocina' });
     const fr = EA.funnelRows();
     const rate = (a, b) => { const x = fr.filter((r) => r.f >= a && r.f <= b); const v = suma(x, (r) => r.visitas); return v ? suma(x, (r) => r.inicio) / v : 0; };
     const sem = rate(EA.addDias(hoy, -6), hoy), prev = rate(EA.addDias(hoy, -34), EA.addDias(hoy, -7));
