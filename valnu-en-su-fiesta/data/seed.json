@@ -1,0 +1,9357 @@
+{
+ "version": 4,
+ "settings": {
+  "businessName": "Valnu en su Fiesta",
+  "whatsapp": "593987522450",
+  "whatsappDisplay": "098 752 2450",
+  "whatsappConfirm": true,
+  "address": "Ambato, Ecuador (dirección exacta por confirmar)",
+  "instagram": "valnuensufiesta",
+  "hours": [
+   "Lunes a viernes: 09:00 – 19:00",
+   "Sábado: 09:00 – 18:00",
+   "Domingo: 10:00 – 14:00"
+  ],
+  "coverage": {
+   "localCity": "Ambato",
+   "otherFeeMin": 10,
+   "otherFeeMax": 35,
+   "otherCities": [
+    "Latacunga",
+    "Riobamba",
+    "Baños",
+    "Pelileo",
+    "Píllaro"
+   ]
+  },
+  "depositPct": 50,
+  "policies": {
+   "montaje": "Llegamos 2 horas antes del evento para el montaje.",
+   "desmontaje": "El desmontaje se coordina al finalizar el evento.",
+   "cancelacion": "El anticipo no es reembolsable; se puede reprogramar con 7 días de aviso. [confirmar]"
+  },
+  "quoteValidityDays": 7
+ },
+ "occasions": [
+  {
+   "id": "infantil",
+   "name": "Cumpleaños infantil",
+   "icon": "🎈",
+   "palette": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "blurb": "Globos, carrito de algodón y piñata",
+   "scene": "pastel"
+  },
+  {
+   "id": "adulto",
+   "name": "Cumpleaños adulto",
+   "icon": "🥂",
+   "palette": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "blurb": "Números gigantes y backdrop elegante",
+   "scene": "noche"
+  },
+  {
+   "id": "babyshower",
+   "name": "Baby shower",
+   "icon": "🍼",
+   "palette": [
+    "#9ED8F0",
+    "#FFFFFF",
+    "#F9C6D9"
+   ],
+   "blurb": "Dulce, suave y lleno de detalles",
+   "scene": "pastel"
+  },
+  {
+   "id": "genero",
+   "name": "Revelación de género",
+   "icon": "💙",
+   "palette": [
+    "#7CC4F0",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "blurb": "¿Niño o niña? Que sea inolvidable",
+   "scene": "pastel"
+  },
+  {
+   "id": "bautizo",
+   "name": "Bautizo",
+   "icon": "🕊️",
+   "palette": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "blurb": "Padrinos, recuerdos y mesa de dulces",
+   "scene": "claro"
+  },
+  {
+   "id": "comunion",
+   "name": "Primera comunión",
+   "icon": "✨",
+   "palette": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "blurb": "Elegante y con mucho cariño",
+   "scene": "claro"
+  },
+  {
+   "id": "graduacion",
+   "name": "Graduación",
+   "icon": "🎓",
+   "palette": [
+    "#1F3A93",
+    "#F4C95D",
+    "#FFFFFF"
+   ],
+   "blurb": "Celebra el logro con estilo",
+   "scene": "noche"
+  },
+  {
+   "id": "aniversario",
+   "name": "Aniversario",
+   "icon": "💞",
+   "palette": [
+    "#C2467A",
+    "#F6A5C8",
+    "#F4C95D"
+   ],
+   "blurb": "Un detalle que se recuerda",
+   "scene": "pastel"
+  },
+  {
+   "id": "romantica",
+   "name": "Sorpresa romántica",
+   "icon": "🌹",
+   "palette": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "blurb": "Rosas, helio y mucha emoción",
+   "scene": "noche"
+  },
+  {
+   "id": "corporativo",
+   "name": "Evento corporativo",
+   "icon": "🏢",
+   "palette": [
+    "#2E5BFF",
+    "#7FD1C7",
+    "#FFFFFF"
+   ],
+   "blurb": "Marca, globos y alquileres",
+   "scene": "claro"
+  },
+  {
+   "id": "temporada",
+   "name": "Fiesta de temporada",
+   "icon": "🎃",
+   "palette": [
+    "#F28C28",
+    "#6B3FA0",
+    "#1E1E1E"
+   ],
+   "blurb": "Halloween, Navidad, San Valentín…",
+   "scene": "noche"
+  }
+ ],
+ "categories": [
+  {
+   "id": "globos",
+   "name": "Globos",
+   "icon": "🎈"
+  },
+  {
+   "id": "backdrop",
+   "name": "Backdrop",
+   "icon": "🖼️"
+  },
+  {
+   "id": "mesa",
+   "name": "Mesa de dulces",
+   "icon": "🍬"
+  },
+  {
+   "id": "torta",
+   "name": "Torta",
+   "icon": "🎂"
+  },
+  {
+   "id": "bocaditos",
+   "name": "Bocaditos",
+   "icon": "🥟"
+  },
+  {
+   "id": "carritos",
+   "name": "Carritos",
+   "icon": "🛒"
+  },
+  {
+   "id": "alquileres",
+   "name": "Alquileres",
+   "icon": "🏕️"
+  },
+  {
+   "id": "recuerdos",
+   "name": "Recuerdos",
+   "icon": "🎁"
+  },
+  {
+   "id": "regalos",
+   "name": "Regalos",
+   "icon": "🌹"
+  },
+  {
+   "id": "extras",
+   "name": "Extras",
+   "icon": "✨"
+  }
+ ],
+ "items": [
+  {
+   "id": "arco-organico",
+   "name": "Arco orgánico de globos",
+   "cat": "globos",
+   "line": "decoracion",
+   "photo": "assets/fotos/globos/arco-azul-blanco.jpg",
+   "pmin": 85,
+   "pmax": 160,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "arch",
+   "desc": "Arco armado globo por globo en tus colores",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "columnas-globos",
+   "name": "Columnas de globos (par)",
+   "cat": "globos",
+   "line": "decoracion",
+   "photo": "assets/fotos/globos/columna-helio-azul.jpg",
+   "pmin": 45,
+   "pmax": 80,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "columns",
+   "desc": "Dos columnas con globo burbuja arriba",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "ramillete-helio",
+   "name": "Ramillete de globos con helio",
+   "cat": "globos",
+   "line": "decoracion",
+   "photo": "",
+   "pmin": 25,
+   "pmax": 55,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "helium",
+   "desc": "Globos que flotan en el techo de tu salón",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "numero-gigante",
+   "name": "Número gigante",
+   "cat": "globos",
+   "line": "decoracion",
+   "photo": "",
+   "pmin": 30,
+   "pmax": 60,
+   "occasions": [
+    "adulto",
+    "infantil",
+    "aniversario",
+    "graduacion"
+   ],
+   "scene": "number",
+   "desc": "12, 21, 30, 50… el número que celebras",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "backdrop-nombre",
+   "name": "Backdrop con nombre",
+   "cat": "backdrop",
+   "line": "decoracion",
+   "photo": "assets/fotos/backdrops/limones-flores.jpg",
+   "pmin": 90,
+   "pmax": 180,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "backdrop",
+   "desc": "Fondo temático con el nombre del festejado",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "backdrop-vespa",
+   "name": "Backdrop vespa / figura",
+   "cat": "backdrop",
+   "line": "decoracion",
+   "photo": "assets/fotos/backdrops/vespa-rosada.jpg",
+   "pmin": 120,
+   "pmax": 220,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "aniversario"
+   ],
+   "scene": "backdrop",
+   "desc": "Figuras y temas: vespa, flores, limones…",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "backdrop-negro-plata",
+   "name": "Backdrop negro y plata",
+   "cat": "backdrop",
+   "line": "decoracion",
+   "photo": "assets/fotos/backdrops/backdrop-12-negro-plata.jpg",
+   "pmin": 110,
+   "pmax": 200,
+   "occasions": [
+    "adulto",
+    "graduacion",
+    "corporativo"
+   ],
+   "scene": "backdrop",
+   "desc": "Elegante, con globos y cilindros",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "deco-room",
+   "name": "Deco Room (cuarto)",
+   "cat": "backdrop",
+   "line": "decoracion",
+   "photo": "",
+   "pmin": 70,
+   "pmax": 140,
+   "occasions": [
+    "romantica",
+    "aniversario",
+    "infantil"
+   ],
+   "scene": "neon",
+   "desc": "Decoración de cuartos para sorpresas",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "mesa-dulces",
+   "name": "Mesa de dulces",
+   "cat": "mesa",
+   "line": "cakes",
+   "photo": "",
+   "pmin": 70,
+   "pmax": 140,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "sweets",
+   "desc": "Dulces, jarras y dispensadores en tu tema",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "tartaletas",
+   "name": "Tartaletas de frutas",
+   "cat": "mesa",
+   "line": "cakes",
+   "photo": "",
+   "pmin": 18,
+   "pmax": 32,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "sweets",
+   "desc": "Por cada 20 invitados",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 20,
+   "gift": false
+  },
+  {
+   "id": "cupcakes",
+   "name": "Cupcakes decorados",
+   "cat": "mesa",
+   "line": "cakes",
+   "photo": "",
+   "pmin": 20,
+   "pmax": 36,
+   "occasions": [
+    "infantil",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion"
+   ],
+   "scene": "cupcakes",
+   "desc": "Por cada 20 invitados",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 20,
+   "gift": false
+  },
+  {
+   "id": "galletas",
+   "name": "Galletas decoradas",
+   "cat": "mesa",
+   "line": "cakes",
+   "photo": "",
+   "pmin": 15,
+   "pmax": 30,
+   "occasions": [
+    "infantil",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion"
+   ],
+   "scene": "cupcakes",
+   "desc": "Por cada 20 invitados",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 20,
+   "gift": false
+  },
+  {
+   "id": "torta-tematica",
+   "name": "Torta temática",
+   "cat": "torta",
+   "line": "cakes",
+   "photo": "",
+   "pmin": 35,
+   "pmax": 90,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "cake",
+   "desc": "Diseño según tu tema y colores",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "torta-2pisos",
+   "name": "Torta de 2 pisos",
+   "cat": "torta",
+   "line": "cakes",
+   "photo": "",
+   "pmin": 70,
+   "pmax": 150,
+   "occasions": [
+    "bautizo",
+    "comunion",
+    "aniversario",
+    "babyshower",
+    "genero"
+   ],
+   "scene": "cake2",
+   "desc": "Para celebraciones grandes",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "bocaditos-sal",
+   "name": "Bocaditos de sal",
+   "cat": "bocaditos",
+   "line": "cakes",
+   "photo": "",
+   "pmin": 25,
+   "pmax": 45,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "snacks",
+   "desc": "Por cada 20 invitados",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 20,
+   "gift": false
+  },
+  {
+   "id": "bocaditos-mixtos",
+   "name": "Bandeja de bocaditos mixtos",
+   "cat": "bocaditos",
+   "line": "cakes",
+   "photo": "",
+   "pmin": 35,
+   "pmax": 60,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "snacks",
+   "desc": "Por cada 20 invitados",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 20,
+   "gift": false
+  },
+  {
+   "id": "carrito-algodon",
+   "name": "Carrito de algodón de azúcar",
+   "cat": "carritos",
+   "line": "alquileres",
+   "photo": "assets/fotos/carritos/carrito-algodon-carpa.jpg",
+   "pmin": 40,
+   "pmax": 70,
+   "occasions": [
+    "infantil",
+    "corporativo",
+    "babyshower",
+    "genero",
+    "comunion"
+   ],
+   "scene": "cart",
+   "desc": "Con operador. Se alquila por horas",
+   "active": true,
+   "rental": true,
+   "stock": 1,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "carrito-canguil",
+   "name": "Carrito de canguil",
+   "cat": "carritos",
+   "line": "alquileres",
+   "photo": "",
+   "pmin": 35,
+   "pmax": 60,
+   "occasions": [
+    "infantil",
+    "corporativo",
+    "graduacion",
+    "temporada"
+   ],
+   "scene": "cart",
+   "desc": "Canguil recién hecho en tu evento",
+   "active": true,
+   "rental": true,
+   "stock": 1,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "carrito-snacks",
+   "name": "Carrito de snacks",
+   "cat": "carritos",
+   "line": "alquileres",
+   "photo": "",
+   "pmin": 40,
+   "pmax": 75,
+   "occasions": [
+    "infantil",
+    "corporativo",
+    "graduacion"
+   ],
+   "scene": "cart",
+   "desc": "Snacks y bebidas con estilo",
+   "active": true,
+   "rental": true,
+   "stock": 2,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "cilindros-bases",
+   "name": "Cilindros y bases",
+   "cat": "alquileres",
+   "line": "alquileres",
+   "photo": "",
+   "pmin": 20,
+   "pmax": 45,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "cylinders",
+   "desc": "Para tortas, dulces y decoración",
+   "active": true,
+   "rental": true,
+   "stock": 6,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "mesas-sillas",
+   "name": "Mesas y sillas (set)",
+   "cat": "alquileres",
+   "line": "alquileres",
+   "photo": "",
+   "pmin": 30,
+   "pmax": 90,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "tables",
+   "desc": "Set para 20 invitados",
+   "active": true,
+   "rental": true,
+   "stock": 4,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "carpa",
+   "name": "Carpa / estructura",
+   "cat": "alquileres",
+   "line": "alquileres",
+   "photo": "",
+   "pmin": 90,
+   "pmax": 200,
+   "occasions": [
+    "infantil",
+    "corporativo",
+    "comunion",
+    "bautizo",
+    "graduacion"
+   ],
+   "scene": "tent",
+   "desc": "Carpa blanca con montaje",
+   "active": true,
+   "rental": true,
+   "stock": 2,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "recuerdos-velas",
+   "name": "Velas personalizadas",
+   "cat": "recuerdos",
+   "line": "regalos",
+   "photo": "",
+   "pmin": 1.5,
+   "pmax": 4,
+   "occasions": [
+    "bautizo",
+    "comunion",
+    "aniversario",
+    "babyshower",
+    "genero"
+   ],
+   "scene": "favors",
+   "desc": "Recuerdo por invitado (mín. 20)",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": true
+  },
+  {
+   "id": "recuerdos-chocolates",
+   "name": "Chocolates personalizados",
+   "cat": "recuerdos",
+   "line": "regalos",
+   "photo": "",
+   "pmin": 1.2,
+   "pmax": 3.5,
+   "occasions": [
+    "bautizo",
+    "comunion",
+    "aniversario",
+    "babyshower",
+    "infantil"
+   ],
+   "scene": "favors",
+   "desc": "Recuerdo por invitado (mín. 20)",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": true
+  },
+  {
+   "id": "recuerdos-tazas",
+   "name": "Tazas personalizadas",
+   "cat": "recuerdos",
+   "line": "regalos",
+   "photo": "",
+   "pmin": 4,
+   "pmax": 8,
+   "occasions": [
+    "aniversario",
+    "corporativo",
+    "bautizo",
+    "adulto"
+   ],
+   "scene": "favors",
+   "desc": "Con nombre, foto o logo",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": true
+  },
+  {
+   "id": "ramo-rosas",
+   "name": "Ramo de rosas grande con mensaje",
+   "cat": "regalos",
+   "line": "regalos",
+   "photo": "assets/fotos/ramos/ramo-rosas-rosado.jpg",
+   "pmin": 35,
+   "pmax": 95,
+   "occasions": [
+    "romantica",
+    "aniversario",
+    "adulto"
+   ],
+   "scene": "bouquet",
+   "desc": "Rosas con papel, cinta y mensaje",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": true
+  },
+  {
+   "id": "ramo-corazon",
+   "name": "Ramo corazón personalizado",
+   "cat": "regalos",
+   "line": "regalos",
+   "photo": "assets/fotos/ramos/ramo-corazon-mama.jpg",
+   "pmin": 60,
+   "pmax": 120,
+   "occasions": [
+    "romantica",
+    "aniversario",
+    "adulto"
+   ],
+   "scene": "bouquet",
+   "desc": "Corazón de rosas con foto o mensaje",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": true
+  },
+  {
+   "id": "caja-padrinos",
+   "name": "Caja «¿Aceptas ser mi padrino?»",
+   "cat": "regalos",
+   "line": "regalos",
+   "photo": "assets/fotos/padrinos/padrinos-caja-1.jpg",
+   "pmin": 25,
+   "pmax": 55,
+   "occasions": [
+    "bautizo",
+    "comunion"
+   ],
+   "scene": "padrinoBox",
+   "desc": "Taza, chocolates y frase personalizada",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": true
+  },
+  {
+   "id": "pinata",
+   "name": "Piñata temática",
+   "cat": "extras",
+   "line": "decoracion",
+   "photo": "",
+   "pmin": 20,
+   "pmax": 45,
+   "occasions": [
+    "infantil",
+    "babyshower",
+    "corporativo"
+   ],
+   "scene": "pinata",
+   "desc": "Con dulces o sorpresas",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "neon-nombre",
+   "name": "Letrero luminoso / letras",
+   "cat": "extras",
+   "line": "decoracion",
+   "photo": "",
+   "pmin": 35,
+   "pmax": 80,
+   "occasions": [
+    "adulto",
+    "aniversario",
+    "romantica",
+    "graduacion"
+   ],
+   "scene": "neon",
+   "desc": "Letras gigantes iluminadas",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "espuma-confeti",
+   "name": "Espuma, carioca y confeti",
+   "cat": "extras",
+   "line": "temporada",
+   "photo": "assets/fotos/temporada/espuma-carioca.jpg",
+   "pmin": 8,
+   "pmax": 20,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "graduacion",
+    "temporada",
+    "corporativo"
+   ],
+   "scene": "confetti",
+   "desc": "Para la hora loca",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  },
+  {
+   "id": "cotillon",
+   "name": "Cotillón y gafas de fiesta",
+   "cat": "extras",
+   "line": "temporada",
+   "photo": "assets/fotos/temporada/lentes-iridiscentes.jpg",
+   "pmin": 10,
+   "pmax": 25,
+   "occasions": [
+    "infantil",
+    "adulto",
+    "babyshower",
+    "genero",
+    "bautizo",
+    "comunion",
+    "graduacion",
+    "aniversario",
+    "romantica",
+    "corporativo",
+    "temporada"
+   ],
+   "scene": "confetti",
+   "desc": "Gafas, sombreros y accesorios",
+   "active": true,
+   "rental": false,
+   "stock": 0,
+   "unitGuests": 0,
+   "gift": false
+  }
+ ],
+ "suggestions": {
+  "bautizo": [
+   "caja-padrinos",
+   "recuerdos-velas",
+   "mesa-dulces",
+   "bocaditos-sal"
+  ],
+  "infantil": [
+   "carrito-algodon",
+   "pinata",
+   "numero-gigante",
+   "cupcakes"
+  ],
+  "romantica": [
+   "ramo-rosas",
+   "ramillete-helio",
+   "deco-room",
+   "neon-nombre"
+  ],
+  "adulto": [
+   "numero-gigante",
+   "neon-nombre",
+   "columnas-globos",
+   "espuma-confeti"
+  ],
+  "babyshower": [
+   "mesa-dulces",
+   "cupcakes",
+   "recuerdos-chocolates",
+   "arco-organico"
+  ],
+  "genero": [
+   "ramillete-helio",
+   "cupcakes",
+   "pinata",
+   "mesa-dulces"
+  ],
+  "comunion": [
+   "recuerdos-velas",
+   "torta-2pisos",
+   "mesa-dulces",
+   "bocaditos-mixtos"
+  ],
+  "graduacion": [
+   "numero-gigante",
+   "carrito-canguil",
+   "espuma-confeti",
+   "columnas-globos"
+  ],
+  "aniversario": [
+   "ramo-corazon",
+   "deco-room",
+   "neon-nombre",
+   "torta-tematica"
+  ],
+  "corporativo": [
+   "carrito-snacks",
+   "carpa",
+   "mesas-sillas",
+   "columnas-globos"
+  ],
+  "temporada": [
+   "espuma-confeti",
+   "cotillon",
+   "carrito-canguil",
+   "pinata"
+  ]
+ },
+ "content": {
+  "sections": {
+   "hero": true,
+   "lines": true,
+   "builder": true,
+   "gallery": true,
+   "gifts": true,
+   "season": true,
+   "how": true,
+   "testimonials": true,
+   "location": true
+  },
+  "hero": {
+   "eyebrow": "Ambato · Importadores de artículos para fiestas",
+   "title": "Tu fiesta completa, sin mil vueltas",
+   "subtitle": "Globos, backdrops, tortas, bocaditos, alquileres y regalos personalizados. Arma tu fiesta aquí y recibe tu cotización en minutos.",
+   "cta1": "Arma tu fiesta",
+   "cta2": "Escríbenos por WhatsApp",
+   "hint": "Toca los globos 🎈"
+  },
+  "lines": [
+   {
+    "id": "decoracion",
+    "title": "Decoración",
+    "tagline": "Arcos, columnas, backdrops y globos con helio",
+    "cat": "globos",
+    "photos": [
+     "assets/fotos/globos/arco-azul-blanco.jpg",
+     "assets/fotos/backdrops/limones-flores.jpg",
+     "assets/fotos/backdrops/vespa-rosada.jpg"
+    ],
+    "points": [
+     "Arcos y columnas de globos",
+     "Backdrops con nombre y figuras",
+     "Deco Room para sorpresas"
+    ],
+    "emoji": "🎈"
+   },
+   {
+    "id": "alquileres",
+    "title": "Alquileres",
+    "tagline": "Carritos, mesas, bases y estructuras",
+    "cat": "alquileres",
+    "photos": [
+     "assets/fotos/carritos/carrito-algodon-carpa.jpg",
+     "assets/fotos/backdrops/backdrop-12-negro-plata.jpg"
+    ],
+    "points": [
+     "Carritos de algodón, canguil y snacks",
+     "Cilindros y bases",
+     "Mesas, carpas y estructuras"
+    ],
+    "emoji": "🛒"
+   },
+   {
+    "id": "cakes",
+    "title": "Cakes y bocaditos",
+    "tagline": "Tortas, cupcakes, tartaletas y bocaditos de sal",
+    "cat": "torta",
+    "photos": [],
+    "points": [
+     "Tortas temáticas",
+     "Cupcakes y galletas decoradas",
+     "Bocaditos de sal y tartaletas"
+    ],
+    "emoji": "🎂"
+   },
+   {
+    "id": "regalos",
+    "title": "Regalos y obsequios",
+    "tagline": "Ramos, cajas para padrinos y recuerdos personalizados",
+    "cat": "regalos",
+    "photos": [
+     "assets/fotos/ramos/ramo-corazon-mama.jpg",
+     "assets/fotos/padrinos/padrinos-caja-1.jpg",
+     "assets/fotos/ramos/ramo-rosas-rosado.jpg"
+    ],
+    "points": [
+     "Ramos de rosas con mensaje",
+     "Cajas «¿Aceptas ser mi padrino?»",
+     "Velas, chocolates y tazas"
+    ],
+    "emoji": "🌹"
+   },
+   {
+    "id": "temporada",
+    "title": "Tienda de temporada",
+    "tagline": "Halloween, Finados, espuma, gafas y cotillón",
+    "cat": "season",
+    "photos": [
+     "assets/fotos/temporada/mascaras-halloween.jpg",
+     "assets/fotos/temporada/lentes-iridiscentes.jpg",
+     "assets/fotos/temporada/lipstick-maquillaje.jpg"
+    ],
+    "points": [
+     "Máscaras, maquillaje y accesorios",
+     "Velas y recuerdos para Finados",
+     "Espuma carioca y cotillón"
+    ],
+    "emoji": "🎃"
+   }
+  ],
+  "gallery": [
+   {
+    "photo": "assets/fotos/padrinos/padrinos-caja-1.jpg",
+    "occasion": "bautizo",
+    "caption": "Caja para pedir padrinos de bautizo",
+    "visible": true
+   },
+   {
+    "photo": "assets/fotos/globos/arco-azul-blanco.jpg",
+    "occasion": "infantil",
+    "caption": "Arco de globos azul, blanco y verde",
+    "visible": true
+   },
+   {
+    "photo": "assets/fotos/backdrops/limones-flores.jpg",
+    "occasion": "infantil",
+    "caption": "Backdrop de limones y flores con nombre",
+    "visible": true
+   },
+   {
+    "photo": "assets/fotos/ramos/ramo-corazon-mama.jpg",
+    "occasion": "aniversario",
+    "caption": "Ramo corazón con mensaje para mamá",
+    "visible": true
+   },
+   {
+    "photo": "assets/fotos/backdrops/backdrop-12-negro-plata.jpg",
+    "occasion": "adulto",
+    "caption": "Backdrop negro y plata con número",
+    "visible": true
+   },
+   {
+    "photo": "assets/fotos/carritos/carrito-algodon-carpa.jpg",
+    "occasion": "corporativo",
+    "caption": "Carritos blancos bajo carpa",
+    "visible": true
+   },
+   {
+    "photo": "assets/fotos/globos/columna-helio-azul.jpg",
+    "occasion": "genero",
+    "caption": "Columna con globo burbuja",
+    "visible": true
+   },
+   {
+    "photo": "assets/fotos/backdrops/vespa-rosada.jpg",
+    "occasion": "adulto",
+    "caption": "Vespa rosada para una fiesta temática",
+    "visible": true
+   },
+   {
+    "photo": "assets/fotos/ramos/ramo-rosas-rosado.jpg",
+    "occasion": "romantica",
+    "caption": "Ramo de rosas con mariposas",
+    "visible": true
+   }
+  ],
+  "giftsIntro": {
+   "title": "Regalos que sí se recuerdan",
+   "subtitle": "Ramos grandes, cajas para padrinos y obsequios personalizados. Pídelos directo por WhatsApp."
+  },
+  "season": {
+   "active": true,
+   "title": "Temporada Halloween y Finados",
+   "subtitle": "Máscaras, maquillaje, accesorios y recuerdos. Llévalos hoy en el local.",
+   "startDaysAgo": 12,
+   "endDaysFromNow": 14,
+   "cta": "Pedir por WhatsApp",
+   "products": [
+    {
+     "name": "Gafas de extraterrestre",
+     "price": 3,
+     "photo": "assets/fotos/temporada/lentes-iridiscentes.jpg"
+    },
+    {
+     "name": "Máscaras de terror",
+     "price": 4.5,
+     "photo": "assets/fotos/temporada/mascaras-halloween.jpg"
+    },
+    {
+     "name": "Accesorios Halloween",
+     "price": 1.5,
+     "photo": "assets/fotos/temporada/accesorios-halloween.jpg"
+    },
+    {
+     "name": "Maquillaje y labiales",
+     "price": 2.5,
+     "photo": "assets/fotos/temporada/lipstick-maquillaje.jpg"
+    },
+    {
+     "name": "Ojos y telarañas",
+     "price": 1.5,
+     "photo": "assets/fotos/temporada/ojos-halloween.jpg"
+    },
+    {
+     "name": "Espuma carioca",
+     "price": 3.5,
+     "photo": "assets/fotos/temporada/espuma-carioca.jpg"
+    }
+   ]
+  },
+  "how": [
+   {
+    "n": 1,
+    "title": "Arma tu fiesta",
+    "text": "Elige ocasión, colores y todo lo que quieras sumar. Ves tu fiesta armándose en pantalla."
+   },
+   {
+    "n": 2,
+    "title": "Te enviamos la cotización",
+    "text": "Recibes un rango de precio al instante y la cotización formal por WhatsApp."
+   },
+   {
+    "n": 3,
+    "title": "Reservas con un anticipo",
+    "text": "Aseguras tu fecha con un anticipo. El saldo se paga antes o el día del evento [confirmar]."
+   },
+   {
+    "n": 4,
+    "title": "Llegamos, montamos y desmontamos",
+    "text": "Nosotros instalamos todo y luego lo retiramos. Tú solo disfrutas [confirmar]."
+   }
+  ],
+  "testimonials": [
+   {
+    "name": "Nombre del cliente",
+    "occasion": "Cumpleaños infantil",
+    "text": "Aquí irá una reseña real de un cliente de Valnu. (Texto de ejemplo)",
+    "demo": true
+   },
+   {
+    "name": "Nombre del cliente",
+    "occasion": "Bautizo",
+    "text": "Aquí irá una reseña real de un cliente de Valnu. (Texto de ejemplo)",
+    "demo": true
+   },
+   {
+    "name": "Nombre del cliente",
+    "occasion": "Sorpresa romántica",
+    "text": "Aquí irá una reseña real de un cliente de Valnu. (Texto de ejemplo)",
+    "demo": true
+   }
+  ],
+  "location": {
+   "title": "Visítanos en Ambato",
+   "subtitle": "Pasa por el local, mira los productos y cotiza en persona.",
+   "mapQuery": "Ambato, Ecuador"
+  },
+  "finalCta": {
+   "title": "¿Lista tu fiesta?",
+   "text": "Cuéntanos qué celebras y nosotros nos encargamos del resto.",
+   "cta": "Arma tu fiesta"
+  }
+ },
+ "quotes": [
+  {
+   "id": 101,
+   "daysAgo": 89,
+   "hoursAgo": 2,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Fernanda Cevallos",
+    "whatsapp": "0981258145"
+   },
+   "occasion": "aniversario",
+   "eventInDays": -83,
+   "guests": 15,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2467A",
+    "#F6A5C8",
+    "#F4C95D"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 31
+    },
+    {
+     "itemId": "ramo-rosas",
+     "name": "Ramo de rosas grande con mensaje",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 95,
+     "final": 53
+    }
+   ],
+   "rangeMin": 60,
+   "rangeMax": 140,
+   "source": "galeria",
+   "finalTotal": 84,
+   "deposit": 84,
+   "notes": ""
+  },
+  {
+   "id": 102,
+   "daysAgo": 88,
+   "hoursAgo": 18,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Paola Naranjo",
+    "whatsapp": "0994063972"
+   },
+   "occasion": "bautizo",
+   "eventInDays": -82,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 5,
+     "pmin": 15,
+     "pmax": 30,
+     "final": 23
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 65
+    }
+   ],
+   "rangeMin": 120,
+   "rangeMax": 230,
+   "source": "armador",
+   "finalTotal": 180,
+   "deposit": 180,
+   "notes": ""
+  },
+  {
+   "id": 103,
+   "daysAgo": 87,
+   "hoursAgo": 17,
+   "status": "lost",
+   "lostReason": "Precio",
+   "contact": {
+    "name": "Lorena Mera",
+    "whatsapp": "0995206344"
+   },
+   "occasion": "comunion",
+   "eventInDays": -71,
+   "guests": 50,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 3,
+     "pmin": 20,
+     "pmax": 36
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70
+    }
+   ],
+   "rangeMin": 255,
+   "rangeMax": 503,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 104,
+   "daysAgo": 86,
+   "hoursAgo": 18,
+   "status": "lost",
+   "lostReason": "Precio",
+   "contact": {
+    "name": "Andrés Toapanta",
+    "whatsapp": "0994029873"
+   },
+   "occasion": "adulto",
+   "eventInDays": -74,
+   "guests": 20,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45
+    },
+    {
+     "itemId": "recuerdos-tazas",
+     "name": "Tazas personalizadas",
+     "qty": 1,
+     "pmin": 4,
+     "pmax": 8
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90
+    }
+   ],
+   "rangeMin": 154,
+   "rangeMax": 323,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 105,
+   "daysAgo": 86,
+   "hoursAgo": 1,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Ricardo Haro",
+    "whatsapp": "0999458054"
+   },
+   "occasion": "corporativo",
+   "eventInDays": -68,
+   "guests": 50,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#2E5BFF",
+    "#7FD1C7",
+    "#FFFFFF"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 55
+    },
+    {
+     "itemId": "recuerdos-tazas",
+     "name": "Tazas personalizadas",
+     "qty": 1,
+     "pmin": 4,
+     "pmax": 8,
+     "final": 6
+    }
+   ],
+   "rangeMin": 44,
+   "rangeMax": 78,
+   "source": "armador",
+   "finalTotal": 61,
+   "deposit": 30,
+   "notes": ""
+  },
+  {
+   "id": 106,
+   "daysAgo": 85,
+   "hoursAgo": 22,
+   "status": "lost",
+   "lostReason": "Cambió la fecha",
+   "contact": {
+    "name": "Diego Salazar",
+    "whatsapp": "0987321837"
+   },
+   "occasion": "adulto",
+   "eventInDays": -66,
+   "guests": 20,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90
+    }
+   ],
+   "rangeMin": 370,
+   "rangeMax": 725,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 107,
+   "daysAgo": 84,
+   "hoursAgo": 2,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Verónica Freire",
+    "whatsapp": "0993935038"
+   },
+   "occasion": "infantil",
+   "eventInDays": -64,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 28
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 5,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 23
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 124
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 5,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 44
+    }
+   ],
+   "rangeMin": 375,
+   "rangeMax": 685,
+   "source": "armador",
+   "finalTotal": 487,
+   "deposit": 244,
+   "notes": ""
+  },
+  {
+   "id": 108,
+   "daysAgo": 83,
+   "hoursAgo": 13,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Lorena Chiliquinga",
+    "whatsapp": "0998766045"
+   },
+   "occasion": "genero",
+   "eventInDays": -74,
+   "guests": 15,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#7CC4F0",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 31
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 43
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 42
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90,
+     "final": 51
+    },
+    {
+     "itemId": "torta-2pisos",
+     "name": "Torta de 2 pisos",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 150,
+     "final": 99
+    }
+   ],
+   "rangeMin": 190,
+   "rangeMax": 400,
+   "source": "galeria",
+   "finalTotal": 266,
+   "deposit": 266,
+   "notes": ""
+  },
+  {
+   "id": 109,
+   "daysAgo": 82,
+   "hoursAgo": 17,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Ricardo Villacís",
+    "whatsapp": "0984984527"
+   },
+   "occasion": "infantil",
+   "eventInDays": -73,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 140
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 109
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 47
+    }
+   ],
+   "rangeMin": 200,
+   "rangeMax": 415,
+   "source": "whatsapp",
+   "finalTotal": 296,
+   "deposit": 296,
+   "notes": ""
+  },
+  {
+   "id": 110,
+   "daysAgo": 82,
+   "hoursAgo": 3,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Paola Freire",
+    "whatsapp": "0998225842"
+   },
+   "occasion": "comunion",
+   "eventInDays": -73,
+   "guests": 50,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90,
+     "final": 78
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 170
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 3,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 27
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 115
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 131
+    },
+    {
+     "itemId": "caja-padrinos",
+     "name": "Caja «¿Aceptas ser mi padrino?»",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 35
+    }
+   ],
+   "rangeMin": 379,
+   "rangeMax": 781,
+   "source": "armador",
+   "finalTotal": 610,
+   "deposit": 610,
+   "notes": ""
+  },
+  {
+   "id": 111,
+   "daysAgo": 81,
+   "hoursAgo": 19,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Fernanda Haro",
+    "whatsapp": "0991930699"
+   },
+   "occasion": "aniversario",
+   "eventInDays": -69,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2467A",
+    "#F6A5C8",
+    "#F4C95D"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 106
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 44
+    },
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 95
+    }
+   ],
+   "rangeMin": 200,
+   "rangeMax": 380,
+   "source": "armador",
+   "finalTotal": 289,
+   "deposit": 289,
+   "notes": ""
+  },
+  {
+   "id": 112,
+   "daysAgo": 81,
+   "hoursAgo": 11,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Cristina Cevallos",
+    "whatsapp": "0996195157"
+   },
+   "occasion": "infantil",
+   "eventInDays": -65,
+   "guests": 30,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 106
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 50
+    }
+   ],
+   "rangeMin": 105,
+   "rangeMax": 200,
+   "source": "armador",
+   "finalTotal": 156,
+   "deposit": 156,
+   "notes": ""
+  },
+  {
+   "id": 113,
+   "daysAgo": 80,
+   "hoursAgo": 15,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Lorena Villacís",
+    "whatsapp": "0982849417"
+   },
+   "occasion": "romantica",
+   "eventInDays": -69,
+   "guests": 60,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "ramo-rosas",
+     "name": "Ramo de rosas grande con mensaje",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 95,
+     "final": 51
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 34
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 105
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 66
+    }
+   ],
+   "rangeMin": 170,
+   "rangeMax": 360,
+   "source": "armador",
+   "finalTotal": 256,
+   "deposit": 77,
+   "notes": ""
+  },
+  {
+   "id": 114,
+   "daysAgo": 80,
+   "hoursAgo": 4,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Fernanda Freire",
+    "whatsapp": "0984672479"
+   },
+   "occasion": "genero",
+   "eventInDays": -64,
+   "guests": 20,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#7CC4F0",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 114
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4,
+     "final": 3
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 51
+    }
+   ],
+   "rangeMin": 126,
+   "rangeMax": 234,
+   "source": "armador",
+   "finalTotal": 168,
+   "deposit": 168,
+   "notes": ""
+  },
+  {
+   "id": 115,
+   "daysAgo": 79,
+   "hoursAgo": 23,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Pablo Morales",
+    "whatsapp": "0997565966"
+   },
+   "occasion": "adulto",
+   "eventInDays": -73,
+   "guests": 25,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 101
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 65
+    },
+    {
+     "itemId": "ramo-rosas",
+     "name": "Ramo de rosas grande con mensaje",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 95,
+     "final": 76
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 23
+    }
+   ],
+   "rangeMin": 161,
+   "rangeMax": 369,
+   "source": "galeria",
+   "finalTotal": 288,
+   "deposit": 288,
+   "notes": ""
+  },
+  {
+   "id": 116,
+   "daysAgo": 78,
+   "hoursAgo": 16,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Verónica Salazar",
+    "whatsapp": "0983279787"
+   },
+   "occasion": "genero",
+   "eventInDays": -63,
+   "guests": 30,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#7CC4F0",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "",
+   "items": [
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    }
+   ],
+   "rangeMin": 135,
+   "rangeMax": 260,
+   "source": "whatsapp",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 117,
+   "daysAgo": 78,
+   "hoursAgo": 14,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Pablo Haro",
+    "whatsapp": "0997037325"
+   },
+   "occasion": "adulto",
+   "eventInDays": -71,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 105
+    },
+    {
+     "itemId": "backdrop-negro-plata",
+     "name": "Backdrop negro y plata",
+     "qty": 1,
+     "pmin": 110,
+     "pmax": 200,
+     "final": 177
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 5,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 44
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 135
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 104
+    }
+   ],
+   "rangeMin": 505,
+   "rangeMax": 940,
+   "source": "armador",
+   "finalTotal": 741,
+   "deposit": 741,
+   "notes": ""
+  },
+  {
+   "id": 118,
+   "daysAgo": 76,
+   "hoursAgo": 3,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Paola Naranjo",
+    "whatsapp": "0984605500"
+   },
+   "occasion": "romantica",
+   "eventInDays": -62,
+   "guests": 50,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 74
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 28
+    },
+    {
+     "itemId": "ramo-rosas",
+     "name": "Ramo de rosas grande con mensaje",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 95,
+     "final": 72
+    }
+   ],
+   "rangeMin": 85,
+   "rangeMax": 230,
+   "source": "armador",
+   "finalTotal": 174,
+   "deposit": 174,
+   "notes": ""
+  },
+  {
+   "id": 119,
+   "daysAgo": 75,
+   "hoursAgo": 6,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Pablo Haro",
+    "whatsapp": "0994779321"
+   },
+   "occasion": "adulto",
+   "eventInDays": -60,
+   "guests": 50,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 3,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    }
+   ],
+   "rangeMin": 190,
+   "rangeMax": 340,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 120,
+   "daysAgo": 74,
+   "hoursAgo": 3,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Carlos Morales",
+    "whatsapp": "0989074665"
+   },
+   "occasion": "temporada",
+   "eventInDays": -67,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F28C28",
+    "#6B3FA0",
+    "#1E1E1E"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 62
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 63
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 107
+    }
+   ],
+   "rangeMin": 145,
+   "rangeMax": 310,
+   "source": "armador",
+   "finalTotal": 232,
+   "deposit": 116,
+   "notes": ""
+  },
+  {
+   "id": 121,
+   "daysAgo": 71,
+   "hoursAgo": 0,
+   "status": "lost",
+   "lostReason": "Cambió la fecha",
+   "contact": {
+    "name": "Andrés Haro",
+    "whatsapp": "0980387430"
+   },
+   "occasion": "bautizo",
+   "eventInDays": -64,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 2,
+     "pmin": 15,
+     "pmax": 30
+    },
+    {
+     "itemId": "caja-padrinos",
+     "name": "Caja «¿Aceptas ser mi padrino?»",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    }
+   ],
+   "rangeMin": 80,
+   "rangeMax": 170,
+   "source": "galeria",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 122,
+   "daysAgo": 71,
+   "hoursAgo": 19,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Gabriela Naranjo",
+    "whatsapp": "0990234282"
+   },
+   "occasion": "infantil",
+   "eventInDays": -58,
+   "guests": 25,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 105
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60,
+     "final": 49
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 160
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 28
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 73
+    }
+   ],
+   "rangeMin": 301,
+   "rangeMax": 564,
+   "source": "armador",
+   "finalTotal": 443,
+   "deposit": 443,
+   "notes": ""
+  },
+  {
+   "id": 123,
+   "daysAgo": 70,
+   "hoursAgo": 15,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Fernanda Naranjo",
+    "whatsapp": "0987220280"
+   },
+   "occasion": "infantil",
+   "eventInDays": -59,
+   "guests": 60,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 3,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45
+    }
+   ],
+   "rangeMin": 190,
+   "rangeMax": 345,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 124,
+   "daysAgo": 70,
+   "hoursAgo": 12,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Freire",
+    "whatsapp": "0988576307"
+   },
+   "occasion": "temporada",
+   "eventInDays": -61,
+   "guests": 20,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F28C28",
+    "#6B3FA0",
+    "#1E1E1E"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 43
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 119
+    }
+   ],
+   "rangeMin": 110,
+   "rangeMax": 215,
+   "source": "armador",
+   "finalTotal": 162,
+   "deposit": 162,
+   "notes": ""
+  },
+  {
+   "id": 125,
+   "daysAgo": 69,
+   "hoursAgo": 1,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Esteban Pérez",
+    "whatsapp": "0998356736"
+   },
+   "occasion": "babyshower",
+   "eventInDays": -55,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#9ED8F0",
+    "#FFFFFF",
+    "#F9C6D9"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90,
+     "final": 78
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 55
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 118
+    }
+   ],
+   "rangeMin": 150,
+   "rangeMax": 340,
+   "source": "armador",
+   "finalTotal": 251,
+   "deposit": 251,
+   "notes": ""
+  },
+  {
+   "id": 126,
+   "daysAgo": 67,
+   "hoursAgo": 0,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Karla Salazar",
+    "whatsapp": "0990054453"
+   },
+   "occasion": "infantil",
+   "eventInDays": -55,
+   "guests": 15,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45
+    }
+   ],
+   "rangeMin": 115,
+   "rangeMax": 225,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 127,
+   "daysAgo": 66,
+   "hoursAgo": 12,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Carlos Freire",
+    "whatsapp": "0997212793"
+   },
+   "occasion": "graduacion",
+   "eventInDays": -57,
+   "guests": 25,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#1F3A93",
+    "#F4C95D",
+    "#FFFFFF"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 2,
+     "pmin": 25,
+     "pmax": 45
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60
+    }
+   ],
+   "rangeMin": 360,
+   "rangeMax": 705,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 128,
+   "daysAgo": 66,
+   "hoursAgo": 22,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Andrés Villacís",
+    "whatsapp": "0995146006"
+   },
+   "occasion": "comunion",
+   "eventInDays": -61,
+   "guests": 50,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 3,
+     "pmin": 15,
+     "pmax": 30
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80
+    },
+    {
+     "itemId": "recuerdos-chocolates",
+     "name": "Chocolates personalizados",
+     "qty": 1,
+     "pmin": 1.2,
+     "pmax": 3.5
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 3,
+     "pmin": 25,
+     "pmax": 45
+    }
+   ],
+   "rangeMin": 276,
+   "rangeMax": 524,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 129,
+   "daysAgo": 65,
+   "hoursAgo": 0,
+   "status": "lost",
+   "lostReason": "Cambió la fecha",
+   "contact": {
+    "name": "Daniela Freire",
+    "whatsapp": "0995900050"
+   },
+   "occasion": "babyshower",
+   "eventInDays": -45,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#9ED8F0",
+    "#FFFFFF",
+    "#F9C6D9"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "recuerdos-chocolates",
+     "name": "Chocolates personalizados",
+     "qty": 1,
+     "pmin": 1.2,
+     "pmax": 3.5
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    }
+   ],
+   "rangeMin": 26,
+   "rangeMax": 58,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 130,
+   "daysAgo": 65,
+   "hoursAgo": 7,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Carlos Mera",
+    "whatsapp": "0986653512"
+   },
+   "occasion": "comunion",
+   "eventInDays": -54,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 138
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 58
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 44
+    },
+    {
+     "itemId": "caja-padrinos",
+     "name": "Caja «¿Aceptas ser mi padrino?»",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 43
+    }
+   ],
+   "rangeMin": 180,
+   "rangeMax": 380,
+   "source": "armador",
+   "finalTotal": 283,
+   "deposit": 283,
+   "notes": ""
+  },
+  {
+   "id": 131,
+   "daysAgo": 63,
+   "hoursAgo": 9,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Pablo Cevallos",
+    "whatsapp": "0990458066"
+   },
+   "occasion": "comunion",
+   "eventInDays": -52,
+   "guests": 20,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "",
+   "items": [
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    },
+    {
+     "itemId": "caja-padrinos",
+     "name": "Caja «¿Aceptas ser mi padrino?»",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "recuerdos-chocolates",
+     "name": "Chocolates personalizados",
+     "qty": 1,
+     "pmin": 1.2,
+     "pmax": 3.5
+    }
+   ],
+   "rangeMin": 56,
+   "rangeMax": 148,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 132,
+   "daysAgo": 62,
+   "hoursAgo": 8,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Verónica Pérez",
+    "whatsapp": "0984449487"
+   },
+   "occasion": "adulto",
+   "eventInDays": -43,
+   "guests": 100,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 47
+    },
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 98
+    },
+    {
+     "itemId": "ramo-rosas",
+     "name": "Ramo de rosas grande con mensaje",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 95,
+     "final": 58
+    }
+   ],
+   "rangeMin": 120,
+   "rangeMax": 270,
+   "source": "armador",
+   "finalTotal": 203,
+   "deposit": 203,
+   "notes": ""
+  },
+  {
+   "id": 133,
+   "daysAgo": 60,
+   "hoursAgo": 23,
+   "status": "lost",
+   "lostReason": "Cambió la fecha",
+   "contact": {
+    "name": "María Fernanda Pérez",
+    "whatsapp": "0991350545"
+   },
+   "occasion": "infantil",
+   "eventInDays": -43,
+   "guests": 50,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 3,
+     "pmin": 25,
+     "pmax": 45
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 3,
+     "pmin": 15,
+     "pmax": 30
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60
+    }
+   ],
+   "rangeMin": 150,
+   "rangeMax": 285,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 134,
+   "daysAgo": 60,
+   "hoursAgo": 8,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Carlos Naranjo",
+    "whatsapp": "0983412816"
+   },
+   "occasion": "adulto",
+   "eventInDays": -46,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 30
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 37
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 173
+    },
+    {
+     "itemId": "backdrop-negro-plata",
+     "name": "Backdrop negro y plata",
+     "qty": 1,
+     "pmin": 110,
+     "pmax": 200,
+     "final": 142
+    }
+   ],
+   "rangeMin": 275,
+   "rangeMax": 520,
+   "source": "armador",
+   "finalTotal": 382,
+   "deposit": 191,
+   "notes": ""
+  },
+  {
+   "id": 135,
+   "daysAgo": 60,
+   "hoursAgo": 17,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Sofía Naranjo",
+    "whatsapp": "0996293196"
+   },
+   "occasion": "genero",
+   "eventInDays": -55,
+   "guests": 25,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#7CC4F0",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 2,
+     "pmin": 20,
+     "pmax": 36
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 2,
+     "pmin": 15,
+     "pmax": 30
+    },
+    {
+     "itemId": "torta-2pisos",
+     "name": "Torta de 2 pisos",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 150
+    }
+   ],
+   "rangeMin": 320,
+   "rangeMax": 617,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 136,
+   "daysAgo": 59,
+   "hoursAgo": 8,
+   "status": "lost",
+   "lostReason": "Cambió la fecha",
+   "contact": {
+    "name": "Andrés Morales",
+    "whatsapp": "0985424307"
+   },
+   "occasion": "comunion",
+   "eventInDays": -45,
+   "guests": 60,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 3,
+     "pmin": 15,
+     "pmax": 30
+    },
+    {
+     "itemId": "torta-2pisos",
+     "name": "Torta de 2 pisos",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 150
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4
+    },
+    {
+     "itemId": "caja-padrinos",
+     "name": "Caja «¿Aceptas ser mi padrino?»",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    }
+   ],
+   "rangeMin": 216,
+   "rangeMax": 459,
+   "source": "whatsapp",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 137,
+   "daysAgo": 58,
+   "hoursAgo": 10,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Daniela Morales",
+    "whatsapp": "0991474113"
+   },
+   "occasion": "temporada",
+   "eventInDays": -46,
+   "guests": 30,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F28C28",
+    "#6B3FA0",
+    "#1E1E1E"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    }
+   ],
+   "rangeMin": 220,
+   "rangeMax": 445,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 138,
+   "daysAgo": 58,
+   "hoursAgo": 18,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Xavier Toapanta",
+    "whatsapp": "0987046596"
+   },
+   "occasion": "infantil",
+   "eventInDays": -45,
+   "guests": 60,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 3,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 48
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 3,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 36
+    }
+   ],
+   "rangeMin": 180,
+   "rangeMax": 315,
+   "source": "armador",
+   "finalTotal": 252,
+   "deposit": 252,
+   "notes": ""
+  },
+  {
+   "id": 139,
+   "daysAgo": 57,
+   "hoursAgo": 8,
+   "status": "lost",
+   "lostReason": "Precio",
+   "contact": {
+    "name": "María Fernanda Morales",
+    "whatsapp": "0981081912"
+   },
+   "occasion": "romantica",
+   "eventInDays": -46,
+   "guests": 40,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "",
+   "items": [
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90
+    },
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120
+    }
+   ],
+   "rangeMin": 151,
+   "rangeMax": 319,
+   "source": "whatsapp",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 140,
+   "daysAgo": 55,
+   "hoursAgo": 14,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Fernanda Chiliquinga",
+    "whatsapp": "0983653755"
+   },
+   "occasion": "infantil",
+   "eventInDays": -36,
+   "guests": 25,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 88
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 119
+    }
+   ],
+   "rangeMin": 160,
+   "rangeMax": 320,
+   "source": "whatsapp",
+   "finalTotal": 207,
+   "deposit": 62,
+   "notes": ""
+  },
+  {
+   "id": 141,
+   "daysAgo": 54,
+   "hoursAgo": 20,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Verónica Cevallos",
+    "whatsapp": "0980038655"
+   },
+   "occasion": "infantil",
+   "eventInDays": -45,
+   "guests": 60,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 3,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 55
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60,
+     "final": 42
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 137
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 46
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 3,
+     "pmin": 20,
+     "pmax": 36,
+     "final": 26
+    },
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 108
+    }
+   ],
+   "rangeMin": 380,
+   "rangeMax": 743,
+   "source": "armador",
+   "finalTotal": 576,
+   "deposit": 576,
+   "notes": ""
+  },
+  {
+   "id": 142,
+   "daysAgo": 54,
+   "hoursAgo": 1,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Byron Villacís",
+    "whatsapp": "0992422455"
+   },
+   "occasion": "infantil",
+   "eventInDays": -40,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "",
+   "items": [
+    {
+     "itemId": "recuerdos-chocolates",
+     "name": "Chocolates personalizados",
+     "qty": 1,
+     "pmin": 1.2,
+     "pmax": 3.5,
+     "final": 3
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 51
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 38
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 25
+    }
+   ],
+   "rangeMin": 132,
+   "rangeMax": 242,
+   "source": "armador",
+   "finalTotal": 193,
+   "deposit": 96,
+   "notes": ""
+  },
+  {
+   "id": 143,
+   "daysAgo": 53,
+   "hoursAgo": 6,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Santiago Vera",
+    "whatsapp": "0996635103"
+   },
+   "occasion": "adulto",
+   "eventInDays": -42,
+   "guests": 40,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    },
+    {
+     "itemId": "recuerdos-tazas",
+     "name": "Tazas personalizadas",
+     "qty": 1,
+     "pmin": 4,
+     "pmax": 8
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60
+    }
+   ],
+   "rangeMin": 104,
+   "rangeMax": 208,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 144,
+   "daysAgo": 53,
+   "hoursAgo": 4,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Mateo Salazar",
+    "whatsapp": "0982017804"
+   },
+   "occasion": "romantica",
+   "eventInDays": -47,
+   "guests": 25,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    }
+   ],
+   "rangeMin": 175,
+   "rangeMax": 340,
+   "source": "galeria",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 145,
+   "daysAgo": 52,
+   "hoursAgo": 2,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Xavier Haro",
+    "whatsapp": "0981070174"
+   },
+   "occasion": "corporativo",
+   "eventInDays": -44,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2E5BFF",
+    "#7FD1C7",
+    "#FFFFFF"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 5,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 29
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 105
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 49
+    }
+   ],
+   "rangeMin": 200,
+   "rangeMax": 370,
+   "source": "armador",
+   "finalTotal": 299,
+   "deposit": 299,
+   "notes": ""
+  },
+  {
+   "id": 146,
+   "daysAgo": 52,
+   "hoursAgo": 6,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Gabriela Pérez",
+    "whatsapp": "0998170699"
+   },
+   "occasion": "adulto",
+   "eventInDays": -44,
+   "guests": 80,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    }
+   ],
+   "rangeMin": 140,
+   "rangeMax": 305,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 147,
+   "daysAgo": 51,
+   "hoursAgo": 20,
+   "status": "lost",
+   "lostReason": "Eligió otra empresa",
+   "contact": {
+    "name": "Daniela Salazar",
+    "whatsapp": "0988624024"
+   },
+   "occasion": "graduacion",
+   "eventInDays": -33,
+   "guests": 80,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#1F3A93",
+    "#F4C95D",
+    "#FFFFFF"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "carrito-snacks",
+     "name": "Carrito de snacks",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 75
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    }
+   ],
+   "rangeMin": 125,
+   "rangeMax": 235,
+   "source": "whatsapp",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 148,
+   "daysAgo": 51,
+   "hoursAgo": 10,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Verónica Naranjo",
+    "whatsapp": "0980126554"
+   },
+   "occasion": "corporativo",
+   "eventInDays": -38,
+   "guests": 50,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#2E5BFF",
+    "#7FD1C7",
+    "#FFFFFF"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 70
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 3,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 31
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 51
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 60
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 37
+    }
+   ],
+   "rangeMin": 205,
+   "rangeMax": 410,
+   "source": "armador",
+   "finalTotal": 311,
+   "deposit": 156,
+   "notes": ""
+  },
+  {
+   "id": 149,
+   "daysAgo": 50,
+   "hoursAgo": 5,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Ricardo Vera",
+    "whatsapp": "0997176003"
+   },
+   "occasion": "infantil",
+   "eventInDays": -30,
+   "guests": 50,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 3,
+     "pmin": 20,
+     "pmax": 36,
+     "final": 26
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 116
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 89
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 3,
+     "pmin": 15,
+     "pmax": 30,
+     "final": 23
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 31
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 64
+    }
+   ],
+   "rangeMin": 325,
+   "rangeMax": 633,
+   "source": "armador",
+   "finalTotal": 447,
+   "deposit": 224,
+   "notes": ""
+  },
+  {
+   "id": 150,
+   "daysAgo": 50,
+   "hoursAgo": 6,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Lorena Mera",
+    "whatsapp": "0987883053"
+   },
+   "occasion": "infantil",
+   "eventInDays": -43,
+   "guests": 60,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 52
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 176
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 102
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 149
+    }
+   ],
+   "rangeMin": 320,
+   "rangeMax": 610,
+   "source": "armador",
+   "finalTotal": 479,
+   "deposit": 479,
+   "notes": ""
+  },
+  {
+   "id": 151,
+   "daysAgo": 49,
+   "hoursAgo": 18,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Fernanda Toapanta",
+    "whatsapp": "0987763856"
+   },
+   "occasion": "infantil",
+   "eventInDays": -35,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 2,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 31
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 25
+    }
+   ],
+   "rangeMin": 86,
+   "rangeMax": 154,
+   "source": "armador",
+   "finalTotal": 112,
+   "deposit": 56,
+   "notes": ""
+  },
+  {
+   "id": 152,
+   "daysAgo": 48,
+   "hoursAgo": 7,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Esteban Toapanta",
+    "whatsapp": "0985964602"
+   },
+   "occasion": "infantil",
+   "eventInDays": -34,
+   "guests": 20,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 175
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 48
+    },
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 110
+    }
+   ],
+   "rangeMin": 190,
+   "rangeMax": 430,
+   "source": "armador",
+   "finalTotal": 333,
+   "deposit": 333,
+   "notes": ""
+  },
+  {
+   "id": 153,
+   "daysAgo": 48,
+   "hoursAgo": 4,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Cristina Villacís",
+    "whatsapp": "0992475848"
+   },
+   "occasion": "infantil",
+   "eventInDays": -33,
+   "guests": 15,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 55
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 119
+    },
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 107
+    }
+   ],
+   "rangeMin": 205,
+   "rangeMax": 420,
+   "source": "armador",
+   "finalTotal": 281,
+   "deposit": 281,
+   "notes": ""
+  },
+  {
+   "id": 154,
+   "daysAgo": 48,
+   "hoursAgo": 21,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Santiago Chiliquinga",
+    "whatsapp": "0990321201"
+   },
+   "occasion": "genero",
+   "eventInDays": -31,
+   "guests": 60,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#7CC4F0",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 42
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 3,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 34
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4,
+     "final": 3
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 3,
+     "pmin": 20,
+     "pmax": 36,
+     "final": 32
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 3,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 55
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 102
+    }
+   ],
+   "rangeMin": 336,
+   "rangeMax": 622,
+   "source": "armador",
+   "finalTotal": 510,
+   "deposit": 510,
+   "notes": ""
+  },
+  {
+   "id": 155,
+   "daysAgo": 47,
+   "hoursAgo": 5,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Jorge Morales",
+    "whatsapp": "0980497759"
+   },
+   "occasion": "babyshower",
+   "eventInDays": -29,
+   "guests": 80,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#9ED8F0",
+    "#FFFFFF",
+    "#F9C6D9"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 58
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 4,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 54
+    }
+   ],
+   "rangeMin": 180,
+   "rangeMax": 310,
+   "source": "armador",
+   "finalTotal": 274,
+   "deposit": 274,
+   "notes": ""
+  },
+  {
+   "id": 156,
+   "daysAgo": 46,
+   "hoursAgo": 11,
+   "status": "lost",
+   "lostReason": "Eligió otra empresa",
+   "contact": {
+    "name": "Santiago Morales",
+    "whatsapp": "0981459528"
+   },
+   "occasion": "infantil",
+   "eventInDays": -36,
+   "guests": 30,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 2,
+     "pmin": 25,
+     "pmax": 45
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60
+    }
+   ],
+   "rangeMin": 260,
+   "rangeMax": 485,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 157,
+   "daysAgo": 46,
+   "hoursAgo": 2,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Ricardo Cevallos",
+    "whatsapp": "0995869743"
+   },
+   "occasion": "romantica",
+   "eventInDays": -29,
+   "guests": 60,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 46
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 48
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 28
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 130
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 3,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 43
+    }
+   ],
+   "rangeMin": 270,
+   "rangeMax": 550,
+   "source": "armador",
+   "finalTotal": 381,
+   "deposit": 114,
+   "notes": ""
+  },
+  {
+   "id": 158,
+   "daysAgo": 46,
+   "hoursAgo": 21,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Naranjo",
+    "whatsapp": "0994095272"
+   },
+   "occasion": "aniversario",
+   "eventInDays": -40,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2467A",
+    "#F6A5C8",
+    "#F4C95D"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 5,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 47
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 67
+    }
+   ],
+   "rangeMin": 205,
+   "rangeMax": 390,
+   "source": "armador",
+   "finalTotal": 302,
+   "deposit": 302,
+   "notes": ""
+  },
+  {
+   "id": 159,
+   "daysAgo": 45,
+   "hoursAgo": 14,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Paola Pérez",
+    "whatsapp": "0994448505"
+   },
+   "occasion": "infantil",
+   "eventInDays": -25,
+   "guests": 20,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 56
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 181
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 42
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 31
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60,
+     "final": 53
+    }
+   ],
+   "rangeMin": 250,
+   "rangeMax": 455,
+   "source": "galeria",
+   "finalTotal": 363,
+   "deposit": 182,
+   "notes": ""
+  },
+  {
+   "id": 160,
+   "daysAgo": 44,
+   "hoursAgo": 20,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Gabriela Morales",
+    "whatsapp": "0996504417"
+   },
+   "occasion": "corporativo",
+   "eventInDays": -27,
+   "guests": 20,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2E5BFF",
+    "#7FD1C7",
+    "#FFFFFF"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 106
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 38
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 52
+    }
+   ],
+   "rangeMin": 145,
+   "rangeMax": 275,
+   "source": "armador",
+   "finalTotal": 196,
+   "deposit": 196,
+   "notes": ""
+  },
+  {
+   "id": 161,
+   "daysAgo": 43,
+   "hoursAgo": 4,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Cristina Pérez",
+    "whatsapp": "0981235912"
+   },
+   "occasion": "infantil",
+   "eventInDays": -24,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 94
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 76
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 27
+    },
+    {
+     "itemId": "carrito-snacks",
+     "name": "Carrito de snacks",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 75,
+     "final": 66
+    }
+   ],
+   "rangeMin": 176,
+   "rangeMax": 369,
+   "source": "galeria",
+   "finalTotal": 290,
+   "deposit": 145,
+   "notes": ""
+  },
+  {
+   "id": 162,
+   "daysAgo": 43,
+   "hoursAgo": 20,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Pablo Chiliquinga",
+    "whatsapp": "0993229049"
+   },
+   "occasion": "romantica",
+   "eventInDays": -37,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 2,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 41
+    },
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 94
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 46
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 68
+    }
+   ],
+   "rangeMin": 225,
+   "rangeMax": 410,
+   "source": "galeria",
+   "finalTotal": 336,
+   "deposit": 336,
+   "notes": ""
+  },
+  {
+   "id": 163,
+   "daysAgo": 42,
+   "hoursAgo": 16,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Ricardo Chiliquinga",
+    "whatsapp": "0994503328"
+   },
+   "occasion": "infantil",
+   "eventInDays": -28,
+   "guests": 40,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 49
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 2,
+     "pmin": 15,
+     "pmax": 30,
+     "final": 21
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 131
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 54
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 88
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 130
+    }
+   ],
+   "rangeMin": 350,
+   "rangeMax": 710,
+   "source": "armador",
+   "finalTotal": 494,
+   "deposit": 494,
+   "notes": ""
+  },
+  {
+   "id": 164,
+   "daysAgo": 42,
+   "hoursAgo": 9,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "María Fernanda Cevallos",
+    "whatsapp": "0985010115"
+   },
+   "occasion": "bautizo",
+   "eventInDays": -24,
+   "guests": 25,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32
+    }
+   ],
+   "rangeMin": 108,
+   "rangeMax": 188,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 165,
+   "daysAgo": 41,
+   "hoursAgo": 8,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Xavier Haro",
+    "whatsapp": "0988338176"
+   },
+   "occasion": "corporativo",
+   "eventInDays": -28,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2E5BFF",
+    "#7FD1C7",
+    "#FFFFFF"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    }
+   ],
+   "rangeMin": 65,
+   "rangeMax": 150,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 166,
+   "daysAgo": 38,
+   "hoursAgo": 0,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Chiliquinga",
+    "whatsapp": "0993933293"
+   },
+   "occasion": "bautizo",
+   "eventInDays": -30,
+   "guests": 100,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 5,
+     "pmin": 20,
+     "pmax": 36,
+     "final": 27
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 99
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 47
+    },
+    {
+     "itemId": "caja-padrinos",
+     "name": "Caja «¿Aceptas ser mi padrino?»",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 47
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90,
+     "final": 72
+    },
+    {
+     "itemId": "torta-2pisos",
+     "name": "Torta de 2 pisos",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 150,
+     "final": 121
+    }
+   ],
+   "rangeMin": 330,
+   "rangeMax": 705,
+   "source": "whatsapp",
+   "finalTotal": 521,
+   "deposit": 521,
+   "notes": ""
+  },
+  {
+   "id": 167,
+   "daysAgo": 37,
+   "hoursAgo": 23,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Salazar",
+    "whatsapp": "0984136138"
+   },
+   "occasion": "bautizo",
+   "eventInDays": -30,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 2,
+     "pmin": 15,
+     "pmax": 30,
+     "final": 21
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 140
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90,
+     "final": 62
+    }
+   ],
+   "rangeMin": 155,
+   "rangeMax": 330,
+   "source": "armador",
+   "finalTotal": 244,
+   "deposit": 73,
+   "notes": ""
+  },
+  {
+   "id": 168,
+   "daysAgo": 36,
+   "hoursAgo": 2,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Xavier Cevallos",
+    "whatsapp": "0985341406"
+   },
+   "occasion": "romantica",
+   "eventInDays": -25,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 38
+    },
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 97
+    }
+   ],
+   "rangeMin": 95,
+   "rangeMax": 195,
+   "source": "galeria",
+   "finalTotal": 135,
+   "deposit": 40,
+   "notes": ""
+  },
+  {
+   "id": 169,
+   "daysAgo": 35,
+   "hoursAgo": 15,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Karla Mera",
+    "whatsapp": "0999640492"
+   },
+   "occasion": "aniversario",
+   "eventInDays": -15,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2467A",
+    "#F6A5C8",
+    "#F4C95D"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 110
+    },
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 76
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 28
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 123
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90,
+     "final": 59
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 43
+    }
+   ],
+   "rangeMin": 340,
+   "rangeMax": 675,
+   "source": "armador",
+   "finalTotal": 482,
+   "deposit": 482,
+   "notes": ""
+  },
+  {
+   "id": 170,
+   "daysAgo": 35,
+   "hoursAgo": 22,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Gabriela Toapanta",
+    "whatsapp": "0982212861"
+   },
+   "occasion": "infantil",
+   "eventInDays": -29,
+   "guests": 50,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 36
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 46
+    }
+   ],
+   "rangeMin": 55,
+   "rangeMax": 145,
+   "source": "armador",
+   "finalTotal": 82,
+   "deposit": 82,
+   "notes": ""
+  },
+  {
+   "id": 171,
+   "daysAgo": 35,
+   "hoursAgo": 3,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Esteban Naranjo",
+    "whatsapp": "0989482255"
+   },
+   "occasion": "infantil",
+   "eventInDays": -21,
+   "guests": 15,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 36
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 1,
+     "pmin": 15,
+     "pmax": 30
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 1,
+     "pmin": 18,
+     "pmax": 32
+    }
+   ],
+   "rangeMin": 188,
+   "rangeMax": 388,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 172,
+   "daysAgo": 34,
+   "hoursAgo": 19,
+   "status": "lost",
+   "lostReason": "Cambió la fecha",
+   "contact": {
+    "name": "Diego Freire",
+    "whatsapp": "0981614541"
+   },
+   "occasion": "comunion",
+   "eventInDays": -14,
+   "guests": 50,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    }
+   ],
+   "rangeMin": 196,
+   "rangeMax": 389,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 173,
+   "daysAgo": 34,
+   "hoursAgo": 9,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Carlos Salazar",
+    "whatsapp": "0991670354"
+   },
+   "occasion": "infantil",
+   "eventInDays": -27,
+   "guests": 40,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "carrito-snacks",
+     "name": "Carrito de snacks",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 75
+    },
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    }
+   ],
+   "rangeMin": 110,
+   "rangeMax": 215,
+   "source": "galeria",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 174,
+   "daysAgo": 33,
+   "hoursAgo": 18,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Diego Morales",
+    "whatsapp": "0983688411"
+   },
+   "occasion": "adulto",
+   "eventInDays": -13,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "",
+   "items": [
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 28
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 180
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 130
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 58
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60,
+     "final": 44
+    }
+   ],
+   "rangeMin": 306,
+   "rangeMax": 614,
+   "source": "whatsapp",
+   "finalTotal": 468,
+   "deposit": 468,
+   "notes": ""
+  },
+  {
+   "id": 175,
+   "daysAgo": 33,
+   "hoursAgo": 11,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Karla Chiliquinga",
+    "whatsapp": "0987837495"
+   },
+   "occasion": "infantil",
+   "eventInDays": -28,
+   "guests": 25,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 52
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 37
+    },
+    {
+     "itemId": "carrito-snacks",
+     "name": "Carrito de snacks",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 75,
+     "final": 61
+    }
+   ],
+   "rangeMin": 130,
+   "rangeMax": 240,
+   "source": "whatsapp",
+   "finalTotal": 202,
+   "deposit": 202,
+   "notes": ""
+  },
+  {
+   "id": 176,
+   "daysAgo": 32,
+   "hoursAgo": 21,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Alejandra Cevallos",
+    "whatsapp": "0984229772"
+   },
+   "occasion": "genero",
+   "eventInDays": -13,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#7CC4F0",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "",
+   "items": [
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 25
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 2,
+     "pmin": 15,
+     "pmax": 30,
+     "final": 21
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 70
+    }
+   ],
+   "rangeMin": 96,
+   "rangeMax": 214,
+   "source": "armador",
+   "finalTotal": 162,
+   "deposit": 162,
+   "notes": ""
+  },
+  {
+   "id": 177,
+   "daysAgo": 30,
+   "hoursAgo": 5,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Gabriela Villacís",
+    "whatsapp": "0985065380"
+   },
+   "occasion": "infantil",
+   "eventInDays": -14,
+   "guests": 20,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 1,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 25
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60,
+     "final": 41
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 180
+    }
+   ],
+   "rangeMin": 168,
+   "rangeMax": 312,
+   "source": "armador",
+   "finalTotal": 246,
+   "deposit": 246,
+   "notes": ""
+  },
+  {
+   "id": 178,
+   "daysAgo": 29,
+   "hoursAgo": 13,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "María Fernanda Freire",
+    "whatsapp": "0988129710"
+   },
+   "occasion": "comunion",
+   "eventInDays": -24,
+   "guests": 60,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "torta-2pisos",
+     "name": "Torta de 2 pisos",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 150
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200
+    }
+   ],
+   "rangeMin": 345,
+   "rangeMax": 740,
+   "source": "whatsapp",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 179,
+   "daysAgo": 29,
+   "hoursAgo": 7,
+   "status": "lost",
+   "lostReason": "Fecha ocupada",
+   "contact": {
+    "name": "Mateo Cevallos",
+    "whatsapp": "0993426200"
+   },
+   "occasion": "bautizo",
+   "eventInDays": -17,
+   "guests": 20,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4
+    }
+   ],
+   "rangeMin": 306,
+   "rangeMax": 659,
+   "source": "galeria",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 180,
+   "daysAgo": 28,
+   "hoursAgo": 16,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Andrés Salazar",
+    "whatsapp": "0988429648"
+   },
+   "occasion": "bautizo",
+   "eventInDays": -10,
+   "guests": 80,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 4,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 38
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 143
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 29
+    }
+   ],
+   "rangeMin": 205,
+   "rangeMax": 385,
+   "source": "armador",
+   "finalTotal": 324,
+   "deposit": 324,
+   "notes": ""
+  },
+  {
+   "id": 181,
+   "daysAgo": 28,
+   "hoursAgo": 16,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Gabriela Chiliquinga",
+    "whatsapp": "0986167393"
+   },
+   "occasion": "infantil",
+   "eventInDays": -17,
+   "guests": 80,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "carrito-snacks",
+     "name": "Carrito de snacks",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 75
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 4,
+     "pmin": 15,
+     "pmax": 30
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 4,
+     "pmin": 35,
+     "pmax": 60
+    }
+   ],
+   "rangeMin": 240,
+   "rangeMax": 435,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 182,
+   "daysAgo": 27,
+   "hoursAgo": 8,
+   "status": "lost",
+   "lostReason": "Cambió la fecha",
+   "contact": {
+    "name": "Mateo Chiliquinga",
+    "whatsapp": "0991815354"
+   },
+   "occasion": "adulto",
+   "eventInDays": -21,
+   "guests": 60,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    }
+   ],
+   "rangeMin": 110,
+   "rangeMax": 215,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 183,
+   "daysAgo": 27,
+   "hoursAgo": 16,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Cevallos",
+    "whatsapp": "0995742351"
+   },
+   "occasion": "temporada",
+   "eventInDays": -10,
+   "guests": 20,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F28C28",
+    "#6B3FA0",
+    "#1E1E1E"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 34
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 144
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 46
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 52
+    }
+   ],
+   "rangeMin": 175,
+   "rangeMax": 340,
+   "source": "armador",
+   "finalTotal": 276,
+   "deposit": 138,
+   "notes": ""
+  },
+  {
+   "id": 184,
+   "daysAgo": 27,
+   "hoursAgo": 11,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Mateo Chiliquinga",
+    "whatsapp": "0986237424"
+   },
+   "occasion": "graduacion",
+   "eventInDays": -18,
+   "guests": 40,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#1F3A93",
+    "#F4C95D",
+    "#FFFFFF"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    }
+   ],
+   "rangeMin": 140,
+   "rangeMax": 290,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 185,
+   "daysAgo": 26,
+   "hoursAgo": 15,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Alejandra Pérez",
+    "whatsapp": "0984711099"
+   },
+   "occasion": "babyshower",
+   "eventInDays": -6,
+   "guests": 20,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#9ED8F0",
+    "#FFFFFF",
+    "#F9C6D9"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 33
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 41
+    },
+    {
+     "itemId": "recuerdos-chocolates",
+     "name": "Chocolates personalizados",
+     "qty": 1,
+     "pmin": 1.2,
+     "pmax": 3.5,
+     "final": 3
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 113
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 36,
+     "final": 26
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 108
+    }
+   ],
+   "rangeMin": 236,
+   "rangeMax": 454,
+   "source": "whatsapp",
+   "finalTotal": 324,
+   "deposit": 162,
+   "notes": ""
+  },
+  {
+   "id": 186,
+   "daysAgo": 25,
+   "hoursAgo": 12,
+   "status": "lost",
+   "lostReason": "Eligió otra empresa",
+   "contact": {
+    "name": "Gabriela Haro",
+    "whatsapp": "0987150475"
+   },
+   "occasion": "graduacion",
+   "eventInDays": -16,
+   "guests": 40,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#1F3A93",
+    "#F4C95D",
+    "#FFFFFF"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90
+    }
+   ],
+   "rangeMin": 130,
+   "rangeMax": 265,
+   "source": "galeria",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 187,
+   "daysAgo": 24,
+   "hoursAgo": 8,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Diego Haro",
+    "whatsapp": "0984845959"
+   },
+   "occasion": "adulto",
+   "eventInDays": -16,
+   "guests": 15,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "ramo-rosas",
+     "name": "Ramo de rosas grande con mensaje",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 95,
+     "final": 68
+    },
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 103
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 1,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 22
+    }
+   ],
+   "rangeMin": 113,
+   "rangeMax": 247,
+   "source": "galeria",
+   "finalTotal": 193,
+   "deposit": 193,
+   "notes": ""
+  },
+  {
+   "id": 188,
+   "daysAgo": 24,
+   "hoursAgo": 11,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "María Fernanda Mera",
+    "whatsapp": "0981539151"
+   },
+   "occasion": "babyshower",
+   "eventInDays": -10,
+   "guests": 15,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#9ED8F0",
+    "#FFFFFF",
+    "#F9C6D9"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 1,
+     "pmin": 18,
+     "pmax": 32
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70
+    }
+   ],
+   "rangeMin": 140,
+   "rangeMax": 296,
+   "source": "whatsapp",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 189,
+   "daysAgo": 23,
+   "hoursAgo": 6,
+   "status": "lost",
+   "lostReason": "Precio",
+   "contact": {
+    "name": "Pablo Cevallos",
+    "whatsapp": "0989534527"
+   },
+   "occasion": "comunion",
+   "eventInDays": -14,
+   "guests": 100,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#FFFFFF",
+    "#E8D7A8",
+    "#B59BE0"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 5,
+     "pmin": 25,
+     "pmax": 45
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 5,
+     "pmin": 35,
+     "pmax": 60
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 5,
+     "pmin": 18,
+     "pmax": 32
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 5,
+     "pmin": 15,
+     "pmax": 30
+    }
+   ],
+   "rangeMin": 625,
+   "rangeMax": 1155,
+   "source": "galeria",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 190,
+   "daysAgo": 22,
+   "hoursAgo": 11,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Gabriela Chiliquinga",
+    "whatsapp": "0996515255"
+   },
+   "occasion": "aniversario",
+   "eventInDays": -8,
+   "guests": 50,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2467A",
+    "#F6A5C8",
+    "#F4C95D"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "torta-2pisos",
+     "name": "Torta de 2 pisos",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 150,
+     "final": 104
+    },
+    {
+     "itemId": "recuerdos-chocolates",
+     "name": "Chocolates personalizados",
+     "qty": 1,
+     "pmin": 1.2,
+     "pmax": 3.5,
+     "final": 2
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 3,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 26
+    },
+    {
+     "itemId": "ramo-rosas",
+     "name": "Ramo de rosas grande con mensaje",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 95,
+     "final": 71
+    }
+   ],
+   "rangeMin": 160,
+   "rangeMax": 344,
+   "source": "armador",
+   "finalTotal": 255,
+   "deposit": 255,
+   "notes": ""
+  },
+  {
+   "id": 191,
+   "daysAgo": 21,
+   "hoursAgo": 9,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Fernanda Toapanta",
+    "whatsapp": "0992617949"
+   },
+   "occasion": "infantil",
+   "eventInDays": -15,
+   "guests": 15,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140
+    },
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60
+    }
+   ],
+   "rangeMin": 105,
+   "rangeMax": 200,
+   "source": "whatsapp",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 192,
+   "daysAgo": 21,
+   "hoursAgo": 6,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Salazar",
+    "whatsapp": "0992377200"
+   },
+   "occasion": "infantil",
+   "eventInDays": -14,
+   "guests": 20,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 59
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 192
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60,
+     "final": 41
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 120
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 54
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 49
+    }
+   ],
+   "rangeMin": 360,
+   "rangeMax": 690,
+   "source": "whatsapp",
+   "finalTotal": 515,
+   "deposit": 154,
+   "notes": ""
+  },
+  {
+   "id": 193,
+   "daysAgo": 19,
+   "hoursAgo": 13,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Diego Villacís",
+    "whatsapp": "0998414849"
+   },
+   "occasion": "bautizo",
+   "eventInDays": -11,
+   "guests": 25,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 130
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 35
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 104
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 26
+    }
+   ],
+   "rangeMin": 220,
+   "rangeMax": 460,
+   "source": "galeria",
+   "finalTotal": 295,
+   "deposit": 295,
+   "notes": ""
+  },
+  {
+   "id": 194,
+   "daysAgo": 18,
+   "hoursAgo": 4,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Carlos Pérez",
+    "whatsapp": "0984858666"
+   },
+   "occasion": "babyshower",
+   "eventInDays": 5,
+   "guests": 25,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#9ED8F0",
+    "#FFFFFF",
+    "#F9C6D9"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 2,
+     "pmin": 15,
+     "pmax": 30,
+     "final": 25
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 60
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 54
+    }
+   ],
+   "rangeMin": 130,
+   "rangeMax": 270,
+   "source": "whatsapp",
+   "finalTotal": 218,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 195,
+   "daysAgo": 18,
+   "hoursAgo": 0,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Ricardo Salazar",
+    "whatsapp": "0990612578"
+   },
+   "occasion": "infantil",
+   "eventInDays": 3,
+   "guests": 80,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 146
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 35
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 4,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 41
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 4,
+     "pmin": 20,
+     "pmax": 36,
+     "final": 25
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 39
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 154
+    }
+   ],
+   "rangeMin": 435,
+   "rangeMax": 844,
+   "source": "galeria",
+   "finalTotal": 638,
+   "deposit": 319,
+   "notes": ""
+  },
+  {
+   "id": 196,
+   "daysAgo": 18,
+   "hoursAgo": 8,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Ricardo Freire",
+    "whatsapp": "0980520113"
+   },
+   "occasion": "graduacion",
+   "eventInDays": 13,
+   "guests": 50,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#1F3A93",
+    "#F4C95D",
+    "#FFFFFF"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 3,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 49
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 161
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 53
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 120
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 3,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 34
+    }
+   ],
+   "rangeMin": 385,
+   "rangeMax": 745,
+   "source": "armador",
+   "finalTotal": 583,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 197,
+   "daysAgo": 17,
+   "hoursAgo": 22,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Santiago Morales",
+    "whatsapp": "0999190055"
+   },
+   "occasion": "infantil",
+   "eventInDays": 11,
+   "guests": 15,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 1,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 27
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 54
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 164
+    }
+   ],
+   "rangeMin": 173,
+   "rangeMax": 312,
+   "source": "whatsapp",
+   "finalTotal": 245,
+   "deposit": 122,
+   "notes": ""
+  },
+  {
+   "id": 198,
+   "daysAgo": 17,
+   "hoursAgo": 12,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Alejandra Salazar",
+    "whatsapp": "0992917586"
+   },
+   "occasion": "infantil",
+   "eventInDays": 1,
+   "guests": 40,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 119
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 2,
+     "pmin": 20,
+     "pmax": 36,
+     "final": 31
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 58
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 2,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 36
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 62
+    },
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 122
+    }
+   ],
+   "rangeMin": 315,
+   "rangeMax": 592,
+   "source": "armador",
+   "finalTotal": 495,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 199,
+   "daysAgo": 16,
+   "hoursAgo": 6,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Alejandra Mera",
+    "whatsapp": "0992042368"
+   },
+   "occasion": "infantil",
+   "eventInDays": 5,
+   "guests": 50,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 33
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 200
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 3,
+     "pmin": 20,
+     "pmax": 36,
+     "final": 27
+    }
+   ],
+   "rangeMin": 205,
+   "rangeMax": 383,
+   "source": "armador",
+   "finalTotal": 314,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 200,
+   "daysAgo": 14,
+   "hoursAgo": 19,
+   "status": "lost",
+   "lostReason": "Cambió la fecha",
+   "contact": {
+    "name": "Carlos Cevallos",
+    "whatsapp": "0998974170"
+   },
+   "occasion": "infantil",
+   "eventInDays": -7,
+   "guests": 20,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "carrito-snacks",
+     "name": "Carrito de snacks",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 75
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    }
+   ],
+   "rangeMin": 215,
+   "rangeMax": 435,
+   "source": "whatsapp",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 201,
+   "daysAgo": 14,
+   "hoursAgo": 8,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Gabriela Morales",
+    "whatsapp": "0992690354"
+   },
+   "occasion": "babyshower",
+   "eventInDays": 13,
+   "guests": 50,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#9ED8F0",
+    "#FFFFFF",
+    "#F9C6D9"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 89
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90,
+     "final": 60
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 36
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 124
+    }
+   ],
+   "rangeMin": 210,
+   "rangeMax": 435,
+   "source": "armador",
+   "finalTotal": 309,
+   "deposit": 154,
+   "notes": ""
+  },
+  {
+   "id": 202,
+   "daysAgo": 13,
+   "hoursAgo": 8,
+   "status": "lost",
+   "lostReason": "Precio",
+   "contact": {
+    "name": "Jorge Pérez",
+    "whatsapp": "0987889606"
+   },
+   "occasion": "adulto",
+   "eventInDays": -7,
+   "guests": 80,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45
+    },
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120
+    }
+   ],
+   "rangeMin": 105,
+   "rangeMax": 220,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 203,
+   "daysAgo": 13,
+   "hoursAgo": 1,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Fernanda Freire",
+    "whatsapp": "0996221051"
+   },
+   "occasion": "romantica",
+   "eventInDays": 1,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 85
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 104
+    }
+   ],
+   "rangeMin": 145,
+   "rangeMax": 280,
+   "source": "armador",
+   "finalTotal": 189,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 204,
+   "daysAgo": 13,
+   "hoursAgo": 9,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Karla Vera",
+    "whatsapp": "0992582346"
+   },
+   "occasion": "bautizo",
+   "eventInDays": 13,
+   "guests": 40,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 124
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4,
+     "final": 2
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 2,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 37
+    },
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 41
+    }
+   ],
+   "rangeMin": 212,
+   "rangeMax": 394,
+   "source": "armador",
+   "finalTotal": 282,
+   "deposit": 85,
+   "notes": ""
+  },
+  {
+   "id": 205,
+   "daysAgo": 12,
+   "hoursAgo": 2,
+   "status": "lost",
+   "lostReason": "Eligió otra empresa",
+   "contact": {
+    "name": "María Fernanda Chiliquinga",
+    "whatsapp": "0982521750"
+   },
+   "occasion": "corporativo",
+   "eventInDays": -4,
+   "guests": 60,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#2E5BFF",
+    "#7FD1C7",
+    "#FFFFFF"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "backdrop-negro-plata",
+     "name": "Backdrop negro y plata",
+     "qty": 1,
+     "pmin": 110,
+     "pmax": 200
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80
+    }
+   ],
+   "rangeMin": 185,
+   "rangeMax": 370,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 206,
+   "daysAgo": 12,
+   "hoursAgo": 11,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Paola Haro",
+    "whatsapp": "0985012763"
+   },
+   "occasion": "infantil",
+   "eventInDays": 11,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 59
+    },
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 146
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 57
+    }
+   ],
+   "rangeMin": 205,
+   "rangeMax": 370,
+   "source": "galeria",
+   "finalTotal": 262,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 207,
+   "daysAgo": 11,
+   "hoursAgo": 3,
+   "status": "lost",
+   "lostReason": "No respondió",
+   "contact": {
+    "name": "Pablo Haro",
+    "whatsapp": "0989604390"
+   },
+   "occasion": "adulto",
+   "eventInDays": 0,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    }
+   ],
+   "rangeMin": 241,
+   "rangeMax": 464,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 208,
+   "daysAgo": 10,
+   "hoursAgo": 7,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Jorge Salazar",
+    "whatsapp": "0989849045"
+   },
+   "occasion": "romantica",
+   "eventInDays": 1,
+   "guests": 60,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#C2123C",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 3,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 28
+    },
+    {
+     "itemId": "deco-room",
+     "name": "Deco Room (cuarto)",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 101
+    }
+   ],
+   "rangeMin": 124,
+   "rangeMax": 236,
+   "source": "galeria",
+   "finalTotal": 185,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 209,
+   "daysAgo": 10,
+   "hoursAgo": 16,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Verónica Mera",
+    "whatsapp": "0986062831"
+   },
+   "occasion": "infantil",
+   "eventInDays": -1,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "bocaditos-mixtos",
+     "name": "Bandeja de bocaditos mixtos",
+     "qty": 2,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 52
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 67
+    },
+    {
+     "itemId": "recuerdos-chocolates",
+     "name": "Chocolates personalizados",
+     "qty": 1,
+     "pmin": 1.2,
+     "pmax": 3.5,
+     "final": 2
+    }
+   ],
+   "rangeMin": 116,
+   "rangeMax": 204,
+   "source": "whatsapp",
+   "finalTotal": 173,
+   "deposit": 86,
+   "notes": ""
+  },
+  {
+   "id": 210,
+   "daysAgo": 10,
+   "hoursAgo": 15,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Alejandra Naranjo",
+    "whatsapp": "0986787754"
+   },
+   "occasion": "graduacion",
+   "eventInDays": 16,
+   "guests": 30,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#1F3A93",
+    "#F4C95D",
+    "#FFFFFF"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 103
+    },
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 44
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 2,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 31
+    }
+   ],
+   "rangeMin": 145,
+   "rangeMax": 285,
+   "source": "whatsapp",
+   "finalTotal": 209,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 211,
+   "daysAgo": 9,
+   "hoursAgo": 15,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Alejandra Pérez",
+    "whatsapp": "0981230468"
+   },
+   "occasion": "infantil",
+   "eventInDays": 14,
+   "guests": 25,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Mami",
+   "items": [
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 49
+    },
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 113
+    },
+    {
+     "itemId": "tartaletas",
+     "name": "Tartaletas de frutas",
+     "qty": 2,
+     "pmin": 18,
+     "pmax": 32,
+     "final": 26
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 105
+    }
+   ],
+   "rangeMin": 231,
+   "rangeMax": 444,
+   "source": "whatsapp",
+   "finalTotal": 319,
+   "deposit": 96,
+   "notes": ""
+  },
+  {
+   "id": 212,
+   "daysAgo": 9,
+   "hoursAgo": 22,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Andrés Freire",
+    "whatsapp": "0996602851"
+   },
+   "occasion": "infantil",
+   "eventInDays": -6,
+   "guests": 40,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 2,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 39
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 49
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 58
+    }
+   ],
+   "rangeMin": 125,
+   "rangeMax": 260,
+   "source": "armador",
+   "finalTotal": 185,
+   "deposit": 185,
+   "notes": ""
+  },
+  {
+   "id": 213,
+   "daysAgo": 8,
+   "hoursAgo": 17,
+   "status": "done",
+   "lostReason": null,
+   "contact": {
+    "name": "Verónica Salazar",
+    "whatsapp": "0999343543"
+   },
+   "occasion": "aniversario",
+   "eventInDays": -3,
+   "guests": 30,
+   "place": "otra",
+   "city": "Baños",
+   "colors": [
+    "#C2467A",
+    "#F6A5C8",
+    "#F4C95D"
+   ],
+   "honoree": "Gianna",
+   "items": [
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 122
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60,
+     "final": 43
+    }
+   ],
+   "rangeMin": 115,
+   "rangeMax": 220,
+   "source": "armador",
+   "finalTotal": 165,
+   "deposit": 82,
+   "notes": ""
+  },
+  {
+   "id": 214,
+   "daysAgo": 6,
+   "hoursAgo": 3,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Paola Chiliquinga",
+    "whatsapp": "0999221368"
+   },
+   "occasion": "infantil",
+   "eventInDays": 11,
+   "guests": 30,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "backdrop-nombre",
+     "name": "Backdrop con nombre",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 180,
+     "final": 159
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 32
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 59
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 120
+    }
+   ],
+   "rangeMin": 210,
+   "rangeMax": 455,
+   "source": "armador",
+   "finalTotal": 370,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 215,
+   "daysAgo": 5,
+   "hoursAgo": 10,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Pablo Salazar",
+    "whatsapp": "0990901155"
+   },
+   "occasion": "adulto",
+   "eventInDays": 14,
+   "guests": 60,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#2B2B3A",
+    "#C0C4CC",
+    "#F4C95D"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 53
+    },
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 3,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 35
+    },
+    {
+     "itemId": "ramo-corazon",
+     "name": "Ramo corazón personalizado",
+     "qty": 1,
+     "pmin": 60,
+     "pmax": 120,
+     "final": 96
+    }
+   ],
+   "rangeMin": 165,
+   "rangeMax": 345,
+   "source": "armador",
+   "finalTotal": 254,
+   "deposit": 127,
+   "notes": ""
+  },
+  {
+   "id": 216,
+   "daysAgo": 3,
+   "hoursAgo": 0,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Mera",
+    "whatsapp": "0988917828"
+   },
+   "occasion": "infantil",
+   "eventInDays": 24,
+   "guests": 15,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Camila",
+   "items": [
+    {
+     "itemId": "bocaditos-sal",
+     "name": "Bocaditos de sal",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 45,
+     "final": 39
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 48
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 56
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 49
+    }
+   ],
+   "rangeMin": 140,
+   "rangeMax": 285,
+   "source": "whatsapp",
+   "finalTotal": 192,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 217,
+   "daysAgo": 1,
+   "hoursAgo": 20,
+   "status": "new",
+   "lostReason": null,
+   "contact": {
+    "name": "Daniela Haro",
+    "whatsapp": "0999805441"
+   },
+   "occasion": "infantil",
+   "eventInDays": 14,
+   "guests": 40,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Emilia",
+   "items": [
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200
+    },
+    {
+     "itemId": "carrito-snacks",
+     "name": "Carrito de snacks",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 75
+    }
+   ],
+   "rangeMin": 130,
+   "rangeMax": 275,
+   "source": "galeria",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 218,
+   "daysAgo": 0,
+   "hoursAgo": 18,
+   "status": "new",
+   "lostReason": null,
+   "contact": {
+    "name": "Ricardo Freire",
+    "whatsapp": "0999132040"
+   },
+   "occasion": "infantil",
+   "eventInDays": 16,
+   "guests": 80,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "ramillete-helio",
+     "name": "Ramillete de globos con helio",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55
+    },
+    {
+     "itemId": "cilindros-bases",
+     "name": "Cilindros y bases",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45
+    },
+    {
+     "itemId": "cupcakes",
+     "name": "Cupcakes decorados",
+     "qty": 4,
+     "pmin": 20,
+     "pmax": 36
+    }
+   ],
+   "rangeMin": 125,
+   "rangeMax": 244,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 219,
+   "daysAgo": 0,
+   "hoursAgo": 5,
+   "status": "new",
+   "lostReason": null,
+   "contact": {
+    "name": "Camila Rodríguez",
+    "whatsapp": "0995735874"
+   },
+   "occasion": "genero",
+   "eventInDays": 12,
+   "guests": 40,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#7CC4F0",
+    "#F6A5C8",
+    "#FFFFFF"
+   ],
+   "honoree": "Valentina",
+   "items": [
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90
+    }
+   ],
+   "rangeMin": 66,
+   "rangeMax": 184,
+   "source": "armador",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 220,
+   "daysAgo": 0,
+   "hoursAgo": 3,
+   "status": "new",
+   "lostReason": null,
+   "contact": {
+    "name": "Gabriela Toapanta",
+    "whatsapp": "0998317887"
+   },
+   "occasion": "infantil",
+   "eventInDays": 20,
+   "guests": 30,
+   "place": "otra",
+   "city": "Latacunga",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Thiago",
+   "items": [
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160
+    },
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70
+    },
+    {
+     "itemId": "pinata",
+     "name": "Piñata temática",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45
+    }
+   ],
+   "rangeMin": 145,
+   "rangeMax": 275,
+   "source": "galeria",
+   "finalTotal": null,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 221,
+   "daysAgo": 2,
+   "hoursAgo": 0,
+   "status": "quoted",
+   "lostReason": null,
+   "contact": {
+    "name": "Patricia Yánez",
+    "whatsapp": "0989057277"
+   },
+   "occasion": "infantil",
+   "eventInDays": 1,
+   "guests": 100,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "backdrop-vespa",
+     "name": "Backdrop vespa / figura",
+     "qty": 1,
+     "pmin": 120,
+     "pmax": 220,
+     "final": 148
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 88
+    },
+    {
+     "itemId": "galletas",
+     "name": "Galletas decoradas",
+     "qty": 5,
+     "pmin": 15,
+     "pmax": 30,
+     "final": 23
+    }
+   ],
+   "rangeMin": 265,
+   "rangeMax": 510,
+   "source": "armador",
+   "finalTotal": 351,
+   "deposit": 0,
+   "notes": ""
+  },
+  {
+   "id": 222,
+   "daysAgo": 6,
+   "hoursAgo": 2,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Lorena Chiliquinga",
+    "whatsapp": "0982080940"
+   },
+   "occasion": "infantil",
+   "eventInDays": 6,
+   "guests": 50,
+   "place": "retiro",
+   "city": "",
+   "colors": [
+    "#F06FA6",
+    "#7FD1C7",
+    "#B59BE0"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "carrito-algodon",
+     "name": "Carrito de algodón de azúcar",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 70,
+     "final": 53
+    },
+    {
+     "itemId": "arco-organico",
+     "name": "Arco orgánico de globos",
+     "qty": 1,
+     "pmin": 85,
+     "pmax": 160,
+     "final": 135
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 108
+    },
+    {
+     "itemId": "torta-tematica",
+     "name": "Torta temática",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 90,
+     "final": 79
+    }
+   ],
+   "rangeMin": 230,
+   "rangeMax": 460,
+   "source": "galeria",
+   "finalTotal": 375,
+   "deposit": 112,
+   "notes": ""
+  },
+  {
+   "id": 223,
+   "daysAgo": 5,
+   "hoursAgo": 2,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Mateo Pérez",
+    "whatsapp": "0991826400"
+   },
+   "occasion": "corporativo",
+   "eventInDays": 3,
+   "guests": 25,
+   "place": "ambato",
+   "city": "",
+   "colors": [
+    "#2E5BFF",
+    "#7FD1C7",
+    "#FFFFFF"
+   ],
+   "honoree": "Sebastián",
+   "items": [
+    {
+     "itemId": "carrito-snacks",
+     "name": "Carrito de snacks",
+     "qty": 1,
+     "pmin": 40,
+     "pmax": 75,
+     "final": 61
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 134
+    },
+    {
+     "itemId": "mesas-sillas",
+     "name": "Mesas y sillas (set)",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 90,
+     "final": 73
+    },
+    {
+     "itemId": "columnas-globos",
+     "name": "Columnas de globos (par)",
+     "qty": 1,
+     "pmin": 45,
+     "pmax": 80,
+     "final": 56
+    }
+   ],
+   "rangeMin": 205,
+   "rangeMax": 445,
+   "source": "whatsapp",
+   "finalTotal": 324,
+   "deposit": 97,
+   "notes": ""
+  },
+  {
+   "id": 224,
+   "daysAgo": 9,
+   "hoursAgo": 2,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Freire",
+    "whatsapp": "0984270561"
+   },
+   "occasion": "graduacion",
+   "eventInDays": 9,
+   "guests": 40,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#1F3A93",
+    "#F4C95D",
+    "#FFFFFF"
+   ],
+   "honoree": "Mateo",
+   "items": [
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 52
+    },
+    {
+     "itemId": "numero-gigante",
+     "name": "Número gigante",
+     "qty": 1,
+     "pmin": 30,
+     "pmax": 60,
+     "final": 47
+    },
+    {
+     "itemId": "espuma-confeti",
+     "name": "Espuma, carioca y confeti",
+     "qty": 1,
+     "pmin": 8,
+     "pmax": 20,
+     "final": 14
+    }
+   ],
+   "rangeMin": 73,
+   "rangeMax": 140,
+   "source": "armador",
+   "finalTotal": 113,
+   "deposit": 34,
+   "notes": ""
+  },
+  {
+   "id": 225,
+   "daysAgo": 4,
+   "hoursAgo": 2,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Verónica Mera",
+    "whatsapp": "0983725416"
+   },
+   "occasion": "temporada",
+   "eventInDays": 9,
+   "guests": 60,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#F28C28",
+    "#6B3FA0",
+    "#1E1E1E"
+   ],
+   "honoree": "",
+   "items": [
+    {
+     "itemId": "carrito-canguil",
+     "name": "Carrito de canguil",
+     "qty": 1,
+     "pmin": 35,
+     "pmax": 60,
+     "final": 51
+    },
+    {
+     "itemId": "pinata",
+     "name": "Piñata temática",
+     "qty": 1,
+     "pmin": 20,
+     "pmax": 45,
+     "final": 30
+    },
+    {
+     "itemId": "cotillon",
+     "name": "Cotillón y gafas de fiesta",
+     "qty": 1,
+     "pmin": 10,
+     "pmax": 25,
+     "final": 17
+    }
+   ],
+   "rangeMin": 65,
+   "rangeMax": 130,
+   "source": "galeria",
+   "finalTotal": 98,
+   "deposit": 29,
+   "notes": ""
+  },
+  {
+   "id": 226,
+   "daysAgo": 7,
+   "hoursAgo": 1,
+   "status": "deposit",
+   "lostReason": null,
+   "contact": {
+    "name": "Sofía Pérez",
+    "whatsapp": "0980226894"
+   },
+   "occasion": "bautizo",
+   "eventInDays": 4,
+   "guests": 60,
+   "place": "otra",
+   "city": "Riobamba",
+   "colors": [
+    "#FFFFFF",
+    "#CFE9F7",
+    "#E8D7A8"
+   ],
+   "honoree": "Doña Rosa",
+   "items": [
+    {
+     "itemId": "caja-padrinos",
+     "name": "Caja «¿Aceptas ser mi padrino?»",
+     "qty": 1,
+     "pmin": 25,
+     "pmax": 55,
+     "final": 36
+    },
+    {
+     "itemId": "recuerdos-velas",
+     "name": "Velas personalizadas",
+     "qty": 1,
+     "pmin": 1.5,
+     "pmax": 4,
+     "final": 3
+    },
+    {
+     "itemId": "mesa-dulces",
+     "name": "Mesa de dulces",
+     "qty": 1,
+     "pmin": 70,
+     "pmax": 140,
+     "final": 93
+    },
+    {
+     "itemId": "carpa",
+     "name": "Carpa / estructura",
+     "qty": 1,
+     "pmin": 90,
+     "pmax": 200,
+     "final": 152
+    }
+   ],
+   "rangeMin": 186,
+   "rangeMax": 399,
+   "source": "galeria",
+   "finalTotal": 284,
+   "deposit": 85,
+   "notes": ""
+  }
+ ],
+ "funnelDaily": [
+  {
+   "daysAgo": 89,
+   "visit": 44,
+   "opened": 9,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 88,
+   "visit": 46,
+   "opened": 11,
+   "added3": 4,
+   "suggShown": 8,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 87,
+   "visit": 43,
+   "opened": 9,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 86,
+   "visit": 71,
+   "opened": 18,
+   "added3": 7,
+   "suggShown": 13,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 85,
+   "visit": 42,
+   "opened": 8,
+   "added3": 4,
+   "suggShown": 6,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 84,
+   "visit": 37,
+   "opened": 7,
+   "added3": 3,
+   "suggShown": 5,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 83,
+   "visit": 38,
+   "opened": 9,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 82,
+   "visit": 54,
+   "opened": 14,
+   "added3": 5,
+   "suggShown": 10,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 81,
+   "visit": 59,
+   "opened": 13,
+   "added3": 5,
+   "suggShown": 9,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 80,
+   "visit": 52,
+   "opened": 14,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 79,
+   "visit": 34,
+   "opened": 8,
+   "added3": 4,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 78,
+   "visit": 52,
+   "opened": 11,
+   "added3": 5,
+   "suggShown": 8,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 77,
+   "visit": 23,
+   "opened": 3,
+   "added3": 1,
+   "suggShown": 2,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 76,
+   "visit": 46,
+   "opened": 10,
+   "added3": 4,
+   "suggShown": 7,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 75,
+   "visit": 25,
+   "opened": 6,
+   "added3": 3,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 74,
+   "visit": 42,
+   "opened": 10,
+   "added3": 3,
+   "suggShown": 7,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 73,
+   "visit": 21,
+   "opened": 3,
+   "added3": 1,
+   "suggShown": 2,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 72,
+   "visit": 12,
+   "opened": 0,
+   "added3": 0,
+   "suggShown": 0,
+   "suggAccepted": 0
+  },
+  {
+   "daysAgo": 71,
+   "visit": 51,
+   "opened": 13,
+   "added3": 5,
+   "suggShown": 9,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 70,
+   "visit": 53,
+   "opened": 12,
+   "added3": 6,
+   "suggShown": 8,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 69,
+   "visit": 47,
+   "opened": 10,
+   "added3": 3,
+   "suggShown": 7,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 68,
+   "visit": 27,
+   "opened": 5,
+   "added3": 2,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 67,
+   "visit": 53,
+   "opened": 11,
+   "added3": 4,
+   "suggShown": 8,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 66,
+   "visit": 54,
+   "opened": 14,
+   "added3": 7,
+   "suggShown": 10,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 65,
+   "visit": 64,
+   "opened": 16,
+   "added3": 7,
+   "suggShown": 11,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 64,
+   "visit": 17,
+   "opened": 2,
+   "added3": 1,
+   "suggShown": 1,
+   "suggAccepted": 0
+  },
+  {
+   "daysAgo": 63,
+   "visit": 31,
+   "opened": 8,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 62,
+   "visit": 28,
+   "opened": 6,
+   "added3": 2,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 61,
+   "visit": 25,
+   "opened": 5,
+   "added3": 1,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 60,
+   "visit": 88,
+   "opened": 21,
+   "added3": 8,
+   "suggShown": 15,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 59,
+   "visit": 48,
+   "opened": 9,
+   "added3": 4,
+   "suggShown": 6,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 58,
+   "visit": 63,
+   "opened": 15,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 57,
+   "visit": 32,
+   "opened": 7,
+   "added3": 3,
+   "suggShown": 5,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 56,
+   "visit": 23,
+   "opened": 3,
+   "added3": 0,
+   "suggShown": 2,
+   "suggAccepted": 0
+  },
+  {
+   "daysAgo": 55,
+   "visit": 26,
+   "opened": 5,
+   "added3": 2,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 54,
+   "visit": 57,
+   "opened": 13,
+   "added3": 6,
+   "suggShown": 9,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 53,
+   "visit": 52,
+   "opened": 13,
+   "added3": 6,
+   "suggShown": 9,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 52,
+   "visit": 63,
+   "opened": 15,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 51,
+   "visit": 61,
+   "opened": 15,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 50,
+   "visit": 65,
+   "opened": 15,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 49,
+   "visit": 30,
+   "opened": 7,
+   "added3": 3,
+   "suggShown": 5,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 48,
+   "visit": 63,
+   "opened": 18,
+   "added3": 8,
+   "suggShown": 13,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 47,
+   "visit": 48,
+   "opened": 10,
+   "added3": 4,
+   "suggShown": 7,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 46,
+   "visit": 81,
+   "opened": 20,
+   "added3": 8,
+   "suggShown": 14,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 45,
+   "visit": 44,
+   "opened": 8,
+   "added3": 4,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 44,
+   "visit": 23,
+   "opened": 4,
+   "added3": 2,
+   "suggShown": 3,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 43,
+   "visit": 65,
+   "opened": 16,
+   "added3": 7,
+   "suggShown": 11,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 42,
+   "visit": 51,
+   "opened": 12,
+   "added3": 6,
+   "suggShown": 8,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 41,
+   "visit": 46,
+   "opened": 9,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 40,
+   "visit": 18,
+   "opened": 3,
+   "added3": 1,
+   "suggShown": 2,
+   "suggAccepted": 0
+  },
+  {
+   "daysAgo": 39,
+   "visit": 20,
+   "opened": 4,
+   "added3": 1,
+   "suggShown": 3,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 38,
+   "visit": 45,
+   "opened": 10,
+   "added3": 4,
+   "suggShown": 7,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 37,
+   "visit": 41,
+   "opened": 8,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 36,
+   "visit": 40,
+   "opened": 9,
+   "added3": 4,
+   "suggShown": 6,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 35,
+   "visit": 78,
+   "opened": 19,
+   "added3": 8,
+   "suggShown": 13,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 34,
+   "visit": 45,
+   "opened": 11,
+   "added3": 5,
+   "suggShown": 8,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 33,
+   "visit": 61,
+   "opened": 15,
+   "added3": 5,
+   "suggShown": 10,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 32,
+   "visit": 22,
+   "opened": 4,
+   "added3": 2,
+   "suggShown": 3,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 31,
+   "visit": 12,
+   "opened": 0,
+   "added3": 0,
+   "suggShown": 0,
+   "suggAccepted": 0
+  },
+  {
+   "daysAgo": 30,
+   "visit": 31,
+   "opened": 6,
+   "added3": 3,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 29,
+   "visit": 63,
+   "opened": 13,
+   "added3": 6,
+   "suggShown": 9,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 28,
+   "visit": 68,
+   "opened": 17,
+   "added3": 6,
+   "suggShown": 12,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 27,
+   "visit": 75,
+   "opened": 17,
+   "added3": 8,
+   "suggShown": 12,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 26,
+   "visit": 33,
+   "opened": 7,
+   "added3": 4,
+   "suggShown": 5,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 25,
+   "visit": 31,
+   "opened": 7,
+   "added3": 3,
+   "suggShown": 5,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 24,
+   "visit": 50,
+   "opened": 12,
+   "added3": 5,
+   "suggShown": 8,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 23,
+   "visit": 41,
+   "opened": 11,
+   "added3": 4,
+   "suggShown": 8,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 22,
+   "visit": 53,
+   "opened": 12,
+   "added3": 4,
+   "suggShown": 8,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 21,
+   "visit": 61,
+   "opened": 13,
+   "added3": 6,
+   "suggShown": 9,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 20,
+   "visit": 29,
+   "opened": 5,
+   "added3": 1,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 19,
+   "visit": 26,
+   "opened": 5,
+   "added3": 2,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 18,
+   "visit": 83,
+   "opened": 24,
+   "added3": 9,
+   "suggShown": 17,
+   "suggAccepted": 5
+  },
+  {
+   "daysAgo": 17,
+   "visit": 49,
+   "opened": 14,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 16,
+   "visit": 39,
+   "opened": 10,
+   "added3": 4,
+   "suggShown": 7,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 15,
+   "visit": 23,
+   "opened": 3,
+   "added3": 1,
+   "suggShown": 2,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 14,
+   "visit": 71,
+   "opened": 15,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 13,
+   "visit": 76,
+   "opened": 19,
+   "added3": 9,
+   "suggShown": 13,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 12,
+   "visit": 53,
+   "opened": 13,
+   "added3": 6,
+   "suggShown": 9,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 11,
+   "visit": 48,
+   "opened": 10,
+   "added3": 4,
+   "suggShown": 7,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 10,
+   "visit": 68,
+   "opened": 18,
+   "added3": 7,
+   "suggShown": 13,
+   "suggAccepted": 4
+  },
+  {
+   "daysAgo": 9,
+   "visit": 68,
+   "opened": 16,
+   "added3": 8,
+   "suggShown": 11,
+   "suggAccepted": 3
+  },
+  {
+   "daysAgo": 8,
+   "visit": 40,
+   "opened": 9,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 7,
+   "visit": 43,
+   "opened": 9,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 6,
+   "visit": 67,
+   "opened": 14,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 5,
+   "visit": 63,
+   "opened": 14,
+   "added3": 6,
+   "suggShown": 10,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 4,
+   "visit": 42,
+   "opened": 9,
+   "added3": 4,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 3,
+   "visit": 32,
+   "opened": 8,
+   "added3": 4,
+   "suggShown": 6,
+   "suggAccepted": 2
+  },
+  {
+   "daysAgo": 2,
+   "visit": 23,
+   "opened": 5,
+   "added3": 2,
+   "suggShown": 4,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 1,
+   "visit": 38,
+   "opened": 8,
+   "added3": 3,
+   "suggShown": 6,
+   "suggAccepted": 1
+  },
+  {
+   "daysAgo": 0,
+   "visit": 72,
+   "opened": 18,
+   "added3": 9,
+   "suggShown": 13,
+   "suggAccepted": 3
+  }
+ ]
+}

@@ -1,0 +1,77 @@
+[
+ {
+  "path": "assets/fotos/backdrops/backdrop-12-negro-plata.jpg",
+  "folder": "backdrops",
+  "name": "backdrop-12-negro-plata.jpg"
+ },
+ {
+  "path": "assets/fotos/backdrops/limones-flores.jpg",
+  "folder": "backdrops",
+  "name": "limones-flores.jpg"
+ },
+ {
+  "path": "assets/fotos/backdrops/vespa-rosada.jpg",
+  "folder": "backdrops",
+  "name": "vespa-rosada.jpg"
+ },
+ {
+  "path": "assets/fotos/carritos/carrito-algodon-carpa.jpg",
+  "folder": "carritos",
+  "name": "carrito-algodon-carpa.jpg"
+ },
+ {
+  "path": "assets/fotos/globos/arco-azul-blanco.jpg",
+  "folder": "globos",
+  "name": "arco-azul-blanco.jpg"
+ },
+ {
+  "path": "assets/fotos/globos/columna-helio-azul.jpg",
+  "folder": "globos",
+  "name": "columna-helio-azul.jpg"
+ },
+ {
+  "path": "assets/fotos/padrinos/padrinos-caja-1.jpg",
+  "folder": "padrinos",
+  "name": "padrinos-caja-1.jpg"
+ },
+ {
+  "path": "assets/fotos/ramos/ramo-corazon-mama.jpg",
+  "folder": "ramos",
+  "name": "ramo-corazon-mama.jpg"
+ },
+ {
+  "path": "assets/fotos/ramos/ramo-rosas-rosado.jpg",
+  "folder": "ramos",
+  "name": "ramo-rosas-rosado.jpg"
+ },
+ {
+  "path": "assets/fotos/temporada/accesorios-halloween.jpg",
+  "folder": "temporada",
+  "name": "accesorios-halloween.jpg"
+ },
+ {
+  "path": "assets/fotos/temporada/espuma-carioca.jpg",
+  "folder": "temporada",
+  "name": "espuma-carioca.jpg"
+ },
+ {
+  "path": "assets/fotos/temporada/lentes-iridiscentes.jpg",
+  "folder": "temporada",
+  "name": "lentes-iridiscentes.jpg"
+ },
+ {
+  "path": "assets/fotos/temporada/lipstick-maquillaje.jpg",
+  "folder": "temporada",
+  "name": "lipstick-maquillaje.jpg"
+ },
+ {
+  "path": "assets/fotos/temporada/mascaras-halloween.jpg",
+  "folder": "temporada",
+  "name": "mascaras-halloween.jpg"
+ },
+ {
+  "path": "assets/fotos/temporada/ojos-halloween.jpg",
+  "folder": "temporada",
+  "name": "ojos-halloween.jpg"
+ }
+]
