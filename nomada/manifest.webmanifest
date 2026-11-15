@@ -1,0 +1,17 @@
+{
+  "name": "Pasaporte Nómada · Experiencia Nómada",
+  "short_name": "Nómada",
+  "description": "Tu pasaporte de fidelización en Experiencia Nómada, Ambato.",
+  "start_url": "pasaporte/",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0a09",
+  "theme_color": "#0b0a09",
+  "lang": "es-EC",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
