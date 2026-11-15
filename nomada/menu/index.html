@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es-EC">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Menú · Experiencia Nómada</title>
+<meta name="description" content="Menú digital de Experiencia Nómada, Ambato: platos de temporada, coctelería, cervezas y vinos.">
+<meta name="theme-color" content="#0b0a09">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../icons/favicon.png">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/menu.css">
+</head>
+<body class="menu-body">
+<header class="m-top">
+  <a href="../" class="m-back" aria-label="Volver" id="m-back"></a>
+  <a href="../" class="m-brand" id="m-brand" aria-label="Experiencia Nómada"></a>
+  <a class="btn sm primary" id="m-res" href="#" target="_blank" rel="noopener">Reservar</a>
+</header>
+<nav class="m-tabs" id="m-tabs" role="tablist" aria-label="Categorías"></nav>
+<main class="m-main" id="m-main">
+  <div class="m-banner" id="m-banner"></div>
+  <div class="m-filters" id="m-filters"></div>
+  <div id="m-list" aria-live="polite"></div>
+  <div class="m-legend" id="m-legend"></div>
+</main>
+<script type="module" src="../js/menu.js"></script>
+</body>
+</html>

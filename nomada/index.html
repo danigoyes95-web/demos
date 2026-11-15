@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es-EC">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Experiencia Nómada · Cocina de autor en Ambato</title>
+<meta name="description" content="Alta cocina de autor con raíces andinas, coctelería y eventos con cupos limitados en Ambato. Ve el menú, crea tu Pasaporte Nómada y reserva.">
+<meta name="theme-color" content="#0b0a09">
+<meta property="og:title" content="Experiencia Nómada · Ambato">
+<meta property="og:description" content="Cada plato, un destino. Cocina de autor con raíces andinas.">
+<meta property="og:image" content="assets/fotos/cocteles/coctel-rojo.jpg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/landing.css">
+</head>
+<body class="land">
+<header class="nav" id="nav">
+  <a href="#top" class="nav-brand" id="nav-brand" aria-label="Experiencia Nómada"></a>
+  <nav class="nav-links" aria-label="Principal">
+    <a href="menu/">Menú</a><a href="#eventos">Eventos</a><a href="pasaporte/">Pasaporte</a><a href="#ubicacion">Ubicación</a>
+  </nav>
+  <a class="btn sm primary" id="nav-reservar" href="#" target="_blank" rel="noopener">Reservar</a>
+</header>
+
+<main id="top">
+  <!-- 1. HERO -->
+  <section class="hero" id="hero" aria-label="Inicio">
+    <div class="hero-stick">
+      <div class="hero-img" id="hero-img"></div>
+      <div class="hero-light" id="hero-light"></div>
+      <div class="hero-in">
+        <div class="hero-mark" id="hero-mark"></div>
+        <h1 class="hero-frase display" id="hero-frase"></h1>
+        <p class="hero-sub" id="hero-sub"></p>
+        <div class="hero-cta"><a class="btn primary lg" href="menu/" id="cta-menu">Ver el menú</a><a class="btn lg" href="pasaporte/?o=landing" id="cta-pp">Mi Pasaporte Nómada</a></div>
+        <div class="hero-meta"><span id="hero-hor"></span></div>
+      </div>
+      <a href="#temporada" class="hero-scroll" aria-label="Seguir">Desliza<i></i></a>
+    </div>
+  </section>
+
+  <!-- 2. TEMPORADA -->
+  <section class="sec" id="temporada" aria-labelledby="h-temp">
+    <div class="wrap"><div class="sec-head rv"><span class="eyebrow">De temporada</span><h2 class="display" id="h-temp">Lo que está<br>en su punto</h2><p class="lead">Platos que existen mientras dura el ingrediente. Cuando se acaba, se acaba.</p></div></div>
+    <div class="car-wrap"><div class="car" id="car" tabindex="0" aria-label="Platos de temporada"></div>
+      <div class="car-nav wrap"><button class="icon-btn" id="car-prev" aria-label="Anterior"></button><button class="icon-btn" id="car-next" aria-label="Siguiente"></button></div></div>
+    <div class="wrap center rv"><a class="btn" href="menu/">Ver el menú completo</a></div>
+  </section>
+
+  <!-- 3. EVENTOS -->
+  <section class="sec" id="eventos" aria-labelledby="h-ev">
+    <div class="wrap"><div class="sec-head rv"><span class="eyebrow">Próximos eventos</span><h2 class="display" id="h-ev">Mesas con<br>cupos contados</h2><p class="lead">Catas, colaboraciones y cenas temáticas. Pocas sillas, mucha conversación.</p></div>
+      <div class="ev-grid" id="ev-grid"></div></div>
+  </section>
+
+  <!-- 4. PASAPORTE -->
+  <section class="sec pp-sec" id="pasaporte" aria-labelledby="h-pp">
+    <div class="wrap pp-grid">
+      <div class="pp-visual rv" id="pp-visual" aria-hidden="true"></div>
+      <div class="pp-copy rv"><span class="eyebrow">Fidelización</span><h2 class="display" id="h-pp">Tu Pasaporte<br>Nómada</h2><p class="lead" id="pp-txt"></p>
+        <ol class="pp-steps" id="pp-steps"></ol>
+        <div class="pp-ctas"><a class="btn primary lg" id="pp-cta" href="pasaporte/?o=landing">Crear mi pasaporte gratis</a><span class="hint">Gratis · un solo paso · sin app</span></div></div>
+    </div>
+  </section>
+
+  <!-- 5. MINIJUEGO -->
+  <section class="sec game-sec" id="juego" aria-labelledby="h-game"></section>
+
+  <!-- 6. EXPERIENCIA / EQUIPO -->
+  <section class="sec" id="equipo" aria-labelledby="h-team">
+    <div class="wrap team">
+      <div class="team-copy rv"><span class="eyebrow">La experiencia</span><h2 class="display" id="h-team">Cocinar es<br>una forma de viajar</h2><div id="filo"></div></div>
+      <div class="team-photos" id="team-photos"></div>
+    </div>
+  </section>
+
+  <!-- 7. RESERVAS Y UBICACIÓN -->
+  <section class="sec" id="ubicacion" aria-labelledby="h-loc">
+    <div class="wrap loc">
+      <div class="rv"><span class="eyebrow">Reservas y ubicación</span><h2 class="display" id="h-loc">Te esperamos<br>en Ambato</h2><p class="lead" id="loc-txt"></p>
+        <ul class="loc-list" id="loc-list"></ul>
+        <div class="loc-cta"><a class="btn primary lg" id="loc-wa" href="#" target="_blank" rel="noopener">Reservar mesa por WhatsApp</a><a class="btn" id="loc-ig" href="#" target="_blank" rel="noopener">Instagram</a></div></div>
+      <a class="map-card rv" id="map-card" href="#" target="_blank" rel="noopener" aria-label="Abrir ubicación en Google Maps"><div class="map-grid"></div><div class="map-pin" id="map-pin"></div><div class="map-label"><b>Experiencia Nómada</b><span id="map-addr"></span><em>Abrir en Google Maps →</em></div></a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap foot-in"><div id="foot-mark"></div><p class="hint">Experiencia Nómada · Ambato, Ecuador<br>Demo de diseño · contenido y precios provisionales</p></div></footer>
+<a class="fab" id="fab" href="#" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp"></a>
+
+<script src="js/vendor/confetti.browser.js"></script>
+<script type="module" src="js/landing.js"></script>
+</body>
+</html>
