@@ -2,23 +2,21 @@ import { useState, useEffect, useMemo } from 'preact/hooks';
 import { useApp, go, TypeBadge, EstadoBadge, CalidadBadge, Empty, Skeleton, Modal, toast, TYPES_ORDER } from '../common.jsx';
 import { Icon, Logo } from '../icons.jsx';
 import { useGps, startGps, gpsAllowed, distM, fmtDist, hasLoc, setSim, isSim } from '../../js/geo.js';
-import { planRoute } from '../../js/route.js';
 import { useOnline, usePending, forceOffline, isForced, autoSync } from '../../js/sync.js';
 import { downloadTiles } from '../../js/tiles.js';
 import { savePosition, resetDemo } from '../../js/data.js';
-import { useToday } from './hooks.js';
+import { useToday, useRoutePlan } from './hooks.js';
 import { applyTheme } from '../App.jsx';
 
 export default function Jornada() {
-  const { user, tipos, logout, showHelp } = useApp();
+  const { user, tipos, cfg, logout, showHelp } = useApp();
   const [orders, reload] = useToday(user.id);
   const [filter, setFilter] = useState('todos'), [q, setQ] = useState(''), [menu, setMenu] = useState(false), [ask, setAsk] = useState(!gpsAllowed() && !isSim());
   const { pos, status } = useGps(); const online = useOnline(); const pending = usePending(user.id, orders);
   useEffect(() => { if (gpsAllowed()) startGps(); }, []);
   useEffect(() => { if (pos) savePosition(user.id, pos); }, [pos && Math.round(pos.lat * 2000), pos && Math.round(pos.lng * 2000)]);
   useEffect(() => { const i = setInterval(reload, 4000); return () => clearInterval(i); }, [reload]);
-  const route = useMemo(() => orders ? planRoute(orders, pos) : [], [orders, pos && Math.round(pos.lat * 500), pos && Math.round(pos.lng * 500)]);
-  const rank = useMemo(() => Object.fromEntries(route.map((o, i) => [o.id, i + 1])), [route]);
+  const { route, rank, plan, reorder } = useRoutePlan(orders, pos, user.id, cfg);
   const hoy = new Date().toLocaleDateString('es-EC', { weekday: 'short', day: 'numeric', month: 'short' });
   const cnt = orders ? { p: orders.filter(o => o.estado === 'pendiente').length, h: orders.filter(o => o.estado === 'hecha').length, n: orders.filter(o => o.estado === 'no_ejecutada').length } : { p: 0, h: 0, n: 0 };
   const total = orders?.length || 0;
@@ -57,9 +55,20 @@ export default function Jornada() {
           <i style={{ width: `${cnt.h / total * 100}%`, background: 'var(--ok)' }} /><i style={{ width: `${cnt.n / total * 100}%`, background: 'var(--bad)' }} />
         </div>
         <div class="small muted" style={{ marginBottom: 12 }}>{cnt.h + cnt.n} de {total} órdenes atendidas hoy</div>
-        {nx ? <button class="btn primary xl" id="btn-next" style={{ marginBottom: 12 }} onClick={() => go('/mapa/' + nx.id)}><Icon n="nav" size={30} />IR A LA SIGUIENTE</button>
-          : <button class="btn ok xl" style={{ marginBottom: 12 }} onClick={() => go('/cierre')}><Icon n="check" size={30} />TERMINAR JORNADA</button>}
-        {nx && <div class="small muted" style={{ margin: '-4px 4px 12px' }}>Siguiente: <b>{nx.cliente}</b>{dist(nx) && ` · ${dist(nx)}`}</div>}
+        <div style={{ margin: '18px 0 20px' }}>
+          {nx ? <button class="btn primary next" id="btn-next" onClick={() => go('/mapa/' + nx.id)}>
+              <Icon n="nav" size={30} />
+              <span class="grow" style={{ textAlign: 'left' }}><span class="next-t">IR A LA SIGUIENTE</span>
+                <span class="next-s ellip">{dist(nx) ? `${dist(nx)} · ` : ''}{nx.cliente}</span></span>
+              <Icon n="chev" size={26} />
+            </button>
+            : <button class="btn ok xl" onClick={() => go('/cierre')}><Icon n="check" size={30} />TERMINAR JORNADA</button>}
+        </div>
+        {plan && route.length > 1 && <div class="card row" style={{ marginBottom: 10, padding: 10 }} id="ruta-info">
+          <Icon n="map" />
+          <div class="grow small"><b>Ruta del día: {plan.paradas} paradas · ~{plan.km.toFixed(1)} km</b>
+            {plan.kmBase > plan.km * 1.02 && <span class="badge b-ok" style={{ marginLeft: 6 }}>−{Math.round((1 - plan.km / plan.kmBase) * 100)}% vs orden del PDF</span>}</div>
+          <button class="btn ghost sm" id="btn-reorder" style={{ minHeight: 40 }} onClick={async () => { await reorder(); toast('Ruta recalculada desde donde estás'); }}>Reordenar</button></div>}
         <div class="row" style={{ marginBottom: 8 }}>
           <div class="grow sbox"><input id="search" type="search" placeholder="CUEN, medidor, cliente…" value={q} onInput={e => setQ(e.target.value)} /><Icon n="search" /></div>
           <div class="seg" style={{ width: 150 }}><button class="on" aria-pressed="true">Lista</button><button id="to-map" onClick={() => go('/mapa')}>Mapa</button></div>

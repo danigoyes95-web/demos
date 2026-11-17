@@ -13,6 +13,9 @@ La app actual: (1) el mapa no lleva al medidor (pines amontonados, sin ruta/dist
 - **Evidencia:** foto con marca de agua (fecha, hora, GPS, precisión, CUEN, operario), ~300 KB; el GPS de la ejecución y su precisión se guardan siempre. Alerta si precisión > 50 m.
 - **Sol y guantes:** botones ≥ 56 px, texto grande, alto contraste, tema claro (día) / oscuro (noche, auto), números tabulares.
 
+## Ruta del día (`src/js/route.js`)
+Ruta **fija** por operario (se guarda en `settings` como `ruta:<op>:<fecha>`): se calcula al abrir la jornada y solo se recalcula si llegan órdenes nuevas, si aparece el GPS por primera vez o si el operario pulsa "Reordenar". Algoritmo: agrupa por MRU/sector (zonas ordenadas por cercanía) → vecino más cercano + 2-opt dentro de cada zona → órdenes sin ubicación al final de su zona. Opción en Configuración: respetar la secuencia del PDF dentro de cada MRU. Distancias en línea recta × 1.3 (aprox. por calle). El ahorro mostrado compara contra el orden del PDF; en la demo es exagerado porque la secuencia sembrada es aleatoria. Siguiente paso en producción: distancias por calle (OSRM/Valhalla) calculadas en la oficina.
+
 ## Paleta (justificación)
 - **Azul marino `#0E1B2C`** (base, cabeceras): sobrio, técnico, transmite seguridad eléctrica y da el mayor contraste con el amarillo.
 - **Ámbar `#FFC21A`** (acción principal): color universal de "precaución/seguridad", se ve a pleno sol y sobre marino; texto oscuro encima (contraste > 10:1).
@@ -46,4 +49,4 @@ Login simulado: OP-01/1234, OP-02/2345, OP-03/3456, SUP-01/0000.
 1. PDF real (columnas, páginas, si trae coordenadas/secuencia) y si hay Excel. 2. Campos exactos de cada tipo de orden. 3. Formato de exportación que exige la eléctrica. 4. ¿Escanean sellos (código de barras/QR)? Hoy el botón aparece solo si el navegador soporta `BarcodeDetector`. 5. Lista de motivos de no ejecución. 6. Reglas de lectura (máximos/saltos). 7. Quién cierra la jornada y plazos de corrección. 8. Políticas de fotos/video (cantidad, retención).
 
 ## Pruebas (`npm run test:*`, requieren `npm run build && npm run preview`)
-`test:corte` (toques y tiempo) · `test:offline` (modo avión) · `test:gps` (brújula/llegada) · `test:supervisor` (importar PDF) · `test:viewports` · `test:pwa`.
+`test:corte` (toques y tiempo) · `test:offline` (modo avión) · `test:gps` (brújula/llegada) · `test:supervisor` (importar PDF) · `test:viewports` · `test:pwa` · `node tests/e2e-ruta.mjs`.
