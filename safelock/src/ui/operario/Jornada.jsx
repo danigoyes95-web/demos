@@ -57,9 +57,15 @@ export default function Jornada() {
           <i style={{ width: `${cnt.h / total * 100}%`, background: 'var(--ok)' }} /><i style={{ width: `${cnt.n / total * 100}%`, background: 'var(--bad)' }} />
         </div>
         <div class="small muted" style={{ marginBottom: 12 }}>{cnt.h + cnt.n} de {total} órdenes atendidas hoy</div>
-        {nx ? <button class="btn primary xl" id="btn-next" style={{ marginBottom: 12 }} onClick={() => go('/mapa/' + nx.id)}><Icon n="nav" size={30} />IR A LA SIGUIENTE</button>
-          : <button class="btn ok xl" style={{ marginBottom: 12 }} onClick={() => go('/cierre')}><Icon n="check" size={30} />TERMINAR JORNADA</button>}
-        {nx && <div class="small muted" style={{ margin: '-4px 4px 12px' }}>Siguiente: <b>{nx.cliente}</b>{dist(nx) && ` · ${dist(nx)}`}</div>}
+        <div style={{ margin: '18px 0 20px' }}>
+          {nx ? <button class="btn primary next" id="btn-next" onClick={() => go('/mapa/' + nx.id)}>
+              <Icon n="nav" size={30} />
+              <span class="grow" style={{ textAlign: 'left' }}><span class="next-t">IR A LA SIGUIENTE</span>
+                <span class="next-s ellip">{dist(nx) ? `${dist(nx)} · ` : ''}{nx.cliente}</span></span>
+              <Icon n="chev" size={26} />
+            </button>
+            : <button class="btn ok xl" onClick={() => go('/cierre')}><Icon n="check" size={30} />TERMINAR JORNADA</button>}
+        </div>
         <div class="row" style={{ marginBottom: 8 }}>
           <div class="grow sbox"><input id="search" type="search" placeholder="CUEN, medidor, cliente…" value={q} onInput={e => setQ(e.target.value)} /><Icon n="search" /></div>
           <div class="seg" style={{ width: 150 }}><button class="on" aria-pressed="true">Lista</button><button id="to-map" onClick={() => go('/mapa')}>Mapa</button></div>
