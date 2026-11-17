@@ -1,0 +1,56 @@
+{
+  "corte": {
+    "label": "Corte", "plural": "Cortes", "color": "#D81B60", "icon": "cut",
+    "fields": [
+      { "key": "lectura", "kind": "number", "label": "Lectura del medidor (kWh)", "required": true, "validate": "lectura" },
+      { "key": "tipoCorte", "kind": "choice", "label": "Tipo de corte", "required": true, "options": [["medidor", "EN MEDIDOR"], ["poste", "EN POSTE"]] },
+      { "key": "sello1", "kind": "seal", "label": "Sello 1", "required": true, "max": 20 },
+      { "key": "sello2", "kind": "seal", "label": "Sello 2", "required": false, "max": 20 },
+      { "key": "fotos", "kind": "photos", "label": "Evidencia (fotos / video)", "required": true, "min": 1 },
+      { "key": "obs", "kind": "notes", "label": "Observaciones", "chips": ["Cliente presente", "Medidor en mal estado", "Acometida dañada", "Sello anterior roto", "Sin novedad"] },
+      { "key": "notaProximo", "kind": "nextnote", "label": "Cómo llegar / dónde está el medidor (para el próximo operario)" }
+    ]
+  },
+  "reconexion": {
+    "label": "Reconexión", "plural": "Reconexiones", "color": "#0097A7", "icon": "plug",
+    "fields": [
+      { "key": "lectura", "kind": "number", "label": "Lectura del medidor (kWh)", "required": true, "validate": "lectura" },
+      { "key": "sello1", "kind": "seal", "label": "Sello nuevo", "required": true, "max": 20 },
+      { "key": "fotos", "kind": "photos", "label": "Evidencia (fotos)", "required": true, "min": 1 },
+      { "key": "obs", "kind": "notes", "label": "Observaciones", "chips": ["Cliente presente", "Servicio restablecido", "Medidor en mal estado", "Sin novedad"] },
+      { "key": "notaProximo", "kind": "nextnote", "label": "Cómo llegar / dónde está el medidor" }
+    ]
+  },
+  "notificacion": {
+    "label": "Notificación", "plural": "Notificaciones", "color": "#7E57C2", "icon": "doc",
+    "fields": [
+      { "key": "entrega", "kind": "choice", "label": "¿Cómo se entregó?", "required": true, "options": [["mano", "EN MANO"], ["puerta", "EN PUERTA"], ["fachada", "EN FACHADA"]] },
+      { "key": "recibe", "kind": "text", "label": "Nombre de quien recibe", "required": false, "max": 40 },
+      { "key": "fotos", "kind": "photos", "label": "Evidencia (foto)", "required": true, "min": 1 },
+      { "key": "obs", "kind": "notes", "label": "Observaciones", "chips": ["Cliente presente", "Se negó a firmar", "Casa cerrada", "Sin novedad"] },
+      { "key": "notaProximo", "kind": "nextnote", "label": "Cómo llegar a este domicilio" }
+    ]
+  },
+  "retiro": {
+    "label": "Retiro", "plural": "Retiros", "color": "#8D6E63", "icon": "out",
+    "fields": [
+      { "key": "lectura", "kind": "number", "label": "Lectura final (kWh)", "required": true, "validate": "lectura" },
+      { "key": "estadoMedidor", "kind": "choice", "label": "Estado del medidor retirado", "required": true, "options": [["bueno", "BUENO"], ["danado", "DAÑADO"]] },
+      { "key": "sello1", "kind": "seal", "label": "Sello retirado", "required": false, "max": 20 },
+      { "key": "fotos", "kind": "photos", "label": "Evidencia (fotos)", "required": true, "min": 1 },
+      { "key": "obs", "kind": "notes", "label": "Observaciones", "chips": ["Cliente presente", "Medidor en mal estado", "Sin novedad"] },
+      { "key": "notaProximo", "kind": "nextnote", "label": "Cómo llegar / ubicación" }
+    ]
+  },
+  "revision": {
+    "label": "Revisión", "plural": "Revisiones", "color": "#3949AB", "icon": "eye",
+    "fields": [
+      { "key": "lectura", "kind": "number", "label": "Lectura actual (kWh)", "required": true, "validate": "lectura" },
+      { "key": "anomalia", "kind": "choice", "label": "Resultado", "required": true, "options": [["ninguna", "SIN ANOMALÍA"], ["directa", "CONEXIÓN DIRECTA"], ["danado", "MEDIDOR DAÑADO"], ["sello", "SELLO ROTO"]] },
+      { "key": "sello1", "kind": "seal", "label": "Sello verificado", "required": false, "max": 20 },
+      { "key": "fotos", "kind": "photos", "label": "Evidencia (fotos)", "required": true, "min": 1 },
+      { "key": "obs", "kind": "notes", "label": "Observaciones", "chips": ["Cliente presente", "Sin novedad"] },
+      { "key": "notaProximo", "kind": "nextnote", "label": "Cómo llegar / ubicación" }
+    ]
+  }
+}
