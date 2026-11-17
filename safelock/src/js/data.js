@@ -59,13 +59,17 @@ export async function resetDemo() {
     orders.push(ord);
   }
   // Historial de 14 días
+  const cuenta = {}, total = {};
+  seed.historial.forEach(h => { total[h.dia] = (total[h.dia] || 0) + 1; });
   seed.historial.forEach((h, i) => {
+    cuenta[h.dia] = (cuenta[h.dia] || 0) + 1;
+    const verif = cuenta[h.dia] <= Math.round(total[h.dia] * (0.30 + (h.dia + 14) * 0.035));
     const fecha = dayKey(new Date(atMin(h.dia, 0)));
     const hora = atMin(h.dia, h.min);
     orders.push({
       id: `H-${fecha}-${String(i).padStart(3, '0')}`, fecha, estado: h.ok ? 'hecha' : 'no_ejecutada', tipo: h.tipo, cuen: h.cuen, cuentaContrato: h.cuentaContrato,
       medidor: h.medidor, cliente: h.cliente, direccion: h.direccion, sector: h.sector, mru: h.mru, rural: h.rural, secuencia: 1, deuda: 0, planillas: 0,
-      lecturaAnterior: h.lectura - 50, loc: { lat: h.lat, lng: h.lng, calidad: (h.min * 7 + i) % 100 < 36 + (h.dia + 14) * 3 ? 'verificada' : 'aprox', precision: h.acc }, asignadoA: h.op, notaLlegada: '', fotoLugar: null,
+      lecturaAnterior: h.lectura - 50, loc: { lat: h.lat, lng: h.lng, calidad: verif ? 'verificada' : 'aprox', precision: h.acc }, asignadoA: h.op, notaLlegada: '', fotoLugar: null,
       sync: 'ok', cerrada: true, creada: hora - 36e5,
       ejecucion: { si: h.ok, motivo: h.motivo, obs: '', campos: h.ok ? camposDemo(h.tipo, h.lectura, h.corte) : {}, gps: { lat: h.lat + 0.00003, lng: h.lng, acc: h.acc }, fotos: Array.from({ length: h.fotos }, (_, k) => 'seed:' + (k + 1)), hora, durSeg: h.dur * 60, operario: h.op },
     });

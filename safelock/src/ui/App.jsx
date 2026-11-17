@@ -2,7 +2,7 @@ import { useState, useEffect } from 'preact/hooks';
 import { ensureSeed, currentUser, getTipos, getMotivos, getConfig, logout } from '../js/data.js';
 import { Ctx, useRoute, go, Toasts, toast } from './common.jsx';
 import { swState } from '../js/sw-state.js';
-import { autoSync, onSynced } from '../js/sync.js';
+import { autoSync, onSynced, setSyncOwner } from '../js/sync.js';
 import Login from './Login.jsx';
 import { InstallHelp } from './Help.jsx';
 import Operario from './operario/Operario.jsx';
@@ -25,7 +25,7 @@ export default function App() {
   useEffect(() => { (async () => { await ensureSeed(); await loadEnv(); setUser(await currentUser()); setReady(true); document.getElementById('boot')?.remove(); if (!localStorage.getItem('sl_help_seen')) setHelp(true); })(); }, []);
   useEffect(() => { const f = () => setUpd(true); swState.listeners.add(f); return () => swState.listeners.delete(f); }, []);
   useEffect(() => onSynced(n => toast(`✓ ${n} registro${n > 1 ? 's' : ''} sincronizado${n > 1 ? 's' : ''}`)), []);
-  useEffect(() => { if (user?.rol === 'operario') autoSync(user.id); }, [user]);
+  useEffect(() => { if (user?.rol === 'operario') { setSyncOwner(user.id); autoSync(user.id); } }, [user]);
   if (!ready) return null;
   const doLogout = () => { logout(); setUser(null); go('/'); };
   const closeHelp = () => { localStorage.setItem('sl_help_seen', '1'); setHelp(false); };

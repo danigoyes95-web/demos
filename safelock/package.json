@@ -9,7 +9,13 @@
     "preview": "vite preview --host --port 4173",
     "seed": "node scripts/gen-seed.mjs",
     "sample-pdf": "node scripts/gen-sample-pdf.mjs",
-    "icons": "node scripts/gen-icons.mjs"
+    "icons": "node scripts/gen-icons.mjs",
+    "test:corte": "node tests/e2e-corte.mjs",
+    "test:offline": "node tests/e2e-offline.mjs",
+    "test:gps": "node tests/e2e-gps.mjs",
+    "test:supervisor": "node tests/e2e-supervisor.mjs",
+    "test:viewports": "node tests/e2e-viewports.mjs",
+    "test:pwa": "node tests/pwa-check.mjs"
   },
   "dependencies": {
     "chart.js": "^4.6.1",

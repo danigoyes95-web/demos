@@ -10,9 +10,10 @@ export const isOnline = eff;
 export const forceOffline = v => { forced = v; localStorage.setItem('sl_offline', v ? '1' : '0'); notify(); if (!v) autoSync(); };
 export const isForced = () => forced;
 export function useOnline() { const [o, s] = useState(eff()); useEffect(() => { L.add(s); return () => L.delete(s); }, []); return o; }
+let owner = null; export const setSyncOwner = id => { owner = id; };
 let busy = false; const SL = new Set();
 export const onSynced = f => { SL.add(f); return () => SL.delete(f); };
-export async function autoSync(op) {
+export async function autoSync(op = owner) {
   if (busy || !eff()) return 0; busy = true;
   try { const n = await syncAll(op); if (n) SL.forEach(f => f(n)); return n; } finally { busy = false; }
 }

@@ -33,7 +33,7 @@ export default function Mapa({ id }) {
     <div class="mapwrap">
       {orders && <MapView orders={orders} tipos={tipos} pos={pos} rank={rank} routeIds={routeIds} selId={id} onSelect={onSelect} editPoint={edit} onEdit={setEdit}
         onMapClick={p => edit && setEdit({ lat: p.lat, lng: p.lng })} focus={sel && hasLoc(sel) ? sel.loc : null} fitKey={id} onReady={m => (mapRef.current = m)} />}
-      <div style={{ position: 'absolute', right: 10, top: 90, zIndex: 900, display: 'grid', gap: 8 }}>
+      <div style={{ position: 'absolute', left: 10, top: 10, zIndex: 900 }}>
         <button class="btn sm" aria-label="Centrar en mí" style={{ minWidth: 48, padding: 0 }} onClick={() => pos && mapRef.current?.setView([pos.lat, pos.lng], 17)}><Icon n="pin" /></button>
       </div>
       {edit && <div class="sheet"><div class="col"><div class="b">Arrastra el pin hasta el medidor (o toca el mapa)</div>
