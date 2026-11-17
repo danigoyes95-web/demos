@@ -4,7 +4,7 @@ import { Icon } from '../icons.jsx';
 import { useGps, startGps, vibrate, getPos } from '../../js/geo.js';
 import { saveExecution, photoURL, getPhotoRecord, getOrder, listToday } from '../../js/data.js';
 import { stampPhoto, saveVideo } from '../../js/photo.js';
-import { planRoute } from '../../js/route.js';
+import { ensureRoute } from '../../js/route.js';
 import { autoSync } from '../../js/sync.js';
 
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -65,7 +65,7 @@ export default function Registro({ id }) {
     autoSync(user.id);
     setTimeout(async () => {
       if (editing) return go('/', true);
-      const all = await listToday(user.id); const next = planRoute(all, getPos())[0];
+      const all = await listToday(user.id); const next = (await ensureRoute(user.id, all, getPos(), cfg)).route[0];
       go(next ? '/mapa/' + next.id : '/cierre', true);
     }, 700);
   };

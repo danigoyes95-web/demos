@@ -3,9 +3,8 @@ import MapView from '../MapView.jsx';
 import { useApp, go, TypeBadge, CalidadBadge, EstadoBadge, Modal, toast, money, hhmm } from '../common.jsx';
 import { Icon } from '../icons.jsx';
 import { useGps, distM, fmtDist, etaMin, hasLoc, useWakeLock, vibrate, startGps } from '../../js/geo.js';
-import { planRoute } from '../../js/route.js';
 import { setLocation, photoURL } from '../../js/data.js';
-import { useToday, navUrl, NAV_KEY } from './hooks.js';
+import { useToday, useRoutePlan, navUrl, NAV_KEY } from './hooks.js';
 
 export default function Mapa({ id }) {
   const { user, tipos, cfg } = useApp();
@@ -15,13 +14,12 @@ export default function Mapa({ id }) {
   const mapRef = useRef(); const warned = useRef('');
   useWakeLock();
   useEffect(() => { startGps(); }, []);
-  const route = useMemo(() => orders ? planRoute(orders, pos) : [], [orders, pos && Math.round(pos.lat * 500), pos && Math.round(pos.lng * 500)]);
-  const rank = useMemo(() => Object.fromEntries(route.map((o, i) => [o.id, i + 1])), [route]);
+  const { route, rank } = useRoutePlan(orders, pos, user.id, cfg);
   const sel = orders?.find(o => o.id === id);
   const d = sel && pos && hasLoc(sel) ? distM(pos, sel.loc) : null;
   const arrived = d != null && d <= cfg.radioLlegada;
   useEffect(() => { if (arrived && warned.current !== sel.id) { warned.current = sel.id; vibrate([200, 100, 200]); toast('📍 Llegaste al punto. Toca LLEGUÉ'); } }, [arrived, sel?.id]);
-  const routeIds = useMemo(() => sel && sel.estado === 'pendiente' ? [sel.id] : route.slice(0, 12).map(o => o.id), [sel?.id, route]);
+  const routeIds = useMemo(() => route.slice(0, 40).map(o => o.id), [route]);
   const navigate = () => { const app = localStorage.getItem(NAV_KEY); if (!app) return setModal('navpref'); window.open(navUrl(sel, app), '_blank', 'noopener'); };
   const onSelect = i => go('/mapa/' + i, true);
   const saveEdit = async () => { await setLocation(sel.id, edit.lat, edit.lng, user.id); setEdit(null); toast('✓ Ubicación guardada como verificada'); reload(); };

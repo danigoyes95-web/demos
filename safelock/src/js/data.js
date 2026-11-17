@@ -20,7 +20,7 @@ export const MOTIVOS_DEFAULT = [
   ['pago', 'Cliente pagó'], ['no_encontrado', 'Medidor no encontrado'], ['acceso', 'Acceso negado'],
   ['peligro', 'Perro / peligro'], ['direccion', 'Dirección errada'], ['ausente', 'Cliente ausente'], ['otro', 'Otro'],
 ];
-export const CONFIG_DEFAULT = { radioLlegada: 30, precisionMala: 50, precisionVerificada: 15, distanciaSospechosa: 100, inactividadMin: 45, empresa: 'Empresa Eléctrica [demo]' };
+export const CONFIG_DEFAULT = { respetarSecuencia: false, radioLlegada: 30, precisionMala: 50, precisionVerificada: 15, distanciaSospechosa: 100, inactividadMin: 45, empresa: 'Empresa Eléctrica [demo]' };
 
 export const dayKey = (d = new Date()) => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`; };
 const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
@@ -226,3 +226,7 @@ export async function distanceDone(op, fecha = dayKey()) {
   let d = 0; for (let i = 1; i < rows.length; i++) d += distM(rows[i - 1].ejecucion.gps, rows[i].ejecucion.gps);
   return d * 1.3; // factor de ruta sobre línea recta
 }
+
+// ---------- Ruta del día (plan fijo por operario) ----------
+export async function getRoutePlan(op) { const r = await db.settings.get(`ruta:${op}:${dayKey()}`); return r?.value || null; }
+export const saveRoutePlan = (op, plan) => db.settings.put({ key: `ruta:${op}:${dayKey()}`, value: plan });
