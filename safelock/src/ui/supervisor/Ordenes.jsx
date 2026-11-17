@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'preact/hooks';
 import { useData } from './Supervisor.jsx';
 import MapView from '../MapView.jsx';
-import { TypeBadge, EstadoBadge, CalidadBadge, Modal, Skeleton, Empty, hhmm, money, useRoute } from '../common.jsx';
+import { nom, TypeBadge, EstadoBadge, CalidadBadge, Modal, Skeleton, Empty, hhmm, money, useRoute } from '../common.jsx';
 import { Icon } from '../icons.jsx';
 import { photoURL, getHistory, getPhotoRecord } from '../../js/data.js';
 import { distM } from '../../js/geo.js';
@@ -10,7 +10,7 @@ export default function Ordenes({ tipos, motivos }) {
   const [d] = useData(); const route = useRoute();
   const [f, setF] = useState({ tipo: '', estado: '', operario: '', sector: '', desde: '', hasta: '', q: '' }); const [sel, setSel] = useState(null);
   useEffect(() => { if (route.q.id && d) setSel(d.orders.find(o => o.id === route.q.id) || null); }, [route.q.id, !!d]);
-  const rows = useMemo(() => d ? d.orders.filter(o => (!f.tipo || o.tipo === f.tipo) && (!f.estado || o.estado === f.estado) && (!f.operario || o.asignadoA === f.operario) && (!f.sector || o.sector === f.sector) && (!f.desde || o.fecha >= f.desde) && (!f.hasta || o.fecha <= f.hasta) && (!f.q || [o.cuen, o.medidor, o.cliente, o.direccion].some(v => String(v).toLowerCase().includes(f.q.toLowerCase()))))
+  const rows = useMemo(() => d ? d.orders.filter(o => (!f.tipo || o.tipo === f.tipo) && (!f.estado || o.estado === f.estado) && (!f.operario || o.asignadoA === f.operario) && (!f.sector || o.sector === f.sector) && (!f.desde || o.fecha >= f.desde) && (!f.hasta || o.fecha <= f.hasta) && (!f.q || [o.cuen, o.cuentaContrato, o.numeroOrden, o.medidor, o.cliente, o.direccion].some(v => String(v).toLowerCase().includes(f.q.toLowerCase()))))
     .sort((a, b) => b.fecha.localeCompare(a.fecha) || (b.ejecucion?.hora || 0) - (a.ejecucion?.hora || 0)) : [], [d, f]);
   if (!d) return <Skeleton />;
   const sectores = [...new Set(d.orders.map(o => o.sector))].sort(); const S = k => e => setF({ ...f, [k]: e.target.value });
@@ -26,7 +26,7 @@ export default function Ordenes({ tipos, motivos }) {
     </div>
     <div class="muted small">{rows.length} órdenes {rows.length > 150 && '(mostrando 150)'}</div>
     {rows.length === 0 ? <Empty icon="search" title="Sin resultados" text="Cambia los filtros." /> : <div class="tw" style={{ maxHeight: '65vh' }}><table class="t"><thead><tr><th>Fecha</th><th>Tipo</th><th>CUEN</th><th>Cliente</th><th>Sector</th><th>Operario</th><th>Estado</th><th>Ubicación</th><th>Fotos</th></tr></thead>
-      <tbody>{rows.slice(0, 150).map(o => <tr class="click" onClick={() => setSel(o)}><td class="num">{o.fecha}</td><td><TypeBadge tipo={o.tipo} /></td><td class="num">{o.cuen}</td><td>{o.cliente}</td><td>{o.sector}</td><td>{opName(o.asignadoA)}</td><td><EstadoBadge o={o} /></td><td><CalidadBadge o={o} /></td><td class="num">{o.ejecucion ? o.ejecucion.fotos.length : '—'}</td></tr>)}</tbody></table></div>}
+      <tbody>{rows.slice(0, 150).map(o => <tr class="click" onClick={() => setSel(o)}><td class="num">{o.fecha}</td><td><TypeBadge tipo={o.tipo} /></td><td class="num">{o.cuen}</td><td>{nom(o)}</td><td>{o.sector}</td><td>{opName(o.asignadoA)}</td><td><EstadoBadge o={o} /></td><td><CalidadBadge o={o} /></td><td class="num">{o.ejecucion ? o.ejecucion.fotos.length : '—'}</td></tr>)}</tbody></table></div>}
     {sel && <Detalle o={sel} tipos={tipos} motivos={motivos} opName={opName} onClose={() => setSel(null)} />}
   </div>;
 }
@@ -39,8 +39,8 @@ function Detalle({ o, tipos, motivos, opName, onClose }) {
   const campos = e?.si ? tipo.fields.filter(f => !['photos', 'notes', 'nextnote'].includes(f.kind)).map(f => [f.label, (f.options?.find(x => x[0] === e.campos[f.key])?.[1]) ?? e.campos[f.key] ?? '—']) : [];
   return <Modal wide onClose={onClose}><div style={{ minWidth: 0 }}>
     <div class="row wrap"><TypeBadge tipo={o.tipo} /><EstadoBadge o={o} /><CalidadBadge o={o} full /><div class="grow" /><button class="btn ghost sm" onClick={onClose}><Icon n="x" /></button></div>
-    <h2 style={{ margin: '8px 0 2px' }}>{o.cliente}</h2><div class="muted">{o.direccion} · {o.sector}</div>
-    <div class="grid g4" style={{ margin: '12px 0' }}>{[['CUEN', o.cuen], ['Medidor', o.medidor], ['Cuenta contrato', o.cuentaContrato], ['Operario', opName(o.asignadoA)], ['Fecha', o.fecha], ['Deuda', money(o.deuda)]].map(([k, v]) => <div><div class="small muted">{k}</div><div class="b num">{v}</div></div>)}</div>
+    <h2 style={{ margin: '8px 0 2px' }}>{nom(o)}</h2><div class="muted">{o.direccion} · {o.sector}</div>
+    <div class="grid g4" style={{ margin: '12px 0' }}>{[['Cuenta contrato', o.cuentaContrato], ['N° de orden', o.numeroOrden], ['Medidor', o.medidor], ['Ruta de lectura', o.mru ? o.mru + (o.secuencia ? '-' + o.secuencia : '') : ''], ['Operario', opName(o.asignadoA)], ['Fecha', o.fecha], ['Deuda', o.deuda ? money(o.deuda) : '']].filter(r => r[1]).map(([k, v]) => <div><div class="small muted">{k}</div><div class="b num">{v}</div></div>)}</div>
     {e ? <>
       {!e.si && <div class="alert bad"><Icon n="x" />No ejecutada: {motivos.find(m => m[0] === e.motivo)?.[1] || e.motivo}</div>}
       {dist != null && dist > 100 && e.si && <div class="alert bad" style={{ marginTop: 8 }}><Icon n="warn" />Registrada a {dist} m del punto de la orden (posible inconsistencia).</div>}

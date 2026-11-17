@@ -3,7 +3,7 @@ import { photoURL } from './data.js';
 export const COLS = ['Fecha', 'Hora', 'CUEN', 'Cuenta contrato', 'Medidor', 'Cliente', 'Sector', 'Tipo de orden', 'Estado', 'Motivo no ejecución', 'Lectura', 'Tipo de corte', 'Sello 1', 'Sello 2', 'Observaciones', 'Latitud', 'Longitud', 'Precisión GPS (m)', 'Operario', 'N° fotos'];
 export function rowOf(o, tipos, motivos, ops) {
   const e = o.ejecucion, c = e?.campos || {};
-  return [o.fecha, e ? new Date(e.hora).toLocaleTimeString('es-EC') : '', o.cuen, o.cuentaContrato, o.medidor, o.cliente, o.sector, tipos[o.tipo]?.label, o.estado === 'hecha' ? 'EJECUTADA' : o.estado === 'no_ejecutada' ? 'NO EJECUTADA' : 'PENDIENTE',
+  return [o.fecha, e ? new Date(e.hora).toLocaleTimeString('es-EC') : '', o.cuen, o.cuentaContrato, o.medidor, o.cliente || o.direccion, o.sector, tipos[o.tipo]?.label, o.estado === 'hecha' ? 'EJECUTADA' : o.estado === 'no_ejecutada' ? 'NO EJECUTADA' : 'PENDIENTE',
     e && !e.si ? (motivos.find(m => m[0] === e.motivo)?.[1] || e.motivo) : '', c.lectura ?? '', c.tipoCorte ?? '', c.sello1 ?? '', c.sello2 ?? '', e?.obs ?? '', e?.gps?.lat?.toFixed(6) ?? '', e?.gps?.lng?.toFixed(6) ?? '', e?.gps ? Math.round(e.gps.acc) : '', ops.find(x => x.id === (e?.operario || o.asignadoA))?.nombre ?? '', e?.fotos?.length ?? 0];
 }
 const save = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
@@ -34,11 +34,35 @@ export async function exportPDF(orders, fecha, tipos, motivos, ops, empresa) {
     doc.setDrawColor(180); doc.rect(12, y, 186, H - 4);
     doc.setFontSize(10); doc.setFont(undefined, 'bold'); doc.text(`${tipos[o.tipo].label.toUpperCase()} · ${o.estado === 'hecha' ? 'EJECUTADA' : 'NO EJECUTADA'} · ${new Date(e.hora).toLocaleString('es-EC')}`, 15, y + 6);
     doc.setFont(undefined, 'normal'); doc.setFontSize(9);
-    const L = [`CUEN ${o.cuen} · Medidor ${o.medidor}`, o.cliente, `${o.direccion} · ${o.sector}`, e.si ? `Lectura: ${c.lectura ?? '—'}  Sellos: ${[c.sello1, c.sello2].filter(Boolean).join(' / ') || '—'}  ${c.tipoCorte ? 'Corte en ' + c.tipoCorte : ''}` : `Motivo: ${motivos.find(m => m[0] === e.motivo)?.[1] || e.motivo}`, `GPS: ${e.gps ? `${e.gps.lat.toFixed(6)}, ${e.gps.lng.toFixed(6)} (±${Math.round(e.gps.acc)} m)` : 'no disponible'}`, `Operario: ${ops.find(x => x.id === e.operario)?.nombre || e.operario}`, e.obs ? `Obs: ${e.obs}` : ''].filter(Boolean);
+    const L = [`Cuenta ${o.cuentaContrato || o.cuen}${o.medidor ? ' · Medidor ' + o.medidor : ''}`, o.cliente, `${o.direccion} · ${o.sector}`, e.si ? `Lectura: ${c.lectura ?? '—'}  Sellos: ${[c.sello1, c.sello2].filter(Boolean).join(' / ') || '—'}  ${c.tipoCorte ? 'Corte en ' + c.tipoCorte : ''}` : `Motivo: ${motivos.find(m => m[0] === e.motivo)?.[1] || e.motivo}`, `GPS: ${e.gps ? `${e.gps.lat.toFixed(6)}, ${e.gps.lng.toFixed(6)} (±${Math.round(e.gps.acc)} m)` : 'no disponible'}`, `Operario: ${ops.find(x => x.id === e.operario)?.nombre || e.operario}`, e.obs ? `Obs: ${e.obs}` : ''].filter(Boolean);
     L.forEach((t, i) => doc.text(doc.splitTextToSize(t, 86)[0], 15, y + 13 + i * 5.2));
     let x = 104; for (const pid of e.fotos.slice(0, 2)) { const im = await toJpeg(pid); if (im) { const w = 46, h = Math.min(44, w * im.h / im.w); doc.addImage(im.d, 'JPEG', x, y + 4, w, h); x += w + 3; } }
     y += H;
   }
   if (!rows.length) doc.text('Sin registros para esta fecha.', 14, 40);
   doc.save(`reporte-${fecha}.pdf`);
+}
+
+// ---- Excel "formato empresa": devuelve las MISMAS 37 columnas del archivo que mandó la eléctrica, con las columnas de resultado
+// (Fecha Ejecución, Horas, Codificación, Acción medidor…) rellenadas + columnas extra al final.
+// SUPUESTO: esas columnas vacías del archivo original son las que el contratista debe completar. Los códigos exactos están por confirmar.
+const f2 = d => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+const hm = t => new Date(t).toLocaleTimeString('es-EC', { hour12: false });
+export async function exportEmpresa(orders, tipos, motivos, ops, name) {
+  const rows = orders.filter(o => o.raw && o.ejecucion); if (!rows.length) throw new Error('No hay órdenes importadas desde el Excel de la empresa con resultado.');
+  const head = Object.keys(rows[0].raw), extra = ['Resultado Safelock', 'Lectura', 'N° medidor', 'Sello 1', 'Sello 2', 'Latitud', 'Longitud', 'Precisión GPS (m)', 'Observaciones', 'N° fotos'];
+  const data = [[...head, ...extra].map(v => ({ value: v, fontWeight: 'bold' })), ...rows.map(o => {
+    const e = o.ejecucion, c = e.campos || {}, r = { ...o.raw }, t = new Date(e.hora);
+    const op = ops.find(x => x.id === e.operario);
+    const set = (k, v) => { if (k in r) r[k] = v; };
+    set('Fecha EjecuciónTrab', f2(t)); set('Hora Inicio Trabajo', hm(e.hora - (e.durSeg || 0) * 1000)); set('Hora Fin de Trabajo', hm(e.hora)); set('Hora de Ingreso', hm(e.hora)); set('Fecha de Ingreso', f2(t));
+    set('Desc. Accion Medidor', c.tipoCorte ? (c.tipoCorte === 'poste' ? 'CORTE EN POSTE' : 'CORTE EN MEDIDOR') : '');
+    set('Codificación', e.si ? 'EJECUTADA' : 'NO EJECUTADA'); set('Descripción de códig', e.si ? '' : (motivos.find(m => m[0] === e.motivo)?.[1] || e.motivo));
+    set('Usuario web ordenes', op?.codigo || e.operario);
+    const ex = [e.si ? 'EJECUTADA' : 'NO EJECUTADA', c.lectura ?? '', c.medidor || o.medidor || '', c.sello1 ?? '', c.sello2 ?? '', e.gps?.lat?.toFixed(6) ?? '', e.gps?.lng?.toFixed(6) ?? '', e.gps ? Math.round(e.gps.acc) : '', e.obs ?? '', e.fotos?.length ?? 0];
+    const cell = v => v == null ? '' : /^\d{4}-\d{2}-\d{2}T/.test(String(v)) ? f2(new Date(String(v).slice(0, 10) + 'T12:00:00')) : String(v);
+    return [...head.map(h => ({ value: cell(r[h]) })), ...ex.map(v => ({ value: typeof v === 'number' ? v : String(v) }))];
+  })];
+  const { default: write } = await import('write-excel-file/browser'); save(await write(data).toBlob(), name + '.xlsx');
+  return rows.length;
 }

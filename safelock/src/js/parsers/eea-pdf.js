@@ -1,39 +1,51 @@
 // Parser de órdenes de la empresa eléctrica (PDF / CSV / Excel). Aislado a propósito:
 // si el formato real cambia, SOLO se ajusta este archivo (ALIASES, detección de columnas, validate()).
-// SUPUESTO (a confirmar con el PDF real): tabla con una fila de encabezados y una orden por fila.
+// FORMATOS: (1) Excel/CSV exportado de SAP de la empresa (37 columnas: Orden, Clase de orden DC01/RC01, Cuenta contrato, Distrito, Calle, Unidad de Lectura…) y (2) PDF en tabla (formato supuesto).
 const norm = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
 export const ALIASES = {
   cuen: ['cuen'], cuentaContrato: ['cuenta contrato', 'cuenta', 'cta contrato', 'contrato'], medidor: ['medidor', 'nro medidor', 'numero medidor', 'n medidor', 'no medidor'],
-  cliente: ['cliente', 'nombre', 'nombre cliente'], direccion: ['direccion', 'dir'], sector: ['sector', 'sector ruta', 'ruta'], mru: ['mru'],
-  rural: ['rural', 'ruralidad', 'zona', 'rur'], secuencia: ['sec', 'secuencia', 'seq'], deuda: ['deuda', 'valor', 'valor adeudado', 'adeudado', 'saldo'],
-  planillas: ['planillas', 'plan', 'n planillas', 'num planillas'], tipo: ['tipo', 'tipo orden', 'tipo de orden', 'orden'], lat: ['lat', 'latitud'], lng: ['lng', 'lon', 'long', 'longitud'],
+  cliente: ['cliente', 'nombre', 'nombre cliente'], direccion: ['direccion', 'dir', 'calle'], sector: ['sector', 'sector ruta', 'ruta', 'distrito'], mru: ['mru'], unidadLectura: ['unidad de lectura'],
+  rural: ['rural', 'ruralidad', 'zona', 'rur', 'descripcion emplazam'], secuencia: ['sec', 'secuencia', 'seq'], deuda: ['deuda', 'valor', 'valor adeudado', 'adeudado', 'saldo'],
+  planillas: ['planillas', 'plan', 'n planillas', 'num planillas'], tipo: ['tipo', 'tipo orden', 'tipo de orden', 'clase de orden', 'desc act pm'], numeroOrden: ['orden', 'numero de orden', 'nro orden'],
+  tarifa: ['descripcion tarifa v', 'tarifa'], instalacion: ['instalacion'], ubicTecnica: ['ubicac tecnica', 'ubicacion tecnica'], statusSistema: ['status sistema'], fechaEntrada: ['fecha entrada'], lat: ['lat', 'latitud'], lng: ['lng', 'lon', 'long', 'longitud'],
 };
 const FIELD_OF = {}; for (const [k, v] of Object.entries(ALIASES)) v.forEach(a => FIELD_OF[a] = k);
 const fieldOf = h => FIELD_OF[norm(h)];
 
-function tipoOf(s) { const t = norm(s); return t.includes('corte') ? 'corte' : t.includes('reconex') ? 'reconexion' : t.includes('notif') ? 'notificacion' : t.includes('retiro') ? 'retiro' : t.includes('revis') ? 'revision' : null; }
+function tipoOf(s) { const t = norm(s); if (t === 'dc01') return 'corte'; if (t === 'rc01') return 'reconexion'; return t.includes('corte') ? 'corte' : t.includes('reconex') ? 'reconexion' : t.includes('notif') ? 'notificacion' : t.includes('retiro') ? 'retiro' : t.includes('revis') ? 'revision' : null; }
 const num = s => { const v = parseFloat(String(s ?? '').replace(/\$/g, '').replace(',', '.')); return Number.isFinite(v) ? v : null; };
 
 function buildOrder(rec) {
   const rural = norm(rec.rural);
+  let mru = String(rec.mru ?? '').trim(), secuencia = parseInt(rec.secuencia) || 0;
+  if (rec.unidadLectura) { const [m, q] = String(rec.unidadLectura).trim().split('-'); mru = m; secuencia = parseInt(q) || 0; } // "0118M636-000122" = ruta de lectura + orden dentro de la ruta
+  const cc = String(rec.cuentaContrato ?? '').trim();
+  const fe = rec.fechaEntrada instanceof Date ? rec.fechaEntrada.toISOString().slice(0, 10) : String(rec.fechaEntrada ?? '');
   return {
-    tipo: tipoOf(rec.tipo), cuen: String(rec.cuen ?? '').trim(), cuentaContrato: String(rec.cuentaContrato ?? '').trim(), medidor: String(rec.medidor ?? '').trim(),
-    cliente: String(rec.cliente ?? '').trim(), direccion: String(rec.direccion ?? '').trim(), sector: String(rec.sector ?? '').trim(), mru: String(rec.mru ?? '').trim(),
-    rural: /^(r|rural|si|s|1)$/.test(rural), secuencia: parseInt(rec.secuencia) || 0, deuda: num(rec.deuda) ?? 0, planillas: parseInt(rec.planillas) || 0,
+    tipo: tipoOf(rec.tipo) || tipoOf(rec.claseOrden), claseOrden: String(rec.claseOrden ?? ''), cuentaContrato: cc,
+    cuen: String(rec.cuen ?? '').trim() || cc, // el archivo SAP no trae CUEN aparte: se usa la cuenta contrato (a confirmar)
+    medidor: String(rec.medidor ?? '').trim(),
+    cliente: String(rec.cliente ?? '').trim(), direccion: String(rec.direccion ?? '').trim(), sector: String(rec.sector ?? '').trim(), mru,
+    rural: /^(r|rural|si|s|1)$/.test(rural) || rural.includes('rural'), secuencia, deuda: num(rec.deuda) ?? 0, planillas: parseInt(rec.planillas) || 0,
     lat: rec.lat === '' || rec.lat == null ? NaN : num(rec.lat), lng: rec.lng === '' || rec.lng == null ? NaN : num(rec.lng), _rawTipo: rec.tipo,
+    numeroOrden: String(rec.numeroOrden ?? '').trim(), tarifa: String(rec.tarifa ?? '').trim(), instalacion: String(rec.instalacion ?? '').trim(), ubicTecnica: String(rec.ubicTecnica ?? '').trim(),
+    statusSistema: String(rec.statusSistema ?? '').trim(), fechaEntrada: fe,
   };
 }
 // Reglas de validación (editar aquí)
-export function validate(orders) {
-  const seen = new Map();
-  orders.forEach((o, i) => { if (o.cuen) seen.set(o.cuen, [...(seen.get(o.cuen) || []), i]); });
+export function validate(orders, opts = {}) {
+  const seen = new Map(); const keys = o => [o.cuen && `${o.tipo}|n|${o.cuen}`, o.cuentaContrato && `${o.tipo}|c|${o.cuentaContrato}`].filter(Boolean);
+  orders.forEach((o, i) => keys(o).forEach(k => seen.set(k, [...(seen.get(k) || []), i])));
+  const sap = orders.some(o => o.numeroOrden); // formato SAP: sin medidor ni cliente ni coordenadas
   orders.forEach((o, i) => {
     o._errors = {};
-    if (!o.medidor) o._errors.medidor = 'Medidor faltante';
-    if (!o.cuen) o._errors.cuen = 'CUEN faltante';
-    else if (seen.get(o.cuen).length > 1 && seen.get(o.cuen)[0] !== i) o._errors.cuen = 'CUEN duplicado en el archivo';
-    if (!o.cliente) o._errors.cliente = 'Cliente faltante';
-    if (!o.tipo) o._errors.tipo = `Tipo de orden no reconocido ("${o._rawTipo ?? ''}")`;
+    if (!o.medidor && !sap) o._errors.medidor = 'Medidor faltante';
+    if (!o.cuen) o._errors.cuen = 'Cuenta faltante';
+    else if (keys(o).some(k => seen.get(k)[0] !== i)) o._errors.cuen = 'Cuenta duplicada en el archivo';
+    if (!o.cliente && !sap) o._errors.cliente = 'Cliente faltante';
+    if (!o.tipo) o._errors.tipo = `Tipo de orden no reconocido ("${o._rawTipo ?? o.claseOrden ?? ''}")`;
+    if (sap && o.statusSistema && !/^LIB\./i.test(o.statusSistema)) o._errors.statusSistema = `Orden no liberada (${o.statusSistema})`;
+    if (sap && !o.direccion) o._errors.direccion = 'Sin dirección';
     const hasLat = Number.isFinite(o.lat), hasLng = Number.isFinite(o.lng);
     if (hasLat !== hasLng || (hasLat && (o.lat < -5.5 || o.lat > 2 || o.lng < -92 || o.lng > -74.5))) o._errors.lat = 'Coordenadas inválidas';
   });
@@ -48,9 +60,11 @@ export function gridToOrders(grid) {
   const out = [];
   for (const row of grid.slice(h + 1)) {
     if (row.every(c => !String(c ?? '').trim())) continue;
-    const rec = {}; row.forEach((c, i) => { if (cols[i]) rec[cols[i]] = c; });
-    if (!rec.cuen && !rec.medidor && !rec.cliente) continue; // línea de pie de página, etc.
-    out.push(buildOrder(rec));
+    const rec = {}; row.forEach((c, i) => { if (cols[i] && rec[cols[i]] === undefined) rec[cols[i]] = c; });
+    if (!rec.cuen && !rec.cuentaContrato && !rec.medidor && !rec.cliente) continue; // línea de pie de página, etc.
+    const o = buildOrder({ ...rec, claseOrden: rec.tipo });
+    if (rec.numeroOrden !== undefined) o.raw = Object.fromEntries(grid[h].map((hd, i) => [hd, row[i] instanceof Date ? row[i].toISOString() : row[i] ?? '']));
+    out.push(o);
   }
   return out;
 }
@@ -116,6 +130,6 @@ export async function parseFile(file) {
   const n = file.name.toLowerCase();
   if (n.endsWith('.pdf')) return parsePdf(file);
   if (n.endsWith('.csv') || n.endsWith('.txt')) return { orders: validate(gridToOrders(parseCSV(await file.text()))), meta: { formato: 'CSV' } };
-  if (n.endsWith('.xlsx')) { const { default: readXlsx } = await import('read-excel-file/browser'); return { orders: validate(gridToOrders(await readXlsx(file))), meta: { formato: 'Excel' } }; }
+  if (n.endsWith('.xlsx')) { const { default: readXlsx } = await import('read-excel-file/browser'); const res = await readXlsx(file); const grid = Array.isArray(res) && res[0]?.data ? res[0].data : res; /* v9: [{sheet, data}] */ return { orders: validate(gridToOrders(grid)), meta: { formato: 'Excel' } }; }
   throw new Error('Formato no soportado. Usa PDF, CSV o Excel (.xlsx).');
 }

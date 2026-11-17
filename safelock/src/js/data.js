@@ -5,12 +5,12 @@ import seed from '../data/seed.json';
 import TIPOS_DEFAULT from '../data/order-types.json';
 import { distM } from './geo.js';
 
-export const db = new Dexie('safelock-demo');
+export const db = new Dexie('safelock-v2');
 db.version(1).stores({
-  orders: 'id, fecha, asignadoA, estado, medidor, cuen, tipo, sync',
+  orders: 'id, fecha, asignadoA, estado, medidor, cuen, cuentaContrato, tipo, sync',
   operarios: 'id, codigo',
   photos: 'id',
-  locations: 'medidor, cuen',
+  locations: 'key, medidor, cuen',
   positions: 'op',
   history: '++id, orderId',
   settings: 'key',
@@ -22,6 +22,8 @@ export const MOTIVOS_DEFAULT = [
 ];
 export const CONFIG_DEFAULT = { respetarSecuencia: false, radioLlegada: 30, precisionMala: 50, precisionVerificada: 15, distanciaSospechosa: 100, inactividadMin: 45, empresa: 'Empresa Eléctrica [demo]' };
 
+// Clave de ubicación aprendida: la cuenta contrato (el archivo de la empresa no trae número de medidor).
+export const locKey = o => String(o.cuentaContrato || o.cuen || o.medidor || '');
 export const dayKey = (d = new Date()) => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`; };
 const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
 const atMin = (dia, min) => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + dia); return d.getTime() + min * 60000; };
@@ -32,7 +34,7 @@ export async function resetDemo() {
   const hoy = dayKey();
   const now = Date.now();
   await db.operarios.bulkAdd(seed.operarios);
-  await db.locations.bulkAdd(seed.locations);
+  await db.locations.bulkAdd(seed.locations.map(l => ({ ...l, key: String(l.cuentaContrato || l.cuen) })));
   await db.positions.bulkAdd(seed.posiciones.map(p => ({ op: p.op, lat: p.lat, lng: p.lng, t: now - p.minAgo * 60000, acc: 8 })));
   const orders = [];
   for (const o of seed.ordenes) {
@@ -142,10 +144,11 @@ export async function saveExecution(id, ej, quien) {
   if (ej.si && ej.gps && ej.gps.acc <= cfg.precisionVerificada) {
     const loc = { lat: +ej.gps.lat.toFixed(6), lng: +ej.gps.lng.toFixed(6), calidad: 'verificada', precision: Math.round(ej.gps.acc) };
     upd.loc = loc;
-    await db.locations.put({ medidor: o.medidor, cuen: o.cuen, lat: loc.lat, lng: loc.lng, precision: loc.precision, nota: ej.campos?.notaProximo || o.notaLlegada || '', fotoLugar: true });
-    for (const p of await db.orders.where('medidor').equals(o.medidor).filter(x => x.estado === 'pendiente').toArray()) await db.orders.update(p.id, { loc });
+    await db.locations.put({ key: locKey(o), medidor: ej.campos?.medidor || o.medidor, cuen: o.cuen, lat: loc.lat, lng: loc.lng, precision: loc.precision, nota: ej.campos?.notaProximo || o.notaLlegada || '', fotoLugar: true });
+    for (const p of await db.orders.filter(x => x.estado === 'pendiente' && locKey(x) === locKey(o)).toArray()) await db.orders.update(p.id, { loc });
   }
-  if (ej.campos?.notaProximo) { upd.notaLlegada = ej.campos.notaProximo; await db.locations.update(o.medidor, { nota: ej.campos.notaProximo }); }
+  if (ej.campos?.medidor) upd.medidor = String(ej.campos.medidor).trim();
+  if (ej.campos?.notaProximo) { upd.notaLlegada = ej.campos.notaProximo; await db.locations.update(locKey(o), { nota: ej.campos.notaProximo }); }
   await db.orders.update(id, upd);
   await logHist(id, quien, editing ? 'Registro corregido' : ej.si ? 'Orden ejecutada' : `No ejecutada (${ej.motivo})`);
   return db.orders.get(id);
@@ -153,11 +156,11 @@ export async function saveExecution(id, ej, quien) {
 export async function setLocation(id, lat, lng, quien) {
   const o = await db.orders.get(id);
   const loc = { lat: +lat.toFixed(6), lng: +lng.toFixed(6), calidad: 'verificada', precision: 5 };
-  await db.locations.put({ medidor: o.medidor, cuen: o.cuen, lat: loc.lat, lng: loc.lng, precision: 5, nota: o.notaLlegada || '' });
+  await db.locations.put({ key: locKey(o), medidor: o.medidor, cuen: o.cuen, lat: loc.lat, lng: loc.lng, precision: 5, nota: o.notaLlegada || '' });
   await db.orders.update(id, { loc }); await logHist(id, quien, 'Ubicación corregida manualmente');
 }
-export async function setNota(id, nota) { const o = await db.orders.get(id); await db.orders.update(id, { notaLlegada: nota }); await db.locations.update(o.medidor, { nota }); }
-export const lookupLocation = async (medidor, cuen) => (await db.locations.get(medidor)) || (await db.locations.where('cuen').equals(String(cuen)).first()) || null;
+export async function setNota(id, nota) { const o = await db.orders.get(id); await db.orders.update(id, { notaLlegada: nota }); await db.locations.update(locKey(o), { nota }); }
+export const lookupLocation = async o => (await db.locations.get(locKey(o))) || (o.medidor && (await db.locations.where('medidor').equals(String(o.medidor)).first())) || (o.cuen && (await db.locations.where('cuen').equals(String(o.cuen)).first())) || null;
 
 export async function assignOrders(ids, opId, quien = 'sup1') {
   await db.orders.where('id').anyOf(ids).modify({ asignadoA: opId });
@@ -175,20 +178,23 @@ export async function importOrders(rows, fecha = dayKey(), quien = 'sup1') {
   let n = existing;
   for (const r of rows) {
     n++;
-    const known = await lookupLocation(r.medidor, r.cuen);
+    const known = await lookupLocation(r);
     const hasC = Number.isFinite(r.lat) && Number.isFinite(r.lng);
     const loc = known ? { lat: known.lat, lng: known.lng, calidad: 'verificada', precision: known.precision } : hasC ? { lat: r.lat, lng: r.lng, calidad: 'aprox', precision: null } : { lat: null, lng: null, calidad: 'ninguna', precision: null };
     out.push({
       id: `O-${fecha}-${String(n).padStart(3, '0')}`, fecha, estado: 'pendiente', tipo: r.tipo, cuen: r.cuen, cuentaContrato: r.cuentaContrato || '', medidor: r.medidor, cliente: r.cliente,
       direccion: r.direccion, sector: r.sector, mru: r.mru || '', rural: !!r.rural, secuencia: r.secuencia || 0, deuda: r.deuda || 0, planillas: r.planillas || 0, lecturaAnterior: r.lecturaAnterior ?? null,
       loc, asignadoA: null, notaLlegada: known?.nota || '', fotoLugar: known?.fotoLugar ? 'seed:lugar' : null, sync: 'ok', cerrada: false, ejecucion: null, creada: Date.now(),
+      // Campos del archivo SAP de la empresa (si vienen) y la fila original completa, para devolverla con el resultado
+      numeroOrden: r.numeroOrden || '', claseOrden: r.claseOrden || '', tarifa: r.tarifa || '', instalacion: r.instalacion || '', ubicTecnica: r.ubicTecnica || '', statusSistema: r.statusSistema || '', fechaEntrada: r.fechaEntrada || '', raw: r.raw || null,
     });
   }
   await db.orders.bulkAdd(out);
-  for (const o of out) await logHist(o.id, quien, 'Importada desde archivo');
+  await db.history.bulkAdd(out.map(o => ({ orderId: o.id, quien, que: 'Importada desde archivo', t: Date.now() })));
   return out.length;
 }
-export const findDuplicates = async (cuens, fecha = dayKey()) => new Set((await db.orders.where('fecha').equals(fecha).toArray()).map(o => o.cuen).filter(c => cuens.includes(c)));
+// Duplicado = misma cuenta y mismo tipo de orden ya cargada hoy (una cuenta puede tener un corte y una reconexión).
+export const findDuplicates = async (list, fecha = dayKey()) => { const have = new Set((await db.orders.where('fecha').equals(fecha).toArray()).map(o => o.tipo + '|' + locKey(o))); return new Set(list.map(o => o.tipo + '|' + locKey(o)).filter(k => have.has(k))); };
 
 // ---------- Fotos ----------
 export async function savePhoto(blob, meta = {}) { const id = 'p_' + uid(); await db.photos.put({ id, blob, meta, t: Date.now() }); return id; }

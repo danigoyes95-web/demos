@@ -1,7 +1,7 @@
 // Ruta del día: estable, optimizada (vs orden del PDF) y recalculable
 import { chromium, URL_, newCtx, sleep } from './helpers.mjs';
 const b = await chromium.launch(); const errs = [];
-const plan = (p, op) => p.evaluate(op => new Promise(res => { const q = indexedDB.open('safelock-demo'); q.onsuccess = () => { const t = q.result.transaction('settings').objectStore('settings').getAll(); t.onsuccess = () => res(t.result.find(r => r.key.startsWith('ruta:' + op))?.value); }; }), op);
+const plan = (p, op) => p.evaluate(op => new Promise(res => { const q = indexedDB.open('safelock-v2'); q.onsuccess = () => { const t = q.result.transaction('settings').objectStore('settings').getAll(); t.onsuccess = () => res(t.result.find(r => r.key.startsWith('ruta:' + op))?.value); }; }), op);
 for (const [code, pin] of [['OP-01', '1234'], ['OP-02', '2345'], ['OP-03', '3456']]) {
   const ctx = await newCtx(b); const p = await ctx.newPage(); p.on('pageerror', e => errs.push(e.message));
   await p.addInitScript(() => { localStorage.setItem('sl_help_seen', '1'); localStorage.setItem('sl_gps_ok', '1'); });

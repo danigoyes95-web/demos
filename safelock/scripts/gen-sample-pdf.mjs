@@ -16,7 +16,7 @@ for (let i = 0; i < 48; i++) {
     gps ? (sec[3] + (rnd() - .5) * .02).toFixed(6) : '', gps ? (sec[4] + (rnd() - .5) * .02).toFixed(6) : '']);
 }
 rows[11][2] = '';              // medidor faltante
-rows[20][0] = rows[9][0];      // CUEN duplicado
+rows[17][0] = rows[9][0];      // CUEN duplicado
 rows[33][12] = '12.482100'; rows[33][13] = '-78.610000'; // coordenadas inválidas (fuera de Ecuador)
 const pdf = await PDFDocument.create(); const f = await pdf.embedFont(StandardFonts.Helvetica), fb = await pdf.embedFont(StandardFonts.HelveticaBold);
 const H = ['CUEN','CTA CONTRATO','MEDIDOR','CLIENTE','DIRECCIÓN','SECTOR','MRU','RUR','SEC','ADEUDADO','PLAN','TIPO ORDEN','LAT','LNG'];

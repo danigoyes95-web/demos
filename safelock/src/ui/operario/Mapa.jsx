@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'preact/hooks';
 import MapView from '../MapView.jsx';
-import { useApp, go, TypeBadge, CalidadBadge, EstadoBadge, Modal, toast, money, hhmm } from '../common.jsx';
+import { useApp, nom, sub, ref, go, TypeBadge, CalidadBadge, EstadoBadge, Modal, toast, money, hhmm } from '../common.jsx';
 import { Icon } from '../icons.jsx';
 import { useGps, distM, fmtDist, etaMin, hasLoc, useWakeLock, vibrate, startGps } from '../../js/geo.js';
 import { setLocation, photoURL } from '../../js/data.js';
@@ -39,11 +39,11 @@ export default function Mapa({ id }) {
         <button class="btn ghost sm" onClick={() => setEdit(null)}>Cancelar</button></div></div>}
       {sel && !edit && <div class="sheet" id="sheet">
         <div class="row wrap" style={{ gap: 6 }}><TypeBadge tipo={sel.tipo} /><CalidadBadge o={sel} full /><EstadoBadge o={sel} /></div>
-        <h2 style={{ margin: '8px 0 2px' }}>{sel.cliente}</h2>
-        <div class="muted">{sel.direccion} · {sel.sector}</div>
+        <h2 style={{ margin: '8px 0 2px' }}>{nom(sel)}</h2>
+        <div class="muted">{sub(sel)}</div>
         <div class="row" style={{ margin: '8px 0', gap: 16 }}>
           <div><span class="b num" style={{ fontSize: 26 }}>{d != null ? fmtDist(d) : '—'}</span> <span class="muted small">{d != null && `· ${etaMin(d, sel.rural)} min aprox.`}</span></div>
-          <div class="muted small num">Med. <b>{sel.medidor}</b> · CUEN {sel.cuen}</div>
+          <div class="muted small num"><b>{ref(sel)}</b>{sel.mru ? ` · Ruta ${sel.mru}${sel.secuencia ? '-' + sel.secuencia : ''}` : ''}</div>
         </div>
         {arrived && sel.estado === 'pendiente' && <div class="alert ok" style={{ marginBottom: 8 }}><Icon n="pin" />Estás a {Math.round(d)} m. ¡Llegaste!</div>}
         {!hasLoc(sel) && <div class="alert warn" style={{ marginBottom: 8 }}><Icon n="warn" /><div>Sin ubicación guardada. Usa la dirección y las notas, o ubica el punto en el mapa para que la próxima vez sea fácil.</div></div>}
@@ -69,7 +69,7 @@ export default function Mapa({ id }) {
     {modal === 'foto' && <FotoLugar o={sel} onClose={() => setModal(null)} />}
     {modal === 'nota' && <Modal onClose={() => setModal(null)}><h2>Cómo llegar</h2>{sel.notaLlegada ? <p style={{ fontSize: 18 }}>“{sel.notaLlegada}”</p> : <p class="muted">Aún no hay referencias de operarios anteriores. Al registrar esta orden podrás dejar una nota para el próximo.</p>}
       <div class="muted small">Dirección: {sel.direccion}, {sel.sector}</div><button class="btn dark block" style={{ marginTop: 12 }} onClick={() => setModal(null)}>CERRAR</button></Modal>}
-    {modal === 'mas' && <Modal onClose={() => setModal(null)}><h2>Datos de la orden</h2><table class="t"><tbody>{[['CUEN', sel.cuen], ['Cuenta contrato', sel.cuentaContrato], ['Medidor', sel.medidor], ['Cliente', sel.cliente], ['Dirección', sel.direccion], ['Sector', sel.sector], ['MRU', sel.mru], ['Ruralidad', sel.rural ? 'Rural' : 'Urbano'], ['Secuencia', sel.secuencia], ['Valor adeudado', money(sel.deuda)], ['Planillas', sel.planillas], ['Lectura anterior', sel.lecturaAnterior ?? '—']].map(([k, v]) => <tr><td class="muted">{k}</td><td class="b num">{v}</td></tr>)}</tbody></table>
+    {modal === 'mas' && <Modal onClose={() => setModal(null)}><h2>Datos de la orden</h2><table class="t"><tbody>{[['Cuenta contrato', sel.cuentaContrato], ['N° de orden', sel.numeroOrden], ['Medidor', sel.medidor], ['Cliente', sel.cliente], ['Dirección', sel.direccion], ['Distrito', sel.sector], ['Ruta de lectura', sel.mru], ['Ruralidad', sel.rural ? 'Rural' : 'Urbano'], ['Secuencia', sel.secuencia], ['Tarifa', sel.tarifa], ['Valor adeudado', sel.deuda ? money(sel.deuda) : ''], ['Planillas', sel.planillas || ''], ['Lectura anterior', sel.lecturaAnterior ?? '']].filter(r => r[1] !== '' && r[1] != null && r[1] !== 0).map(([k, v]) => <tr><td class="muted">{k}</td><td class="b num">{v}</td></tr>)}</tbody></table>
       <div class="row" style={{ marginTop: 10 }}><span class="small muted grow">App de navegación: {localStorage.getItem(NAV_KEY) || 'sin elegir'}</span><button class="btn ghost sm" onClick={() => { localStorage.removeItem(NAV_KEY); toast('Elige de nuevo al navegar'); }}>Cambiar</button></div>
       <button class="btn dark block" style={{ marginTop: 12 }} onClick={() => setModal(null)}>CERRAR</button></Modal>}
   </div>;

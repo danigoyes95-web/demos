@@ -4,7 +4,7 @@ const b = await chromium.launch(); const ctx = await newCtx(b, { geolocation: { 
 await p.addInitScript(() => { window.__vib = []; navigator.vibrate = v => { window.__vib.push(v); return true; }; });
 await p.goto(URL_); await p.click('#demo-op'); await p.getByText('ENTENDIDO').click(); await p.waitForSelector('#btn-next');
 await p.click('#gps-allow'); await sleep(500);
-const o = await p.evaluate(async () => (await new Promise(res => { const q = indexedDB.open('safelock-demo'); q.onsuccess = () => { const t = q.result.transaction('orders').objectStore('orders').getAll(); t.onsuccess = () => res(t.result); }; })).find(o => o.estado === 'pendiente' && o.asignadoA === 'op1' && o.loc.calidad === 'verificada'));
+const o = await p.evaluate(async () => (await new Promise(res => { const q = indexedDB.open('safelock-v2'); q.onsuccess = () => { const t = q.result.transaction('orders').objectStore('orders').getAll(); t.onsuccess = () => res(t.result); }; })).find(o => o.estado === 'pendiente' && o.asignadoA === 'op1' && o.loc.calidad === 'verificada'));
 const T = o.loc; console.log('destino', o.cliente, T.lat, T.lng);
 await p.goto(URL_ + '#/brujula/' + o.id); await p.waitForSelector('#dist');
 // camina desde ~250 m al suroeste hasta 8 m del medidor

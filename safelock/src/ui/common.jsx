@@ -30,6 +30,10 @@ export function CalidadBadge({ o, full }) {
   if (c === 'aprox') return <span class="badge b-warn"><Icon n="warn" />Aproximada</span>;
   return <span class="badge b-bad"><Icon n="x" />Sin ubicación</span>;
 }
+// Nombre y referencia de una orden: el archivo de la empresa no trae cliente ni medidor, así que se usa la dirección y la cuenta.
+export const nom = o => o.cliente || o.direccion || ('Cuenta ' + o.cuentaContrato);
+export const sub = o => o.cliente ? `${o.direccion} · ${o.sector}` : `${o.sector}${o.rural ? ' · Rural' : ''}`;
+export const ref = o => o.medidor ? 'Med. ' + o.medidor : 'Cta. ' + (o.cuentaContrato || o.cuen);
 export const hhmm = t => new Date(t).toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit' });
 export const fdate = t => new Date(t).toLocaleDateString('es-EC', { day: '2-digit', month: 'short' });
 export const money = n => '$' + (n || 0).toFixed(2);

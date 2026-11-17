@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useRef } from 'preact/hooks';
 import { Chart } from 'chart.js/auto';
 import { useData } from './Supervisor.jsx';
 import { dayKey } from '../../js/data.js';
-import { exportCSV, exportXLSX, exportPDF } from '../../js/exports.js';
+import { exportCSV, exportXLSX, exportPDF, exportEmpresa } from '../../js/exports.js';
 import { Skeleton, toast } from '../common.jsx';
 import { Icon } from '../icons.jsx';
 
@@ -26,7 +26,7 @@ export default function Reportes({ tipos, motivos, cfg }) {
   }, [d, rango]);
   if (!R) return <Skeleton />;
   const base = { tipos, motivos, ops: d.ops };
-  const files = (kind) => async () => { const rows = R.all.filter(o => o.estado !== 'pendiente'); const name = `safelock-ordenes-${R.ds[0]}_${R.ds[R.ds.length - 1]}`; try { kind === 'csv' ? exportCSV(rows, tipos, motivos, d.ops, name) : await exportXLSX(rows, tipos, motivos, d.ops, name); toast('✓ Archivo generado'); } catch (e) { toast('No se pudo exportar: ' + e.message); } };
+  const files = (kind) => async () => { const rows = R.all.filter(o => o.estado !== 'pendiente'); const name = `safelock-ordenes-${R.ds[0]}_${R.ds[R.ds.length - 1]}`; try { if (kind === 'empresa') { const n = await exportEmpresa(rows, tipos, motivos, d.ops, `resultado-empresa-${R.ds[R.ds.length - 1]}`); return toast(`✓ ${n} órdenes en formato empresa`); } kind === 'csv' ? exportCSV(rows, tipos, motivos, d.ops, name) : await exportXLSX(rows, tipos, motivos, d.ops, name); toast('✓ Archivo generado'); } catch (e) { toast('No se pudo exportar: ' + e.message); } };
   const pdf = async () => { toast('Generando PDF…'); await exportPDF(d.orders.filter(o => o.fecha === fechaPdf), fechaPdf, tipos, motivos, d.ops, cfg.empresa); };
   const col = { ok: '#0B7A4B', bad: '#B3261E', info: '#1F5FBF', amber: '#FFC21A' };
   return <div class="col" style={{ gap: 14 }}>
@@ -44,8 +44,8 @@ export default function Reportes({ tipos, motivos, cfg }) {
         <div class="small muted" style={{ marginTop: 6 }}>{R.prod.map(p => `${p.op.nombre.split(' ')[0]}: ${p.t ? Math.round(p.t / 60) + ' min/orden' : '—'}`).join(' · ')}</div></div>
       <div class="card"><h3>% de ubicaciones verificadas (crece con el uso)</h3><Canvas cfg={{ type: 'line', data: { labels: R.ds.map(f => f.slice(5)), datasets: [{ label: '% verificadas', data: R.ver, borderColor: col.info, backgroundColor: col.info, tension: .3, spanGaps: true }] }, options: { scales: { y: { min: 0, max: 100 } }, plugins: { legend: { display: false } } } }} /></div>
     </div>
-    <div class="card col"><h3>Exportar</h3><div class="muted small">Formato supuesto, una fila por orden. Se ajusta al formato que pida la empresa eléctrica.</div>
-      <div class="row wrap"><button class="btn" id="exp-csv" onClick={files('csv')}><Icon n="download" />CSV</button><button class="btn" id="exp-xlsx" onClick={files('xlsx')}><Icon n="download" />Excel (.xlsx)</button>
+    <div class="card col"><h3>Exportar</h3><div class="muted small">"Formato empresa" devuelve las 37 columnas del Excel de la eléctrica con el resultado rellenado (supuesto, por confirmar). CSV y Excel simples traen una fila por orden.</div>
+      <div class="row wrap"><button class="btn" id="exp-csv" onClick={files('csv')}><Icon n="download" />CSV</button><button class="btn" id="exp-empresa" onClick={files('empresa')}><Icon n="download" />Excel formato empresa</button><button class="btn" id="exp-xlsx" onClick={files('xlsx')}><Icon n="download" />Excel (.xlsx)</button>
         <div class="grow" /><input type="date" style={{ width: 170 }} value={fechaPdf} onInput={e => setFechaPdf(e.target.value)} /><button class="btn dark" id="exp-pdf" onClick={pdf}><Icon n="doc" />Reporte PDF con evidencias</button></div></div>
   </div>;
 }

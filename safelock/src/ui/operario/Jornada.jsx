@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'preact/hooks';
-import { useApp, go, TypeBadge, EstadoBadge, CalidadBadge, Empty, Skeleton, Modal, toast, TYPES_ORDER } from '../common.jsx';
+import { useApp, nom, sub, ref, go, TypeBadge, EstadoBadge, CalidadBadge, Empty, Skeleton, Modal, toast, TYPES_ORDER } from '../common.jsx';
 import { Icon, Logo } from '../icons.jsx';
 import { useGps, startGps, gpsAllowed, distM, fmtDist, hasLoc, setSim, isSim } from '../../js/geo.js';
 import { useOnline, usePending, forceOffline, isForced, autoSync } from '../../js/sync.js';
@@ -24,7 +24,7 @@ export default function Jornada() {
   const list = useMemo(() => {
     if (!orders) return [];
     const t = q.trim().toLowerCase();
-    let l = orders.filter(o => (filter === 'todos' || o.tipo === filter) && (!t || [o.cuen, o.medidor, o.cliente, o.direccion, o.sector, o.cuentaContrato].some(v => String(v).toLowerCase().includes(t))));
+    let l = orders.filter(o => (filter === 'todos' || o.tipo === filter) && (!t || [o.cuen, o.medidor, o.cliente, o.direccion, o.sector, o.mru, o.cuentaContrato].some(v => String(v).toLowerCase().includes(t))));
     return l.sort((a, b) => (a.estado === 'pendiente' ? 0 : 1) - (b.estado === 'pendiente' ? 0 : 1) || (rank[a.id] || 999) - (rank[b.id] || 999));
   }, [orders, filter, q, rank]);
   const dist = o => pos && hasLoc(o) ? fmtDist(distM(pos, o.loc)) : null;
@@ -59,7 +59,7 @@ export default function Jornada() {
           {nx ? <button class="btn primary next" id="btn-next" onClick={() => go('/mapa/' + nx.id)}>
               <Icon n="nav" size={30} />
               <span class="grow" style={{ textAlign: 'left' }}><span class="next-t">IR A LA SIGUIENTE</span>
-                <span class="next-s ellip">{dist(nx) ? `${dist(nx)} · ` : ''}{nx.cliente}</span></span>
+                <span class="next-s ellip">{dist(nx) ? `${dist(nx)} · ` : ''}{nom(nx)}</span></span>
               <Icon n="chev" size={26} />
             </button>
             : <button class="btn ok xl" onClick={() => go('/cierre')}><Icon n="check" size={30} />TERMINAR JORNADA</button>}
@@ -81,9 +81,9 @@ export default function Jornada() {
           {rank[o.id] ? <div class="n num">{rank[o.id]}</div> : <div class="n" style={{ background: o.estado === 'hecha' ? 'var(--ok)' : 'var(--bad)' }}><Icon n={o.estado === 'hecha' ? 'check' : 'x'} size={18} /></div>}
           <div class="grow col" style={{ gap: 4 }}>
             <div class="row wrap" style={{ gap: 6 }}><TypeBadge tipo={o.tipo} /><EstadoBadge o={o} /></div>
-            <div class="b ellip" style={{ fontSize: 17 }}>{o.cliente}</div>
-            <div class="small muted ellip">{o.direccion} · {o.sector}</div>
-            <div class="row wrap small" style={{ gap: 8 }}><span class="num b">Med. {o.medidor}</span><CalidadBadge o={o} /></div>
+            <div class="b ellip" style={{ fontSize: 17 }}>{nom(o)}</div>
+            <div class="small muted ellip">{sub(o)}</div>
+            <div class="row wrap small" style={{ gap: 8 }}><span class="num b">{ref(o)}</span><CalidadBadge o={o} /></div>
           </div>
           <div style={{ textAlign: 'right', alignSelf: 'center' }}><div class="b num" style={{ fontSize: 18 }}>{dist(o) || '—'}</div><Icon n="chev" /></div>
         </button>)}

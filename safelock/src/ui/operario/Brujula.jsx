@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'preact/hooks';
-import { useApp, go, TypeBadge } from '../common.jsx';
+import { useApp, nom, sub, go, TypeBadge } from '../common.jsx';
 import { Icon } from '../icons.jsx';
 import { useGps, distM, bearing, cardinal, fmtDist, hasLoc, useWakeLock, vibrate, startGps, isSim, simStepToward } from '../../js/geo.js';
 import { useOrder } from './hooks.js';
@@ -30,7 +30,7 @@ export default function Brujula({ id }) {
   return <div class="shell" style={{ background: 'var(--bg)' }}>
     <header class="top"><button aria-label="Volver" onClick={() => go('/mapa/' + id)} style={{ color: '#fff' }}><Icon n="back" size={28} /></button><div class="grow b" style={{ fontSize: 18 }}>Últimos metros</div><TypeBadge tipo={o.tipo} /></header>
     <div class="scroll col" style={{ alignItems: 'stretch', paddingTop: 20 }}>
-      <div class="center"><div class="b" style={{ fontSize: 20 }}>{o.cliente}</div><div class="muted">{o.direccion} · {o.sector}</div></div>
+      <div class="center"><div class="b" style={{ fontSize: 20 }}>{nom(o)}</div><div class="muted">{sub(o)}</div></div>
       <div class="compass" aria-label="Flecha hacia el medidor" style={arrived ? { borderColor: 'var(--ok)' } : undefined}>
         <svg viewBox="0 0 100 100" style={{ transform: `rotate(${rot}deg)` }}><path d="M50 6 80 62 50 50 20 62z" fill={arrived ? '#0B7A4B' : '#FFC21A'} stroke="#0E1B2C" stroke-width="4" stroke-linejoin="round" /></svg>
       </div>

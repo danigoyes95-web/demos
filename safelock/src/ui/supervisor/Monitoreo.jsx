@@ -4,7 +4,7 @@ import MapView from '../MapView.jsx';
 import { dayKey } from '../../js/data.js';
 import { computeAlerts } from './alerts.js';
 import { Icon } from '../icons.jsx';
-import { hhmm, Skeleton, go } from '../common.jsx';
+import { nom, hhmm, Skeleton, go } from '../common.jsx';
 
 export default function Monitoreo({ tipos, cfg }) {
   const [d] = useData(dayKey());
@@ -32,7 +32,7 @@ export default function Monitoreo({ tipos, cfg }) {
         <div class="card"><h3 style={{ marginBottom: 8 }}>Operarios</h3>{ops.map(op => { const m = orders.filter(o => o.asignadoA === op.id), h = m.filter(o => o.estado !== 'pendiente').length; return <div class="row" style={{ padding: '6px 0' }}><span style={{ width: 14, height: 14, borderRadius: 99, background: op.color }} /><span class="grow">{op.nombre}</span><span class="num b">{h}/{m.length}</span></div>; })}</div>
         <div class="card" style={{ maxHeight: 340, overflow: 'auto' }}><h3 style={{ marginBottom: 8 }}>Línea de tiempo de la jornada</h3>
           {timeline.length === 0 && <div class="muted">Aún no hay registros hoy.</div>}
-          {timeline.map(o => <div class="row small" style={{ padding: '6px 0', borderTop: '1px solid var(--line)' }}><b class="num">{hhmm(o.ejecucion.hora)}</b><span class={'badge ' + (o.estado === 'hecha' ? 'b-ok' : 'b-bad')}><Icon n={o.estado === 'hecha' ? 'check' : 'x'} /></span><span class="grow ellip">{tipos[o.tipo].label} · {o.cliente}</span><span class="muted">{ops.find(x => x.id === o.ejecucion.operario)?.nombre.split(' ')[0]}</span></div>)}</div>
+          {timeline.map(o => <div class="row small" style={{ padding: '6px 0', borderTop: '1px solid var(--line)' }}><b class="num">{hhmm(o.ejecucion.hora)}</b><span class={'badge ' + (o.estado === 'hecha' ? 'b-ok' : 'b-bad')}><Icon n={o.estado === 'hecha' ? 'check' : 'x'} /></span><span class="grow ellip">{tipos[o.tipo].label} · {nom(o)}</span><span class="muted">{ops.find(x => x.id === o.ejecucion.operario)?.nombre.split(' ')[0]}</span></div>)}</div>
       </div>
     </div>
   </div>;

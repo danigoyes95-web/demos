@@ -37,7 +37,7 @@ const medidores = [];
 function nuevoMedidor(sec, verif) {
   const [lat, lng] = near(sec.lat, sec.lng, sec.rural ? 4500 : 1800);
   const m = {
-    medidor: 'M' + dig(7), cuen: dig(8), cuentaContrato: '40' + dig(8),
+    medidor: 'M' + dig(7), cuen: dig(8), cuentaContrato: '2010' + dig(8),
     cliente: `${pick(NOM)} ${pick(APE)} ${pick(APE)}`.toUpperCase(),
     direccion: sec.rural ? pick(REF_RURAL) : `${pick(CALLES)} y ${pick(CALLES)}, N° ${ri(1, 99)}-${ri(1, 99)}`,
     sector: sec.n, mru: sec.mru, rural: sec.rural, lat, lng,
@@ -105,7 +105,7 @@ for (let d = -14; d <= -1; d++) {
     });
   }
 }
-const locations = medidores.filter(m => m.calidad === 'verificada').map(m => ({ medidor: m.medidor, cuen: m.cuen, lat: +m.lat.toFixed(6), lng: +m.lng.toFixed(6), precision: ri(4, 14), nota: m.nota, fotoLugar: true }));
+const locations = medidores.filter(m => m.calidad === 'verificada').map(m => ({ cuentaContrato: m.cuentaContrato, medidor: m.medidor, cuen: m.cuen, lat: +m.lat.toFixed(6), lng: +m.lng.toFixed(6), precision: ri(4, 14), nota: m.nota, fotoLugar: true }));
 fs.writeFileSync(new URL('../src/data/seed.json', import.meta.url), JSON.stringify({ operarios, ordenes, historial: hist, locations,
   posiciones: [{ op: 'op1', lat: -1.2395, lng: -78.6180, minAgo: 3 }, { op: 'op2', lat: -1.2610, lng: -78.6240, minAgo: 6 }, { op: 'op3', lat: -1.2160, lng: -78.6360, minAgo: 70 }] }));
 console.log('órdenes', ordenes.length, 'historial', hist.length, 'ubicaciones', locations.length);

@@ -29,26 +29,30 @@ function nnPath(start, items) {
 export function optimizeRoute(orders, from, opts = {}) {
   const pend = orders.filter(o => o.estado === 'pendiente');
   const groups = {}; pend.forEach(o => (groups[o.mru || o.sector || '-'] ||= []).push(o));
-  let list = Object.values(groups).map(g => ({ loc: g.filter(hasLoc), noLoc: g.filter(o => !hasLoc(o)) }));
-  const out = []; let cur = from || (list.flatMap(g => g.loc)[0]?.loc) || null; const tail = [];
+  const all = Object.entries(groups).map(([k, g]) => ({ k, all: g, loc: g.filter(hasLoc), noLoc: g.filter(o => !hasLoc(o)) }));
+  const withLoc = all.filter(g => g.loc.length), noLocGroups = all.filter(g => !g.loc.length).sort((a, b) => a.k.localeCompare(b.k));
+  const bySeq = arr => [...arr].sort((a, b) => (a.secuencia || 1e9) - (b.secuencia || 1e9));
+  const out = []; let cur = from || withLoc[0]?.loc[0]?.loc || null;
+  let list = [...withLoc];
   while (list.length) {
-    // siguiente zona: la que tiene un punto más cercano a donde estoy
+    // siguiente zona/ruta: la que tiene un punto más cercano a donde estoy
     let bi = 0, bd = Infinity;
-    list.forEach((g, i) => { const m = !g.loc.length ? Infinity - 1 : cur ? Math.min(...g.loc.map(o => d(cur, o))) : 0; if (m < bd) { bd = m; bi = i; } });
+    list.forEach((g, i) => { const m = cur ? Math.min(...g.loc.map(o => d(cur, o))) : 0; if (m < bd) { bd = m; bi = i; } });
     const g = list.splice(bi, 1)[0];
+    // Sin coordenadas suficientes (o si se pide), se sigue la secuencia de lectura de la empresa: ya es un recorrido por calles.
+    const seqMode = opts.respetarSecuencia || g.loc.length < 0.6 * g.all.length;
     let seq;
-    if (opts.respetarSecuencia && g.loc.some(o => o.secuencia)) {
-      seq = [...g.loc].sort((a, b) => (a.secuencia || 1e9) - (b.secuencia || 1e9));
-      if (cur && seq.length > 1 && d(cur, seq[seq.length - 1]) < d(cur, seq[0])) seq.reverse();
-    } else if (g.loc.length) {
+    if (seqMode && g.all.some(o => o.secuencia)) {
+      seq = bySeq(g.all); const lc = seq.filter(hasLoc);
+      if (cur && lc.length > 1 && d(cur, lc[lc.length - 1]) < d(cur, lc[0])) seq.reverse();
+    } else {
       const start = cur ? { lat: cur.lat ?? cur.loc.lat, lng: cur.lng ?? cur.loc.lng } : g.loc[0].loc;
-      seq = twoOpt(nnPath(start, g.loc)).slice(1);
-    } else seq = [];
-    const noLoc = g.noLoc.sort((a, b) => (a.secuencia || 0) - (b.secuencia || 0));
-    (g.loc.length ? out : tail).push(...seq, ...noLoc);
-    if (seq.length) cur = seq[seq.length - 1].loc;
+      seq = [...twoOpt(nnPath(start, g.loc)).slice(1), ...bySeq(g.noLoc)];
+    }
+    out.push(...seq); const last = [...seq].reverse().find(hasLoc); if (last) cur = last.loc;
   }
-  return [...out, ...tail];
+  for (const g of noLocGroups) out.push(...bySeq(g.all)); // rutas sin ninguna coordenada: por código de ruta y secuencia
+  return out;
 }
 export const planRoute = (orders, from, cfg) => optimizeRoute(orders, from, cfg);
 export function routeLength(route, from) { let s = 0, c = from; for (const o of route) { if (!hasLoc(o)) continue; if (c) s += distM(c, o.loc); c = o.loc; } return s; }

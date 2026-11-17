@@ -37,6 +37,11 @@ ejecucion:{si, motivo, obs, campos:{lectura,tipoCorte,sello1,sello2,…}, fotos:
 Otras tablas: `operarios`, `photos`(blob+meta), `locations`(medidor→punto verificado+nota), `positions`(última posición por operario), `history`(quién/qué/cuándo), `settings`.
 Login simulado: OP-01/1234, OP-02/2345, OP-03/3456, SUP-01/0000.
 
+## Formato REAL de la empresa (Excel SAP, recibido el 17/11/2026)
+Dos archivos diarios: `DC01_…xlsx` (cortes por mora, ~1.300 filas) y `RC01_…xlsx` (reconexiones, ~135). 37 columnas, una orden por fila. **No traen** cliente, número de medidor, CUEN aparte, deuda, planillas ni coordenadas. Sí traen: `Orden` (n° SAP), `Clase de orden` (DC01 corte / RC01 reconexión), `Cuenta contrato` (12 dígitos), `Descripción Emplazam` (ZONA URBANA/RURAL), `Distrito` (parroquia), `Calle`, `Unidad de Lectura` (`0118M636-000122` = ruta de lectura + secuencia), `Status sistema` (LIB. = liberada; ABIE/CERR = no liberada), tarifa, instalación, ubicación técnica.
+Columnas vacías que probablemente el contratista debe devolver llenas (**supuesto**): Fecha EjecuciónTrab, Hora Inicio/Fin Trabajo, Hora de Ingreso, Codificación, Desc. Acción Medidor, Grupo códigos, Descripción de códigos, Usuario web órdenes.
+Consecuencias de diseño: (1) la clave de ubicación aprendida es la **cuenta contrato**; (2) todas las órdenes arrancan 🔴 sin ubicación y el orden de visita sale de **ruta de lectura + secuencia**; (3) se asignan rutas enteras (MRU) a cada cuadrilla (~100 órdenes por ruta); (4) el operario puede anotar el n° de medidor (opcional); (5) las órdenes no liberadas se marcan como problema; (6) "Excel formato empresa" devuelve las mismas 37 columnas con el resultado. Los archivos reales NO están en el repo (datos de clientes); `public/samples/*.xlsx` son ficticios con la misma estructura (`python3 scripts/gen-sample-xlsx.py`).
+
 ## Supuestos (inventados en la demo — confirmar)
 - Tipos de orden: corte, reconexión, notificación, retiro, revisión. Campos de los 4 tipos distintos a corte **inventados**.
 - El PDF de ejemplo (`public/samples/ordenes-ejemplo.pdf`) es **ficticio**: una tabla con encabezados `CUEN, CTA CONTRATO, MEDIDOR, CLIENTE, DIRECCIÓN, SECTOR, MRU, RUR, SEC, ADEUDADO, PLAN, TIPO ORDEN, LAT, LNG`. El parser (`src/js/parsers/eea-pdf.js`) detecta columnas por alias y tiene un modo alterno "ETIQUETA: valor".
@@ -46,7 +51,7 @@ Login simulado: OP-01/1234, OP-02/2345, OP-03/3456, SUP-01/0000.
 - Km recorridos = suma de distancias entre puntos de ejecución × 1.3.
 
 ## Pendientes a confirmar con el contratista
-1. PDF real (columnas, páginas, si trae coordenadas/secuencia) y si hay Excel. 2. Campos exactos de cada tipo de orden. 3. Formato de exportación que exige la eléctrica. 4. ¿Escanean sellos (código de barras/QR)? Hoy el botón aparece solo si el navegador soporta `BarcodeDetector`. 5. Lista de motivos de no ejecución. 6. Reglas de lectura (máximos/saltos). 7. Quién cierra la jornada y plazos de corrección. 8. Políticas de fotos/video (cantidad, retención).
+1. PDF real (columnas, páginas, si trae coordenadas/secuencia) y si hay Excel. 2. Campos exactos de cada tipo de orden y los códigos de resultado de "Codificación" / "Grupo códigos". 3. Formato de exportación que exige la eléctrica. 4. ¿Escanean sellos (código de barras/QR)? Hoy el botón aparece solo si el navegador soporta `BarcodeDetector`. 5. Lista de motivos de no ejecución. 6. Reglas de lectura (máximos/saltos). 7. Quién cierra la jornada y plazos de corrección. 8. Políticas de fotos/video (cantidad, retención).
 
 ## Pruebas (`npm run test:*`, requieren `npm run build && npm run preview`)
-`test:corte` (toques y tiempo) · `test:offline` (modo avión) · `test:gps` (brújula/llegada) · `test:supervisor` (importar PDF) · `test:viewports` · `test:pwa` · `node tests/e2e-ruta.mjs`.
+`test:corte` (toques y tiempo) · `test:offline` (modo avión) · `test:gps` (brújula/llegada) · `test:supervisor` (importar PDF) · `test:viewports` · `test:pwa` · `node tests/e2e-ruta.mjs` · `node tests/e2e-excel.mjs` (importa los Excel; con `DC=ruta RC=ruta` usa archivos reales) · `node tests/e2e-excel-operario.mjs`.

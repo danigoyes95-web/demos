@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'preact/hooks';
-import { useApp, go, TypeBadge, Modal, toast, money } from '../common.jsx';
+import { useApp, nom, ref, go, TypeBadge, Modal, toast, money } from '../common.jsx';
 import { Icon } from '../icons.jsx';
 import { useGps, startGps, vibrate, getPos } from '../../js/geo.js';
 import { saveExecution, photoURL, getPhotoRecord, getOrder, listToday } from '../../js/data.js';
@@ -75,8 +75,8 @@ export default function Registro({ id }) {
     <header class="top" style={{ alignItems: 'flex-start' }}>
       <button aria-label="Volver" onClick={() => history.length > 1 ? history.back() : go('/')} style={{ color: '#fff', paddingTop: 4 }}><Icon n="back" size={28} /></button>
       <div class="grow" style={{ minWidth: 0 }}><div class="row" style={{ gap: 8 }}><TypeBadge tipo={o.tipo} />{editing && <span class="badge b-warn">Editando</span>}</div>
-        <div class="b ellip" style={{ fontSize: 18, marginTop: 4 }}>{o.cliente}</div>
-        <div class="small num" style={{ opacity: .85 }}>Med. {o.medidor} · CUEN {o.cuen}{o.deuda > 0 && ` · ${money(o.deuda)} · ${o.planillas} planillas`}</div></div>
+        <div class="b ellip" style={{ fontSize: 18, marginTop: 4 }}>{nom(o)}</div>
+        <div class="small num" style={{ opacity: .85 }}>{ref(o)}{o.medidor ? ` · CUEN ${o.cuen}` : ''}{o.deuda > 0 && ` · ${money(o.deuda)} · ${o.planillas} planillas`}</div></div>
       <button class="btn sm" style={{ background: 'transparent', color: '#fff', borderColor: '#3b5578', minHeight: 40 }} onClick={() => setMore(true)}>+ datos</button>
     </header>
     <div class="scroll col" ref={el => (refs.current.top = el)}>
@@ -107,11 +107,12 @@ export default function Registro({ id }) {
         if (f.kind === 'notes') return <Obs key={f.key} obs={obs} setObs={setObs} chips={f.chips} toggleChip={toggleChip} dictate={dictate} rec={rec} label={f.label} />;
         if (f.kind === 'nextnote') return <div key={f.key}><label class="f" for="f-next">Nota para el próximo operario <span class="muted small">(opcional)</span></label><textarea id="f-next" rows={2} placeholder={f.label} value={vals.notaProximo ?? o.notaLlegada ?? ''} onInput={e => set('notaProximo', e.target.value)} /></div>;
       })}
+      {si && !o.medidor && <div><label class="f" for="f-medidor">N° de medidor <span class="muted small">(opcional · no viene en el archivo)</span></label><input id="f-medidor" class="num" style={{ fontWeight: 700, fontSize: 20 }} maxLength={20} autocomplete="off" value={vals.medidor ?? ''} onInput={e => set('medidor', e.target.value)} /></div>}
       <div style={{ height: 70 }} />
     </div>
     <div class="fab"><button class="btn primary xl" id="btn-guardar" disabled={saving} onClick={guardar}>{editing ? 'GUARDAR CAMBIOS' : 'GUARDAR Y SIGUIENTE'}<Icon n="chev" size={28} /></button></div>
     {done && <div class="modal" style={{ placeItems: 'center' }}><div class="card center" style={{ borderRadius: 24, maxWidth: 300, padding: 28 }} role="status"><div style={{ color: 'var(--ok)' }}><Icon n="check" size={72} /></div><h2>Guardada</h2><div class="muted">{si ? 'Registro completo' : 'Marcada como no ejecutada'}</div></div></div>}
-    {more && <Modal onClose={() => setMore(false)}><h2>Más datos</h2><table class="t"><tbody>{[['Cuenta contrato', o.cuentaContrato], ['Dirección', o.direccion], ['Sector', o.sector], ['MRU', o.mru], ['Ruralidad', o.rural ? 'Rural' : 'Urbano'], ['Secuencia', o.secuencia], ['Valor adeudado', money(o.deuda)], ['Planillas', o.planillas], ['Lectura anterior', prev ?? '—']].map(([k, v]) => <tr><td class="muted">{k}</td><td class="b">{v}</td></tr>)}</tbody></table><button class="btn dark block" style={{ marginTop: 12 }} onClick={() => setMore(false)}>CERRAR</button></Modal>}
+    {more && <Modal onClose={() => setMore(false)}><h2>Más datos</h2><table class="t"><tbody>{[['Cuenta contrato', o.cuentaContrato], ['N° de orden', o.numeroOrden], ['Dirección', o.direccion], ['Distrito', o.sector], ['Ruta de lectura', o.mru], ['Ruralidad', o.rural ? 'Rural' : 'Urbano'], ['Secuencia', o.secuencia], ['Tarifa', o.tarifa], ['Valor adeudado', o.deuda ? money(o.deuda) : ''], ['Planillas', o.planillas || ''], ['Lectura anterior', prev ?? '']].filter(r => r[1] !== '' && r[1] != null && r[1] !== 0).map(([k, v]) => <tr><td class="muted">{k}</td><td class="b">{v}</td></tr>)}</tbody></table><button class="btn dark block" style={{ marginTop: 12 }} onClick={() => setMore(false)}>CERRAR</button></Modal>}
   </div>;
 }
 
