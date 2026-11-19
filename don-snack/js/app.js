@@ -81,7 +81,7 @@ function closedScreen(st) {
 
 /* ---------- inicio ---------- */
 async function home() {
-  document.body.className = ''; const me = S.me; let usual = null, ronda = null, recent = [];
+  document.body.className = 'skin-pop'; const me = S.me; let usual = null, ronda = null, recent = [];
   if (me) { [usual, ronda, recent] = await Promise.all([Data.getUsual(me.id), Data.getRonda(me.id), Data.getRecent(me.id, 4)]); if (usual) recent = recent.filter(r => r.orderId !== usual.orderId).slice(0, 3); else recent = recent.slice(0, 3); }
   S.lists = { usual, ronda, recent }; const top = await Data.getTopProducts(6);
   const feat = S.camps.flatMap(c => S.prods.filter(p => p.camp === c.id)).filter((p, i, a) => a.findIndex(x => x.id === p.id) === i).slice(0, 4);
@@ -90,7 +90,9 @@ ${me ? `<div class="hello"><h1>Hola, ${esc(me.name.split(' ')[0])} 👋</h1><div
 ${usual ? `<button class="usual" data-a="usual"><small>Un toque y listo</small><h2>¿LO DE SIEMPRE?</h2><p>${esc(usual.text)}</p><p style="opacity:.8;font-size:16px;margin-top:4px">${usual.pickup ? 'Retiro en tienda' : 'a tu dirección de siempre'}</p><span class="price">${money(usual.total)}</span></button>` : ''}
 ${ronda ? `<div class="gap"></div><button class="btn big sec" data-a="ronda" style="justify-content:space-between"><span>🍻 Otra ronda</span><span style="font-size:15px;font-weight:600;color:var(--mut);text-align:right;max-width:55%">${esc(ronda.text.slice(0, 38))}${ronda.text.length > 38 ? '…' : ''}</span></button>` : ''}
 ${recent.length ? `<div class="sect"><h3>Tus pedidos anteriores</h3></div><div class="minirow">${recent.map((r, i) => `<button class="mini" data-a="repeat" data-i="${i}"><b>${esc(new Date(r.at).toLocaleDateString('es-EC', { weekday: 'long', day: 'numeric' }))}</b><small>${esc(r.text.slice(0, 70))}${r.text.length > 70 ? '…' : ''}</small><span class="price">${money(r.total)}</span></button>`).join('')}</div>` : ''}
-<div class="doors"><a class="door previa" href="#/previa"><em>🔥</em><b>Para la<br>previa</b><span>Combos de fiesta y pedido rápido</span></a><a class="door cava" href="#/cava"><em>🍷</em><b>Cava y regalos</b><span>Vinos, espumantes y licores premium. Te ayudamos a elegir.</span></a></div>
+<div class="sect"><h2>Combos listos</h2><a href="#/previa" class="gold" style="font-weight:800">Calculadora →</a></div><div class="hrow">${S.combos.filter(c => c.door === 'previa').map(c => `<button class="combo hc" data-a="add" data-k="c" data-id="${c.id}" data-d="1"><b>${esc(c.name)}</b><p>${esc(c.desc)}</p><span class="price">${money(c.price)}</span><s>${money(c.old)}</s><br><span class="addtxt">+ Agregar</span></button>`).join('')}</div>
+<div class="sect"><h2>Categorías</h2></div><div class="tiles">${S.cats.filter(c => c.door === 'previa').map(c => `<a class="tile" href="#/cat/${c.id}"><em>${c.emoji}</em>${esc(c.name)}</a>`).join('')}</div>
+<a class="strip" href="#/cava"><span>🍷</span><b>Cava y regalos</b><i>Te ayudamos a elegir →</i></a>
 ${feat.length ? `<div class="sect"><h2>${esc(S.camps.find(c => c.id === feat[0].camp).title)}</h2></div>${feat.map(p => prodCard(p, { cava: p.door === 'cava' })).join('')}` : ''}
 <div class="sect"><h2>Lo más pedido en Ambato esta semana</h2></div>${top.map(p => prodCard(p)).join('')}
 <a class="btn ghost" href="#/fans" style="margin-top:10px">⭐ Fans fav. del mes</a>${resp()}`;
