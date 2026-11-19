@@ -157,31 +157,57 @@ window.CLINICA_SEED = {
           11,
           "resina",
           "Estética (ejemplo)",
-          -60
+          -60,
+          "V"
+        ],
+        [
+          11,
+          "resina",
+          "Estética (ejemplo)",
+          -60,
+          "M"
         ],
         [
           21,
           "resina",
           "Estética (ejemplo)",
-          -60
+          -60,
+          "V"
+        ],
+        [
+          21,
+          "resina",
+          "Estética (ejemplo)",
+          -60,
+          "D"
         ],
         [
           46,
           "caries",
-          "Ejemplo",
-          -45
+          "Detectada en la valoración (ejemplo)",
+          -45,
+          "O"
         ],
         [
           46,
           "resina",
-          "Tratada (ejemplo)",
-          -30
+          "Resina (ejemplo)",
+          -30,
+          "O"
+        ],
+        [
+          46,
+          "resina",
+          "Resina (ejemplo)",
+          -30,
+          "D"
         ],
         [
           36,
           "caries",
           "Detectada en la valoración (ejemplo)",
-          -45
+          -45,
+          "O"
         ],
         [
           36,
@@ -193,7 +219,30 @@ window.CLINICA_SEED = {
           36,
           "corona",
           "Corona definitiva (ejemplo)",
-          -10
+          -10,
+          null,
+          2
+        ],
+        [
+          16,
+          "sellante",
+          "Sellante (ejemplo)",
+          -20,
+          "O"
+        ],
+        [
+          26,
+          "caries",
+          "Por tratar (ejemplo)",
+          -3,
+          "O"
+        ],
+        [
+          26,
+          "caries",
+          "Por tratar (ejemplo)",
+          -3,
+          "M"
         ]
       ],
       "evo": [
@@ -245,12 +294,6 @@ window.CLINICA_SEED = {
         ],
         [
           26,
-          "caries",
-          "Ejemplo",
-          -40
-        ],
-        [
-          26,
           "endodoncia",
           "Conducto (ejemplo)",
           -30
@@ -259,13 +302,36 @@ window.CLINICA_SEED = {
           26,
           "corona",
           "Corona (ejemplo)",
-          -15
+          -15,
+          null,
+          2
         ],
         [
           16,
           "caries",
           "Detectada en el control (ejemplo)",
-          -5
+          -5,
+          "O"
+        ],
+        [
+          16,
+          "caries",
+          "Detectada en el control (ejemplo)",
+          -5,
+          "M"
+        ],
+        [
+          37,
+          "extraccion",
+          "Extracción programada (ejemplo)",
+          -2
+        ],
+        [
+          24,
+          "resina",
+          "Resina (ejemplo)",
+          -80,
+          "V"
         ]
       ],
       "evo": [
@@ -368,8 +434,23 @@ window.CLINICA_SEED = {
         [
           65,
           "resina",
-          "Ejemplo",
-          -80
+          "Resina (ejemplo)",
+          -80,
+          "O"
+        ],
+        [
+          16,
+          "sellante",
+          "Sellante (ejemplo)",
+          -50,
+          "O"
+        ],
+        [
+          26,
+          "sellante",
+          "Sellante (ejemplo)",
+          -50,
+          "O"
         ]
       ],
       "evo": [
@@ -399,13 +480,29 @@ window.CLINICA_SEED = {
           12,
           "resina",
           "Estética (ejemplo)",
-          -25
+          -25,
+          "V"
+        ],
+        [
+          12,
+          "resina",
+          "Estética (ejemplo)",
+          -25,
+          "M"
         ],
         [
           22,
           "resina",
           "Estética (ejemplo)",
-          -25
+          -25,
+          "V"
+        ],
+        [
+          22,
+          "resina",
+          "Estética (ejemplo)",
+          -25,
+          "D"
         ],
         [
           11,
@@ -591,12 +688,6 @@ window.CLINICA_SEED = {
         ],
         [
           46,
-          "caries",
-          "Ejemplo",
-          -70
-        ],
-        [
-          46,
           "endodoncia",
           "Conducto (ejemplo)",
           -65
@@ -605,13 +696,23 @@ window.CLINICA_SEED = {
           46,
           "corona",
           "Corona (ejemplo)",
-          -50
+          -50,
+          null,
+          2
         ],
         [
           17,
           "caries",
           "Detectada hoy (ejemplo)",
-          -3
+          -3,
+          "O"
+        ],
+        [
+          17,
+          "caries",
+          "Detectada hoy (ejemplo)",
+          -3,
+          "D"
         ]
       ],
       "evo": [
@@ -701,20 +802,30 @@ window.CLINICA_SEED = {
         [
           64,
           "resina",
-          "Ejemplo",
-          -70
+          "Resina (ejemplo)",
+          -70,
+          "O"
         ],
         [
           36,
-          "resina",
-          "Sellante/resina (ejemplo)",
-          -50
+          "sellante",
+          "Sellante (ejemplo)",
+          -50,
+          "O"
         ],
         [
           26,
           "caries",
           "Detectada en el control (ejemplo)",
-          -4
+          -4,
+          "O"
+        ],
+        [
+          26,
+          "caries",
+          "Detectada en el control (ejemplo)",
+          -4,
+          "M"
         ]
       ],
       "evo": [
@@ -729,5 +840,6 @@ window.CLINICA_SEED = {
       ]
     }
   ],
-  "admin_nombre": "Administración"
+  "admin_nombre": "Administración",
+  "odo_v2": true
 };

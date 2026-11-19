@@ -143,7 +143,20 @@
   }
 
   /* ---- odontograma (numeración FDI) ---- */
+  /* Odontograma por superficies (clinica-odo.js): solo si la página lo cargó. Cada diente tiene 5 caras, 11 estados y un 2.º tratamiento; los cambios quedan como borrador y se guardan juntos con «Guardar sesión». */
+  function pOdoV2() {
+    const a = edad((F.datos || {}).nacimiento), filas = F.odontograma || [];
+    $('#fi-cuerpo').innerHTML = `${bannerConsent()}<div id="od-raiz"></div>
+      <div class="acciones no-print" style="margin-top:14px;align-items:center"><button type="button" class="btn" id="od-guardar" disabled>Guardar sesión</button><span class="nota-d" id="od-n" style="margin:0"></span></div>
+      <p class="err-f" id="fi-err" role="alert"></p><p class="nota-d">Cada marca queda en el historial; el odontograma muestra el último estado de cada diente y de cada cara.</p>`;
+    const ui = CLODO.montar($('#od-raiz'), { filas, escribir: consiente(), superficies: true, temporales: (a != null && a < 14) || filas.some(o => o.diente > 50), msg: msgErr,
+      alCambiar: () => { const n = ui.pendientes().length; $('#od-guardar').disabled = !n; $('#od-n').textContent = n ? `${n} ${n === 1 ? 'marca por guardar' : 'marcas por guardar'}` : ''; },
+      guardar: async (diente, cambios, nota) => { for (const c of cambios) { const arg = { p_id: F.id, p_diente: diente, p_estado: c.estado, p_nota: nota, p_doctor: null }; if (c.superficie) arg.p_superficie = c.superficie; if (c.capa === 2) arg.p_capa = 2; await C.rpc('odontograma_marcar', arg); }
+        F = await C.rpc('paciente_ficha', { p_id: F.id }); ui.actualizar(F.odontograma || []); } });
+    $('#od-guardar').onclick = async () => { const ok = await ui.guardarTodo(); if (ok) aviso('Sesión guardada.'); };
+  }
   function pOdo() {
+    if (window.CLODO) return pOdoV2();
     const est = Object.fromEntries((F.odontograma || []).map(o => [o.diente, o]));
     const fila = a => `<div class="arc">${a.map((n, i) => (i === Math.floor(a.length / 2) ? '<span class="mid"></span>' : '') + `<button type="button" class="dte" data-n="${n}" data-e="${(est[n] || {}).estado || 'sano'}" aria-pressed="${n === selD}" aria-label="Diente ${n}, ${ESTADO[(est[n] || {}).estado || 'sano'][1]}" style="--e:${ESTADO[(est[n] || {}).estado || 'sano'][2]}">${n}</button>`).join('')}</div>`;
     if (temporal ? !TSUP.includes(selD) : !SUP.concat(INF).includes(selD)) selD = temporal ? 54 : 16;

@@ -204,3 +204,6 @@ body .hub-lista.limpio .hub-card span { line-height: 1.45; }
 body .hub-lista.limpio .hub-card i { text-transform: none; letter-spacing: 0; font: 700 1rem var(--fx-font-txt); margin-top: auto; padding-top: 8px; }
 body .hub-lista.limpio .hub-card:active { transform: scale(.98); box-shadow: 0 8px 20px color-mix(in srgb, var(--fx-ink) 9%, transparent); }
 @media (hover: hover) { body .hub-lista.limpio .hub-card:hover { transform: translateY(-4px); } }
+
+/* Odontograma por superficies (clinica-odo.js) en el panel de la clínica: en celular los 8 dientes de cada mitad caben dentro de la tarjeta */
+@media (max-width: 640px) { body .od { --t: min(36px, calc((100vw - 104px) / 8.6)); } }
