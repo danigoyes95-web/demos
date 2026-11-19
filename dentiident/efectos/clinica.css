@@ -193,3 +193,14 @@ body .kpi, body .bloque { border: 1px solid color-mix(in srgb, var(--fx-ink) 12%
 .faq details[open] summary::after { content: "–"; }
 .faq summary:focus-visible { outline: 3px solid var(--fx-ink); outline-offset: 2px; border-radius: 12px; }
 .faq details p { padding-bottom: 18px; max-width: 62ch; }
+
+/* Entrada de la demo, versión simple (hub.limpio = true): tres tarjetas claras con un paso cada una, sin bordes gruesos ni sombras duras */
+body .hub-lista.limpio { gap: 20px; counter-reset: paso; }
+body .hub-lista.limpio .hub-card { flex: 1 1 min(100%, 300px); counter-increment: paso; gap: 10px; padding: clamp(22px, 3vw, 30px); background: var(--fx-paper); border: 1px solid color-mix(in srgb, var(--fx-ink) 12%, transparent); border-radius: var(--fx-radio); box-shadow: 0 16px 40px color-mix(in srgb, var(--fx-ink) 9%, transparent); transition: transform var(--fx-fast) var(--fx-ease), box-shadow var(--fx-fast) var(--fx-ease); }
+body .hub-lista.limpio .hub-card::before { content: counter(paso); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(145deg, #17181a, #5d5e64 55%, #17181a); color: #fff; font: 700 1.1rem var(--fx-font-txt); box-shadow: 0 0 0 4px color-mix(in srgb, var(--fx-rosa, var(--fx-pop)) 45%, transparent); }
+body .hub-lista.limpio .hub-card small { background: none; color: color-mix(in srgb, var(--fx-ink) 65%, var(--fx-bg)); padding: 0; font: 600 .85rem var(--fx-font-txt); letter-spacing: .02em; text-transform: none; }
+body .hub-lista.limpio .hub-card b { text-transform: none; font: 800 clamp(1.5rem, 3vw, 1.9rem)/1.1 var(--fx-font-disp); letter-spacing: -.02em; }
+body .hub-lista.limpio .hub-card span { line-height: 1.45; }
+body .hub-lista.limpio .hub-card i { text-transform: none; letter-spacing: 0; font: 700 1rem var(--fx-font-txt); margin-top: auto; padding-top: 8px; }
+body .hub-lista.limpio .hub-card:active { transform: scale(.98); box-shadow: 0 8px 20px color-mix(in srgb, var(--fx-ink) 9%, transparent); }
+@media (hover: hover) { body .hub-lista.limpio .hub-card:hover { transform: translateY(-4px); } }
