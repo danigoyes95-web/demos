@@ -1,0 +1,97 @@
+Coloca aquí las fotos reales (jpg/webp) con el id del producto, p. ej. ron-abuelo.jpg
+Si no existe, la app dibuja un placeholder.
+
+pilsener-six.jpg  ← Pilsener six pack 6 × 355 ml
+club-six.jpg  ← Club Verde six pack 6 × 355 ml
+corona-six.jpg  ← Corona six pack 6 × 355 ml
+heineken-six.jpg  ← Heineken six pack 6 × 355 ml
+pilsener-600.jpg  ← Pilsener botella 600 ml
+pilsener-caja.jpg  ← Pilsener caja 12 × 600 ml
+supercholo.jpg  ← Super Cholo Passion Mix 500 ml · 8%
+supercholo-4.jpg  ← Super Cholo pack 4 × 500 ml
+krasnaya-lemon.jpg  ← Krasnaya Lemon Ice 275 ml
+spritz-lata.jpg  ← Spritz listo 355 ml
+gintonic-lata.jpg  ← Gin & Tonic listo 355 ml
+ron-san-miguel.jpg  ← Ron San Miguel 750 ml
+ron-abuelo.jpg  ← Ron Abuelo Añejo 750 ml
+ron-havana.jpg  ← Ron Havana Club 7 750 ml
+ron-botran.jpg  ← Ron Botran Reserva 750 ml
+johnnie-red.jpg  ← Johnnie Walker Red 750 ml
+black-pocket.jpg  ← Black Label pocket 200 ml
+jack-daniels.jpg  ← Jack Daniel's 750 ml
+black-label.jpg  ← Johnnie Walker Black 750 ml
+smirnoff.jpg  ← Smirnoff Red 750 ml
+skyy.jpg  ← Skyy Vodka 750 ml
+skyy-citrus.jpg  ← Skyy Citrus 750 ml
+absolut.jpg  ← Absolut Blue 750 ml
+krasnaya.jpg  ← Krasnaya Vodka 750 ml
+zhumir.jpg  ← Aguardiente Zhumir 750 ml
+puntas.jpg  ← Puntas 750 ml
+olmeca.jpg  ← Tequila Olmeca Blanco 750 ml
+cuervo.jpg  ← Tequila Jose Cuervo 750 ml
+gran-malo.jpg  ← Gran Malo mezcal con chile 700 ml
+enterrado.jpg  ← Enterrado (granizado) vaso 500 ml
+slush-mojito.jpg  ← Granizado de mojito vaso 500 ml
+slush-pina.jpg  ← Granizado piña colada vaso 500 ml
+papas.jpg  ← Papas fritas familiar
+nachos.jpg  ← Nachos con queso 150 g
+chifles.jpg  ← Chifles bolsa
+mani.jpg  ← Maní salado bolsa
+mix-frutos.jpg  ← Mix de frutos secos 200 g
+tabla.jpg  ← Tabla picada pequeña 2 personas
+hielo-2.jpg  ← Hielo bolsa 2 kg
+hielo-5.jpg  ← Hielo bolsa 5 kg
+cola-2l.jpg  ← Coca-Cola 2 L
+sprite-2l.jpg  ← Sprite 2 L
+tonica.jpg  ← Agua tónica 400 ml
+ginger.jpg  ← Ginger ale 400 ml
+limones.jpg  ← Limones bolsa
+redbull.jpg  ← Energizante 250 ml
+vasos-50.jpg  ← Vasos desechables paquete × 50
+platos.jpg  ← Platos desechables paquete × 25
+servilletas.jpg  ← Servilletas paquete
+canelazo.jpg  ← Canelazo con aguardiente termo 1 L
+vino-caliente.jpg  ← Vino caliente termo 1 L
+cafe-irlandes.jpg  ← Café irlandés taza
+malbec-trapiche.jpg  ← Trapiche Malbec 750 ml
+malbec-alamos.jpg  ← Alamos Malbec 750 ml
+malbec-catena.jpg  ← Catena Malbec 750 ml
+malbec-bosca.jpg  ← Luigi Bosca Malbec 750 ml
+cab-concha.jpg  ← Concha y Toro Cabernet 750 ml
+carmenere.jpg  ← Santa Rita Carménère 750 ml
+merlot.jpg  ← Casillero Merlot 750 ml
+tempranillo.jpg  ← Rioja Crianza 750 ml
+pinot-noir.jpg  ← Pinot Noir 750 ml
+reserva-cab.jpg  ← Cabernet Gran Reserva 750 ml
+amarone.jpg  ← Amarone della Valpolicella 750 ml
+bn-white.jpg  ← Blue Nun Authentic White 750 ml
+sauv-blanc.jpg  ← Cono Sur Sauvignon Blanc 750 ml
+chardonnay.jpg  ← Trapiche Chardonnay 750 ml
+mateus.jpg  ← Mateus Rosé 750 ml
+moscato.jpg  ← Moscato dulce 750 ml
+bn-24k.jpg  ← Blue Nun 24K Gold 750 ml
+prosecco.jpg  ← Prosecco Riondo 750 ml
+chandon.jpg  ← Chandon Brut 750 ml
+cordon-negro.jpg  ← Freixenet Cordon Negro 750 ml
+lambrusco.jpg  ← Lambrusco dulce 750 ml
+moet.jpg  ← Moët & Chandon Impérial 750 ml
+baileys.jpg  ← Baileys 750 ml
+amarula.jpg  ← Amarula 750 ml
+crema-cafe.jpg  ← Crema de café 700 ml
+gin-ceibo.jpg  ← Gin Ceibo artesanal 700 ml
+ron-ceibo.jpg  ← Ron Ceibo añejo 700 ml
+puro.jpg  ← Pu-ro Guaranda 100% caña 750 ml
+licor-43.jpg  ← Licor 43 700 ml
+hennessy.jpg  ← Hennessy VS 700 ml
+glenfiddich.jpg  ← Glenfiddich 12 750 ml
+don-julio.jpg  ← Don Julio Reposado 750 ml
+chivas-18.jpg  ← Chivas Regal 18 750 ml
+ceibo-estuche.jpg  ← Estuche Ceibo (nuevo) estuche
+sanchez-sour.jpg  ← Sánchez Bier Sour Dreams 330 ml
+sanchez-ipa.jpg  ← Sánchez Bier Indian Pale Ale 330 ml
+sanchez-stout.jpg  ← Sánchez Bier Oatmeal Stout 330 ml
+belhaven.jpg  ← Belhaven Black Scottish Stout 440 ml
+artesanal-6.jpg  ← Pack artesanal mixto 6 × 330 ml
+copas-2.jpg  ← Set 2 copas de vino 2 unid.
+vasos-cerv.jpg  ← Vasos cerveceros 2 unid.
+chocolates.jpg  ← Chocolates finos caja
