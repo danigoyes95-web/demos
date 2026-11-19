@@ -19,15 +19,15 @@ window.TIENDA = {
   supabase: { url: '', anonKey: '', schema: 'la_tasca' },   // vacío = modo demo
   // Categorías = los círculos del menú de abajo.
   categorias: [
-    { id: 'whisky',      nombre: 'Whisky',      icono: 'vaso' },
-    { id: 'ron',         nombre: 'Ron',         icono: 'botella' },
-    { id: 'vodka',       nombre: 'Vodka',       icono: 'botella-alta' },
-    { id: 'tequila',     nombre: 'Tequila',     icono: 'tequila' },
-    { id: 'vino',        nombre: 'Vino',        icono: 'copa' },
-    { id: 'cerveza',     nombre: 'Cerveza',     icono: 'cerveza' },
-    { id: 'aguardiente', nombre: 'Aguardiente', icono: 'trago' },
-    { id: 'cigarrillos', nombre: 'Cigarrillos', icono: 'cigarro' },
-    { id: 'mixers',      nombre: 'Mixers y hielo', icono: 'hielo' }
+    { id: 'whisky', color: '#e8a838',      nombre: 'Whisky',      icono: 'vaso' },
+    { id: 'ron', color: '#ff7d3b',         nombre: 'Ron',         icono: 'botella' },
+    { id: 'vodka', color: '#58b8ff',       nombre: 'Vodka',       icono: 'botella-alta' },
+    { id: 'tequila', color: '#a8e04c',     nombre: 'Tequila',     icono: 'tequila' },
+    { id: 'vino', color: '#ff4081',        nombre: 'Vino',        icono: 'copa' },
+    { id: 'cerveza', color: '#ffc83a',     nombre: 'Cerveza',     icono: 'cerveza' },
+    { id: 'aguardiente', color: '#2ee6b4', nombre: 'Aguardiente', icono: 'trago' },
+    { id: 'cigarrillos', color: '#b39cff', nombre: 'Cigarrillos', icono: 'cigarro' },
+    { id: 'mixers', color: '#6fd8ff',      nombre: 'Mixers y hielo', icono: 'hielo' }
   ],
   /* Precio y costo por presentación. Los cigarrillos traen `variantes` (suelto o cajetilla).
      ideal: coctel | regalo | fiesta | solo */
