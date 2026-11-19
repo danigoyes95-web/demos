@@ -99,7 +99,7 @@ function render() {
 
   const d = $('#dialed'), ls = S.lines();
   if (!st.open) { d.className = 'dialed closed'; d.textContent = st.msg; }
-  else if (!ls.length) { d.className = 'dialed hint'; d.textContent = '¿Cuál es tu pretexto hoy?'; }
+  else if (!ls.length) { d.className = 'dialed hint'; d.textContent = '¿Cuál es tu pretexto?'; }
   else { d.className = 'dialed'; d.textContent = ls.map(l => `${l.q} ${l.p.short}`).join(' · '); }
   $('#back').disabled = !S.store.cart.log.length;
 
