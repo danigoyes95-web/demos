@@ -125,6 +125,12 @@ input.txt,select.txt{border:1px solid var(--line);border-radius:10px;padding:9px
 .seg-cli b{display:block;font-size:22px}
 .seg-cli small{color:var(--ink-2)}
 @media (max-width:760px){.seg-cli{grid-template-columns:1fr 1fr}}
+.hm{border-collapse:separate;border-spacing:3px;font-size:11.5px;min-width:640px;width:100%}
+.hm th{font-size:11px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0;padding:2px 0;border:0;text-align:center}
+.hm th.d{text-align:right;padding-right:8px;font-size:12.5px;color:var(--ink-2)}
+.hm td{height:30px;min-width:22px;padding:0;border:0;text-align:center;border-radius:6px;font-weight:600;font-variant-numeric:tabular-nums}
+.hm-leyenda{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin-top:10px}
+.hm-leyenda i{display:block;width:140px;height:10px;border-radius:5px;background:linear-gradient(90deg,rgba(224,22,29,.1),rgba(224,22,29,1))}
 .aviso{font-size:13px;background:#fff3c4;color:#5a4400;border-radius:12px;padding:10px 14px;margin-bottom:16px}
 .login{position:fixed;inset:0;z-index:50;background:var(--bg);display:grid;place-items:center;padding:16px}
 .login-caja{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;width:min(400px,100%);display:grid;gap:12px}
@@ -185,8 +191,14 @@ input.txt,select.txt{border:1px solid var(--line);border-radius:10px;padding:9px
       <div class="card"><h2>Qué hacer esta semana <small>generado con tus datos</small></h2><div class="insights" id="insights"></div></div>
     </div>
     <div class="fila f-11">
-      <div class="card"><h2>Ventas por producto <small>utilidad y margen debajo</small></h2><div class="barras" id="g-lineas"></div></div>
+      <div class="card"><h2>Ventas por producto <small>los 10 que más venden</small></h2><div class="barras" id="g-lineas"></div></div>
       <div class="card"><h2>Pedidos por día de la semana <small>para planificar stock y publicaciones</small></h2><div class="barras" id="g-semana"></div></div>
+    </div>
+    <div class="card" style="margin-bottom:16px">
+      <h2>Mapa de calor: cuándo se pide <small id="mapa-sub">por hora y día</small></h2>
+      <div class="barra-acc" style="margin-top:8px"><div class="seg" role="group" aria-label="Medida del mapa" id="mapa-med"><button type="button" data-m="n" aria-pressed="true">Pedidos</button><button type="button" data-m="v" aria-pressed="false">Ventas $</button></div><span class="nota" id="mapa-fuerte" style="margin:0"></span></div>
+      <div class="tw"><table class="hm" id="mapa" aria-label="Mapa de calor de pedidos por hora y día"></table></div>
+      <div class="hm-leyenda"><span>Menos</span><i></i><span>Más</span><span style="margin-left:auto">Las horas de 0 a 2 son de madrugada del mismo día.</span></div>
     </div>
   </section>
 
@@ -221,7 +233,7 @@ input.txt,select.txt{border:1px solid var(--line);border-radius:10px;padding:9px
           <div class="res"><small>Precio sugerido</small><b id="sim-precio">—</b><small id="sim-red"></small></div>
         </div>
       </div>
-      <div class="card"><h2>Utilidad por producto <small>en el período</small></h2><div class="barras" id="g-utilidad"></div></div>
+      <div class="card"><h2>Utilidad por producto <small>los 10 que más dejan</small></h2><div class="barras" id="g-utilidad"></div></div>
     </div>
     <div class="card oculto" id="c-envio" style="margin-top:16px"><h2>Envío a domicilio <small>se aplica en la tienda al instante</small></h2>
       <div class="sim" style="grid-template-columns:repeat(2,minmax(0,200px)) auto">
@@ -363,7 +375,9 @@ input.txt,select.txt{border:1px solid var(--line);border-radius:10px;padding:9px
         for (let j = 0; j < lineas; j++) { const id = pick(prodW); items[id] = (items[id] || 0) + 1 + (r() < .3 ? 1 : 0) + (id.endsWith('|suelto') ? Math.floor(r() * 5) : 0) + (id === 'pilsener' ? Math.floor(r() * 4) : 0); }
         const its = Object.entries(items).map(([id, cant]) => ({ id, cant, precio: porId[id].precio, costo: porId[id].costo }));
         const sub = its.reduce((s, i) => s + i.precio * i.cant, 0), entrega = r() < .8 ? 'domicilio' : 'retiro';
-        const t = dia + (9 + Math.floor(r() * 11)) * 36e5 + Math.floor(r() * 60) * 6e4;
+        const horaW = [[11, 2], [12, 4], [13, 5], [14, 3], [15, 3], [16, 5], [17, 6], [18, 8], [19, 10], [20, 12], [21, 14], [22, 14], [23, 10], [0, 6], [1, 3]];
+        const hora = (dow === 5 || dow === 6) && r() < .45 ? [22, 23, 0, 1][Math.floor(r() * 4)] : (dow === 1 || dow === 2) && r() < .5 ? [12, 13, 19, 20][Math.floor(r() * 4)] : pick(horaW);
+        const t = dia + hora * 36e5 + Math.floor(r() * 60) * 6e4;
         if (t > Date.now()) continue;
         const estado = d > 2 ? (r() < .05 ? 'anulado' : 'entregado') : d > 0 ? (r() < .7 ? 'entregado' : 'confirmado') : (r() < .5 ? 'nuevo' : 'confirmado');
         pedidos.push({ id: 'E' + (1000 + pedidos.length), fecha: t, cliente: { nombre: c.nombre, tel: c.tel, sector: c.sector }, items: its, envio: entrega === 'domicilio' && sub < T.envio.gratisDesde ? T.envio.domicilio : 0, entrega, canal, estado, ejemplo: true });
@@ -492,13 +506,15 @@ input.txt,select.txt{border:1px solid var(--line);border-radius:10px;padding:9px
 
     // por línea
     const pl = porLinea(act);
-    barras($('#g-lineas'), pl.sort((a, b) => b.ventas - a.ventas).map(x => ({ l: x.p.nombre, s: `utilidad ${usd(x.utilidad)} · margen ${pct(x.ventas ? x.utilidad / x.ventas : NaN)}`, v: x.ventas, c: 'var(--s1)' })), usd);
+    barras($('#g-lineas'), pl.filter(x => x.ventas > 0).sort((a, b) => b.ventas - a.ventas).slice(0, 10).map(x => ({ l: x.p.nombre, s: `utilidad ${usd(x.utilidad)} · margen ${pct(x.ventas ? x.utilidad / x.ventas : NaN)}`, v: x.ventas, c: 'var(--s1)' })), usd);
 
     // día de la semana
     const nom = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'], cnt = [0, 0, 0, 0, 0, 0, 0];
     act.filter(valido).forEach(p => cnt[new Date(p.fecha).getDay()]++);
     const orden = [1, 2, 3, 4, 5, 6, 0], maxD = Math.max(...cnt);
     barras($('#g-semana'), orden.map(i => ({ l: nom[i], v: cnt[i], c: cnt[i] === maxD && maxD ? 'var(--seq-4)' : 'var(--seq-1)' })), v => v + ' ped.');
+
+    mapa(act);
 
     // insights
     const ins = [];
@@ -518,6 +534,29 @@ input.txt,select.txt{border:1px solid var(--line);border-radius:10px;padding:9px
     if (nuevos) ins.unshift(['bad', 'ped', `Tienes <b>${nuevos} pedido${nuevos > 1 ? 's' : ''} sin confirmar</b>. <a href="#" data-ir="pedidos">Confirmar ahora →</a>`]);
     $('#insights').innerHTML = ins.map(([k, i, t]) => `<div class="ins ${k}"><svg class="ico"><use href="#i-${i}"/></svg><span>${t}</span></div>`).join('');
   }
+  let medMapa = 'n';
+  function mapa(act) {
+    const dias7 = [1, 2, 3, 4, 5, 6, 0], nom = { 1: 'Lun', 2: 'Mar', 3: 'Mié', 4: 'Jue', 5: 'Vie', 6: 'Sáb', 0: 'Dom' }, M = {};
+    let max = 0;
+    act.filter(valido).forEach(p => { const d = new Date(p.fecha), k = d.getDay() + '-' + d.getHours(); M[k] = (M[k] || 0) + (medMapa === 'v' ? sub(p) : 1); });
+    Object.values(M).forEach(v => { if (v > max) max = v; });
+    const fmt = v => medMapa === 'v' ? Math.round(v) : v;
+    let h = '<thead><tr><th></th>' + Array.from({ length: 24 }, (_, i) => `<th>${i}</th>`).join('') + '</tr></thead><tbody>';
+    let top = null;
+    for (const d of dias7) {
+      h += `<tr><th class="d">${nom[d]}</th>`;
+      for (let i = 0; i < 24; i++) {
+        const v = M[d + '-' + i] || 0, a = max ? v / max : 0;
+        if (v && (!top || v > top.v)) top = { d, i, v };
+        h += v ? `<td style="background:rgba(224,22,29,${(.12 + .88 * a).toFixed(2)});color:${a > .45 ? '#fff' : 'var(--ink)'}" title="${nom[d]} ${i}:00 · ${medMapa === 'v' ? usd(v) : v + ' pedidos'}">${fmt(v)}</td>` : '<td style="background:#f1ede6" title="Sin pedidos"></td>';
+      }
+      h += '</tr>';
+    }
+    $('#mapa').innerHTML = h + '</tbody>';
+    $('#mapa-sub').textContent = `últimos ${dias} días · ${medMapa === 'v' ? 'ventas en USD' : 'número de pedidos'}`;
+    $('#mapa-fuerte').textContent = top ? `Tu hora fuerte: ${nom[top.d]} a las ${top.i}:00. Ten stock y repartidor listos antes.` : '';
+  }
+  $('#mapa-med').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (!b) return; medMapa = b.dataset.m; $('#mapa-med').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); resumen(); });
   function porLinea(lista) {
     const m = Object.fromEntries(P.map(p => [p.id, { p, unidades: 0, ventas: 0, utilidad: 0 }]));
     lista.filter(valido).forEach(p => p.items.forEach(i => { const x = m[i.id]; if (!x) return; x.unidades += i.cant; x.ventas += i.precio * i.cant; x.utilidad += (i.precio - i.costo) * i.cant; }));
@@ -573,7 +612,7 @@ input.txt,select.txt{border:1px solid var(--line);border-radius:10px;padding:9px
       <td class="n"><input class="num" type="number" step="0.05" min="0" value="${p.precio.toFixed(2)}" data-campo="precio" aria-label="Precio de ${p.nombre}"></td>
       <td class="n">${usd(p.precio - p.costo)}</td><td class="n">${margenPill(p.precio ? (p.precio - p.costo) / p.precio : 0)}</td>
             <td class="n">${pl[p.id] ? pl[p.id].unidades : 0}</td></tr>`).join('');
-    const pu = Object.values(pl).sort((a, b) => b.utilidad - a.utilidad);
+    const pu = Object.values(pl).filter(x => x.utilidad > 0).sort((a, b) => b.utilidad - a.utilidad).slice(0, 10);
     barras($('#g-utilidad'), pu.map(x => ({ l: x.p.nombre, s: `${x.unidades} unidades`, v: x.utilidad, c: 'var(--s3)' })), usd);
     const sel = $('#sim-prod'); if (!sel.options.length) { sel.innerHTML = P.map(p => `<option value="${p.id}">${p.nombre}</option>`).join(''); simCargar(); }
   }
