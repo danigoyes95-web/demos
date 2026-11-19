@@ -95,3 +95,10 @@
 .pd-lista .pd-item.con-foto { flex-wrap: wrap; align-items: stretch; }
 .pd-lista .pd-item .pd-foto { width: 100%; height: 220px; object-fit: cover; border-radius: 7px; }
 .pd-lista .pd-item.con-foto .pd-info { flex: 1 1 60%; }
+
+/* Casillas de la reserva con base de datos (clínica): menor de edad y consentimiento. Visibles, no en forma de píldora. */
+.pd-chk { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; min-height: 44px; }
+.pd-chk input { width: 24px; height: 24px; flex: none; margin-top: 2px; accent-color: var(--fx-deep); }
+.pd-chk > span { font: 400 .98rem/1.35 var(--fx-font-txt); }
+.pd-chk > span a { color: inherit; text-decoration: underline; text-underline-offset: 3px; font-weight: 700; }
+.pd-chk input:focus-visible { outline: 3px solid var(--fx-pop); outline-offset: 2px; }
