@@ -66,13 +66,18 @@ html.gate #puerta{display:grid}
 .chip.rep{box-shadow:inset 0 0 0 1.5px var(--rojo)}
 .circulos{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-content:center;padding:14px 0}
 @media (max-height:700px){.demo{display:none}.circulos{padding:10px 0}}
-.cir{--c:#fff;position:relative;aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:radial-gradient(circle at 50% 28%,#34343e 0%,#1b1b22 70%);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--c) 70%,transparent),0 0 22px -4px color-mix(in srgb,var(--c) 55%,transparent);transition:transform .18s var(--ease),box-shadow .2s;min-width:0}
+.cir{--c:#fff;--r:255,255,255;position:relative;aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0;isolation:isolate;
+  background:radial-gradient(circle at 50% 18%,rgba(var(--r),.42) 0%,rgba(var(--r),.12) 52%,#14141a 100%);
+  box-shadow:inset 0 0 0 2.5px rgba(var(--r),.95),inset 0 0 26px rgba(var(--r),.28),0 0 30px -2px rgba(var(--r),.6);transition:transform .18s var(--ease)}
+.cir::before{content:"";position:absolute;inset:-9px;border-radius:50%;z-index:-1;background:radial-gradient(circle,rgba(var(--r),.5) 56%,transparent 72%);filter:blur(9px);opacity:.55;animation:respira 3.2s ease-in-out infinite alternate}
+.cir:nth-child(2n)::before{animation-delay:-1s}.cir:nth-child(3n)::before{animation-delay:-2s}
+@keyframes respira{to{opacity:1}}
 .cir:active{transform:scale(.92)}
-.cir .ico{font-size:clamp(34px,10.5vw,46px);color:var(--c)}
-.cir span{font-weight:800;font-size:clamp(13px,3.9vw,16px);line-height:1.1;text-align:center;padding:0 6px}
+.cir .ico{font-size:clamp(36px,11vw,48px);color:var(--c);stroke-width:1.9;filter:drop-shadow(0 0 7px rgba(var(--r),.95))}
+.cir span{font-weight:800;font-size:clamp(13px,3.9vw,16px);line-height:1.1;text-align:center;padding:0 6px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6)}
 .cir b{position:absolute;top:2px;right:2px;min-width:28px;height:28px;border-radius:999px;background:var(--rojo);color:#fff;display:none;place-items:center;font-size:14px;padding:0 7px;box-shadow:0 0 0 3px var(--negro)}
 .cir.on b{display:grid}
-.cir.on{box-shadow:inset 0 0 0 3px var(--c),0 0 26px -2px color-mix(in srgb,var(--c) 70%,transparent)}
+.cir.on{box-shadow:inset 0 0 0 4px #fff,inset 0 0 30px rgba(var(--r),.4),0 0 36px 0 rgba(var(--r),.8)}
 .pedir{display:flex;align-items:center;justify-content:center;gap:10px;min-height:68px;border-radius:22px;background:var(--rojo);color:#fff;font-weight:800;font-size:20px;letter-spacing:.02em;box-shadow:0 14px 34px -12px var(--rojo);transition:transform .15s var(--ease),background-color .2s,box-shadow .2s}
 .pedir:active{transform:scale(.98)}
 .pedir small{display:block;font-size:12.5px;font-weight:600;opacity:.85;letter-spacing:0;text-align:center}
@@ -136,7 +141,7 @@ label.campo{display:grid;gap:6px;font-size:14px;font-weight:800}
 .vacio{color:var(--gris);text-align:center;padding:40px 0;font-size:17px}
 .ok-ico{stroke-dasharray:60;stroke-dashoffset:60;animation:dibuja .6s var(--ease) forwards}
 @keyframes dibuja{to{stroke-dashoffset:0}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ok-ico{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.cir::before{animation:none}*,*::before,*::after{animation:none!important;transition:none!important}.ok-ico{stroke-dashoffset:0}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LiquorStore","name":"La Tasca Licores","description":"Tienda de vinos, cervezas y licores en Ambato","image":"assets/og.jpg","address":{"@type":"PostalAddress","streetAddress":"Los Guaytambos","addressLocality":"Ambato","postalCode":"180102","addressCountry":"EC"},"areaServed":"Ambato","sameAs":["https://www.instagram.com/latascalicores/"]}
@@ -204,6 +209,7 @@ label.campo{display:grid;gap:6px;font-size:14px;font-weight:800}
   const { T, LS, api, track, usd, tel, canal, campana } = SP;
   const $ = s => document.querySelector(s);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)).join(',');
   const ico = (id, st) => `<svg class="ico"${st ? ` style="${st}"` : ''}><use href="#${id}"/></svg>`;
 
   /* ---------- puerta de edad: si dice que no, el catálogo nunca se arma ---------- */
@@ -264,7 +270,7 @@ label.campo{display:grid;gap:6px;font-size:14px;font-weight:800}
     });
 
     /* ---------- los círculos ---------- */
-    $('#circulos').innerHTML = cats.map(c => `<button type="button" class="cir" data-cat="${c.id}" style="--c:${c.color}"><b data-nc="${c.id}"></b>${ico('c-' + c.icono)}<span>${c.nombre}</span></button>`).join('');
+    $('#circulos').innerHTML = cats.map(c => `<button type="button" class="cir" data-cat="${c.id}" style="--c:${c.color};--r:${rgb(c.color)}"><b data-nc="${c.id}"></b>${ico('c-' + c.icono)}<span>${c.nombre}</span></button>`).join('');
     $('#circulos').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b) abrirHoja(b.dataset.cat); });
 
     function filasHoja(catId) {
@@ -283,7 +289,7 @@ label.campo{display:grid;gap:6px;font-size:14px;font-weight:800}
     function abrirHoja(id) {
       const c = cats.find(x => x.id === id);
       $('#hoja-t').innerHTML = `${c.nombre}<small>${id === 'cigarrillos' ? 'Elige suelto o cajetilla' : 'Toca + para agregar'}</small>`;
-      $('#hoja-i').style.setProperty('--c', c.color); $('#hoja-i').innerHTML = ico('c-' + c.icono);
+      $('#hoja-i').style.setProperty('--c', c.color); $('#hoja-i').style.boxShadow = `inset 0 0 0 2px ${c.color}, 0 0 18px rgba(${rgb(c.color)},.55)`; $('#hoja-i').innerHTML = ico('c-' + c.icono);
       $('#hoja-lista').innerHTML = filasHoja(id);
       $('#hoja').showModal(); $('#hoja-lista').scrollTop = 0; pintar(); track('hoja', { cat: id });
     }
