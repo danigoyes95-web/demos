@@ -2,7 +2,7 @@
 (() => {
   const { esc } = CS; CS.fecha = CS.fecha || (d => d); let stop = () => {};
   CS.verEj = id => { const e = EJ.get(id); if (!e) return;
-    let dg = document.getElementById('dEj'); if (!dg) { dg = document.createElement('dialog'); dg.id = 'dEj'; dg.setAttribute('aria-labelledby', 'dEjT'); document.body.appendChild(dg); dg.addEventListener('close', () => stop()); }
+    let dg = document.getElementById('dEj'); if (!dg) { dg = document.createElement('dialog'); dg.id = 'dEj'; dg.setAttribute('aria-labelledby', 'dEjT'); document.body.appendChild(dg); dg.addEventListener('close', () => { if (!dg.open) stop(); }); }
     dg.innerHTML = `<button class="btn sec sm x" aria-label="Cerrar">✕</button><h3 id="dEjT">${esc(e.n)}</h3><span class="chip">${esc(e.gr)}</span> <span class="chip">${esc(e.niv)}</span> <span class="chip">${esc(e.mus)}</span>
       <div class="vis ${e.clip ? 'vclip' : ''}" style="margin:12px 0"></div>${e.clip ? '' : EJ.frames(e)}
       ${e.pasos.length ? `<h4>Cómo hacerlo</h4><ol>${e.pasos.map(p => `<li>${esc(p)}</li>`).join('')}</ol>` : ''}
