@@ -16,8 +16,9 @@ Founder-operator with a Marketing & Business Management engineering degree who b
 
 ## Experience
 
-### Founder & Lead Builder — 33r, digital studio (Ambato · Quito) · [TBC start date] – present
+### Founder & Lead Builder — 33r, digital studio (Ambato · Quito) · March 2025 – present
 *Websites that sell, systems that control.* Small studio delivering agency-level work to SMBs in food service, events, retail, health and entertainment.
+
 - Design and ship a two-sided product for each client: a customer-facing experience that drives purchase and an owner-facing dashboard that shows what is happening in the business in real time.
 - Built an owner dashboard with role-based access (Supabase/PostgreSQL with Row Level Security): live sales, profit and order status, demand forecast, purchase list, price simulator and ROAS by marketing channel. [ADD METRIC]
 - Designed custom loyalty mechanics instead of templates: stored-value QR cards, non-expiring stars and a points club, plus games and mini-games that capture sign-ups and coupons. [ADD METRIC]
