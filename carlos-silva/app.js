@@ -56,6 +56,8 @@
   const comidaOpc = items => { const g = []; let cur = null; const nuevo = t => (cur = { t, l: [] }, g.push(cur));
     (items || []).forEach(it => String(it).split(/\s*[•·]\s*/).forEach(tk => { tk = tk.trim().replace(/^[-*–]\s*/, ''); if (!tk) return; const m = tk.match(/^opci[oó]n\s*(\d+)\s*[:.\-–]?\s*(.*)$/i);
       if (m) { nuevo('Opción ' + m[1]); tk = m[2].trim(); if (!tk) return; } if (!cur) nuevo(''); cur.l.push(tk.split(/\s+o\s+/i).map(x => x.trim()).filter(Boolean)); })); return g; };
+  /* indicaciones del plan: un párrafo se separa en frases (una por línea) para leerlo fácil */
+  const indic = t => String(t || '').split(/\n+/).flatMap(l => l.trim().replace(/^[-•·*]\s*/, '').replace(/([.!?])\s+(?=[A-ZÁÉÍÓÚÑ¿¡0-9])/g, '$1\n').split('\n')).map(x => x.trim()).filter(Boolean);
   /* ---- lista de compras: del plan alimenticio a productos con su gramaje, ordenados por tipo ---- */
   const nrm = x => String(x || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const CAT_C = [['Lácteos', '🥛', /\b(leche|yogur|yogurt|queso|mozzarella|requeson|cottage|kefir|crema de leche)/], ['Proteínas', '🥩', /\b(pollo|pechuga|carne|res|cerdo|lomo|pescado|atun|tilapia|camaron|huevo|clara|pavo|jamon|salmon|trucha|molida|bistec|filete|chuleta|pernil|sardina|proteina|whey)/],
@@ -311,6 +313,33 @@
     return `<div style="page-break-before:always"></div><h2>🛒 Lista de compras · 1 semana</h2><p style="font-size:9.5pt;color:#555">${L.manual ? 'Preparada por tu coach.' : 'Cantidades calculadas de tus comidas. Multiplica por 2 si compras para dos semanas.'}</p>` +
       L.grupos.map(g => `<h3 style="margin:10px 0 4px">${g.emoji} ${esc(g.cat)}</h3><table><tr><th>Producto</th>${L.manual ? '<th>Cantidad</th>' : '<th>Por porción</th><th>Veces/semana</th><th>Total semana</th>'}</tr>${g.items.map(x => L.manual ? `<tr><td>${esc(x.n)}</td><td>${esc(x.totTxt)}</td></tr>` : `<tr><td>${esc(x.n)}${x.notas.length ? `<br><small>${esc(x.notas.join(' · '))}</small>` : ''}</td><td>${esc(x.porcion)}</td><td>${x.veces}</td><td><b>${esc(x.totTxt)}</b></td></tr>`).join('')}</table>`).join('') +
       (L.alt.length ? `<h3 style="margin:12px 0 4px">🔁 Alternativas</h3><p style="font-size:9.5pt">${L.alt.map(x => `${esc(x.n)} (${esc(x.porcion)})`).join(' · ')}</p>` : ''); };
+  /* ---- PDF real (archivo que se descarga o se comparte por WhatsApp) en vez del diálogo de impresión, que en el celular salía en blanco ---- */
+  const cargaScript = src => new Promise((ok, no) => { if (window.html2pdf) return ok(); const el = document.createElement('script'); el.src = src; el.onload = ok; el.onerror = () => no(new Error('No se pudo cargar el generador de PDF.')); document.head.appendChild(el); });
+  const nombrePdf = t => String(t || 'documento').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w\- ]+/g, '').trim().replace(/\s+/g, '-').replace(/-{2,}/g, '-').slice(0, 80) + '.pdf';
+  const dlgPdf = () => { let d = document.getElementById('dPdf'); if (!d) { d = document.createElement('dialog'); d.id = 'dPdf'; d.setAttribute('aria-label', 'PDF'); document.body.appendChild(d); } return d; };
+  const kb = n => n > 1048576 ? (n / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB';
+  const mostrarPdf = (html, abrir = true) => { const d = dlgPdf(); d.innerHTML = html; if (abrir && !d.open) d.showModal(); return d; };
+  const imprimirClasico = (html, titulo) => { const r = document.getElementById('print-root'), t = document.title; r.innerHTML = html; document.title = titulo;
+    const fin = () => { removeEventListener('afterprint', fin); document.title = t; r.innerHTML = ''; }; addEventListener('afterprint', fin); setTimeout(fin, 120000); window.print(); };
+  let pdfBusy = false;
+  const crearPdf = async (html, titulo) => { if (pdfBusy) return; pdfBusy = true;
+    mostrarPdf(`<div class="spin" role="status" aria-label="Generando"></div><h3>Generando tu PDF…</h3><p>Esto tarda unos segundos. No cierres esta pantalla.</p>`);
+    let box = null, wrap = null;
+    try { await cargaScript('assets/vendor/html2pdf.bundle.min.js');
+      wrap = document.createElement('div'); wrap.style.cssText = 'position:fixed;left:-12000px;top:0;width:794px;z-index:-1'; box = document.createElement('div'); box.className = 'pdfbox'; box.style.cssText = 'width:794px;box-sizing:border-box;padding:0 38px'; box.innerHTML = html; wrap.appendChild(box); document.body.appendChild(wrap);
+      box.querySelectorAll('svg').forEach(sv => { const r = sv.getBoundingClientRect(), bg = getComputedStyle(sv).backgroundColor; sv.querySelectorAll('*').forEach(n => { const cs = getComputedStyle(n); ['stroke', 'stroke-width', 'fill', 'stroke-linecap', 'stroke-linejoin', 'stroke-dasharray', 'opacity'].forEach(p => { const v = cs.getPropertyValue(p); if (v) n.setAttribute(p, v); }); });
+        const cl = sv.cloneNode(true); cl.setAttribute('xmlns', 'http://www.w3.org/2000/svg'); cl.setAttribute('width', r.width); cl.setAttribute('height', r.height); cl.insertAdjacentHTML('afterbegin', `<rect x="-1000" y="-1000" width="3000" height="3000" fill="${bg}"/>`);
+        const im = new Image(); im.style.cssText = `display:block;width:${r.width}px;height:${r.height}px;border-radius:8px`; im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(cl)); sv.replaceWith(im); });
+      await Promise.all([...box.querySelectorAll('img')].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))); await new Promise(r => setTimeout(r, 80));
+      const h = Math.max(1, box.scrollHeight), scale = Math.max(1, Math.min(2, Math.sqrt(12e6 / (794 * h)), 14000 / h));
+      const blob = await window.html2pdf().set({ margin: [10, 0, 12, 0], image: { type: 'jpeg', quality: 0.92 }, html2canvas: { scale, useCORS: true, backgroundColor: '#ffffff', logging: false, windowWidth: 794 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true }, pagebreak: { mode: ['css', 'legacy'], avoid: ['.ex', 'tr', 'h2', 'h3', '.cab'] } }).from(box).outputPdf('blob');
+      wrap.remove(); wrap = null;
+      const nombre = nombrePdf(titulo), file = new File([blob], nombre, { type: 'application/pdf' }), url = URL.createObjectURL(blob), puede = !!(navigator.canShare && navigator.canShare({ files: [file] }));
+      const d = mostrarPdf(`<h3>✓ Tu PDF está listo</h3><p><b>${esc(nombre)}</b><br>${kb(blob.size)}. ${puede ? 'Compártelo por WhatsApp o guárdalo en tu celular.' : 'Descárgalo o ábrelo para enviarlo.'}</p><div class="row">${puede ? '<button class="btn" id="pdfShare">Compartir / enviar</button>' : ''}<a class="btn ${puede ? 'sec' : ''}" id="pdfDown" href="${url}" download="${esc(nombre)}">Descargar</a><a class="btn sec" href="${url}" target="_blank" rel="noopener">Abrir</a></div><p style="margin:12px 0 0"><button class="btn sec sm" id="pdfClose">Cerrar</button></p>`, false);
+      const sh = d.querySelector('#pdfShare'); if (sh) sh.onclick = async () => { try { await navigator.share({ files: [file], title: titulo }); } catch (e) { if (e && e.name !== 'AbortError') d.querySelector('#pdfDown').click(); } };
+      d.querySelector('#pdfClose').onclick = () => { d.close(); setTimeout(() => URL.revokeObjectURL(url), 60000); };
+    } catch (e) { console.warn('PDF', e); if (wrap) wrap.remove(); const d = dlgPdf(); if (d.open) d.close(); try { imprimirClasico(html, titulo); } catch (x) { mostrarPdf(`<h3>No se pudo crear el PDF</h3><p>Revisa tu internet e inténtalo de nuevo.</p><p><button class="btn sec" onclick="dPdf.close()">Cerrar</button></p>`); } }
+    finally { pdfBusy = false; } };
   const Doc = {
     rutina(c) { const r = c.rutina; if (!r) return '<p>Sin rutina asignada.</p>';
       return `<div class="doc">${cab('Rutina · ' + r.nombre, c)}<p><b>Objetivo:</b> ${esc(r.obj || c.obj)} · <b>Duración:</b> ${esc(r.semanas)} semanas · <b>Nivel:</b> ${esc(c.nivel)}</p>` +
@@ -320,11 +349,12 @@
       const N = C.nutricionista, nut = N && N.logo ? `<div style="text-align:center;margin:0 0 10px"><img src="${esc(N.logo)}" alt="${esc(N.nombre)}" style="height:46px;width:auto"></div>` : '';
       return `<div class="doc">${cab('Plan alimenticio', c)}${nut}<table><tr><th>Calorías</th><th>Proteína</th><th>Carbohidratos</th><th>Grasas</th><th>Agua</th></tr><tr><td>${esc(p.kcal)} kcal</td><td>${esc(p.p)} g</td><td>${esc(p.c)} g</td><td>${esc(p.g)} g</td><td>${esc(p.agua)}</td></tr></table>` +
         p.comidas.map(m => `<h2>${esc(m.h)} · ${esc(m.n)}${m.dias && m.dias.length ? ` <small>(${m.dias.map(k => ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'][k]).join(', ')})</small>` : ''}</h2>${comidaOpc(m.it).map(o => `${o.t ? `<p><b>${esc(o.t)}</b></p>` : ''}<ul>${o.l.map(a => `<li>${a.map(esc).join(' <i>o</i> ')}</li>`).join('')}</ul>`).join('')}`).join('') +
-        (p.notas ? `<h2>Indicaciones</h2><p>${esc(p.notas)}</p>` : '') + (c.supl.length ? `<h2>Suplementación</h2><table><tr><th>Producto</th><th>Dosis</th><th>Cuándo</th></tr>${c.supl.map(s => `<tr><td>${esc(s.n)}</td><td>${esc(s.dosis)}</td><td>${esc(s.mom)}</td></tr>`).join('')}</table>` : '') + listaPdf(p) + pie + '</div>'; },
+        (indic(p.notas).length ? `<h2>Indicaciones</h2><ul>${indic(p.notas).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '') + (c.supl.length ? `<h2>Suplementación</h2><table><tr><th>Producto</th><th>Dosis</th><th>Cuándo</th></tr>${c.supl.map(s => `<tr><td>${esc(s.n)}</td><td>${esc(s.dosis)}</td><td>${esc(s.mom)}</td></tr>`).join('')}</table>` : '') + listaPdf(p) + pie + '</div>'; },
     progreso(c) { const m = c.medidas; return `<div class="doc">${cab('Reporte de progreso', c)}${m.length ? `<table><tr><th>Fecha</th><th>Peso (kg)</th><th>% grasa</th><th>Masa muscular (kg)</th><th>Grasa visceral</th><th>Agua %</th></tr>${m.map(x => `<tr><td>${esc(fecha(x.f))}</td><td>${esc(x.kg)}</td><td>${esc(x.gr)}</td><td>${esc(x.mm)}</td><td>${esc(x.vis)}</td><td>${esc(x.agua)}</td></tr>`).join('')}</table>` : '<p>Aún no hay chequeos InBody.</p>'}` +
         (c.medcorp && c.medcorp.length ? `<h2>Medidas corporales (cm)</h2><table><tr><th>Fecha</th>${MC.map(x => `<th>${x[1]}</th>`).join('')}</tr>${c.medcorp.map(m => `<tr><td>${esc(fecha(m.f))}</td>${MC.map(x => `<td>${esc(m[x[0]] ?? '—')}</td>`).join('')}</tr>`).join('')}</table>` : '') +
         c.evals.slice(-3).map(e => `<h2>Evaluación técnica · ${esc(fecha(e.f))}</h2><p>${esc(e.nota)}</p><table><tr><th>Ejercicio</th><th>Técnica (1-5)</th><th>Comentario</th></tr>${e.it.map(i => `<tr><td>${esc(EJ.get(i.id)?.n || i.id)}</td><td>${esc(i.pt)}</td><td>${esc(i.n)}</td></tr>`).join('')}</table>`).join('') + pie + '</div>'; },
-    imprimir(html, titulo) { const r = document.getElementById('print-root'); r.innerHTML = html; const t = document.title; document.title = titulo; window.print(); document.title = t; setTimeout(() => r.innerHTML = '', 500); }
+    NOMBRES: { rutina: 'Rutina', plan: 'Plan alimenticio', progreso: 'Reporte de progreso' },
+    imprimir(html, titulo) { return crearPdf(html, titulo); }
   };
   /* ---- enlace del cliente: el plan viaja dentro del link (sin servidor) ---- */
   const b64 = u8 => btoa(String.fromCharCode(...u8)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -342,5 +372,5 @@
   const wa = (tel, txt) => `https://wa.me/${tel}?text=${encodeURIComponent(txt)}`;
   const ICONOS = { apple: 'M12 7c-2-2-6-1-6 4 0 4 3 9 5 9 .8 0 1-.5 2-.5s1.2.5 2 .5c2 0 5-5 5-9 0-5-4-6-6-4zM12 7c0-2 1-4 3-4', plate: 'M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z', scale: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM8 9a4 3 0 0 1 8 0M12 9l2-2', chat: 'M4 5h16v11H9l-5 4zM8 10h8', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 4-6 8-6s8 2 8 6', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12', check: 'M4 12l5 5L20 6', pin: 'M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', pill: 'M8 3l13 13a4 4 0 0 1-6 6L2 9a4 4 0 0 1 6-6zM8 9l5 5' };
   const ico = n => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONOS[n] || ICONOS.check}"/></svg>`;
-  window.CS = { compras, comprasTexto, planCambio, planVersion, pesoEn, nrm, TEC, comidaOpc, diaEf, diaDe, activa, hastaDe, activar, anularPago, msgActiva, dinero, blobUrl, seg, trabajo, nSeries, repsObj, SR, ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
+  window.CS = { indic, compras, comprasTexto, planCambio, planVersion, pesoEn, nrm, TEC, comidaOpc, diaEf, diaDe, activa, hastaDe, activar, anularPago, msgActiva, dinero, blobUrl, seg, trabajo, nSeries, repsObj, SR, ymd, MC, DIAS_N, ventana, venceDias, msgVence, msgCheckin, renovar, comprimir, M, diaDe, dias, remoto, diaSem, esc, hoy, uid, fecha, RUTINAS, calc, ACT, planBase, Store, pend, Doc, Link, wa, ico };
 })();
