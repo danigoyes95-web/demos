@@ -204,10 +204,40 @@
       err: ['Redondear la espalda', 'Rodillas hacia adentro', 'Despegar los talones del piso', 'Bajar sin control'], resp: 'Inhala al bajar, exhala al subir.', a: {}, b: {} },
     { id: 'triceps-nuca-polea', n: 'Tríceps tras nuca en polea', gr: 'Brazo', eq: {}, mus: 'Tríceps (cabeza larga)', niv: 'Intermedio',
       pasos: ['De espaldas a la polea alta, toma el agarre detrás de la cabeza con los codos apuntando al frente.', 'Estira los brazos hacia delante y arriba sin mover los codos.', 'Regresa lento a la posición inicial detrás de la cabeza.'],
-      err: ['Abrir los codos hacia los lados', 'Inclinar demasiado el torso', 'Peso excesivo que obliga a mover los hombros'], resp: 'Exhala al estirar, inhala al regresar.', a: {}, b: {} }
+      err: ['Abrir los codos hacia los lados', 'Inclinar demasiado el torso', 'Peso excesivo que obliga a mover los hombros'], resp: 'Exhala al estirar, inhala al regresar.', a: {}, b: {} },
+    { id: 'hiperextension-espalda', n: 'Hiperextensión de espalda', gr: 'Espalda', eq: {}, mus: 'Lumbar, glúteo, isquiotibiales', niv: 'Principiante',
+      pasos: ['Ajusta el apoyo a la altura de la cadera, con los pies firmes y el cuerpo en línea recta.', 'Baja el torso con la espalda neutra hasta sentir estiramiento en la parte de atrás del muslo.', 'Sube hasta alinear el cuerpo, apretando glúteos y lumbar, sin pasar de la línea recta.'],
+      err: ['Hiperextender la zona lumbar al subir', 'Usar impulso', 'Redondear la espalda al bajar'], resp: 'Inhala al bajar, exhala al subir.', a: {}, b: {} },
+    { id: 'prensa-piernas', n: 'Prensa para cuádriceps', gr: 'Pierna', eq: {}, mus: 'Cuádriceps, glúteo', niv: 'Principiante',
+      pasos: ['Siéntate con la espalda y la cadera pegadas al respaldo y los pies en la plataforma, a la altura de los hombros.', 'Baja flexionando las rodillas hasta unos 90°, sin que la cadera se despegue del asiento.', 'Empuja con todo el pie hasta casi estirar las piernas, sin bloquear las rodillas.'],
+      err: ['Despegar la cadera del asiento', 'Dejar que las rodillas se vayan hacia adentro', 'Bloquear las rodillas arriba'], resp: 'Inhala al bajar, exhala al empujar.', a: {}, b: {} },
+    { id: 'abductor', n: 'Abductor en máquina', gr: 'Glúteo', eq: {}, mus: 'Glúteo medio, abductores', niv: 'Principiante',
+      pasos: ['Siéntate con la espalda recta y apoya las piernas contra las almohadillas, por fuera de las rodillas.', 'Abre las piernas empujando contra las almohadillas y apretando el glúteo.', 'Regresa lento sin dejar caer el peso.'],
+      err: ['Rebotar con la pila de pesas', 'Inclinar el torso para ayudarte', 'Peso excesivo con recorrido muy corto'], resp: 'Exhala al abrir, inhala al cerrar.', a: {}, b: {} },
+    { id: 'aductor', n: 'Aductor en máquina', gr: 'Pierna', eq: {}, mus: 'Aductores (parte interna del muslo)', niv: 'Principiante',
+      pasos: ['Siéntate con la espalda recta y las almohadillas por dentro de las rodillas, con las piernas abiertas.', 'Junta las piernas apretando la parte interna del muslo.', 'Regresa lento controlando el peso.'],
+      err: ['Rebotar con la pila de pesas', 'Abrir más piernas de lo que permite la cadera', 'Soltar el peso de golpe'], resp: 'Exhala al juntar, inhala al abrir.', a: {}, b: {} },
+    { id: 'femoral-boca-abajo', n: 'Curl femoral boca abajo', gr: 'Pierna', eq: {}, mus: 'Isquiotibiales', niv: 'Principiante',
+      pasos: ['Acuéstate boca abajo con las rodillas fuera del borde del banco y el rodillo sobre los tobillos.', 'Flexiona las rodillas llevando el rodillo hacia los glúteos.', 'Baja lento sin soltar el peso.'],
+      err: ['Levantar la cadera del banco', 'Usar impulso', 'Hacer un recorrido muy corto'], resp: 'Exhala al subir, inhala al bajar.', a: {}, b: {} },
+    { id: 'femoral-sentado', n: 'Curl femoral sentado', gr: 'Pierna', eq: {}, mus: 'Isquiotibiales', niv: 'Principiante',
+      pasos: ['Siéntate con la espalda apoyada y el rodillo sobre los tobillos, con los muslos fijos bajo el soporte.', 'Flexiona las rodillas llevando el rodillo hacia atrás y abajo.', 'Sube lento hasta estirar las piernas sin soltar el peso.'],
+      err: ['Despegar la espalda del respaldo', 'Usar impulso', 'Soltar el peso de golpe'], resp: 'Exhala al flexionar, inhala al regresar.', a: {}, b: {} },
+    { id: 'bulgaras', n: 'Sentadilla búlgara', gr: 'Pierna', eq: { banco: 1 }, mus: 'Cuádriceps, glúteo', niv: 'Intermedio',
+      pasos: ['Apoya el pie de atrás sobre un banco y da un paso largo con la otra pierna, con el torso recto.', 'Baja flexionando la rodilla de adelante hasta que el muslo quede paralelo al piso.', 'Empuja con el talón de adelante para subir, sin perder el equilibrio.'],
+      err: ['Dejar que la rodilla delantera se vaya hacia adentro', 'Pie delantero demasiado cerca del banco', 'Inclinar el torso hacia delante'], resp: 'Inhala al bajar, exhala al subir.', a: {}, b: {} },
+    { id: 'patada-gluteo', n: 'Patada de glúteo', gr: 'Glúteo', eq: {}, mus: 'Glúteo mayor', niv: 'Principiante',
+      pasos: ['Apoya manos y rodillas (o usa la máquina o la polea) con la espalda neutra.', 'Lleva una pierna hacia atrás y arriba apretando el glúteo, sin arquear la zona lumbar.', 'Regresa lento sin apoyar el peso.'],
+      err: ['Arquear la zona lumbar', 'Girar la cadera', 'Usar impulso'], resp: 'Exhala al subir la pierna, inhala al bajar.', a: {}, b: {} },
+    { id: 'step-up', n: 'Step up', gr: 'Pierna', eq: { banco: 1 }, mus: 'Cuádriceps, glúteo', niv: 'Intermedio',
+      pasos: ['Párate frente a un cajón o banco con un pie completo apoyado encima.', 'Sube empujando con el talón de la pierna de arriba hasta quedar erguido.', 'Baja controlado y repite; luego cambia de pierna.'],
+      err: ['Impulsarte con la pierna de abajo', 'Dejar que la rodilla se vaya hacia adentro', 'Usar un cajón demasiado alto'], resp: 'Exhala al subir, inhala al bajar.', a: {}, b: {} },
+    { id: 'tijeras-estaticas', n: 'Tijeras estáticas (zancada estática)', gr: 'Pierna', eq: {}, mus: 'Cuádriceps, glúteo', niv: 'Intermedio',
+      pasos: ['Da un paso largo al frente y mantén los pies fijos, con el torso recto.', 'Baja flexionando ambas rodillas hasta que la de atrás casi toque el piso.', 'Sube empujando con el talón de adelante, sin mover los pies.'],
+      err: ['Dejar que la rodilla delantera se vaya hacia adentro', 'Inclinar el torso', 'Dar pasos demasiado cortos'], resp: 'Inhala al bajar, exhala al subir.', a: {}, b: {} }
   ];
   /* video explicativo con la mascota (assets/ejercicios/<id>.mp4) + imágenes: miniatura (id.jpg) y dos cuadros para el PDF (id-a.jpg, id-b.jpg) */
-  const CLIPS = ['aperturas-banco', 'peck-deck-pecho', 'press-banca', 'press-inclinado-hammer', 'press-plano-manc', 'dominadas', 'fondos', 'hex-press', 'jalon', 'remo-sentado-cerrado', 'jalon-cerrado', 'cruce-poleas', 'peck-deck-deltoides', 'remo-barra', 'remo-mancuerna', 'curl-biceps-manc', 'curl-martillo', 'press-hombro-manc', 'elev-frontal', 'elev-lateral', 'copa-triceps', 'curl-barra', 'pajaros', 'triceps-nuca-barra', 'triceps-nuca-manc', 'cruce-piernas', 'elev-piernas', 'crunch', 'mountain', 'plancha', 'curl-cable', 'pushdown', 'sentadilla-pendulo', 'sentadilla-smith', 'triceps-nuca-polea', 'ext-cuad', 'hip-thrust'];
+  const CLIPS = ['aperturas-banco', 'peck-deck-pecho', 'press-banca', 'press-inclinado-hammer', 'press-plano-manc', 'dominadas', 'fondos', 'hex-press', 'jalon', 'remo-sentado-cerrado', 'jalon-cerrado', 'cruce-poleas', 'peck-deck-deltoides', 'remo-barra', 'remo-mancuerna', 'curl-biceps-manc', 'curl-martillo', 'press-hombro-manc', 'elev-frontal', 'elev-lateral', 'copa-triceps', 'curl-barra', 'pajaros', 'triceps-nuca-barra', 'triceps-nuca-manc', 'cruce-piernas', 'elev-piernas', 'crunch', 'mountain', 'plancha', 'curl-cable', 'pushdown', 'sentadilla-pendulo', 'sentadilla-smith', 'triceps-nuca-polea', 'ext-cuad', 'hip-thrust', 'hiperextension-espalda', 'talones', 'prensa-piernas', 'abductor', 'aductor', 'femoral-boca-abajo', 'femoral-sentado', 'zancadas', 'bulgaras', 'patada-gluteo', 'step-up', 'tijeras-estaticas'];
   CLIPS.forEach(id => { const e = X.find(x => x.id === id); if (e) { const b = 'assets/ejercicios/' + id; e.clip = b + '.mp4'; e.img = b + '.jpg'; e.fa = b + '-a.jpg'; e.fb = b + '-b.jpg'; } });
   const CAMPOS = ['n', 'gr', 'mus', 'niv', 'pasos', 'err', 'resp', 'video'];
   const norm = e => { e.a = full(e.a); e.b = full(e.b); e.eq = e.eq || {}; return e; };
