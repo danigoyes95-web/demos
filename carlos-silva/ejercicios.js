@@ -131,8 +131,39 @@
     { id: 'mountain', n: 'Mountain climbers', gr: 'Core', eq: {}, g: 'all', mus: 'Core, hombro, cardio', niv: 'Intermedio',
       pasos: ['Posición de plancha alta, manos bajo los hombros.', 'Lleva una rodilla al pecho y alterna rápido.', 'Mantén la cadera baja y el core firme.'],
       err: ['Cadera levantada', 'Manos adelantadas', 'Perder el ritmo respiratorio'], resp: 'Respiración rítmica, 2 pasos por ciclo.',
-      a: { x: 150, t: 62, ua: 0, fa: 0, th: 100, sh: -10, th2: -62, sh2: -62 }, b: { x: 150, t: 62, ua: 0, fa: 0, th: -62, sh: -62, th2: 100, sh2: -10 } }
+      a: { x: 150, t: 62, ua: 0, fa: 0, th: 100, sh: -10, th2: -62, sh2: -62 }, b: { x: 150, t: 62, ua: 0, fa: 0, th: -62, sh: -62, th2: 100, sh2: -10 } },
+    /* ===== ejercicios con video del tiburón (mascota de FitZone) ===== */
+    { id: 'aperturas-banco', n: 'Aperturas en banco', gr: 'Pecho', eq: { manc: 1, banco: 1 }, mus: 'Pectoral, deltoides anterior', niv: 'Intermedio',
+      pasos: ['Acostado en el banco plano, mancuernas arriba con las palmas enfrentadas y los codos ligeramente flexionados.', 'Abre los brazos en arco hasta sentir estiramiento en el pecho, sin bajar más allá de la línea de los hombros.', 'Cierra el arco llevando las mancuernas arriba y apretando el pecho.'],
+      err: ['Bajar demasiado y cargar el hombro', 'Estirar los codos por completo', 'Usar impulso con la espalda'], resp: 'Inhala al abrir, exhala al cerrar.', a: {}, b: {} },
+    { id: 'peck-deck-pecho', n: 'Aperturas en peck deck', gr: 'Pecho', eq: {}, mus: 'Pectoral', niv: 'Principiante',
+      pasos: ['Siéntate con la espalda pegada al respaldo y los codos a la altura del pecho.', 'Junta los brazos al frente apretando el pecho, sin despegar la espalda.', 'Regresa lento hasta sentir un estiramiento controlado.'],
+      err: ['Despegar la espalda del respaldo', 'Encoger los hombros hacia las orejas', 'Soltar el peso de golpe'], resp: 'Exhala al juntar, inhala al abrir.', a: {}, b: {} },
+    { id: 'press-inclinado-hammer', n: 'Press inclinado en hammer', gr: 'Pecho', eq: {}, mus: 'Pectoral superior, hombro, tríceps', niv: 'Principiante',
+      pasos: ['Ajusta el asiento para que los agarres queden a la altura del pecho alto.', 'Empuja hacia delante y arriba sin bloquear los codos.', 'Regresa controlado hasta sentir estiramiento en el pecho.'],
+      err: ['Despegar la espalda del respaldo', 'Bloquear los codos con fuerza', 'Rebotar al regresar'], resp: 'Exhala al empujar, inhala al regresar.', a: {}, b: {} },
+    { id: 'press-plano-manc', n: 'Press plano con mancuernas', gr: 'Pecho', eq: { manc: 1, banco: 1 }, mus: 'Pectoral, tríceps, deltoides anterior', niv: 'Intermedio',
+      pasos: ['Acuéstate en el banco plano con las mancuernas a la altura del pecho y los pies firmes.', 'Empuja hasta casi estirar los codos, juntando las mancuernas arriba.', 'Baja lento hasta que los codos queden un poco por debajo del banco.'],
+      err: ['Abrir demasiado los codos', 'Bajar sin control', 'Despegar la cadera del banco'], resp: 'Inhala al bajar, exhala al empujar.', a: {}, b: {} },
+    { id: 'fondos', n: 'Fondos en paralelas', gr: 'Pecho', eq: {}, mus: 'Pectoral inferior, tríceps, hombro', niv: 'Intermedio',
+      pasos: ['Sujétate de las barras con los brazos estirados y el torso ligeramente inclinado hacia delante.', 'Baja flexionando los codos hasta que los brazos formen unos 90°.', 'Empuja hacia arriba sin balancear las piernas.'],
+      err: ['Bajar demasiado y cargar el hombro', 'Balancear el cuerpo', 'Encoger los hombros'], resp: 'Inhala al bajar, exhala al subir.', a: {}, b: {} },
+    { id: 'hex-press', n: 'Hex press con mancuernas', gr: 'Pecho', eq: { manc: 1, banco: 1 }, mus: 'Pectoral, tríceps', niv: 'Intermedio',
+      pasos: ['Acostado, junta las dos mancuernas una contra otra sobre el pecho y apriétalas durante todo el movimiento.', 'Empuja hacia arriba sin separarlas.', 'Baja controlado hasta el pecho manteniendo la presión entre ambas.'],
+      err: ['Dejar que las mancuernas se separen', 'Bajar sin control', 'Despegar la cadera del banco'], resp: 'Exhala al empujar, inhala al bajar.', a: {}, b: {} },
+    { id: 'remo-sentado-cerrado', n: 'Remo sentado agarre cerrado', gr: 'Espalda', eq: {}, mus: 'Dorsal, romboides, bíceps', niv: 'Principiante',
+      pasos: ['Siéntate con el pecho arriba y los pies firmes; toma el agarre cerrado.', 'Tira hacia el abdomen llevando los codos pegados hacia atrás y juntando las escápulas.', 'Regresa lento estirando los brazos sin encorvar la espalda.'],
+      err: ['Balancear el torso', 'Encoger los hombros', 'Espalda redondeada'], resp: 'Exhala al tirar, inhala al regresar.', a: {}, b: {} },
+    { id: 'jalon-cerrado', n: 'Jalón con agarre cerrado', gr: 'Espalda', eq: {}, mus: 'Dorsal ancho, bíceps', niv: 'Principiante',
+      pasos: ['Siéntate con los muslos fijos bajo el soporte y toma el agarre cerrado.', 'Tira hacia el pecho alto llevando los codos hacia abajo y atrás.', 'Sube lento hasta estirar los brazos sin despegarte del asiento.'],
+      err: ['Inclinarte demasiado hacia atrás', 'Tirar con los brazos en vez de con la espalda', 'Soltar el peso de golpe'], resp: 'Exhala al tirar, inhala al subir.', a: {}, b: {} },
+    { id: 'cruce-poleas', n: 'Cruce de poleas para pecho', gr: 'Pecho', eq: {}, mus: 'Pectoral', niv: 'Intermedio',
+      pasos: ['De pie entre las poleas altas, torso ligeramente inclinado y codos un poco flexionados.', 'Junta las manos al frente en arco, apretando el pecho.', 'Regresa lento controlando el peso hasta sentir estiramiento.'],
+      err: ['Doblar y estirar los codos en cada repetición', 'Usar impulso con el torso', 'Peso excesivo'], resp: 'Exhala al juntar, inhala al abrir.', a: {}, b: {} }
   ];
+  /* video explicativo con la mascota (assets/ejercicios/<id>.mp4) + imágenes: miniatura (id.jpg) y dos cuadros para el PDF (id-a.jpg, id-b.jpg) */
+  const CLIPS = ['aperturas-banco', 'peck-deck-pecho', 'press-banca', 'press-inclinado-hammer', 'press-plano-manc', 'dominadas', 'fondos', 'hex-press', 'jalon', 'remo-sentado-cerrado', 'jalon-cerrado', 'cruce-poleas'];
+  CLIPS.forEach(id => { const e = X.find(x => x.id === id); if (e) { const b = 'assets/ejercicios/' + id; e.clip = b + '.mp4'; e.img = b + '.jpg'; e.fa = b + '-a.jpg'; e.fb = b + '-b.jpg'; } });
   const CAMPOS = ['n', 'gr', 'mus', 'niv', 'pasos', 'err', 'resp', 'video'];
   const norm = e => { e.a = full(e.a); e.b = full(e.b); e.eq = e.eq || {}; return e; };
   X.forEach(norm);
@@ -147,11 +178,15 @@
       return [...fijos, ...extra.sort((a, b) => orden(a) - orden(b) || a.localeCompare(b, 'es'))]; },
     gruposForm() { return [...new Set([...E.GRUPOS_BASE, ...E.grupos])]; },
     get: id => X.find(e => e.id === id),
-    frames: (ex, w) => `<div class="frames"><figure>${svg(draw(ex.a, ex), w)}<figcaption>1 · Inicio</figcaption></figure>` +
+    frames: (ex, w) => ex.clip ? `<div class="frames clip"><figure><img src="${ex.fa}" alt=""><figcaption>1 · Inicio</figcaption></figure><span class="arrow" aria-hidden="true">→</span><figure><img src="${ex.fb}" alt=""><figcaption>2 · Final</figcaption></figure></div>` : `<div class="frames"><figure>${svg(draw(ex.a, ex), w)}<figcaption>1 · Inicio</figcaption></figure>` +
       (ex.est ? '' : `<span class="arrow" aria-hidden="true">→</span><figure>${svg(draw(ex.b, ex), w)}<figcaption>2 · Final</figcaption></figure>`) + `</div>`,
     miniatura: ex => ex.img ? `<img src="${ex.img}" alt="" loading="lazy">` : svg(draw(ex.b, ex)),
     /* animación en loop: devuelve función para detenerla */
     animar(el, ex) {
+      if (ex.clip) { const red = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        el.innerHTML = `<video class="clipv" src="${ex.clip}" poster="${ex.img}" muted loop playsinline preload="metadata" aria-label="Video de ${String(ex.n).replace(/"/g, '')}" ${red ? 'controls' : 'autoplay'}></video>`;
+        const v = el.querySelector('video'); if (!red) { const p = v.play(); if (p && p.catch) p.catch(() => { v.controls = true; }); }
+        return () => { try { v.pause(); v.removeAttribute('src'); v.load(); } catch (e) {} }; }
       if (ex.est) { el.innerHTML = svg(draw(ex.a, ex)); return () => {}; }
       let raf, t0 = performance.now();
       const tick = n => { const ph = ((n - t0) % 3200) / 3200, k = ph < .5 ? ph * 2 : (1 - ph) * 2, e = k * k * (3 - 2 * k);
