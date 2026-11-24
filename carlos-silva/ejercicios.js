@@ -174,10 +174,31 @@
       err: ['Impulso con la espalda', 'Girar las muñecas', 'Subir los codos hacia delante'], resp: 'Exhala al subir, inhala al bajar.', a: {}, b: {} },
     { id: 'press-hombro-manc', n: 'Press de hombro con mancuernas', gr: 'Hombro', eq: { manc: 1 }, mus: 'Deltoides, tríceps', niv: 'Intermedio',
       pasos: ['De pie (o sentado), mancuernas a la altura de los hombros con las palmas hacia delante y el abdomen firme.', 'Empuja hacia arriba hasta casi estirar los codos, sin arquear la espalda.', 'Baja controlado hasta la altura de las orejas.'],
-      err: ['Arquear la zona lumbar', 'Bloquear los codos con fuerza', 'Subir con impulso de piernas'], resp: 'Exhala al empujar, inhala al bajar.', a: {}, b: {} }
+      err: ['Arquear la zona lumbar', 'Bloquear los codos con fuerza', 'Subir con impulso de piernas'], resp: 'Exhala al empujar, inhala al bajar.', a: {}, b: {} },
+    { id: 'elev-lateral', n: 'Vuelos laterales', gr: 'Hombro', eq: { manc: 1 }, mus: 'Deltoides lateral', niv: 'Principiante',
+      pasos: ['De pie, mancuernas a los lados con los codos ligeramente flexionados.', 'Sube los brazos hacia los lados hasta la altura de los hombros, como abriendo alas.', 'Baja lento sin dejar caer las mancuernas.'],
+      err: ['Subir por encima de los hombros', 'Balancear el torso para subir', 'Peso excesivo que obliga a encoger los hombros'], resp: 'Exhala al subir, inhala al bajar.', a: {}, b: {} },
+    { id: 'copa-triceps', n: 'Copa para tríceps', gr: 'Brazo', eq: { manc: 1 }, mus: 'Tríceps (cabeza larga)', niv: 'Principiante',
+      pasos: ['De pie o sentado, sostén una mancuerna con las dos manos sobre la cabeza, en forma de copa.', 'Flexiona los codos bajando la mancuerna detrás de la cabeza, con los codos apuntando al frente.', 'Estira los brazos hacia arriba sin abrir los codos.'],
+      err: ['Abrir los codos hacia los lados', 'Arquear la zona lumbar', 'Bajar sin control'], resp: 'Inhala al bajar, exhala al estirar.', a: {}, b: {} },
+    { id: 'pajaros', n: 'Pájaros', gr: 'Hombro', eq: { manc: 1 }, mus: 'Deltoides posterior, romboides', niv: 'Principiante',
+      pasos: ['Inclina el torso hacia delante con la espalda recta y las mancuernas colgando bajo los hombros.', 'Abre los brazos hacia los lados, con los codos ligeramente flexionados, hasta la altura del torso.', 'Baja lento a la posición inicial.'],
+      err: ['Encorvar la espalda', 'Usar impulso del torso', 'Subir los brazos más arriba del torso'], resp: 'Exhala al abrir, inhala al bajar.', a: {}, b: {} },
+    { id: 'triceps-nuca-barra', n: 'Tríceps tras nuca con barra recta', gr: 'Brazo', eq: { barra: 1 }, mus: 'Tríceps', niv: 'Intermedio',
+      pasos: ['De pie o sentado, sostén la barra sobre la cabeza con los brazos estirados.', 'Baja la barra detrás de la cabeza flexionando solo los codos, que se mantienen cerca de la cabeza.', 'Estira los brazos hacia arriba sin mover los hombros.'],
+      err: ['Abrir los codos hacia los lados', 'Arquear la zona lumbar', 'Peso excesivo que obliga a mover el torso'], resp: 'Inhala al bajar, exhala al estirar.', a: {}, b: {} },
+    { id: 'triceps-nuca-manc', n: 'Tríceps tras nuca con mancuerna (una mano)', gr: 'Brazo', eq: { manc: 1 }, mus: 'Tríceps', niv: 'Intermedio',
+      pasos: ['De pie, sostén una mancuerna sobre la cabeza con una mano y el codo apuntando arriba.', 'Flexiona el codo bajando la mancuerna detrás de la cabeza, sin mover el brazo de arriba.', 'Estira el brazo hasta arriba y repite; luego cambia de mano.'],
+      err: ['Mover el codo hacia delante o los lados', 'Inclinar el torso', 'Bajar sin control'], resp: 'Inhala al bajar, exhala al estirar.', a: {}, b: {} },
+    { id: 'cruce-piernas', n: 'Cruce de piernas (abdominales)', gr: 'Core', eq: {}, mus: 'Abdomen, oblicuos, flexores de cadera', niv: 'Intermedio',
+      pasos: ['Acostado boca arriba, manos detrás de la cabeza y las piernas elevadas.', 'Cruza las piernas una sobre otra de forma alterna, en tijera, con el abdomen firme.', 'Mantén la zona lumbar pegada al suelo durante todo el movimiento.'],
+      err: ['Despegar la zona lumbar del suelo', 'Jalar el cuello con las manos', 'Mover las piernas muy rápido sin control'], resp: 'Respira de forma constante, sin aguantar el aire.', a: {}, b: {} },
+    { id: 'curl-cable', n: 'Bíceps con cabo (polea)', gr: 'Brazo', eq: {}, mus: 'Bíceps braquial', niv: 'Principiante',
+      pasos: ['De pie frente a la polea baja, toma el agarre con las palmas hacia arriba y los codos pegados al torso.', 'Sube el agarre flexionando los codos hasta los hombros, apretando el bíceps.', 'Baja lento sin dejar descansar el peso en la pila.'],
+      err: ['Balancear el cuerpo para subir', 'Separar los codos del torso', 'Bajar de golpe'], resp: 'Exhala al subir, inhala al bajar.', a: {}, b: {} }
   ];
   /* video explicativo con la mascota (assets/ejercicios/<id>.mp4) + imágenes: miniatura (id.jpg) y dos cuadros para el PDF (id-a.jpg, id-b.jpg) */
-  const CLIPS = ['aperturas-banco', 'peck-deck-pecho', 'press-banca', 'press-inclinado-hammer', 'press-plano-manc', 'dominadas', 'fondos', 'hex-press', 'jalon', 'remo-sentado-cerrado', 'jalon-cerrado', 'cruce-poleas', 'peck-deck-deltoides', 'remo-barra', 'remo-mancuerna', 'curl-biceps-manc', 'curl-martillo', 'press-hombro-manc'];
+  const CLIPS = ['aperturas-banco', 'peck-deck-pecho', 'press-banca', 'press-inclinado-hammer', 'press-plano-manc', 'dominadas', 'fondos', 'hex-press', 'jalon', 'remo-sentado-cerrado', 'jalon-cerrado', 'cruce-poleas', 'peck-deck-deltoides', 'remo-barra', 'remo-mancuerna', 'curl-biceps-manc', 'curl-martillo', 'press-hombro-manc', 'elev-frontal', 'elev-lateral', 'copa-triceps', 'curl-barra', 'pajaros', 'triceps-nuca-barra', 'triceps-nuca-manc', 'cruce-piernas', 'elev-piernas', 'crunch', 'mountain', 'plancha', 'curl-cable'];
   CLIPS.forEach(id => { const e = X.find(x => x.id === id); if (e) { const b = 'assets/ejercicios/' + id; e.clip = b + '.mp4'; e.img = b + '.jpg'; e.fa = b + '-a.jpg'; e.fb = b + '-b.jpg'; } });
   const CAMPOS = ['n', 'gr', 'mus', 'niv', 'pasos', 'err', 'resp', 'video'];
   const norm = e => { e.a = full(e.a); e.b = full(e.b); e.eq = e.eq || {}; return e; };
