@@ -159,10 +159,25 @@
       err: ['Inclinarte demasiado hacia atrás', 'Tirar con los brazos en vez de con la espalda', 'Soltar el peso de golpe'], resp: 'Exhala al tirar, inhala al subir.', a: {}, b: {} },
     { id: 'cruce-poleas', n: 'Cruce de poleas para pecho', gr: 'Pecho', eq: {}, mus: 'Pectoral', niv: 'Intermedio',
       pasos: ['De pie entre las poleas altas, torso ligeramente inclinado y codos un poco flexionados.', 'Junta las manos al frente en arco, apretando el pecho.', 'Regresa lento controlando el peso hasta sentir estiramiento.'],
-      err: ['Doblar y estirar los codos en cada repetición', 'Usar impulso con el torso', 'Peso excesivo'], resp: 'Exhala al juntar, inhala al abrir.', a: {}, b: {} }
+      err: ['Doblar y estirar los codos en cada repetición', 'Usar impulso con el torso', 'Peso excesivo'], resp: 'Exhala al juntar, inhala al abrir.', a: {}, b: {} },
+    { id: 'peck-deck-deltoides', n: 'Peck deck para deltoides', gr: 'Hombro', eq: {}, mus: 'Deltoides posterior, romboides', niv: 'Principiante',
+      pasos: ['Siéntate de frente al respaldo (pecho contra el apoyo) y toma los agarres con los codos ligeramente flexionados.', 'Abre los brazos hacia atrás hasta la línea de los hombros, apretando la parte de atrás del hombro.', 'Regresa lento sin soltar el peso.'],
+      err: ['Encoger los hombros hacia las orejas', 'Usar impulso con el torso', 'Abrir más allá de lo que permite el hombro'], resp: 'Exhala al abrir, inhala al regresar.', a: {}, b: {} },
+    { id: 'remo-mancuerna', n: 'Remo con mancuerna', gr: 'Espalda', eq: { manc: 1, banco: 1 }, mus: 'Dorsal, romboides, bíceps', niv: 'Principiante',
+      pasos: ['Apoya una mano y una rodilla (o el pie) en el banco, espalda recta y paralela al suelo.', 'Tira de la mancuerna hacia la cadera llevando el codo hacia atrás y pegado al cuerpo.', 'Baja lento estirando el brazo sin girar el torso.'],
+      err: ['Girar el torso para subir el peso', 'Encorvar la espalda', 'Tirar con el brazo en vez de con la espalda'], resp: 'Exhala al tirar, inhala al bajar.', a: {}, b: {} },
+    { id: 'curl-biceps-manc', n: 'Curl de bíceps con mancuernas', gr: 'Brazo', eq: { manc: 1 }, mus: 'Bíceps braquial', niv: 'Principiante',
+      pasos: ['De pie, mancuernas a los lados con las palmas hacia delante y los codos pegados al torso.', 'Sube las mancuernas flexionando los codos hasta los hombros, apretando el bíceps.', 'Baja lento hasta estirar casi por completo.'],
+      err: ['Balancear el cuerpo para subir', 'Separar los codos del torso', 'Bajar de golpe'], resp: 'Exhala al subir, inhala al bajar.', a: {}, b: {} },
+    { id: 'curl-martillo', n: 'Curl martillo', gr: 'Brazo', eq: { manc: 1 }, mus: 'Bíceps braquial, braquiorradial, antebrazo', niv: 'Principiante',
+      pasos: ['De pie, mancuernas a los lados con las palmas mirándose (agarre neutro).', 'Sube las mancuernas sin girar las muñecas, con los codos pegados al torso.', 'Baja controlado hasta estirar los brazos.'],
+      err: ['Impulso con la espalda', 'Girar las muñecas', 'Subir los codos hacia delante'], resp: 'Exhala al subir, inhala al bajar.', a: {}, b: {} },
+    { id: 'press-hombro-manc', n: 'Press de hombro con mancuernas', gr: 'Hombro', eq: { manc: 1 }, mus: 'Deltoides, tríceps', niv: 'Intermedio',
+      pasos: ['De pie (o sentado), mancuernas a la altura de los hombros con las palmas hacia delante y el abdomen firme.', 'Empuja hacia arriba hasta casi estirar los codos, sin arquear la espalda.', 'Baja controlado hasta la altura de las orejas.'],
+      err: ['Arquear la zona lumbar', 'Bloquear los codos con fuerza', 'Subir con impulso de piernas'], resp: 'Exhala al empujar, inhala al bajar.', a: {}, b: {} }
   ];
   /* video explicativo con la mascota (assets/ejercicios/<id>.mp4) + imágenes: miniatura (id.jpg) y dos cuadros para el PDF (id-a.jpg, id-b.jpg) */
-  const CLIPS = ['aperturas-banco', 'peck-deck-pecho', 'press-banca', 'press-inclinado-hammer', 'press-plano-manc', 'dominadas', 'fondos', 'hex-press', 'jalon', 'remo-sentado-cerrado', 'jalon-cerrado', 'cruce-poleas'];
+  const CLIPS = ['aperturas-banco', 'peck-deck-pecho', 'press-banca', 'press-inclinado-hammer', 'press-plano-manc', 'dominadas', 'fondos', 'hex-press', 'jalon', 'remo-sentado-cerrado', 'jalon-cerrado', 'cruce-poleas', 'peck-deck-deltoides', 'remo-barra', 'remo-mancuerna', 'curl-biceps-manc', 'curl-martillo', 'press-hombro-manc'];
   CLIPS.forEach(id => { const e = X.find(x => x.id === id); if (e) { const b = 'assets/ejercicios/' + id; e.clip = b + '.mp4'; e.img = b + '.jpg'; e.fa = b + '-a.jpg'; e.fb = b + '-b.jpg'; } });
   const CAMPOS = ['n', 'gr', 'mus', 'niv', 'pasos', 'err', 'resp', 'video'];
   const norm = e => { e.a = full(e.a); e.b = full(e.b); e.eq = e.eq || {}; return e; };
