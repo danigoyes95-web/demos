@@ -1,0 +1,47 @@
+# Target companies. `ats` is filled in by the agent after checking the careers page.
+# Known public board APIs (no key): greenhouse, lever, ashby. Others: workday (per-company JSON), custom.
+# `board` values below marked unverified are guesses to test, not facts.
+companies:
+  # Tech and platforms (best odds for remote + English)
+  - {name: Cloudflare, ats: greenhouse, board: cloudflare, verified: false}
+  - {name: Twilio, ats: greenhouse, board: twilio, verified: false}
+  - {name: HubSpot, ats: detect}
+  - {name: GitLab, ats: greenhouse, board: gitlab, verified: false}
+  - {name: Plex, ats: detect}
+  - {name: Pinterest, ats: greenhouse, board: pinterest, verified: false}
+  - {name: DoorDash, ats: greenhouse, board: doordash, verified: false}
+  - {name: Samsara, ats: greenhouse, board: samsara, verified: false}
+  - {name: Uber, ats: detect}
+  - {name: Rappi, ats: detect}
+  - {name: Microsoft, ats: custom}
+  - {name: SAP, ats: detect}
+  - {name: Token Metrics, ats: detect}
+  - {name: Unreasonable Group, ats: detect}
+  # Finance and payments
+  - {name: Visa, ats: detect}
+  - {name: Diners Club, ats: detect}
+  - {name: Banks (any, remote LatAm or global), ats: jsearch}
+  # Consumer brands
+  - {name: The Coca-Cola Company, ats: detect}
+  - {name: Adidas, ats: detect}
+  - {name: Nike (incl. ACG), ats: detect}
+  - {name: Casio (G-Shock), ats: detect}
+  # Telecom, services, enterprise
+  - {name: Claro, ats: detect}
+  - {name: Verizon, ats: detect}
+  - {name: Cox Enterprises, ats: detect}
+  - {name: SHI International Corp., ats: detect}
+  - {name: Express Scripts, ats: detect}
+  - {name: Sharecare, ats: detect}
+  - {name: NBCUniversal, ats: detect}
+  - {name: Stride, Inc., ats: detect}
+  - {name: Cayuse, ats: detect}
+  - {name: Randstad, ats: detect}
+  - {name: Atrium Staffing, ats: detect}
+  # Health, engineering, defense (fewer remote openings; check anyway)
+  - {name: Boston Scientific, ats: detect}
+  - {name: Stryker, ats: detect}
+  - {name: MD Anderson Cancer Center, ats: detect}
+  - {name: Sargent & Lundy, ats: detect}
+  - {name: BAE Systems, ats: detect}
+  - {name: General Dynamics, ats: detect}
