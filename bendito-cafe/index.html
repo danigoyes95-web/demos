@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Bendito Café · Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#7A2E45;--brand-ink:#fff;--pink:#F9A8BA;--rose:#D98C8F;--sage:#8FA876;--sage-d:#4F6B43;--bg:#FFF6F3;--surface:#fff;--text:#4A2230;--muted:#76535C;--line:#F2D6DA;--r:18px;--ease:cubic-bezier(.2,.7,.2,1);--f:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--s:'Allura','Snell Roundhand','Brush Script MT',cursive}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.55 var(--f);-webkit-font-smoothing:antialiased}
+h1,h2,h3{line-height:1.1;margin:0;text-wrap:balance}p{margin:0}a{color:inherit}
+.script{font-family:var(--s);font-weight:400;letter-spacing:0}
+h1{font-size:clamp(2.2rem,7vw,3.8rem)}h2{font-size:clamp(1.25rem,3.4vw,1.7rem)}
+.wrap{width:min(100% - 2rem,1040px);margin-inline:auto}.muted{color:var(--muted)}
+:focus-visible{outline:3px solid var(--sage-d);outline-offset:2px;border-radius:8px}
+.demo-banner{background:#FFF1BF;color:#4A3B00;display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:center;padding:.5rem 1rem;font-size:.84rem;text-align:center}
+.btn{font:700 .95rem var(--f);display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;padding:.65em 1.4em;border-radius:999px;border:2px solid var(--brand);background:var(--brand);color:var(--brand-ink);cursor:pointer;text-decoration:none;transition:transform .25s var(--ease),box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px rgba(122,46,69,.55)}
+.btn--ghost{background:transparent;color:var(--brand);min-height:44px;padding:.4em 1em;font-size:.85rem}
+.btn--sage{background:var(--sage-d);border-color:var(--sage-d)}.btn:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1.1rem}
+.tag{font:800 .7rem/1 var(--f);letter-spacing:.14em;text-transform:uppercase;color:var(--sage-d)}
+input,select,textarea{font:inherit;color:inherit;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.7rem .9rem;width:100%;min-height:46px}
+textarea{resize:vertical}label{display:grid;gap:.3rem;font-size:.88rem;font-weight:700}
+.dlg{border:0;border-radius:var(--r);padding:1.3rem;width:min(92vw,440px);background:#fff;color:var(--text)}.dlg::backdrop{background:rgba(74,34,48,.55)}.dlg form{display:grid;gap:.9rem}.row{display:flex;gap:.6rem;justify-content:flex-end;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:5.2rem;transform:translateX(-50%);background:var(--text);color:#fff;padding:.7rem 1.2rem;border-radius:999px;font-size:.9rem;z-index:60;animation:up .4s var(--ease);max-width:92vw;text-align:center}.toast.out{opacity:0;transition:opacity .4s}
+@keyframes up{from{opacity:0;transform:translate(-50%,12px)}}
+.foot{padding-block:2rem 3rem;font-size:.8rem;color:var(--muted);text-align:center}.foot b{color:var(--text)}
+.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}.tabs .wrap{display:flex;gap:.5rem;padding-block:.55rem;overflow-x:auto}
+.tabs button,.chip{font:700 .9rem var(--f);padding:.6rem 1.1rem;min-height:44px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--text);cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected=true],.chip[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}
+.view[hidden]{display:none!important}
+.mono{width:64px;height:64px;border-radius:50%;background:var(--pink);display:grid;place-items:center;font:400 2.1rem/1 var(--s);color:var(--brand);box-shadow:0 0 0 4px #fff,0 0 0 6px var(--pink)}
+/* inicio */
+.hero{padding-block:clamp(2rem,7vw,4.5rem) 1rem;display:grid;gap:1rem;justify-items:start}.hero h1{color:var(--brand)}
+.hero .lema{font:400 clamp(1.6rem,4.5vw,2.3rem)/1.1 var(--s);color:var(--sage-d)}.hero p.lead{max-width:56ch;font-size:1.08rem;color:var(--muted)}
+.hub{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-block:1.2rem}
+.hub a{text-decoration:none;display:grid;gap:.45rem;align-content:start;transition:transform .3s var(--ease),border-color .3s}.hub a:hover{transform:translateY(-3px);border-color:var(--brand)}.hub h3{font-size:1.2rem}
+.steps{display:grid;gap:.75rem;padding:0;list-style:none;margin:0;counter-reset:s}.steps li{counter-increment:s;display:flex;gap:.8rem;align-items:flex-start}
+.steps li::before{content:counter(s);flex:none;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--sage-d);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.people{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem}
+/* cliente */
+.sec{margin-block:1.6rem}.sec>h2{display:flex;gap:.6rem;align-items:baseline;margin-bottom:.7rem}.sec>h2 .n{font:400 2rem/1 var(--s);color:var(--rose)}
+.chips{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.4rem;margin-bottom:.6rem}
+.menu{display:grid;gap:.7rem;padding:0;list-style:none;margin:0;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.it{display:grid;grid-template-columns:1fr auto;gap:.15rem 1rem;align-items:center;position:relative}.it h3{font-size:1.02rem}.it .p{font-weight:800;color:var(--brand)}.it p.d{grid-column:1;font-size:.86rem}
+.it.share{border-color:var(--sage);background:linear-gradient(#fff,#F6FAF1)}.it.share .tag{grid-column:1}
+.qty{display:flex;align-items:center;gap:.4rem;grid-column:2;grid-row:1/3}.qty button{width:44px;height:44px;border-radius:50%;border:2px solid var(--brand);background:#fff;color:var(--brand);font-size:1.3rem;font-weight:800;cursor:pointer}.qty button[data-add]{background:var(--brand);color:#fff}.qty output{min-width:1.6ch;text-align:center;font-weight:800}
+.switch{display:flex;gap:.8rem;align-items:center;cursor:pointer;font-weight:700}.switch input{width:22px;height:22px;min-height:0;accent-color:var(--brand);flex:none}
+.cols{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:start;margin-top:1rem}
+.ideas{display:flex;flex-wrap:wrap;gap:.4rem}.ideas button{font:600 .8rem var(--f);min-height:40px;padding:.3rem .8rem;border-radius:999px;border:1.5px dashed var(--rose);background:#fff;color:var(--brand);cursor:pointer}
+.fields{display:grid;gap:.8rem}.two{display:grid;gap:.7rem;grid-template-columns:1fr 1fr}
+.radios{display:flex;gap:.5rem;flex-wrap:wrap}
+/* tarjeta bendita */
+.tarj{position:relative;background:#FFFBF8;border:3px double var(--sage);border-radius:14px;padding:1.4rem 1.3rem 1.1rem;text-align:center;display:grid;gap:.5rem;min-height:210px;align-content:center;box-shadow:0 14px 30px -18px rgba(122,46,69,.45);transform-origin:50% 100%;overflow:hidden}
+.tarj .fl{position:absolute;width:46px;height:46px;opacity:.9}.tarj .fl.a{left:-8px;top:-8px}.tarj .fl.b{right:-8px;bottom:-8px;transform:rotate(180deg)}
+.tarj .para{font:400 1.9rem/1 var(--s);color:var(--brand)}.tarj .msg{font-size:.98rem;color:var(--text);overflow-wrap:anywhere}.tarj .de{font:400 1.5rem/1 var(--s);color:var(--sage-d)}
+.tarj .brand{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.tarj.vacia .msg{color:var(--muted);font-style:italic}
+.tarj.fly{animation:fly .75s var(--ease) forwards}@keyframes fly{0%{transform:none;opacity:1}60%{transform:translateY(-14px) scale(.96) rotate(-2deg);opacity:1}100%{transform:translateY(-120px) scale(.5) rotate(4deg);opacity:0}}
+.tarj.pop{animation:pop .6s var(--ease)}@keyframes pop{from{transform:scale(.7) rotate(-4deg);opacity:0}}
+.bar-cart{position:sticky;bottom:0;z-index:15;background:#fff;border-top:1px solid var(--line);padding:.8rem 1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.bar-cart b{font-size:1.15rem;color:var(--brand)}
+.ok{display:grid;gap:1.2rem;padding:1.5rem 0}.ok[hidden]{display:none}
+.wa{background:#F6FAF1;border:1.5px dashed var(--sage);border-radius:14px;padding:.9rem;font-size:.88rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.wheelbox{display:grid;gap:.8rem;justify-items:center;text-align:center}.wheelwrap{position:relative;width:min(78vw,300px);aspect-ratio:1}
+.wheelwrap svg{width:100%;height:100%;display:block}.wheel{transition:transform 4.2s cubic-bezier(.12,.7,.1,1);transform-origin:50% 50%}
+.ptr{position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-top:24px solid var(--brand);filter:drop-shadow(0 2px 2px rgba(0,0,0,.25));z-index:2}
+.prize{background:var(--brand);color:#fff;border-radius:14px;padding:.9rem 1.1rem;animation:pop .6s var(--ease)}.prize .code{font:800 1.3rem var(--f);letter-spacing:.12em}
+.stamps{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem;max-width:360px;margin:.6rem auto 0}.stamps i{aspect-ratio:1;border-radius:50%;border:2px dashed var(--rose);display:grid;place-items:center;font-style:normal;color:var(--brand);font:400 1.4rem/1 var(--s)}.stamps i.on{background:var(--pink);border-style:solid;border-color:var(--pink)}
+.team{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))}
+.person{display:grid;gap:.3rem;justify-items:center;text-align:center;padding:.9rem .6rem;border:1.5px solid var(--line);border-radius:var(--r);background:#fff;cursor:pointer;font:inherit;color:inherit;min-height:44px}.person[aria-pressed=true]{border-color:var(--brand);box-shadow:0 0 0 3px rgba(122,46,69,.18)}
+.av{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font:800 1.2rem var(--f);color:#fff;background:var(--c,var(--rose))}.person small{color:var(--muted)}
+/* panel */
+.app{display:grid;gap:1rem;padding-block:1.2rem 3rem}.app>*,.card{min-width:0}
+.kpis{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.kpi{display:grid;gap:.4rem}.kpi b{font-size:clamp(1.4rem,3vw,2rem);transition:color .4s}.kpi b.flash{color:var(--rose)}
+.chart{display:grid;grid-template-columns:repeat(14,1fr);gap:5px;align-items:end;height:140px}.chart i{display:block;background:var(--line);border-radius:5px 5px 2px 2px;height:var(--h);min-height:3px;transition:height .6s var(--ease)}.chart i:last-child{background:var(--brand)}
+.tbl{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:440px;font-size:.92rem}th,td{text-align:left;padding:.65rem .6rem;border-bottom:1px solid var(--line)}th{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.orders{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr))}
+.ord{display:grid;gap:.6rem;align-content:start}.ord.nuevo{animation:flash 1.8s var(--ease)}@keyframes flash{from{background:#FFE3EA;transform:scale(1.02)}}
+.ord header{display:flex;justify-content:space-between;gap:.6rem;align-items:baseline;flex-wrap:wrap}.ord ul{margin:0;padding-left:1.1rem;font-size:.9rem}
+.pill{display:inline-block;padding:.2em .7em;border-radius:999px;font-size:.74rem;font-weight:800;background:#eee}.pill[data-s=nueva]{background:#FFE0A8}.pill[data-s=preparando]{background:#FFD0DA}.pill[data-s=lista]{background:#CFE8C4}.pill[data-s=entregada]{background:#E6E0E2}
+.miniw{font-size:.76rem;background:#F6FAF1;color:var(--sage-d);padding:.2em .6em;border-radius:8px;font-weight:800}
+.ord .tarj{min-height:0;padding:.8rem .8rem .6rem;gap:.2rem;box-shadow:none}.ord .tarj .para{font-size:1.4rem}.ord .tarj .de{font-size:1.2rem}.ord .tarj .msg{font-size:.88rem}
+.roles,.fil{display:flex;gap:.5rem;flex-wrap:wrap}
+.lock{display:grid;gap:.3rem;padding:1rem;border:1.5px dashed var(--rose);border-radius:12px;color:var(--muted)}
+.bless{display:grid;gap:.6rem}.bl{display:grid;grid-template-columns:auto 1fr auto;gap:.2rem .8rem;align-items:center}.bl .av{width:44px;height:44px;font-size:1rem;grid-row:1/3}.bl .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.bl .bar i{display:block;height:100%;background:var(--pink);border-radius:99px;transition:width .6s var(--ease)}
+.quotes{display:grid;gap:.5rem;margin:0;padding:0;list-style:none}.quotes li{background:#FFF9F6;border-left:4px solid var(--pink);padding:.5rem .8rem;border-radius:0 10px 10px 0;font-size:.9rem}.quotes li.nuevo{animation:flash 1.8s var(--ease)}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="flor" viewBox="0 0 48 48"><g fill="#F9A8BA"><circle cx="24" cy="11" r="8"/><circle cx="37" cy="21" r="8"/><circle cx="32" cy="37" r="8"/><circle cx="16" cy="37" r="8"/><circle cx="11" cy="21" r="8"/></g><circle cx="24" cy="25" r="6" fill="#F6D58E"/><path d="M4 44c8-2 12-8 14-14" stroke="#8FA876" stroke-width="3" fill="none" stroke-linecap="round"/></symbol></defs></svg>
+
+<nav class="tabs" aria-label="Pantallas de la demo"><div class="wrap" role="tablist">
+<button role="tab" data-v="inicio" aria-selected="true">Cómo probarla</button><button role="tab" data-v="cliente" aria-selected="false">Lo que ve tu cliente</button><button role="tab" data-v="panel" aria-selected="false">Lo que ves tú</button></div></nav>
+
+<!-- INICIO -->
+<div class="view" id="v-inicio"><main class="wrap">
+<section class="hero">
+  <div class="mono" aria-hidden="true">BC</div>
+  <p class="tag">Demo funcional · datos de ejemplo</p>
+  <h1 class="script">Bendito Café</h1>
+  <p class="lema">Que te sientas como en casa.</p>
+  <p class="lead">Lo mejor de Bendito Café no está solo en la carta: está en su gente y en cómo se comparte. Esta demo convierte eso en un sistema: un pedido que se envía con una tarjetita, una ruleta, y un panel donde cada bendición llega a quien la merece.</p>
+</section>
+<nav class="hub" aria-label="Pantallas de la demo">
+  <a class="card" href="#cliente"><span class="tag">Lo que ve tu cliente</span><h3>Pide y comparte con amor</h3><p class="muted">Elige de la carta, escribe una tarjetita para alguien, gira la ruleta y bendice a quien te atendió.</p></a>
+  <a class="card" href="#panel"><span class="tag">Lo que ves tú</span><h3>El panel de las sucursales</h3><p class="muted">Pedidos con su tarjetita, cifras que se mueven y el ranking de tu gente.</p></a>
+</nav>
+<section class="card"><h2>Cómo probarla (2 minutos)</h2>
+<ol class="steps" style="margin-top:1rem">
+<li><span>En <b>Lo que ve tu cliente</b>, elige un par de productos (por ejemplo el <b>Bendito piqueo</b>, que es para compartir).</span></li>
+<li><span>Activa <b>«Esto es para compartir»</b> y escribe una tarjetita para alguien. Mírala armarse en vivo.</span></li>
+<li><span>Envía el pedido y gira la <b>ruleta bendita</b>.</span></li>
+<li><span>Abre <b>Lo que ves tú</b> (puede ser en otra pestaña): el pedido llega con su tarjetita lista para imprimir y las cifras se recalculan.</span></li>
+<li><span>Vuelve y <b>bendice a alguien del equipo</b>: aparece al instante en el ranking de <i>Nuestra gente</i>.</span></li>
+</ol>
+<p class="muted" style="margin-top:1rem">Todo lo que pruebes se guarda solo en este navegador. <button class="btn btn--ghost" data-reset type="button">Restablecer demo</button></p></section>
+<p class="foot">Esta demo ya mide: clics, solicitudes y qué sección se usa más (GA4 y Clarity). · <b>Preparada por 33r</b></p>
+</main></div>
+
+<!-- CLIENTE -->
+<div class="view" id="v-cliente" hidden>
+<main class="wrap">
+<section class="hero" style="padding-block:1.6rem .4rem"><p class="tag">Lo que ve tu cliente</p><h1 class="script">Bendito Café</h1><p class="lema" style="font-size:1.7rem">Pide para ti… o para quien quieres.</p></section>
+<div id="form">
+<section class="sec"><h2><span class="n script">1</span>Elige de la carta</h2>
+<div class="chips" id="cats" role="group" aria-label="Categorías"></div>
+<ul class="menu" id="menu"></ul>
+<p class="muted" style="font-size:.8rem;margin-top:.6rem">Productos y precios tomados de su carta en historias. [CONFIRMAR] precios vigentes antes de publicar.</p></section>
+
+<section class="sec"><h2><span class="n script">2</span>¿Lo compartes con alguien?</h2>
+<label class="switch card" for="share"><input type="checkbox" id="share"><span>Esto es para compartir: quiero enviar una tarjetita con cariño</span></label>
+<div class="cols" id="cardbox" hidden>
+  <div class="fields card">
+    <div class="two"><label for="para">Para<input id="para" maxlength="24" placeholder="Ej.: Mamá"></label><label for="de">De parte de<input id="de" maxlength="24" placeholder="Tu nombre"></label></div>
+    <label for="msg">Tu mensaje<textarea id="msg" rows="3" maxlength="140" placeholder="Escribe con el corazón…"></textarea></label>
+    <div><span class="tag">Ideas rápidas</span><div class="ideas" id="ideas" style="margin-top:.5rem"></div></div>
+  </div>
+  <div><span class="tag">Así la recibirá</span>
+  <div class="tarj" id="tarj" style="margin-top:.6rem"><svg class="fl a"><use href="#flor"/></svg><svg class="fl b"><use href="#flor"/></svg><span class="brand">Bendito Café</span><span class="para" id="tPara">Para ti</span><span class="msg" id="tMsg"></span><span class="de" id="tDe"></span></div></div>
+</div></section>
+
+<section class="sec"><h2><span class="n script">3</span>Tus datos</h2>
+<div class="card fields" style="max-width:560px">
+  <label for="nombre">Tu nombre<input id="nombre" autocomplete="given-name" placeholder="Ej.: Camila"></label>
+  <label for="suc">Sucursal<select id="suc"><option>Kennedy Norte</option><option>Sambo</option><option>La Aurora</option></select></label>
+  <div><span class="tag">¿Cómo lo quieres?</span><div class="radios" id="modo" role="group" aria-label="Modo" style="margin-top:.5rem"><button type="button" class="chip" data-m="Aquí" aria-pressed="true">Comer aquí</button><button type="button" class="chip" data-m="Para llevar" aria-pressed="false">Para llevar</button></div></div>
+  <label class="switch" for="pet"><input type="checkbox" id="pet"><span>Voy con mi peludito (somos pet friendly)</span></label>
+</div></section>
+</div>
+
+<section class="ok" id="ok" hidden role="status">
+  <div><p class="tag">¡Listo!</p><h2 class="script" style="font-size:2.6rem;color:var(--brand)">Pedido enviado con cariño</h2><p class="muted">Ya llegó al panel de la sucursal. Ábrelo y míralo aparecer.</p></div>
+  <div class="cols">
+    <div id="okCard" hidden><span class="tag">Tu tarjetita va con el pedido</span><div class="tarj pop" id="okTarj" style="margin-top:.6rem"></div></div>
+    <div><span class="tag">Mensaje listo para WhatsApp de la sucursal</span><div class="wa" id="waTxt" style="margin-top:.6rem"></div><div class="row" style="justify-content:flex-start;margin-top:.6rem"><button class="btn btn--ghost" id="waCopy" type="button">Copiar mensaje</button></div><p class="muted" style="font-size:.78rem;margin-top:.4rem">Número de WhatsApp de cada sucursal: [CONFIRMAR].</p></div>
+  </div>
+  <div class="card wheelbox" id="rul">
+    <span class="tag">Tu regalo bendito</span><h2 class="script" style="font-size:2.2rem;color:var(--brand)">Gira la ruleta</h2>
+    <div class="wheelwrap"><div class="ptr"></div><svg viewBox="0 0 200 200" aria-hidden="true"><g class="wheel" id="wheel"></g><circle cx="100" cy="100" r="13" fill="#fff" stroke="#F9A8BA" stroke-width="3"/></svg></div>
+    <button class="btn" id="spin" type="button">Girar</button>
+    <div class="prize" id="prize" hidden></div>
+    <p class="muted" style="font-size:.78rem">Premios de ejemplo. [CONFIRMAR] premios reales y normativa local antes de lanzar.</p>
+  </div>
+  <div class="card" style="text-align:center"><span class="tag">Tu pasaporte bendito</span><p id="pasTxt" style="margin-top:.4rem;font-weight:700"></p><div class="stamps" id="stamps"></div></div>
+  <div class="row" style="justify-content:flex-start"><button class="btn" id="otra" type="button">Hacer otro pedido</button><a class="btn btn--ghost" href="#panel">Ver el panel</a></div>
+</section>
+
+<section class="sec" id="gente"><h2><span class="n script">♥</span>Bendice a quien te atendió</h2>
+<p class="muted" style="margin-bottom:.8rem">Después de tu visita, regálale una bendición a la persona que te hizo sentir en casa. Le llega al instante.</p>
+<div class="team" id="team" role="group" aria-label="Nuestra gente"></div>
+<div class="card fields" style="margin-top:.8rem;max-width:560px">
+  <label for="bmsg">Tu mensaje<textarea id="bmsg" rows="2" maxlength="100" placeholder="Gracias por…"></textarea></label>
+  <div class="ideas" id="bideas"></div>
+  <button class="btn btn--sage" id="bsend" type="button" disabled>Enviar bendición</button>
+</div>
+<p class="muted" style="font-size:.78rem;margin-top:.5rem">Nombres del equipo de ejemplo. [CONFIRMAR] con su gente real y su permiso para mostrarlos.</p></section>
+<p class="foot">Esta demo ya mide: clics, solicitudes y qué sección se usa más (GA4 y Clarity). · <b>Preparada por 33r</b></p>
+</main>
+<div class="bar-cart" id="cart"><span><span class="tag" id="cl">Tu pedido está vacío</span><br><b id="ct"></b></span><button class="btn" id="send" type="button" disabled>Enviar pedido</button></div>
+</div>
+
+<!-- PANEL -->
+<div class="view" id="v-panel" hidden><main class="wrap app">
+<header style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+  <div><p class="tag">Lo que ves tú · datos de ejemplo</p><h1 class="script" style="font-size:clamp(2rem,5vw,2.8rem);color:var(--brand)">Panel de Bendito Café</h1></div>
+  <div class="roles" role="group" aria-label="Entrar como"><button class="btn btn--ghost chip" data-role="equipo" aria-pressed="true" type="button">Entrar como equipo</button><button class="btn btn--ghost chip" data-role="dueno" aria-pressed="false" type="button">Entrar como dueña</button></div>
+</header>
+<section class="kpis" aria-label="Resumen">
+  <div class="card kpi"><span class="tag">Pedidos hoy</span><b id="k1">—</b></div>
+  <div class="card kpi"><span class="tag">Por atender</span><b id="k2">—</b></div>
+  <div class="card kpi"><span class="tag">Bendiciones (14 días)</span><b id="k3">—</b></div>
+  <div class="card kpi" data-owner><span class="tag">Ventas (14 días)</span><b id="k4">—</b></div>
+  <div class="card kpi" data-owner><span class="tag">Ticket promedio</span><b id="k5">—</b></div>
+  <div class="card kpi" data-owner><span class="tag">Pedidos para compartir</span><b id="k6">—</b></div>
+</section>
+<section class="lock card" id="lock" hidden><b>Las ventas son de la dirección</b><span>El equipo ve pedidos, tarjetitas y bendiciones. Las cifras de ventas las ve solo la dueña.</span></section>
+<section class="card" data-owner><h2 style="font-size:1.05rem;margin-bottom:.8rem">Pedidos por día · últimos 14 días</h2><div class="chart" id="chart" role="img" aria-label="Gráfico de pedidos por día"></div></section>
+<section><div style="display:flex;flex-wrap:wrap;gap:.6rem;justify-content:space-between;align-items:center;margin-bottom:.7rem"><h2 style="font-size:1.1rem">Pedidos</h2><div class="fil" id="fil" role="group" aria-label="Sucursal"></div></div><div class="orders" id="orders"></div></section>
+<section class="card"><h2 class="script" style="font-size:2rem;color:var(--brand)">Nuestra gente</h2><p class="muted" style="font-size:.88rem;margin-bottom:.8rem">Las bendiciones que sus clientes les regalan. Nombres de ejemplo.</p>
+<div class="cols" style="margin-top:0"><div class="bless" id="bless"></div><ul class="quotes" id="quotes" aria-label="Últimos mensajes"></ul></div></section>
+<section class="card" data-owner><h2 style="font-size:1.05rem;margin-bottom:.8rem">Lo más pedido · 14 días</h2><div class="tbl"><table><thead><tr><th>Producto</th><th>Unidades</th><th>Ventas</th></tr></thead><tbody id="top"></tbody></table></div></section>
+<section class="card"><h2 style="font-size:1.05rem;margin-bottom:.8rem">Cupones de la ruleta</h2><div class="tbl"><table><thead><tr><th>Código</th><th>Premio</th><th>Estado</th><th></th></tr></thead><tbody id="cups"></tbody></table></div></section>
+<p class="muted"><button class="btn btn--ghost" data-reset type="button">Restablecer demo</button></p>
+<p class="foot">Esta demo ya mide: clics, solicitudes y qué sección se usa más (GA4 y Clarity). · <b>Preparada por 33r</b></p>
+</main></div>
+
+<script>
+/* ===== CONFIG ===== */
+window.DEMO={slug:'bendito-cafe',negocio:'Bendito Café',locale:'es-EC',moneda:'USD',whatsapp:'',preparadaPor:'33r'};
+/* ===== DATOS DE EJEMPLO (carta tomada de sus historias; precios [CONFIRMAR]; pedidos, equipo y mensajes ficticios) ===== */
+window.DATOS={
+ cats:[{id:'verde',n:'Bendito verde'},{id:'pan',n:'Bendita panadería'},{id:'var',n:'Bendita variedad'},{id:'beb',n:'Benditas bebidas'},{id:'dul',n:'Benditos dulces'},{id:'alm',n:'Almuerzo'}],
+ items:[
+ {id:'bq',c:'verde',n:'Bolón de queso',p:4.50},{id:'bc',c:'verde',n:'Bolón de chicharrón o mixto',p:5.25},{id:'tq',c:'verde',n:'Tigrillo de queso',p:7.75},{id:'tz',c:'verde',n:'Tigrillo zurcido',p:9.25,d:'Suave y crujiente, con intenso sabor a hogar'},{id:'ca',c:'verde',n:'Canastas de verde (10 unidades)',p:8.35},{id:'co',c:'verde',n:'Corviches (2 unidades)',p:4.75},
+ {id:'s3',c:'pan',n:'Sánduche de tres quesos',p:6.70},{id:'av',c:'pan',n:'Avo toast',p:7.50},{id:'sp',c:'pan',n:'Sánduche de pollo',p:8.00},{id:'cf',c:'pan',n:'Canasta franciscana',p:4.25,d:'Variedad de panes servidos con mantequilla y mermelada'},
+ {id:'pq',c:'var',n:'Bendito piqueo',p:13.00,share:true,d:'¡Lo bueno siempre se comparte! Elige 3 de sus delicias, 4 unidades de cada una.'},{id:'ar',c:'var',n:'Arepa de pollo o carne',p:6.25},{id:'hu',c:'var',n:'Humita',p:4.55},{id:'te',c:'var',n:'Tequeños (6 unidades)',p:5.50},{id:'hb',c:'var',n:'Hamburguesa San Andrés',p:8.50,d:'Carne jugosa, queso cheddar, tocino, cebollas asadas y salsa de tocino. Con papas fritas.'},
+ {id:'es',c:'beb',n:'Espresso',p:2.00},{id:'am',c:'beb',n:'Americano',p:2.50},{id:'la',c:'beb',n:'Latte',p:3.00},{id:'cp',c:'beb',n:'Capuccino',p:3.25},{id:'mo',c:'beb',n:'Mocaccino',p:3.50},{id:'hc',c:'beb',n:'Hot cocoa',p:4.25},{id:'fl',c:'beb',n:'Frappelatte',p:3.50},{id:'mi',c:'beb',n:'Milkshake',p:5.50},{id:'ju',c:'beb',n:'Jugo natural',p:3.50},{id:'th',c:'beb',n:'Té helado',p:2.00},
+ {id:'oreo',c:'dul',n:'Bendito Oreo',p:5.25,d:'Delicioso postre casero a base de oreo'},{id:'cn',c:'dul',n:'Cake de naranja',p:3.25,d:'Clásico y exquisito, bañado en dulce de leche'},{id:'pa',c:'dul',n:'Pancakes con miel (4)',p:6.00,d:'Con frutas, miel y chispas de chocolate'},{id:'wa',c:'dul',n:'Waffles con miel (3)',p:6.00},{id:'tf',c:'dul',n:'Tostadas francesas (3)',p:6.00},{id:'cr',c:'dul',n:'Caramel french toast',p:7.50},
+ {id:'al',c:'alm',n:'Bendito almuerzo',p:9.99,d:'1 proteína + 2 guarniciones + 1 entrada + 1 bebida'}],
+ sucs:['Kennedy Norte','Sambo','La Aurora'],
+ estados:['nueva','preparando','lista','entregada'],
+ team:[{id:'t1',n:'Carolina',r:'Barista',s:'Kennedy Norte',c:'#C96F83'},{id:'t2',n:'Mateo',r:'Cocina',s:'Sambo',c:'#6F8C5A'},{id:'t3',n:'Dayana',r:'Atención',s:'La Aurora',c:'#B5706E'},{id:'t4',n:'Santiago',r:'Cold Station',s:'Kennedy Norte',c:'#8A6A9E'},{id:'t5',n:'Valentina',r:'Atención',s:'Sambo',c:'#D08A5B'}],
+ cardIdeas:['Gracias por existir','Un cafecito para ti, con cariño','Para que te sientas como en casa','Hoy te toca a ti, te lo mereces'],
+ blIdeas:['Me hizo sentir como en casa','Gracias por la sonrisa','El mejor café del día','Siempre con tanto cariño'],
+ prizes:[{l:'Americano',t:'Un americano de cortesía'},{l:'10%',t:'10% en tu próxima visita'},{l:'Té helado',t:'Un té helado de cortesía'},{l:'Cake -50%',t:'Cake de naranja a mitad de precio'},{l:'Shot extra',t:'Shot adicional gratis'},{l:'Leche',t:'Leche de almendras sin costo'},{l:'Agua',t:'Agua mineral de cortesía'},{l:'2.º café',t:'Segundo café a mitad de precio'}],
+ seed:function(){var D=this,out=[],bl=[],cp=[],sd=7,rnd=function(){sd=(sd*1103515245+12345)&0x7fffffff;return sd/0x7fffffff};
+  var nom=['Camila R.','Diego M.','Valeria T.','Andrés P.','Lucía F.','Mateo S.','Sofía G.','Javier L.','Paula N.','Ricardo A.'],pop=['la','cp','am','mi','oreo','cn','bq','hb','pa','pq','ar','th','fl','al'],
+  para=['Mamá','Mi amiga Caro','Abuela','Mi equipo','Papá'],msgs=['Gracias por existir','Un cafecito para ti, con cariño','Para que te sientas como en casa'],n=0,now=new Date();now.setHours(12,0,0,0);
+  for(var d=13;d>=0;d--){var q=4+Math.floor(rnd()*5)+(d%7===5||d%7===6?2:0);if(d===0)q=6;
+   for(var k=0;k<q;k++){var ni=1+Math.floor(rnd()*3),its=[],tot=0;for(var j=0;j<ni;j++){var pid=pop[Math.floor(rnd()*pop.length)],it=D.items.filter(function(x){return x.id===pid})[0];if(!it||its.some(function(z){return z.id===it.id}))continue;var c=1+(rnd()<.25?1:0);its.push({id:it.id,nombre:it.n,precio:it.p,cant:c});tot+=it.p*c}
+    if(!its.length){its.push({id:'la',nombre:'Latte',precio:3,cant:1});tot=3}
+    var at=new Date(now);at.setDate(now.getDate()-d);at.setHours(8+Math.floor(rnd()*11),Math.floor(rnd()*60));var card=null;
+    if(rnd()<.34){card={para:para[Math.floor(rnd()*para.length)],de:nom[Math.floor(rnd()*nom.length)].split(' ')[0],msg:msgs[Math.floor(rnd()*msgs.length)]}}
+    var est=d===0?['nueva','preparando','lista','entregada','entregada','nueva'][k%6]:'entregada';
+    out.push({id:'s'+(++n),at:at.getTime(),nombre:nom[Math.floor(rnd()*nom.length)],sucursal:D.sucs[Math.floor(rnd()*3)],modo:rnd()<.6?'Aquí':'Para llevar',mascota:rnd()<.12,items:its,total:Math.round(tot*100)/100,estado:est,card:card,ejemplo:true})}}
+  var bm=['Me hizo sentir como en casa','Gracias por la sonrisa','El mejor café del día','Siempre con tanto cariño','Qué atención tan linda','Nos cuidó a todos, hasta al perrito'],w=[0,0,0,1,1,2,2,2,2,3,4,4,0,2,2,3,1,4,2,0,2,4,0,1];
+  w.forEach(function(ti,i){var at=new Date(now);at.setDate(now.getDate()-(i%14));at.setHours(10+(i%8),15);bl.push({id:'b'+i,at:at.getTime(),to:D.team[ti].id,msg:bm[i%bm.length],ejemplo:true})});
+  cp.push({id:'c1',at:now.getTime()-3600e3,code:'BENDITO-4821',premio:'10% en tu próxima visita',estado:'por canjear',ejemplo:true},{id:'c2',at:now.getTime()-86400e3,code:'BENDITO-7305',premio:'Un americano de cortesía',estado:'canjeado',ejemplo:true});
+  return {v:2,orders:out,blessings:bl,coupons:cp,mine:0}}
+};
+/* ===== KIT ===== */
+(function(){
+var D=window.DEMO,KEY='demo:'+D.slug,CH=null;try{CH=window.BroadcastChannel?new BroadcastChannel(KEY):null}catch(e){}
+var ls=[];function emit(){ls.forEach(function(f){try{f()}catch(e){}})}
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var money=function(v){return new Intl.NumberFormat(D.locale,{style:'currency',currency:D.moneda}).format(v||0)};
+var mem=null;
+var db={get:function(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===2)return s}catch(e){}if(mem)return mem;var n=window.DATOS.seed();mem=n;db.save(n,true);return n},
+ save:function(s,silent){mem=s;try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}if(!silent){if(CH)try{CH.postMessage('x')}catch(e){}emit()}},
+ update:function(fn){var s=db.get();fn(s);db.save(s);return s},
+ reset:function(){mem=null;try{localStorage.removeItem(KEY)}catch(e){}if(CH)try{CH.postMessage('x')}catch(e){}emit()}};
+function onChange(cb){ls.push(cb);addEventListener('storage',function(e){if(e.key===KEY)cb()});if(CH)CH.addEventListener('message',cb)}
+function toast(t){var el=document.createElement('div');el.className='toast';el.setAttribute('role','status');el.textContent=t;document.body.appendChild(el);setTimeout(function(){el.classList.add('out');setTimeout(function(){el.remove()},400)},2600)}
+function track(n,p){try{(window.dataLayer=window.dataLayer||[]).push(Object.assign({event:n,demo:D.slug},p||{}))}catch(e){}}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function copy(msg,ok){var done=function(){toast(ok||'Copiado')},fail=function(){toast('No se pudo copiar: selecciona el texto y cópialo')};try{navigator.clipboard.writeText(msg).then(done,fail)}catch(x){fail()}}
+function banner(){var b=document.createElement('div');b.className='demo-banner';b.setAttribute('role','region');b.setAttribute('aria-label','Aviso de demo');
+ b.innerHTML='<span>Demo preparada por '+D.preparadaPor+' para <b>'+esc(D.negocio)+'</b>. No es su sitio oficial. Lo marcado [CONFIRMAR] se completa con ustedes.</span><button type="button" class="btn btn--ghost" data-suggest>Sugerir un cambio</button>';document.body.prepend(b);
+ var dlg=document.createElement('dialog');dlg.className='dlg';dlg.innerHTML='<form method="dialog"><h2>¿Qué cambiarías?</h2><label for="sg">Cuéntanos con tus palabras</label><textarea id="sg" rows="4" placeholder="Ej.: quiero que aparezca el horario de los sábados"></textarea><div class="row"><button class="btn btn--ghost" value="cancel">Cancelar</button><button class="btn" id="sgSend" value="send">Copiar mensaje</button></div></form>';document.body.appendChild(dlg);
+ $('[data-suggest]',b).addEventListener('click',function(){track('suggest_open');dlg.showModal();$('#sg',dlg).focus()});
+ $('#sgSend',dlg).addEventListener('click',function(){track('suggest_send');copy('Demo '+D.negocio+' · sugerencia: '+($('#sg',dlg).value||'(sin texto)'),'Mensaje copiado: pégalo donde prefieras')})}
+document.addEventListener('DOMContentLoaded',function(){banner();$$('[data-reset]').forEach(function(r){r.addEventListener('click',function(){db.reset();toast('Demo restablecida');setTimeout(function(){location.reload()},500)})})});
+window.Kit={db:db,onChange:onChange,money:money,toast:toast,track:track,esc:esc,$:$,$$:$$,copy:copy};
+})();
+/* ===== CLIENTE ===== */
+(function(){
+var K=window.Kit,$=K.$,esc=K.esc,DT=window.DATOS,cart={},cat='verde',modo='Aquí',who=null,last=null;
+var tarjHTML=function(c){return '<svg class="fl a"><use href="#flor"/></svg><svg class="fl b"><use href="#flor"/></svg><span class="brand">Bendito Café</span><span class="para">Para '+esc(c.para||'ti')+'</span><span class="msg">'+esc(c.msg||'')+'</span><span class="de">'+(c.de?'Con cariño, '+esc(c.de):'')+'</span>'};
+$('#cats').innerHTML=DT.cats.map(function(c){return '<button type="button" class="chip" data-cat="'+c.id+'" aria-pressed="'+(c.id===cat)+'">'+esc(c.n)+'</button>'}).join('');
+function drawMenu(){$('#menu').innerHTML=DT.items.filter(function(i){return i.c===cat}).map(function(i){return '<li class="card it'+(i.share?' share':'')+'"><h3>'+esc(i.n)+'</h3><span class="p">'+K.money(i.p)+'</span><p class="d muted">'+(i.share?'<span class="tag">Para compartir</span><br>':'')+esc(i.d||'')+'</p><div class="qty"><button type="button" data-rm="'+i.id+'" aria-label="Quitar '+esc(i.n)+'">−</button><output id="q-'+i.id+'">'+(cart[i.id]||0)+'</output><button type="button" data-add="'+i.id+'" aria-label="Agregar '+esc(i.n)+'">+</button></div></li>'}).join('')}
+function totals(){var n=0,t=0;DT.items.forEach(function(i){var q=cart[i.id]||0;n+=q;t+=q*i.p});return{n:n,t:Math.round(t*100)/100}}
+function draw(){var o=totals();$('#cl').textContent=o.n?o.n+(o.n===1?' producto':' productos')+' en tu pedido':'Tu pedido está vacío';$('#ct').textContent=o.n?K.money(o.t):'';$('#send').disabled=!o.n;
+ DT.items.forEach(function(i){var e=$('#q-'+i.id);if(e)e.textContent=cart[i.id]||0})}
+$('#cats').addEventListener('click',function(e){var b=e.target.closest('[data-cat]');if(!b)return;cat=b.dataset.cat;K.$$('[data-cat]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});K.track('cat',{c:cat});drawMenu()});
+$('#menu').addEventListener('click',function(e){var a=e.target.closest('[data-add]'),r=e.target.closest('[data-rm]');if(a){cart[a.dataset.add]=(cart[a.dataset.add]||0)+1;K.track('item_add',{id:a.dataset.add})}if(r)cart[r.dataset.rm]=Math.max(0,(cart[r.dataset.rm]||0)-1);draw()});
+/* tarjeta en vivo */
+function drawCard(){var c={para:$('#para').value.trim(),de:$('#de').value.trim(),msg:$('#msg').value.trim()};var t=$('#tarj');t.classList.toggle('vacia',!c.msg);t.innerHTML=tarjHTML({para:c.para,de:c.de,msg:c.msg||'Aquí aparecerá tu mensaje…'})}
+$('#share').addEventListener('change',function(){$('#cardbox').hidden=!this.checked;K.track('share_toggle',{on:this.checked});drawCard()});
+['para','de','msg'].forEach(function(id){$('#'+id).addEventListener('input',drawCard)});
+function ideas(box,list,target){box.innerHTML=list.map(function(t){return '<button type="button">'+esc(t)+'</button>'}).join('');box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;target.value=b.textContent;target.dispatchEvent(new Event('input'))})}
+ideas($('#ideas'),DT.cardIdeas,$('#msg'));
+$('#modo').addEventListener('click',function(e){var b=e.target.closest('[data-m]');if(!b)return;modo=b.dataset.m;K.$$('[data-m]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))})});
+/* enviar */
+function waText(o){var l=o.items.map(function(i){return i.cant+'× '+i.nombre}).join(', ');return 'Hola Bendito Café '+o.sucursal+'. Soy '+o.nombre+'.\nPedido ('+o.modo.toLowerCase()+'): '+l+'.\nTotal: '+K.money(o.total)+(o.mascota?'\nVoy con mi peludito.':'')+(o.card?'\nTarjetita: Para '+(o.card.para||'ti')+' — «'+o.card.msg+'»'+(o.card.de?' (de '+o.card.de+')':''):'')}
+$('#send').addEventListener('click',function(){
+ var lines=DT.items.filter(function(i){return cart[i.id]}).map(function(i){return{id:i.id,nombre:i.n,precio:i.p,cant:cart[i.id]}});if(!lines.length)return;
+ var total=Math.round(lines.reduce(function(s,l){return s+l.precio*l.cant},0)*100)/100;
+ var card=null;if($('#share').checked&&$('#msg').value.trim()){card={para:$('#para').value.trim()||'ti',de:$('#de').value.trim(),msg:$('#msg').value.trim()}}
+ var o={id:'r'+Date.now(),at:Date.now(),nombre:$('#nombre').value.trim()||'Cliente demo',sucursal:$('#suc').value,modo:modo,mascota:$('#pet').checked,items:lines,total:total,estado:'nueva',card:card,ejemplo:false};last=o;
+ var go=function(){K.db.update(function(s){s.orders.push(o);s.mine=(s.mine||0)+1});K.track('order_submit',{total:total,card:!!card});showOk(o)};
+ var t=$('#tarj');if(card&&!$('#cardbox').hidden){t.classList.add('fly');setTimeout(go,650)}else go()});
+function stamps(){var s=K.db.get(),n=(2+(s.mine||0));var full=n%6===0&&n>0,cur=full?6:n%6;$('#stamps').innerHTML=[1,2,3,4,5,6].map(function(i){return '<i class="'+(i<=cur?'on':'')+'">'+(i<=cur?'♥':'')+'</i>'}).join('');
+ $('#pasTxt').textContent=full?'¡Completaste tu pasaporte! Tienes una bebida de cortesía.':'Llevas '+cur+' de 6 sellos. Con 6, una bebida de cortesía. [CONFIRMAR] regla real.'}
+function showOk(o){$('#form').hidden=true;$('#cart').hidden=true;$('#ok').hidden=false;$('#okCard').hidden=!o.card;if(o.card){$('#okTarj').innerHTML=tarjHTML(o.card)}
+ $('#waTxt').textContent=waText(o);$('#prize').hidden=true;$('#spin').disabled=false;stamps();window.scrollTo(0,0);K.toast('Pedido enviado al panel')}
+$('#waCopy').addEventListener('click',function(){K.track('wa_copy');K.copy($('#waTxt').textContent,'Mensaje copiado')});
+$('#otra').addEventListener('click',function(){cart={};draw();drawMenu();$('#share').checked=false;$('#cardbox').hidden=true;['para','de','msg'].forEach(function(i){$('#'+i).value=''});$('#tarj').classList.remove('fly');drawCard();$('#form').hidden=false;$('#cart').hidden=false;$('#ok').hidden=true;window.scrollTo(0,0)});
+/* ruleta */
+var P=DT.prizes,N=P.length,A=360/N,cols=['#F9A8BA','#FFF6F3','#B9CBA3','#F2C7C9'],cur=0;
+function pt(a,r){var x=a*Math.PI/180;return[(100+r*Math.sin(x)).toFixed(2),(100-r*Math.cos(x)).toFixed(2)]}
+$('#wheel').innerHTML=P.map(function(p,i){var a0=i*A,a1=(i+1)*A,s=pt(a0,96),e=pt(a1,96),c=a0+A/2;return '<path d="M100 100 L'+s[0]+' '+s[1]+' A96 96 0 0 1 '+e[0]+' '+e[1]+' Z" fill="'+cols[i%4]+'" stroke="#fff" stroke-width="1.5"/><text x="100" y="30" transform="rotate('+c+' 100 100)" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="9" fill="#4A2230">'+esc(p.l)+'</text>'}).join('')+'<circle cx="100" cy="100" r="98" fill="none" stroke="#7A2E45" stroke-width="3"/>';
+$('#spin').addEventListener('click',function(){var b=this;b.disabled=true;var i=Math.floor(Math.random()*N),c=i*A+A/2;cur=cur+1800+(((360-c)-(cur%360))+360)%360;$('#wheel').style.transform='rotate('+cur+'deg)';K.track('spin');
+ var ms=matchMedia('(prefers-reduced-motion: reduce)').matches?0:4300;
+ setTimeout(function(){var code='BENDITO-'+(1000+Math.floor(Math.random()*9000));K.db.update(function(s){s.coupons.push({id:'c'+Date.now(),at:Date.now(),code:code,premio:P[i].t,estado:'por canjear',ejemplo:false})});
+  var pz=$('#prize');pz.innerHTML='<span class="tag" style="color:#fff">Ganaste</span><p style="font-size:1.15rem;font-weight:800">'+esc(P[i].t)+'</p><p class="code">'+code+'</p><p style="font-size:.85rem">Muéstralo en caja. Ya figura en el panel.</p>';pz.hidden=false},ms)});
+/* bendiciones */
+$('#team').innerHTML=DT.team.map(function(p){return '<button type="button" class="person" data-p="'+p.id+'" aria-pressed="false"><span class="av" style="--c:'+p.c+'">'+p.n[0]+'</span><b>'+esc(p.n)+'</b><small>'+esc(p.r)+' · '+esc(p.s)+'</small></button>'}).join('');
+$('#team').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b)return;who=b.dataset.p;K.$$('[data-p]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});chk()});
+ideas($('#bideas'),DT.blIdeas,$('#bmsg'));$('#bmsg').addEventListener('input',chk);function chk(){$('#bsend').disabled=!(who&&$('#bmsg').value.trim())}
+$('#bsend').addEventListener('click',function(){var p=DT.team.filter(function(x){return x.id===who})[0];K.db.update(function(s){s.blessings.push({id:'b'+Date.now(),at:Date.now(),to:who,msg:$('#bmsg').value.trim(),ejemplo:false})});K.track('blessing_send');K.toast('Bendición enviada a '+p.n+' ♥');$('#bmsg').value='';who=null;K.$$('[data-p]').forEach(function(x){x.setAttribute('aria-pressed','false')});chk()});
+drawMenu();drawCard();draw();
+})();
+/* ===== PANEL ===== */
+(function(){
+var K=window.Kit,$=K.$,esc=K.esc,DT=window.DATOS,role='equipo',suc='Todas',first=true,seen={},seenB={};
+try{role=sessionStorage.getItem('demo-role')||'equipo'}catch(e){}
+var sameDay=function(a,b){return new Date(a).toDateString()===new Date(b).toDateString()},av=function(p){return '<span class="av" style="--c:'+p.c+'">'+p.n[0]+'</span>'};
+$('#fil').innerHTML=['Todas'].concat(DT.sucs).map(function(s){return '<button type="button" class="chip" data-suc="'+s+'" aria-pressed="'+(s===suc)+'">'+s+'</button>'}).join('');
+$('#fil').addEventListener('click',function(e){var b=e.target.closest('[data-suc]');if(!b)return;suc=b.dataset.suc;K.$$('[data-suc]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});render()});
+function set(id,v){var e=$(id);if(e.textContent!==v){e.textContent=v;if(!first){e.classList.add('flash');setTimeout(function(){e.classList.remove('flash')},700)}}}
+function render(){var s=K.db.get(),all=s.orders.slice().sort(function(a,b){return b.at-a.at}),now=Date.now();
+ var hoy=all.filter(function(x){return sameDay(x.at,now)}),pend=all.filter(function(x){return x.estado==='nueva'||x.estado==='preparando'}),ent=all.filter(function(x){return x.estado!=='nueva'||true});
+ var vend=all.filter(function(x){return x.estado==='entregada'}),ventas=vend.reduce(function(t,x){return t+x.total},0),conT=all.filter(function(x){return x.card}).length;
+ set('#k1',String(hoy.length));set('#k2',String(pend.length));set('#k3',String(s.blessings.length));set('#k4',K.money(ventas));set('#k5',K.money(vend.length?ventas/vend.length:0));set('#k6',all.length?Math.round(conT/all.length*100)+'%':'0%');
+ var days=[];for(var d=13;d>=0;d--){var dt=new Date();dt.setDate(dt.getDate()-d);days.push(all.filter(function(x){return sameDay(x.at,dt.getTime())}).length)}var mx=Math.max.apply(null,days.concat(1));
+ $('#chart').innerHTML=days.map(function(v){return '<i style="--h:'+Math.round(v/mx*100)+'%" title="'+v+' pedidos"></i>'}).join('');
+ var list=all.filter(function(x){return(suc==='Todas'||x.sucursal===suc)&&x.estado!=='entregada'}).slice(0,9);
+ $('#orders').innerHTML=list.length?list.map(function(x){var isNew=!first&&!seen[x.id];var nx=DT.estados[Math.min(DT.estados.indexOf(x.estado)+1,3)];
+  return '<article class="card ord'+(isNew?' nuevo':'')+'"><header><b>'+esc(x.nombre)+(x.ejemplo?' <span class="muted" style="font-weight:400">(ejemplo)</span>':'')+'</b><span class="pill" data-s="'+x.estado+'">'+x.estado+'</span></header>'
+  +'<p class="muted" style="font-size:.85rem">'+new Date(x.at).toLocaleString(window.DEMO.locale,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' · '+esc(x.sucursal)+' · '+esc(x.modo)+(x.mascota?' · <span class="miniw">con peludito</span>':'')+'</p>'
+  +'<ul>'+x.items.map(function(i){return '<li>'+i.cant+'× '+esc(i.nombre)+'</li>'}).join('')+'</ul>'
+  +(x.card?'<div class="tarj '+(isNew?'pop':'')+'">'+'<svg class="fl a"><use href="#flor"/></svg><span class="brand">Tarjetita para imprimir</span><span class="para">Para '+esc(x.card.para)+'</span><span class="msg">'+esc(x.card.msg)+'</span><span class="de">'+(x.card.de?'Con cariño, '+esc(x.card.de):'')+'</span></div>':'')
+  +'<div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap"><b>'+K.money(x.total)+'</b><span style="display:flex;gap:.4rem;flex-wrap:wrap">'+(x.card?'<button class="btn btn--ghost" data-print="'+x.id+'" type="button">Imprimir tarjetita</button>':'')+'<button class="btn btn--ghost" data-next="'+x.id+'" type="button">Pasar a «'+nx+'»</button></span></div></article>'}).join(''):'<div class="card muted">No hay pedidos pendientes en esta sucursal. Pídele a tu cliente demo uno nuevo.</div>';
+ all.forEach(function(x){seen[x.id]=1});
+ var cnt={};s.blessings.forEach(function(b){cnt[b.to]=(cnt[b.to]||0)+1});var mxb=Math.max.apply(null,Object.keys(cnt).map(function(k){return cnt[k]}).concat(1));
+ $('#bless').innerHTML=DT.team.slice().sort(function(a,b){return(cnt[b.id]||0)-(cnt[a.id]||0)}).map(function(p){return '<div class="bl">'+av(p)+'<b>'+esc(p.n)+' <span class="muted" style="font-weight:400;font-size:.8rem">'+esc(p.r)+' · '+esc(p.s)+'</span></b><b>'+(cnt[p.id]||0)+' ♥</b><div class="bar" style="grid-column:2/4"><i style="width:'+Math.round((cnt[p.id]||0)/mxb*100)+'%"></i></div></div>'}).join('');
+ var bs=s.blessings.slice().sort(function(a,b){return b.at-a.at}).slice(0,5);
+ $('#quotes').innerHTML=bs.map(function(b){var p=DT.team.filter(function(x){return x.id===b.to})[0],isN=!first&&!seenB[b.id];return '<li class="'+(isN?'nuevo':'')+'">«'+esc(b.msg)+'» <b>→ '+esc(p?p.n:'')+'</b>'+(b.ejemplo?' <span class="muted">(ejemplo)</span>':'')+'</li>'}).join('');s.blessings.forEach(function(b){seenB[b.id]=1});
+ var tp={};all.forEach(function(x){x.items.forEach(function(i){var t=tp[i.id]||(tp[i.id]={n:i.nombre,u:0,v:0});t.u+=i.cant;t.v+=i.cant*i.precio})});
+ $('#top').innerHTML=Object.keys(tp).map(function(k){return tp[k]}).sort(function(a,b){return b.v-a.v}).slice(0,6).map(function(t){return '<tr><td>'+esc(t.n)+'</td><td>'+t.u+'</td><td>'+K.money(t.v)+'</td></tr>'}).join('');
+ $('#cups').innerHTML=s.coupons.slice().sort(function(a,b){return b.at-a.at}).slice(0,6).map(function(c){return '<tr><td><b>'+esc(c.code)+'</b>'+(c.ejemplo?' <span class="muted">(ejemplo)</span>':'')+'</td><td>'+esc(c.premio)+'</td><td><span class="pill" data-s="'+(c.estado==='canjeado'?'entregada':'nueva')+'">'+c.estado+'</span></td><td>'+(c.estado==='canjeado'?'':'<button class="btn btn--ghost" data-redeem="'+c.id+'" type="button">Canjear</button>')+'</td></tr>'}).join('');
+ $('#lock').hidden=role==='dueno';K.$$('[data-owner]').forEach(function(e){e.hidden=role!=='dueno'});K.$$('[data-role]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.role===role))});first=false}
+$('#orders').addEventListener('click',function(e){var n=e.target.closest('[data-next]'),p=e.target.closest('[data-print]');
+ if(n){K.db.update(function(s){s.orders.forEach(function(x){if(x.id===n.dataset.next)x.estado=DT.estados[Math.min(DT.estados.indexOf(x.estado)+1,3)]})});K.track('status_change')}
+ if(p){K.track('print_card');K.toast('Tarjetita enviada a la impresora de la sucursal (simulado en la demo)')}});
+$('#cups').addEventListener('click',function(e){var b=e.target.closest('[data-redeem]');if(!b)return;K.db.update(function(s){s.coupons.forEach(function(c){if(c.id===b.dataset.redeem)c.estado='canjeado'})});K.track('coupon_redeem')});
+K.$$('[data-role]').forEach(function(b){b.addEventListener('click',function(){role=b.dataset.role;try{sessionStorage.setItem('demo-role',role)}catch(e){}K.track('role_switch',{role:role});render()})});
+K.onChange(render);render();
+})();
+/* ===== PESTAÑAS ===== */
+(function(){var tabs=document.querySelectorAll('[data-v]'),views=document.querySelectorAll('.view');
+function show(v){if(!document.getElementById('v-'+v))v='inicio';tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.v===v))});views.forEach(function(e){e.hidden=e.id!=='v-'+v});window.scrollTo(0,0);try{history.replaceState(null,'','#'+v)}catch(e){}Kit.track('view',{v:v})}
+tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.v)})});
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(a&&a.getAttribute('href').length>1){e.preventDefault();show(a.getAttribute('href').slice(1))}});
+show((location.hash||'#inicio').slice(1))})();
+</script></body></html>
