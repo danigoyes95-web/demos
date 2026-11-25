@@ -1,0 +1,71 @@
+/* efectos/sellos.css · complemento OPCIONAL «Ruta de sellos» (efectos.usar = ["sellos"]; pide landing.sellos y motor/sellos.js).
+   Pasarela de sellos coleccionables: fila con scroll-snap, el sello del centro se agranda y los demás se alejan; ficha del sello y pasaporte.
+   Solo transform y opacity en lo que se mueve; sin animaciones infinitas (el sellado es una animación de un solo disparo). Colores por --fx-*.
+   Móvil primero: todo funciona con el dedo (deslizar, tocar). Con movimiento reducido el sello aparece sellado sin animación. */
+.ruta-sec { background-color: var(--fx-accent); color: var(--fx-ink); overflow: hidden;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .13 0 0 0 0 .22 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.ruta-sec .intro { max-width: 58ch; }
+
+.ruta { margin-top: clamp(26px, 4vw, 44px); }
+.ruta-marco { position: relative; }
+.ruta-pista { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; padding-block: 34px 18px; }
+.ruta-pista::-webkit-scrollbar { display: none; }
+.ruta-fila { position: relative; display: flex; width: max-content; gap: clamp(8px, 2vw, 22px); padding-inline: calc(50vw - 125px); }
+/* La «pasarela»: un hilo punteado que une los sellos, a la altura de su centro */
+.ruta-fila::before { content: ""; position: absolute; left: 0; right: 0; top: 125px; border-top: 2px dashed color-mix(in srgb, var(--fx-deep) 38%, transparent); }
+.ruta-item { scroll-snap-align: center; flex: 0 0 auto; position: relative; }
+.ruta-item::after { content: ""; position: absolute; left: calc(100% + clamp(4px, 1vw, 11px) - 6px); top: 119px; width: 12px; height: 12px; border-radius: 50%; background: var(--fx-deep); }
+.ruta-item:last-child::after { display: none; }
+
+.ruta-sello { appearance: none; border: 0; background: none; padding: 0; width: 250px; display: flex; flex-direction: column; align-items: center; gap: 12px; cursor: pointer; color: inherit; font: inherit;
+  opacity: .62; transform: scale(.82); transition: transform .5s var(--fx-ease), opacity .5s; -webkit-tap-highlight-color: transparent; }
+.ruta-sello.activo { opacity: 1; transform: scale(1); }
+.ruta-sello.activo .sello-svg image { opacity: .85; }
+.ruta-sello.activo .s-puntos, .ruta-sello.activo .s-aro, .ruta-sello.activo .s-txt, .ruta-sello.activo .s-est { opacity: 1; }
+.ruta-sello:focus-visible { outline: 3px solid var(--fx-deep); outline-offset: 6px; border-radius: 24px; }
+.sello-caja { position: relative; display: block; width: 250px; height: 250px; transform: rotate(var(--giro, 0deg)); }
+.sello-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.s-fondo { fill: var(--fx-accent); }
+.s-puntos { fill: none; stroke: var(--fx-deep); stroke-width: 3.2; stroke-linecap: round; stroke-dasharray: .1 6.2; }
+.s-aro { fill: none; stroke: var(--fx-deep); stroke-width: 2; }
+.s-aro.fino { stroke-width: 1; }
+.s-txt { fill: var(--fx-deep); font-family: var(--fx-font-txt); font-weight: 600; letter-spacing: .16em; }
+.s-txt.lugar { font-family: var(--fx-font-disp); font-weight: 700; letter-spacing: .2em; }
+.s-est { fill: var(--fx-deep); }
+.sello-svg image { filter: grayscale(1) contrast(.9) brightness(1.08); opacity: .55; transition: opacity .5s, filter .5s; }
+.sello-svg { filter: none; }
+.ruta-sello .s-puntos, .ruta-sello .s-aro, .ruta-sello .s-txt, .ruta-sello .s-est { opacity: .55; transition: opacity .5s; }
+.ruta-sello.sellado .sello-svg image { filter: none; opacity: 1; }
+.ruta-sello.sellado .s-puntos, .ruta-sello.sellado .s-aro, .ruta-sello.sellado .s-txt, .ruta-sello.sellado .s-est { opacity: 1; }
+.sello-fecha { position: absolute; right: 2px; bottom: 6px; padding: 5px 11px; border: 1.5px solid var(--fx-deep); border-radius: 6px; background: var(--fx-accent); color: var(--fx-deep); font: 700 .8rem/1 var(--fx-font-txt); letter-spacing: .1em; text-transform: uppercase; transform: rotate(-8deg); opacity: 0; }
+.ruta-sello.sellado .sello-fecha { opacity: 1; }
+.ruta-nombre { font: 600 1.35rem/1 var(--fx-font-disp); }
+.ruta-sello.recien .sello-caja { animation: fx-sellar .6s var(--fx-ease) both; }
+@keyframes fx-sellar { 0% { transform: rotate(calc(var(--giro, 0deg) - 14deg)) scale(1.35); opacity: 0; } 60% { opacity: 1; } 100% { transform: rotate(var(--giro, 0deg)) scale(1); } }
+
+/* Flechas (en celular se desliza con el dedo; las flechas solo aparecen con puntero fino) */
+.ruta-flecha { display: none; position: absolute; top: 118px; z-index: 3; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--fx-deep); color: var(--fx-bg); font: 400 1.9rem/1 var(--fx-font-disp); cursor: pointer; }
+.ruta-flecha.ant { left: 18px; } .ruta-flecha.sig { right: 18px; }
+@media (hover: hover) and (min-width: 900px) { .ruta-flecha { display: grid; place-items: center; } }
+
+.ruta-bajo { display: grid; gap: 22px; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: stretch; margin-top: 8px; }
+@media (max-width: 860px) { .ruta-bajo { grid-template-columns: 1fr; } }
+.ruta-ficha, .pasaporte { background: var(--fx-bg); border-radius: 28px; padding: clamp(20px, 3vw, 32px); }
+.ruta-ficha { min-height: 280px; }
+.ficha-etiqueta { display: flex; flex-wrap: wrap; gap: 8px; font: 600 .74rem/1 var(--fx-font-txt); letter-spacing: .12em; text-transform: uppercase; }
+.ficha-etiqueta span { padding: 7px 12px; border-radius: 999px; background: var(--fx-deep); color: var(--fx-bg); }
+.ficha-etiqueta .ficha-ej { background: var(--fx-marca-bg); color: var(--fx-marca-ink); }
+.ruta-ficha h3 { font: 600 clamp(2rem, 4vw, 2.7rem)/1 var(--fx-font-disp); margin: 14px 0 8px; }
+.ficha-sabor { font-size: 1.1rem; margin-bottom: 8px; } .ficha-sabor b { font: italic 500 1.15rem var(--fx-font-disp); margin-right: 4px; }
+.ficha-cuando { margin-top: 8px; font-weight: 500; }
+.ruta-ficha .btn.ficha-sellar[aria-pressed="true"] { background: transparent; color: var(--fx-deep); box-shadow: inset 0 0 0 1.5px var(--fx-deep); }
+.pasaporte { background: var(--fx-deep); color: var(--fx-bg); display: flex; flex-direction: column; gap: 14px; }
+.pasaporte h3 { font: 600 1.6rem/1 var(--fx-font-disp); }
+.pas-cuenta { font-size: 1.1rem; } .pas-cuenta b { font-variant-numeric: lining-nums; font: 600 3.4rem/1 var(--fx-font-disp); margin-right: 6px; vertical-align: -.1em; }
+.pas-puntos { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.pas-puntos li { width: 26px; height: 26px; border-radius: 50%; border: 1.5px dashed var(--fx-soft-2); transition: background .3s, border-color .3s; }
+.pas-puntos li.lleno { background: var(--fx-pop); border: 1.5px solid var(--fx-pop); }
+.pas-completo[hidden] { display: none; } .pas-completo p { margin-bottom: 12px; font: italic 500 1.25rem/1.25 var(--fx-font-disp); }
+.pasaporte .btn { background: var(--fx-pop); color: var(--fx-deep); }
+@media (max-width: 420px) { .ruta-sello, .sello-caja { width: 230px; } .sello-caja { height: 230px; } .ruta-fila { padding-inline: calc(50vw - 115px); } .ruta-fila::before { top: 115px; } .ruta-item::after { top: 109px; } }
+@media (prefers-reduced-motion: reduce) { .ruta-sello { transition: none; } .ruta-sello.recien .sello-caja { animation: none; } }
