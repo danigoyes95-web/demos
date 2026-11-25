@@ -1,0 +1,53 @@
+/* efectos/rosegold.css · complemento OPCIONAL (efectos.usar = ["clinica", "rosegold"], DESPUÉS de clinica): oro rosado líquido.
+   Repinta los brillos de clinica.css (titular, mancha de la doctora, estrellas, botones, íconos) con --fx-metal-1/2/3 (oscuro, medio, claro) y --fx-rosa/--fx-rosa-2,
+   y suma movimiento ligado al scroll. NO añade animaciones infinitas (siguen siendo las 3 de clinica: titular, barrido del botón, estrellas).
+   Todo lo nuevo es transform u opacity, dentro de @supports (animation-timeline) y apagado con prefers-reduced-motion. Sin soporte o sin JS, todo se ve quieto y completo. */
+
+/* Titular en oro rosado líquido (reutiliza la animación de clinica.css) */
+body .hero h1 .grueso { background: linear-gradient(100deg, var(--fx-deep) 0%, var(--fx-metal-1) 24%, var(--fx-metal-2) 40%, var(--fx-metal-1) 56%, var(--fx-deep) 80%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Mancha de la doctora: placa de oro rosado cepillado */
+body .hero .hero-foto::before { background: linear-gradient(155deg, var(--fx-metal-3) 0%, var(--fx-metal-2) 32%, var(--fx-metal-3) 50%, var(--fx-metal-1) 100%); box-shadow: inset 0 0 0 2px color-mix(in srgb, #fff 60%, transparent), 0 22px 46px color-mix(in srgb, var(--fx-metal-1) 28%, transparent); }
+.hero .hero-media::after { background: linear-gradient(145deg, var(--fx-rosa), var(--fx-rosa-2)); box-shadow: -34px 64px 0 -2px color-mix(in srgb, var(--fx-metal-2) 70%, var(--fx-bg)); }
+
+/* Estrellas del hero en champán, rosa y oro rosado (misma animación de clinica.css) */
+.hero.oscuro::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.8 6.5 5.5 11.2 12 12-6.5.8-11.2 5.5-12 12-.8-6.5-5.5-11.2-12-12C6.5 11.2 11.2 6.5 12 0z' fill='%23D9A198'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.8 6.5 5.5 11.2 12 12-6.5.8-11.2 5.5-12 12-.8-6.5-5.5-11.2-12-12C6.5 11.2 11.2 6.5 12 0z' fill='%23F2C4BB'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.8 6.5 5.5 11.2 12 12-6.5.8-11.2 5.5-12 12-.8-6.5-5.5-11.2-12-12C6.5 11.2 11.2 6.5 12 0z' fill='%23FFFFFF'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.8 6.5 5.5 11.2 12 12-6.5.8-11.2 5.5-12 12-.8-6.5-5.5-11.2-12-12C6.5 11.2 11.2 6.5 12 0z' fill='%23E2A097'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c.8 6.5 5.5 11.2 12 12-6.5.8-11.2 5.5-12 12-.8-6.5-5.5-11.2-12-12C6.5 11.2 11.2 6.5 12 0z' fill='%23F7DDD2'/%3E%3C/svg%3E"); }
+
+/* Botones principales en metal rosado, con el barrido de brillo de clinica.css */
+body .btn:not(.btn-linea) { background: linear-gradient(135deg, var(--fx-metal-1), var(--fx-accent) 60%, color-mix(in srgb, var(--fx-accent) 80%, var(--fx-metal-2))); color: #fff; border-color: transparent; box-shadow: 0 10px 24px color-mix(in srgb, var(--fx-metal-1) 32%, transparent), inset 0 1px 0 color-mix(in srgb, #fff 45%, transparent); }
+body .pd-btn { background: linear-gradient(135deg, var(--fx-metal-1), var(--fx-accent)); color: #fff; }
+
+/* Íconos, fila de servicios, marca y entrada de la demo */
+.franja-card li:first-child .ico { background: linear-gradient(145deg, var(--fx-metal-1), var(--fx-metal-2) 55%, var(--fx-metal-1)); color: #fff; box-shadow: 0 8px 18px color-mix(in srgb, var(--fx-metal-1) 32%, transparent), 0 0 0 4px color-mix(in srgb, var(--fx-rosa) 50%, transparent); }
+.franja-card h2::after { background: linear-gradient(90deg, var(--fx-metal-1), var(--fx-metal-2), var(--fx-metal-3), var(--fx-metal-2), var(--fx-metal-1)); }
+.marca img { box-shadow: 0 0 0 2px var(--fx-metal-2), 0 0 0 4px color-mix(in srgb, var(--fx-rosa) 60%, transparent), 0 6px 16px color-mix(in srgb, var(--fx-metal-1) 25%, transparent); }
+body .hub-lista.limpio .hub-card::before { background: linear-gradient(145deg, var(--fx-metal-1), var(--fx-metal-2) 55%, var(--fx-metal-1)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--fx-rosa) 50%, transparent); }
+
+/* Movimiento ligado al scroll (CSS puro, solo transform y opacity) */
+@supports (animation-timeline: view()) {
+  @keyframes fx-rg-hilo { to { transform: scaleX(1); } }
+  @keyframes fx-rg-par { from { transform: translateY(0) scale(1.06); } to { transform: translateY(-26px) scale(1.06); } }
+  @keyframes fx-rg-sube { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes fx-rg-brilla { from { opacity: .35; transform: scale(.9); } to { opacity: 1; transform: none; } }
+
+  /* Barra de lectura en oro rosado, fija arriba */
+  html::before { content: ""; position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 60; pointer-events: none; transform-origin: left; transform: scaleX(0);
+    background: linear-gradient(90deg, var(--fx-metal-1), var(--fx-metal-2), var(--fx-metal-3), var(--fx-rosa-2)); animation: fx-rg-hilo linear both; animation-timeline: scroll(root); }
+
+  /* La foto de la doctora se desplaza un poco más lento que la página */
+  .hero .hero-foto img { animation: fx-rg-par linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+
+  /* El hilo bajo «Tratamientos» se dibuja de afuera hacia adentro al entrar en pantalla */
+  .franja-card h2::after { transform-origin: center; transform: scaleX(.15); animation: fx-rg-hilo linear both; animation-timeline: view(); animation-range: entry 10% entry 90%; }
+
+  /* Íconos del servicio, tarjetas de la entrada y de las preguntas: suben y se encienden al entrar */
+  .franja-card li, body .hub-lista.limpio .hub-card, .faq details, .proceso li { animation: fx-rg-sube linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+  .franja-card .ico { animation: fx-rg-brilla linear both; animation-timeline: view(); animation-range: entry 10% entry 70%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::before { display: none; }
+  .hero .hero-foto img, .franja-card h2::after, .franja-card li, .franja-card .ico, body .hub-lista.limpio .hub-card, .faq details, .proceso li { animation: none; transform: none; opacity: 1; }
+  .franja-card h2::after { transform: none; }
+}

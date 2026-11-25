@@ -131,3 +131,16 @@ footer img { width: 120px; height: 120px; }
 
 /* Propuesta: «Recomendado» como píldora (el sello girado de energía se salía de la pantalla a 375 px) */
 .plan .sello { top: -16px !important; right: 14px !important; width: auto !important; height: auto !important; white-space: nowrap; padding: 8px 16px; border: 0; border-radius: 999px; transform: none; background: var(--fx-deep); color: var(--fx-bg); font: 500 .9rem/1 var(--fx-font-txt); letter-spacing: .04em; }
+
+/* Menú: en celular también se ve (fila de chips que se desliza) y «Ruta de sellos» va resaltada, porque es lo que queremos que toquen */
+.cabecera .wrap { flex-wrap: wrap; }
+.cabecera nav a[href="#sellos"] { background: var(--fx-deep); color: var(--fx-bg); font-weight: 500; padding: 0 16px; }
+.cabecera nav a[href="#sellos"]::before { content: "✦"; margin-right: 7px; font-size: .8em; }
+@media (max-width: 760px) {
+  .cabecera .wrap { min-height: 0; padding-block: 10px 8px; row-gap: 8px; }
+  .cabecera nav { display: flex; order: 3; width: 100%; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .cabecera nav::-webkit-scrollbar { display: none; }
+  .cabecera nav a { flex: 0 0 auto; min-height: 40px; padding: 0 14px; border: 1px solid var(--fx-hilo); white-space: nowrap; font-size: .95rem; }
+  .cabecera nav a[href="#sellos"] { border-color: var(--fx-deep); }
+  html { scroll-padding-top: 122px; }
+}
