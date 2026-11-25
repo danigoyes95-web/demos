@@ -1,8 +1,8 @@
-/* DENTALSALUD · Ambato — datos del cliente para la demo (generado por nuevo-cliente.py desde clientes/anto-saltos/cliente.json).
+/* Dra. Anto Saltos · Ambato — datos del cliente para la demo (generado por nuevo-cliente.py desde clientes/anto-saltos/cliente.json).
    Todo número o dato del cliente vive SOLO aquí. Lo que falta va como [MARCADOR]. */
 window.DEMO = {
-  "cliente": "DENTALSALUD",
-  "corto": "DENTALSALUD",
+  "cliente": "Dra. Anto Saltos",
+  "corto": "Dra. Anto Saltos",
   "ciudad": "Ambato",
   "waCliente": "593983139928",
   "waAgencia": "593983139928",
@@ -11,7 +11,7 @@ window.DEMO = {
   "domicilio": false,
   "envio": null,
   "claveDemo": "anto_saltos_demo_reservas",
-  "saludoPedido": "Hola DENTALSALUD, quiero reservar desde la web",
+  "saludoPedido": "Hola Dra. Anto Saltos, quiero reservar desde la web",
   "instagram": "https://www.instagram.com/od.antonelasaltos/",
   "facebook": "",
   "sectoresEjemplo": [],
@@ -19,11 +19,11 @@ window.DEMO = {
   "clinica": {
     "modo": "demo",
     "schema": "anto_saltos",
-    "consentimiento": "Acepto que DENTALSALUD use mis datos (nombre, celular y datos de la cita) para gestionar mi solicitud y contactarme.",
+    "consentimiento": "Acepto que Dra. Anto Saltos use mis datos (nombre, celular y datos de la cita) para gestionar mi solicitud y contactarme.",
     "privacidad": "privacidad.html",
     "consentimientoDoc": {
       "titulo": "Consentimiento informado y autorización de tratamiento de datos personales",
-      "responsable": "DENTALSALUD (razón social y RUC de ejemplo)",
+      "responsable": "Dra. Anto Saltos (razón social y RUC de ejemplo)",
       "conservacion": "el tiempo que exija la ley para la historia clínica (dato de ejemplo)",
       "contacto": "el WhatsApp de la clínica (dato de ejemplo)",
       "secciones": [

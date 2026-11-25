@@ -23,7 +23,7 @@ window.CLINICA_SEED = {
     {
       "nombre": "Dra. Antonela Saltos",
       "especialidad": "Odontología integral y diseño de sonrisa",
-      "color": "#C2567E",
+      "color": "#B76E79",
       "servicios": [
         "Diseño de sonrisa",
         "Restauración con resina",

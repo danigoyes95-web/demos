@@ -1,4 +1,4 @@
-/* Carta de DENTALSALUD (generado desde clientes/anto-saltos/cliente.json). Precios en centavos. desc = null → ingredientes sin confirmar. */
+/* Carta de Dra. Anto Saltos (generado desde clientes/anto-saltos/cliente.json). Precios en centavos. desc = null → ingredientes sin confirmar. */
 window.MENU = {
   "categorias": [
     {
