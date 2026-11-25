@@ -39,7 +39,7 @@ input,select,textarea{font:inherit;color:inherit;background:var(--surface);borde
 .badges{display:flex;flex-wrap:wrap;gap:.5rem}.badges span{display:inline-flex;align-items:center;gap:.4rem;background:var(--green-soft);color:#17521a;border-radius:999px;padding:.35rem .8rem;font-size:.76rem;font-weight:700}.badges span::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--green)}
 
 /* catálogo */
-.tools{display:grid;gap:.7rem;margin-block:1rem .8rem}.chips{display:flex;gap:.45rem;overflow-x:auto;padding-bottom:.2rem;scrollbar-width:none}.chips button{font:700 .78rem var(--f);min-height:40px;padding:.4rem .9rem;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:inherit;cursor:pointer;white-space:nowrap}.chips button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tools{display:grid;gap:.6rem}.chips{display:flex;gap:.45rem;overflow-x:auto;padding-bottom:.2rem;scrollbar-width:none}.chips button{font:700 .78rem var(--f);min-height:40px;padding:.4rem .9rem;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:inherit;cursor:pointer;white-space:nowrap}.chips button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .grid{list-style:none;margin:0;padding:0;display:grid;gap:.8rem;grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(min-width:700px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(min-width:1000px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .pc{display:grid;gap:.45rem;align-content:start;padding:.9rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);transition:transform .3s var(--ease),border-color .3s}.pc:hover{transform:translateY(-3px);border-color:var(--blue)}
@@ -48,14 +48,20 @@ input,select,textarea{font:inherit;color:inherit;background:var(--surface);borde
 .empty{padding:2rem 1rem;text-align:center;display:grid;gap:.8rem;justify-items:center}
 
 /* configurador */
-.cfg{display:grid;gap:1rem;margin-block:1.2rem;border:2px solid var(--brand);background:linear-gradient(180deg,#fff,#EAF5F9)}
+.cfg{border:2px solid var(--brand);background:linear-gradient(180deg,#fff,#EAF5F9)}
 .cfg-body{display:grid;gap:1.2rem}@media(min-width:760px){.cfg-body{grid-template-columns:1.2fr 1fr;align-items:start}}
 .step{display:grid;gap:.45rem}.opts{display:flex;flex-wrap:wrap;gap:.45rem}.opts button{font:700 .82rem var(--f);min-height:44px;padding:.4rem 1rem;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:inherit;cursor:pointer;transition:background .2s,border-color .2s}.opts button[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}
 .xt{display:flex;flex-wrap:wrap;gap:.8rem}.xt label{display:flex;align-items:center;gap:.45rem;font-weight:600}.xt input{width:20px;height:20px;min-height:0}
 .prev{display:grid;gap:.7rem;justify-items:center;text-align:center}.prev .ph{width:min(60%,170px)}.prev ul{list-style:none;padding:0;margin:0;display:grid;gap:.25rem;font-size:.82rem;text-align:left;width:100%}.prev li::before{content:"✓ ";color:var(--green);font-weight:800}
 
+.chero{padding-block:1.2rem .4rem;display:grid;gap:.8rem}.chero h1{font-size:clamp(1.6rem,5vw,2.4rem)}
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:.4rem;grid-template-columns:repeat(3,1fr)}.flow li{display:grid;gap:.3rem;font-size:.74rem;font-weight:700;background:#fff;border:1px solid var(--line);border-radius:14px;padding:.6rem .55rem;line-height:1.25}.flow b{width:1.6rem;height:1.6rem;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:.8rem}
+.badges{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.badges span{white-space:nowrap}
+.cfg{padding:0;gap:0;margin-block:.6rem 0}.cfg summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.1rem;min-height:56px}.cfg summary::-webkit-details-marker{display:none}.cfg summary b{display:block;font-size:.92rem;margin-top:.3rem;line-height:1.3}.cfg .plus{flex:none;width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.2rem;transition:transform .25s var(--ease)}.cfg[open] .plus{transform:rotate(45deg)}.cfg .cfg-body{padding:0 1.1rem 1.2rem}
+.gh{grid-column:1/-1;display:flex;align-items:baseline;gap:.6rem;margin-top:.8rem;padding-bottom:.4rem;border-bottom:2px solid var(--green)}.gh h2{font-size:1.05rem}.gh span{font-size:.76rem;color:var(--muted);font-weight:600}
+.tools{position:sticky;top:61px;z-index:20;background:var(--bg);padding-block:.5rem;margin-block:.6rem 0}
 /* barra cotización */
-.cartbar{position:sticky;bottom:0;z-index:25;background:#fff;border-top:1px solid var(--line);padding:.7rem 1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;box-shadow:0 -8px 24px -16px rgba(11,52,71,.5)}
+.cartbar .tag{display:block;line-height:1.4}.cartbar{position:sticky;bottom:0;z-index:25;background:#fff;border-top:1px solid var(--line);padding:.7rem 1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;box-shadow:0 -8px 24px -16px rgba(11,52,71,.5)}
 .sheet{border:0;padding:0;width:min(100%,560px);max-height:92vh;margin:auto auto 0;border-radius:22px 22px 0 0;background:#fff;color:var(--ink);overflow:auto}@media(min-width:700px){.sheet{margin:auto;border-radius:22px}}.sheet::backdrop{background:rgba(5,25,36,.55)}
 .sheet .in{padding:1.2rem;display:grid;gap:1rem}.sheet header{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .ln{display:grid;grid-template-columns:48px 1fr auto;gap:.7rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}.ln img{width:48px;height:48px;border-radius:50%;object-fit:cover;background:#111}.ln b{font-size:.85rem;display:block;line-height:1.25}.ln small{color:var(--muted);font-size:.74rem}
@@ -121,12 +127,10 @@ select.pill{width:auto;min-height:36px;padding:.2rem .6rem;border-radius:999px;b
 
 <!-- CATÁLOGO -->
 <div class="view" id="v-catalogo" hidden><main class="wrap">
-<section class="hero"><p class="tag">Lo que ve tu cliente · Ambato, Ecuador</p>
-<h1>Neumática, electroneumática y <em>autopartes industriales</em></h1>
-<p class="lead">Más de 8 años de experiencia. Elige lo que necesitas y pide tu cotización; te respondemos por WhatsApp.</p>
+<section class="chero"><div><p class="tag">Lo que ve tu cliente · Ambato, Ecuador</p><h1>Catálogo SERMAN</h1><p class="muted">Neumática, electroneumática y autopartes industriales · +8 años de experiencia</p></div>
+<ol class="flow" aria-label="Cómo cotizar"><li><b>1</b> Elige tus productos</li><li><b>2</b> Revisa tu cotización</li><li><b>3</b> Envíala y te respondemos</li></ol>
 <div class="badges"><span>Calidad garantizada</span><span>Soluciones a tu medida</span><span>Envíos a todo el Ecuador</span></div></section>
-
-<section class="card cfg" aria-labelledby="cfgT"><div><p class="tag">Arma tu bloque</p><h2 id="cfgT">Un bloque de electroválvulas a tu medida</h2></div>
+<details class="card cfg" id="cfgD"><summary><span><span class="tag">Arma tu bloque</span><b>¿Necesitas un bloque de electroválvulas? Configúralo aquí</b></span><span class="plus" aria-hidden="true">+</span></summary>
 <div class="cfg-body"><div style="display:grid;gap:1rem">
 <div class="step"><span class="tag">1 · Cuántas electroválvulas</span><div class="opts" id="cN"></div></div>
 <div class="step"><span class="tag">2 · Tipo</span><div class="opts" id="cT"></div></div>
@@ -134,7 +138,7 @@ select.pill{width:auto;min-height:36px;padding:.2rem .6rem;border-radius:999px;b
 <div class="step"><span class="tag">4 · Extras</span><div class="xt" id="cX"></div></div></div>
 <div class="prev"><div class="ph"><img id="cImg" alt="Bloque de electroválvulas" width="170" height="170"></div><b id="cTit"></b><ul id="cLis"></ul>
 <button class="btn" id="cAdd" type="button">Agregar a mi cotización</button>
-<p class="muted" style="font-size:.72rem">[CONFIRMAR] combinaciones y compatibilidades reales: las valida Juan Carlos antes de cotizar.</p></div></div></section>
+<p class="muted" style="font-size:.72rem">[CONFIRMAR] combinaciones y compatibilidades reales: las valida Juan Carlos antes de cotizar.</p></div></div></details>
 
 <div class="tools"><label class="sr" for="q" style="position:absolute;left:-9999px">Buscar producto</label><input id="q" type="search" placeholder="Buscar: conector, 1/4, electroválvula…" autocomplete="off"><div class="chips" id="chips" role="group" aria-label="Categorías"></div></div>
 <ul class="grid" id="grid"></ul>
@@ -268,14 +272,15 @@ document.addEventListener('click',function(e){var g=e.target.closest('[data-go]'
 var cat='todo',cart=[];
 function drawChips(){$('#chips').innerHTML=CATS.map(function(c){return'<button type="button" data-c="'+c[0]+'" aria-pressed="'+(c[0]===cat)+'">'+c[1]+'</button>'}).join('')}
 function drawGrid(){var q=$('#q').value.trim().toLowerCase(),list=PROD.filter(function(p){return(cat==='todo'||p.c===cat)&&(!q||(p.n+' '+p.s+' '+(p.v||[]).join(' ')).toLowerCase().indexOf(q)>-1)});
-$('#grid').innerHTML=list.map(function(p){return'<li class="pc" data-id="'+p.id+'"><div class="ph"><img src="'+IMG[p.img]+'" alt="'+esc(p.n)+'" width="128" height="128" loading="lazy"></div><h3>'+esc(p.n)+'</h3><p class="sp">'+esc(p.s)+'</p>'+(p.v?'<label>'+esc(p.vl)+'<select aria-label="'+esc(p.vl)+' de '+esc(p.n)+'">'+p.v.map(function(v){return'<option>'+esc(v)+'</option>'}).join('')+'</select></label>':'')+'<button class="btn btn--sm" type="button" data-add>Agregar a cotización</button></li>'}).join('');
+var grp=cat==='todo'&&!q,last='';
+$('#grid').innerHTML=list.map(function(p){var hd='';if(grp&&p.c!==last){last=p.c;var cn=CATS.filter(function(c){return c[0]===p.c})[0][1];hd='<li class="gh"><h2>'+cn+'</h2><span>'+list.filter(function(x){return x.c===p.c}).length+' productos</span></li>'}return hd+'<li class="pc" data-id="'+p.id+'"><div class="ph"><img src="'+IMG[p.img]+'" alt="'+esc(p.n)+'" width="128" height="128" loading="lazy"></div><h3>'+esc(p.n)+'</h3><p class="sp">'+esc(p.s)+'</p>'+(p.v?'<label>'+esc(p.vl)+'<select aria-label="'+esc(p.vl)+' de '+esc(p.n)+'">'+p.v.map(function(v){return'<option>'+esc(v)+'</option>'}).join('')+'</select></label>':'')+'<button class="btn btn--sm" type="button" data-add>Agregar a cotización</button></li>'}).join('');
 $('#vacio').hidden=list.length>0}
 $('#chips').addEventListener('click',function(e){var b=e.target.closest('[data-c]');if(!b)return;cat=b.dataset.c;drawChips();drawGrid();track('filter',{c:cat})});
 $('#q').addEventListener('input',function(){drawGrid()});
 $('#vacioBtn').addEventListener('click',function(){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hola SERMAN, busco: '+$('#q').value),'_blank','noopener')});
 function addLine(l){var ex=cart.filter(function(x){return x.k===l.k})[0];if(ex)ex.q+=l.q;else cart.push(l);drawCart();track('item_add',{id:l.pid})}
 $('#grid').addEventListener('click',function(e){var b=e.target.closest('[data-add]');if(!b)return;var li=b.closest('.pc'),p=P[li.dataset.id],sel=li.querySelector('select'),v=sel?sel.value:'';addLine({k:p.id+'|'+v,pid:p.id,v:v,q:1});toast('Agregado: '+p.n);b.animate([{transform:'scale(1)'},{transform:'scale(.94)'},{transform:'scale(1)'}],{duration:220})});
-function drawCart(){var n=cart.reduce(function(t,l){return t+l.q},0);$('#cl').textContent=n?n+' unidades · '+cart.length+' referencias':'Tu cotización está vacía';$('#ct').textContent=n?'Precio: te cotizamos por WhatsApp':'';$('#open').disabled=!n;if($('#sheet').open&&$('#sheet').dataset.mode==='edit'&&$('#lines')){$('#lines').innerHTML=linesHtml();$('#env').disabled=!cart.length}}
+function drawCart(){var n=cart.reduce(function(t,l){return t+l.q},0);$('#cl').textContent=n?n+(n===1?' unidad':' unidades')+' · '+cart.length+(cart.length===1?' referencia':' referencias'):'Tu cotización está vacía';$('#ct').textContent=n?'Precio: te cotizamos':'';$('#open').disabled=!n;$('#open').textContent=n?'Ver cotización ('+n+')':'Ver cotización';if($('#sheet').open&&$('#sheet').dataset.mode==='edit'&&$('#lines')){$('#lines').innerHTML=linesHtml();$('#env').disabled=!cart.length}}
 
 /* Configurador de bloques */
 var cfg={n:4,t:'bi',v:'24 V',x:{sil:true,tap:false,con:false}};
@@ -287,7 +292,7 @@ $('#cImg').src=IMG['bloque'+cfg.n];$('#cTit').textContent='Bloque de '+cfg.n+' e
 $('#cLis').innerHTML=['Electroválvulas 5/2 '+(cfg.t==='bi'?'biestables (2 bobinas)':'monoestables (retorno por muelle)'),'Bobinas de '+cfg.v,'Base para '+cfg.n+' electroválvulas · roscados internos 1/4"'].concat(cfg.x.sil?['Silenciadores incluidos']:[],cfg.x.tap?['Tapones incluidos']:[],cfg.x.con?['Conectores rectos incluidos']:[]).map(function(t){return'<li>'+t+'</li>'}).join('')}
 $('.cfg').addEventListener('click',function(e){var b=e.target.closest('button[data-n],button[data-t],button[data-v2]');if(!b)return;if(b.dataset.n)cfg.n=+b.dataset.n;if(b.dataset.t)cfg.t=b.dataset.t;if(b.dataset.v2)cfg.v=b.dataset.v2;drawCfg();track('cfg_change')});
 $('#cX').addEventListener('change',function(e){var i=e.target.closest('[data-x]');if(i){cfg.x[i.dataset.x]=i.checked;drawCfg()}});
-$('#cAdd').addEventListener('click',function(){var t=cfgTxt();addLine({k:'cfg|'+t,pid:'bloque'+cfg.n,v:'',label:t,img:'bloque'+cfg.n,q:1});toast('Bloque agregado a tu cotización');track('cfg_add',{n:cfg.n})});
+$('#cAdd').addEventListener('click',function(){var t=cfgTxt();addLine({k:'cfg|'+t,pid:'bloque'+cfg.n,v:'',label:t,img:'bloque'+cfg.n,q:1});toast('Bloque agregado a tu cotización');$('#cfgD').open=false;track('cfg_add',{n:cfg.n})});
 
 /* Hoja de cotización */
 var sheet=$('#sheet'),sentId=null;
