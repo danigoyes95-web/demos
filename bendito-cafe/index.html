@@ -2,7 +2,7 @@
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow"><title>Bendito Café · Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--brand:#7A2E45;--brand-ink:#fff;--pink:#F9A8BA;--rose:#D98C8F;--sage:#8FA876;--sage-d:#4F6B43;--bg:#FFF6F3;--surface:#fff;--text:#4A2230;--muted:#76535C;--line:#F2D6DA;--r:18px;--ease:cubic-bezier(.2,.7,.2,1);--f:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--s:'Allura','Snell Roundhand','Brush Script MT',cursive}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
@@ -145,11 +145,83 @@ textarea{resize:vertical}label{display:grid;gap:.3rem;font-size:.88rem;font-weig
 .lock{display:grid;gap:.3rem;padding:1rem;border:1.5px dashed var(--rose);border-radius:12px;color:var(--muted)}
 .bless{display:grid;gap:.6rem}.bl{display:grid;grid-template-columns:auto 1fr auto;gap:.2rem .8rem;align-items:center}.bl .av{width:44px;height:44px;font-size:1rem;grid-row:1/3}.bl .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.bl .bar i{display:block;height:100%;background:var(--pink);border-radius:99px;transition:width .6s var(--ease)}
 .quotes{display:grid;gap:.5rem;margin:0;padding:0;list-style:none}.quotes li{background:#FFF9F6;border-left:4px solid var(--pink);padding:.5rem .8rem;border-radius:0 10px 10px 0;font-size:.9rem}.quotes li.nuevo{animation:flash 1.8s var(--ease)}
+
+/* ===== REDISEÑO BOUTIQUE ===== */
+:root{--brand:#B8325E;--wine:#5E1F38;--berry:#D12F69;--butter:#FFE08A;--gold:#C9A56A;--bg:#FFF5F7;--line:#F3D9DF;--serif:'Fraunces',Georgia,'Times New Roman',serif}
+body{background:radial-gradient(60% 38% at 100% 0,#FFE0E8 0,transparent 70%),radial-gradient(50% 30% at 0 38%,#FFF0DA 0,transparent 70%),var(--bg)}
+h1,h2,h3{font-family:var(--serif);letter-spacing:-.01em}.script,.script.big{font-family:var(--s)}
+.btn--berry{background:linear-gradient(180deg,#E0457C,#C22A60);border-color:#C22A60;box-shadow:0 12px 22px -12px rgba(209,47,105,.9)}
+.btn--gold{background:#fff;color:var(--brand);border:1.5px solid var(--gold)}
+.sc{display:block;position:relative;aspect-ratio:1}.sc::before{content:"";position:absolute;inset:0;background:var(--rc,#fff);clip-path:url(#scal);animation:spin 36s linear infinite}
+.sci{position:absolute;inset:7%;clip-path:url(#scal);background:#fff;overflow:hidden}.sci img{width:100%;height:100%;object-fit:cover;display:block}
+.hero2{padding-block:1rem 0}
+.hcard{position:relative;overflow:hidden;border-radius:34px;background:linear-gradient(160deg,#FFB3CA 0%,#FFD3E0 48%,#FFEBF1 100%);box-shadow:0 34px 60px -40px rgba(94,31,56,.7);isolation:isolate}
+.hcard>canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.hnav{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:1rem 1.1rem;position:relative;z-index:5}
+.hnav .mono{width:46px;height:46px;font-size:1.5rem;box-shadow:0 0 0 3px #fff;flex:none}
+.hnav nav{display:flex;gap:.1rem;background:#fff;border:1.5px solid var(--gold);border-radius:999px;padding:.15rem;overflow-x:auto;scrollbar-width:none}
+.hnav nav button{font:700 .8rem var(--f);background:none;border:0;padding:.5rem .8rem;min-height:44px;border-radius:999px;color:var(--brand);cursor:pointer;white-space:nowrap}.hnav nav button:hover{background:#FFE3EA}
+.hbody{display:grid;position:relative;z-index:3;padding:0 1.2rem 1.4rem;gap:.4rem}
+@media(min-width:860px){.hbody{grid-template-columns:1fr 1.05fr;align-items:center;padding:0 2.6rem 2.4rem;gap:1.4rem}}
+.hero-txt{display:grid;gap:.9rem;justify-items:start;position:relative;z-index:4}
+.hero-txt .tag{color:var(--wine)}
+.big{font-size:clamp(3.6rem,17vw,6.6rem);line-height:.92;color:var(--wine);text-shadow:none}
+.cl-hero .lema,.hero-txt .lema{font:400 clamp(1.7rem,5vw,2.4rem)/1.05 var(--s);color:var(--brand)}
+.hero-txt .lead{max-width:40ch;color:#7A4558;font-size:1.04rem}
+.hbtns{display:flex;gap:.6rem;flex-wrap:wrap}
+.stats.mini{grid-template-columns:repeat(3,auto);gap:1.2rem;margin-top:.4rem;text-align:left}.stats.mini .stat{background:none;border:0;padding:0}.stats.mini .stat b{font-size:clamp(1.8rem,6vw,2.4rem);color:var(--wine)}.stats.mini .stat span{font-size:.72rem;color:#7A4558;display:block;max-width:12ch;line-height:1.2}
+.stage{position:relative;aspect-ratio:1/1.04;width:100%;max-width:540px;margin-inline:auto}
+.giant{position:absolute;left:-6%;top:4%;font:900 clamp(7.5rem,42vw,16rem)/.8 var(--serif);color:#F58BAC;transform:rotate(-9deg);letter-spacing:-.05em;text-shadow:0 8px 0 rgba(209,47,105,.2);z-index:0;pointer-events:none;white-space:nowrap}
+.sat{position:absolute;filter:drop-shadow(0 16px 18px rgba(94,31,56,.3));transform:translateY(var(--py,0px));animation:flt 7s ease-in-out infinite;animation-delay:var(--fd,0s);z-index:1}
+.sat.star{left:27%;top:13%;width:66%;z-index:2}.sat.s1{left:-1%;top:0;width:30%;--fd:-2s}.sat.s2{right:0;bottom:1%;width:36%;--fd:-4s;z-index:3}.sat.s3{left:7%;bottom:4%;width:28%;--fd:-1s}.sat.s4{right:3%;top:-3%;width:21%;--fd:-3s}
+.pl{position:absolute;display:flex;align-items:center;padding:.5rem 1rem;border-radius:999px;font:800 clamp(.72rem,2.7vw,.92rem) var(--f);white-space:nowrap;box-shadow:0 12px 18px -10px rgba(94,31,56,.6);transform:translateY(var(--py,0px)) rotate(var(--r,0deg));z-index:5}
+.pl.w{background:var(--wine);color:#fff}.pl.y{background:var(--butter);color:var(--wine)}.pl.b{background:var(--berry);color:#fff}
+.pl.p1{left:-2%;top:40%;--r:-14deg}.pl.p2{right:-3%;top:46%;--r:9deg}.pl.p3{left:30%;bottom:-3%;--r:-5deg}
+.explore{position:absolute;left:1%;top:21%;width:26%;aspect-ratio:1;z-index:6;display:grid;place-items:center;text-align:center;font:800 clamp(.6rem,2.2vw,.78rem)/1.1 var(--f);color:var(--wine);cursor:pointer;border:0;background:none;padding:0;transform:translateY(var(--py,0px))}
+.explore::before{content:"";position:absolute;inset:0;background:var(--butter);clip-path:url(#scal);animation:spin 24s linear infinite;filter:drop-shadow(0 6px 8px rgba(0,0,0,.2))}.explore span{position:relative;max-width:6ch}
+.sp{position:absolute;color:#fff;font-size:1.3rem;line-height:1;z-index:3;animation:tw 2.6s ease-in-out infinite;animation-delay:var(--d2,0s);text-shadow:0 0 10px rgba(255,255,255,.9)}@keyframes tw{50%{opacity:.15;transform:scale(.5)}}
+.band-m{overflow:hidden;padding-block:1.6rem .4rem}.marq{margin-top:0}
+.feat{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin-top:1.4rem}
+.fc{text-align:center;padding:1.4rem 1rem 1.2rem;border-radius:28px;border:1.5px solid #EBD9C6;display:grid;gap:.5rem;justify-items:center;align-content:start}
+.fc:nth-child(1){background:#FFE3EA}.fc:nth-child(2){background:#E8F1DA}.fc:nth-child(3){background:#FFF1C9}.fc:nth-child(4){background:#ECE1F7}
+.fc .ic{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.7)}
+.fc .ic svg{width:30px;height:30px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.fc h3{font:800 1.12rem var(--serif);color:var(--wine)}.fc p{font-size:.9rem;color:#7A4558}
+.orn{display:flex;align-items:center;gap:.7rem;color:var(--gold);justify-content:center;margin:.3rem 0}.orn::before,.orn::after{content:"";height:1px;width:min(22vw,90px);background:var(--gold)}
+.sec-t{text-align:left}.sec-t p.script{font-size:clamp(2.2rem,7vw,3.2rem)}
+.sec-t .tag{color:var(--brand)}
+.cat{width:104px}.cat .sc{width:88px;transition:transform .4s var(--ease);filter:drop-shadow(0 8px 10px rgba(94,31,56,.2))}.cat[aria-pressed=true] .sc{transform:scale(1.14)}.cat[aria-pressed=true] .sc::before{animation-duration:7s}.cat b{font:700 .78rem/1.15 var(--f)}
+.banner{display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem;min-height:170px;border-radius:30px;background:var(--bg,#F8A9BD);color:var(--ink,#5E1F38);padding:1.2rem 1.3rem;margin:.2rem 0 1rem;overflow:hidden;position:relative;height:auto}
+.banner::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.55) 0 3px,transparent 4px) 0 0/34px 34px;opacity:.55}
+.banner>*{position:relative}.banner::after{display:none}.banner h3{font:400 clamp(2.4rem,9.5vw,3.8rem)/1 var(--s)}.banner .bs{font:600 italic 1rem var(--serif);display:block;margin-top:.2rem}
+.banner .sc{width:clamp(110px,30vw,170px);filter:drop-shadow(0 12px 14px rgba(0,0,0,.25))}
+.banner.swap{animation:fadein .6s var(--ease)}
+.it{border-radius:24px;border:1.5px solid #EBD9C6;background:#fff}.it .p{color:var(--berry);font-family:var(--serif);font-weight:800}.it h3{font:800 1.02rem var(--serif);color:var(--wine)}
+.it.ph .th{border-radius:0;border:0;clip-path:url(#scal);width:72px;height:72px;background:var(--pink)}
+.it.share{background:linear-gradient(#fff,#FFF6DC);border-color:var(--gold)}
+.fr{border-radius:0;border:0;box-shadow:none;clip-path:url(#scal);width:72px;height:72px;padding:6px;background:var(--line)}.fr img{clip-path:url(#scal);border-radius:0}.fr[aria-pressed=true]{background:var(--berry);box-shadow:none}
+.band{background:var(--butter);border-radius:42px 42px 0 0;margin-top:3.2rem;padding:2.6rem 0 2.8rem;position:relative;overflow:hidden}
+.band h2{font:800 clamp(1.8rem,6.5vw,2.8rem)/1.05 var(--serif);color:var(--wine);max-width:16ch}.band p.lead{color:#6b4a2a;max-width:44ch;margin-top:.5rem}
+.band .gal{margin-top:1rem}
+.gc{flex:0 0 min(62vw,232px);aspect-ratio:auto;border-radius:12px;padding:.55rem .55rem .2rem;background:#fff;box-shadow:0 18px 28px -18px rgba(94,31,56,.55)}
+.gc img{aspect-ratio:4/5;border-radius:8px}.gc figcaption{position:static;background:none;color:var(--wine);padding:.5rem .2rem .35rem;text-align:center;font:400 1.7rem/1 var(--s)}
+.tarj{border-color:var(--gold)}
+.ptd{font-family:var(--serif)}
+.mini-row{display:flex;gap:.8rem;margin-top:.6rem;flex-wrap:wrap}.mini-row .sc{width:78px;filter:drop-shadow(0 8px 10px rgba(94,31,56,.25))}
+.tabs button[aria-selected=true],.chip[aria-pressed=true]{background:var(--brand);border-color:var(--brand)}
+@media(prefers-reduced-motion:reduce){.sc::before,.explore::before,.sat,.sp{animation:none!important}}
+
+.big .w{display:inline-block;white-space:nowrap}.hero-txt .big{font-size:clamp(3.2rem,15vw,5.4rem)}
+.giant{left:1%;top:30%;font-size:clamp(5rem,27vw,10.5rem)}
+.sat.s3{left:22%;bottom:2%}.explore{left:0;top:47%;width:22%}.pl.p1{top:37%}.pl.p3{left:50%;bottom:-3%}
+.banner>div{position:relative;left:auto;bottom:auto;display:block;color:inherit}.banner .sc,.banner .sci{font-size:inherit;font-weight:inherit;opacity:1}
+.giant{left:-2%;top:3%;font-size:clamp(6rem,36vw,13rem);color:#F69AB8}.sat.star{top:20%;left:30%;width:64%}.sat.s2{bottom:0}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<clipPath id="scal" clipPathUnits="objectBoundingBox"><path d="M0.9700 0.5000 L0.9681 0.5123 L0.9627 0.5242 L0.9542 0.5357 L0.9434 0.5466 L0.9313 0.5568 L0.9190 0.5664 L0.9075 0.5755 L0.8978 0.5846 L0.8906 0.5938 L0.8864 0.6035 L0.8852 0.6141 L0.8868 0.6257 L0.8907 0.6383 L0.8960 0.6520 L0.9019 0.6665 L0.9073 0.6813 L0.9112 0.6961 L0.9128 0.7103 L0.9115 0.7234 L0.9070 0.7350 L0.8993 0.7447 L0.8886 0.7523 L0.8754 0.7580 L0.8607 0.7620 L0.8451 0.7648 L0.8297 0.7669 L0.8151 0.7691 L0.8022 0.7721 L0.7914 0.7765 L0.7828 0.7828 L0.7765 0.7914 L0.7721 0.8022 L0.7691 0.8151 L0.7669 0.8297 L0.7648 0.8451 L0.7620 0.8607 L0.7580 0.8754 L0.7523 0.8886 L0.7447 0.8993 L0.7350 0.9070 L0.7234 0.9115 L0.7103 0.9128 L0.6961 0.9112 L0.6813 0.9073 L0.6665 0.9019 L0.6520 0.8960 L0.6383 0.8907 L0.6257 0.8868 L0.6141 0.8852 L0.6035 0.8864 L0.5938 0.8906 L0.5846 0.8978 L0.5755 0.9075 L0.5664 0.9190 L0.5568 0.9313 L0.5466 0.9434 L0.5357 0.9542 L0.5242 0.9627 L0.5123 0.9681 L0.5000 0.9700 L0.4877 0.9681 L0.4758 0.9627 L0.4643 0.9542 L0.4534 0.9434 L0.4432 0.9313 L0.4336 0.9190 L0.4245 0.9075 L0.4154 0.8978 L0.4062 0.8906 L0.3965 0.8864 L0.3859 0.8852 L0.3743 0.8868 L0.3617 0.8907 L0.3480 0.8960 L0.3335 0.9019 L0.3187 0.9073 L0.3039 0.9112 L0.2897 0.9128 L0.2766 0.9115 L0.2650 0.9070 L0.2553 0.8993 L0.2477 0.8886 L0.2420 0.8754 L0.2380 0.8607 L0.2352 0.8451 L0.2331 0.8297 L0.2309 0.8151 L0.2279 0.8022 L0.2235 0.7914 L0.2172 0.7828 L0.2086 0.7765 L0.1978 0.7721 L0.1849 0.7691 L0.1703 0.7669 L0.1549 0.7648 L0.1393 0.7620 L0.1246 0.7580 L0.1114 0.7523 L0.1007 0.7447 L0.0930 0.7350 L0.0885 0.7234 L0.0872 0.7103 L0.0888 0.6961 L0.0927 0.6813 L0.0981 0.6665 L0.1040 0.6520 L0.1093 0.6383 L0.1132 0.6257 L0.1148 0.6141 L0.1136 0.6035 L0.1094 0.5938 L0.1022 0.5846 L0.0925 0.5755 L0.0810 0.5664 L0.0687 0.5568 L0.0566 0.5466 L0.0458 0.5357 L0.0373 0.5242 L0.0319 0.5123 L0.0300 0.5000 L0.0319 0.4877 L0.0373 0.4758 L0.0458 0.4643 L0.0566 0.4534 L0.0687 0.4432 L0.0810 0.4336 L0.0925 0.4245 L0.1022 0.4154 L0.1094 0.4062 L0.1136 0.3965 L0.1148 0.3859 L0.1132 0.3743 L0.1093 0.3617 L0.1040 0.3480 L0.0981 0.3335 L0.0927 0.3187 L0.0888 0.3039 L0.0872 0.2897 L0.0885 0.2766 L0.0930 0.2650 L0.1007 0.2553 L0.1114 0.2477 L0.1246 0.2420 L0.1393 0.2380 L0.1549 0.2352 L0.1703 0.2331 L0.1849 0.2309 L0.1978 0.2279 L0.2086 0.2235 L0.2172 0.2172 L0.2235 0.2086 L0.2279 0.1978 L0.2309 0.1849 L0.2331 0.1703 L0.2352 0.1549 L0.2380 0.1393 L0.2420 0.1246 L0.2477 0.1114 L0.2553 0.1007 L0.2650 0.0930 L0.2766 0.0885 L0.2897 0.0872 L0.3039 0.0888 L0.3187 0.0927 L0.3335 0.0981 L0.3480 0.1040 L0.3617 0.1093 L0.3743 0.1132 L0.3859 0.1148 L0.3965 0.1136 L0.4062 0.1094 L0.4154 0.1022 L0.4245 0.0925 L0.4336 0.0810 L0.4432 0.0687 L0.4534 0.0566 L0.4643 0.0458 L0.4758 0.0373 L0.4877 0.0319 L0.5000 0.0300 L0.5123 0.0319 L0.5242 0.0373 L0.5357 0.0458 L0.5466 0.0566 L0.5568 0.0687 L0.5664 0.0810 L0.5755 0.0925 L0.5846 0.1022 L0.5938 0.1094 L0.6035 0.1136 L0.6141 0.1148 L0.6257 0.1132 L0.6383 0.1093 L0.6520 0.1040 L0.6665 0.0981 L0.6813 0.0927 L0.6961 0.0888 L0.7103 0.0872 L0.7234 0.0885 L0.7350 0.0930 L0.7447 0.1007 L0.7523 0.1114 L0.7580 0.1246 L0.7620 0.1393 L0.7648 0.1549 L0.7669 0.1703 L0.7691 0.1849 L0.7721 0.1978 L0.7765 0.2086 L0.7828 0.2172 L0.7914 0.2235 L0.8022 0.2279 L0.8151 0.2309 L0.8297 0.2331 L0.8451 0.2352 L0.8607 0.2380 L0.8754 0.2420 L0.8886 0.2477 L0.8993 0.2553 L0.9070 0.2650 L0.9115 0.2766 L0.9128 0.2897 L0.9112 0.3039 L0.9073 0.3187 L0.9019 0.3335 L0.8960 0.3480 L0.8907 0.3617 L0.8868 0.3743 L0.8852 0.3859 L0.8864 0.3965 L0.8906 0.4062 L0.8978 0.4154 L0.9075 0.4245 L0.9190 0.4336 L0.9313 0.4432 L0.9434 0.4534 L0.9542 0.4643 L0.9627 0.4758 L0.9681 0.4877 L0.9700 0.5000Z"/></clipPath>
 <symbol id="flor" viewBox="0 0 48 48"><g fill="#F9A8BA"><circle cx="24" cy="11" r="8"/><circle cx="37" cy="21" r="8"/><circle cx="32" cy="37" r="8"/><circle cx="16" cy="37" r="8"/><circle cx="11" cy="21" r="8"/></g><circle cx="24" cy="25" r="6" fill="#F6D58E"/><path d="M4 44c8-2 12-8 14-14" stroke="#8FA876" stroke-width="3" fill="none" stroke-linecap="round"/></symbol></defs></svg>
 
 <nav class="tabs" aria-label="Pantallas de la demo"><div class="wrap" role="tablist">
@@ -163,6 +235,7 @@ textarea{resize:vertical}label{display:grid;gap:.3rem;font-size:.88rem;font-weig
   <h1 class="script">Bendito Café</h1>
   <p class="lema">Que te sientas como en casa.</p>
   <p class="lead">Lo mejor de Bendito Café no está solo en la carta: está en su gente y en cómo se comparte. Esta demo convierte eso en un sistema: un pedido que se envía con una tarjetita, una ruleta, y un panel donde cada bendición llega a quien la merece.</p>
+  <div class="mini-row" aria-hidden="true"><span class="sc" style="--rc:#D12F69"><span class="sci"><img data-img="matcha" alt=""></span></span><span class="sc" style="--rc:#FFE08A"><span class="sci"><img data-img="vertido" alt=""></span></span><span class="sc" style="--rc:#B9D39B"><span class="sci"><img data-img="dona" alt=""></span></span><span class="sc" style="--rc:#CDB6E8"><span class="sci"><img data-img="jarras" alt=""></span></span></div>
 </section>
 <nav class="hub" aria-label="Pantallas de la demo">
   <a class="card" href="#cliente"><span class="tag">Lo que ve tu cliente</span><h3>Pide y comparte con amor</h3><p class="muted">Elige de la carta, escribe una tarjetita para alguien, gira la ruleta y bendice a quien te atendió.</p></a>
@@ -182,52 +255,52 @@ textarea{resize:vertical}label{display:grid;gap:.3rem;font-size:.88rem;font-weig
 
 <!-- CLIENTE -->
 <div class="view" id="v-cliente" hidden>
-<header class="cl-hero">
+<section class="wrap hero2" aria-label="Portada"><div class="hcard cl-hero">
   <canvas id="petals" aria-hidden="true"></canvas>
-  <div class="wrap hero-grid">
+  <div class="hnav"><div class="mono" aria-hidden="true">BC</div><nav aria-label="Secciones"><button type="button" data-scroll="#carta">Carta</button><button type="button" data-scroll="#compartir">Tarjetita</button><button type="button" data-scroll="#gente-b">Nuestra gente</button></nav></div>
+  <div class="hbody">
     <div class="hero-txt">
-      <p class="tag rv">Lo que ve tu cliente · pide desde el celular</p>
+      <p class="tag rv">Café de casa · Kennedy Norte · Sambo · La Aurora</p>
       <h1 class="script big" id="bigname" aria-label="Bendito Café"></h1>
       <p class="lema rv" style="--d:500ms">Que te sientas como en casa.</p>
-      <p class="lead rv" style="--d:650ms">Pide para ti… o para quien quieres. Cada pedido puede viajar con una tarjetita hecha con amor.</p>
-      <button class="btn rv" style="--d:800ms" type="button" data-scroll="#pedido">Armar mi pedido</button>
+      <p class="lead rv" style="--d:650ms">Pide tu café, tu postre o tu antojo… y si es para alguien especial, mándalo con una tarjetita hecha con amor.</p>
+      <div class="hbtns rv" style="--d:800ms"><button class="btn btn--berry" type="button" data-scroll="#carta">Armar mi pedido</button><button class="btn btn--gold" type="button" data-scroll="#compartir">Enviar una tarjetita</button></div>
+      <div class="stats mini" aria-label="Bendito Café en cifras">
+        <div class="stat rv" data-count="3"><b>3</b><span>sedes para visitarte</span></div>
+        <div class="stat rv" style="--d:120ms" data-count="77.1" data-dec="1" data-suf=" mil"><b>77,1 mil</b><span>los siguen en Instagram</span></div>
+      </div>
     </div>
-    <div class="collage">
-      <figure class="arch a1" data-par="-.07"><img data-img="puerta" alt="La puerta rosa de Bendito Café"></figure>
-      <figure class="arch a2" data-par=".05"><img data-img="flores" alt="El rincón de flores del café"></figure>
-      <figure class="arch a3" data-par="-.04"><img data-img="pet" alt="Una invitada con su perrito en el sofá"></figure>
-      <div class="seal" data-par=".06" aria-hidden="true"><svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><circle cx="60" cy="60" r="58" fill="#7A2E45"/><text font-family="Nunito,sans-serif" font-weight="800" font-size="10.5" letter-spacing="2.4" fill="#fff"><textPath href="#circ">HECHO CON AMOR · BENDITO CAFÉ · </textPath></text></svg><div class="ctr"><svg><use href="#flor"/></svg></div></div>
+    <div class="stage">
+      <div class="giant" aria-hidden="true" data-par="-.04">CAFÉ</div>
+      <div class="sat star" data-par="-.05"><span class="sc" style="--rc:#D12F69"><span class="sci"><img data-img="matcha" alt="Bebida fría de matcha y fresa con un lazo rosado"></span></span></div>
+      <div class="sat s1" data-par=".06"><span class="sc" style="--rc:#FFE08A"><span class="sci"><img data-img="vertido" alt="Bebida rosada sirviéndose en un vaso de Bendito Café"></span></span></div>
+      <div class="sat s2" data-par="-.08"><span class="sc" style="--rc:#B9D39B"><span class="sci"><img data-img="dona" alt="Postres con frutas y miel sobre una tabla rosada"></span></span></div>
+      <div class="sat s3" data-par=".07"><span class="sc" style="--rc:#fff"><span class="sci"><img data-img="shake" alt="Milkshake de nutella con crema"></span></span></div>
+      <div class="sat s4" data-par="-.03"><span class="sc" style="--rc:#CDB6E8"><span class="sci"><img data-img="jarras" alt="Bebidas de frutos rojos en jarras de vidrio"></span></span></div>
+      <button class="explore" type="button" data-scroll="#carta" data-par=".05" aria-label="Ver la carta"><span>Ver la carta</span></button>
+      <span class="pl w p1" data-par=".04">Hecho con amor</span><span class="pl y p2" data-par="-.05">Pet friendly</span><span class="pl b p3" data-par=".03">Cold Station</span>
+      <span class="sp" style="left:48%;top:4%" aria-hidden="true">✦</span><span class="sp" style="right:30%;bottom:20%;--d2:.8s" aria-hidden="true">✦</span><span class="sp" style="left:12%;top:60%;--d2:1.4s;font-size:.9rem" aria-hidden="true">✦</span>
     </div>
   </div>
-  <div class="marq" aria-hidden="true"><div><span>Que te sientas como en casa<i>✿</i>Kennedy Norte<i>✿</i>Sambo<i>✿</i>La Aurora<i>✿</i>Pet friendly<i>✿</i>Cold Station<i>✿</i></span><span>Que te sientas como en casa<i>✿</i>Kennedy Norte<i>✿</i>Sambo<i>✿</i>La Aurora<i>✿</i>Pet friendly<i>✿</i>Cold Station<i>✿</i></span></div></div>
-</header>
+</div></section>
+<div class="band-m" aria-hidden="true"><div class="marq"><div><span>Que te sientas como en casa<i>✿</i>Kennedy Norte<i>✿</i>Sambo<i>✿</i>La Aurora<i>✿</i>Pet friendly<i>✿</i>Cold Station<i>✿</i></span><span>Que te sientas como en casa<i>✿</i>Kennedy Norte<i>✿</i>Sambo<i>✿</i>La Aurora<i>✿</i>Pet friendly<i>✿</i>Cold Station<i>✿</i></span></div></div></div>
 
 <main class="wrap" id="pedido">
-<section class="stats" aria-label="Bendito Café en cifras">
-  <div class="stat rv" data-count="3"><b>3</b><span>sedes para visitarte</span></div>
-  <div class="stat rv" style="--d:120ms" data-count="77.1" data-dec="1" data-suf=" mil"><b>77,1 mil</b><span>los siguen en Instagram</span></div>
-  <div class="stat rv" style="--d:240ms" data-count="1"><b>1</b><span>casa para todos</span></div>
-</section>
-
-<section aria-label="Nuestra gente">
-  <div class="sec-t rv"><p class="tag">Nuestra gente</p><p class="script">Aquí se viene a compartir</p></div>
-  <div class="gal" id="gal">
-    <figure class="gc"><img data-img="gente" alt="Dos amigas compartiendo un postre"><figcaption>Compartir con amor</figcaption></figure>
-    <figure class="gc"><img data-img="beso" alt="Una invitada enviando un beso"><figcaption>Servido con cariño</figcaption></figure>
-    <figure class="gc"><img data-img="carro" alt="El carrito Cold Station"><figcaption>Cold Station</figcaption></figure>
-    <figure class="gc"><img data-img="ruleta" alt="La ruleta de Bendito Café"><figcaption>Gira y gana algo bendito</figcaption></figure>
-    <figure class="gc"><img data-img="pet" alt="Invitada con su perrito"><figcaption>Pet friendly</figcaption></figure>
-  </div>
+<section class="feat" aria-label="Lo que nos hace Bendito">
+  <div class="fc rv"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><h3>Hecho con amor</h3><p>Cada pedido puede viajar con una tarjetita escrita por ti.</p></div>
+  <div class="fc rv" style="--d:100ms"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9h8v5a4 4 0 0 1-8 0V9z"/><path d="M15 10h1.5a2 2 0 0 1 0 4H15"/><path d="M10 4c0 1-1 1-1 2M13 4c0 1-1 1-1 2"/></svg></span><h3>Para compartir</h3><p>El Bendito piqueo: lo bueno siempre se comparte.</p></div>
+  <div class="fc rv" style="--d:200ms"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.5" cy="9" r="1.6"/><circle cx="10" cy="5.8" r="1.6"/><circle cx="14" cy="5.8" r="1.6"/><circle cx="17.5" cy="9" r="1.6"/><path d="M12 11c-3 0-5 2.6-5 5 0 1.8 1.4 2.5 2.8 2.5 1 0 1.5-.5 2.2-.5s1.2.5 2.2.5c1.4 0 2.8-.7 2.8-2.5 0-2.4-2-5-5-5z"/></svg></span><h3>Pet friendly</h3><p>Tu peludito también es bienvenido.</p></div>
+  <div class="fc rv" style="--d:300ms"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1.4 11.5a1.5 1.5 0 0 1-1.5 1.3H8.9a1.5 1.5 0 0 1-1.5-1.3L6 7z"/><path d="M8 7l1-3h6l1 3M13 4l2-2.5"/></svg></span><h3>Cold Station</h3><p>Bebidas frías en nuestro carrito rosado.</p></div>
 </section>
 
 <div id="form">
-<section class="sec"><div class="sec-t" style="margin-top:.4rem"><p class="tag">Paso 1</p><p class="script">Elige de la carta</p></div>
+<section class="sec" id="carta"><div class="orn" aria-hidden="true">✿</div><div class="sec-t" style="margin-top:.4rem"><p class="tag">Paso 1</p><p class="script">Elige tu antojo</p></div>
 <div class="cats" id="cats" role="group" aria-label="Categorías"></div>
-<div class="banner" id="banner"><img id="banImg" class="bg" alt=""><img id="banArch" class="barch" alt=""><div><h3 id="banT"></h3><span id="banS"></span></div></div>
+<div class="banner" id="banner"><div><h3 id="banT"></h3><span class="bs" id="banS"></span></div><span class="sc" style="--rc:#fff"><span class="sci"><img id="banArch" alt=""></span></span></div>
 <ul class="menu" id="menu"></ul>
 <p class="muted" style="font-size:.8rem;margin-top:.6rem">Productos y precios tomados de su carta en historias. [CONFIRMAR] precios vigentes antes de publicar.</p></section>
 
-<section class="sec"><div class="sec-t"><p class="tag">Paso 2</p><p class="script">¿Lo compartes con alguien?</p></div>
+<section class="sec" id="compartir"><div class="sec-t"><p class="tag">Paso 2</p><p class="script">¿Lo compartes con alguien?</p></div>
 <label class="switch card" for="share"><input type="checkbox" id="share"><span>Esto es para compartir: quiero enviar una tarjetita con cariño</span></label>
 <div class="cols" id="cardbox" hidden>
   <div class="fields card">
@@ -257,14 +330,29 @@ textarea{resize:vertical}label{display:grid;gap:.3rem;font-size:.88rem;font-weig
   <div class="card wheelbox" id="rul">
     <span class="tag">Tu regalo bendito</span><h2 class="script" style="font-size:2.3rem;color:var(--brand)">Gira la ruleta</h2>
     <div class="wheelwrap"><div class="ptr"></div><svg viewBox="0 0 200 200" aria-hidden="true"><g class="wheel" id="wheel"></g><circle cx="100" cy="100" r="13" fill="#fff" stroke="#F9A8BA" stroke-width="3"/></svg></div>
-    <button class="btn" id="spin" type="button">Girar</button>
+    <button class="btn btn--berry" id="spin" type="button">Girar</button>
     <div class="prize" id="prize" hidden></div>
     <p class="muted" style="font-size:.78rem">Premios de ejemplo. [CONFIRMAR] premios reales y normativa local antes de lanzar.</p>
   </div>
   <div class="card" style="text-align:center"><span class="tag">Tu pasaporte bendito</span><p id="pasTxt" style="margin-top:.4rem;font-weight:700"></p><div class="stamps" id="stamps"></div></div>
-  <div class="row" style="justify-content:flex-start"><button class="btn" id="otra" type="button">Hacer otro pedido</button><a class="btn btn--ghost" href="#panel">Ver el panel</a></div>
+  <div class="row" style="justify-content:flex-start"><button class="btn btn--berry" id="otra" type="button">Hacer otro pedido</button><a class="btn btn--gold" href="#panel">Ver el panel</a></div>
 </section>
+</main>
 
+<section class="band" id="gente-b"><div class="wrap">
+  <p class="tag" style="color:var(--wine)">Nuestra gente</p>
+  <h2>Aquí todos son familia</h2>
+  <p class="lead">Rostros que hacen que cada visita se sienta como en casa.</p>
+  <div class="gal" id="gal">
+    <figure class="gc"><img data-img="gente" alt="Dos amigas compartiendo un postre"><figcaption>Compartir con amor</figcaption></figure>
+    <figure class="gc"><img data-img="beso" alt="Una invitada enviando un beso"><figcaption>Servido con cariño</figcaption></figure>
+    <figure class="gc"><img data-img="carro" alt="El carrito Cold Station"><figcaption>Cold Station</figcaption></figure>
+    <figure class="gc"><img data-img="ruleta" alt="La ruleta de Bendito Café"><figcaption>Gira y gana</figcaption></figure>
+    <figure class="gc"><img data-img="pet" alt="Invitada con su perrito"><figcaption>Pet friendly</figcaption></figure>
+  </div>
+</div></section>
+
+<main class="wrap">
 <section class="sec" id="gente"><div class="sec-t"><p class="tag">Después de tu visita</p><p class="script">Bendice a quien te atendió</p></div>
 <p class="muted" style="margin-bottom:.8rem">Regálale una bendición a la persona que te hizo sentir en casa. Le llega al instante.</p>
 <div class="team" id="team" role="group" aria-label="Nuestra gente"></div>
@@ -276,7 +364,7 @@ textarea{resize:vertical}label{display:grid;gap:.3rem;font-size:.88rem;font-weig
 <p class="muted" style="font-size:.78rem;margin-top:.5rem">Nombres del equipo de ejemplo. [CONFIRMAR] con su gente real y su permiso para mostrarlos.</p></section>
 <p class="foot">Esta demo ya mide: clics, solicitudes y qué sección se usa más (GA4 y Clarity). · <b>Preparada por 33r</b></p>
 </main>
-<div class="bar-cart" id="cart"><span><span class="tag" id="cl">Tu pedido está vacío</span><br><b id="ct"></b></span><button class="btn" id="send" type="button" disabled>Enviar pedido</button></div>
+<div class="bar-cart" id="cart"><span><span class="tag" id="cl">Tu pedido está vacío</span><br><b id="ct"></b></span><button class="btn btn--berry" id="send" type="button" disabled>Enviar pedido</button></div>
 </div>
 
 <!-- PANEL -->
@@ -366,20 +454,20 @@ window.Kit={db:db,onChange:onChange,money:money,toast:toast,track:track,esc:esc,
 })();
 /* ===== CLIENTE ===== */
 (function(){
-var K=window.Kit,$=K.$,esc=K.esc,DT=window.DATOS,IMG=window.IMG,RM=matchMedia('(prefers-reduced-motion: reduce)').matches,cart={},cat='verde',modo='Aquí',who=null,frame='puerta';
-var FR=[['puerta','la puerta rosa'],['flores','el jardín de flores'],['vertido','Cold Station'],['postre','un postre']];
-var CATIMG={verde:'flores',pan:'dona',var:'gente',beb:'jarras',dul:'postre',alm:'puerta'};
+var K=window.Kit,$=K.$,esc=K.esc,DT=window.DATOS,IMG=window.IMG,RM=matchMedia('(prefers-reduced-motion: reduce)').matches,cart={},cat='verde',modo='Aquí',who=null,frame='matcha';
+var FR=[['matcha','la bebida de matcha'],['vertido','Cold Station'],['postre','un postre'],['dona','los postres con frutas']];
+var CATIMG={verde:'cart',pan:'dona',var:'frio',beb:'vertido',dul:'postre',alm:'jarras'},CATCOL={verde:['#B9D39B','#2F4A2A'],pan:['#FFD96B','#5B3A00'],var:['#F8A9BD','#5E1F38'],beb:['#F27AA0','#4A1228'],dul:['#D12F69','#ffffff'],alm:['#CDB6E8','#3F2A5E']};
 var CATSUB={verde:'Sabor a hogar',pan:'Para acompañar el café',var:'Lo bueno se comparte',beb:'Para cada ánimo',dul:'Un final dulce',alm:'Todo en un plato'};
 var ITEMIMG={mi:'shake',pq:'gente'};
 K.$$('img[data-img]').forEach(function(i){i.src=IMG[i.dataset.img]});
 var viewC=$('#v-cliente'),vis=function(){return!viewC.hidden};
 /* letras del título */
-$('#bigname').innerHTML='Bendito Café'.split('').map(function(c,i){return c===' '?' ':'<span style="--i:'+i+'" aria-hidden="true">'+c+'</span>'}).join('');
+var li=0;$('#bigname').innerHTML='Bendito Café'.split(' ').map(function(w){return '<span class="w">'+w.split('').map(function(c){return '<span style="--i:'+(li++)+'" aria-hidden="true">'+c+'</span>'}).join('')+'</span>'}).join(' ');
 /* tarjeta con foto (la usa también el panel) */
-K.tarj=function(c,label){var f=c.frame||['puerta','flores','vertido','postre'][(c.para||'').length%4];var op={puerta:25,flores:30,vertido:78,postre:55}[f]||40;return '<span class="th"><img style="object-position:50% '+op+'%" src="'+IMG[f]+'" alt=""></span><svg class="fl a"><use href="#flor"/></svg><span class="brand">'+esc(label||'Bendito Café')+'</span><span class="para">Para '+esc(c.para||'ti')+'</span><span class="msg">'+esc(c.msg||'')+'</span><span class="de">'+(c.de?'Con cariño, '+esc(c.de):'')+'</span>'};
+K.tarj=function(c,label){var f=c.frame||['matcha','vertido','postre','dona'][(c.para||'').length%4];var op={matcha:40,vertido:78,postre:55,dona:50}[f]||40;return '<span class="th"><img style="object-position:50% '+op+'%" src="'+IMG[f]+'" alt=""></span><svg class="fl a"><use href="#flor"/></svg><span class="brand">'+esc(label||'Bendito Café')+'</span><span class="para">Para '+esc(c.para||'ti')+'</span><span class="msg">'+esc(c.msg||'')+'</span><span class="de">'+(c.de?'Con cariño, '+esc(c.de):'')+'</span>'};
 /* categorías */
-$('#cats').innerHTML=DT.cats.map(function(c){return '<button type="button" class="cat" data-cat="'+c.id+'" aria-pressed="'+(c.id===cat)+'"><span class="ring"><img src="'+IMG[CATIMG[c.id]]+'" alt=""></span>'+esc(c.n)+'</button>'}).join('');
-function banner(sw){var c=DT.cats.filter(function(x){return x.id===cat})[0],im=$('#banImg'),ar=$('#banArch');im.src=ar.src=IMG[CATIMG[cat]];im.dataset.par='.08';if(sw){[im,ar].forEach(function(e){e.classList.remove('swap');void e.offsetWidth;e.classList.add('swap')})}$('#banT').textContent=c.n;$('#banS').textContent=CATSUB[cat]}
+$('#cats').innerHTML=DT.cats.map(function(c){return '<button type="button" class="cat" data-cat="'+c.id+'" aria-pressed="'+(c.id===cat)+'"><span class="sc" style="--rc:'+CATCOL[c.id][0]+'"><span class="sci"><img src="'+IMG[CATIMG[c.id]]+'" alt=""></span></span><b>'+esc(c.n)+'</b></button>'}).join('');
+function banner(sw){var c=DT.cats.filter(function(x){return x.id===cat})[0],b=$('#banner'),col=CATCOL[cat];b.style.setProperty('--bg',col[0]);b.style.setProperty('--ink',col[1]);$('#banArch').src=IMG[CATIMG[cat]];$('#banT').textContent=c.n;$('#banS').textContent=CATSUB[cat];if(sw&&!RM){b.classList.remove('swap');void b.offsetWidth;b.classList.add('swap')}}
 function drawMenu(){var n=0;$('#menu').innerHTML=DT.items.filter(function(i){return i.c===cat}).map(function(i){var ph=ITEMIMG[i.id];return '<li class="card it'+(i.share?' share':'')+(ph?' ph':'')+'" style="--i:'+(n++)+'">'+(ph?'<img class="th" src="'+IMG[ph]+'" alt="">':'')+'<h3>'+esc(i.n)+'</h3><span class="p">'+K.money(i.p)+'</span><p class="d muted">'+(i.share?'<span class="tag">Para compartir</span><br>':'')+esc(i.d||'')+'</p><div class="qty"><button type="button" data-rm="'+i.id+'" aria-label="Quitar '+esc(i.n)+'">−</button><output id="q-'+i.id+'">'+(cart[i.id]||0)+'</output><button type="button" data-add="'+i.id+'" aria-label="Agregar '+esc(i.n)+'">+</button></div></li>'}).join('')}
 function totals(){var n=0,t=0;DT.items.forEach(function(i){var q=cart[i.id]||0;n+=q;t+=q*i.p});return{n:n,t:Math.round(t*100)/100}}
 function draw(){var o=totals();$('#cl').textContent=o.n?o.n+(o.n===1?' producto':' productos')+' en tu pedido':'Tu pedido está vacío';$('#ct').textContent=o.n?K.money(o.t):'';$('#send').disabled=!o.n;DT.items.forEach(function(i){var e=$('#q-'+i.id);if(e)e.textContent=cart[i.id]||0})}
