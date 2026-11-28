@@ -55,7 +55,7 @@
   /* texto libre de una comida -> opciones y alimentos legibles. Entiende «OPCIÓN 1», viñetas (• ·) y alternativas con « o » */
   const comidaOpc = items => { const g = []; let cur = null; const nuevo = t => (cur = { t, l: [] }, g.push(cur));
     (items || []).forEach(it => String(it).split(/\s*[•·]\s*/).forEach(tk => { tk = tk.trim().replace(/^[-*–]\s*/, ''); if (!tk) return; const m = tk.match(/^opci[oó]n\s*(\d+)\s*[:.\-–]?\s*(.*)$/i);
-      if (m) { nuevo('Opción ' + m[1]); tk = m[2].trim(); if (!tk) return; } if (!cur) nuevo(''); cur.l.push(tk.split(/\s+o\s+/i).map(x => x.trim()).filter(Boolean)); })); return g; };
+      if (m) { nuevo('Opción ' + m[1]); tk = m[2].trim(); if (!tk) return; } if (!cur) nuevo(''); cur.l.push(tk.split(/\s+[oó]\s+/i).map(x => x.trim()).filter(Boolean)); })); return g; };
   /* indicaciones del plan: un párrafo se separa en frases (una por línea) para leerlo fácil */
   const indic = t => String(t || '').split(/\n+/).flatMap(l => l.trim().replace(/^[-•·*]\s*/, '').replace(/([.!?])\s+(?=[A-ZÁÉÍÓÚÑ¿¡0-9])/g, '$1\n').split('\n')).map(x => x.trim()).filter(Boolean);
   /* ---- lista de compras: del plan alimenticio a productos con su gramaje, ordenados por tipo ---- */
@@ -322,24 +322,28 @@
   const imprimirClasico = (html, titulo) => { const r = document.getElementById('print-root'), t = document.title; r.innerHTML = html; document.title = titulo;
     const fin = () => { removeEventListener('afterprint', fin); document.title = t; r.innerHTML = ''; }; addEventListener('afterprint', fin); setTimeout(fin, 120000); window.print(); };
   let pdfBusy = false;
-  const crearPdf = async (html, titulo) => { if (pdfBusy) return; pdfBusy = true;
+  const crearPdf = async (html, titulo) => { if (pdfBusy) return; pdfBusy = true; const sx = window.scrollX, sy = window.scrollY;   /* el generador de PDF corre todo el contenido tanto como esté bajada la pantalla: se genera siempre desde arriba y luego se devuelve a su lugar */
     mostrarPdf(`<div class="spin" role="status" aria-label="Generando"></div><h3>Generando tu PDF…</h3><p>Esto tarda unos segundos. No cierres esta pantalla.</p>`);
     let box = null, wrap = null;
-    try { await cargaScript('assets/vendor/html2pdf.bundle.min.js');
-      wrap = document.createElement('div'); wrap.style.cssText = 'position:fixed;left:-12000px;top:0;width:794px;z-index:-1'; box = document.createElement('div'); box.className = 'pdfbox'; box.style.cssText = 'width:794px;box-sizing:border-box;padding:0 38px'; box.innerHTML = html; wrap.appendChild(box); document.body.appendChild(wrap);
+    try { await cargaScript('assets/vendor/html2pdf.bundle.min.js'); window.scrollTo(0, 0);
+      wrap = document.createElement('div'); wrap.style.cssText = 'position:fixed;left:-12000px;top:0;width:794px;z-index:-1'; box = document.createElement('div'); box.className = 'pdfbox'; box.style.cssText = 'width:794px;box-sizing:border-box;padding:0 38px;-webkit-text-size-adjust:100%;text-size-adjust:100%'; box.innerHTML = html; wrap.appendChild(box); document.body.appendChild(wrap);
       box.querySelectorAll('svg').forEach(sv => { const r = sv.getBoundingClientRect(), bg = getComputedStyle(sv).backgroundColor; sv.querySelectorAll('*').forEach(n => { const cs = getComputedStyle(n); ['stroke', 'stroke-width', 'fill', 'stroke-linecap', 'stroke-linejoin', 'stroke-dasharray', 'opacity'].forEach(p => { const v = cs.getPropertyValue(p); if (v) n.setAttribute(p, v); }); });
         const cl = sv.cloneNode(true); cl.setAttribute('xmlns', 'http://www.w3.org/2000/svg'); cl.setAttribute('width', r.width); cl.setAttribute('height', r.height); cl.insertAdjacentHTML('afterbegin', `<rect x="-1000" y="-1000" width="3000" height="3000" fill="${bg}"/>`);
         const im = new Image(); im.style.cssText = `display:block;width:${r.width}px;height:${r.height}px;border-radius:8px`; im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(cl)); sv.replaceWith(im); });
       await Promise.all([...box.querySelectorAll('img')].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))); await new Promise(r => setTimeout(r, 80));
       const h = Math.max(1, box.scrollHeight), scale = Math.max(1, Math.min(2, Math.sqrt(12e6 / (794 * h)), 14000 / h));
-      const blob = await window.html2pdf().set({ margin: [10, 0, 12, 0], image: { type: 'jpeg', quality: 0.92 }, html2canvas: { scale, useCORS: true, backgroundColor: '#ffffff', logging: false, windowWidth: 794 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true }, pagebreak: { mode: ['css', 'legacy'], avoid: ['.ex', 'tr', 'h2', 'h3', '.cab'] } }).from(box).outputPdf('blob');
+      const wk = window.html2pdf().set({ margin: [10, 0, 12, 0], image: { type: 'jpeg', quality: 0.92 }, html2canvas: { scale, useCORS: true, backgroundColor: '#ffffff', logging: false, windowWidth: 794, scrollX: 0, scrollY: 0, x: 0, y: 0 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true }, pagebreak: { mode: ['css', 'legacy'], avoid: ['.ex', 'tr', 'h2', 'h3', '.cab'] } }).from(box);
+      const cv = await wk.toCanvas().get('canvas');
+      if (!cv || !cv.width || !cv.height) throw new Error('El PDF salió vacío.');
+      { const t = document.createElement('canvas'); t.width = 60; t.height = 90; const g = t.getContext('2d'); g.drawImage(cv, 0, 0, t.width, t.height); const d = g.getImageData(0, 0, t.width, t.height).data; let tinta = 0; for (let i = 0; i < d.length; i += 4) if (d[i] < 235 || d[i + 1] < 235 || d[i + 2] < 235) tinta++; if (tinta < 12) throw new Error('El PDF salió en blanco.'); }
+      const blob = await wk.outputPdf('blob');
       wrap.remove(); wrap = null;
       const nombre = nombrePdf(titulo), file = new File([blob], nombre, { type: 'application/pdf' }), url = URL.createObjectURL(blob), puede = !!(navigator.canShare && navigator.canShare({ files: [file] }));
       const d = mostrarPdf(`<h3>✓ Tu PDF está listo</h3><p><b>${esc(nombre)}</b><br>${kb(blob.size)}. ${puede ? 'Compártelo por WhatsApp o guárdalo en tu celular.' : 'Descárgalo o ábrelo para enviarlo.'}</p><div class="row">${puede ? '<button class="btn" id="pdfShare">Compartir / enviar</button>' : ''}<a class="btn ${puede ? 'sec' : ''}" id="pdfDown" href="${url}" download="${esc(nombre)}">Descargar</a><a class="btn sec" href="${url}" target="_blank" rel="noopener">Abrir</a></div><p style="margin:12px 0 0"><button class="btn sec sm" id="pdfClose">Cerrar</button></p>`, false);
       const sh = d.querySelector('#pdfShare'); if (sh) sh.onclick = async () => { try { await navigator.share({ files: [file], title: titulo }); } catch (e) { if (e && e.name !== 'AbortError') d.querySelector('#pdfDown').click(); } };
       d.querySelector('#pdfClose').onclick = () => { d.close(); setTimeout(() => URL.revokeObjectURL(url), 60000); };
     } catch (e) { console.warn('PDF', e); if (wrap) wrap.remove(); const d = dlgPdf(); if (d.open) d.close(); try { imprimirClasico(html, titulo); } catch (x) { mostrarPdf(`<h3>No se pudo crear el PDF</h3><p>Revisa tu internet e inténtalo de nuevo.</p><p><button class="btn sec" onclick="dPdf.close()">Cerrar</button></p>`); } }
-    finally { pdfBusy = false; } };
+    finally { pdfBusy = false; try { window.scrollTo(sx, sy); } catch (e) {} } };
   const Doc = {
     rutina(c) { const r = c.rutina; if (!r) return '<p>Sin rutina asignada.</p>';
       return `<div class="doc">${cab('Rutina · ' + r.nombre, c)}<p><b>Objetivo:</b> ${esc(r.obj || c.obj)} · <b>Duración:</b> ${esc(r.semanas)} semanas · <b>Nivel:</b> ${esc(c.nivel)}</p>` +
