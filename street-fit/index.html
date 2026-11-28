@@ -205,7 +205,7 @@ body{background:var(--bg)}
 .chart i{background:#CFE3EE}
 .demo-banner{background:#FFF3C4}
 .portal{background:linear-gradient(180deg,var(--bg),#E3F1F9 45%,var(--bg))}
-.ghostgo{border-color:rgba(11,17,23,.25);color:var(--text)}.ghostgo:hover{background:rgba(26,163,221,.12)}
+.ghostgo{background:transparent;cursor:pointer;border-color:rgba(11,17,23,.25);color:var(--text)}.ghostgo:hover{background:rgba(26,163,221,.12)}
 
 /* ===== Dashboard de entrenadores ===== */
 .app{gap:1.2rem}
@@ -239,6 +239,21 @@ body{background:var(--bg)}
 .fc{display:grid;gap:.7rem;padding:1rem;border-radius:16px;border:1px solid var(--line);background:#fff}.fc .h{display:flex;gap:.8rem;align-items:center}.fc .h b{display:block}.fc .h small{color:var(--muted)}.fc .big2{margin-left:auto;font:400 2rem/1 var(--fh);color:var(--brand-d);text-align:right}.fc .big2 small{display:block;font:600 .62rem var(--f);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .fc .kv{display:flex;gap:.5rem 1rem;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}.fc .kv b{color:var(--text)}.fc .pr{display:flex;gap:.4rem;flex-wrap:wrap}.fc .pr span{padding:.25rem .65rem;border-radius:99px;background:#DFF1FA;color:#0A5F86;font-size:.76rem;font-weight:700}
 .sub2{color:var(--muted);font-size:.9rem;margin-top:.2rem}
+
+/* ===== Inicio (narrativa) ===== */
+.intro{position:relative;overflow:hidden;background:radial-gradient(800px 520px at 90% 0%,rgba(26,163,221,.28),transparent 60%),radial-gradient(600px 400px at 0% 100%,rgba(26,163,221,.12),transparent 60%),var(--bg);padding-block:clamp(3rem,9vw,6rem) clamp(2.5rem,7vw,4.5rem)}
+.intro .wrap{display:grid;gap:1.4rem;justify-items:start}.intro h1{font-size:clamp(3rem,10.5vw,6.6rem);line-height:.92}.intro h1 .out{-webkit-text-stroke:2px var(--text);color:transparent}
+.intro .lead{max-width:56ch;font-size:1.15rem}
+.stage{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));width:100%;max-width:640px;margin-top:.6rem}.stage div{padding:.9rem 1rem;border-radius:16px;background:rgba(255,255,255,.75);border:1px solid var(--line)}.stage b{display:block;font:400 2rem/1 var(--fh);color:var(--brand-d)}.stage span{font-size:.78rem;color:var(--muted)}
+.tl{position:relative;display:grid;gap:1.6rem;padding:0 0 0 1.8rem;margin:2rem 0 0;list-style:none}.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--brand),rgba(26,163,221,.12))}
+.tl li{position:relative}.tl li::before{content:"";position:absolute;left:-1.8rem;top:.5rem;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--brand);box-shadow:0 0 0 5px rgba(26,163,221,.15)}
+.tl time{font:400 1.7rem/1 var(--fh);color:var(--brand-d);letter-spacing:.02em}.tl h3{font-size:1.25rem;margin:.3rem 0 .3rem}.tl p{color:#33444f;max-width:62ch}
+.vs{display:grid;gap:1rem;margin-top:1.8rem}@media(min-width:760px){.vs{grid-template-columns:1fr 1fr}}
+.vs .card h3{margin-bottom:.8rem}.vs ul{list-style:none;margin:0;padding:0;display:grid;gap:.7rem}.vs li{display:flex;gap:.7rem;align-items:flex-start}.vs li::before{content:"✕";flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#FDE4E4;color:#9B1C1C;font-size:.7rem;font-weight:800;margin-top:.1rem}
+.vs .yes{background:linear-gradient(160deg,#E3F4FC,#fff);border-color:rgba(26,163,221,.45)}.vs .yes li::before{content:"✓";background:var(--brand);color:#04121A}
+.feats{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-top:1.8rem}.feats .card{display:grid;gap:.6rem;align-content:start}.feats .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(26,163,221,.14);color:var(--brand-d)}.feats .ico .ic{width:24px;height:24px}.feats h3{font-size:1.15rem}.feats p{color:var(--muted);font-size:.92rem}
+.try{display:grid;gap:1rem;margin-top:1.8rem}@media(min-width:900px){.try{grid-template-columns:repeat(3,1fr)}}.try .card{display:grid;gap:.8rem;align-content:space-between}.try .n{font:400 3rem/1 var(--fh);-webkit-text-stroke:1.5px var(--brand-d);color:transparent}.try .btn-go{justify-self:start}
+.cta-band{margin-top:2.4rem;border-radius:26px;padding:clamp(1.4rem,4vw,2.4rem);background:#0B1117;color:#fff;display:grid;gap:1rem;justify-items:start;position:relative;overflow:hidden}.cta-band::before{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(26,163,221,.55),transparent 65%)}.cta-band>*{position:relative}.cta-band h2{font-size:clamp(1.8rem,5vw,3rem)}.cta-band h2 em.s{color:#7CD0F2}.cta-band p{color:#c9d6de;max-width:52ch}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -255,26 +270,50 @@ body{background:var(--bg)}
 <button role="tab" data-v="inicio" aria-selected="true">Cómo probarla</button><button role="tab" data-v="cliente" aria-selected="false">Lo que ve tu cliente</button><button role="tab" data-v="panel" aria-selected="false">Lo que ves tú (entrenadores)</button></div></nav>
 
 <!-- ========== INICIO ========== -->
-<div class="view" id="v-inicio"><main class="wrap" style="padding-block:2.5rem 1rem;display:grid;gap:1.4rem">
-  <header style="display:grid;gap:1rem"><p class="tag">Demo funcional · datos de ejemplo</p>
-    <h1>Street FIT,<br><em class="s">con control.</em></h1>
-    <p class="muted" style="max-width:56ch;font-size:1.1rem">Dos pantallas conectadas: la <b style="color:var(--text)">página donde tus clientes reservan</b> y el <b style="color:var(--text)">panel de los entrenadores</b>. Lo que uno hace, el otro lo ve al instante.</p></header>
-  <section class="card"><h2 class="h2s">Qué resuelve</h2>
-    <ul style="margin:0;padding-left:1.2rem;display:grid;gap:.4rem" class="muted">
-      <li>Saber <b style="color:var(--text)">cuántas personas vienen</b> a cada horario, antes de llegar.</li>
-      <li><b style="color:var(--text)">10 cupos por horario</b>: sin reserva no se atiende.</li>
-      <li>El cliente <b style="color:var(--text)">paga → se activa su acceso</b> → reserva. Si paga de otra forma, recepción le carga las clases.</li>
-      <li>Conteo de <b style="color:var(--text)">clases restantes</b> por cliente, siempre al día.</li></ul></section>
-  <section class="card"><h2 class="h2s">Cómo probarla (3 minutos)</h2>
-    <ol class="steps">
-      <li><span>Ve a <b>Lo que ve tu cliente</b>, elige <b>Camila</b> y reserva un horario.</span></li>
-      <li><span>Entra a <b>Lo que ves tú</b>: el cupo subió, Camila aparece en la lista y sus clases bajaron.</span></li>
-      <li><span>Vuelve y elige <b>Mateo (sin pago)</b>: no puede reservar. Envía su comprobante, y en el panel, como <b>Administración</b>, apruébalo. Ya tiene acceso.</span></li>
-      <li><span>En el panel, <b>Control de puerta</b>: escribe el nombre de alguien sin reserva y mira cómo se rechaza.</span></li></ol>
-    <p class="muted" style="margin-top:1rem;font-size:.9rem">Todo se guarda solo en este navegador. <button class="btn btn--ghost" data-reset type="button">Restablecer demo</button></p></section>
-  <section class="card"><h2 class="h2s">Pendiente por confirmar</h2><p class="muted">[CONFIRMAR] precios vigentes (la presentación lista Grupales $55, Individualizado $130 y 1 a 1 $180 sin IVA; la tabla de clases, otros valores) · días abiertos (se asumió lunes a sábado) · clases incluidas en «Todos los días» (se asumió 26) · datos de transferencia y medios de pago · política de cancelación (se asumió hasta 2 h antes) · cómo se reparte «hasta 5 por entrenador» con 10 cupos · foto y logo definitivos.</p></section>
+<div class="view" id="v-inicio"><div>
+  <header class="intro"><div class="wrap">
+    <p class="tag rv">Demo funcional · datos de ejemplo</p>
+    <h1 class="rv" style="--d:.08s"><span>Sabes quién viene.</span><br><span class="out">Antes</span> <em class="s">de que llegue.</em></h1>
+    <p class="lead rv" style="--d:.16s">Imagina abrir el gimnasio y ya tener la lista del día: quién reservó cada horario, cuántas clases le quedan a cada uno y cuántos cupos libres hay. Sin chats, sin cuadernos, sin adivinar. Eso es <b>Street FIT con control</b>.</p>
+    <div class="stage rv" style="--d:.24s"><div><b>8</b><span>horarios al día</span></div><div><b>10</b><span>cupos máximos por horario</span></div><div><b>80</b><span>clientes en la demo</span></div><div><b>0</b><span>sin reserva, sin entrada</span></div></div>
+    <div class="cta rv" style="--d:.3s"><button class="btn-go" type="button" data-v="panel"><span>Ver el panel de entrenadores</span><i><svg class="ic"><use href="#i-arw"/></svg></i></button><button class="ghostgo" type="button" data-v="cliente">Ver lo que ve tu cliente</button></div>
+  </div></header>
+
+  <section class="sec"><div class="wrap"><span class="tag rv">Un día con Street FIT</span><h2 class="rv">Así se siente <em class="s">tu jornada</em></h2>
+    <ol class="tl">
+      <li class="rv"><time>La noche anterior</time><h3>Tus clientes reservan solos</h3><p>Camila abre la página desde el celular, ve los cupos en vivo y se queda con el de las 6 am. Su clase se descuenta sola. Tú no contestaste ningún mensaje.</p></li>
+      <li class="rv"><time>6:00 am</time><h3>Llegas y ya lo sabes todo</h3><p>Abres el panel: 10 de 10, horario lleno. Ves los nombres, repartidos en dos grupos de 5 (uno por entrenador), y a quién le queda una sola clase para avisarle a tiempo.</p></li>
+      <li class="rv"><time>6:10 am</time><h3>Alguien llega sin reserva</h3><p>Lo escribes en el control de puerta: «sin reserva para este horario, no se puede atender». Cero discusiones, el tope de 10 se respeta.</p></li>
+      <li class="rv"><time>7:00 am</time><h3>Pasas lista en un toque</h3><p>Un botón y todos quedan como «asistió». Si alguien faltó, lo marcas. Esa clase ya cuenta en su plan, sin cuentas a mano.</p></li>
+      <li class="rv"><time>12:00 pm</time><h3>Entra un pago, se activa el acceso</h3><p>Un cliente nuevo envía su comprobante. Recepción lo aprueba y, en ese instante, el cliente puede reservar. ¿Pagó en efectivo? Se le cargan las clases en dos clics.</p></li>
+      <li class="rv"><time>6:00 pm</time><h3>Miras la semana de un vistazo</h3><p>Un mapa de colores te dice qué horarios se llenan, cuáles están flojos y dónde conviene empujar. Decides con datos, no con corazonadas.</p></li>
+    </ol></div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap"><span class="tag rv">Antes y después</span><h2 class="rv">De «¿cuántos vienen?» a <em class="s">«ya lo sé»</em></h2>
+    <div class="vs"><div class="card rv"><h3>Hoy</h3><ul><li>No sabes cuántos llegarán a cada horario.</li><li>Nada frena que lleguen más de 10.</li><li>Las clases de cada cliente se llevan a mano.</li><li>Pagos y accesos van por mensajes sueltos.</li></ul></div>
+    <div class="card yes rv" style="--d:.1s"><h3>Con Street FIT</h3><ul><li>Cuentas reales por horario, antes de llegar.</li><li>El sistema cierra el horario al llegar a 10.</li><li>Cada cliente tiene su saldo de clases, siempre al día.</li><li>El pago activa el acceso; si fue en efectivo, recepción carga las clases.</li></ul></div></div></div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap"><span class="tag rv">Lo que hace la app</span><h2 class="rv">Todo sobre <em class="s">tus clases</em></h2>
+    <div class="feats">
+      <div class="card spot rv"><span class="ico"><svg class="ic"><use href="#i-sun"/></svg></span><h3>Cupos en vivo</h3><p>Lo que reserva un cliente aparece al instante en tu panel, en otra pestaña o en otro celular.</p></div>
+      <div class="card spot rv" style="--d:.06s"><span class="ico"><svg class="ic"><use href="#i-check"/></svg></span><h3>Tope de 10 por horario</h3><p>Cuando se llena, se cierra. Sin reserva no se atiende.</p></div>
+      <div class="card spot rv" style="--d:.12s"><span class="ico"><svg class="ic"><use href="#i-kb"/></svg></span><h3>Conteo de clases</h3><p>Cada cliente sabe cuántas le quedan, y tú ves quién está por quedarse sin ellas.</p></div>
+      <div class="card spot rv" style="--d:.18s"><span class="ico"><svg class="ic"><use href="#i-bb"/></svg></span><h3>Pago que activa el acceso</h3><p>El cliente paga, recepción valida y reserva. O carga las clases a mano si pagó de otra forma.</p></div>
+      <div class="card spot rv" style="--d:.24s"><span class="ico"><svg class="ic"><use href="#i-mob"/></svg></span><h3>Lista y asistencia</h3><p>Grupos A y B, «asistió», «no vino», pasar lista de un toque y copiar la lista.</p></div>
+      <div class="card spot rv" style="--d:.3s"><span class="ico"><svg class="ic"><use href="#i-moon"/></svg></span><h3>Semana de un vistazo</h3><p>Un mapa de colores con la ocupación de cada horario, más alertas de horarios llenos o flojos.</p></div>
+    </div></div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap"><span class="tag rv">Pruébalo en 3 minutos</span><h2 class="rv">Tú eres <em class="s">el entrenador</em></h2>
+    <div class="try">
+      <div class="card rv"><span class="n">1</span><p><b>Reserva como cliente.</b> Entra, elige a <b>Camila</b> y toma un horario. Mira cómo se descuenta su clase.</p><button class="btn-go" type="button" data-v="cliente"><span>Ir a reservar</span><i><svg class="ic"><use href="#i-arw"/></svg></i></button></div>
+      <div class="card rv" style="--d:.1s"><span class="n">2</span><p><b>Míralo en tu panel.</b> El cupo subió y Camila ya está en la lista. Pasa lista y prueba el control de puerta con alguien sin reserva.</p><button class="btn-go" type="button" data-v="panel"><span>Ir al panel</span><i><svg class="ic"><use href="#i-arw"/></svg></i></button></div>
+      <div class="card rv" style="--d:.2s"><span class="n">3</span><p><b>Activa a un cliente nuevo.</b> Con <b>Mateo (sin pago)</b> envía un comprobante; en el panel, como administración, apruébalo y mira cómo se habilita.</p><button class="btn-go" type="button" data-v="cliente"><span>Probar con Mateo</span><i><svg class="ic"><use href="#i-arw"/></svg></i></button></div>
+    </div>
+    <div class="cta-band rv"><h2>Tus clientes reservan. <em class="s">Tú entrenas.</em></h2><p>Lo demás —cupos, clases, pagos y asistencia— lo lleva el sistema. Todo lo que pruebes aquí se guarda solo en tu navegador.</p><button class="ghostgo" style="color:#fff;border-color:rgba(255,255,255,.4)" type="button" data-reset>Restablecer demo</button></div>
+    <section class="card" style="margin-top:1.4rem"><h2 class="h2s">Pendiente por confirmar</h2><p class="muted">[CONFIRMAR] precios vigentes (la presentación lista Grupales $55, Individualizado $130 y 1 a 1 $180 sin IVA; la tabla de clases, otros valores) · días abiertos (se asumió lunes a sábado) · clases incluidas en «Todos los días» (se asumió 26) · datos de transferencia y medios de pago · política de cancelación (se asumió hasta 2 h antes) · cómo se reparte «hasta 5 por entrenador» con 10 cupos · foto y logo definitivos.</p></section>
+  </div></section>
   <p class="foot">Esta demo ya mide: clics, solicitudes y qué sección se usa más (GA4 y Clarity). · <b>Preparada por 33r</b></p>
-</main></div>
+</div></div>
 
 <!-- ========== CLIENTE (LANDING + RESERVA) ========== -->
 <div class="view" id="v-cliente" hidden>
