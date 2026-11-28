@@ -52,8 +52,10 @@ section.sec{padding-block:clamp(3rem,8vw,5.5rem)}.sec>.wrap>.tag{margin-bottom:.
 .plan h3{font-family:var(--fs);font-style:italic;font-weight:600;text-transform:none;font-size:2rem;color:var(--accent)}.plan small{color:var(--muted);display:block;margin-bottom:.8rem}
 .plan ul{list-style:none;margin:0;padding:0}.plan li{display:flex;justify-content:space-between;align-items:baseline;padding:.8rem 0;border-top:1px solid var(--line)}.plan li b{font:400 1.7rem var(--fh);color:var(--text)}.plan li span{color:var(--muted);font-size:.92rem}
 .how{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));margin-top:1.8rem}.how .card b{font:400 2.6rem var(--fh);color:var(--brand);display:block;line-height:1}
-.gal{display:grid;gap:.6rem;grid-template-columns:1fr;margin-top:1.8rem}.gal img{width:100%;height:100%;object-fit:cover;border-radius:var(--r);display:block;min-height:200px;max-height:420px}
-@media(min-width:760px){.gal{grid-template-columns:1.2fr 1fr 1fr}}
+.gal{display:grid;gap:.6rem;grid-template-columns:1fr 1fr;margin-top:1.8rem}.gal img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--r);display:block}
+@media(min-width:760px){.gal{grid-template-columns:repeat(4,1fr)}}
+.about{display:grid;gap:1.4rem;max-width:62ch}.about p{font-size:1.05rem;color:#d8d3c6}.about b{color:var(--text)}
+.visit{position:relative;overflow:hidden;background:#050607}.visit>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}.visit::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,7,.9),rgba(5,6,7,.35))}.visit .wrap{position:relative;z-index:2;display:grid;gap:1rem}.visit ul{list-style:none;padding:0;margin:0;display:grid;gap:.6rem;font-size:1.05rem}.visit a{text-decoration:none;border-bottom:1px solid var(--brand)}
 .portal{background:linear-gradient(180deg,var(--bg),#0d1216 40%,var(--bg))}
 .who{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}.who button{min-height:44px;padding:.4rem 1rem;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);font:600 .85rem var(--f);cursor:pointer}.who button[aria-pressed=true]{border-color:var(--brand);background:#0f2b3a}
 .acct{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}.acct h3{font-size:1.6rem}.bal{font:400 2.4rem var(--fh);color:var(--brand);line-height:1}
@@ -104,7 +106,7 @@ tr.nuevo{animation:flash 1.6s var(--ease)}
       <li><span>Vuelve y elige <b>Mateo (sin pago)</b>: no puede reservar. Envía su comprobante, y en el panel, como <b>Administración</b>, apruébalo. Ya tiene acceso.</span></li>
       <li><span>En el panel, <b>Control de puerta</b>: escribe el nombre de alguien sin reserva y mira cómo se rechaza.</span></li></ol>
     <p class="muted" style="margin-top:1rem;font-size:.9rem">Todo se guarda solo en este navegador. <button class="btn btn--ghost" data-reset type="button">Restablecer demo</button></p></section>
-  <section class="card"><h2 class="h2s">Pendiente por confirmar</h2><p class="muted">[CONFIRMAR] días abiertos (se asumió lunes a sábado) · clases incluidas en «Todos los días» (se asumió 26) · datos de transferencia y medios de pago · política de cancelación (se asumió hasta 2 h antes) · cómo se reparte «hasta 5 por entrenador» con 10 cupos · foto y logo definitivos.</p></section>
+  <section class="card"><h2 class="h2s">Pendiente por confirmar</h2><p class="muted">[CONFIRMAR] precios vigentes (la presentación lista Grupales $55, Individualizado $130 y 1 a 1 $180 sin IVA; la tabla de clases, otros valores) · días abiertos (se asumió lunes a sábado) · clases incluidas en «Todos los días» (se asumió 26) · datos de transferencia y medios de pago · política de cancelación (se asumió hasta 2 h antes) · cómo se reparte «hasta 5 por entrenador» con 10 cupos · foto y logo definitivos.</p></section>
   <p class="foot">Esta demo ya mide: clics, solicitudes y qué sección se usa más (GA4 y Clarity). · <b>Preparada por 33r</b></p>
 </main></div>
 
@@ -114,25 +116,31 @@ tr.nuevo{animation:flash 1.6s var(--ease)}
     <img src="img/hero.jpg" alt="Grupo entrenando con kettlebells en un gimnasio urbano" fetchpriority="high">
     <div class="wrap site-head" style="position:absolute;left:50%;transform:translateX(-50%)"><a class="brand" href="#v-cliente"><img src="img/logo.jpg" alt=""><b>Street <i>FIT</i></b></a><a class="btn btn--ghost btn--sm" href="#reserva" data-go>Reservar clase</a></div>
     <div class="wrap">
-      <p class="tag" style="color:var(--accent)">AFC × Street FIT · Ambato</p>
+      <p class="tag" style="color:var(--accent)">AFC × Street FIT · Izamba, Ambato</p>
       <h1>Entrena<br>con <em class="s">control.</em></h1>
-      <p class="lead">Sesiones de 1 hora, grupos pequeños y tu horario asegurado. Reserva tu clase en segundos desde el celular.</p>
+      <p class="lead">Centro de acondicionamiento físico y de movilidad. Sesiones de 1 hora, grupos pequeños y tu horario asegurado: reserva en segundos desde el celular.</p>
       <div class="cta"><a class="btn" href="#reserva" data-go>Reservar mi clase</a><a class="btn btn--ghost" href="#planes" data-go>Ver planes</a></div>
     </div></header>
   <div class="stats" role="list"><div role="listitem"><b>8</b><span>horarios al día</span></div><div role="listitem"><b>10</b><span>cupos por horario</span></div><div role="listitem"><b>1 h</b><span>por sesión</span></div><div role="listitem"><b>5</b><span>máx. por entrenador</span></div></div>
-  <section class="sec" id="planes"><div class="wrap"><span class="tag">Clases</span><h2>Elige tu <em class="s">plan</em></h2>
+  <section class="sec" id="nosotros"><div class="wrap"><span class="tag">Quiénes somos</span><h2>Movimiento <em class="s">adecuado</em></h2>
+    <div class="about" style="margin-top:1.4rem"><p>Somos un <b>Centro de Acondicionamiento Físico y de Movilidad</b> que mejora la salud y el bienestar de atletas profesionales, personas sedentarias y quienes viven con dolencias físicas.</p><p>Nuestro equipo reúne preparadores físicos, fisioterapeutas y pedagogos de la actividad física, con planes especializados y un enfoque profesional y estructurado. <span class="muted">By West Coast Warriorz.</span></p></div>
+    <div class="gal"><img src="img/real1.jpg" alt="Clienta haciendo zancada con banda elástica" loading="lazy"><img src="img/real2.jpg" alt="Clienta lanzando balón medicinal" loading="lazy"><img src="img/real3.jpg" alt="Cliente empujando un trineo de carga" loading="lazy"><img src="img/real4.jpg" alt="Joven entrenando zancada con banda" loading="lazy"></div>
+    <p class="muted" style="margin-top:.8rem;font-size:.82rem">Fotos de la presentación de Street FIT.</p></div></section>
+  <section class="sec" id="planes" style="padding-top:0"><div class="wrap"><span class="tag">Clases</span><h2>Elige tu <em class="s">plan</em></h2>
     <div class="plans">
       <article class="card plan"><h3>Uno a uno</h3><small>Un entrenador solo para ti</small><ul><li><span>Todos los días</span><b>$250</b></li><li><span>8 días / mes</span><b>$125</b></li><li><span>12 días / mes</span><b>$175</b></li></ul></article>
       <article class="card plan"><h3>Personalizadas</h3><small>Hasta 5 por entrenador</small><ul><li><span>Todos los días</span><b>$130</b></li><li><span>8 días / mes</span><b>$80</b></li><li><span>12 días / mes</span><b>$105</b></li></ul></article>
-    </div><p class="muted" style="margin-top:1rem;font-size:.88rem">Sesiones de 1 hora. Precios tomados de su publicación; [CONFIRMAR] vigencia.</p></div></section>
+    </div><p class="muted" style="margin-top:1rem;font-size:.88rem">Sesiones de 1 hora. Precios de su publicación en Instagram. [CONFIRMAR]: su presentación también lista Grupales $55 (máx. 12), Individualizado $130 (máx. 3) y 1 a 1 $180, sin IVA. Confirmar cuál es el esquema vigente.</p></div></section>
   <section class="sec" style="padding-top:0"><div class="wrap"><span class="tag">Así funciona</span><h2>Paga, reserva, <em class="s">entrena</em></h2>
     <div class="how"><div class="card"><b>1</b><h3 style="margin:.5rem 0 .4rem">Activa tu plan</h3><p class="muted">Paga y tu acceso se activa. ¿Pagaste en el gimnasio? Recepción te carga las clases.</p></div>
     <div class="card"><b>2</b><h3 style="margin:.5rem 0 .4rem">Reserva tu horario</h3><p class="muted">Ves los cupos en vivo. 10 por horario: cuando se llena, se llena.</p></div>
     <div class="card"><b>3</b><h3 style="margin:.5rem 0 .4rem">Llega y entrena</h3><p class="muted">Tu entrenador ya sabe que vienes. Sin reserva no hay cupo.</p></div></div>
-    <div class="gal"><img src="img/coach.jpg" alt="Entrenador guiando una sentadilla" loading="lazy"><img src="img/group.jpg" alt="Clase grupal con cuerdas y cajones" loading="lazy"><img src="img/grip.jpg" alt="Manos con magnesio sujetando una barra" loading="lazy"></div></div></section>
+    </div></div></section>
   <section class="sec portal" id="reserva"><div class="wrap"><span class="tag">Mi cuenta · demo con clientes de ejemplo</span><h2>Reserva tu <em class="s">clase</em></h2>
     <div class="who" id="who" role="group" aria-label="Probar como"></div>
     <div id="portal"></div></div></section>
+  <section class="sec visit" id="visita"><img src="img/sitio.jpg" alt="" loading="lazy"><div class="wrap"><span class="tag">Visítanos</span><h2>Ven a <em class="s">entrenar</em></h2>
+    <ul><li>📍 Av. Pedro Vásconez y Pasaje Sevilla, Izamba</li><li>💬 <a href="https://wa.me/593995760341" target="_blank" rel="noopener">+593 99 576 0341</a></li><li>📷 <a href="https://www.instagram.com/streetfit.ambato" target="_blank" rel="noopener">@streetfit.ambato</a></li></ul></div></section>
   <p class="foot">Esta demo ya mide: clics, solicitudes y qué sección se usa más (GA4 y Clarity). · <b>Preparada por 33r</b></p>
 </div>
 
