@@ -254,6 +254,13 @@ body{background:var(--bg)}
 .feats{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-top:1.8rem}.feats .card{display:grid;gap:.6rem;align-content:start}.feats .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(26,163,221,.14);color:var(--brand-d)}.feats .ico .ic{width:24px;height:24px}.feats h3{font-size:1.15rem}.feats p{color:var(--muted);font-size:.92rem}
 .try{display:grid;gap:1rem;margin-top:1.8rem}@media(min-width:900px){.try{grid-template-columns:repeat(3,1fr)}}.try .card{display:grid;gap:.8rem;align-content:space-between}.try .n{font:400 3rem/1 var(--fh);-webkit-text-stroke:1.5px var(--brand-d);color:transparent}.try .btn-go{justify-self:start}
 .cta-band{margin-top:2.4rem;border-radius:26px;padding:clamp(1.4rem,4vw,2.4rem);background:#0B1117;color:#fff;display:grid;gap:1rem;justify-items:start;position:relative;overflow:hidden}.cta-band::before{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(26,163,221,.55),transparent 65%)}.cta-band>*{position:relative}.cta-band h2{font-size:clamp(1.8rem,5vw,3rem)}.cta-band h2 em.s{color:#7CD0F2}.cta-band p{color:#c9d6de;max-width:52ch}
+.tabs .sm{display:none}.seg button small::before{content:"· "}
+@media(max-width:560px){
+ .tabs .lg{display:none}.tabs .sm{display:inline}.tabs button{padding:.6rem .9rem;font-size:.84rem}
+ .seg{display:grid;grid-template-columns:repeat(3,1fr);border-radius:20px;width:100%}
+ .seg button{flex-direction:column;justify-content:center;padding:.55rem .25rem;border-radius:16px;text-align:center;gap:.25rem;min-height:72px}
+ .seg button small{display:block;font-size:.72rem}.seg button small::before{content:none}
+}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -267,7 +274,7 @@ body{background:var(--bg)}
 </defs></svg>
 <div class="demo-banner" role="note"><span><b>Demo preparada por 33r para Street FIT.</b> No es el sitio oficial. Lo marcado <b>[CONFIRMAR]</b> se completa con ustedes.</span><button type="button" id="sug">Sugerir un cambio</button></div>
 <nav class="tabs" aria-label="Pantallas de la demo"><div class="wrap" role="tablist">
-<button role="tab" data-v="inicio" aria-selected="true">Cómo probarla</button><button role="tab" data-v="cliente" aria-selected="false">Lo que ve tu cliente</button><button role="tab" data-v="panel" aria-selected="false">Lo que ves tú (entrenadores)</button></div></nav>
+<button role="tab" data-v="inicio" aria-selected="true">Cómo probarla</button><button role="tab" data-v="cliente" aria-selected="false"><span class="lg">Lo que ve tu cliente</span><span class="sm">Tu cliente</span></button><button role="tab" data-v="panel" aria-selected="false"><span class="lg">Lo que ves tú (entrenadores)</span><span class="sm">Entrenadores</span></button></div></nav>
 
 <!-- ========== INICIO ========== -->
 <div class="view" id="v-inicio"><div>
@@ -464,7 +471,7 @@ const ico=n=>`<svg class="ic"><use href="#i-${n}"/></svg>`;
 const rcol=n=>n>=CAP?'var(--bad)':n>=8?'var(--warn)':'var(--brand)';
 let animRings=true;
 function renderWho(){const ids=['c1','c2','c3'],tx={c1:['Camila','con clases'],c2:['Mateo','sin pago'],c3:['Valeria','sin clases']};
-  $('#who').innerHTML='<span class="tag">Probar como</span><div class="seg" role="group" aria-label="Probar como">'+ids.map(i=>`<button type="button" data-who="${i}" aria-pressed="${cur===i}"><span class="av" style="--c:${avc(i)}">${ini(C(i).nombre)}</span><span>${tx[i][0]} <small>· ${tx[i][1]}</small></span></button>`).join('')+'</div>'}
+  $('#who').innerHTML='<span class="tag">Probar como</span><div class="seg" role="group" aria-label="Probar como">'+ids.map(i=>`<button type="button" data-who="${i}" aria-pressed="${cur===i}"><span class="av" style="--c:${avc(i)}">${ini(C(i).nombre)}</span><span>${tx[i][0]} <small>${tx[i][1]}</small></span></button>`).join('')+'</div>'}
 function slotCard(f,s,ok,mia){const L=lista(f,s).sort((a,b)=>a.id-b.id),n=L.length,full=n>=CAP,mine=mia&&mia.slot===s,left=CAP-n,fl=flash&&flash.f===f&&flash.s===s,t=SLOTS[s].split(' ');
   const av=L.slice(0,4).map(r=>`<span class="av" style="--c:${avc(r.cid)}">${ini(C(r.cid).nombre)}</span>`).join('')+(n>4?`<span class="av more">+${n-4}</span>`:'');
   const st=mine?`<span class="st me">${ico('check')} Tu clase</span>`:full?'<span class="st no">Completo</span>':left<=3?`<span class="st low"><i class="dot w"></i>${left===1?'Último cupo':'Últimos '+left+' cupos'}</span>`:`<span class="st"><i class="dot"></i>Quedan ${left} cupos</span>`;
